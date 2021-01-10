@@ -1,0 +1,12 @@
+body {
+    background : url('/nicerapp/siteMedia/backgrounds/tiled/active/grey/117802292-seamless-texture-of-paving-stones-gray-tile-background-.jpg') repeat;
+}
+
+.vividDialog {
+    scrollbar-color : lime rgba(0,0,0,0.5);
+    border : 2px ridge lime;
+    background : rgba(0,0,0,0.5);
+    color : white;
+    padding : 10px;
+}
+
