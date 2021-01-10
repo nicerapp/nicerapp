@@ -8,6 +8,7 @@ var nas = na.site = {
     
     onload : function (evt) {
         $('.vividDialog').fadeIn('normal');
+        $('#siteContent').focus();
     },
 
     startTooltips : function(evt) {
