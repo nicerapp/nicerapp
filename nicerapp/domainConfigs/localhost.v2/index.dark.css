@@ -10,16 +10,13 @@ body {
     padding : 10px;
     box-shadow : 4px 4px 2px rgba(0,0,0,0.6), inset 2px 2px 2px rgba(0,0,0,0.4);
 }
-
 .vividDialogContent::-webkit-scrollbar {
   width: 1rem;
 }
- 
 .vividDialogContent::-webkit-scrollbar-track {
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   background : rgba(0,0,0,0.5);
 }
- 
 .vividDialogContent::-webkit-scrollbar-button:vertical:decrement {
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   color : white;
@@ -28,7 +25,6 @@ body {
   border-radius : 10px 10px 0px 0px;
   background : url('/nicerapp/siteMedia/vividDialog/frame_e02_001.png') center;
 }
-
 .vividDialogContent::-webkit-scrollbar-button:vertical:increment {
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   padding : 0;
@@ -37,7 +33,6 @@ body {
   border-radius : 0px 0px 10px 10px;
   background : url('/nicerapp/siteMedia/vividDialog/frame_e03_001.png') center;
 }
-
 .vividDialogContent::-webkit-scrollbar-button:horizontal:decrement {
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   color : white;
@@ -46,7 +41,6 @@ body {
   border-radius : 10px 0px 0px 10px;
   background : url('/nicerapp/siteMedia/vividDialog/frame_e06_001.png') center;
 }
-
 .vividDialogContent::-webkit-scrollbar-button:horizontal:increment {
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   padding : 0;
@@ -55,7 +49,6 @@ body {
   border-radius : 0px 10px 10px 0px;
   background : url('/nicerapp/siteMedia/vividDialog/frame_e07_001.png') center;
 }
-
 .vividDialogContent::-webkit-scrollbar-thumb {
   background : url('/nicerapp/siteMedia/backgrounds/tiled/active/blue/blue174.jpg') repeat;
   border-radius : 20px;

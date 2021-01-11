@@ -22,7 +22,21 @@ select, optgroup {
     font-size : 2rem;
 }
 
-
+.selfHealerMsg {
+    font-weight : bold;
+}
+.selfHealerDbg {
+    color : rgba(150,150,150,1);
+}
+.selfHealerResult {
+    color : rgba(150,150,255,1);
+}
+.selfHealerFailed {
+    color : rgba(255,150,150,1);
+}
+.selfHealerWarning {
+    color : rgba(235,161,52,1);
+}
 
 
 
