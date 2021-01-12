@@ -8,6 +8,7 @@ var nas = na.site = {
     
     onload : function (evt) {
         $('.vividDialog').fadeIn('slow', function() {
+                /*
                 $('#siteContent').animate({
                     top : 'calc( 1vh + 2em )', // doesn't get set at all :(
                     left : '1vw',
@@ -20,6 +21,12 @@ var nas = na.site = {
                 $('#siteDateTime').animate({
                     left : '1vw'
                 }, 'fast');
+                */
+                $("#siteContent").bind('onanimationend animationend webkitAnimationEnd', function() { 
+                    $('#siteContent .vividDialogContent').fadeIn('slow');
+                });
+                
+                $('.vividDialog').addClass('started');
         });
         $('#siteContent .vividDialogContent').focus();
         setInterval (nas.updateDateTime, 1000);
@@ -31,7 +38,7 @@ var nas = na.site = {
 		r = 
 			d.getFullYear() + '-' + na.m.padNumber((d.getMonth()+1),2,'0') + '-' + na.m.padNumber(d.getDate(), 2, '0')
 			+ '(' + Date.locale.en.day_names_short[d.getDay()] + ')'
-			+ '<br/>' + na.m.padNumber(d.getHours(), 2, '0') + ':' + na.m.padNumber(d.getMinutes(), 2, '0')
+			+ ' ' + na.m.padNumber(d.getHours(), 2, '0') + ':' + na.m.padNumber(d.getMinutes(), 2, '0')
 			+ ':' + na.m.padNumber(d.getSeconds(), 2, '0'); // + '.' + na.m.padNumber(d.getMilliseconds(), 3, 0);
 			
         jQuery('#siteDateTime').html(r);

@@ -30,8 +30,36 @@ html, body {
 #siteDateTime {
     top : 1vh;
     left : -10vh;
-    width : 200px;
-    height : 2vh;
+    width : 300px;
+    height : 2rem;
+    font-size : 1rem;
+    text-align : center;
+    vertical-align : middle;
+}
+
+#siteContent.started {
+    animation : anim_siteContent_started 1s;
+    animation-fill-mode : forwards;
+    animation-timing-function : cubic-bezier(0.42,0,0.58,1);
+}
+@keyframes anim_siteContent_started {
+    100% {
+        top : calc(1vh + 4rem);
+        left : 1vw;
+        width : 98vw;
+        height : calc(98vh - 4rem);
+    }
+}
+
+#siteDateTime.started {
+    animation : anim_siteDateTime_started 1s;
+    animation-fill-mode : forwards;
+    animation-timing-function : cubic-bezier(0.42,0,0.58,1);
+}
+@keyframes anim_siteDateTime_started {
+    100% {
+        left : 1vw;
+    }
 }
 
 select, optgroup {
