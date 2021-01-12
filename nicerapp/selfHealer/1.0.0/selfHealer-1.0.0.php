@@ -17,12 +17,12 @@ class selfHealer {
         $r = "\t\t".'<h2 class="selfHealerTitle">NicerApp SelfHealer for '.$folder.'</h2>'."\r\n";
         //echo $r;
         
-        $dataFile = realpath(dirname(__FILE__).'/appData').'/'.base64_encode($folder).'.txt';
-        $scriptFile = realpath(dirname(__FILE__).'/appData').'/script.sh';
+        $dataFile = realpath(dirname(__FILE__).'/appData/RAM').'/'.base64_encode($folder).'.txt';
         
-        $xec = 'ls -Ral --full-time "'.$folder.'" > "'.$dataFile.'"';
+        $xec = 'ls -Ral --full-time "'.$folder.'" | tr -d \'\r\n\' > "'.$dataFile.'"';
         exec ($xec, $output, $result);
-        //echo '<pre>'.$xec.'</pre><br/>';
+        $c = join('',$output);
+        
         $dbg = array (
             'xec' => $xec,
             'output' => $output,
@@ -30,30 +30,32 @@ class selfHealer {
         );
         //echo '<pre class="selfHealerMsg selfHealerDbg">';var_dump($dbg);echo '</pre>';
         
-        // useless : checks access time (ls -u) of all files
+        $f = fopen ($dataFile, 'a');
+        fwrite ($f, join(" _ ",$this->getFolderReport($folder)));
+        fclose ($f);
+        
+        //$c .= join('',$this->getFolderReport($folder));
+        
         /*
-        $xec = 'ls -Ralu --full-time "'.$folder.'" >> "'.$dataFile.'"';
-        exec ($xec, $output, $result);
-        //echo '<pre>'.$xec.'</pre><br/>';
-        $dbg = array (
-            'xec' => $xec,
-            'output' => $output,
-            'result' => $result
-        );
-        echo '<pre class="selfHealerMsg selfHealerDbg">';var_dump($dbg);echo '</pre>';
+        $c = file_get_contents($dataFile);
+        $c = str_replace("\r\n", '', $c);
+        $c = str_replace("\n", '', $c);
+        $c = str_replace("\r", '', $c);
+        file_put_contents($dataFile, $c);
         */
         
         if (file_exists($dataFile.'.hash')) {
             $c1 = file_get_contents($dataFile.'.hash');
 
-            $xec = 'echo password | sha512 "'.$dataFile.'" > "'.$dataFile.'.hash2"';
+            $xec = 'cat "'.$dataFile.'" | sha512 > "'.$dataFile.'.hash2"';
+            //$xec = 'echo '.$c.' | sha512 > "'.$dataFile.'.hash2"';
             exec ($xec, $output, $result);
             //echo '<pre>'.$xec.'</pre><br/>';
             
             $c2 = file_get_contents($dataFile.'.hash2');
             
-            $xec = 'rm -rf "'.$dataFile.'.hash2"';
-            exec ($xec, $output, $result);
+            //$xec = 'rm -rf "'.$dataFile.'.hash2"';
+            //exec ($xec, $output, $result);
             
             $r = ($c1===$c2);
             if ($r) {
@@ -66,19 +68,37 @@ class selfHealer {
         } else {
             echo "\t\t".'<p class="selfHealerMsg selfHealerWarning">Warning : need to create the initial hash file for "'.$folder.'"</p>'."\r\n";
             
-            $xec = 'echo password | sha512 "'.$dataFile.'" > "'.$dataFile.'.hash"';
-            exec ($xec, $output, $result);
+            $xec = 'cat "'.$dataFile.'" | sha512 > "'.$dataFile.'.hash"';
+            //$xec = 'echo '.escapeshellarg($c).' | sha512 > "'.$dataFile.'.hash"';// 2> "'.$dataFile.'.errs.txt"';
+            $output = exec ($xec, $output, $result);
             //echo '<pre>'.$xec.'</pre><br/>';
             $dbg = array (
                 'xec' => $xec,
                 'output' => $output,
                 'result' => $result
             );
-            //echo '<pre class="selfHealerMsg selfHealerResult">';var_dump($dbg);echo '</pre>';
+            echo '<pre class="selfHealerMsg selfHealerResult">';var_dump($dbg);echo '</pre>';
             
             return true;
         }
     }
+    
+    function getFolderReport ($folder) {
+        $files = getFilePathList ($folder, true, '/.*/', array('dir','file'));
+        //echo '<pre style="color:lime;">';var_dump ($files);echo '</pre>';
+        $basePath = realpath(dirname(__FILE__).'/../../..');
+        $r = array();
+        foreach ($files as $idx => $file) {
+            $fileRel = str_replace ($basePath.'/', '', $file);
+            clearstatcache();
+            //if (strpos($fileRel,'.git')===false) {
+                $r[] = $fileRel.' - '.filectime($file).' - '.filemtime($file);
+            //}
+        }
+        return $r;
+    }
+
+
 }
 
 ?>

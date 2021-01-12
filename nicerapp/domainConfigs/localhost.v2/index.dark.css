@@ -4,11 +4,10 @@ body {
 
 .vividDialog {
     scrollbar-color : lime rgba(0,0,0,0.5);
-    border : 2px ridge lime;
+    border : 3px ridge lime;
     background : rgba(0,0,0,0.5);
     color : white;
-    padding : 10px;
-    box-shadow : 4px 4px 2px rgba(0,0,0,0.6), inset 2px 2px 2px rgba(0,0,0,0.4);
+    box-shadow : 7px 7px 5px rgba(0,0,0,0.7), inset -2px -2px 2px rgba(0,0,0,0.8), inset 2px 2px 2px rgba(0,0,0,0.8);
 }
 .vividDialogContent::-webkit-scrollbar {
   width: 1rem;

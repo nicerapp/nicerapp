@@ -1,4 +1,4 @@
-    <h1 class="tooltip" tooltipTheme="mainTooltipTheme" title="revolutionary web app framework">nicer.app web apps framework</h1>
+    <h1 id="pageTitle">nicer.app web apps framework</h1>
 <?php 
     $a = 'abc';
     //echo $a;
@@ -15,7 +15,7 @@
 
     <div>
         <?php 
-        $selfChecksOK = $cms->runSelfHealer();
+        $selfChecksOK = true;//$cms->runSelfHealer();
         if ($selfChecksOK) {
         ?>
             <p class="selfHealerMsg selfHealerResult">selfHealer Checks OK! :)</p>
@@ -34,6 +34,7 @@
 
 
 
+    <!--
     <p>
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vehicula metus ultrices tortor scelerisque, ac rhoncus nisl ullamcorper. Vestibulum lacinia venenatis felis, sed viverra augue consequat ac. In nec finibus augue, non dictum odio. Cras a tortor vitae lacus dictum consectetur. Sed efficitur nisl id nisi dictum laoreet. Nullam massa ligula, malesuada vitae mauris vitae, pretium eleifend urna. Aliquam vitae lobortis sapien. Nunc lacus quam, fringilla ut pulvinar eget, molestie at tellus. Praesent egestas lacus elit, scelerisque fringilla enim ornare sed. Nunc a ex a erat posuere ultricies ac venenatis est. Sed sapien sem, commodo quis pellentesque in, mattis ac erat. Praesent quis dignissim lacus, sed dignissim sem. Aliquam erat volutpat. Sed maximus ultrices est, eu lacinia mi euismod vitae.
     </p><p>
@@ -93,4 +94,4 @@
 
     Mauris ullamcorper fringilla lacus vitae sollicitudin. Etiam tincidunt sapien eu ex blandit, at volutpat augue dignissim. Vestibulum volutpat hendrerit laoreet. Mauris sodales, lorem in efficitur volutpat, nisi orci tristique sapien, at tincidunt tortor sem in leo. Nunc faucibus id eros vel molestie. Nulla at libero et nunc posuere auctor. Integer velit urna, rutrum eget egestas vel, pellentesque quis turpis. Nam accumsan dui eget mauris dapibus, et vestibulum neque pharetra. Duis dapibus aliquet posuere. Maecenas sodales, dolor ut maximus consectetur, turpis nulla feugiat mi, ac pellentesque odio lectus a ipsum. Integer pharetra ex eu arcu convallis imperdiet. Vestibulum aliquet est tempor odio venenatis, sed posuere eros ultrices. Maecenas faucibus blandit ante, sed sollicitudin est sodales id. Pellentesque quis varius massa. Mauris eget cursus eros. Suspendisse volutpat quam eget dolor gravida, ut suscipit elit rutrum.    
     </p>
-
+    -->

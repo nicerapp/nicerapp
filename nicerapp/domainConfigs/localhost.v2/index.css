@@ -1,21 +1,37 @@
 html, body {
     padding : 0;
     margin : 0;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .vividDialog {
     display : none;
-    margin : 20px;
     font-size : 2rem;
-    width : calc(100vw - 80px);
-    height: calc(100vh - 80px);
+    /*
+    margin : 20px;
+    width : calc(100vw - 60px);
+    height: calc(100vh - 60px);
+    */
+    position : absolute;
+    top : 48vh;
+    height : 4vh;
+    left : 48vw;
+    width : 4vw;
     border-radius : 20px;
 }
 .vividDialogContent {
     overflow:auto;
+    display : none;
     margin : 10px;
     width : calc(100vw - 100px);
     height: calc(100vh - 120px);
+}
+
+#siteDateTime {
+    top : 1vh;
+    left : -10vh;
+    width : 200px;
+    height : 2vh;
 }
 
 select, optgroup {
