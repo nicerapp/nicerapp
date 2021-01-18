@@ -185,7 +185,7 @@ class naVividMenu {
                 top : it.offsetY,
                 zIndex : it.zIndex
             });
-            if (it.level===1) $(it.b.el).fadeIn('slow');
+            if (it.level===1) $(it.b.el).fadeIn('normal');
             $(it.b.el).fitText();
         }
         //debugger;
@@ -200,6 +200,17 @@ class naVividMenu {
         if (t.timeoutMouseout) clearTimeout (t.timeoutMouseout);
         if (t.timeoutMouseover) clearTimeout (t.timeoutMouseover);
         t.timeoutMouseover = setTimeout (function() {
+            $(it.p).find('li').each(function(idx,pcli){
+                //if (pcli!==it.li) {
+                    if (pcli.openChildren) pcli.openChildren.each(function(idx2,li) {
+                        $(li.it.b.el).fadeOut('fast');
+                        if (li.openChildren) li.openChildren.each(function(idx3,li2){
+                            $(li2.it.b.el).fadeOut('fast');
+                        });
+                    });
+                //}
+            });
+            
             it.li.openChildren = $(it.li).children('ul').children('li');
             var hasChildren = false;
             it.li.openChildren.each(function(idx,li) {
@@ -207,14 +218,9 @@ class naVividMenu {
                 opLev = opLevMin + (
                     ( (opLevMax-opLevMin) / ((li.it.level-it.level)) )
                 );
-                if (
-                    li.it.label == 'Dogs'
-                ) {
-                    //debugger;
-                }
                 if (li.it.level!==it.level) {
-                    if ($(li.it.b.el).css('display')==='none') $(li.it.b.el).css({display:'block',opacity:1});
-                    $(li.it.b.el).stop(true,true).animate({opacity:opLev},'fast');
+                    if ($(li.it.b.el).css('display')==='none') $(li.it.b.el).css({display:'block',opacity:0});
+                    $(li.it.b.el).stop(true,true).delay(200).animate({opacity:opLev},'fast');
                     hasChildren = true;
                 }
             });
@@ -226,29 +232,24 @@ class naVividMenu {
                         (opLevMax-opLevMin) / cli.it.level
                     );
                     if (opLev >= 0 && opLev <= 1) {
-                        if ($(cli.it.b.el).css('display')==='none') $(cli.it.b.el).css({display:'block',opacity:1});
-                        $(cli.it.b.el).stop(true,true).animate({opacity:opLev},'fast');
+                        if ($(cli.it.b.el).css('display')==='none') $(cli.it.b.el).css({display:'block',opacity:0});
+                        $(cli.it.b.el).stop(true,true).delay(200).animate({opacity:opLev},'fast');
                     }
                 });
                 
                 if (idx===0 && !hasChildren) $(pul).children('li').each(function(idx,cli){
-                    $(cli.it.b.el).stop(true,true).animate({opacity:1},'fast');
+                    if ($(cli.it.b.el).css('display')==='none') $(cli.it.b.el).css({display:'block',opacity:0});
+                    $(cli.it.b.el).stop(true,true).delay(200).animate({opacity:1},'fast');
                 });
             });
 
-            $(it.path).stop(true,true).animate({opacity:1}, 'fast');
-            $('#'+it.b.el.id).stop(true,true).animate({opacity:1}, 'fast');
-            
-            $(it.p).children('li').each(function(idx,pcli){
-                if (pcli!==it.li) {
-                    if (pcli.openChildren) pcli.openChildren.each(function(idx2,li) {
-                        $(li.it.b.el).fadeOut('slow');
-                        if (li.openChildren) li.openChildren.each(function(idx2,li2){
-                            $(li2.it.b.el).fadeOut('slow');
-                        });
-                    });
-                }
+            $(it.path).stop(true,true).animate ({opacity:1},'fast');
+            if (it.parent) t.items[it.parent].li.openChildren.each(function(idx,el){
+                $(el.it.b.el).stop(true,true).animate ({opacity:1},'fast');
             });
+            
+            $('#'+it.b.el.id).stop(true,true).delay(200).animate ({opacity:1},'fast');
+            
         }, 250);
     }
     
@@ -259,7 +260,6 @@ class naVividMenu {
         //if (!t.timeoutMouseout) {
             if (t.timeoutMouseout) clearTimeout (t.timeoutMouseout);
             t.timeoutMouseout = setTimeout (function() {
-                debugger;
                 if (it.level>1) {
                     it.li.openChildren.each(function(idx,li) {
                         /*
