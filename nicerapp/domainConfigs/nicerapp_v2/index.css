@@ -30,7 +30,7 @@ html, body {
 .vividButton, .vividMenu, .vividDialog {
     position : absolute;
     display : none;
-    font-size : 2rem;
+    font-size : 1rem;
 }
 .vividButton {
     display : flex;
@@ -38,7 +38,7 @@ html, body {
     align-items : center;
     text-align : center;
     width : 200px;
-    height : 1.5rem;
+    height : 1rem;
     font-size : 1rem;
     font-weight : bold;
 }
