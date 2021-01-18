@@ -54,30 +54,43 @@ body {
 }
 
 .vividButton[theme="black"] {
-  background : rgba(0,0,0,0.5);
-  padding : 5px;
-  margin : 5px;
-  border-radius : 7px;
-    animation : anim_vividButton_black_hover_reversed 0.7s;
-    animation-fill-mode : forwards;
-    animation-timing-function : cubic-bezier(1,1,0,1);
+    border : 3px ridge rgba(255,255,255,0.7);
+    background-image: -o-linear-gradient(bottom, rgba(0,0,0,0.25) 25%, rgba(40,40,40,0.25) 81%);
+    background-image: -moz-linear-gradient(bottom, rgba(0,0,0,0.25) 25%, rgba(40,40,40,0.25) 81%);
+    background-image: -webkit-linear-gradient(bottom, rgba(0,0,0,0.25) 25%, rgba(40,40,40,0.25) 81%);
+    background-image: -ms-linear-gradient(bottom, rgba(0,0,0,0.25) 25%, rgba(40,40,40,0.25) 81%);
+    background-image: linear-gradient(bottom, rgba(0,0,0,0.25) 25%, rgba(40,40,40,0.25) 81%);
+    padding : 5px;
+    margin : 5px;
+    border-radius : 20px;
+    z-index : 1;
 }  
 .vividButton[theme="black"] a {
   color : white;
   text-decoration : none;
 }
-.vividButton[theme="black"]:hover {
-    animation : anim_vividButton_black_hover 0.7s;
-    animation-fill-mode : forwards;
-    animation-timing-function : cubic-bezier(1,1,0,1);
-}
-@keyframes anim_vividButton_black_hover {
-    100% {
-        background : rgba(0,0,255,0.5);
-    }
-}
-@keyframes anim_vividButton_black_hover_reversed {
-    100% {
-        background : rgba(0,0,0,0.5);
-    }
+.vividButton[theme="black"]::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;   
+    background-image: -o-linear-gradient(bottom, rgba(0,0,0,0.25) 25%, rgba(40,40,40,0.8) 81%);
+    background-image: -moz-linear-gradient(bottom, rgba(0,0,0,0.25) 25%, rgba(40,40,40,0.8) 81%);
+    background-image: -webkit-linear-gradient(bottom, rgba(0,0,0,0.25) 25%, rgba(40,40,40,0.8) 81%);
+    background-image: -ms-linear-gradient(bottom, rgba(0,0,0,0.25) 25%, rgba(40,40,40,0.8) 81%);
+    background-image: linear-gradient(bottom, rgba(0,0,0,0.25) 25%, rgba(40,40,40,0.8) 81%);
+    border-radius : 20px;
+    z-index: -1;
+    transition: opacity 0.5s linear;
+    opacity: 0;
+}    
+.vividButton[theme="black"]:hover::before {
+    opacity: 1;
+    background-image: -o-linear-gradient(bottom, rgba(0,0,50,0.25) 25%, rgba(40,40,80,0.8) 81%);
+    background-image: -moz-linear-gradient(bottom, rgba(0,0,50,0.25)  25%, rgba(40,40,80,0.8) 81%);
+    background-image: -webkit-linear-gradient(bottom, rgba(0,0,50,0.25) 25%, rgba(40,40,80,0.8) 81%);
+    background-image: -ms-linear-gradient(bottom, rgba(0,0,50,0.25) 25%, rgba(40,40,80,0.8) 81%);
+    background-image: linear-gradient(bottom, rgba(0,0,50,0.25) 25%, rgba(40,40,80,0.8) 81%);
 }

@@ -20,10 +20,10 @@ class naVividMenu {
             };
             var it = t.items[idx];
             li.it = it;
-            $(it.b.el).bind('mouseover', function() {
+            $('#'+it.b.el.id/*+'::before'*/).bind('mouseover', function() {
                 t.onmouseover(it);
             });
-            $(it.b.el).bind('mouseout', function() {
+            $('#'+it.b.el.id/*+'::before'*/).bind('mouseout', function() {
                 t.onmouseout(it);
             });
             $(li).parents('ul').each(function(idx2,ul){
@@ -52,7 +52,7 @@ class naVividMenu {
         for (var i=0; i<t.items.length; i++) {
             var it = t.items[i];
             it.label = $(it.b.el).children('a').html();
-            it.p = $(it.li).parents('ul')[0];
+            it.pul = $(it.li).parents('ul')[0];
             
             
             /*
@@ -73,7 +73,7 @@ class naVividMenu {
             */
             
 
-            $(it.p).children('li').each(function(idx,li) {
+            $(it.pul).children('li').each(function(idx,li) {
                 if (it.li === li) {
                     it.levelIdx = idx;
                 }
@@ -185,7 +185,7 @@ class naVividMenu {
                 top : it.offsetY,
                 zIndex : it.zIndex
             });
-            if (it.level===1) $(it.b.el).fadeIn('normal');
+            if (it.level===1) $(it.b.el).fadeIn('fast');
             $(it.b.el).fitText();
         }
         //debugger;
@@ -197,6 +197,7 @@ class naVividMenu {
         opLevMax = 1,
         opLevMin = 0.2;
         
+        if (it.p) it.p.it.travelledIntoChild = true;
         if (t.timeoutMouseout) clearTimeout (t.timeoutMouseout);
         if (t.timeoutMouseover) clearTimeout (t.timeoutMouseover);
         t.timeoutMouseover = setTimeout (function() {
@@ -220,7 +221,7 @@ class naVividMenu {
                 );
                 if (li.it.level!==it.level) {
                     if ($(li.it.b.el).css('display')==='none') $(li.it.b.el).css({display:'block',opacity:0});
-                    $(li.it.b.el).stop(true,true).delay(200).animate({opacity:opLev},'fast');
+                    $(li.it.b.el).stop(true,true).delay(20).animate({opacity:opLev},'fast');
                     hasChildren = true;
                 }
             });
@@ -233,22 +234,25 @@ class naVividMenu {
                     );
                     if (opLev >= 0 && opLev <= 1) {
                         if ($(cli.it.b.el).css('display')==='none') $(cli.it.b.el).css({display:'block',opacity:0});
-                        $(cli.it.b.el).stop(true,true).delay(200).animate({opacity:opLev},'fast');
+                        $(cli.it.b.el).stop(true,true).delay(20).animate({opacity:opLev},'fast');
                     }
                 });
                 
                 if (idx===0 && !hasChildren) $(pul).children('li').each(function(idx,cli){
                     if ($(cli.it.b.el).css('display')==='none') $(cli.it.b.el).css({display:'block',opacity:0});
-                    $(cli.it.b.el).stop(true,true).delay(200).animate({opacity:1},'fast');
+                    $(cli.it.b.el).stop(true,true).delay(20).animate({opacity:1},'fast');
                 });
             });
 
             $(it.path).stop(true,true).animate ({opacity:1},'fast');
-            if (it.parent) t.items[it.parent].li.openChildren.each(function(idx,el){
-                $(el.it.b.el).stop(true,true).animate ({opacity:1},'fast');
-            });
+            if (it.travelledIntoChild && it.parent) {
+                t.items[it.parent].li.openChildren.each(function(idx,el){
+                    $(el.it.b.el).stop(true,true).delay(20).animate ({opacity:1},'fast');
+                });
+                
+            }
             
-            $('#'+it.b.el.id).stop(true,true).delay(200).animate ({opacity:1},'fast');
+            $('#'+it.b.el.id).stop(true,true).delay(20).animate ({opacity:1},'fast');
             
         }, 250);
     }
@@ -256,26 +260,18 @@ class naVividMenu {
     onmouseout(it) {
         var
         t = this;
-        //return false;
-        //if (!t.timeoutMouseout) {
-            if (t.timeoutMouseout) clearTimeout (t.timeoutMouseout);
-            t.timeoutMouseout = setTimeout (function() {
-                if (it.level>1) {
-                    it.li.openChildren.each(function(idx,li) {
-                        /*
-                        for (var i=0; i<t.items.length; i++) {
-                            var it2 = t.items[i];
-                            if (it2.li === li) {
-                                $(it2.b.el).fadeOut('slow');
-                            }
-                        }*/
+        if (t.timeoutMouseout) clearTimeout (t.timeoutMouseout);
+        t.timeoutMouseout = setTimeout (function() {
+            for (var i=0; i<t.items.length; i++) {
+                var it2 = t.items[i];
+                //if (it2.level>1) {
+                    if (it2.li.openChildren) it2.li.openChildren.each(function(idx,li) {
                         $(li.it.b.el).fadeOut('slow');
                     });
-                    //delete t.timeoutMouseout;
-                    //if (it.parent) t.onmouseover(t.items[it.parent]);
-                }
-            }, 1500);
-        //}
+                    
+                //}
+            }
+        }, 1500);
     }
 
 }
