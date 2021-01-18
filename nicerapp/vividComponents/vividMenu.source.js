@@ -99,7 +99,7 @@ class naVividMenu {
             if (placing=='left') var width = left; else var width = right;
 
             var
-            columnCount = Math.floor(width / $(it.b.el).width()),
+            columnCount = Math.floor(width / $(it.b.el).width())-1,
             itemsOnLevelCount = 0;
             
             for (var j=0; j<t.items.length; j++) {
@@ -114,10 +114,10 @@ class naVividMenu {
                 columnCount = 1;
                 rowCount = 9999;
             } else if (columnCount > rowCount) {
-                columnCount = Math.floor(Math.sqrt(itemsOnLevelCount))-1;
+                columnCount = Math.floor(Math.sqrt(itemsOnLevelCount));
                 rowCount = Math.ceil(itemsOnLevelCount / columnCount);
             };
-            rowCount++;
+            //rowCount++;
             //rowCount++;
             
             var
