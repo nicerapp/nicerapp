@@ -53,3 +53,31 @@ body {
   border-radius : 20px;
 }
 
+.vividButton[theme="black"] {
+  background : rgba(0,0,0,0.5);
+  padding : 5px;
+  margin : 5px;
+  border-radius : 7px;
+    animation : anim_vividButton_black_hover_reversed 0.7s;
+    animation-fill-mode : forwards;
+    animation-timing-function : cubic-bezier(1,1,0,1);
+}  
+.vividButton[theme="black"] a {
+  color : white;
+  text-decoration : none;
+}
+.vividButton[theme="black"]:hover {
+    animation : anim_vividButton_black_hover 0.7s;
+    animation-fill-mode : forwards;
+    animation-timing-function : cubic-bezier(1,1,0,1);
+}
+@keyframes anim_vividButton_black_hover {
+    100% {
+        background : rgba(0,0,255,0.5);
+    }
+}
+@keyframes anim_vividButton_black_hover_reversed {
+    100% {
+        background : rgba(0,0,0,0.5);
+    }
+}

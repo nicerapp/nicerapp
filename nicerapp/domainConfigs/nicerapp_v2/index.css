@@ -4,15 +4,7 @@ html, body {
     font-family: 'Open Sans', sans-serif;
 }
 
-.vividDialog {
-    display : none;
-    font-size : 2rem;
-    /*
-    margin : 20px;
-    width : calc(100vw - 60px);
-    height: calc(100vh - 60px);
-    */
-    position : absolute;
+#siteContent {
     top : 48vh;
     height : 4vh;
     left : 48vw;
@@ -27,19 +19,25 @@ html, body {
     height: calc(100vh - 120px);
 }
 
-#siteDateTime {
-    top : 1vh;
-    left : -10vh;
-    width : 300px;
-    height : 2rem;
+
+.vividButton, .vividMenu, .vividDialog {
+    position : absolute;
+    display : none;
+    font-size : 2rem;
+}
+.vividButton {
+    display : flex;
+    justify-content : center;
+    align-items : center;
+    text-align : center;
+    width : 200px;
+    height : 1.5rem;
     font-size : 1rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    font-weight : bold;
 }
 
 #siteContent.started {
-    animation : anim_siteContent_started 1s;
+    animation : anim_siteContent_started 0.7s;
     animation-fill-mode : forwards;
     animation-timing-function : cubic-bezier(1,1,0,1);
 }
@@ -52,8 +50,35 @@ html, body {
     }
 }
 
+#siteMenu.started {
+    animation : anim_siteMenu_started 0.7s;
+    animation-fill-mode : forwards;
+    animation-timing-function : cubic-bezier(1,1,0,1);
+}
+@keyframes anim_siteMenu_started {
+    100% {
+        top : 1vh;
+        left : calc(2vw + 300px);
+        width : 5vw;
+        height : 2rem;
+    }
+}
+
+
+#siteDateTime {
+    top : 1vh;
+    left : -10vh;
+    width : 250px;
+    height : 2rem;
+    font-size : 1rem;
+    font-weight : bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius : 10px;
+}
 #siteDateTime.started {
-    animation : anim_siteDateTime_started 1s;
+    animation : anim_siteDateTime_started 0.7s;
     animation-fill-mode : forwards;
     animation-timing-function : cubic-bezier(1,1,0,1);
 }
