@@ -160,7 +160,7 @@ class naVividMenu {
             it.column = column;
             it.offsetX = (
                 it.level === 1
-                ? ($(it.b.el).width() + 30) * it.levelIdx
+                ? ($(it.b.el).width() + 20) * it.levelIdx
                 : it.level === 2
                         ? placing==='right'
                             ? l.offsetX + parent.offsetX + ( ($(it.b.el).width()+20) * it.column) 
