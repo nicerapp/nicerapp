@@ -6,8 +6,13 @@ var nas = na.site = {
         copyright : 'Copyright (c) and All Rights Reserved (r) 2021 by Rene A.J.M. Veerman <rene.veerman.netherlands@gmail.com>'
     },
     
+    settings : {
+        buttons : {},
+        menus : {}
+    },
+    
     onload : function (evt) {
-        $('.vividDialog').fadeIn('slow', function() {
+        $('.vividDialog, .vividMenu').fadeIn('slow', function() {
                 /*
                 $('#siteContent').animate({
                     top : 'calc( 1vh + 2em )', // doesn't get set at all :(
@@ -22,13 +27,34 @@ var nas = na.site = {
                     left : '1vw'
                 }, 'fast');
                 */
-                $("#siteContent").bind('onanimationend animationend webkitAnimationEnd', function() { 
-                    $('#siteContent .vividDialogContent').fadeIn('slow');
+                $('#siteContent').bind('onanimationend animationend webkitAnimationEnd', function() { 
+                    if (!nas.s.siteContentStarted) {
+                        nas.s.siteContentStarted = true;
+                        $('#siteContent .vividDialogContent').fadeIn('slow');
+                        nas.reloadMenu();
+                    }
+                });
+
+                $('#siteMenu').bind('onanimationend animationend webkitAnimationEnd', function() { 
+                    //nas.s.menus['#siteMenu'].onresize();
                 });
                 
-                $('.vividDialog').addClass('started');
+                $('.vividDialog, .vividMenu').addClass('started');
         });
+        
         $('#siteContent .vividDialogContent').focus();
+        
+        $('.vividButton').each(function(idx,el){
+            nas.s.buttons['#'+el.id] = new naVividButton(el);
+        });
+        
+        
+        /*
+        $('.vividMenu').each(function(idx,el){
+            nas.s.menus['#'+el.id] = new naVividMenu(el);
+        });
+        */
+        
         setInterval (nas.updateDateTime, 1000);
     },
     
@@ -61,9 +87,30 @@ var nas = na.site = {
             };
             */
         });
-    }
+    },
     
-};
+    reloadMenu : function() {
+        var ac = {
+            type : 'POST',
+            url : '/nicerapp/domainConfigs/localhost.v2/mainmenu.php',
+            data : {
+                na_js__screenWidth : $(window).width(),
+                na_js__menuSpace : $(window).width() - $('#siteMenu').offset().left,
+                na_js__menuItemWidth : 200,
+                na_js__hasContentMenu : false
+            },
+            success : function (data, ts, xhr) {
+                jQuery('#siteMenu').html(data);
+                nas.s.menus['#siteMenu'] = new naVividMenu($('#siteMenu')[0]);
+            },
+            failure : function (xhr, ajaxOptions, thrownError) {
+                debugger;
+            }                
+        }
+        $.ajax(ac);
+    }
+}
+nas.s = nas.settings;
 
 na.m = {
 	padNumber : function (number, characterPositions, paddingWith) {
@@ -75,6 +122,32 @@ na.m = {
 		};
 		r = padding + number;
 		return r;
+	},
+    
+	userDevice : {
+		isPhone : 
+                navigator.userAgent === 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) CriOS/56.0.2924.75 Mobile/14E5239e Safari/602.1' // iPhone 8 and iPhone 8 Plus
+                || navigator.userAgent === 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) CriOS/56.0.2924.75 Mobile/14E5239e Safari/602.1' // iPhone 7 and iPhone 7 Plus
+                || navigator.userAgent === 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36' // iPhoneX and iPhoneX Plus
+				|| navigator.userAgent.match(/iPhone/i)
+				|| navigator.userAgent.match(/iPad/i)
+				|| navigator.userAgent.match(/Mobile Safari/i)
+				|| navigator.userAgent.match(/BlackBerry/i)
+				|| navigator.userAgent.match(/PlayStation/i)
+				|| navigator.userAgent.match(/IEMobile/i)
+				|| navigator.userAgent.match(/Windows CE/i)
+				|| navigator.userAgent.match(/Windows Phone/i)
+				|| navigator.userAgent.match(/SymbianOS/i)
+				|| navigator.userAgent.match(/Android/i)
+				|| navigator.userAgent.match(/PalmOS/i)
+				|| navigator.userAgent.match(/PalmSource/i)
+				|| navigator.userAgent.match(/SonyEricsson/i)
+				|| navigator.userAgent.match(/Opera Mini/i)
+				|| navigator.userAgent.match(/Vodafone/i)
+				|| navigator.userAgent.match(/DoCoMo/i)
+				|| navigator.userAgent.match(/AvantGo/i)
+				|| navigator.userAgent.match(/J-PHONE/i)
+				|| navigator.userAgent.match(/UP.Browser/i)
 	}
 };
 

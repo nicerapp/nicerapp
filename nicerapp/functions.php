@@ -11,6 +11,15 @@ function execPHP ($file) {
     return $c;
 };
 
+function require_return ($file) {
+// used by .../domainConfigs/DOMAIN.EXT/mainmenu.php
+    ob_start();
+    require ($file);
+    $r = ob_get_clean();
+    return $r;
+}
+
+
 function getFilePathList ( 
 //TODO: all features listed below $level are untested.
 	

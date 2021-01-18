@@ -36,12 +36,14 @@ class nicerAppCMS {
         $cssThemeFiles = $this->getFiles('css', 'cssThemeFiles');
         $javascriptFiles = $this->getFiles('javascript', 'javascriptFiles');
         $div_siteContent = $this->getDivSiteContent();
+        $div_siteMenu = $this->getSiteMenu();
         $replacements = array (
             '{$domain}' => $this->domain,
             '{$cssFiles}' => $cssFiles,
             '{$cssThemeFiles}' => $cssThemeFiles,
             '{$javascriptFiles}' => $javascriptFiles,
-            '{$div_siteContent}' => $div_siteContent
+            '{$div_siteContent}' => $div_siteContent,
+            '{$div_siteMenu}' => $div_siteMenu
         );
         $search = array_keys($replacements);
         $replace = array_values($replacements);
@@ -50,6 +52,36 @@ class nicerAppCMS {
     }
     
     public function getFiles($type = null, $indexPrefix = null) {
+        switch ($indexPrefix) {
+            case 'cssThemeFiles': $filenamePrefix = '.'.$this->cssTheme; break;
+            default: $filenamePrefix = '';
+        };
+        $filename = realpath(dirname(__FILE__).'/../domainConfigs/'.$this->domain.'/index.'.$indexPrefix.$filenamePrefix.'.json');
+        $files = json_decode(file_get_contents($filename), true);
+        switch ($type) {
+            case 'css': $lineSrc = "\t".'<link type="text/css" rel="StyleSheet" href="{$src}?c={$changed}">'."\r\n"; break;
+            case 'javascript': $lineSrc = "\t".'<script type="text/javascript" src="{$src}?c={$changed}"></script>'."\r\n"; break;
+        };
+        $lines = '';
+        $c = '';
+        $newest = strtotime ('1970-01-01');
+        foreach ($files as $idx => $file) {
+            $file = str_replace ('{$domain}', $this->domain, $file);
+            $c .= file_get_contents($file);
+            $fdt = filectime($this->basePath.'/'.$file);
+            if ($fdt > $newest) $newest = $fdt;
+        };
+        $cacheFilename = realpath(dirname(__FILE__).'/../domainConfigs').'/'.$this->domain.'/index.'.$indexPrefix.$filenamePrefix.'.'.$type;
+        file_put_contents ($cacheFilename, $c);
+        $url = str_replace ($this->basePath, '', $cacheFilename);
+        $lastModified = date('Ymd_His', $newest);
+        $search = array ('{$src}', '{$changed}');
+        $replace = array ($url, $lastModified);
+        $lines .= str_replace ($search, $replace, $lineSrc);
+        return $lines;
+    }
+
+    public function getFiles_asIndividualLinks($type = null, $indexPrefix = null) {
         switch ($indexPrefix) {
             case 'cssThemeFiles': $filenamePrefix = '.'.$this->cssTheme; break;
             default: $filenamePrefix = '';
@@ -73,6 +105,12 @@ class nicerAppCMS {
     
     public function getDivSiteContent() {
         $contentFile = realpath(dirname(__FILE__).'/../domainConfigs/'.$this->domain.'/frontpage.siteContent.php');
+        $content = execPHP($contentFile);
+        return $content;
+    }
+    
+    public function getSiteMenu() {
+        $contentFile = realpath(dirname(__FILE__).'/../domainConfigs/'.$this->domain.'/mainmenu.php');
         $content = execPHP($contentFile);
         return $content;
     }
