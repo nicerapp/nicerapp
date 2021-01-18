@@ -164,10 +164,10 @@ class naVividMenu {
                 : it.level === 2
                         ? placing==='right'
                             ? l.offsetX + parent.offsetX + ( ($(it.b.el).width()+20) * it.column) 
-                            : l.offsetX - parent.offsetX - ( ($(it.b.el).width()+20) * it.column) 
+                            : l.offsetX + parent.offsetX - ( ($(it.b.el).width()+20) * it.column) 
                         : placing==='right'
                             ? l.offsetX + parent.offsetX + ( ($(it.b.el).width()+20) * it.column) + ($(it.b.el).width()/2)
-                            : l.offsetX - parent.offsetX - ( ($(it.b.el).width()+20) * it.column) - ($(it.b.el).width()/2)
+                            : l.offsetX + parent.offsetX - ( ($(it.b.el).width()+20) * it.column) - ($(it.b.el).width()/2)
             );
             it.offsetY = (
                 it.level === 1 
