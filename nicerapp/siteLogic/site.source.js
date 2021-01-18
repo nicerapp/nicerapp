@@ -47,7 +47,13 @@ var nas = na.site = {
         $('.vividButton').each(function(idx,el){
             nas.s.buttons['#'+el.id] = new naVividButton(el);
         });
-        
+
+        $(window).resize (function() {
+            if (nas.s.timeoutWindowResize) clearTimeout(nas.s.timeoutWindowResize);
+            nas.s.timeoutWindowResize = setTimeout (function() {
+                nas.reloadMenu();
+            }, 250);
+        });
         
         /*
         $('.vividMenu').each(function(idx,el){
