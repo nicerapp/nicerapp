@@ -118,6 +118,7 @@ class naVividMenu {
                 rowCount = Math.floor(itemsOnLevelCount / columnCount);
             };
             //rowCount++;
+            //rowCount++;
             
             var
             column = 0,
@@ -246,13 +247,34 @@ class naVividMenu {
 
             $(it.path).stop(true,true).animate ({opacity:1},'fast');
             $('#'+it.b.el.id).stop(true,true).delay(20).animate ({opacity:1},'fast');
+            var opLev = null, opLev2 = null;
             if (it.travelledIntoChild && it.parent) {
-                t.items[it.parent].li.openChildren.each(function(idx,el){
-                    $(el.it.b.el).stop(true,true).delay(20).animate ({opacity:1},'fast');
+                $(it.p).children('ul').children('li').each(function(idx3,li3) {
+                    opLev = opLevMin + (
+                        ( (opLevMax-opLevMin) / ((li3.it.level-it.p.it.level+1)) )
+                    );
+                    if (li3.it.level===it.level) {
+                        if ($(li3.it.b.el).css('display')==='none') $(li3.it.b.el).css({display:'block',opacity:0});
+                        $(li3.it.b.el).stop(true,true).delay(20).animate({opacity:opLev},'fast');
+                        hasChildren = true;
+                    }
                 });
-                
+                t.items[it.parent].li.openChildren.each(function(idx,el){
+                    if ($(el.it.b.el).css('display')==='none') $(el.it.b.el).css({display:'block',opacity:0});
+                    opLev2 = (
+                        el === it.li
+                        ? 1
+                        : opLev
+                    );
+                    $(el.it.b.el).stop(true,true).delay(20).animate ({opacity:opLev2},'fast');
+                });
+                $(it.li).children('ul').children('li').each(function(idx2,el2){
+                    if ($(el2.it.b.el).css('display')==='none') $(el2.it.b.el).css({display:'block',opacity:0});
+                    $(el2.it.b.el).stop(true,true).delay(20).animate ({opacity:1},'fast');
+                });
+                delete it.travelledIntoChild;
             }
-        }, 50);
+        }, 250);
     }
     
     onmouseout(it) {
@@ -266,7 +288,7 @@ class naVividMenu {
                     $(li.it.b.el).fadeOut('slow');
                 });
             }
-        }, 500);
+        }, 1000);
     }
 
 }

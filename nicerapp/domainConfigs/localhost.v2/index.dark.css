@@ -64,6 +64,7 @@ body {
     margin : 5px;
     border-radius : 20px;
     z-index : 1;
+    pointer-events : none;
 }  
 .vividButton[theme="black"] a {
   color : white;
@@ -72,6 +73,7 @@ body {
 .vividButton[theme="black"]::before {
     content: "";
     position: absolute;
+    pointer-events: all;
     top: 0;
     left: 0;
     width: 100%;
