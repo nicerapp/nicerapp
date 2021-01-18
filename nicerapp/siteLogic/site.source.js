@@ -50,6 +50,10 @@ var nas = na.site = {
 
         $(window).resize (function() {
             if (nas.s.timeoutWindowResize) clearTimeout(nas.s.timeoutWindowResize);
+            $('#siteBackground img').css({
+                width : $(window).width(),
+                height : $(window).height()
+            });
             nas.s.timeoutWindowResize = setTimeout (function() {
                 nas.onresize();
             }, 250);
@@ -100,7 +104,7 @@ var nas = na.site = {
         $('#siteBackground img').css({
             width : $(window).width(),
             height : $(window).height()
-        }).fadeIn('slow');
+        }).fadeIn(2000);
     },
     
     reloadMenu : function() {
