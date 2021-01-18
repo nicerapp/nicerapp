@@ -138,19 +138,7 @@ class naVividMenu {
                 : it.level === 2
                     ? parent.offsetY + ( ($(it.b.el).height()+20) * it.columnIdx )+ ($(it.b.el).height()/1.5)
                     : parent.offsetY + ( ($(it.b.el).height()+20) * (it.columnIdx-1) )+ ($(it.b.el).height()/1.5)
-                
-                /*
-                it.level === 1 
-                ? 0
-                : l 
-                    ? it.level === 2
-                        ? l.offsetY + parent.offsetY + ( ($(it.b.el).height()+20) * (it.columnIdx) ) 
-                        : l.offsetY + parent.offsetY + ( ($(it.b.el).height()+20) * (it.columnIdx) ) + ($(it.b.el).height()/2)
-                    : parent.offsetY + ( ($(it.b.el).height()+20) * it.columnIdx )
-                */
             );
-            //if (it.label=='Portrait'||it.label=='Tiled')debugger;
-            if (it.label=='Animals'||it.label=='Anime')debugger;
             
             if (!l) {
                 if (!parent) {
@@ -171,7 +159,7 @@ class naVividMenu {
                 l = levels['path '+it.path];
             };
             it.zIndex = (100 * 1000) + l.zIndexOffset;
-            //if (it.label=='Portrait' || it.label=='Tiled') debugger;
+
             $(it.b.el).css({
                 display : 'none',
                 left : it.offsetX,
