@@ -114,10 +114,10 @@ class naVividMenu {
                 columnCount = 1;
                 rowCount = 9999;
             } else if (columnCount > rowCount) {
-                columnCount = Math.floor(Math.sqrt(itemsOnLevelCount));
-                rowCount = Math.floor(itemsOnLevelCount / columnCount);
+                columnCount = Math.floor(Math.sqrt(itemsOnLevelCount))-1;
+                rowCount = Math.ceil(itemsOnLevelCount / columnCount);
             };
-            //rowCount++;
+            rowCount++;
             //rowCount++;
             
             var
