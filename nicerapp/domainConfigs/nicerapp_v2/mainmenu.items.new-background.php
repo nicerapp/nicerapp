@@ -1,5 +1,5 @@
-<!--<li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground');">New Background</a>
-    <ul>-->
+<li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground');">New Background</a>
+    <ul>
         <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'darkmode');">Dark mode</a>
             <ul>
                 <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'darkmode art');">Art</a></li>
@@ -245,5 +245,5 @@
         </ul>
         </li>
         -->
-    <!--</ul>
-</li>-->
+    </ul>
+</li>

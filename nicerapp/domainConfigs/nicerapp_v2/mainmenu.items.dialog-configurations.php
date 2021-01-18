@@ -1,4 +1,4 @@
-<li><a href="#">Dialog Configurations</a>
+<li><a href="#">Dialog Configs</a>
     <ul>
     <li><a class="noPushState" href="javascript:na.site.code.setDesiredDesktopConfiguration('background');">Background only</a></li>
     <li><a class="noPushState" href="javascript:na.site.code.setDesiredDesktopConfiguration('content');">Content only</a></li>

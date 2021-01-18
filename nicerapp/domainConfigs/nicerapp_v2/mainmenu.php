@@ -1,41 +1,22 @@
 <?php
-require_once (dirname(__FILE__).'/../../boot_stage_001.php');
-global $saSiteHTTP; global $saSiteDomain; global $saSiteRootFolder; global $saFrameworkFolder;
-global $saSiteHD; global $saFrameworkHD; global $saSiteURL; global $saFrameworkURL;
-global $saIsLocalhost; global $saHTDOCShd;
-global $saServerOperatingSystem; global $saDeveloperMode;
-//var_dump ($_SESSION); //die();
-if (array_key_exists('sa_js__screenWidth',$_SESSION)) {
-/*
-    if (
-        $_SERVER['HTTP_USER_AGENT']=='Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36' // iPhone X and iPhoneX Plus
-        || 
-        $_SERVER['HTTP_USER_AGENT']=='Mozilla/5.0 (iPhone; CPU iPhone OS 10_3 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) CriOS/56.0.2924.75 Mobile/14E5239e Safari/602.1' // iPhone 8 and iPhone 8 Plus
-        || 
-        $_SERVER['HTTP_USER_AGENT']=='Mozilla/5.0 (iPhone; CPU iPhone OS 10_3 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) CriOS/56.0.2924.75 Mobile/14E5239e Safari/602.1' // iPhone 7 and iPhone 7 Plus
-    ) {
-        $browserWidth = (float)$_SESSION['sa_js__screenWidth'];
-        $browserHeight = (float)$_SESSION['sa_js__screenHeight'];
-    } else {
-        $browserWidth = (float)$_SESSION['sa_js__browserWidth'];
-        $browserHeight = (float)$_SESSION['sa_js__browserHeight'];
-    }
-    $browserWidth -= 500; // #siteVideo menu
-    
-*/    
-    
-    $browserWidth = (float)$_SESSION['sa_js__menuSpace'];
-    $menuItemWidth = (float)$_SESSION['sa_js__menuItemWidth'];
-    $hasContentMenu = $_SESSION['sa_js__hasContentMenu']=='true'?true:false;
+require_once (realpath(dirname(__FILE__).'/../..').'/boot.php');
+
+if (is_array($_POST) && array_key_exists('na_js__screenWidth', $_POST)) {
+    $_SESSION['na_js__screenWidth'] = $_POST['na_js__screenWidth'];
+    $_SESSION['na_js__menuSpace'] = $_POST['na_js__menuSpace'];
+    $_SESSION['na_js__menuItemWidth'] = $_POST['na_js__menuItemWidth'];
+    $_SESSION['na_js__hasContentMenu'] = $_POST['na_js__hasContentMenu'];
+}
+
+if (is_array($_SESSION) && array_key_exists('na_js__screenWidth',$_SESSION)) {
+    $browserWidth = (float)$_SESSION['na_js__menuSpace'];
+    $menuItemWidth = (float)$_SESSION['na_js__menuItemWidth'];
+    $hasContentMenu = $_SESSION['na_js__hasContentMenu']=='true'?true:false;
     $itemGap = 5;
     
-    //var_dump ($browserWidth); die();
     $menuStructure = 'forWidestScreen';
     
-    //var_dump ($browserWidth); var_dump ((6 * $menuItemWidth) + (6 * $itemGap));
-    
     // reserve one menu-item in #siteMenu for the apps menu
-    
     $multiplier = $hasContentMenu ? 6 : 5;
     if ($browserWidth < ($multiplier * $menuItemWidth) + ($multiplier * $itemGap) ) $menuStructure = 'forMax5itemsWide';
     
@@ -53,7 +34,8 @@ if (array_key_exists('sa_js__screenWidth',$_SESSION)) {
     $menuStructure = 'forWidestScreen';
 }
 //var_dump ($menuStructure);
-//var_dump ($_SERVER); var_dump ($_SESSION); 
+//var_dump ($_SERVER); 
+//var_dump ($_SESSION); 
 //var_dump ($menuStructure); die();
 
 switch ($menuStructure) {
@@ -80,7 +62,7 @@ function forWidestScreen() {
 		<?php echo require_return (dirname(__FILE__).'/mainmenu.items.apps-games.php');?>
 		<?php echo require_return (dirname(__FILE__).'/mainmenu.items.dialog-configurations.php');?>
 		<?php echo require_return (dirname(__FILE__).'/mainmenu.items.dialogs.php');?>
-		<?php //echo require_return (dirname(__FILE__).'/mainmenu.items.new-background.php');?>
+		<?php echo require_return (dirname(__FILE__).'/mainmenu.items.new-background.php');?>
 		<?php echo require_return (dirname(__FILE__).'/mainmenu.items.admin.php');?>		
 		<li class="saLinkpoint"><a href="-saLinkpoint-">-saLinkpoint-appMenu</a></li>
 	</ul>
@@ -97,7 +79,7 @@ function forMax5itemsWide() {
             <?php echo require_return (dirname(__FILE__).'/mainmenu.items.dialogs.php');?>
         </ul>
         </li>
-		<?php //echo require_return (dirname(__FILE__).'/mainmenu.items.new-background.php');?>
+		<?php echo require_return (dirname(__FILE__).'/mainmenu.items.new-background.php');?>
 		<?php echo require_return (dirname(__FILE__).'/mainmenu.items.admin.php');?>		
 		<li class="saLinkpoint"><a href="-saLinkpoint-">-saLinkpoint-appMenu</a></li>
 	</ul>
@@ -115,7 +97,7 @@ function forMax4itemsWide () {
             <?php echo require_return (dirname(__FILE__).'/mainmenu.items.admin.php');?>		
         </ul>
         </li>
-		<?php //echo require_return (dirname(__FILE__).'/mainmenu.items.new-background.php');?>
+		<?php echo require_return (dirname(__FILE__).'/mainmenu.items.new-background.php');?>
 		<li class="saLinkpoint"><a href="-saLinkpoint-">-saLinkpoint-appMenu</a></li>
 	</ul>
 <?php
@@ -129,7 +111,7 @@ function forMax3itemsWide () {
 		<ul>
             <?php echo require_return (dirname(__FILE__).'/mainmenu.items.dialog-configurations.php');?>
             <?php echo require_return (dirname(__FILE__).'/mainmenu.items.dialogs.php');?>
-            <?php //echo require_return (dirname(__FILE__).'/mainmenu.items.new-background.php');?>
+            <?php echo require_return (dirname(__FILE__).'/mainmenu.items.new-background.php');?>
             <?php echo require_return (dirname(__FILE__).'/mainmenu.items.admin.php');?>		
         </ul>
         </li>
@@ -146,7 +128,7 @@ function forMax2itemsWide () {
                 <?php echo require_return (dirname(__FILE__).'/mainmenu.items.apps-games.php');?>
                 <?php echo require_return (dirname(__FILE__).'/mainmenu.items.dialog-configurations.php');?>
                 <?php echo require_return (dirname(__FILE__).'/mainmenu.items.dialogs.php');?>
-                <?php //echo require_return (dirname(__FILE__).'/mainmenu.items.new-background.php');?>
+                <?php echo require_return (dirname(__FILE__).'/mainmenu.items.new-background.php');?>
                 <?php echo require_return (dirname(__FILE__).'/mainmenu.items.admin.php');?>		
             </ul>
 		</li>
