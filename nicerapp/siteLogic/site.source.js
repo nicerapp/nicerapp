@@ -31,7 +31,7 @@ var nas = na.site = {
                     if (!nas.s.siteContentStarted) {
                         nas.s.siteContentStarted = true;
                         $('#siteContent .vividDialogContent').fadeIn('slow');
-                        nas.reloadMenu();
+                        nas.onresize();
                     }
                 });
 
@@ -51,7 +51,7 @@ var nas = na.site = {
         $(window).resize (function() {
             if (nas.s.timeoutWindowResize) clearTimeout(nas.s.timeoutWindowResize);
             nas.s.timeoutWindowResize = setTimeout (function() {
-                nas.reloadMenu();
+                nas.onresize();
             }, 250);
         });
         
@@ -93,6 +93,14 @@ var nas = na.site = {
             };
             */
         });
+    },
+    
+    onresize : function() {
+        nas.reloadMenu();
+        $('#siteBackground img').css({
+            width : $(window).width(),
+            height : $(window).height()
+        }).fadeIn('slow');
     },
     
     reloadMenu : function() {
