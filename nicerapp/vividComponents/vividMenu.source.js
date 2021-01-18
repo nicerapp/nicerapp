@@ -80,7 +80,7 @@ class naVividMenu {
             };
             
             var
-            rowCount = Math.floor(itemsOnLevelCount / columnCount);
+            rowCount = Math.ceil(itemsOnLevelCount / columnCount);
             
             if (it.level===0) {
                 columnCount = 1;
@@ -135,7 +135,9 @@ class naVividMenu {
             it.offsetY = (
                 it.level === 1
                 ? 0
-                : parent.offsetY + ( ($(it.b.el).height()+20) * it.columnIdx )+ ($(it.b.el).height()/2)
+                : it.level === 2
+                    ? parent.offsetY + ( ($(it.b.el).height()+20) * it.columnIdx )+ ($(it.b.el).height()/1.5)
+                    : parent.offsetY + ( ($(it.b.el).height()+20) * (it.columnIdx-1) )+ ($(it.b.el).height()/1.5)
                 
                 /*
                 it.level === 1 
