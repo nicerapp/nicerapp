@@ -136,8 +136,8 @@ class naVividMenu {
                 it.level === 1
                 ? 0
                 : it.level === 2
-                    ? parent.offsetY + ( ($(it.b.el).height()+20) * it.columnIdx )+ ($(it.b.el).height()/1.5)
-                    : parent.offsetY + ( ($(it.b.el).height()+20) * (it.columnIdx-1) )+ ($(it.b.el).height()/1.5)
+                    ? parent.offsetY + ( ($(it.b.el).height()+20) * it.columnIdx )
+                    : parent.offsetY + ( ($(it.b.el).height()+20) * (it.columnIdx-1) )+ ($(it.b.el).height())
             );
             
             if (!l) {
@@ -208,11 +208,18 @@ class naVividMenu {
             });
             
             $(it.li).parents('ul').each(function(idx,pul) {
-                $(pul).children('li').each(function(idx2,cli){
+                //debugger;
+                if (idx<$(it.li).parents('ul').length-1) $(pul).children('li').each(function(idx2,cli){
                     var
-                    opLev = opLevMin + (
-                        (opLevMax-opLevMin) / cli.it.level
-                    );
+                    opLevFactor =
+                        (opLevMax-opLevMin) / (cli.it.level + idx)*10//(cli.it.level /*>*/<= $(it.li).parents('ul').length ? cli.it.level * 2 : (((opLevMax-opLevMin)*10*(idx+2))-2)*5),
+                    opLev = 
+                        opLevMax - (
+                            (opLevMax-opLevMin) / ((opLevFactor + cli.it.level) / 4)
+                        );
+                        
+                        
+                    //if (cli.it.label=='Dark mode'||cli.it.label=='Anime') debugger;
                     if (opLev >= 0 && opLev <= 1) {
                         if ($(cli.it.b.el).css('display')==='none') $(cli.it.b.el).css({display:'block',opacity:0});
                         $(cli.it.b.el).stop(true,true).delay(20).animate({opacity:opLev},'fast');
@@ -267,6 +274,9 @@ class naVividMenu {
                 if (it2.li.openChildren) it2.li.openChildren.each(function(idx,li) {
                     $(li.it.b.el).fadeOut('slow');
                 });
+                if (it2.level===1) {
+                    $(it2.b.el).animate({opacity:1},'fast');
+                }
             }
         }, 1000);
     }
