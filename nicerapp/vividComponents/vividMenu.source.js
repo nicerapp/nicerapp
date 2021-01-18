@@ -179,6 +179,12 @@ class naVividMenu {
         opLevMin = 0.2;
         
         if (it.p) it.p.it.travelledIntoChild = true;
+        for (var i=0; i<t.items.length; i++) {
+            var it2 = t.items[i];
+            if (it2.li.openChildren) it2.li.openChildren.each(function(idx,cli){
+                $(cli.it.b.el).fadeOut('fast');
+            });
+        }
         if (t.timeoutMouseout) clearTimeout (t.timeoutMouseout);
         if (t.timeoutMouseover) clearTimeout (t.timeoutMouseover);
         t.timeoutMouseover = setTimeout (function() {
