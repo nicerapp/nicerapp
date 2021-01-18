@@ -32,9 +32,9 @@ class nicerAppCMS {
     
     public function getSite() {
         $templateFile = realpath(dirname(__FILE__).'/../domainConfigs/'.$this->domain.'/index.template.html');
-        $cssFiles = $this->getFiles('css', 'cssFiles');
-        $cssThemeFiles = $this->getFiles('css', 'cssThemeFiles');
-        $javascriptFiles = $this->getFiles('javascript', 'javascriptFiles');
+        $cssFiles = $this->getFiles_asIndividualLinks('css', 'cssFiles');
+        $cssThemeFiles = $this->getFiles_asIndividualLinks('css', 'cssThemeFiles');
+        $javascriptFiles = $this->getFiles_asIndividualLinks('javascript', 'javascriptFiles');
         $div_siteContent = $this->getDivSiteContent();
         $div_siteMenu = $this->getSiteMenu();
         $replacements = array (
