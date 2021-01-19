@@ -110,7 +110,8 @@ var nas = na.site = {
         $('#siteBackground img').css({
             width : $(window).width(),
             height : $(window).height()
-        }).fadeIn(2000);
+        });
+        $('#siteBackground img.bg_first').fadeIn(2000);
     },
     
     reloadMenu : function() {
@@ -158,9 +159,17 @@ na.backgrounds = {
         };
         
         var
-        url = '/nicerapp/siteMedia/backgrounds'+hits[Math.floor(Math.random() * Math.floor(hits.length))];
+        url = '/nicerapp/siteMedia/backgrounds'+hits[Math.floor(Math.random() * Math.floor(hits.length))],
+        bgf = $(div+' img.bg_first')[0],
+        bgl = $(div+' img.bg_last')[0];
         
-        $(div+' img')[0].src = url;
+        bgl.onload=function(){
+            jQuery(bgl).fadeIn(1500, function(){
+                bgf.src = bgl.src;
+                jQuery(bgl).fadeOut('fast');
+            });
+        };
+        bgl.src = url;
     }
 };
 
