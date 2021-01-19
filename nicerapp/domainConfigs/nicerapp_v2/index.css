@@ -9,6 +9,13 @@ html, body {
 }
 #siteBackground img {
     display : none;
+    position : absolute;
+}
+img.bg_first {
+    z-index : 10;
+}
+img.bg_last {
+    z-index : 11;
 }
 
 #siteContent {
@@ -24,6 +31,7 @@ html, body {
     margin : 10px;
     width : calc(100vw - 100px);
     height: calc(100vh - 120px);
+    z-index : 1100;
 }
 
 
@@ -31,6 +39,7 @@ html, body {
     position : absolute;
     display : none;
     font-size : 1rem;
+    z-index : 1000;
 }
 .vividButton {
     display : flex;
