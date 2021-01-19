@@ -18,7 +18,7 @@ class nicerAppCMS {
     
     public $domain;
     public $basePath;
-    public $cssTheme = 'darkmode';
+    public $cssTheme = 'dark';
     public $selfHealer;
     
     public function init () {
@@ -43,7 +43,8 @@ class nicerAppCMS {
             '{$cssThemeFiles}' => $cssThemeFiles,
             '{$javascriptFiles}' => $javascriptFiles,
             '{$div_siteContent}' => $div_siteContent,
-            '{$div_siteMenu}' => $div_siteMenu
+            '{$div_siteMenu}' => $div_siteMenu,
+            '{$theme}' => $this->cssTheme
         );
         $search = array_keys($replacements);
         $replace = array_values($replacements);

@@ -53,7 +53,7 @@ body {
   border-radius : 20px;
 }
 
-.vividButton[theme="black"] {
+.vividButton[theme="dark"] {
     border : 3px ridge rgba(255,255,255,0.7);
     background-image: -o-linear-gradient(bottom, rgba(0,0,0,0.4) 25%, rgba(40,40,40,0.4) 81%);
     background-image: -moz-linear-gradient(bottom, rgba(0,0,0,0.4) 25%, rgba(40,40,40,0.4) 81%);
@@ -66,11 +66,11 @@ body {
     z-index : 1;
     pointer-events : none;
 }  
-.vividButton[theme="black"] a {
+.vividButton[theme="dark"] a {
   color : white;
   text-decoration : none;
 }
-.vividButton[theme="black"]::before {
+.vividButton[theme="dark"]::before {
     content: "";
     position: absolute;
     pointer-events: all;
@@ -88,7 +88,7 @@ body {
     transition: opacity 0.5s linear;
     opacity: 0;
 }    
-.vividButton[theme="black"]:hover::before {
+.vividButton[theme="dark"]:hover::before {
     opacity: 1;
     background-image: -o-linear-gradient(bottom, rgba(0,0,50,0.4) 25%, rgba(40,40,80,0.8) 81%);
     background-image: -moz-linear-gradient(bottom, rgba(0,0,50,0.4)  25%, rgba(40,40,80,0.8) 81%);
