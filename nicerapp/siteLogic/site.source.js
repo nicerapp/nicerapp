@@ -59,13 +59,19 @@ var nas = na.site = {
             }, 250);
         });
         
-        /*
-        $('.vividMenu').each(function(idx,el){
-            nas.s.menus['#'+el.id] = new naVividMenu(el);
-        });
-        */
-        
         setInterval (nas.updateDateTime, 1000);
+        
+        var ac = {
+            type : 'GET',
+            url : '/nicerapp/domainConfigs/localhost.v2/ajax_backgrounds.php',
+            success : function (data, ts, xhr) {
+                nas.s.backgrounds = JSON.parse(data);
+            },
+            failure : function (xhr, ajaxOptions, thrownError) {
+                debugger;
+            }                
+        };
+        $.ajax(ac);
     },
     
     updateDateTime : function() {
@@ -129,6 +135,34 @@ var nas = na.site = {
     }
 }
 nas.s = nas.settings;
+
+na.backgrounds = {
+    next : function (div, search) {
+        var
+        bgs = nas.s.backgrounds,
+        sk = search.split(/\s+/),
+        hits = [];
+        
+        for (var i=0; i<bgs.length; i++) {
+            var 
+            bg = bgs[i],
+            hit = true;
+            
+            for (var j=0; j<sk.length; j++) {
+                if (!bg.match(sk[j])) hit = false;
+            }
+            
+            if (hit) {
+                hits[hits.length] = bg;
+            }
+        };
+        
+        var
+        url = '/nicerapp/siteMedia/backgrounds'+hits[Math.floor(Math.random() * Math.floor(hits.length))];
+        
+        $(div+' img')[0].src = url;
+    }
+};
 
 na.m = {
 	padNumber : function (number, characterPositions, paddingWith) {

@@ -1,9 +1,9 @@
 <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground');">New Background</a>
     <ul>
-        <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'darkmode');">Dark mode</a>
+        <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape darkmode');">Dark mode</a>
             <ul>
-                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'darkmode art');">Art</a></li>
-                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'darkmode scenery');">Scenery</a></li>
+                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape darkmode art');">Art</a></li>
+                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape darkmode scenery');">Scenery</a></li>
             </ul>
         </li>
         <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyVideoHD);">HD Video</a>
@@ -45,122 +45,122 @@
             </ul>
         </li>
         <!--<li><a href="javascript:na.apps.search.showYoutube();">Search Youtube</a></li>-->
-        <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape);">Landscape</a>
+        <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape');">Landscape</a>
             <ul>
-            <!--<li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'architecture');">Architecture</a></li>
-            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'fantasy');">Fantasy</a></li>
-            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'good');">Good</a></li>
-            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'nature');">Nature</a>
+            <!--<li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape architecture');">Architecture</a></li>
+            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape fantasy');">Fantasy</a></li>
+            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape good');">Good</a></li>
+            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape nature');">Nature</a>
                 <ul>
-                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'animals');">Animals</a></li>
-                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'flowers');">Flowers</a></li>
+                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape animals');">Animals</a></li>
+                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape flowers');">Flowers</a></li>
                 </ul>
             </li>-->
-            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'animals');">Animals</a>
+            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape animals');">Animals</a>
 			    <ul>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'cats');">Cats</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.farites.onlyLandscape, 'dogs');">Dogs</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.farites.onlyLandscape, 'landanimals');">Land Animals</a>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape cat');">Cats</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape dog');">Dogs</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape landanimals');">Land Animals</a>
 						<ul>
-							<li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'herbivore');">Herbivore</a></li>
-							<li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'predator');">Predator</a></li>
-							<li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'farmanimals');">Farm Animals</a></li>
+							<li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape herbivore');">Herbivore</a></li>
+							<li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape predator');">Predator</a></li>
+							<li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape farmanimals');">Farm Animals</a></li>
 
 						</ul>
 					</li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'bird');">Birds</a>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape bird');">Birds</a>
 						<ul>
-						<li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'eagle');">Eagles</a></li>
-						<li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'owl');">Owls</a></li>
+						<li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape eagle');">Eagles</a></li>
+						<li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape owl');">Owls</a></li>
 						</ul>
                     </li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'sealife');">Sealife</a>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape sealife');">Sealife</a>
 						<ul>
-							<li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'dolphins');">Dolphins</a></li>
-							<li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'sharks');">Sharks</a></li>
+							<li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape dolphins');">Dolphins</a></li>
+							<li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape sharks');">Sharks</a></li>
                     	</ul>
 					</li>
 				</ul>
             </li>
-            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'anime -for_children');">Anime</a>
+            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape anime -for_children');">Anime</a>
                 <ul>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'anime somethings');">20-somethings</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'anime teenagers');">Teenagers</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'anime girls');">For Children and Parents</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'anime couples');">Couples</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'anime families');">Groups</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'anime warriors');">Warriors</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'anime -for_children women');">Women</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'anime angels');">Angels</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape anime somethings');">20-somethings</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape anime teenagers');">Teenagers</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape anime girls');">For Children and Parents</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape anime couples');">Couples</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape anime families');">Groups</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape anime warriors');">Warriors</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape anime -for_children women');">Women</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape anime angels');">Angels</a></li>
                 </ul>
             </li>
-            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'art');">Art</a>
+            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape art');">Art</a>
                 <ul>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'art abstract');">Abstract</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'coffee');">Coffee</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'cyberwar');">Cyberwar</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'DNA');">DNA</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'electronics');">Electronics</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'game');">Games</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'movie');">Movies</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'art painting');">Painting</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape art abstract');">Abstract</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape coffee');">Coffee</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape cyberwar');">Cyberwar</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape DNA');">DNA</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape electronics');">Electronics</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape game');">Games</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape movie');">Movies</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape art painting');">Painting</a></li>
                 </ul>
             </li>
-            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'autumn');">Autumn</a></li>
-            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'buildings');">Buildings</a></li>
-            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'cars');">Cars</a></li>
-            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'christmas');">Christmas</a></li>
-            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'city');">Cities</a></li>
-            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'couples');">Couples</a></li>
-            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'desert');">Desert</a></li>
-            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'funny');">Funny</a></li>
-            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'flowers');">Flowers</a></li>
-            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'forest');">Forest</a></li>
-            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'Godrays');">Godrays</a></li>
-            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'lightning');">Lightning</a></li>
-            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'military');">Military</a></li>
-            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'halloween');">Halloween</a></li>
-            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'religious');">Religious</a>
+            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape autumn');">Autumn</a></li>
+            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape buildings');">Buildings</a></li>
+            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape cars');">Cars</a></li>
+            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape christmas');">Christmas</a></li>
+            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape city');">Cities</a></li>
+            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape couples');">Couples</a></li>
+            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape desert');">Desert</a></li>
+            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape funny');">Funny</a></li>
+            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape flowers');">Flowers</a></li>
+            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape forest');">Forest</a></li>
+            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape Godrays');">Godrays</a></li>
+            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape lightning');">Lightning</a></li>
+            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape military');">Military</a></li>
+            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape halloween');">Halloween</a></li>
+            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape religious');">Religious</a>
                 <ul>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'christianity');">Christian</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'budhism');">Budhism</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'hinduism');">Hinduism</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'hinduism');">Islam</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'satanism');">Satanism</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape christianity');">Christian</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape budhism');">Budhism</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape hinduism');">Hinduism</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape hinduism');">Islam</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape satanism');">Satanism</a></li>
                 </ul>
             </li>
-            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'scenery');">Scenery</a>
+            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape scenery');">Scenery</a>
                 <ul>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'beach');">Beaches</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'bridge');">Bridges</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'buildings');">Buildings</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'camping');">Camping</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'castles');">Castles</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'city');">City</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'coastline');">Coastline</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'countryside');">Countryside</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'roads countryside');">Countryside Roads</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'lake');">Lakes</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'farmland');">Farmland</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'hills');">Hills</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'homes');">Homes</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'hotel');">Hotels</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'landmarks');">Landmarks</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'roads');">Roads</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'scenery simple');">Simple</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'tropical');">Tropical</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'loc__Tuscany__');">Tuscany</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'loc__Venice__');">Venice</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'windmills new');">Windmills modern</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'windmills old');">Windmills old</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape beach');">Beaches</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape bridge');">Bridges</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape buildings');">Buildings</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape camping');">Camping</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape castles');">Castles</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape city');">City</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape coastline');">Coastline</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape countryside');">Countryside</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape roads countryside');">Countryside Roads</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape lake');">Lakes</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape farmland');">Farmland</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape hills');">Hills</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape homes');">Homes</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape hotel');">Hotels</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape landmarks');">Landmarks</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape roads');">Roads</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape scenery simple');">Simple</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape tropical');">Tropical</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape loc__Tuscany__');">Tuscany</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape loc__Venice__');">Venice</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape windmills new');">Windmills modern</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape windmills old');">Windmills old</a></li>
                 </ul>
             </li>
-            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'simple');">Simple</a></li>
-            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'sunrise -anime');">Sunrise &amp; Sunset</a></li>
-            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'space');">Space &amp; Night Sky</a></li>
-            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'tuscany');">Tuscany</a></li>
-            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'winter');">Winter</a></li>
-            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'women -anime');">Women</a></li>
+            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape simple');">Simple</a></li>
+            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape sunrise -anime');">Sunrise &amp; Sunset</a></li>
+            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape space');">Space &amp; Night Sky</a></li>
+            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape tuscany');">Tuscany</a></li>
+            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape winter');">Winter</a></li>
+            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape women -anime');">Women</a></li>
             </ul>
         </li>
         <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyPortrait);">Portrait</a>
@@ -210,16 +210,16 @@
                 </ul>
                 
             </li>
-            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, '-women -fantasy');">Landscape</a>
+            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', 'landscape -women -fantasy');">Landscape</a>
                 <ul>
-                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, '4K');">4K</a></li>
-                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'anime');">Anime</a></li>
-                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'buildings');">Buildings</a></li>
-                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'christmas');">Christmas</a></li>
-                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'scenery');">Scenery</a></li>
-                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'sunrise');">Sunrise &amp; Sunset</a></li>
-                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'space');">Space</a></li>
-                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyLandscape, 'women');">Women</a></li>
+                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', 'landscape 4K');">4K</a></li>
+                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', 'landscape anime');">Anime</a></li>
+                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', 'landscape buildings');">Buildings</a></li>
+                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', 'landscape christmas');">Christmas</a></li>
+                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', 'landscape scenery');">Scenery</a></li>
+                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', 'landscape sunrise');">Sunrise &amp; Sunset</a></li>
+                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', 'landscape space');">Space</a></li>
+                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', 'landscape women');">Women</a></li>
                 </ul>
             </li>
             <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyPortrait);">Portrait</a></li>
