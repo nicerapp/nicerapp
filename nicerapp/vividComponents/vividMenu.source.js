@@ -210,7 +210,7 @@ class naVividMenu {
                     ( (opLevMax-opLevMin) / ((li.it.level-it.level)) )
                 );
                 if (li.it.level!==it.level) {
-                    if ($(li.it.b.el).css('display')==='none') $(li.it.b.el).css({display:'block',opacity:0});
+                    if ($(li.it.b.el).css('display')==='none') $(li.it.b.el).css({display:'flex',opacity:0});
                     $(li.it.b.el).stop(true,true).delay(20).animate({opacity:opLev},'fast');
                     hasChildren = true;
                 }
@@ -230,13 +230,13 @@ class naVividMenu {
                         
                     //if (cli.it.label=='Dark mode'||cli.it.label=='Anime') debugger;
                     if (opLev >= 0 && opLev <= 1) {
-                        if ($(cli.it.b.el).css('display')==='none') $(cli.it.b.el).css({display:'block',opacity:0});
+                        if ($(cli.it.b.el).css('display')==='none') $(cli.it.b.el).css({display:'flex',opacity:0});
                         $(cli.it.b.el).stop(true,true).delay(20).animate({opacity:opLev},'fast');
                     }
                 });
                 
                 if (idx===0 && !hasChildren) $(pul).children('li').each(function(idx,cli){
-                    if ($(cli.it.b.el).css('display')==='none') $(cli.it.b.el).css({display:'block',opacity:0});
+                    if ($(cli.it.b.el).css('display')==='none') $(cli.it.b.el).css({display:'flex',opacity:0});
                     $(cli.it.b.el).stop(true,true).delay(20).animate({opacity:1},'fast');
                 });
             });
@@ -250,13 +250,13 @@ class naVividMenu {
                         ( (opLevMax-opLevMin) / ((li3.it.level-it.p.it.level+1)) )
                     );
                     if (li3.it.level===it.level) {
-                        if ($(li3.it.b.el).css('display')==='none') $(li3.it.b.el).css({display:'block',opacity:0});
+                        if ($(li3.it.b.el).css('display')==='none') $(li3.it.b.el).css({display:'flex',opacity:0});
                         $(li3.it.b.el).stop(true,true).delay(20).animate({opacity:opLev},'fast');
                         hasChildren = true;
                     }
                 });
                 t.items[it.parent].li.openChildren.each(function(idx,el){
-                    if ($(el.it.b.el).css('display')==='none') $(el.it.b.el).css({display:'block',opacity:0});
+                    if ($(el.it.b.el).css('display')==='none') $(el.it.b.el).css({display:'flex',opacity:0});
                     opLev2 = (
                         el === it.li
                         ? 1
@@ -265,7 +265,7 @@ class naVividMenu {
                     $(el.it.b.el).stop(true,true).delay(20).animate ({opacity:opLev2},'fast');
                 });
                 $(it.li).children('ul').children('li').each(function(idx2,el2){
-                    if ($(el2.it.b.el).css('display')==='none') $(el2.it.b.el).css({display:'block',opacity:0});
+                    if ($(el2.it.b.el).css('display')==='none') $(el2.it.b.el).css({display:'flex',opacity:0});
                     $(el2.it.b.el).stop(true,true).delay(20).animate ({opacity:1},'fast');
                 });
                 delete it.travelledIntoChild;
