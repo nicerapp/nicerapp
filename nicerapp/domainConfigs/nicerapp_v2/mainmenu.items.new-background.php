@@ -165,30 +165,30 @@
         </li>
         <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyPortrait);">Portrait</a>
             <ul>
-            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyPortrait, '4K');">4K</a></li>
+            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'portrait  4K');">4K</a></li>
             </ul>
             <!--<ul>
-            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyPortrait, 'fantasy');">Fantasy</a></li>
-            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyPortrait, 'nature');">Nature</a></li>
-            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyPortrait, 'women');">Women</a></li>
-            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyPortrait, 'scenery');">Scenery</a></li>
-            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyPortrait, 'good');">Good</a></li>
+            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'portrait  fantasy');">Fantasy</a></li>
+            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'portrait  nature');">Nature</a></li>
+            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'portrait  women');">Women</a></li>
+            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'portrait  scenery');">Scenery</a></li>
+            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'portrait  good');">Good</a></li>
             </ul>-->
         </li>
         <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyTiled);">Tiled</a>
                 <ul>
-                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyTiled, 'black');">Black</a></li>
-                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyTiled, 'grey');">Grey</a></li>
-                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyTiled, 'brown');">Brown</a></li>
-                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyTiled, 'blue');">Blue</a></li>
-                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyTiled, 'purple');">Purple</a></li>
-                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyTiled, 'red');">Red</a></li>
-                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyTiled, 'orange');">Orange</a></li>
-                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyTiled, 'yellow');">Yellow</a></li>
-                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyTiled, 'gold');">Gold</a></li>
-                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyTiled, 'green');">Green</a></li>
-                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyTiled, 'stone');">Stone</a></li>
-                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyTiled, 'developers_pick');">Developer's Pick</a></li>
+                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'tiled black');">Black</a></li>
+                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'tiled grey');">Grey</a></li>
+                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'tiled brown');">Brown</a></li>
+                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'tiled blue');">Blue</a></li>
+                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'tiled purple');">Purple</a></li>
+                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'tiled red');">Red</a></li>
+                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'tiled orange');">Orange</a></li>
+                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'tiled yellow');">Yellow</a></li>
+                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'tiled gold');">Gold</a></li>
+                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'tiled green');">Green</a></li>
+                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'tiled stone');">Stone</a></li>
+                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'tiled developers_pick');">Developer's Pick</a></li>
                 </ul>
         </li>
         <!--
@@ -227,17 +227,17 @@
                 <ul>
                 <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyTiled);">Tiled</a>
                     <ul>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyTiled, 'black');">Black</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyTiled, 'grey');">Grey</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyTiled, 'brown');">Brown</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyTiled, 'blue');">Blue</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyTiled, 'purple');">Purple</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyTiled, 'red');">Red</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyTiled, 'orange');">Orange</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyTiled, 'yellow');">Yellow</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyTiled, 'gold');">Gold</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyTiled, 'green');">Green</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyTiled, 'stone');">Stone</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', 'tiled black');">Black</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', 'tiled grey');">Grey</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', 'tiled brown');">Brown</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', 'tiled blue');">Blue</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', 'tiled purple');">Purple</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', 'tiled red');">Red</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', 'tiled orange');">Orange</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', 'tiled yellow');">Yellow</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', 'tiled gold');">Gold</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', 'tiled green');">Green</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', 'tiled stone');">Stone</a></li>
                     </ul>
                 </li>
                 </ul>
