@@ -5,6 +5,8 @@ function isLocalhost () {
     //echo '<pre>';var_dump ($_SERVER);die();
     switch ($ip) {
         case '80.101.238.137':
+        case '192.168.178.21':
+        case '192.168.178.22':
         case '192.168.178.30':
         case '127.0.0.1':
         case '::1':
