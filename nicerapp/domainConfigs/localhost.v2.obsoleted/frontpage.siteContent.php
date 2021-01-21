@@ -15,7 +15,7 @@
 
     <div>
         <?php 
-        $selfChecksOK = true;//$cms->runSelfHealer();
+        $selfChecksOK = $cms->runSelfHealer();
         if ($selfChecksOK) {
         ?>
             <p class="selfHealerMsg selfHealerResult">selfHealer Checks OK! :)</p>

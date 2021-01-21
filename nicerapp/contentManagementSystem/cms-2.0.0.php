@@ -27,7 +27,6 @@ class nicerAppCMS {
         $p1 = realpath(dirname(__FILE__).'/../../..');
         $p2 = realpath(dirname(__FILE__).'/../..');
         $this->domain = str_replace($p1.'/','', $p2);
-        $this->selfHealer = new selfHealer();
     }
     
     public function getSite() {
@@ -114,31 +113,6 @@ class nicerAppCMS {
         $contentFile = realpath(dirname(__FILE__).'/../domainConfigs/'.$this->domain.'/mainmenu.php');
         $content = execPHP($contentFile);
         return $content;
-    }
-    
-    public function runSelfHealer() {
-        echo "\t\t".'<h2 class="selfHealerMsg">Nicer.App selfHealer now running</h2>'."\r\n";
-        $httpRoot = realpath(dirname(__FILE__).'/../../');
-        $folders = array(
-            '/etc/nginx',
-            '/etc/apache2',
-            '/etc/php/7.4',
-            $httpRoot
-        );
-        
-        $r = array();
-        foreach ($folders as $idx => $folder) {
-            $folderRP = realpath($folder);
-            if ($folderRP!=='' && file_exists($folderRP)) {
-                $r[] = $this->selfHealer->checkFolderContents($folderRP);
-            } else {
-                echo "\t\t".'<p class="selfHealerMsg selfHealerWarning">Warning : "'.$folder.'" does not exist!</p>'."\r\n";
-            }
-        }
-        //echo '<pre style="color:lime;">';var_dump ($r);echo '</pre>';
-        
-        $r = in_array (false, $r, true);
-        return !$r;
     }
 }
 

@@ -1,7 +1,5 @@
     <h1 id="pageTitle">nicer.app web apps framework</h1>
 <?php 
-    $a = 'abc';
-    //echo $a;
     global $cms;
 ?>
     <form id="siteSettings" action="/" method="POST">
@@ -14,25 +12,6 @@
     </form>    
 
     <div>
-        <?php 
-        $selfChecksOK = true;//$cms->runSelfHealer();
-        if ($selfChecksOK) {
-        ?>
-            <p class="selfHealerMsg selfHealerResult">selfHealer Checks OK! :)</p>
-        <?php
-        } else {
-        ?>
-            <p class="selfHealerMsg selfHealerFailed">selfHealer Checks FAILED! :(</p>
-        <?php
-        }
-        ?>
-    </div>
-
-
-
-
-
-
 
     <!--
     <p>

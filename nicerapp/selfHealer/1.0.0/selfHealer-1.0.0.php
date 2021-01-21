@@ -3,7 +3,7 @@
 class selfHealer {
     public $version = '1.0.0';
     public $about = array(
-        'whatsThis' => 'NicerApp selfHealer anti-intrusion system',
+        'whatsThis' => 'NicerApp selfHealer intrusion detection and response system',
         'version' => '1.0.0',
         'history' => array (
             '1.y.z' => 'Compatible with php7 and above'
@@ -13,13 +13,40 @@ class selfHealer {
         'copyright' => 'Copyright (c) and All Rights Reserved (r) 2021 by Rene A.J.M. Veerman <rene.veerman.netherlands@gmail.com>'
     );
     
-    public function checkFolderContents ($folder) {
-        $r = "\t\t".'<h2 class="selfHealerTitle">NicerApp SelfHealer for '.$folder.'</h2>'."\r\n";
+    public function run(&$report) {
+        $r = '<h2 class="selfHealerMsg">Nicer.App selfHealer now running</h2>'."\r\n";
+        $httpRoot = realpath(dirname(__FILE__).'/../../');
+        $folders = array(
+            '/etc/nginx',
+            '/etc/apache2',
+            '/etc/php/7.4',
+            $httpRoot
+        );
+        
+        $ret = array();
+        foreach ($folders as $idx => $folder) {
+            $folderRP = realpath($folder);
+            if ($folderRP!=='' && file_exists($folderRP)) {
+                $ret[] = $this->checkFolderContents($folderRP, $r);
+            } else {
+                $r .= '<p class="selfHealerMsg selfHealerNotice">Notice : "'.$folder.'" does not exist.</p>'."\r\n";
+            }
+        }
+        //echo '<pre style="color:lime;">';var_dump ($r);echo '</pre>';
+        
+        $report = $r;
+        $ret = in_array (false, $ret, true);
+        return !$ret;
+    }
+    
+    public function checkFolderContents ($folder, &$report) {
+        $r = '<h2 class="selfHealerTitle">NicerApp SelfHealer for '.$folder.'</h2>'."\r\n";
         //echo $r;
         
-        $dataFile = realpath(dirname(__FILE__).'/appData/RAM').'/'.base64_encode($folder).'.txt';
+        $htdocs = realpath(dirname(__FILE__).'/../../../../');
+        $dataFile = $htdocs.'/RAM_disk/'.base64_encode($folder).'.txt';
         
-        $xec = 'ls -Ral --full-time "'.$folder.'" | tr -d \'\r\n\' > "'.$dataFile.'"';
+        $xec = 'ls -Rl --full-time "'.$folder.'" | tr -d \'\r\n\' > "'.$dataFile.'"';
         exec ($xec, $output, $result);
         $c = join('',$output);
         
@@ -57,28 +84,33 @@ class selfHealer {
             //$xec = 'rm -rf "'.$dataFile.'.hash2"';
             //exec ($xec, $output, $result);
             
-            $r = ($c1===$c2);
-            if ($r) {
-                echo "\t\t".'<p class="selfHealerMsg selfHealerResult">Hash for "'.$folder.'" checks out! :)</p>'."\r\n";
+            $ret = ($c1===$c2);
+            if ($ret) {
+                $r .= '<p class="selfHealerMsg selfHealerResult">Hash for "'.$folder.'" checks out! :)</p>'."\r\n";
             } else {
-                echo "\t\t".'<p class="selfHealerMsg selfHealerFailed">Hash check for "'.$folder.'" failed! :(</p>'."\r\n";
+                $r .= '<p class="selfHealerMsg selfHealerFailed">Hash check for "'.$folder.'" failed! :(</p>'."\r\n";
             }
-            return $r;
+            
+            $report = $r;
+            return $ret;
             
         } else {
-            echo "\t\t".'<p class="selfHealerMsg selfHealerWarning">Warning : need to create the initial hash file for "'.$folder.'"</p>'."\r\n";
+            $r .= '<p class="selfHealerMsg selfHealerWarning">Warning : need to create the initial hash file for "'.$folder.'"</p>'."\r\n";
             
             $xec = 'cat "'.$dataFile.'" | sha512 > "'.$dataFile.'.hash"';
             //$xec = 'echo '.escapeshellarg($c).' | sha512 > "'.$dataFile.'.hash"';// 2> "'.$dataFile.'.errs.txt"';
             $output = exec ($xec, $output, $result);
             //echo '<pre>'.$xec.'</pre><br/>';
+            /*
             $dbg = array (
                 'xec' => $xec,
                 'output' => $output,
                 'result' => $result
             );
-            echo '<pre class="selfHealerMsg selfHealerResult">';var_dump($dbg);echo '</pre>';
+            $r .= '<pre class="selfHealerMsg selfHealerResult">';var_dump($dbg);echo '</pre>';
+            */
             
+            $report = $r;
             return true;
         }
     }
@@ -97,8 +129,6 @@ class selfHealer {
         }
         return $r;
     }
-
-
 }
 
 ?>

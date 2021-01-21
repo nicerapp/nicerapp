@@ -1,5 +1,19 @@
 <?php 
 
+function isLocalhost () {
+    $ip = array_key_exists('X-Forwarded-For', $_SERVER) ? $_SERVER['X-Forwarded-For'] : $_SERVER['REMOTE_ADDR'];
+    //echo '<pre>';var_dump ($_SERVER);die();
+    switch ($ip) {
+        case '80.101.238.137':
+        case '192.168.178.30':
+        case '127.0.0.1':
+        case '::1':
+            return true;
+        default:
+            return false;
+    }
+}
+
 function execPHP ($file) {
     ob_flush();
     ob_end_clean();

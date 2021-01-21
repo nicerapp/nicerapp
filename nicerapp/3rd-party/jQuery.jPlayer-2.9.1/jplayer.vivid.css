@@ -1,0 +1,49 @@
+.jp-progress {
+	width : 100%;
+	height : 10px;
+	background : url(318801228_12f7b6a8a2.jpg) no-repeat;
+	border-radius : 3px;
+	border : 1px solid orange;
+}
+
+.jp-seek-bar {
+	height : 10px;
+	background : url(467781133_4f4354223e.jpg) no-repeat;
+	border-radius : 3px;
+}
+
+.jp-play-bar {
+	height : 10px;
+	background : url(485q4xzz6sovw.jpg) no-repeat;
+	border-radius : 3px;
+}
+
+.jp-button { 
+	width : 60px;
+}
+
+.jp-volume-bar {
+	width : 100%;
+	height : 10px;
+	background : url(318798080_b6dd46d777.jpg) no-repeat;
+	border-radius : 3px;
+	border : 1px solid white;
+}
+
+.jp-volume-bar-value {
+	height: 10px;
+	background : url(485q4xzz6sovw.jpg) no-repeat;
+	border-radius : 3px;
+}
+
+
+
+.jp-current-time, .jp-duration {
+	color : white;
+}
+.jp-current-time {
+	float:left;
+}
+.jp-duration {
+	float : right;
+}
