@@ -15,7 +15,7 @@ class selfHealer {
     
     public function run(&$report) {
         $r = '<h2 class="selfHealerMsg">Nicer.App selfHealer now running</h2>'."\r\n";
-        $httpRoot = realpath(dirname(__FILE__).'/..');
+        $httpRoot = realpath(dirname(__FILE__).'/../..');
         $folders = array(
             '/etc/nginx',
             '/etc/apache2',
@@ -44,18 +44,18 @@ class selfHealer {
         //echo $r;
         
         $htdocs = realpath(dirname(__FILE__).'/../../..');
-        //echo $htdocs; die();
         $dataFile = $htdocs.'/RAM_disk/'.base64_encode($folder).'.txt';
         
         $xec = 'ls -Rl --full-time "'.$folder.'" | tr -d \'\r\n\' > "'.$dataFile.'"';
         exec ($xec, $output, $result);
         $c = join('',$output);
-        
+
+        /*
         $dbg = array (
             'xec' => $xec,
             'output' => $output,
             'result' => $result
-        );
+        );*/
         //echo '<pre class="selfHealerMsg selfHealerDbg">';var_dump($dbg);echo '</pre>';
         
         $f = fopen ($dataFile, 'a');
