@@ -11,8 +11,6 @@
         </select>
     </form>    
 
-    <div>
-
     <!--
     <p>
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vehicula metus ultrices tortor scelerisque, ac rhoncus nisl ullamcorper. Vestibulum lacinia venenatis felis, sed viverra augue consequat ac. In nec finibus augue, non dictum odio. Cras a tortor vitae lacus dictum consectetur. Sed efficitur nisl id nisi dictum laoreet. Nullam massa ligula, malesuada vitae mauris vitae, pretium eleifend urna. Aliquam vitae lobortis sapien. Nunc lacus quam, fringilla ut pulvinar eget, molestie at tellus. Praesent egestas lacus elit, scelerisque fringilla enim ornare sed. Nunc a ex a erat posuere ultricies ac venenatis est. Sed sapien sem, commodo quis pellentesque in, mattis ac erat. Praesent quis dignissim lacus, sed dignissim sem. Aliquam erat volutpat. Sed maximus ultrices est, eu lacinia mi euismod vitae.

@@ -29,6 +29,7 @@ var nas = na.site = {
                 */
                 $('#siteContent').bind('onanimationend animationend webkitAnimationEnd', function() { 
                     if (!nas.s.siteContentStarted) {
+                        $('#siteBackground img.bg_first')[0].src = $.cookie('siteBackground_img');
                         nas.s.siteContentStarted = true;
                         $('#siteContent .vividDialogContent').fadeIn('slow');
                         nas.onresize();
@@ -63,7 +64,7 @@ var nas = na.site = {
         
         var ac = {
             type : 'GET',
-            url : '/nicerapp/domainConfigs/localhost.v2/ajax_backgrounds.php',
+            url : '/nicerapp/domainConfigs/nicerapp_v2/ajax_backgrounds.php',
             success : function (data, ts, xhr) {
                 nas.s.backgrounds = JSON.parse(data);
             },
@@ -117,7 +118,7 @@ var nas = na.site = {
     reloadMenu : function() {
         var ac = {
             type : 'POST',
-            url : '/nicerapp/domainConfigs/localhost.v2/mainmenu.php',
+            url : '/nicerapp/domainConfigs/nicerapp_v2/mainmenu.php',
             data : {
                 na_js__screenWidth : $(window).width(),
                 na_js__menuSpace : $(window).width() - $('#siteMenu').offset().left,
@@ -137,41 +138,7 @@ var nas = na.site = {
 }
 nas.s = nas.settings;
 
-na.backgrounds = {
-    next : function (div, search) {
-        var
-        bgs = nas.s.backgrounds,
-        sk = search.split(/\s+/),
-        hits = [];
-        
-        for (var i=0; i<bgs.length; i++) {
-            var 
-            bg = bgs[i],
-            hit = true;
-            
-            for (var j=0; j<sk.length; j++) {
-                if (!bg.match(sk[j])) hit = false;
-            }
-            
-            if (hit) {
-                hits[hits.length] = bg;
-            }
-        };
-        
-        var
-        url = '/nicerapp/siteMedia/backgrounds'+hits[Math.floor(Math.random() * Math.floor(hits.length))],
-        bgf = $(div+' img.bg_first')[0],
-        bgl = $(div+' img.bg_last')[0];
-        
-        bgl.onload=function(){
-            jQuery(bgl).fadeIn(1500, function(){
-                bgf.src = bgl.src;
-                jQuery(bgl).fadeOut('fast');
-            });
-        };
-        bgl.src = url;
-    }
-};
+
 
 na.m = {
 	padNumber : function (number, characterPositions, paddingWith) {
