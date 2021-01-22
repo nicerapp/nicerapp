@@ -1,9 +1,10 @@
 #!/bin/sh 
 cd /home/rene/data1/htdocs/nicerapp_v2
 
-if [ ! -d "../RAM_disk" ]; then
+if [ ! -f "../RAM_disk/exists_true" ]; then
 sudo mkdir ../RAM_disk
 sudo mount -t tmpfs -o rw,size=10M tmpfs ../RAM_disk
+touch ../RAM_disk/exists_true
 else
 rm -rf ../RAM_disk/*
 fi
