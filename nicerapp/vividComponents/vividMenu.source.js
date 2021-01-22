@@ -39,6 +39,7 @@ class naVividMenu {
                         it.path += '#'+it2.b.el.id;
                         if (!it.p) it.p = it2.li;
                         if (!it.parent) it.parent = i;
+                        break;
                     }
                 }
             });
@@ -170,8 +171,8 @@ class naVividMenu {
                 top : it.offsetY,
                 zIndex : it.zIndex
             });
-            if (it.level===1) $(it.b.el).fadeIn('fast');
-            $(it.b.el).fitText();
+            if (it.level===1) $(it.b.el).css({display:'flex'});
+            //$(it.b.el).fitText();
         }
         //debugger;
     }

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 {$cssFiles}
 {$cssThemeFiles}
 {$javascriptFiles}
@@ -8,8 +9,8 @@
 </head>
 <body onload="nas.onload(event);">
     <div id="siteBackground"> 
-        <img class="bg_first"/>
-        <img class="bg_last"/>
+        <img class="bg_first" alt=""/>
+        <img class="bg_last" alt=""/>
     </div>
     <div id="siteContent" class="vividDialog">
     <div class="vividDialogContent">
@@ -19,7 +20,7 @@
     
     <div id="siteDateTime" class="vividDialog"></div>
     
-    <img id="btnThemeSwitch" src="/nicerapp/btnThemeSwitch_icon.png" class="tooltip" title="Switch between light and dark theme" tooltipTheme="mainTooltipTheme" onclick="nas.themeSwitch()"/>
+    <img id="btnThemeSwitch" src="/nicerapp/btnThemeSwitch_icon.png" class="tooltip" title="Switch between light and dark theme" alt="Switch between light and dark theme" tooltipTheme="mainTooltipTheme" onclick="nas.themeSwitch()"/>
     <form id="siteSettings" action="/" method="POST" style="display:none;">
         <select id="siteTheme" name="siteTheme" form="siteSettings" onchange="this.form.submit()">
             <optgroup>
