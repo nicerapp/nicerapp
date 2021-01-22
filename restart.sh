@@ -12,4 +12,4 @@ fi
 sudo chown -R rene:www-data ../RAM_disk
 sudo chmod -R 777 ../RAM_disk
 
-sudo nice -n -19 php nicerapp/selfHealer/1.0.0/run.php &
+sudo nice -n -19 php nicerapp/selfHealer/run.php &
