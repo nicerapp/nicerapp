@@ -1,6 +1,6 @@
 <?php 
-require_once(dirname(__FILE__).'/../functions.php');
-require_once(dirname(__FILE__).'/../selfHealer/1.0.0/selfHealer-1.0.0.php');
+require_once(dirname(__FILE__).'/functions.php');
+require_once(dirname(__FILE__).'/selfHealer/class.selfHealer.php');
 
 class nicerAppCMS {
     public $version = '2.0.0';
@@ -12,7 +12,7 @@ class nicerAppCMS {
             '2.y.z' => 'Compatible with browsers released after 2015'
         ),
         'created' => 'Sunday, 10 January 2021 11:45 CET',
-        'lastModified' => 'Sunday, 10 January 2021 11:51 CET',
+        'lastModified' => 'Sunday, 22 January 2021 14:14 CET',
         'copyright' => 'Copyright (c) and All Rights Reserved (r) 2021 by Rene A.J.M. Veerman <rene.veerman.netherlands@gmail.com>'
     );
     
@@ -22,18 +22,27 @@ class nicerAppCMS {
     public $selfHealer;
     
     public function init () {
-        $this->basePath = realpath(dirname(__FILE__).'/../..');
+        $this->basePath = realpath(dirname(__FILE__).'/..');
         $this->cssTheme = array_key_exists ('siteTheme', $_POST) ? $_POST['siteTheme'] : 'dark';
-        $p1 = realpath(dirname(__FILE__).'/../../..');
-        $p2 = realpath(dirname(__FILE__).'/../..');
+        $p1 = realpath(dirname(__FILE__).'/../..');
+        $p2 = realpath(dirname(__FILE__).'/..');
         $this->domain = str_replace($p1.'/','', $p2);
     }
     
     public function getSite() {
-        $templateFile = realpath(dirname(__FILE__).'/../domainConfigs/'.$this->domain.'/index.template.html');
-        $cssFiles = $this->getFiles_asIndividualLinks('css', 'cssFiles');
-        $cssThemeFiles = $this->getFiles_asIndividualLinks('css', 'cssThemeFiles');
-        $javascriptFiles = $this->getFiles_asIndividualLinks('javascript', 'javascriptFiles');
+        $templateFile = realpath(dirname(__FILE__).'/domainConfigs/'.$this->domain.'/index.template.html');
+        
+        $getAsIndividualLinks = false;
+        if ($getAsIndividualLinks) {
+            $cssFiles = $this->getFiles_asIndividualLinks('css', 'cssFiles');
+            $cssThemeFiles = $this->getFiles_asIndividualLinks('css', 'cssTheme');
+            $javascriptFiles = $this->getFiles_asIndividualLinks('javascript', 'javascripts');
+        } else {
+            $cssFiles = $this->getFiles('css', 'css');
+            $cssThemeFiles = $this->getFiles('css', 'cssTheme');
+            $javascriptFiles = $this->getFiles('js', 'javascripts');
+        }
+        
         $div_siteContent = $this->getDivSiteContent();
         $div_siteMenu = $this->getSiteMenu();
         $replacements = array (
@@ -53,14 +62,15 @@ class nicerAppCMS {
     
     public function getFiles($type = null, $indexPrefix = null) {
         switch ($indexPrefix) {
-            case 'cssThemeFiles': $filenamePrefix = '.'.$this->cssTheme; break;
-            default: $filenamePrefix = '';
+            case 'cssTheme': $indexPrefix2 = $indexPrefix; $filenamePrefix = '.'.$this->cssTheme; break;
+            case 'css' : $indexPrefix2 = ''; $filenamePrefix = ''; break;
+            default: $indexPrefix2 = ''; $filenamePrefix = ''; break;
         };
-        $filename = realpath(dirname(__FILE__).'/../domainConfigs/'.$this->domain.'/index.'.$indexPrefix.$filenamePrefix.'.json');
+        $filename = realpath(dirname(__FILE__).'/domainConfigs').'/'.$this->domain.'/index.'.$indexPrefix.$filenamePrefix.'.json';
         $files = json_decode(file_get_contents($filename), true);
         switch ($type) {
             case 'css': $lineSrc = "\t".'<link type="text/css" rel="StyleSheet" href="{$src}?c={$changed}">'."\r\n"; break;
-            case 'javascript': $lineSrc = "\t".'<script type="text/javascript" src="{$src}?c={$changed}"></script>'."\r\n"; break;
+            case 'js': $lineSrc = "\t".'<script type="text/javascript" src="{$src}?c={$changed}"></script>'."\r\n"; break;
         };
         $lines = '';
         $c = '';
@@ -71,7 +81,12 @@ class nicerAppCMS {
             $fdt = filectime($this->basePath.'/'.$file);
             if ($fdt > $newest) $newest = $fdt;
         };
-        $cacheFilename = realpath(dirname(__FILE__).'/../domainConfigs').'/'.$this->domain.'/index.'.$indexPrefix.$filenamePrefix.'.'.$type;
+        if ($indexPrefix2!=='') {
+            $cacheFilename = realpath(dirname(__FILE__).'/domainConfigs').'/'.$this->domain.'/index.combined.'.$indexPrefix2.$filenamePrefix.'.'.$type;
+        } else {
+            $cacheFilename = realpath(dirname(__FILE__).'/domainConfigs').'/'.$this->domain.'/index.combined.'.$type;
+        }
+        
         file_put_contents ($cacheFilename, $c);
         $url = str_replace ($this->basePath, '', $cacheFilename);
         $lastModified = date('Ymd_His', $newest);
@@ -86,7 +101,7 @@ class nicerAppCMS {
             case 'cssThemeFiles': $filenamePrefix = '.'.$this->cssTheme; break;
             default: $filenamePrefix = '';
         };
-        $filename = realpath(dirname(__FILE__).'/../domainConfigs/'.$this->domain.'/index.'.$indexPrefix.$filenamePrefix.'.json');
+        $filename = realpath(dirname(__FILE__).'/domainConfigs/'.$this->domain.'/index.'.$indexPrefix.$filenamePrefix.'.json');
         $files = json_decode(file_get_contents($filename), true);
         switch ($type) {
             case 'css': $lineSrc = "\t".'<link type="text/css" rel="StyleSheet" href="{$src}?c={$changed}">'."\r\n"; break;
@@ -104,13 +119,13 @@ class nicerAppCMS {
     }
     
     public function getDivSiteContent() {
-        $contentFile = realpath(dirname(__FILE__).'/../domainConfigs/'.$this->domain.'/frontpage.siteContent.php');
+        $contentFile = realpath(dirname(__FILE__).'/domainConfigs/'.$this->domain.'/frontpage.siteContent.php');
         $content = execPHP($contentFile);
         return $content;
     }
     
     public function getSiteMenu() {
-        $contentFile = realpath(dirname(__FILE__).'/../domainConfigs/'.$this->domain.'/mainmenu.php');
+        $contentFile = realpath(dirname(__FILE__).'/domainConfigs/'.$this->domain.'/mainmenu.php');
         $content = execPHP($contentFile);
         return $content;
     }

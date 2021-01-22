@@ -2,6 +2,20 @@
     padding : 0;
     margin : 0;
     font-family: 'Open Sans', sans-serif;
+    overflow : hidden;
+}
+#siteBackground {
+    position:absolute;
+}
+#siteBackground img {
+    display : none;
+    position : absolute;
+}
+img.bg_first {
+    z-index : 10;
+}
+img.bg_last {
+    z-index : 11;
 }
 
 #siteContent {
@@ -17,13 +31,15 @@
     margin : 10px;
     width : calc(100vw - 100px);
     height: calc(100vh - 120px);
+    z-index : 1100;
 }
 
 
 .vividButton, .vividMenu, .vividDialog {
     position : absolute;
     display : none;
-    font-size : 2rem;
+    font-size : 1rem;
+    z-index : 1000;
 }
 .vividButton {
     display : flex;
@@ -31,7 +47,7 @@
     align-items : center;
     text-align : center;
     width : 200px;
-    height : 1.5rem;
+    height : 1rem;
     font-size : 1rem;
     font-weight : bold;
 }
