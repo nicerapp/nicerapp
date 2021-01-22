@@ -15,7 +15,7 @@ class selfHealer {
     
     public function run(&$report) {
         $r = '<h2 class="selfHealerMsg">Nicer.App selfHealer now running</h2>'."\r\n";
-        $httpRoot = realpath(dirname(__FILE__).'/../../');
+        $httpRoot = realpath(dirname(__FILE__).'/..');
         $folders = array(
             '/etc/nginx',
             '/etc/apache2',
