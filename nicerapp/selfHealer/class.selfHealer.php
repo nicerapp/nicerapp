@@ -43,7 +43,8 @@ class selfHealer {
         $r = '<h2 class="selfHealerTitle">NicerApp SelfHealer for '.$folder.'</h2>'."\r\n";
         //echo $r;
         
-        $htdocs = realpath(dirname(__FILE__).'/../../../../');
+        $htdocs = realpath(dirname(__FILE__).'/../../..');
+        //echo $htdocs; die();
         $dataFile = $htdocs.'/RAM_disk/'.base64_encode($folder).'.txt';
         
         $xec = 'ls -Rl --full-time "'.$folder.'" | tr -d \'\r\n\' > "'.$dataFile.'"';
@@ -118,7 +119,7 @@ class selfHealer {
     function getFolderReport ($folder) {
         $files = getFilePathList ($folder, true, '/.*/', array('dir','file'));
         //echo '<pre style="color:lime;">';var_dump ($files);echo '</pre>';
-        $basePath = realpath(dirname(__FILE__).'/../../..');
+        $basePath = realpath(dirname(__FILE__).'/../..');
         $r = array();
         foreach ($files as $idx => $file) {
             $fileRel = str_replace ($basePath.'/', '', $file);
