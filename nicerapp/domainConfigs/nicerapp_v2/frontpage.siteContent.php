@@ -2,14 +2,6 @@
 <?php 
     global $cms;
 ?>
-    <form id="siteSettings" action="/" method="POST">
-        <select id="siteTheme" name="siteTheme" form="siteSettings" onchange="this.form.submit()">
-            <optgroup>
-            <option value="dark" <?php echo array_key_exists('siteTheme', $_POST) && $_POST['siteTheme']=='dark' ? 'selected' : '';?>>Dark</option>
-            <option value="light" <?php echo array_key_exists('siteTheme', $_POST) && $_POST['siteTheme']=='light' ? 'selected' : '';?>>Light</option>
-            </optgroup>
-        </select>
-    </form>    
 
     <!--
     <p>

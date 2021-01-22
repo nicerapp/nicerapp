@@ -19,7 +19,8 @@ class naVividMenu {
                 path : ''
             };
             var it = t.items[idx];
-            li.it = it;
+            if (it.level===1) $(it.b.el).addClass('level1');            
+            li.it = it;            
             $('#'+it.b.el.id/*+'::before'*/).bind('mouseover', function() {
                 t.onmouseover(it);
             });

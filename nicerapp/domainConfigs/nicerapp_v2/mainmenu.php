@@ -33,7 +33,7 @@ if (is_array($_SESSION) && array_key_exists('na_js__screenWidth',$_SESSION)) {
 } else {
     $menuStructure = 'forWidestScreen';
 }
-//var_dump ($menuStructure);
+//var_dump ($menuStructure); die();
 //var_dump ($_SERVER); 
 //var_dump ($_SESSION); 
 //var_dump ($menuStructure); die();
@@ -64,7 +64,7 @@ function forWidestScreen() {
 		<?php echo require_return (dirname(__FILE__).'/mainmenu.items.dialogs.php');?>
 		<?php echo require_return (dirname(__FILE__).'/mainmenu.items.new-background.php');?>
 		<?php echo require_return (dirname(__FILE__).'/mainmenu.items.admin.php');?>		
-		<li class="saLinkpoint"><a href="-saLinkpoint-">-saLinkpoint-appMenu</a></li>
+		<li class="contentMenu"><a href="-contentMenu-">-contentMenu-</a></li>
 	</ul>
 <?php
 }
@@ -81,7 +81,7 @@ function forMax5itemsWide() {
         </li>
 		<?php echo require_return (dirname(__FILE__).'/mainmenu.items.new-background.php');?>
 		<?php echo require_return (dirname(__FILE__).'/mainmenu.items.admin.php');?>		
-		<li class="saLinkpoint"><a href="-saLinkpoint-">-saLinkpoint-appMenu</a></li>
+		<li class="contentMenu"><a href="-contentMenu-">-contentMenu-</a></li>
 	</ul>
 <?php
 }
@@ -98,7 +98,7 @@ function forMax4itemsWide () {
         </ul>
         </li>
 		<?php echo require_return (dirname(__FILE__).'/mainmenu.items.new-background.php');?>
-		<li class="saLinkpoint"><a href="-saLinkpoint-">-saLinkpoint-appMenu</a></li>
+		<li class="contentMenu"><a href="-contentMenu-">-contentMenu-</a></li>
 	</ul>
 <?php
 }
@@ -115,7 +115,7 @@ function forMax3itemsWide () {
             <?php echo require_return (dirname(__FILE__).'/mainmenu.items.admin.php');?>		
         </ul>
         </li>
-		<li class="saLinkpoint"><a href="-saLinkpoint-">-saLinkpoint-appMenu</a></li>
+		<li class="contentMenu"><a href="-contentMenu-">-contentMenu-</a></li>
 	</ul>
 <?php
 }
@@ -132,7 +132,7 @@ function forMax2itemsWide () {
                 <?php echo require_return (dirname(__FILE__).'/mainmenu.items.admin.php');?>		
             </ul>
 		</li>
-        <li class="saLinkpoint"><a href="-saLinkpoint-">-saLinkpoint-appMenu</a></li>
+        <li class="contentMenu"><a href="-contentMenu-">-contentMenu-</a></li>
 	</ul>
 <?php
 }

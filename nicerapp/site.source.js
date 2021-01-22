@@ -29,9 +29,9 @@ var nas = na.site = {
                 */
                 $('#siteContent').bind('onanimationend animationend webkitAnimationEnd', function() { 
                     if (!nas.s.siteContentStarted) {
-                        $('#siteBackground img.bg_first')[0].src = $.cookie('siteBackground_img');
                         nas.s.siteContentStarted = true;
                         $('#siteContent .vividDialogContent').fadeIn('slow');
+                        $('#btnSwitchTheme').addClass('started');
                         nas.onresize();
                     }
                 });
@@ -42,6 +42,7 @@ var nas = na.site = {
                 
                 $('.vividDialog, .vividMenu').addClass('started');
         });
+                        $('#siteBackground img.bg_first')[0].src = $.cookie('siteBackground_img');
         
         $('#siteContent .vividDialogContent').focus();
         
@@ -85,24 +86,32 @@ var nas = na.site = {
 			+ ':' + na.m.padNumber(d.getSeconds(), 2, '0'); // + '.' + na.m.padNumber(d.getMilliseconds(), 3, 0);
 			
         jQuery('#siteDateTime').html(r);
-        
+    },
+    
+    themeSwitch : function () {
+        var 
+        x = $('#siteTheme').val(),
+        t = 'light';
+        if (x=='light') t = 'dark';
+        $('#siteTheme').val(t);
+        $('#siteSettings').submit();
     },
 
     startTooltips : function(evt) {
         $('.tooltip').each (function(idx,el) {
             $(el).tooltipster({
-                theme : $(el).attr('tooltipTheme'),//'siteMainTooltipsterTheme',
+                theme : $(el).attr('tooltipTheme'),//'mainTooltipTheme',
                 contentAsHTML : true,
                 content : $(el).attr('title'),
                 animation : 'grow',
                 offset : 10
             });
-            /*
-            if (el.id=='pageTitle') {
+            
+            if (el.id=='btnThemeSwitch') {
                 $(this).tooltipster('show');
                 $(this).tooltipster('hide');
             };
-            */
+            
         });
     },
     
@@ -123,7 +132,7 @@ var nas = na.site = {
                 na_js__screenWidth : $(window).width(),
                 na_js__menuSpace : $(window).width() - $('#siteMenu').offset().left,
                 na_js__menuItemWidth : 200,
-                na_js__hasContentMenu : false
+                na_js__hasContentMenu : true
             },
             success : function (data, ts, xhr) {
                 jQuery('#siteMenu').html(data);

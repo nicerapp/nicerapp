@@ -19,7 +19,7 @@
     
     <div id="siteDateTime" class="vividDialog"></div>
     
-    <img id="btnThemeSwitch" src="/nicerapp/btnThemeSwitch_icon.png" class="tooltip" title="Switch between light and dark theme" tooltipTheme="mainTooltipTheme"/>
+    <img id="btnThemeSwitch" src="/nicerapp/btnThemeSwitch_icon.png" class="tooltip" title="Switch between light and dark theme" tooltipTheme="mainTooltipTheme" onclick="nas.themeSwitch()"/>
     <form id="siteSettings" action="/" method="POST" style="display:none;">
         <select id="siteTheme" name="siteTheme" form="siteSettings" onchange="this.form.submit()">
             <optgroup>

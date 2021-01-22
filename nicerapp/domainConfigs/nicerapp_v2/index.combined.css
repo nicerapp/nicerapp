@@ -51,6 +51,9 @@ img.bg_last {
     font-size : 1rem;
     font-weight : bold;
 }
+.vividButton.level1 {
+    margin-top : 5px;
+}
 
 #siteContent.started {
     animation : anim_siteContent_started 0.7s;
@@ -104,6 +107,21 @@ img.bg_last {
     }
 }
 
+#btnThemeSwitch {
+    position : absolute;
+    top : -10vh;
+    left : calc(1vw + 270px);
+    z-index : 1100;
+    animation : anim_btnThemeSwitch_started 0.7s;
+    animation-fill-mode : forwards;
+    animation-timing-function : cubic-bezier(1,1,0,1);
+}
+@keyframes anim_btnThemeSwitch_started {
+    100% {
+        top : 1vh;
+    }
+}
+
 select, optgroup {
     font-size : 2rem;
 }
@@ -125,20 +143,6 @@ select, optgroup {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .mainTooltipTheme .tooltipster-box {
     width : 120%;
     border-radius : 7px;
@@ -152,7 +156,8 @@ select, optgroup {
 .mainTooltipTheme .tooltipster-content {
     color : black;
     font-family : Architects Daughter;
-    font-size : 15px;
+    font-size : 20px;
+    font-weight : bold;
     padding : 8px 10px;
    /* animation : mainTooltipThemeAnim 2s infinite;*/
     border-radius : 7px;

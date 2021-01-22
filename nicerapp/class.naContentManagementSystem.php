@@ -30,7 +30,7 @@ class nicerAppCMS {
     }
     
     public function getSite() {
-        $templateFile = realpath(dirname(__FILE__).'/domainConfigs/'.$this->domain.'/index.template.html');
+        $templateFile = realpath(dirname(__FILE__).'/domainConfigs/'.$this->domain.'/index.template.php');
         
         $getAsIndividualLinks = false;
         if ($getAsIndividualLinks) {
@@ -56,7 +56,7 @@ class nicerAppCMS {
         );
         $search = array_keys($replacements);
         $replace = array_values($replacements);
-        $html = str_replace ($search, $replace, file_get_contents($templateFile));
+        $html = str_replace ($search, $replace, execPHP($templateFile));
         return $html;
     }
     
