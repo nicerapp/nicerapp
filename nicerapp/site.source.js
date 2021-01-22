@@ -12,6 +12,52 @@ var nas = na.site = {
     },
     
     onload : function (evt) {
+        if (na.m.userDevice.isPhone) {
+            $('#siteDateTime').css({display:'none'});
+            $('#btnThemeSwitch').css({left:'1vw'});
+            $('#siteMenu').css({left:70});
+            //$('.vividDialog').addClass('started');
+        } else {
+            //$('.vividDialog, .vividMenu').addClass('started');
+        }
+
+        $('#siteBackground img.bg_first')[0].src = $.cookie('siteBackground_img');
+        
+        $('#siteContent .vividDialogContent').focus();
+        
+        $('.vividButton').each(function(idx,el){
+            nas.s.buttons['#'+el.id] = new naVividButton(el);
+        });
+
+        $(window).resize (function() {
+            if (nas.s.timeoutWindowResize) clearTimeout(nas.s.timeoutWindowResize);
+            $('#siteBackground img').css({
+                width : $(window).width(),
+                height : $(window).height()
+            });
+            nas.s.timeoutWindowResize = setTimeout (function() {
+                nas.onresize();
+            }, 250);
+        });
+        
+        setInterval (nas.updateDateTime, 1000);
+        
+        var ac = {
+            type : 'GET',
+            url : '/nicerapp/domainConfigs/nicerapp_v2/ajax_backgrounds.php',
+            success : function (data, ts, xhr) {
+                nas.s.backgrounds = JSON.parse(data);
+            },
+            failure : function (xhr, ajaxOptions, thrownError) {
+                debugger;
+            }                
+        };
+        $.ajax(ac);
+
+        nas.onresize();
+    },
+    
+    onload_withAnimations : function (evt) {
         $('.vividDialog, .vividMenu').not(na.m.userDevice.isPhone?'#siteDateTime':'#nonEl').fadeIn('fast', function() {
                     
                 $('#siteContent').bind('onanimationend animationend webkitAnimationEnd', function() { 
@@ -89,6 +135,7 @@ var nas = na.site = {
         t = 'light';
         if (x=='light') t = 'dark';
         $('#siteTheme').val(t);
+        $.cookie('siteTheme',t);
         $('#siteSettings').submit();
     },
 
@@ -114,9 +161,10 @@ var nas = na.site = {
         nas.reloadMenu();
         $('#siteBackground img').css({
             width : $(window).width(),
-            height : $(window).height()
+            height : $(window).height(),
+            display : 'flex'
         });
-        $('#siteBackground img.bg_first').fadeIn(2000);
+        //$('#siteBackground img.bg_first').fadeIn(2000);
     },
     
     reloadMenu : function() {

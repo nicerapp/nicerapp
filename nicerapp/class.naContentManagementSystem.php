@@ -23,7 +23,13 @@ class nicerAppCMS {
     
     public function init () {
         $this->basePath = realpath(dirname(__FILE__).'/..');
-        $this->cssTheme = array_key_exists ('siteTheme', $_POST) ? $_POST['siteTheme'] : 'dark';
+        $this->cssTheme = (
+            array_key_exists ('siteTheme', $_COOKIE)
+            ? $_COOKIE['siteTheme']
+            : array_key_exists ('siteTheme', $_POST) 
+                ? $_POST['siteTheme'] 
+                : 'dark'
+        );
         $p1 = realpath(dirname(__FILE__).'/../..');
         $p2 = realpath(dirname(__FILE__).'/..');
         $this->domain = str_replace($p1.'/','', $p2);
