@@ -39,7 +39,7 @@
             reloadReport : function(){
                 var ac = {
                     method : 'GET',
-                    url : '/nicerapp/selfHealer/1.0.0/ajax_getReport.php',
+                    url : '/nicerapp/selfHealer/ajax_getReport.php',
                     success : function(data, ts, xhr){
                         $('#siteContent').html(data);
                         if (data.match('failed')) {
@@ -58,7 +58,7 @@
 	</script>
 </head>
 <body onload="nas.onload(event);">
-    <audio id="alarm1" src="/nicerapp/selfHealer/1.0.0/sounds/zapsplat_emergency_alarm_siren_004_26610.mp3" loop preload></audio>
+    <audio id="alarm1" src="/nicerapp/selfHealer/sounds/zapsplat_emergency_alarm_siren_004_26610.mp3" loop preload></audio>
     <div id="siteBackground">
         <img class="bg_first" src="/nicerapp/siteMedia/backgrounds/portrait/70920644_541967329908947_186500115786104832_n.jpg"/>
     </div>
