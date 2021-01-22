@@ -1,6 +1,6 @@
 <?php 
-    require_once(dirname(__FILE__).'/selfHealer-1.0.0.php');
-    require_once(dirname(__FILE__).'/../../functions.php');
+    require_once(dirname(__FILE__).'/class.selfHealer.php');
+    require_once(dirname(__FILE__).'/../functions.php');
     
     if (!isLocalHost()) {
         echo 'Access denied.';
