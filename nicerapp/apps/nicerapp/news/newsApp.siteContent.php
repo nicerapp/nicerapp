@@ -57,7 +57,7 @@ $appParams = array (
                 };
                 na.vividText.initElement (vividTextCmd);	
                 </script>                
-                <div id="newsApp_mainmenu" class="vividMenu <?php echo $saUIdefaults['buttonAndMenu__vividTheme']?>" style="position:absolute;width:200px;height:35px;opacity:0.0001;display:none;">
+                <div id="newsApp_mainmenu" class="vividMenu" theme="dark" style="position:absolute;width:200px;height:35px;opacity:0.0001;display:none;">
                     <?php echo file_get_contents(dirname(__FILE__).'/mainmenu.php');
                     ?>
                 </div>

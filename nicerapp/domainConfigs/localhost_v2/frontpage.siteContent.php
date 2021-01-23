@@ -5,21 +5,24 @@
         'newsHeadlines_englishNews' => array(
             '#siteContent' => 'nicerapp/news/newsApp.siteContent.php?section=English%20News',
             'news' => array ('section' => 'English_News')
+        ),
+        'newsHeadlines_englishNews_worldHeadlines' => array(
+            '#siteContent' => 'nicerapp/news/newsApp.siteContent.php?section=English%20News%20World%20Headlines',
+            'news' => array ('section' => 'English_News__World_Headlines')
         )
     );
     $json = array();
+    $urls = array();
     foreach ($apps as $appName => $appSettings) {
         $json[$appName] = json_encode($appSettings);
+        $urls[$appName] = '/apps/'.base64_encode_url($json[$appName]);
     };
-    $urls = array(
-        'newsHeadlines_englishNews' => '/apps/'.base64_encode_url($json['newsHeadlines_englishNews'])
-    );
-    
 ?>
     <h2>Available Apps</h2>
     
     <ul>
         <li><a href="<?php echo $urls['newsHeadlines_englishNews'];?>">English News</a></li>
+        <li><a href="<?php echo $urls['newsHeadlines_englishNews_worldHeadlines'];?>">English News : World Headlines only</a></li>
     </ul>
     
     <!--
