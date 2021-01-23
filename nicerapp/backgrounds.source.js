@@ -35,6 +35,7 @@ na.backgrounds = {
             });
         };
         bgl.src = url;
+        na.analytics.logMetaEvent ('selectionEngines.random.next : url='+url);
         $.cookie('siteBackground_img', url);
     }
 };

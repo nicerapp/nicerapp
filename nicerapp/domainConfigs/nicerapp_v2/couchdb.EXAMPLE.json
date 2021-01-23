@@ -1,0 +1,8 @@
+{
+    "http" : "http://",
+    "adminUsername" : "admin",
+    "adminPassword" : "password",
+    "domain" : "localhost",
+    "port" : "5984"
+}
+    

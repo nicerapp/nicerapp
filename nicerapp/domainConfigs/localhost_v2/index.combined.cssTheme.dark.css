@@ -1,0 +1,93 @@
+.vividDialog {
+    scrollbar-color : lime rgba(0,0,0,0.5);
+    border : 3px ridge lime;
+    background : rgba(0,0,0,0.5);
+    color : white;
+    box-shadow : 7px 7px 5px rgba(0,0,0,0.7), inset -2px -2px 2px rgba(0,0,0,0.8), inset 2px 2px 2px rgba(0,0,0,0.8);
+}
+.vividDialogContent::-webkit-scrollbar {
+  width: 1rem;
+}
+.vividDialogContent::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background : rgba(0,0,0,0.5);
+}
+.vividDialogContent::-webkit-scrollbar-button:vertical:decrement {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  color : white;
+  padding : 0;
+  margin : 0;
+  border-radius : 10px 10px 0px 0px;
+  background : url('/nicerapp/siteMedia/vividDialog/frame_e02_001.png') center;
+}
+.vividDialogContent::-webkit-scrollbar-button:vertical:increment {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  padding : 0;
+  margin : 0;
+  color : white;
+  border-radius : 0px 0px 10px 10px;
+  background : url('/nicerapp/siteMedia/vividDialog/frame_e03_001.png') center;
+}
+.vividDialogContent::-webkit-scrollbar-button:horizontal:decrement {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  color : white;
+  padding : 0;
+  margin : 0;
+  border-radius : 10px 0px 0px 10px;
+  background : url('/nicerapp/siteMedia/vividDialog/frame_e06_001.png') center;
+}
+.vividDialogContent::-webkit-scrollbar-button:horizontal:increment {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  padding : 0;
+  margin : 0;
+  color : white;
+  border-radius : 0px 10px 10px 0px;
+  background : url('/nicerapp/siteMedia/vividDialog/frame_e07_001.png') center;
+}
+.vividDialogContent::-webkit-scrollbar-thumb {
+  background : url('/nicerapp/siteMedia/backgrounds/tiled/active/blue/blue174.jpg') repeat;
+  border-radius : 20px;
+}
+
+.vividButton[theme="dark"] {
+    border : 3px ridge rgba(255,255,255,0.7);
+    background-image: -o-linear-gradient(bottom, rgba(0,0,0,0.4) 25%, rgba(40,40,40,0.4) 81%);
+    background-image: -moz-linear-gradient(bottom, rgba(0,0,0,0.4) 25%, rgba(40,40,40,0.4) 81%);
+    background-image: -webkit-linear-gradient(bottom, rgba(0,0,0,0.4) 25%, rgba(40,40,40,0.4) 81%);
+    background-image: -ms-linear-gradient(bottom, rgba(0,0,0,0.4) 25%, rgba(40,40,40,0.4) 81%);
+    background-image: linear-gradient(bottom, rgba(0,0,0,0.4) 25%, rgba(40,40,40,0.4) 81%);
+    border-radius : 20px;
+    padding : 5px;
+    z-index : 1;
+    pointer-events : none;
+}  
+.vividButton[theme="dark"] a {
+  color : white;
+  text-decoration : none;
+}
+.vividButton[theme="dark"]::before {
+    content: "";
+    position: absolute;
+    pointer-events: all;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;   
+    background-image: -o-linear-gradient(bottom, rgba(0,0,0,0.4) 25%, rgba(40,40,40,0.8) 81%);
+    background-image: -moz-linear-gradient(bottom, rgba(0,0,0,0.4) 25%, rgba(40,40,40,0.8) 81%);
+    background-image: -webkit-linear-gradient(bottom, rgba(0,0,0,0.4) 25%, rgba(40,40,40,0.8) 81%);
+    background-image: -ms-linear-gradient(bottom, rgba(0,0,0,0.4) 25%, rgba(40,40,40,0.8) 81%);
+    background-image: linear-gradient(bottom, rgba(0,0,0,0.4) 25%, rgba(40,40,40,0.8) 81%);
+    border-radius : 20px;
+    z-index: -1;
+    transition: opacity 0.5s linear;
+    opacity: 0;
+}    
+.vividButton[theme="dark"]:hover::before {
+    opacity: 1;
+    background-image: -o-linear-gradient(bottom, rgba(0,0,50,0.4) 25%, rgba(40,40,80,0.8) 81%);
+    background-image: -moz-linear-gradient(bottom, rgba(0,0,50,0.4)  25%, rgba(40,40,80,0.8) 81%);
+    background-image: -webkit-linear-gradient(bottom, rgba(0,0,50,0.4) 25%, rgba(40,40,80,0.8) 81%);
+    background-image: -ms-linear-gradient(bottom, rgba(0,0,50,0.4) 25%, rgba(40,40,80,0.8) 81%);
+    background-image: linear-gradient(bottom, rgba(0,0,50,0.4) 25%, rgba(40,40,80,0.8) 81%);
+}

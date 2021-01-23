@@ -23,13 +23,9 @@ class nicerAppCMS {
     
     public function init () {
         $this->basePath = realpath(dirname(__FILE__).'/..');
-        $this->cssTheme = (
-            array_key_exists ('siteTheme', $_COOKIE)
-            ? $_COOKIE['siteTheme']
-            : array_key_exists ('siteTheme', $_POST) 
-                ? $_POST['siteTheme'] 
-                : 'dark'
-        );
+        $this->cssTheme = 'dark';
+        if (array_key_exists ('siteTheme', $_POST)) $this->cssTheme = $_POST['siteTheme'];
+        if (array_key_exists ('siteTheme', $_COOKIE)) $this->cssTheme = $_COOKIE['siteTheme'];
         $p1 = realpath(dirname(__FILE__).'/../..');
         $p2 = realpath(dirname(__FILE__).'/..');
         $this->domain = str_replace($p1.'/','', $p2);
@@ -38,11 +34,11 @@ class nicerAppCMS {
     public function getSite() {
         $templateFile = realpath(dirname(__FILE__).'/domainConfigs/'.$this->domain.'/index.template.php');
         
-        $getAsIndividualLinks = false;
+        $getAsIndividualLinks = $this->domain==='localhost_v2';
         if ($getAsIndividualLinks) {
-            $cssFiles = $this->getFiles_asIndividualLinks('css', 'cssFiles');
+            $cssFiles = $this->getFiles_asIndividualLinks('css', 'css');
             $cssThemeFiles = $this->getFiles_asIndividualLinks('css', 'cssTheme');
-            $javascriptFiles = $this->getFiles_asIndividualLinks('javascript', 'javascripts');
+            $javascriptFiles = $this->getFiles_asIndividualLinks('js', 'javascripts');
         } else {
             $cssFiles = $this->getFiles('css', 'css');
             $cssThemeFiles = $this->getFiles('css', 'cssTheme');
@@ -104,14 +100,15 @@ class nicerAppCMS {
 
     public function getFiles_asIndividualLinks($type = null, $indexPrefix = null) {
         switch ($indexPrefix) {
-            case 'cssThemeFiles': $filenamePrefix = '.'.$this->cssTheme; break;
+            case 'cssTheme': $filenamePrefix = '.'.$this->cssTheme; break;
             default: $filenamePrefix = '';
         };
-        $filename = realpath(dirname(__FILE__).'/domainConfigs/'.$this->domain.'/index.'.$indexPrefix.$filenamePrefix.'.json');
+        //var_dump ($this->domain); die();
+        $filename = realpath(dirname(__FILE__).'/domainConfigs').'/'.$this->domain.'/index.'.$indexPrefix.$filenamePrefix.'.json';
         $files = json_decode(file_get_contents($filename), true);
         switch ($type) {
             case 'css': $lineSrc = "\t".'<link type="text/css" rel="StyleSheet" href="{$src}?c={$changed}">'."\r\n"; break;
-            case 'javascript': $lineSrc = "\t".'<script type="text/javascript" src="{$src}?c={$changed}"></script>'."\r\n"; break;
+            case 'js': $lineSrc = "\t".'<script type="text/javascript" src="{$src}?c={$changed}"></script>'."\r\n"; break;
         };
         $lines = '';
         foreach ($files as $idx => $file) {

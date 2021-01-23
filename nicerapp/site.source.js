@@ -30,11 +30,11 @@ var nas = na.site = {
         });
 
         $(window).resize (function() {
-            if (nas.s.timeoutWindowResize) clearTimeout(nas.s.timeoutWindowResize);
             $('#siteBackground img').css({
                 width : $(window).width(),
                 height : $(window).height()
             });
+            if (nas.s.timeoutWindowResize) clearTimeout(nas.s.timeoutWindowResize);
             nas.s.timeoutWindowResize = setTimeout (function() {
                 nas.onresize();
             }, 250);
@@ -55,6 +55,9 @@ var nas = na.site = {
         $.ajax(ac);
 
         nas.onresize();
+        
+        na.analytics.logMetaEvent ('startup : html and js fully loaded, browserWidth='+$(window).width()+', browserHeight='+$(window).height()+', referer='+na.m.globals.referer+', userAgent='+navigator.userAgent);
+        
     },
     
     onload_withAnimations : function (evt) {

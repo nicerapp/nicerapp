@@ -9,7 +9,9 @@
 {$cssThemeFiles}
 {$javascriptFiles}
 <script type="text/javascript">
+na.m.globals = {};
 na.m.globals.couchdb = <?php echo file_get_contents(dirname(__FILE__).'/couchdb.json');?>;
+na.m.globals.referer = '<?php echo $_SERVER['HTTP_REFERER'];?>';
 </script>
 
     <title>nicer.app web apps framework</title>
