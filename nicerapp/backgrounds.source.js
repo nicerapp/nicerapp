@@ -40,7 +40,9 @@ na.backgrounds = {
         bgl.onload=function(){
             jQuery(bgl).fadeIn(1000, function(){
                 bgf.src = bgl.src;
-                jQuery(bgl).fadeOut('fast');
+                setTimeout (function(){
+                    jQuery(bgl).fadeOut('fast');
+                }, 500);
             });
         };
         bgl.src = url;
