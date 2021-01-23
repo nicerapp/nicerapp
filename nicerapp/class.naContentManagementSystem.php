@@ -90,7 +90,7 @@ class nicerAppCMS {
         }
         //echo $cacheFilename; die();
         //var_dump(file_put_contents ($cacheFilename, $c));die();
-        file_put_contents ($cacheFilename, $c)
+        file_put_contents ($cacheFilename, $c);
         $url = str_replace ($this->basePath, '', $cacheFilename);
         $lastModified = date('Ymd_His', $newest);
         $search = array ('{$src}', '{$changed}');
