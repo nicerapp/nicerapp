@@ -35,7 +35,7 @@ class nicerAppCMS {
     public function getSite() {
         $templateFile = realpath(dirname(__FILE__).'/domainConfigs/'.$this->domain.'/index.template.php');
         
-        $getAsIndividualLinks = $this->domain==='localhost_v2';
+        $getAsIndividualLinks = false;//$this->domain==='localhost_v2';
         if ($getAsIndividualLinks) {
             $cssFiles = $this->getFiles_asIndividualLinks('css', 'css');
             $cssThemeFiles = $this->getFiles_asIndividualLinks('css', 'cssTheme');
@@ -80,7 +80,7 @@ class nicerAppCMS {
         $newest = strtotime ('1970-01-01');
         foreach ($files as $idx => $file) {
             $file = str_replace ('{$domain}', $this->domain, $file);
-            $c .= file_get_contents($file);
+            $c .= file_get_contents($this->basePath.$file);
             $fdt = filectime($this->basePath.'/'.$file);
             if ($fdt > $newest) $newest = $fdt;
         };
