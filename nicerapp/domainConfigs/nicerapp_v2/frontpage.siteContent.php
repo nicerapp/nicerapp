@@ -3,7 +3,8 @@
     global $cms;
     $apps = array(
         'newsHeadlines_englishNews' => array(
-            '#siteContent' => 'nicerapp/news/newsApp.siteContent.php?section=English%20News'
+            '#siteContent' => 'nicerapp/news/newsApp.siteContent.php?section=English%20News',
+            'news' => array ('section' => 'English_News')
         )
     );
     $json = array();
