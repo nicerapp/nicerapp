@@ -59,7 +59,7 @@ var nas = na.site = {
         na.analytics.logMetaEvent ('startup : html and js fully loaded, browserWidth='+$(window).width()+', browserHeight='+$(window).height()+', referer='+na.m.globals.referer+', userAgent='+navigator.userAgent);
         
     },
-    
+    /*
     onload_withAnimations : function (evt) {
         $('.vividDialog, .vividMenu').not(na.m.userDevice.isPhone?'#siteDateTime':'#nonEl').fadeIn('fast', function() {
                     
@@ -119,7 +119,7 @@ var nas = na.site = {
         };
         $.ajax(ac);
     },
-    
+    */
     updateDateTime : function() {
 		var 
 		d = new Date(),
@@ -189,6 +189,10 @@ var nas = na.site = {
             }                
         }
         $.ajax(ac);
+    },
+    
+    changeBackground : function () {
+        na.backgrounds.next ('#siteBackground', na.backgrounds.s.lastMenuSelection);
     }
 }
 nas.s = nas.settings;

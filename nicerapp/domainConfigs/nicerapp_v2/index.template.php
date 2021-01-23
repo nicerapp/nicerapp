@@ -9,7 +9,9 @@
 {$cssThemeFiles}
 {$javascriptFiles}
 <script type="text/javascript">
+na.m.globals = {};
 na.m.globals.couchdb = <?php echo file_get_contents(dirname(__FILE__).'/couchdb.json');?>;
+na.m.globals.referer = '<?php echo $_SERVER['HTTP_REFERER'];?>';
 </script>
 
     <title>nicer.app web apps framework</title>
@@ -27,7 +29,7 @@ na.m.globals.couchdb = <?php echo file_get_contents(dirname(__FILE__).'/couchdb.
     
     <div id="siteDateTime" class="vividDialog"></div>
     
-    <img id="btnThemeSwitch" src="/nicerapp/btnThemeSwitch_icon.png" class="tooltip" title="Switch between light and dark theme" alt="Switch between light and dark theme" tooltipTheme="mainTooltipTheme" onclick="nas.themeSwitch()"/>
+    <img id="btnThemeSwitch" src="/nicerapp/siteMedia/btnThemeSwitch_icon.png" class="tooltip" title="Switch between light and dark theme" alt="Switch between light and dark theme" tooltipTheme="mainTooltipTheme" onclick="nas.themeSwitch()"/>
     <form id="siteSettings" action="/" method="POST" style="display:none;">
         <select id="siteTheme" name="siteTheme" form="siteSettings" onchange="this.form.submit()">
             <optgroup>
@@ -36,6 +38,8 @@ na.m.globals.couchdb = <?php echo file_get_contents(dirname(__FILE__).'/couchdb.
             </optgroup>
         </select>
     </form>    
+    
+    <img id="btnChangeBackground" src="/nicerapp/siteMedia/btnBackground.png" class="tooltip" title="Choose a random background" alt="Choose a random background" tooltipTheme="mainTooltipTheme" onclick="nas.changeBackground()"/>
     
     <div id="siteMenu" class="vividMenu" theme="{$theme}">
 {$div_siteMenu}
