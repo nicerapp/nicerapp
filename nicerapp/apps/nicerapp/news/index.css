@@ -12,3 +12,37 @@
 .newsApp__header__displayCounts {
     color : lime;
 }
+
+.newsApp_header {
+    color : grey;
+    text-shadow: -1px -1px 1px rgba(255, 255, 255, 0.8);
+}
+
+.newsApp__item__outer {
+    text-shadow: -1px -1px 1px rgba(255, 255, 255, 0.8);
+}
+
+.newsApp__item__title { font-weight : bold; }
+.newsApp__item__desc { }
+.newsApp__item__url { }
+.newsApp__item__category { color : #CCCCCC; }
+.newsApp__item__categoryTitle { }
+.newsApp__item__categoryColon { }
+.newsApp__item__categoryValue { }
+
+.newsApp__item__date { }
+.newsApp__item__date__local { color : #CCCCCC; }
+.newsApp__item__date__remote { color : #888888; }
+
+.newsAppTooltipTheme.tooltipster-sidetip .tooltipster-box {
+	background: black;
+	border: 1px solid yellow;
+	border-radius: 6px;
+    opacity : 0.9;
+	box-shadow: 5px 5px 2px 0 rgba(0,0,0,0.4), -2px -2px 2px 0 rgba(0,255,255,0.7);
+}
+
+.newsAppTooltipTheme.tooltipster-sidetip .tooltipster-content {
+	color: #DDD;
+	padding: 8px;
+}
