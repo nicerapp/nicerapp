@@ -88,7 +88,7 @@ class nicerAppCMS {
         } else {
             $cacheFilename = realpath(dirname(__FILE__).'/domainConfigs').'/'.$this->domain.'/index.combined.'.$type;
         }
-        
+        echo $cacheFilename; die();
         file_put_contents ($cacheFilename, $c);
         $url = str_replace ($this->basePath, '', $cacheFilename);
         $lastModified = date('Ymd_His', $newest);
