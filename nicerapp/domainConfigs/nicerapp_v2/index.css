@@ -155,7 +155,7 @@ img.bg_last {
 }*/
 #btnThemeSwitch {
     position : absolute;
-    top : calc(1vh - 4px);
+    top : calc(1vh - 3px); 
     left : calc(1vw + 265px);
     z-index : 1100;
     border:3px ridge lime;
