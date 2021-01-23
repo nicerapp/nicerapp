@@ -1,0 +1,29 @@
+Options All -Indexes
+
+AddEncoding gzip .jsgz .cssgz .htmlgz .datagz
+AddType application/javascript .jsgz
+AddType text/css .cssgz
+AddType text/html .htmlgz       
+AddType text/plain .datagz
+
+RewriteEngine on 
+RewriteCond %{HTTP:Accept-Encoding} gzip 
+RewriteCond %{REQUEST_FILENAME} -f 
+RewriteRule ^(.+)\.(html|css|js|data)gz$ $1.$2gz [T=text/$2,E=GZIP:gzip,L] 
+Header set Content-Encoding gzip env=GZIP
+
+#Stage 0 : initialization of rewrite engine; do not touch without a clue.
+RewriteEngine on
+RewriteBase /
+#site operator must keep these in order:
+# must start and end with /
+
+#Stage 1 : shorthands / minified-to-full links 
+RewriteRule ^tarot$ /tarot(deck'Original-Rider-Waite',reading'3-Cards') [R,L]
+RewriteRule ^tarot,music$ /tarot(deck'Original-Rider-Waite',reading'3-Cards')/music(youtubePlaylist'ABCDEFG') [R,L]
+#RewriteRule ^jsonViewer$ /jsonViewer(url'htt p://seductiveapps.com/json.php?file=/home/rene/data.json&version=condensed') [R]
+RewriteRule ^jsonViewer$ /jsonViewer(url'base64aHR0cDovL3NlZHVjdGl2ZWFwcHMuY29tL2pzb24ucGhwP2ZpbGU9L2hvbWUvcmVuZS9kYXRhLmpzb24mdmVyc2lvbj1jb25kZW5zZWQ=') [R]
+
+#Stage 2 : passing Stage 1 output to PHP (index.php)
+RewriteRule ^(tarot.*)$ index.php?apps=$1 [L]
+RewriteRule ^(jsonViewer.*)$ index.php?apps=$1 [L]

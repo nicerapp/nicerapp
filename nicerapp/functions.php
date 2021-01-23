@@ -20,7 +20,17 @@ function execPHP ($file) {
     ob_flush();
     ob_end_clean();
     ob_start();
-    require_once ($file);
+    //echo $file; die();
+    $p = strpos($file,'?');
+    $qs = substr($file, $p+1, strlen($file)-$p-1);
+    $f = (
+        $p === false
+        ? $file
+        : substr($file, 0, $p)
+    );
+    //echo $qs; die();
+    if ($p!==false) parse_str ($qs, $_GET); // may seem like a dirty hack, but isn't.    
+    require_once ($f);
     $c = ob_get_contents();
     ob_end_clean();
     ob_start();
@@ -35,6 +45,277 @@ function require_return ($file) {
     return $r;
 }
 
+function base64_encode_url($string) {
+    return str_replace(['+','/','='], ['-','_',''], base64_encode($string));
+}
+
+function base64_decode_url($string) {
+    return base64_decode(str_replace(['-','_'], ['+','/'], $string));
+}
+
+function createDirectoryStructure ($filepath) {
+$fncn = "createDirectoryStructure";
+/*	Creates a directory structure. 
+    Returns a boolean success value. False usually indicates illegal characters in the directories.
+
+    If you supply a filename as part of $filepath, all directories for that filepath are created.
+    If $filepath==only a directory, you TODO**MUST**TODO end $filepath with / or \
+*/
+    //slash-direction doesn't matter for PHP4 file functions :-), so we even things out first;
+    $filepath = strtr (trim($filepath), "\\", "/");
+    if ($filepath[strlen($filepath)-1]!="/") $filepath.="/";	
+
+    if (($filepath[1]!=':') && ($filepath[0]!='/')) trigger_error ("$fncn: $filepath is not from the root. results would be unstable. gimme a filepath with / as first character.", E_USER_ERROR);
+
+    $directories = explode ("/", $filepath);
+    $result = true;
+
+    for ($i = count($directories); $i>0; $i--) {
+        $pathToTest = implode ("/", array_slice($directories,0,$i+1));
+        if (file_exists($pathToTest)) break;
+    }
+
+    if ( (($i+1) < count($directories)) ) {
+        for ($j = $i+1; $j < (count($directories)-1); $j++) {
+            $pathToCreate = implode ("/", array_slice($directories,0,$j+1));
+            if (file_exists($pathToCreate)) {
+                $result = true;
+            } else {
+                $result=mkdir($pathToCreate,0777);
+//				chown ($pathToCreate, 'Webserver');
+            }
+            if (!$result) {
+                trigger_error ("$fncn : couldn't create directory $pathToCreate.", E_USER_ERROR);
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+
+function getLocationbarInfo ($queryString=null) {
+    if (
+        array_key_exists('url', $_GET)
+    ) {
+        $queryString = $_GET['url'];
+    } else if (
+        array_key_exists('apps', $_GET)
+    ) {
+        $queryString = $_GET['apps'];
+    } else if (
+        array_key_exists('QUERY_STRING', $_SERVER)
+        && $_SERVER['QUERY_STRING']!==''
+    ) {
+        $queryString = $_SERVER['QUERY_STRING'];
+        $queryString = str_replace ('\'url=','', $queryString);
+        $queryString = str_replace ('url=','', $queryString);
+        $queryString = str_replace ('&uc_subscription=index.php', '', $queryString);
+    } else if (!array_key_exists('REDIRECT_QUERY_STRING', $_SERVER)
+        || $_SERVER['REDIRECT_QUERY_STRING'] === ''
+    ) {
+        $dcFilepath = $saSiteHD.'/domainConfigs/'.$_SERVER['HTTP_HOST'].'/';
+        
+        $appParams = array(
+            'saObjectType' => 'saPageContent',
+            'saPageDivs' => array (
+                'siteContent' => array(
+                    'saObjectType' => 'vividDialog',
+                    'saVividThemeName' => 'vividTheme__dialog_black_navyBorder_square',
+                    'div.id' => 'siteContent',
+                    //'require_once' => $saFrameworkHD.'/siteContent/frontpage.siteContent.php',
+                    'require_once' => $dcFilepath.'/frontpage.siteContent.php',
+                )
+            )
+        );
+        //var_dump ($appParams);
+        return $appParams;
+    }
+    //var_dump ($queryString); die();
+    
+
+    $ret = array (
+        'saObjectType' => 'saPageContent'
+    );
+    
+    if (array_key_exists('url',$_GET)) {
+        $appsM1 = strpos($_GET['url'], 'apps/');
+        if ($appsM1!==false) {
+            $appsM2 = strpos($_GET['url'], '/', $appsM1 + strlen ('apps/') + 1);
+            if ($appsM2!==false) {
+                $apps = substr ($_GET['url'], $appsM1, $appsM2-$appsM1);
+            } else {
+                $apps = substr ($_GET['url'], $appsM1 + strlen('apps/'));
+            }
+            $ret = array (
+                'apps' => json_decode(base64_decode_url($apps), true)
+            );
+        } else {
+            $ret = array (
+                'apps' => array (
+                    '' => '' // default to domainConfigs/YOURDOMAIN.EXT/frontpage.siteContent.php
+                )
+            );
+        };
+    } elseif (array_key_exists('apps',$_GET)) {
+        $ret = array (
+            'apps' => json_decode(base64_decode_url($_GET['apps']), true)
+        );
+    } else {
+        $ret = array (
+            'apps' => array (
+                '' => '' // default to domainConfigs/YOURDOMAIN.EXT/frontpage.siteContent.php
+            )
+        );
+    };
+    $appName = '';
+    //echo '<pre>';var_dump ($ret); die();
+    foreach ($ret['apps'] as $appName=>$appSettings) {
+        break;
+    };
+    
+    //$dbg = array ( 'appsM1' => $appsM1, 'appsM2' => $appsM2, 'ret' => $ret);
+    //echo '<pre>getLocationbarInfo():$dbg:'."\r\n"; var_dump ($dbg); echo '</pre>'; die();
+        
+    global $naLocationBarInfo;
+    $naLocationBarInfo = $ret;
+    $ret = array_merge_recursive ($ret, getAppSettings ($appName)); //getAppSettings is in .../nicerapp/apps/functions.php
+    $naLocationBarInfo = $ret;
+    //echo '<pre>getLocationbarInfo():$ret:'."\r\n"; var_dump ($ret); echo '</pre>'; die();
+    return $ret;
+}
+
+function getAppSettings ($appName) {
+	//echo '<pre>getAppSettings():$appName:'."\r\n"; var_dump ($appName); echo '</pre>'; die();
+	
+	$appSettings = array();
+	switch ($appName) {
+		case 'jsonViewer':
+			$appSettings['saPageDivs'] = array (
+				'#siteTools' => array (
+					'require_once' => $saFrameworkHD.'/apps/nicerapp/tools/appContent/jsonViewer.siteTools.php'
+				),
+				'#siteContent' => array (
+					'require_once' => $saFrameworkHD.'/apps/nicerapp/tools/appContent/jsonViewer.siteContent.php'
+				)
+			);
+			break;
+			
+		case 'tarot':
+			$appSettings['saPageDivs'] = array (
+				'#siteContent' => array (
+					'require_once' => $saFrameworkHD.'/apps/nicerapp/cardgame_tarot/appContent/tarotSite/index.php'
+				)
+			);
+			break;
+			
+		case 'calculator':
+			$appSettings['saPageDivs'] = array (
+				'#siteContent' => array (
+					// DIRECT DIV : 'require_once' => $saFrameworkHD.'/apps/nicerapp/musicPlayer/appContent/musicPlayer/index.php'
+					'require_once' => $saFrameworkHD.'/apps/Carbonhoarder/carbonHoarderCalculator/appContent/index.siteContent.php' // iframe
+				)
+			);
+			break;
+
+			
+			
+		case 'musicPlayer':
+			$appSettings['saPageDivs'] = array (
+				'#siteContent' => array (
+					// DIRECT DIV : 'require_once' => $saFrameworkHD.'/apps/nicerapp/musicPlayer/appContent/musicPlayer/index.php'
+					'require_once' => $saFrameworkHD.'/apps/nicerapp/musicPlayer/appContent/index.siteContent.php' // iframe
+				)
+			);
+			break;
+
+			
+		case 'news':
+			$appSettings['saPageDivs'] = array (
+				'#siteContent' => array (
+					'require_once' => $saFrameworkHD.'/apps/nicerapp/news/appContent/newsApp/2.0.0/newsApp.siteContent.php'
+				)
+			);
+			break;
+			
+        case 'text_filesystem':
+			$appSettings['saPageDivs'] = array (
+				'#siteContent' => array (
+					'require_once' => $saFrameworkHD.'/apps/nicerapp/text_filesystem/appContent/text_filesystem.siteContent.php'
+				)
+			);
+			break;
+			
+        case 'text_couchdb':
+			$appSettings['saPageDivs'] = array (
+				'#siteContent' => array (
+					'require_once' => $saFrameworkHD.'/apps/nicerapp/text_couchdb/appContent/text_couchdb.siteContent.php'
+				)
+			);
+			break;
+
+        case 'photo':
+			$appSettings['saPageDivs'] = array (
+				'#siteContent' => array (
+					'require_once' => $saFrameworkHD.'/userInterface/photoAlbum/3.0.0/photo.siteContent.php'
+				)
+			);
+			break;
+			
+        case 'photoAlbum_couchdb':
+			$appSettings['saPageDivs'] = array (
+				'#siteContent' => array (
+					'require_once' => $saFrameworkHD.'/apps/nicerapp/photoAlbum_couchdb/appContent/photoAlbum_couchdb.siteContent.php'
+				)
+			);
+			break;
+			
+        case 'cookies':
+			$appSettings['saPageDivs'] = array (
+				'#siteContent' => array (
+					'require_once' => $saFrameworkHD.'/siteContent/cookies.siteContent.php'
+				)
+			);
+			break;
+
+        case 'googleSearch':
+			$appSettings['saPageDivs'] = array (
+				'#siteContent' => array (
+					'require_once' => $saFrameworkHD.'/apps/nicerapp/googleSearch/appContent/googleSearch.siteContent.php'
+				)
+			);
+			break;
+		
+		case 'analytics':
+			$appSettings['saPageDivs'] = array (
+				'#siteContent' => array (
+					'require_once' => $saFrameworkHD.'/businessLogic/analytics/analytics.siteContent.php'
+				)
+			);
+			break;
+		
+			
+		case '':
+            $dcFilepath = $saSiteHD.'/domainConfigs/'.$_SERVER['HTTP_HOST'].'/';
+			$appSettings['saPageDivs'] = array (
+				'#siteContent' => array (
+					//'require_once' => $saFrameworkHD.'/siteContent/frontpage.siteContent.php'
+					'require_once' => $dcFilepath .'frontpage.siteContent.php'
+				)
+			);
+			break;
+		default :
+            global $naLocationBarInfo;
+            echo '<pre>getAppSettings():$appName:'."\r\n"; var_dump ($appName); echo '</pre>'; 
+            echo '<pre>getAppSettings():global $naLocationBarInfo:'."\r\n"; var_dump ($naLocationBarInfo); echo '</pre>'; 
+            echo '<pre>getAppSettings():$appSetting:'."\r\n"; var_dump ($appSettings); echo '</pre>'; 
+            die();
+            break;
+	}
+	
+	//echo '<pre>getAppSettings():$appSetting:'."\r\n"; var_dump ($appSettings); echo '</pre>'; die();
+	return $appSettings;
+}
 
 function getFilePathList ( 
 //TODO: all features listed below $level are untested.
@@ -331,6 +612,34 @@ function &chaseToReference (&$array, $path) {
 	} else {
 		return goodResult($array);
 	}	
+}
+
+function good($r) {
+	return (
+		is_array($r)
+		&& array_key_exists('result',$r)
+	);
+}
+
+function &result(&$r) {
+	return $r['result'];
+}
+
+function &resultArray (&$r) {
+  $r2 = array();
+  foreach ($r as $k => $v) {
+    $r2[$k] = result($v);
+  }
+  return $r2;
+}
+
+
+function &goodResult(&$r) {
+	$r2 = array (
+		'isMetaForFunc' => true,
+		'result' => &$r
+	);
+	return $r2;
 }
 
 

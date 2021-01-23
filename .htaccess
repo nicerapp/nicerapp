@@ -1,0 +1,76 @@
+#Stage 0 : initialization of rewrite engine; do not touch without a clue.
+RewriteEngine on
+RewriteBase /
+#site operator must keep these in order:
+# must start and end with /
+
+# redirect www.seductiveapps.com to seductiveapps.com
+RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+
+
+
+
+RewriteRule ^music$ /apps/eyJtdXNpY1BsYXllciI6eyJzZXQiOiJpbmRleCJ9fQ [R,L]
+
+RewriteRule ^music__chill$ /apps/eyJtdXNpY1BsYXllciI6eyJzZXQiOiJCZWF1dGlmdWxfQ2hpbGxfTWl4ZXMifX0 [R,L]
+
+RewriteRule ^music__deep_house$ /apps/eyJtdXNpY1BsYXllciI6eyJzZXQiOiJEZWVwX0hvdXNlIn19 [R,L]
+
+RewriteRule ^music__dj_firesnake$ /apps/eyJtdXNpY1BsYXllciI6eyJzZXQiOiJESl9GaXJlU25ha2UifX0 [R,L]
+
+RewriteRule ^tarot$ /apps/eyJ0YXJvdCI6eyJkZWNrIjoiT3JpZ2luYWwtUmlkZXItV2FpdGUiLCJyZWFkaW5nIjoiMy1DYXJkcyJ9fQ [R,L]
+
+RewriteRule ^news$ /apps/eyIjc2l0ZUNvbnRlbnQiOiJuaWNlcmFwcC9uZXdzL25ld3NBcHAuc2l0ZUNvbnRlbnQucGhwP3NlY3Rpb249RW5nbGlzaCUyME5ld3MifQ [R]
+
+
+
+
+RewriteRule ^apps/(.*)$ /index.php?apps=$1 [L]
+
+
+<ifModule mod_gzip.c>
+mod_gzip_on Yes
+mod_gzip_dechunk Yes
+mod_gzip_item_include file .(html?|txt|css|js|json|php|pl)$
+mod_gzip_item_include handler ^cgi-script$
+mod_gzip_item_include mime ^text/.*
+mod_gzip_item_include mime ^application/x-javascript.*
+mod_gzip_item_exclude mime ^image/.*
+mod_gzip_item_exclude rspheader ^Content-Encoding:.*gzip.*
+</ifModule>
+<IfModule mod_filter.c>
+    AddOutputFilterByType DEFLATE "application/atom+xml" \
+                                  "application/javascript" \
+                                  "application/json" \
+                                  "application/ld+json" \
+                                  "application/manifest+json" \
+                                  "application/rdf+xml" \
+                                  "application/rss+xml" \
+                                  "application/schema+json" \
+                                  "application/vnd.geo+json" \
+                                  "application/vnd.ms-fontobject" \
+                                  "application/x-font-ttf" \
+                                  "application/x-javascript" \
+                                  "application/x-web-app-manifest+json" \
+                                  "application/xhtml+xml" \
+                                  "application/xml" \
+                                  "font/eot" \
+                                  "font/opentype" \
+                                  "image/bmp" \
+                                  "image/svg+xml" \
+                                  "image/vnd.microsoft.icon" \
+                                  "image/x-icon" \
+                                  "text/cache-manifest" \
+                                  "text/css" \
+                                  "text/html" \
+                                  "text/javascript" \
+                                  "text/plain" \
+                                  "text/vcard" \
+                                  "text/vnd.rim.location.xloc" \
+                                  "text/vtt" \
+                                  "text/x-component" \
+                                  "text/x-cross-domain-policy" \
+                                  "text/xml"
+
+</IfModule>

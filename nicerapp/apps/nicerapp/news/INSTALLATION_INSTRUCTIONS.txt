@@ -1,0 +1,49 @@
+UBUNTU INSTALLATION INSTRUCTIONS FOR nicerapp' NEWSAPP-2.0.0
+/nicerapp/apps/nicerapp/news/appContent/newsApp/2.0.0
+
+
+in these instructions, replace /home/rene/data1/htdocs/localhost with the path to your nicerapp copy.
+
+- put in /etc/rc.local:
+rm /home/rene/data1/htdocs/localhost/nicerapp/apps/nicerapp/news/appContent/newsApp/2.0.0/crontabEntry_manageDatabase.lock.txt
+
+- start up a terminal, enter the following command:
+    crontab -e
+
+    - pick an editor if you haven't yet.
+
+    - paste the following into the crontab, adjusted for your real path :
+
+0 * * * * php /home/rene/data1/htdocs/localhost/nicerapp/apps/nicerapp/news/appContent/newsApp/2.0.0/crontabEntry_manageDatabase.php
+2 * * * * php /home/rene/data1/htdocs/localhost/nicerapp/apps/nicerapp/news/appContent/newsApp/2.0.0/crontabEntry_manageDatabase.php
+4 * * * * php /home/rene/data1/htdocs/localhost/nicerapp/apps/nicerapp/news/appContent/newsApp/2.0.0/crontabEntry_manageDatabase.php
+6 * * * * php /home/rene/data1/htdocs/localhost/nicerapp/apps/nicerapp/news/appContent/newsApp/2.0.0/crontabEntry_manageDatabase.php
+8 * * * * php /home/rene/data1/htdocs/localhost/nicerapp/apps/nicerapp/news/appContent/newsApp/2.0.0/crontabEntry_manageDatabase.php
+10 * * * * php /home/rene/data1/htdocs/localhost/nicerapp/apps/nicerapp/news/appContent/newsApp/2.0.0/crontabEntry_manageDatabase.php
+12 * * * * php /home/rene/data1/htdocs/localhost/nicerapp/apps/nicerapp/news/appContent/newsApp/2.0.0/crontabEntry_manageDatabase.php
+14 * * * * php /home/rene/data1/htdocs/localhost/nicerapp/apps/nicerapp/news/appContent/newsApp/2.0.0/crontabEntry_manageDatabase.php
+16 * * * * php /home/rene/data1/htdocs/localhost/nicerapp/apps/nicerapp/news/appContent/newsApp/2.0.0/crontabEntry_manageDatabase.php
+18 * * * * php /home/rene/data1/htdocs/localhost/nicerapp/apps/nicerapp/news/appContent/newsApp/2.0.0/crontabEntry_manageDatabase.php
+20 * * * * php /home/rene/data1/htdocs/localhost/nicerapp/apps/nicerapp/news/appContent/newsApp/2.0.0/crontabEntry_manageDatabase.php
+22 * * * * php /home/rene/data1/htdocs/localhost/nicerapp/apps/nicerapp/news/appContent/newsApp/2.0.0/crontabEntry_manageDatabase.php
+24 * * * * php /home/rene/data1/htdocs/localhost/nicerapp/apps/nicerapp/news/appContent/newsApp/2.0.0/crontabEntry_manageDatabase.php
+26 * * * * php /home/rene/data1/htdocs/localhost/nicerapp/apps/nicerapp/news/appContent/newsApp/2.0.0/crontabEntry_manageDatabase.php
+28 * * * * php /home/rene/data1/htdocs/localhost/nicerapp/apps/nicerapp/news/appContent/newsApp/2.0.0/crontabEntry_manageDatabase.php
+30 * * * * php /home/rene/data1/htdocs/localhost/nicerapp/apps/nicerapp/news/appContent/newsApp/2.0.0/crontabEntry_manageDatabase.php
+32 * * * * php /home/rene/data1/htdocs/localhost/nicerapp/apps/nicerapp/news/appContent/newsApp/2.0.0/crontabEntry_manageDatabase.php
+34 * * * * php /home/rene/data1/htdocs/localhost/nicerapp/apps/nicerapp/news/appContent/newsApp/2.0.0/crontabEntry_manageDatabase.php
+36 * * * * php /home/rene/data1/htdocs/localhost/nicerapp/apps/nicerapp/news/appContent/newsApp/2.0.0/crontabEntry_manageDatabase.php
+38 * * * * php /home/rene/data1/htdocs/localhost/nicerapp/apps/nicerapp/news/appContent/newsApp/2.0.0/crontabEntry_manageDatabase.php
+40 * * * * php /home/rene/data1/htdocs/localhost/nicerapp/apps/nicerapp/news/appContent/newsApp/2.0.0/crontabEntry_manageDatabase.php
+42 * * * * php /home/rene/data1/htdocs/localhost/nicerapp/apps/nicerapp/news/appContent/newsApp/2.0.0/crontabEntry_manageDatabase.php
+44 * * * * php /home/rene/data1/htdocs/localhost/nicerapp/apps/nicerapp/news/appContent/newsApp/2.0.0/crontabEntry_manageDatabase.php
+46 * * * * php /home/rene/data1/htdocs/localhost/nicerapp/apps/nicerapp/news/appContent/newsApp/2.0.0/crontabEntry_manageDatabase.php
+48 * * * * php /home/rene/data1/htdocs/localhost/nicerapp/apps/nicerapp/news/appContent/newsApp/2.0.0/crontabEntry_manageDatabase.php
+50 * * * * php /home/rene/data1/htdocs/localhost/nicerapp/apps/nicerapp/news/appContent/newsApp/2.0.0/crontabEntry_manageDatabase.php
+52 * * * * php /home/rene/data1/htdocs/localhost/nicerapp/apps/nicerapp/news/appContent/newsApp/2.0.0/crontabEntry_manageDatabase.php
+54 * * * * php /home/rene/data1/htdocs/localhost/nicerapp/apps/nicerapp/news/appContent/newsApp/2.0.0/crontabEntry_manageDatabase.php
+56 * * * * php /home/rene/data1/htdocs/localhost/nicerapp/apps/nicerapp/news/appContent/newsApp/2.0.0/crontabEntry_manageDatabase.php
+58 * * * * php /home/rene/data1/htdocs/localhost/nicerapp/apps/nicerapp/news/appContent/newsApp/2.0.0/crontabEntry_manageDatabase.php
+
+    - exit and save the crontab file to enable it.
+

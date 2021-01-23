@@ -44,7 +44,7 @@ var nas = na.site = {
         
         var ac = {
             type : 'GET',
-            url : '/nicerapp/domainConfigs/nicerapp_v2/ajax_backgrounds.php',
+            url : '/nicerapp/domainConfigs/'+na.m.globals.domain+'/ajax_backgrounds.php',
             success : function (data, ts, xhr) {
                 nas.s.backgrounds = JSON.parse(data);
             },
@@ -59,67 +59,7 @@ var nas = na.site = {
         na.analytics.logMetaEvent ('startup : html and js fully loaded, browserWidth='+$(window).width()+', browserHeight='+$(window).height()+', referer='+na.m.globals.referer+', userAgent='+navigator.userAgent);
         
     },
-    /*
-    onload_withAnimations : function (evt) {
-        $('.vividDialog, .vividMenu').not(na.m.userDevice.isPhone?'#siteDateTime':'#nonEl').fadeIn('fast', function() {
-                    
-                $('#siteContent').bind('onanimationend animationend webkitAnimationEnd', function() { 
-                    if (!nas.s.siteContentStarted) {
-                        nas.s.siteContentStarted = true;
-                        $('#siteContent .vividDialogContent').fadeIn('slow');
-                        $('#btnThemeSwitch').addClass('started');
-                        nas.onresize();
-                    }
-                });
 
-                $('#siteMenu').bind('onanimationend animationend webkitAnimationEnd', function() { 
-                    
-                });
-                
-                if (na.m.userDevice.isPhone) {
-                    $('#siteMenu').css({left:70});
-                    $('.vividDialog').addClass('started');
-                } else $('.vividDialog, .vividMenu').addClass('started');
-        });
-        if (na.m.userDevice.isPhone) {
-            $('#siteDateTime').css({display:'none'});
-            $('#btnThemeSwitch').css({left:'1vw'});
-        };
-        
-        $('#siteBackground img.bg_first')[0].src = $.cookie('siteBackground_img');
-        
-        $('#siteContent .vividDialogContent').focus();
-        
-        $('.vividButton').each(function(idx,el){
-            nas.s.buttons['#'+el.id] = new naVividButton(el);
-        });
-
-        $(window).resize (function() {
-            if (nas.s.timeoutWindowResize) clearTimeout(nas.s.timeoutWindowResize);
-            $('#siteBackground img').css({
-                width : $(window).width(),
-                height : $(window).height()
-            });
-            nas.s.timeoutWindowResize = setTimeout (function() {
-                nas.onresize();
-            }, 250);
-        });
-        
-        setInterval (nas.updateDateTime, 1000);
-        
-        var ac = {
-            type : 'GET',
-            url : '/nicerapp/domainConfigs/nicerapp_v2/ajax_backgrounds.php',
-            success : function (data, ts, xhr) {
-                nas.s.backgrounds = JSON.parse(data);
-            },
-            failure : function (xhr, ajaxOptions, thrownError) {
-                debugger;
-            }                
-        };
-        $.ajax(ac);
-    },
-    */
     updateDateTime : function() {
 		var 
 		d = new Date(),
@@ -173,7 +113,7 @@ var nas = na.site = {
     reloadMenu : function() {
         var ac = {
             type : 'POST',
-            url : '/nicerapp/domainConfigs/nicerapp_v2/mainmenu.php',
+            url : '/nicerapp/domainConfigs/'+na.m.globals.domain+'/mainmenu.php',
             data : {
                 na_js__screenWidth : $(window).width(),
                 na_js__menuSpace : $(window).width() - $('#siteMenu').offset().left,
@@ -197,9 +137,91 @@ var nas = na.site = {
 }
 nas.s = nas.settings;
 
+na.apps = {
+    loaded : {}
+};
 
+na.account = na.a = {
+    settings : {
+        username : 'Guest',
+        password : 'Guest'
+    }
+};
 
 na.m = {
+    settings : {
+        waitForCondition : {}
+    },
+    
+    base64_encode_url : function (str) {
+        var str2 = btoa(str);
+        str2 = str2.replace (/=/g, '');
+        str2 = str2.replace ('+', '-');
+        str2 = str2.replace ('/', '_');
+        return str2;
+    },
+    
+    base64_decode_url : function (str) {
+        var str2 = str;
+        str2 = str2.replace ('-', '+');
+        str2 = str2.replace ('_', '/');
+        return atob(str2);
+    },
+    
+	secondsToTime : function (secs) {
+		//thx 
+		// http://codeaid.net/javascript/convert-seconds-to-hours-minutes-and-seconds-%28javascript%29
+		//and
+		// http://stackoverflow.com/questions/175554/how-to-convert-milliseconds-into-human-readable-form
+		var days = Math.floor(secs / (60 * 60 * 24));
+		var hours = Math.floor(secs / (60 * 60));
+		var divisor_for_minutes = secs % (60 * 60);
+		var minutes = Math.floor(divisor_for_minutes / 60);
+		var divisor_for_seconds = divisor_for_minutes % 60;
+		var seconds = Math.floor(divisor_for_seconds);
+		var milliSeconds = Math.round((secs - Math.floor(secs)) * 1000);
+
+		var obj = {
+			days : days,
+			hours: hours,
+			minutes: minutes,
+			seconds: seconds,
+			milliSeconds : milliSeconds
+		};
+
+		return obj;
+	},
+
+	secondsToTimeString : function (secs) {
+		var d = na.m.secondsToTime(secs);
+		var s = '';
+		if (d.days>0) {
+			s += d.days + 'd';
+		};
+		if (d.hours>0) {
+			if (s!='') s+=', ';
+			s += d.hours + 'h';
+		};
+		if (d.minutes>0) {
+			if (s!='') s+=', ';
+			s += d.minutes + 'm';
+		};
+		if (d.seconds>0) {
+			if (s!='') s+=', ';
+			s += d.seconds + 's';
+		};
+		if (d.milliSeconds>0) {
+			if (s!='') s+=', ';
+			s += d.milliSeconds + 'ms';
+		};
+		return s;
+	},
+    
+    log : function (level, msg) {
+        console.log (level + ' - ' + msg);
+    },
+	
+    
 	padNumber : function (number, characterPositions, paddingWith) {
 		var 
 		r = '' + number,
@@ -236,7 +258,152 @@ na.m = {
 				|| navigator.userAgent.match(/AvantGo/i)
 				|| navigator.userAgent.match(/J-PHONE/i)
 				|| navigator.userAgent.match(/UP.Browser/i)
-	}
+	},
+    
+	waitForCondition : function (label, condition, callback, frequency, context) {
+	// used (for instance) to let a page wait for vividDialogs to be fully initialized before showing the site's components.
+	// see the source of http://nicer.app for a demo
+		var _fncn = 'na.m.waitForCondition(): ';
+		if (typeof label!=='string') { na.m.log ( { error : _fncn+'invalid label' } ); return false;};
+		if (typeof condition!=='function') { na.m.log ( { error : _fncn+'invalid condition' } ); return false; };
+		if (typeof callback!=='function') { na.m.log ( { error : _fncn+'invalid callback' } ); return false; };
+		if (typeof frequency=='undefined' || frequency<50) frequency = 50; 
+		
+        /*
+		if (label.stacktrace === undefined) {
+			try { 
+				var a = {}; 
+				if (a.debug) {
+					a.debug(); 
+				} else {
+					throw new Error("myError");
+				}
+			} catch(ex) { 
+				var stacktrace = (
+					na.m.globals.log.doStackTraces.forAllCode
+					|| na.m.globals.log.doStackTraces.forCodePath[codePath]
+					? (na.m.userDevice.isFirefox ? ex.stack.split('\n') : ex.stack)
+					: '[no stacktrace provided]'
+				)
+			};
+			label.stacktrace = stacktrace;
+		};
+        */
+		
+		var r = condition(context);
+
+		/*
+		var dbgMsg = 
+			_fncn + label + '\n' 
+			+ 'condition : ' +condition+ ' = ' + (r?'true':'false')+ '\n' 
+			+ 'callback : ' + callback; 
+		var dbgData = {
+			startStacktrace : label.stacktrace,
+			label : label,
+			condition : condition,
+			callback : callback,
+			frequency : frequency//,
+			//conditionAsText : '' + condition,
+			//callbackAsText : '' + callback,
+		};
+		//na.m.log (1, dbgData);
+        */
+
+		if (r) {
+		// condition()==true, we're done waiting
+			clearTimeout (na.m.settings.waitForCondition[label]);
+			delete na.m.settings.waitForCondition[label];
+			callback();
+		} else {
+		// condition()==false, more waiting
+			if (!na.m.settings.waitForCondition[label]) { // prevents double checks & activations of callback().
+				na.m.settings.waitForCondition[label] = setTimeout (function () {
+					clearTimeout (na.m.settings.waitForCondition[label]);
+					delete na.m.settings.waitForCondition[label];
+					na.m.waitForCondition (label, condition, callback, frequency, context); 
+				}, frequency);
+			} 
+		}
+		return r;
+	},
+    
+    walkArray : function (a, keyCallback, valueCallback, callKeyForValues, callbackParams, k, level, path) {
+        if (!path) path = '';
+        if (typeof a !== 'object') {
+            debugger;
+        } else {
+            for (var k in a) {
+                var 
+                v = a[k],
+                cd = {
+                    type : 'key',
+                    path : path,
+                    level : level,
+                    k : k,
+                    v : v,
+                    params : callbackParams
+                };
+                if (typeof keyCallback=='function' && (callKeyForValues || typeof v==='object')) keyCallback (cd);
+                if (typeof v==='object') {
+                    cd.type = 'value';
+                    if (typeof valueCallback=='function') valueCallback(cd);
+                    na.m.walkArray (a[k], keyCallback, valueCallback, callKeyForValues, callbackParams, k, level+1, path+'/'+k);
+                } else {
+                    cd.type = 'value';
+                    if (typeof valueCallback=='function') valueCallback(cd);
+                }
+            }
+        }
+    },
+    
+    chaseToPath : function (wm, path, create) {
+        var 
+        nodes = path.split('/');
+        
+        return na.m.chase (wm, nodes, create);
+    },
+    
+    chase : function (arr, indexes, create) {
+        var 
+        r = arr;
+        
+        for (var i=0; i<indexes.length; i++) {
+            var idx = indexes[i];
+            if (
+                typeof r === 'object'
+                && (
+                    create === true
+                    || r[idx]
+                )
+            ) {
+                if (create===true && !r[idx]) r[idx]={};
+                r = r[idx];
+            }
+        }
+        
+        return r;
+    },
+    
+    extend : function () {
+		var r = arguments[0];
+		for (var i = 1; i < arguments.length; i++) {
+			var a = arguments[i];
+			if (typeof a=='object' && a!==null && typeof a.length=='number') r =[];
+			if (a===null || typeof a==='undefined') continue;
+			for (k in a) {
+				if (typeof a[k] == 'object') {
+                    if (!r[k]) r[k] = {};
+					r[k] = na.m.extend(r[k], a[k]);
+				} else {
+					r[k] = a[k];
+				}
+			}
+		}
+		return r;
+    }
+    
+
+    
 };
 
 Date.prototype.getMonthName = function(lang) {

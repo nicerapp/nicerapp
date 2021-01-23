@@ -1,0 +1,1 @@
+The License for this web-app "news" / "newsApp" is located at http://nicer.app/LICENSE.txt

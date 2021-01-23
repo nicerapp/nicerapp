@@ -1,0 +1,14 @@
+.newsApp_header {
+    font-size : 100%;
+    color : white;
+    text-shadow: -1px -1px 1px rgba(255, 255, 255,1), 2px 2px 2px rgba(0,0,0,1);
+}
+
+.newsApp__header__datetime {
+    color : #EEE;
+    font-size : 70%;
+}
+
+.newsApp__header__displayCounts {
+    color : lime;
+}

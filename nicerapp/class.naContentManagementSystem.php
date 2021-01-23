@@ -9,7 +9,7 @@ class nicerAppCMS {
         'version' => '2.0.0',
         'history' => array (
             '1.y.z' => 'Compatible with older browsers',
-            '2.y.z' => 'Compatible with browsers released after 2015'
+            '2.y.z' => 'Compatible with browsers released after 2015, but much more efficient'
         ),
         'created' => 'Sunday, 10 January 2021 11:45 CET',
         'lastModified' => 'Sunday, 22 January 2021 14:14 CET',
@@ -23,6 +23,7 @@ class nicerAppCMS {
     
     public function init () {
         $this->basePath = realpath(dirname(__FILE__).'/..');
+        //echo $this->basePath; die();
         $this->cssTheme = 'dark';
         if (array_key_exists ('siteTheme', $_POST)) $this->cssTheme = $_POST['siteTheme'];
         if (array_key_exists ('siteTheme', $_COOKIE)) $this->cssTheme = $_COOKIE['siteTheme'];
@@ -123,7 +124,13 @@ class nicerAppCMS {
     }
     
     public function getDivSiteContent() {
-        $contentFile = realpath(dirname(__FILE__).'/domainConfigs/'.$this->domain.'/frontpage.siteContent.php');
+        if (array_key_exists('apps', $_GET)) {
+            $app = json_decode (base64_decode_url($_GET['apps']), true);
+            $contentFile = realpath(dirname(__FILE__)).'/apps/'.$app['#siteContent'];
+        } else {    
+            $contentFile = realpath(dirname(__FILE__).'/domainConfigs/'.$this->domain.'/frontpage.siteContent.php');
+        }
+        
         $content = execPHP($contentFile);
         return $content;
     }

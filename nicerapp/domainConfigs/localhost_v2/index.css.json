@@ -1,4 +1,4 @@
 [
-    "nicerapp/3rd-party/jQuery/tooltipster/dist/css/tooltipster.bundle.min.css",
-    "nicerapp/domainConfigs/{$domain}/index.css"
+    "/nicerapp/3rd-party/jQuery/tooltipster/dist/css/tooltipster.bundle.min.css",
+    "/nicerapp/domainConfigs/{$domain}/index.css"
 ]

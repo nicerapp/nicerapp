@@ -1,0 +1,10 @@
+#Stage 0 : initialization of rewrite engine; do not touch without a clue.
+RewriteEngine on
+RewriteBase /
+#site operator must keep these in order:
+# must start and end with /
+
+# redirect www.seductiveapps.com to seductiveapps.com
+RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+

@@ -1,3 +1,13 @@
+a {
+    color : black;
+}
+a:hover {
+    color : green;
+}
+a:visited {
+    color : rgba(0,50,0,1);
+}
+
 .vividDialog {
     scrollbar-color : lime rgba(0,0,0,0.5);
     border : 3px ridge lime;
