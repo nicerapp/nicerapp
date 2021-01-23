@@ -46,7 +46,7 @@ class selfHealer {
         $htdocs = realpath(dirname(__FILE__).'/../../..');
         $dataFile = $htdocs.'/RAM_disk/'.base64_encode($folder).'.txt';
         
-        $xec = 'ls -Rl --full-time "'.$folder.'" | tr -d \'\r\n\' > "'.$dataFile.'"';
+        $xec = 'ls -Rl --full-time "'.$folder.'" | tr -d \'\r\n\' | sed \'/index.combined/d\' > "'.$dataFile.'"';
         exec ($xec, $output, $result);
         $c = join('',$output);
 
@@ -125,8 +125,9 @@ class selfHealer {
             $fileRel = str_replace ($basePath.'/', '', $file);
             clearstatcache();
             //if (strpos($fileRel,'.git')===false) {
+            if (strpos($fileRel,'index.combined')===false) {
                 $r[] = $fileRel.' - '.filectime($file).' - '.filemtime($file);
-            //}
+            }
         }
         return $r;
     }
