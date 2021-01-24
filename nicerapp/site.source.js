@@ -261,53 +261,13 @@ na.m = {
 	},
     
 	waitForCondition : function (label, condition, callback, frequency, context) {
-	// used (for instance) to let a page wait for vividDialogs to be fully initialized before showing the site's components.
-	// see the source of http://nicer.app for a demo
 		var _fncn = 'na.m.waitForCondition(): ';
 		if (typeof label!=='string') { na.m.log ( { error : _fncn+'invalid label' } ); return false;};
 		if (typeof condition!=='function') { na.m.log ( { error : _fncn+'invalid condition' } ); return false; };
 		if (typeof callback!=='function') { na.m.log ( { error : _fncn+'invalid callback' } ); return false; };
 		if (typeof frequency=='undefined' || frequency<50) frequency = 50; 
 		
-        /*
-		if (label.stacktrace === undefined) {
-			try { 
-				var a = {}; 
-				if (a.debug) {
-					a.debug(); 
-				} else {
-					throw new Error("myError");
-				}
-			} catch(ex) { 
-				var stacktrace = (
-					na.m.globals.log.doStackTraces.forAllCode
-					|| na.m.globals.log.doStackTraces.forCodePath[codePath]
-					? (na.m.userDevice.isFirefox ? ex.stack.split('\n') : ex.stack)
-					: '[no stacktrace provided]'
-				)
-			};
-			label.stacktrace = stacktrace;
-		};
-        */
-		
 		var r = condition(context);
-
-		/*
-		var dbgMsg = 
-			_fncn + label + '\n' 
-			+ 'condition : ' +condition+ ' = ' + (r?'true':'false')+ '\n' 
-			+ 'callback : ' + callback; 
-		var dbgData = {
-			startStacktrace : label.stacktrace,
-			label : label,
-			condition : condition,
-			callback : callback,
-			frequency : frequency//,
-			//conditionAsText : '' + condition,
-			//callbackAsText : '' + callback,
-		};
-		//na.m.log (1, dbgData);
-        */
 
 		if (r) {
 		// condition()==true, we're done waiting

@@ -632,11 +632,12 @@ na.apps.loaded.newsApp = {
         na1 = na.apps.loaded.newsApp, g = na1.globals, s = na1.settings, c = s.current, db = c.db,
         urlp = na1.getURLparameters(location.href),
         container = $('#newsApp_content'),
-        getToTry = g.buffer * 4;
+        getToTry = g.buffer * 100;
         
         //$('#siteContent__content').css ({ top : 0 });
         $('#siteContent__header').animate({opacity:1},700);
         $('#newsApp_title').html (urlp[0].replace(/__/g, ' ').replace(/_/g, ' '));
+        $('#newsApp_content .newsApp__item__outer').animate({opacity:1},'normal');
 
         if (s.loaderIcon) {
             $(s.loaderIcon).fadeOut('slow', function() {
@@ -1026,11 +1027,11 @@ na.apps.loaded.newsApp = {
                         
                         if (full) {
                             na1.countDown();
-                        } /*else if (removed && c.tries < getToTry) {
+                        } else if (removed && c.tries < getToTry) {
                             state = 'testing';
                             na1.displayNews_loop(state);
                             return false;
-                        } */else if (removed) {
+                        } else if (removed) {
                             na1.countDown();
                         }
                         
@@ -1148,7 +1149,7 @@ na.apps.loaded.newsApp = {
             
             if (y > max) max = y;
             if (y2 > max2) max2 = y2;
-            if (y > container[0].offsetHeight ) { // - 20 for margin and padding of news item
+            if (y > container[0].offsetHeight - 20 ) { // - 20 for margin and padding of news item
                 var found = false;
                 for (var j=0; j<c.its3.length; j++) {
                     if (c.its3[j].id === it.id) found = true;
@@ -1178,7 +1179,7 @@ na.apps.loaded.newsApp = {
         }
         
         //if (max2 > container.height() - 50) full = true;
-        if (prefix=='' && max > container.height()) full = true;
+        if (prefix=='' && max > container.height()-20) full = true;
         
         return {
             full : full,
