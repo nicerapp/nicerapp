@@ -44,7 +44,7 @@ na.analytics = {
             
             if (!s.jsSessionID) s.jsSessionID = na.analytics.generateSessionID();            
             
-            if (!s.pouchdb[dbName]) s.pouchdb[dbName] = new PouchDB(na.tree.pouchdb.address(dbName,un,pw));
+            if (!s.pouchdb[dbName]) s.pouchdb[dbName] = new PouchDB(na.analytics.pouchdb.address(dbName,un,pw));
             
             var 
             datetime = new Date(),
@@ -114,7 +114,7 @@ na.analytics = {
             
             if (!s.jsSessionID) s.jsSessionID = na.analytics.generateSessionID();            
             
-            if (!s.pouchdb[dbName]) s.pouchdb[dbName] = new PouchDB(na.tree.pouchdb.address(dbName,un,pw));
+            if (!s.pouchdb[dbName]) s.pouchdb[dbName] = new PouchDB(na.analytics.pouchdb.address(dbName,un,pw));
             
             var 
             datetime = new Date(),
