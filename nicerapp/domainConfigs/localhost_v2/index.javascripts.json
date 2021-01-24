@@ -2,6 +2,7 @@
     "/nicerapp/3rd-party/jQuery/jquery-3.5.1.min.js",
     "/nicerapp/3rd-party/jQuery/tooltipster/dist/js/tooltipster.bundle.min.js",
     "/nicerapp/3rd-party/jquery-cookie/jquery.cookie.js",
+    "/nicerapp/3rd-party/pouchdb/node_modules/pouchdb/dist/pouchdb.min.js",
     "/nicerapp/site.source.js",
     "/nicerapp/backgrounds.source.js",
     "/nicerapp/vividComponents/vividComponents.source.js",

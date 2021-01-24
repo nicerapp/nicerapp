@@ -1,6 +1,6 @@
 //$(document).ready(function() { // NEVER AGAIN!!
 
-na.analytics.logMetaEvent ('newsApp : init-stage-0');
+//na.analytics.logMetaEvent ('newsApp : init-stage-0');
 
 na.m.waitForCondition (
 	'na.s.c.settings.loaded',
@@ -63,7 +63,7 @@ na.apps.loaded.newsApp = {
                 },
                 
 				onload : function (settings) {
-                    na.analytics.logMetaEvent ('newsApp : init-stage-2');
+                    //na.analytics.logMetaEvent ('newsApp : init-stage-2');
                     na.m.waitForCondition ('newsApp start', function() {
                         /*
                         var r = (
@@ -84,7 +84,7 @@ na.apps.loaded.newsApp = {
                         loadedIn = s.loadedIn['#siteContent'];
                         //debugger;
                         settings.onHold = true;
-                        na.analytics.logMetaEvent ('newsApp : init-stage-3');
+                        //na.analytics.logMetaEvent ('newsApp : init-stage-3');
                         
                         na.apps.loaded.newsApp.settings.current.db = {};
                         
@@ -103,7 +103,7 @@ na.apps.loaded.newsApp = {
                             );
                             //return true;
                         }, function () {
-                            na.analytics.logMetaEvent ('newsApp : init-stage-4');
+                            //na.analytics.logMetaEvent ('newsApp : init-stage-4');
                             
                             /*
                             var vividTextCmd = {
@@ -137,7 +137,7 @@ na.apps.loaded.newsApp = {
                             document.addEventListener ('keyup', na.apps.loaded.newsApp.onkeyup);
 
                             na.apps.loaded.newsApp.nestedStartApp();
-                            na.analytics.logMetaEvent ('newsApp : init-stage-5');
+                            //na.analytics.logMetaEvent ('newsApp : init-stage-5');
                             
                             settings.onHold = false;
                             //});
@@ -632,7 +632,7 @@ na.apps.loaded.newsApp = {
         na1 = na.apps.loaded.newsApp, g = na1.globals, s = na1.settings, c = s.current, db = c.db,
         urlp = na1.getURLparameters(location.href),
         container = $('#newsApp_content'),
-        getToTry = g.buffer * 100;
+        getToTry = g.buffer * 10;
         
         //$('#siteContent__content').css ({ top : 0 });
         $('#siteContent__header').animate({opacity:1},700);
