@@ -49,14 +49,16 @@ $appParams = array (
                         </td>
                     </tr>
                 </table>
+                
                 <script type="text/javascript">
+                /*
                 var vividTextCmd = {
                         el : jQuery('#newsApp_info')[0],
                         theme : na.cg.themes.saColorgradientSchemeOrangeYellow_netherlands, 
                         animationType : na.vividText.globals.animationTypes[0],
                         animationSpeed : 4 * 1000
                 };
-                na.vividText.initElement (vividTextCmd);	
+                na.vividText.initElement (vividTextCmd);	*/
                 </script>                
                 <div id="newsApp_mainmenu" class="vividMenu" theme="dark" style="position:absolute;width:200px;height:35px;opacity:0.0001;display:none;">
                     <?php echo file_get_contents(dirname(__FILE__).'/mainmenu.php');
