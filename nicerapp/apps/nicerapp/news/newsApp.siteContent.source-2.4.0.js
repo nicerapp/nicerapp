@@ -710,10 +710,10 @@ na.apps.loaded.newsApp = {
             return false;
         } else {
             var dnfi = na1.displayNews_formatItem (it, '');
-            na.m.log (1, {msg:'displayNews_loop(): state='+state, dnfi:dnfi});
+            //na.m.log (1, {msg:'displayNews_loop(): state='+state, dnfi:dnfi});
             if (!dnfi) {
                 var state = 'testing';
-                na.m.log (1, {msg:'displayNews_loop(): state reset ='+state});
+                //na.m.log (1, {msg:'displayNews_loop(): state reset ='+state});
                 na1.displayNews_loop(state);
                 return false;
             };
@@ -721,12 +721,12 @@ na.apps.loaded.newsApp = {
             var 
             states = [ 'testing', 'displaying', 'finished' ];
             if (!state) var state = 'testing';
-            console.log ('NEW: '+state + ' - ' +it.idx);
+            //console.log ('NEW: '+state + ' - ' +it.idx);
             
             function displayNewsItem(state) {
                 if (!na.apps.loaded.newsApp) return false;
                        
-                na.m.log (1, {msg : 'displayNewsItem(state='+state+')'});
+                //na.m.log (1, {msg : 'displayNewsItem(state='+state+')'});
 
                 var 
                 na1 = na.apps.loaded.newsApp, g = na1.globals, s = na1.settings, c = s.current, db = c.db;
@@ -755,7 +755,7 @@ na.apps.loaded.newsApp = {
                     if (!itEl) {
                         return false;
                     }
-                    na.m.log (1, {msg : 'c.resize['+prefix+'newsApp__item__'+it.idx+']', dnfi:dnfi, state:state});
+                    //na.m.log (1, {msg : 'c.resize['+prefix+'newsApp__item__'+it.idx+']', dnfi:dnfi, state:state});
                     if (sp && sp.scrollHeight > 300) {
                         var
                         jel2 = $('.newsApp__item__mediaSingle',itEl);
@@ -842,7 +842,7 @@ na.apps.loaded.newsApp = {
                         return false;
                     };
                     
-                    na.m.log (1, {msg : 'c.timerDisplayNewsItem() : itEl.id='+itEl.id, state:state});
+                    //na.m.log (1, {msg : 'c.timerDisplayNewsItem() : itEl.id='+itEl.id, state:state});
                     
                     $('.feedflare', itEl).remove();
                     
@@ -946,7 +946,7 @@ na.apps.loaded.newsApp = {
                         full = dnf.full,
                         removed = dnf.removed;
                     
-                        na.m.log (1, {msg : 'c.timerCheck() : itEl.id='+itEl.id, dnf:dnf, state:state});
+                        //na.m.log (1, {msg : 'c.timerCheck() : itEl.id='+itEl.id, dnf:dnf, state:state});
                         
                         if (!full && !removed) 
                         c.timerAnimateItemIn = setTimeout (function(itEl, removed, state) {
@@ -954,7 +954,7 @@ na.apps.loaded.newsApp = {
                             na1 = na.apps.loaded.newsApp, g = na1.globals, s = na1.settings, c = s.current, db = c.db;
                             if (!na.apps.loaded.newsApp) return false;
                         
-                            na.m.log (1, {msg : 'c.timerAnimateItemIn() : itEl.id='+itEl.id, removed:removed, state:state, c:c, getToTry:getToTry});
+                            //na.m.log (1, {msg : 'c.timerAnimateItemIn() : itEl.id='+itEl.id, removed:removed, state:state, c:c, getToTry:getToTry});
                     
                             if (!removed && state=='displaying') {
                                 /*if (itEl.parentNode) {
