@@ -405,3 +405,8 @@ Date.prototype.dst = function() {
 	return (this.getTimezoneOffset() < this.stdTimezoneOffset());
 };	
 
+window.onerror = function (msg, url, lineno, colno, error) {
+    alert (msg+'\n'+url+'\n'+lineno+' - '+colno+'\n'+error);
+};
+    
+}
