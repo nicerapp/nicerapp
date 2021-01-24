@@ -409,4 +409,3 @@ window.onerror = function (msg, url, lineno, colno, error) {
     alert (msg+'\n'+url+'\n'+lineno+' - '+colno+'\n'+error);
 };
     
-}
