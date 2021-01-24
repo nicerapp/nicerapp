@@ -20,7 +20,7 @@ na.analytics = {
                 +(typeof password=='string' && password!=='' ? password : na.a.settings.password)+'@'
                 +na.m.globals.couchdb.domain
                 +':'+na.m.globals.couchdb.port
-                +'/'+na.m.serverHostName()+'___'+databaseName;
+                +'/'+na.settings.serverHostName+'___'+databaseName;
             return r;
         },
         
