@@ -280,7 +280,7 @@ function t2_draw_cards ($readingID, $explanationID) {
 		$explanationID = 'blessedtarot';
 		
 		$file = dirname(__FILE__).'/explanations/'.$explanationID.'/'.$cardIndex[$cn]['explanation'].'.html';
-		//var_dump ($file); die();
+		var_dump ($file); die();
 		if (!file_exists($file)) $file = dirname(__FILE__).'/explanations/'.$explanationID.'/'.$cardIndex[$cn]['explanation'].'.html';
 		$e = file_get_contents($file);
 		$reading['cards'][$cardNo]['explanation'] = $e;
