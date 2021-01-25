@@ -1,0 +1,314 @@
+[
+	{
+		"cardName" : "The Fool",
+		"explanation" : "00"
+	},
+	{
+		"cardName" : "The Magician",
+		"explanation" : "01"
+	},
+	{
+		"cardName" : "The Priestess",
+		"explanation" : "02"
+	},
+	{
+		"cardName" : "The Empress",
+		"explanation" : "03"
+	},
+	{
+		"cardName" : "The Emperor",
+		"explanation" : "04"
+	},
+	{
+		"cardName" : "The Hierophant",
+		"explanation" : "05"
+	},
+	{
+		"cardName" : "The Lovers",
+		"explanation" : "06"
+	},
+	{
+		"cardName" : "The Chariot",
+		"explanation" : "07"
+	},
+	{
+		"cardName" : "Strength",
+		"explanation" : "08"
+	},
+	{
+		"cardName" : "The Hermit",
+		"explanation" : "09"
+	},
+	{
+		"cardName" : "Wheel of Fortune",
+		"explanation" : "10"
+	},
+	{
+		"cardName" : "Justice",
+		"explanation" : "11"
+	},
+	{
+		"cardName" : "The Hanged Man",
+		"explanation" : "12"
+	},
+	{
+		"cardName" : "Death",
+		"explanation" : "13"
+	},
+	{
+		"cardName" : "Temperance",
+		"explanation" : "14"
+	},
+	{
+		"cardName" : "The Devil",
+		"explanation" : "15"
+	},
+	{
+		"cardName" : "The Tower",
+		"explanation" : "16"
+	},
+	{
+		"cardName" : "The Star",
+		"explanation" : "17"
+	},
+	{
+		"cardName" : "The Moon",
+		"explanation" : "18"
+	},
+	{
+		"cardName" : "The Sun",
+		"explanation" : "19"
+	},
+	{
+		"cardName" : "Judgement",
+		"explanation" : "20"
+	},
+	{
+		"cardName" : "The World",
+		"explanation" : "21"
+	},
+	{
+		"cardName" : "Ace of Wands",
+		"explanation" : "22"
+	},
+	{
+		"cardName" : "Two of Wands",
+		"explanation" : "23"
+	},
+	{
+		"cardName" : "Three of Wands",
+		"explanation" : "24"
+	},
+	{
+		"cardName" : "Four of Wands",
+		"explanation" : "25"
+	},
+	{
+		"cardName" : "Five of Wands",
+		"explanation" : "26"
+	},
+	{
+		"cardName" : "Six of Wands",
+		"explanation" : "27"
+	},
+	{
+		"cardName" : "Seven of Wands",
+		"explanation" : "28"
+	},
+	{
+		"cardName" : "Eight of Wands",
+		"explanation" : "29"
+	},
+	{
+		"cardName" : "Nine of Wands",
+		"explanation" : "30"
+	},
+	{
+		"cardName" : "Ten of Wands",
+		"explanation" : "31"
+	},
+	{
+		"cardName" : "Page of Wands",
+		"explanation" : "32"
+	},
+	{
+		"cardName" : "Knight of Wands",
+		"explanation" : "33"
+	},
+	{
+		"cardName" : "Queen of Wands",
+		"explanation" : "34"
+	},
+	{
+		"cardName" : "King of Wands",
+		"explanation" : "35"
+	},
+	{
+		"cardName" : "Ace of Cups",
+		"explanation" : "36"
+	},
+	{
+		"cardName" : "Two of Cups",
+		"explanation" : "37"
+	},
+	{
+		"cardName" : "Three of Cups",
+		"explanation" : "38"
+	},
+	{
+		"cardName" : "Four of Cups",
+		"explanation" : "39"
+	},
+	{
+		"cardName" : "Five of Cups",
+		"explanation" : "40"
+	},
+	{
+		"cardName" : "Six of Cups",
+		"explanation" : "41"
+	},
+	{
+		"cardName" : "Seven of Cups",
+		"explanation" : "42"
+	},
+	{
+		"cardName" : "Eight of Cups",
+		"explanation" : "43"
+	},
+	{
+		"cardName" : "Nine of Cups",
+		"explanation" : "44"
+	},
+	{
+		"cardName" : "Ten of Cups",
+		"explanation" : "45"
+	},
+	{
+		"cardName" : "Page of Cups",
+		"explanation" : "46"
+	},
+	{
+		"cardName" : "Knight of Cups",
+		"explanation" : "47"
+	},
+	{
+		"cardName" : "Queen of Cups",
+		"explanation" : "48"
+	},
+	{
+		"cardName" : "King of Cups",
+		"explanation" : "49"
+	},
+	{
+		"cardName" : "Ace of Swords",
+		"explanation" : "50"
+	},
+	{
+		"cardName" : "Two of Swords",
+		"explanation" : "51"
+	},
+	{
+		"cardName" : "Three of Swords",
+		"explanation" : "52"
+	},
+	{
+		"cardName" : "Four of Swords",
+		"explanation" : "53"
+	},
+	{
+		"cardName" : "Five of Swords",
+		"explanation" : "54"
+	},
+	{
+		"cardName" : "Six of Swords",
+		"explanation" : "55"
+	},
+	{
+		"cardName" : "Seven of Swords",
+		"explanation" : "56"
+	},
+	{
+		"cardName" : "Eight of Swords",
+		"explanation" : "57"
+	},
+	{
+		"cardName" : "Nine of Swords",
+		"explanation" : "58"
+	},
+	{
+		"cardName" : "Ten of Swords",
+		"explanation" : "59"
+	},
+	{
+		"cardName" : "Page of Swords",
+		"explanation" : "60"
+	},
+	{
+		"cardName" : "Knight of Swords",
+		"explanation" : "61"
+	},
+	{
+		"cardName" : "Queen of Swords",
+		"explanation" : "62"
+	},
+	{
+		"cardName" : "King of Swords",
+		"explanation" : "63"
+	},
+	{
+		"cardName" : "Ace of Pentacles",
+		"explanation" : "64"
+	},
+	{
+		"cardName" : "Two of Pentacles",
+		"explanation" : "65"
+	},
+	{
+		"cardName" : "Three of Pentacles",
+		"explanation" : "66"
+	},
+	{
+		"cardName" : "Four of Pentacles",
+		"explanation" : "67"
+	},
+	{
+		"cardName" : "Five of Pentacles",
+		"explanation" : "68"
+	},
+	{
+		"cardName" : "Six of Pentacles",
+		"explanation" : "69"
+	},
+	{
+		"cardName" : "Seven of Pentacles",
+		"explanation" : "70"
+	},
+	{
+		"cardName" : "Eight of Pentacles",
+		"explanation" : "71"
+	},
+	{
+		"cardName" : "Nine of Pentacles",
+		"explanation" : "72"
+	},
+	{
+		"cardName" : "Ten of Pentacles",
+		"explanation" : "73"
+	},
+	{
+		"cardName" : "Page of Pentacles",
+		"explanation" : "74"
+	},
+	{
+		"cardName" : "Knight of Pentacles",
+		"explanation" : "75"
+	},
+	{
+		"cardName" : "Queen of Pentacles",
+		"explanation" : "76"
+	},
+	{
+		"cardName" : "King of Pentacles",
+		"explanation" : "77"
+	}
+]	

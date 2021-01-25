@@ -1,0 +1,42 @@
+{
+	"database" : {
+		"dbName" : "Brian's Art Gallery"
+	},
+	"commands" : {
+		"insertOrUpdateRaw" : {
+			"permissions" : {
+				"d" : {
+					"bids" : {
+						"d" : {
+							"read" : {
+								"d" : {
+									"groups" : { "d" : { "Administrators":true } }
+								}
+							},
+							"add" : {
+								"d" : {
+									"groups" : { "d" : { "Guests":true } }
+								}
+							}
+						}
+					}
+				}
+			},
+			"data" : {
+				"d" : {
+					"works" : {
+						"d" : {
+							"work1" : {
+								"d" : {
+									"minPrice" : { "d" : 150 },
+									"currentPrice" : { "d" : 150 },
+									"bids" : { "m" : { "objectPermissions" : { "d" : "bids" } }, "d" : [] }
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

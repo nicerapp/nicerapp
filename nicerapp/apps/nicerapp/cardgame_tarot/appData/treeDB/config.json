@@ -1,0 +1,15 @@
+{
+	"search" : {
+		"rootPath" : "SA_SITE_HD/apps/dev/appData/treeDB/",
+		"dbName" : "tools",
+		"defaultUsername" : "Guest",
+		"application.init.json" : [
+			"../../../../../siteData/treeDB/inits/nicerapp.json",
+			"inits/tools.json"
+		],
+		"application.init.php" : [
+			"../../../../../siteData/treeDB/inits/nicerapp.php",
+			"inits/tools.php"
+		]
+	}
+}

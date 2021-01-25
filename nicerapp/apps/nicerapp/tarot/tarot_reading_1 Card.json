@@ -1,0 +1,16 @@
+{
+	"readingName" : "1 Card",
+	"heading" : "<h2>Reading : 1 Card</h2><p>A single Tarot card to bring your attention to something</p>",
+	"theme" : {
+		"cardWidth" : 150,
+		"cardHeight" : 300
+	},
+	"cards" : [
+		{
+			"title" : "Your card",
+			"top" : 0,
+			"left" : 0,
+			"right" : 0
+		}
+	]
+}

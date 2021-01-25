@@ -1,0 +1,59 @@
+{
+	"readingName" : "Ladder",
+	"heading" : "<h2>Reading : Ladder</h2><p>The 'Ladder' reading is a structured piece of advice to the questioner. It shows you how to proceed from an issue indicated by card 1 to the intermediate goal indicated by card 7.</p><p>Cards 2 through 6 indicate usually the easiest path toward the intermediate goal of card 7.</p><ul><li>Card 1 is turned first, and indicates an important issue or problem or choice facing the questioner.</li><li>Card 7 is turned second, and indicates what the reader has to do or grow towards to overcome what's indicated by card 1.</li><li>Cards 2 to 6 are the advice cards that can help you reach the goal indicated by card 7. They are to be taken sequentially, so see if you can improve yourself with the tip of card 2 first, then card 3, etc.</li></ul>",
+	"theme" : {
+		"cardWidth" : 60,
+		"cardHeight" : 120
+	},
+	"cards" : [
+		{
+			"title" : 1,
+			"top" : 180,
+			"left" : 0,
+			"right" : 420,
+			"readingSpotExplanation" : "Card 1 is turned first, and indicates an important issue or problem or choice facing the questioner."
+		},
+		{
+			"title" : 2,
+			"top" : 150,
+			"left" : 70,
+			"right" : 350,
+			"readingSpotExplanation" : "Cards 2 to 6 are the advice cards that can help you reach the goal indicated by card 7. They are to be taken sequentially, so see if you can improve yourself with the tip of card 2 first, then card 3, etc."
+		},
+		{
+			"title" : 3,
+			"top" : 120,
+			"left" : 140,
+			"right" : 280, 
+			"readingSpotExplanation" : "Cards 2 to 6 are the advice cards that can help you reach the goal indicated by card 7. They are to be taken sequentially, so see if you can improve yourself with the tip of card 2 first, then card 3, etc."
+		},
+		{
+			"title" : 4,
+			"top" : 90,
+			"left" : 210,
+			"right" : 210,
+			"readingSpotExplanation" : "Cards 2 to 6 are the advice cards that can help you reach the goal indicated by card 7. They are to be taken sequentially, so see if you can improve yourself with the tip of card 2 first, then card 3, etc."
+		},
+		{
+			"title" : 5,
+			"top" : 60,
+			"left" : 280,
+			"right" : 140,
+			"readingSpotExplanation" : "Cards 2 to 6 are the advice cards that can help you reach the goal indicated by card 7. They are to be taken sequentially, so see if you can improve yourself with the tip of card 2 first, then card 3, etc."
+		},
+		{
+			"title" : 6,
+			"top" : 30,
+			"left" : 350,
+			"right" : 70,
+			"readingSpotExplanation" : "Cards 2 to 6 are the advice cards that can help you reach the goal indicated by card 7. They are to be taken sequentially, so see if you can improve yourself with the tip of card 2 first, then card 3, etc."
+		},
+		{
+			"title" : 7,
+			"top" : 0,
+			"left" : 420,
+			"right" : 0,
+			"readingSpotExplanation" : "Card 7 is turned second, and indicates what the reader has to do or grow towards to overcome what's indicated by card 1."
+		}
+	]
+}

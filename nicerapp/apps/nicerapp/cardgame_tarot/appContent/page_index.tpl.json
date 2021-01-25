@@ -1,0 +1,8 @@
+{  
+   "saObjectType":"saPageSettings",
+   "divs":{  
+     "#siteAds":{  
+		  "content":"{$SA_SITE_HD}/nicerapp/apps/nicerapp/cardgame_tarot/appContent/tarotSite/content/ads/default.html"
+	   }
+   }
+}

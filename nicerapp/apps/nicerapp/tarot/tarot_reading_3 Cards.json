@@ -1,0 +1,28 @@
+{
+	"readingName" : "3 Cards",
+	"heading" : "<h2>Reading : 3 Cards</h2><p>This is a simple reading to shed light on where you've been, where you are, and where you're heading.</p>",
+	"theme" : {
+		"cardWidth" : 70,
+		"cardHeight" : 120
+	},
+	"cards" : [
+		{
+			"title" : "Past",
+			"top" : 0,
+			"left" : 0,
+			"right" : 175
+		},
+		{
+			"title" : "Present",
+			"top" : 0,
+			"left" : 75,
+			"right" : 100
+		},
+		{
+			"title" : "Future",
+			"top" : 0,
+			"left" : 160,
+			"right" : 25
+		}
+	]
+}

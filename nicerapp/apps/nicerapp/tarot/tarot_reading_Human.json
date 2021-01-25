@@ -1,0 +1,45 @@
+{
+	"readingName" : "Human",
+	"heading" : "<h2>Reading : Human</h2><p>The 'Human' reading is designed for a single person, and tell the questioner something about what is important for him/her at the moment the cards are drawn. This reading can often also indicate a good course through difficult terrain.</p><p>This reading is valid for about 1 month, and should probably not be drawn more than once a month.</p>",
+	"theme" : {
+		"cardWidth" : 150,
+		"cardHeight" : 300
+	},
+	"cards" : [
+		{
+			"title" : 1,
+			"top" : 10,
+			"left" : 170,
+			"right" : 170,
+			"readingSpotExplanation" : "Card 1 (the head) indicates what has been keeping you busy for a while now and have been possibly talking to other people about."
+		},
+		{
+			"title" : 2,
+			"top" : 95,
+			"left" : 10,
+			"right" : 330,
+			"readingSpotExplanation" : "Card 2 (left arm, over the heart) shows what you feel on the inside but is not obvious to people around you yet."
+		},
+		{
+			"title" : 3,
+			"top" : 420,
+			"left" : 85,
+			"right" : 260,
+			"readingSpotExplanation" : "Card 3 (left leg, resting leg) shows you your past, what you can leave behind."
+		},
+		{
+			"title" : 4,
+			"top" : 420,
+			"left" : 170,
+			"right" : 95,
+			"readingSpotExplanation" : "Card 4 (right leg, walking leg) is often an advisory card, and shows you where you can best go next."
+		},
+		{
+			"title" : 5,
+			"top" : 95,
+			"left" : 330,
+			"right" : 10,
+			"readingSpotExplanation" : "Card 5 (right arm, active arm) shows you how you are likely to approach the issue indicated by card 1, if you weren't advised otherwise by anyone or anything."
+		}
+	]
+}

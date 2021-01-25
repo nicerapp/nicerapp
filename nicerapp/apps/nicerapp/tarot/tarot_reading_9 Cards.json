@@ -1,0 +1,73 @@
+{
+	"readingName" : "9 Cards",
+	"heading" : "<h2>Reading : 9 Cards</h2><p>The '9 Cards' reading tells the questioner something about his past, present and future, in more detail than a '3 Cards' reading.</p><p>The cards in this reading are turned 3 at a time, from left to right, starting with cards 1-3 which are then interpreted, then 4-6, and finally 7-9.</p>",
+	"theme" : {
+		"cardWidth" : 100,
+		"cardHeight" : 200
+	},
+	"cards" : [
+		{
+			"title" : 1,
+			"top" : 460,
+			"left" : 0,
+			"right" : 440,
+			"readingSpotExplanation" : "Cards 1 through 3 indicate the past."
+		},
+		{
+			"title" : 2,
+			"top" : 460,
+			"left" : 110,
+			"right" : 330,
+			"readingSpotExplanation" : "Cards 1 through 3 indicate the past."
+		},
+		{
+			"title" : 3,
+			"top" : 460,
+			"left" : 220,
+			"right" : 220, 
+			"readingSpotExplanation" : "Cards 1 through 3 indicate the past."
+		},
+		{
+			"title" : 4,
+			"top" : 230,
+			"left" : 110,
+			"right" : 330,
+			"readingSpotExplanation" : "Cards 4 through 6 indicate the present."
+		},
+		{
+			"title" : 5,
+			"top" : 230,
+			"left" : 220,
+			"right" : 220,
+			"readingSpotExplanation" : "Cards 4 through 6 indicate the present."
+		},
+		{
+			"title" : 6,
+			"top" : 230,
+			"left" : 330,
+			"right" : 110,
+			"readingSpotExplanation" : "Cards 4 through 6 indicate the present."
+		},
+		{
+			"title" : 7,
+			"top" : 0,
+			"left" : 220,
+			"right" : 220,
+			"readingSpotExplanation" : "Cards 7 through 9 indicate the future."
+		},
+		{
+			"title" : 8,
+			"top" : 0,
+			"left" : 330,
+			"right" : 110,
+			"readingSpotExplanation" : "Cards 7 through 9 indicate the future."
+		},
+		{
+			"title" : 9,
+			"top" : 0,
+			"left" : 440,
+			"right" : 0,
+			"readingSpotExplanation" : "Cards 7 through 9 indicate the future."
+		}
+	]
+}

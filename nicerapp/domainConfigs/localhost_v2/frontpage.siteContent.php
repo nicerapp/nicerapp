@@ -14,8 +14,13 @@
         ),
         'analytics' => array (
             'analytics' => array()
-        )
-        
+        ),
+        'tarot' => array (
+            'tarot' => array (
+                'reading' => '3-Cards',
+                'deck' => 'Original-Rider-Waite'
+            )
+        )        
     );
     $json = array();
     $urls = array();
@@ -26,11 +31,14 @@
 ?>
     <h2>Available Apps</h2>
     
+    <h3>News</h3>
     <ul>
         <li><a href="<?php echo $urls['newsHeadlines_englishNews'];?>">English News</a></li>
         <li><a href="<?php echo $urls['newsHeadlines_englishNews_worldHeadlines'];?>">English News : World Headlines only</a></li>
     </ul>
     <br/>
+    
+    <a href="<?php echo $urls['tarot'];?>"><h3>Tarot</h3></a>
     <!--
     
     <p>

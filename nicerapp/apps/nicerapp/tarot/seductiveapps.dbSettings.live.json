@@ -1,0 +1,17 @@
+{
+	"fwaServiceLog" : {
+		"DB_SERVER_TYPE":"mysql",
+		"DB_SERVER":"fwaservicelogr.db.8082269.hostedresource.com",
+		"DB_USERNAME":"fwaservicelogr",
+		"DB_PASSWORD":"slK4Hj0981#j0s",
+		"DB_DBNAME":"fwaservicelogr",
+		"DB_TABLENAME":"fwaServiceLog"
+	},
+	"fwaGeoCity" : {
+		"DB_SERVER_TYPE":"mysql",
+		"DB_SERVER":"fwageocity.db.8082269.hostedresource.com",
+		"DB_USERNAME":"fwageocity",
+		"DB_PASSWORD":"cmDKe95j@j1j#",
+		"DB_DBNAME":"fwageocity"
+	}
+}

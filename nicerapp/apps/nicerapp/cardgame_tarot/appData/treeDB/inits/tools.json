@@ -1,0 +1,12 @@
+{
+	"database" : {},
+	"commands" : {
+		"insertOrUpdateRaw" : {
+			"apps" : {
+				"dev" : {
+					"settings" : {}
+				}
+			}
+		}
+	}
+}

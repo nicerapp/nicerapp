@@ -1,0 +1,59 @@
+{
+	"readingName" : "Relationship",
+	"heading" : "<h2>Reading : Relationship</h2><p>The Relationship reading is one in which the relationship between the questioner and one other person or party is examined.</p>",
+	"theme" : {
+		"cardWidth" : 100,
+		"cardHeight" : 200
+	},
+	"cards" : [
+		{
+			"title" : 1,
+			"top" : 0,
+			"left" : 0,
+			"right" : 220,
+			"readingSpotExplanation" : "Card 1 points towards what keeps the questioner busy."
+		},
+		{
+			"title" : 2,
+			"top" : 0,
+			"left" : 220,
+			"right" : 0,
+			"readingSpotExplanation" : "Card 2 points towards what the partner is kept busy by."
+		},
+		{
+			"title" : 3,
+			"top" : 230,
+			"left" : 0,
+			"right" : 220,
+			"readingSpotExplanation" : "Card 3 tells what the questioner has to learn."
+		},
+		{
+			"title" : 4,
+			"top" : 230,
+			"left" : 220,
+			"right" : 0,
+			"readingSpotExplanation" : "Card 4 tells what the partner should learn."
+		},
+		{
+			"title" : 5,
+			"top" : 460,
+			"left" : 0,
+			"right" : 220,
+			"readingSpotExplanation" : "Card 5 explains how the questioner could improve the relationship."
+		},
+		{
+			"title" : 6,
+			"top" : 460,
+			"left" : 220,
+			"right" : 0,
+			"readingSpotExplanation" : ""
+		},
+		{
+			"title" : 7,
+			"top" : 510,
+			"left" : 110,
+			"right" : 110,
+			"readingSpotExplanation" : "Card 7 shows the future prospects for the relationship."
+		}
+	]
+}

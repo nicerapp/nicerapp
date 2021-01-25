@@ -1,0 +1,52 @@
+{
+	"readingName" : "Rainbow",
+	"heading" : "<h2>Reading : Rainbow</h2><p>The Rainbow reading can say something about what the questioner really wants, how to get there and what to expect along the way there.</p><p>This reading does not have an expiry date, but is best drawn only once per 2 or 3 months. Drawing it more often may result in the same message from the cards.</p><p>You do not need to ask a question before drawing this reading.</p>",
+	"theme" : {
+		"cardWidth" : 100,
+		"cardHeight" : 200
+	},
+	"cards" : [
+		{
+			"title" : 1,
+			"top" : 330,
+			"left" : 0,
+			"right" : 320,
+			"readingSpotExplanation" : "Card 1 describes your desires."
+		},
+		{
+			"title" : 2,
+			"top" : 100,
+			"left" : 50,
+			"right" : 270,
+			"readingSpotExplanation" : "Card 2 describes what the force behind your desires is."
+		},
+		{
+			"title" : 3,
+			"top" : 0,
+			"left" : 160,
+			"right" : 160,
+			"readingSpotExplanation" : "Card 3 describes what the most difficult obstacle is along your way to fulfillment of your desires."
+		},
+		{
+			"title" : 4,
+			"top" : 100,
+			"left" : 270,
+			"right" : 50,
+			"readingSpotExplanation" : "Card 4 describes what you have to let go of to fulfill your desire."
+		},
+		{
+			"title" : 5,
+			"top" : 330,
+			"left" : 320,
+			"right" : 0,
+			"readingSpotExplanation" : "Card 5 describes how you are acting at the moment in relation to your desire."
+		},
+		{
+			"title" : 6,
+			"top" : 230,
+			"left" : 160,
+			"right" : 160,
+			"readingSpotExplanation" : "Card 6 describes how you could best achieve your desire."
+		}
+	]
+}

@@ -187,7 +187,7 @@ function getLocationbarInfo ($queryString=null) {
 
 function getAppSettings ($appName) {
 	//echo '<pre>getAppSettings():$appName:'."\r\n"; var_dump ($appName); echo '</pre>'; die();
-	
+	$saFrameworkHD = realpath(dirname(__FILE__).'/..');
 	$appSettings = array();
 	switch ($appName) {
 		case 'jsonViewer':

@@ -1,0 +1,25 @@
+{
+	"fwaServiceLog" : {
+		"DB_SERVER_TYPE":"mysql",
+		"DB_SERVER":"localhost",
+		"DB_USERNAME":"root",
+		"DB_PASSWORD":"lkn3@$%j6402J@;",
+		"DB_DBNAME":"fwaservicelog",
+		"DB_TABLENAME":"fwaServiceLog"
+	},
+	"fwaGeoCity" : {
+		"DB_SERVER_TYPE":"mysql",
+		"DB_SERVER":"localhost",
+		"DB_USERNAME":"root",
+		"DB_PASSWORD":"lkn3@$%j6402J@;",
+		"DB_DBNAME":"fwageocity"
+	},
+	"fwaServiceLog_godaddy_live" : {
+		"DB_SERVER_TYPE":"mysql",
+		"DB_SERVER":"fwaservicelogr.db.8082269.hostedresource.com",
+		"DB_USERNAME":"fwaservicelogr",
+		"DB_PASSWORD":"slK4Hj0981#j0s",
+		"DB_DBNAME":"fwaservicelogr",
+		"DB_TABLENAME":"fwaservicelog"
+	}
+}

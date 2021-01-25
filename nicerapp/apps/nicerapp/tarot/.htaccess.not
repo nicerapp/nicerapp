@@ -1,0 +1,34 @@
+<Files .htaccess>
+order deny,allow
+deny from all
+</Files>
+<Files .gitignore>
+order deny,allow
+deny from all
+</Files>
+<Files seductiveapps.dbSettings.*>
+order deny,allow
+deny from all
+</Files>
+<Files saAuthentication.settings.json>
+order deny,allow
+deny from all
+</Files>
+<Files saComments_subscription_all.json.*>
+order deny,allow
+deny from all
+</Files>
+
+
+#initialization of rewrite engine; do not touch without a clue.
+RewriteEngine on
+#RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} !-f
+
+#site operator must keep these in order:
+RewriteBase /
+    # must start with /
+    # must end with /
+
+RewriteRule ^deck\/(.*)\/reading\/(.*)\/$ index.php?deck=$1&reading=$2 [L]
+RewriteRule ^deck\/(.*)\/reading\/(.*)\/majors$ index.php?deck=$1&reading=$2&majors=true [L]
+

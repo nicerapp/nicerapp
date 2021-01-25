@@ -1,0 +1,72 @@
+{
+	"readingName" : "Celtic Cross",
+	"heading" : "<h2>Reading : Celtic Cross</h2><p>The Celtic Cross is an old and traditional reading; in nearly every tarot description it is found, with usually slightly different interpretations.</p><p>The Celtic Cross responds to a question that the reader has, subconciously or conciously. They often address the deepest cause and elements of a situation facing the reader.</p>",
+	"theme" : {
+		"cardWidth" : 100,
+		"cardHeight" : 200
+	},
+	"cards" : [ 
+		{
+			"title" : 1,
+			"top" : 230,
+			"left" : 110,
+			"right" : 320,
+			"readingSpotExplanation" : "Card 1 and 2 describe the question or problem facing the reader, either indicating 2 sides of an issue, or very clearly indicating one thing with 2 similar or related cards."
+		},{
+			"title" : 2,
+			"top" : 230,
+			"left" : 210,
+			"right" : 220,
+			"readingSpotExplanation" : "Card 1 and 2 describe the question or problem facing the reader, either indicating 2 sides of an issue, or very clearly indicating one thing with 2 similar or related cards."
+		},{
+			"title" : 3,
+			"top" : 0,
+			"left" : 160,
+			"right" : 270,
+			"readingSpotExplanation" : "Card 3 describes what you want, and how you want it."
+		},{
+			"title" : 4,
+			"top" : 460,
+			"left" : 160,
+			"right" : 270,
+			"readingSpotExplanation" : "Card 4 describes what you are thinking and which questions you're asking yourself."
+		},{
+			"title" : 5,
+			"top" : 230,
+			"left" : 0,
+			"right" : 430,
+			"readingSpotExplanation" : "Card 5 describes the circumstances of your recent past."
+		},{
+			"title" : 6,
+			"top" : 230,
+			"left" : 320,
+			"right" : 110,
+			"readingSpotExplanation" : "Card 6 describes de circumstances of your near future."
+		},{
+			"title" : 7,
+			"top" : 700,
+			"left" : 430,
+			"right" : 0,
+			"readingSpotExplanation" : "Card 7 describes what your fears are."
+		},{
+			"title" : 8,
+			"top" : 470,
+			"left" : 430,
+			"right" : 0,
+			"readingSpotExplanation" : "Card 8 describes what the influence of your environment is concerning the issue indicated by cards 1 and 2. It may indicate whether or not people are willing to help you."
+		},{
+			"title" : 9,
+			"top" : 230,
+			"left" : 430,
+			"right" : 0,
+			"readingSpotExplanation" : "Card 9 describes what you are hoping for, what your desires are."
+		},{
+			"title" : 10,
+			"top" : 0,
+			"left" : 430,
+			"right" : 0,
+			"readingSpotExplanation" : "Card 10 is the advice card, indicating what you have to do to solve the issue described by cards 1 and 2."
+		}
+	]
+}
+

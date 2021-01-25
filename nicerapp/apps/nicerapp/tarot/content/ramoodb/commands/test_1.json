@@ -1,0 +1,33 @@
+{
+	"database" : {
+		"dbName" : "tarotWithSpirits"
+	},
+	"commands" : {
+		"groupAdd" : [
+			{
+				"Editors" : {
+					"permissions" : {
+						"addGroups" : false,
+						"removeGroups" : false,
+						"editGroups" : {
+							"groups" : [ "Administrators", "Viewers", "Editors" ]
+						},
+						
+					}
+				}
+			}
+		],
+		"dataInsertOrUpdate" : [
+			{
+				"data" : {
+					"works" : {
+						"work2" : {
+							"minPrice" : 150,
+							"currentPrice" : 150
+						}
+					}
+				}
+			}
+		]
+	}
+}
