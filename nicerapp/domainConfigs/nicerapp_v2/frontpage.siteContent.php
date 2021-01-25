@@ -3,12 +3,14 @@
     global $cms;
     $apps = array(
         'newsHeadlines_englishNews' => array(
-            '#siteContent' => 'nicerapp/news/newsApp.siteContent.php?section=English%20News',
-            'news' => array ('section' => 'English_News')
+            //'#siteContent' => 'nicerapp/news/newsApp.siteContent.php?section=English%20News',
+            //'news' => array ('section' => 'English_News')
+            'news' => 'English_News'
         ),
         'newsHeadlines_englishNews_worldHeadlines' => array(
-            '#siteContent' => 'nicerapp/news/newsApp.siteContent.php?section=English%20News%20World%20Headlines',
-            'news' => array ('section' => 'English_News__World_Headlines')
+            //'#siteContent' => 'nicerapp/news/newsApp.siteContent.php?section=English%20News%20World%20Headlines',
+            //'news' => array ('section' => 'English_News__World_Headlines')
+            'news' => 'English_News__World_Headlines'
         )
     );
     $json = array();

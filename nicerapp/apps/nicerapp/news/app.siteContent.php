@@ -17,11 +17,11 @@ $appParams = array (
 	global $saUpstreamRootURL; global $locationbarInfo;
 	global $saUIdefaults;
 
-    $pageTitle = str_replace('__', '&nbsp;', $appParams['apps']['news']['section']);
+    $pageTitle = str_replace('__', '&nbsp;', $appParams['apps']['news']);
     $pageTitle = str_replace('_', '&nbsp;', $pageTitle);
 ?>
         <link type="text/css" rel="StyleSheet" media="screen" href="/nicerapp/apps/nicerapp/news/index.css?changed=<?php echo date('Ymd-His', filectime(dirname(__FILE__).'/index.css'));?>"/>
-        <script type="text/javascript" src="/nicerapp/apps/nicerapp/news/newsApp.siteContent.source-2.4.0.js?changed=<?php echo date('Ymd-His', filectime(dirname(__FILE__).'/newsApp.siteContent.source-2.4.0.js'));?>"></script>
+        <script type="text/javascript" src="/nicerapp/apps/nicerapp/news/app.siteContent.source-2.4.0.js?changed=<?php echo date('Ymd-His', filectime(dirname(__FILE__).'/app.siteContent.source-2.4.0.js'));?>"></script>
         <style>
         </style>
 
