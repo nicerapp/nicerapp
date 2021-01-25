@@ -8,5 +8,5 @@
     "/nicerapp/vividComponents/vividComponents.source.js",
     "/nicerapp/vividComponents/vividButton.source.js",
     "/nicerapp/vividComponents/vividMenu.source.js",
-    "/nicerapp/analytics/analytics.source.js"
+    "/nicerapp/apps/nicerapp/analytics/app.source.js"
 ]

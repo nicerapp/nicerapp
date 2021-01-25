@@ -3,7 +3,7 @@
 ?>
 <li><a class="menu__dontKeepSelected" href="/">Apps &amp; Games</a>
 <ul>
-    <li><a class="menu__dontKeepSelected" href="/" alt="Frontpage">Front page</a></li>
+    <li><a href="/" alt="Frontpage">Front page</a></li>
     <li><a href="/apps/eyJuZXdzIjoiRW5nbGlzaF9OZXdzIn0" alt="News headlines">News</a></li>
 </ul>
 </li>

@@ -11,7 +11,11 @@
             //'#siteContent' => 'nicerapp/news/newsApp.siteContent.php?section=English%20News%20World%20Headlines',
             //'news' => array ('section' => 'English_News__World_Headlines')
             'news' => 'English_News__World_Headlines'
+        ),
+        'analytics' => array (
+            'analytics' => array()
         )
+        
     );
     $json = array();
     $urls = array();
@@ -26,6 +30,8 @@
         <li><a href="<?php echo $urls['newsHeadlines_englishNews'];?>">English News</a></li>
         <li><a href="<?php echo $urls['newsHeadlines_englishNews_worldHeadlines'];?>">English News : World Headlines only</a></li>
     </ul>
+    <br/>
+    <a href="<?php echo $urls['analytics'];?>">Analytics</a><br/>
     
     <!--
     <p>

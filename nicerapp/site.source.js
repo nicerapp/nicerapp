@@ -406,6 +406,6 @@ Date.prototype.dst = function() {
 };	
 
 window.onerror = function (msg, url, lineno, colno, error) {
-    alert (msg+'\n'+url+'\n'+lineno+' - '+colno+'\n'+error);
+    console.log (msg+'\n'+url+'\n'+lineno+' - '+colno+'\n'+error);
 };
     

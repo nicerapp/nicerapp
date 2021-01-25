@@ -6,7 +6,7 @@ $fc = file_get_contents(dirname(__FILE__).'/.htaccess.build.part1.txt');
 $fc .= "\n\r"."\n\r";
 
 $lineEnding = ' [R,L]';
-
+/*
 $url = '^music$';
 $json = '{"musicPlayer":{"set":"index"}}';
 $line = 'RewriteRule '.$url.' /apps/'.base64_encode_url($json).$lineEnding;
@@ -31,10 +31,10 @@ $url = '^tarot$';
 $json = '{"tarot":{"deck":"Original-Rider-Waite","reading":"3-Cards"}}';
 $line = 'RewriteRule '.$url.' /apps/'.base64_encode_url($json).$lineEnding;
 $fc .= $line."\n\r";
-
+*/
 $url = '^news$';
 //$json = '{"news":{"section":"English_News"}}';
-$json = '{"#siteContent":"nicerapp/news/newsApp.siteContent.php?section=English%20News"}';
+$json = '{"news":"English_News"}';
 $line = 'RewriteRule '.$url.' /apps/'.base64_encode_url($json).$lineEnding;
 $fc .= $line."\n\r";
 
