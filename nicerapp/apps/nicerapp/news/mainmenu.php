@@ -1,4 +1,3 @@
-<ul style="display:none;">
 	<li><a href="#">News</a>
 	<ul>
 		<li><a href="/apps/eyJuZXdzIjp7InNlY3Rpb24iOiJEZXV0c2NoZV9uYWNocmljaHRlbiJ9fQ">Deutsche nachrichten</a>
@@ -78,4 +77,3 @@
 			<li><a href="/apps/eyJuZXdzIjp7InNlY3Rpb24iOiJBcmFiaWNfX0J1c2luZXNzIn19">Business</a></li>
 	</ul>
 </li>
-</ul>

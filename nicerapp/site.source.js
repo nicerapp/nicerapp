@@ -122,6 +122,14 @@ var nas = na.site = {
             },
             success : function (data, ts, xhr) {
                 jQuery('#siteMenu').html(data);
+                
+                var 
+                mlp = '<li class="contentMenu"><a href="-contentMenu-">-contentMenu-</a></li>',
+                contentMenu = $('#app_mainmenu')[0] ? $('#app_mainmenu')[0].innerHTML : '',
+                menu = $('#siteMenu')[0].innerHTML,
+                p1 = menu.indexOf(mlp);
+                $('#siteMenu')[0].innerHTML = menu.substr(0,p1) + contentMenu + menu.substr(p1+mlp.length);
+                
                 nas.s.menus['#siteMenu'] = new naVividMenu($('#siteMenu')[0]);
             },
             failure : function (xhr, ajaxOptions, thrownError) {

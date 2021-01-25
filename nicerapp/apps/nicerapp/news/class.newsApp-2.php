@@ -358,7 +358,8 @@ class newsApp2_class {
         }
 		
         if ($ctMenuFile < $ctRSSlist) {
-            $htmlMenu = '<ul style="display:none;">'.PHP_EOL."\t".'<li><a href="#">News</a>'.PHP_EOL."\t".'<ul>'.PHP_EOL;
+            //$htmlMenu = '<ul style="display:none;">'.PHP_EOL."\t".'<li><a href="#">News</a>'.PHP_EOL."\t".'<ul>'.PHP_EOL;
+            $htmlMenu = '<li><a href="#">News</a>'.PHP_EOL;
             $keyCount = 0;
             $valueCount = 0;
             $params = array (
@@ -405,7 +406,7 @@ class newsApp2_class {
             
         
         //var_dump ($cd['v']); die();
-        $json = '{"news":{"section":"'.$path2a.'"}}';
+        $json = '{"news":"'.$path2a.'"}';
         $href = '/apps/'.base64_encode_url($json);
         $cd['params']['html'] .= $indent.'<li><a href="'.$href.'">'.$cd['k'].'</a>';
         $cd['params']['keyCount'] = $cd['params']['keyCount'] + 1;
