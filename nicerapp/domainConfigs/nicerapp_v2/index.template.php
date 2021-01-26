@@ -9,7 +9,6 @@
 {$cssThemeFiles}
 {$javascriptFiles}
 <script type="text/javascript">
-<?php echo dirname(__FILE__)?>
 na.m.globals = {
     couchdb : <?php echo file_get_contents(dirname(__FILE__).'/couchdb.json');?> ,
     referer : '<?php echo $_SERVER['HTTP_REFERER'];?>',
