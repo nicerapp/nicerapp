@@ -1,0 +1,90 @@
+body {
+	font-family : Georgia;
+	padding:0px;
+	margin:0px;
+}
+
+.saComment {
+	color : white;
+	padding : 5px;
+}
+
+.saComment_from {
+	color : cyan;
+	font-weight : bold;
+}
+
+.saComment_when {
+	color : yellow;
+	font-size : 10px;
+}
+
+.saComment_remove {
+	background : url(siteImages/remove_40.png) no-repeat;
+	background-size : 100% 100%;
+}
+
+#playlist { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+#playlist li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
+#playlist li div { position: absolute; margin-left: -1.3em; }
+
+#infoWindow_help, #infoWindow_tools, #infoWindow_info {
+	font-family : "Tahoma", "Geneva";
+	font-size : 13px;
+	color : white;
+	font-weight : bold;
+}	
+
+#infoWindow_comments td {
+	color : white;
+}
+
+.vividTheme__lava_001 td {
+	color : lime;
+	font-family : "Lucida Sans Unicode", "Lucida Grande";
+	font-size : 10px;
+}
+
+.vividTheme__lava_002 td {
+	color : lime;
+	font-family : "Lucida Sans Unicode", "Lucida Grande";
+	font-size : 12px;
+	font-weight: bold;
+}
+
+#infoWindow_mp3desc {
+	vertical-align: top;
+	font-family : "Tahoma", "Geneva";
+	font-size : 12px;
+	font-weight : bold;
+	color : white;
+}
+
+
+#infoWindow_mp3desc td {
+	vertical-align: top;
+	font-family : "Tahoma", "Geneva";
+	font-size : 12px;
+	font-weight : bold;
+	color : white;
+}
+
+#playlist_wrapper td {
+	color : white;
+	font-family : "Tahoma", "Geneva";
+	font-size : 12px;
+}
+
+a {
+	color : yellow;
+	font-weight : bold;
+}
+a:visited {
+	color : lime;
+	font-weight : bold;
+}
+
+
+.mp3_info_label {
+	color : lime;
+}

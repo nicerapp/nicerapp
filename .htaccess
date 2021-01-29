@@ -10,11 +10,21 @@ RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
 
 
 
-RewriteRule ^news$ /apps/eyJuZXdzIjoiRW5nbGlzaF9OZXdzIn0 [R,L]
+
+RewriteRule ^music$ /apps/eyJtdXNpYyI6eyJzZXQiOiJpbmRleCJ9fQ [R,L]
+
+RewriteRule ^music__chill$ /apps/eyJtdXNpYyI6eyJzZXQiOiJCZWF1dGlmdWxfQ2hpbGxfTWl4ZXMifX0 [R,L]
+
+RewriteRule ^music__deep_house$ /apps/eyJtdXNpYyI6eyJzZXQiOiJEZWVwX0hvdXNlIn19 [R,L]
+
+RewriteRule ^music__dj_firesnake$ /apps/eyJtdXNpYyI6eyJzZXQiOiJESl9GaXJlU25ha2UifX0 [R,L]
+
+RewriteRule ^tarot$ /apps/eyJ0YXJvdCI6eyJkZWNrIjoiT3JpZ2luYWwtUmlkZXItV2FpdGUiLCJyZWFkaW5nIjoiMy1DYXJkcyJ9fQ [R,L]
+
+RewriteRule ^news$ /apps/eyJuZXdzIjoiRW5nbGlzaF9OZXdzIn0 [R,L]
 
 
-
-
+RewriteCond %{REQUEST_URI} !^/nicerapp/apps/nicerapp/music/.*$
 RewriteRule ^apps/(.*)$ index.php?apps=$1 [L]
 
 

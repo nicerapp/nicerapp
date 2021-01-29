@@ -20,7 +20,12 @@
                 'reading' => '3-Cards',
                 'deck' => 'Original-Rider-Waite'
             )
-        )        
+        ),
+        'music' => array (
+            'music' => array (
+                'set' => 'index'
+            )
+        )
     );
     $json = array();
     $urls = array();
@@ -38,7 +43,11 @@
     </ul>
     <br/>
     
-    <a href="<?php echo $urls['tarot'];?>"><h3>Tarot</h3></a>
+    <a href="<?php echo $urls['tarot'];?>"><h3>Tarot</h3></a><br/>
+    <br/>
+    
+    <a href="<?php echo $urls['music'];?>"><h3>Music</h3></a>
+
     <!--
     
     <p>

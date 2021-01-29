@@ -179,7 +179,7 @@ function getLocationbarInfo ($queryString=null) {
         
     global $naLocationBarInfo;
     $naLocationBarInfo = $ret;
-    $ret = array_merge_recursive ($ret, getAppSettings ($appName)); //getAppSettings is in .../nicerapp/apps/functions.php
+    //$ret = array_merge_recursive ($ret, getAppSettings ($appName)); //getAppSettings is in .../nicerapp/apps/functions.php
     $naLocationBarInfo = $ret;
     //echo '<pre>getLocationbarInfo():$ret:'."\r\n"; var_dump ($ret); echo '</pre>'; die();
     return $ret;

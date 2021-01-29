@@ -112,7 +112,7 @@ class nicerAppCMS {
             case 'css': $lineSrc = "\t".'<link type="text/css" rel="StyleSheet" href="{$src}?c={$changed}">'."\r\n"; break;
             case 'js': $lineSrc = "\t".'<script type="text/javascript" src="{$src}?c={$changed}"></script>'."\r\n"; break;
         };
-        $lines = '';
+        $lines = '';    
         foreach ($files as $idx => $file) {
             $file = str_replace ('{$domain}', $this->domain, $file);
             $url = str_replace ($this->basePath,'',$file);
@@ -126,6 +126,7 @@ class nicerAppCMS {
     public function getDivSiteContent() {
         if (array_key_exists('apps', $_GET)) {
             $app = json_decode (base64_decode_url($_GET['apps']), true);
+            //var_dump ($app); 
             $files = getFilePathList (realpath(dirname(__FILE__)).'/apps', true, '/app.site.*.php/', array('file'));
             //echo '<pre>'; var_dump ($files); die();
             foreach ($files as $idx => $file) {
