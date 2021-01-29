@@ -500,7 +500,7 @@ var mp3site = {
                 dragged.style.height = '30px';
                 $(dragged).attr('file', original.attr('file'));
                 dragged.file = original.attr('file');
-                dragged.onclick = 'debugger;'+original[0].onclick.toString().replace (new RegExp(oldID), dragged.id);
+                $(dragged).attr('onclick','debugger;'+original[0].onclick.toString().replace('function onclick(event) {', '').replace('\n}','').replace (new RegExp(oldID), dragged.id));
                 
                 pl.append(dragged);
 
