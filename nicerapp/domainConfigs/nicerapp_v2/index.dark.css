@@ -58,12 +58,15 @@ a:visited {
 }
 
 .vividDialog {
-    scrollbar-color : lime rgba(0,0,0,0.5);
+}
+.vividDialog[theme="dark"] {
     border : 3px ridge lime;
     background : rgba(0,0,0,0.5);
     color : white;
     box-shadow : 7px 7px 5px rgba(0,0,0,0.7), inset -2px -2px 2px rgba(0,0,0,0.8), inset 2px 2px 2px rgba(0,0,0,0.8);
+    border-radius : 15px;
 }
+
 .vividDialogContent::-webkit-scrollbar {
   width: 1rem;
 }
@@ -149,4 +152,30 @@ a:visited {
     background-image: -webkit-linear-gradient(bottom, rgba(0,0,50,0.4) 25%, rgba(40,40,80,0.8) 81%);
     background-image: -ms-linear-gradient(bottom, rgba(0,0,50,0.4) 25%, rgba(40,40,80,0.8) 81%);
     background-image: linear-gradient(bottom, rgba(0,0,50,0.4) 25%, rgba(40,40,80,0.8) 81%);
+}
+.vividButton.selected[theme="dark"]::before {
+    content: "";
+    position: absolute;
+    pointer-events: all;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;   
+    background-image: -o-linear-gradient(bottom, rgba(0,0,0,0.4) 25%, rgba(40,255,40,0.8) 81%);
+    background-image: -moz-linear-gradient(bottom, rgba(0,0,0,0.4) 25%, rgba(40,255,40,0.8) 81%);
+    background-image: -webkit-linear-gradient(bottom, rgba(0,0,0,0.4) 25%, rgba(40,255,40,0.8) 81%);
+    background-image: -ms-linear-gradient(bottom, rgba(0,0,0,0.4) 25%, rgba(40,255,40,0.8) 81%);
+    background-image: linear-gradient(bottom, rgba(0,0,0,0.4) 25%, rgba(40,255,40,0.8) 81%);
+    border-radius : 20px;
+    z-index: -1;
+    transition: opacity 0.5s linear;
+    opacity: 0;
+}    
+.vividButton.selected[theme="dark"]:hover::before {
+    opacity: 1;
+    background-image: -o-linear-gradient(bottom, rgba(0,100,0,0.4) 25%, rgba(40,255,40,0.8) 81%);
+    background-image: -moz-linear-gradient(bottom, rgba(0,100,0,0.4)  25%, rgba(40,255,40,0.8) 81%);
+    background-image: -webkit-linear-gradient(bottom, rgba(0,100,0,0.4) 25%, rgba(40,255,40,0.8) 81%);
+    background-image: -ms-linear-gradient(bottom, rgba(0,100,0,0.4) 25%, rgba(40,255,40,0.8) 81%);
+    background-image: linear-gradient(bottom, rgba(0,100,0,0.4) 25%, rgba(40,255,40,0.8) 81%);
 }

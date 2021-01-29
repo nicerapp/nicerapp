@@ -10,7 +10,7 @@
 {$javascriptFiles}
 <script type="text/javascript">
 na.m.globals = {
-    couchdb : <?php echo file_get_contents(dirname(__FILE__).'/couchdb.json');?> ,
+    couchdb : <?php echo file_get_contents(dirname(__FILE__).'/couchdb.json');?>,
     referer : '<?php echo $_SERVER['HTTP_REFERER'];?>',
     myip : '<?php echo str_replace('.','_',(array_key_exists('X-Forwarded-For',apache_request_headers())?apache_request_headers()['X-Forwarded-For'] : $_SERVER['REMOTE_ADDR']))?>',
     domain : '<?php echo $cms->domain?>'
@@ -25,13 +25,13 @@ na.settings = { serverHostName : '<?php echo str_replace('.','_',(array_key_exis
         <img class="bg_first" alt=""/>
         <img class="bg_last" alt=""/>
     </div>
-    <div id="siteContent" class="vividDialog">
+    <div id="siteContent" class="vividDialog" theme="{$theme}">
     <div class="vividDialogContent">
 {$div_siteContent}    
     </div>
     </div>
     
-    <div id="siteDateTime" class="vividDialog"></div>
+    <div id="siteDateTime" class="vividDialog" theme="{$theme}"></div>
     
     <img id="btnThemeSwitch" src="/nicerapp/siteMedia/btnThemeSwitch_icon.png" class="tooltip" title="Switch between light and dark theme" alt="Switch between light and dark theme" tooltipTheme="mainTooltipTheme" onclick="nas.themeSwitch()"/>
     <form id="siteSettings" action="/" method="POST" style="display:none;">
