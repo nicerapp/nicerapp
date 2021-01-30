@@ -1,11 +1,11 @@
 <?php 
 namespace Foo;
-require_once realpath(dirname(__FILE__).'/../../../').'/nicerapp/lib/geoLite2/vendor/autoload.php';
+require_once realpath(dirname(__FILE__).'/../../../').'/nicerapp/3rd-party/geoLite2/vendor/autoload.php';
 use GeoIp2\Database\Reader;
 
 if (!array_key_exists('geoIP',$_SESSION)) $_SESSION['geoIP'] = array();
 if (!array_key_exists($_GET['IP'],$_SESSION['geoIP'])) {
-    $reader = new Reader(realpath(dirname(__FILE__).'/../../../').'/nicerapp/lib/geoLite2/GeoLite2-City.mmdb');
+    $reader = new Reader(realpath(dirname(__FILE__).'/../../../').'/nicerapp/3rd-party/geoLite2/GeoLite2-City.mmdb');
     $record = $reader->city($_GET['IP']);
     $_SESSION['geoIP'][$_GET['IP']] = $record;        
 };
