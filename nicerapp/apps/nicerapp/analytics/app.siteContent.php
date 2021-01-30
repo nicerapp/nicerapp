@@ -1,3 +1,3 @@
 <script type="text/javascript">
-    na.analytics.view.prepare(jQuery('#siteContent')[0]);
+    na.analytics.view.prepare(jQuery('#siteContent .vividDialogContent')[0]);
 </script>
