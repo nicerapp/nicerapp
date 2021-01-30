@@ -480,7 +480,7 @@ na.analytics = {
         dateStr = x.toLocaleString('nl-NL',{timeZone:'CET'}) + '.' + x.getMilliseconds(),
         html = '<div class="datetimeLocal" style="position:absolute;top:'+evt.layerY+'px;left:'+evt.layerX+'px;background:rgba(0,0,0,0.8);border:3px ridge white;border-radius:5px;">'+dateStr+'</div>';
         
-        jQuery('#siteContent').prepend(html);
+        jQuery('#siteContent .vividDialogContent').prepend(html);
     },
     
     
@@ -498,7 +498,7 @@ na.analytics = {
                 var 
                 evt = na.analytics.settings.evt,
                 html = '<div class="geoIP" style="position:absolute;top:'+evt.layerY+'px;left:'+evt.layerX+'px;background:rgba(0,0,0,0.8);border:3px ridge white;border-radius:5px;z-index:1200;">'+data+'</div>';
-                jQuery('#siteContent').append(html);
+                jQuery('#siteContent .vividDialogContent').append(html);
                 //debugger;
             }
         };
