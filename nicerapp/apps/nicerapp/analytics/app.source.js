@@ -497,7 +497,7 @@ na.analytics = {
             success : function (data, ts) {
                 var 
                 evt = na.analytics.settings.evt,
-                html = '<div class="geoIP" style="position:absolute;top:'+evt.layerY+'px;left:'+evt.layerX+'px;background:rgba(0,0,0,0.8);border:3px ridge white;border-radius:5px;">'+data+'</div>';
+                html = '<div class="geoIP" style="position:absolute;top:'+evt.layerY+'px;left:'+evt.layerX+'px;background:rgba(0,0,0,0.8);border:3px ridge white;border-radius:5px;z-index:1200;">'+data+'</div>';
                 jQuery('#siteContent').append(html);
                 //debugger;
             }
