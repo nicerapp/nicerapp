@@ -340,7 +340,7 @@ na.analytics = {
                 for (var date in s.dbSummary.byDate) {
                     var d = s.dbSummary.byDate[date];
                     
-                    html1 += '<tr style="cursor:zoom-in;background:rgba(0,0,50,0.3)" onclick="javascript:na.analytics.view.fillDateDetails(jQuery(\'#siteContent\')[0], \''+date+'\');">'
+                    html1 += '<tr style="cursor:zoom-in;background:rgba(0,0,50,0.3)" onclick="javascript:na.analytics.view.fillDateDetails(jQuery(\'#siteContent .vividDialogContent\')[0], \''+date+'\');">'
                             + '<td style="text-align:center;">'+date+'</td>'
                             + '<td style="text-align:center;">'+d.success+'</td>'
                             + '<td style="text-align:center;">'+d.fail+'</td>'
