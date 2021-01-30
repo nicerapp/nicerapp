@@ -58,6 +58,10 @@ var nas = na.site = {
         
         na.analytics.logMetaEvent ('startup : html and js fully loaded, browserWidth='+$(window).width()+', browserHeight='+$(window).height()+', referer='+na.m.globals.referer+', userAgent='+navigator.userAgent);
         
+        setInterval (function() {
+            na.analytics.logMetaEvent ('keep-alive');
+        }, 5000);
+        
     },
 
     updateDateTime : function() {
