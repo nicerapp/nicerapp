@@ -13,9 +13,8 @@ na.m.globals = {
     couchdb : <?php echo file_get_contents(dirname(__FILE__).'/couchdb.json');?>,
     referer : '<?php echo $_SERVER['HTTP_REFERER'];?>',
     myip : '<?php echo str_replace('.','_',(array_key_exists('X-Forwarded-For',apache_request_headers())?apache_request_headers()['X-Forwarded-For'] : $_SERVER['REMOTE_ADDR']))?>',
-    domain : '<?php echo $cms->domain?>'
+    domain : '{$domain}'
 };
-na.settings = { serverHostName : '<?php echo str_replace('.','_',(array_key_exists('X-Forwarded-For',apache_request_headers())?apache_request_headers()['X-Forwarded-For'] : $_SERVER['HTTP_HOST']))?>' };
 </script>
 
     <title>nicer.app web apps framework</title>
