@@ -358,8 +358,8 @@ class newsApp2_class {
         }
 		
         if ($ctMenuFile < $ctRSSlist) {
-            $htmlMenu = '<ul style="display:none;">'.PHP_EOL."\t".'<li><a href="#">News</a>'.PHP_EOL."\t".'<ul>'.PHP_EOL;
-            //$htmlMenu = '<li><a href="#">News</a>'.PHP_EOL;
+            //$htmlMenu = '<ul style="display:none;">'.PHP_EOL."\t".'<li><a href="#">News</a>'.PHP_EOL."\t".'<ul>'.PHP_EOL;
+            $htmlMenu = '<li><a href="#">News</a><ul>'.PHP_EOL;
             $keyCount = 0;
             $valueCount = 0;
             $params = array (
