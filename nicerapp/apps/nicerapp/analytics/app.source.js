@@ -293,7 +293,7 @@ na.analytics = {
                             };
                         };
                         
-                        if (d.msg.match(/afterDesktopResize/)) {
+                        if (d.msg.match(/startup : html and js fully loaded/)) {
                             //if (d.jsSessionID==='LDFYxv3Y3YHevxKy0P0txla07b9vdm') debugger;
                             s.dbSummary.byDate[date].sessions[d.jsSessionID].afterDesktopResize = true;
                             s.dbSummary.byDate[date].success++;
