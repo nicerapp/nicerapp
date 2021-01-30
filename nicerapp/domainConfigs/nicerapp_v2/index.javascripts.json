@@ -1,12 +1,22 @@
 [
     "/nicerapp/3rd-party/jQuery/jquery-3.5.1.min.js",
     "/nicerapp/3rd-party/jQuery/tooltipster/dist/js/tooltipster.bundle.min.js",
-    "/nicerapp/3rd-party/jquery-cookie/jquery.cookie.js",
+    "/nicerapp/3rd-party/jQuery/cookie/jquery.cookie.js",
     "/nicerapp/3rd-party/pouchdb/node_modules/pouchdb/dist/pouchdb.min.js",
+    "/nicerapp/3rd-party/createjs.min.js",
+    "/nicerapp/3rd-party/EaselJS-1.0.0/easeljs.min.js",
+    "/nicerapp/jsEngineeringMath/index.source.js",
+    "/nicerapp/jsEngineeringMath/math_basics.source.js",
+    "/nicerapp/jsEngineeringMath/physics_waves.source.js",
+    "/nicerapp/jsEngineeringMath/math_2D.source.js",
+    "/nicerapp/jsEngineeringMath/math_3D.source.js",
     "/nicerapp/site.source.js",
     "/nicerapp/backgrounds.source.js",
     "/nicerapp/vividComponents/vividComponents.source.js",
     "/nicerapp/vividComponents/vividButton.source.js",
     "/nicerapp/vividComponents/vividMenu.source.js",
+    "/nicerapp/vividComponents/saColorGradients-1.0.0.source.js",
+    "/nicerapp/vividComponents/vividText-1.1.0.source.js",
+    "/nicerapp/canvasLogo-2.1.0.source.js",
     "/nicerapp/apps/nicerapp/analytics/app.source.js"
 ]
