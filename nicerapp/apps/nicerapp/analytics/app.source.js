@@ -349,10 +349,6 @@ na.analytics = {
                 html1 += '</table><br/><br/><br/><br/><br/><br/>';
                 
                 jQuery(rootElement).html (html1);
-                setTimeout (function() {
-                    //na.analytics.hookEvents_forTable (rootElement);
-                    na.sp.containerSizeChanged (jQuery('#siteContent__scrollpane')[0], true);
-                }, 200);
             },
             200);
         },
@@ -392,7 +388,7 @@ na.analytics = {
                             +'<td class="resolution" style="text-align:center;">'+session.resolution+'</td>'                            
                         +'</tr>';
                 };
-                html1 += '</table><a href="javascript:na.analytics.view.fillDates(jQuery(\'#siteContent\')[0]);">Back</a><br/><br/><br/><br/><br/>';
+                html1 += '</table><a href="javascript:na.analytics.view.fillDates(jQuery(\'#siteContent .vividDialogContent\')[0]);">Back</a><br/><br/><br/><br/><br/>';
                 
                 jQuery(rootElement).html (html1);
                 setTimeout (function() {
@@ -455,15 +451,10 @@ na.analytics = {
                     }
                 };
                 html1 += '</table>';
-                html1 += '<a href="javascript:na.analytics.view.fillDateDetails(jQuery(\'#siteContent\')[0], \''+date+'\');">Back</a><br/><br/>';
+                html1 += '<a href="javascript:na.analytics.view.fillDateDetails(jQuery(\'#siteContent .vividDialogContent\')[0], \''+date+'\');">Back</a><br/><br/>';
 //                 html1 += '<br/><br/><br/><br/><br/>';
                 
                 jQuery(rootElement).html (html1);
-                
-                setTimeout (function() {
-                    //na.analytics.hookEvents_forTable (rootElement);
-                    na.sp.containerSizeChanged (jQuery('#siteContent__scrollpane')[0], true);
-                }, 200);
             },
             200);
         }
@@ -502,7 +493,7 @@ na.analytics = {
             IP : IP
         },
         ajaxCmd = {
-            url : na.m.globals.urls.app + '/nicerapp/businessLogic/analytics/geoIP.html.php',
+            url : '/nicerapp/apps/analytics/geoIP.html.php',
             type : 'GET',
             data : dataToServer,
             async : true,
@@ -510,14 +501,11 @@ na.analytics = {
                 var 
                 evt = na.analytics.settings.evt,
                 html = '<div class="geoIP" style="position:absolute;top:'+evt.layerY+'px;left:'+evt.layerX+'px;background:rgba(0,0,0,0.8);border:3px ridge white;border-radius:5px;">'+data+'</div>';
-                jQuery('#siteContent').append(html);
+                jQuery('#siteContent .vividDialogContent').append(html);
                 //debugger;
             }
         };
         na.analytics.settings.evt = evt;
         jQuery.ajax (ajaxCmd);
-
     }
-    
-    
-}
+};

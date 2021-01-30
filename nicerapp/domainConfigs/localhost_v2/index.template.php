@@ -32,7 +32,7 @@ na.m.globals = {
         <img class="bg_last" alt=""/>
     </div>
     <div id="siteContent" class="vividDialog" theme="{$theme}">
-    <div class="vividDialogContent">
+    <div class="vividDialogContent vividScrollpane">
 {$div_siteContent}    
     </div>
     </div>
