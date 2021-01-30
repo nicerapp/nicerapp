@@ -1,4 +1,4 @@
-var na = {};
+var nicerapp = na = {};
 var nas = na.site = {
     about : {
         firstCreated : '10 January 2021 13:15 CET',
