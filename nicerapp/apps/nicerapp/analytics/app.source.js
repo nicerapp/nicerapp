@@ -254,7 +254,7 @@ na.analytics = {
             ) dbName='analytics_self';
             */
             
-            if (!s.pouchdb[dbName]) s.pouchdb[dbName] = new PouchDB(na.tree.pouchdb.address(dbName,un,pw));
+            if (!s.pouchdb[dbName]) s.pouchdb[dbName] = new PouchDB(na.analytics.pouchdb.address(dbName,un,pw));
             
             if (!s.db) {
                 s.db = {};
