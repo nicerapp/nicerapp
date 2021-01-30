@@ -423,9 +423,9 @@ na.analytics = {
                     if (!entryDoc) {
                         html1 += 
                             '<tr style="background:rgba(0,0,50,0.4);">'
-                                +'<td style="text-align:center;" class="ip" onmouseover="na.analytics.geoIP(event,\''+d.ip+'\');" onmouseout="jQuery(\'.geoIP\').remove();">'+d.ip+'</td>'
+                                +'<td style="text-align:center;" class="ip" onmouseover="na.analytics.geoIP(event,\''+d.ip+'\');" onmouseout="setTimeout(function(){jQuery(\'.geoIP\').remove();},1000);">'+d.ip+'</td>'
                                 +'<td style="text-align:center;overflow-wrap:break-word;">'+d.msg+'</td>'
-                                +'<td style="text-align:center;" class="datetime" onmouseover="na.analytics.datetimeConvertToOwnersTimezone(event,'+d.tzOffset+','+d.datetime+');" onmouseout="jQuery(\'.datetimeLocal\').remove();">'+d.datetimeStr+'</td>'
+                                +'<td style="text-align:center;" class="datetime" onmouseover="na.analytics.datetimeConvertToOwnersTimezone(event,'+d.tzOffset+','+d.datetime+');" onmouseout="setTimeout(function(){jQuery(\'.datetimeLocal\').remove();},1000);">'+d.datetimeStr+'</td>'
                                 +'<td style="text-align:center;" class="tzOffset">'+d.tzOffset+'</td>'
                                 +'<td style="text-align:center;">0</td>'
                                 +'<td style="text-align:center;">'+d.htmlID+'</td>'
@@ -435,9 +435,9 @@ na.analytics = {
                     } else {
                         html1 += 
                             '<tr style="background:rgba(0,0,50,0.4);">'
-                                +'<td style="text-align:center;" class="ip" onmouseover="na.analytics.geoIP(event,\''+d.ip+'\');" onmouseout="jQuery(\'.geoIP\').remove();">'+d.ip+'</td>'
+                                +'<td style="text-align:center;" class="ip" onmouseover="na.analytics.geoIP(event,\''+d.ip+'\');" onmouseout="setTimeout(function(){jQuery(\'.geoIP\').remove();},1000);">'+d.ip+'</td>'
                                 +'<td style="text-align:center;overflow-wrap:break-word;">'+d.msg+'</td>'
-                                +'<td style="text-align:center;" class="datetime" onmouseover="na.analytics.datetimeConvertToOwnersTimezone(event,'+d.tzOffset+','+d.datetime+');" onmouseout="jQuery(\'.datetimeLocal\').remove();">'+d.datetimeStr+'</td>'
+                                +'<td style="text-align:center;" class="datetime" onmouseover="na.analytics.datetimeConvertToOwnersTimezone(event,'+d.tzOffset+','+d.datetime+');" onmouseout="setTimeout(function(){jQuery(\'.datetimeLocal\').remove();},1000);">'+d.datetimeStr+'</td>'
                                 +'<td style="text-align:center;" class="tzOffset">'+d.tzOffset+'</td>'
                                 +'<td style="text-align:center;">'+na.analytics.t2str(entryDateTime.getTime()-startDateTime.getTime())+'</td>'
                                 +'<td style="text-align:center;">'+d.htmlID+'</td>'
