@@ -375,7 +375,7 @@ na.analytics = {
                     totalTimeOnSite = na.analytics.t2str (totalTimeOnSite);
 
                     html1 += 
-                        '<tr onclick="javascript:na.analytics.view.fillDate(jQuery(\'#siteContent\')[0], \''+jsSessionID+'\', \''+date+'\');" '
+                        '<tr onclick="javascript:na.analytics.view.fillDate(jQuery(\'#siteContent .vividDialogContent\')[0], \''+jsSessionID+'\', \''+date+'\');" '
                         +(session.afterDesktopResize
                             ?'class="dateDetails succesful" style="cursor:zoom-in;background:rgba(0,255,0,0.5);color:white;"'
                             :'class="dateDetails failed" style="cursor:zoom-in;background:rgba(255,0,0,0.5);color:yellow;"'
@@ -391,9 +391,6 @@ na.analytics = {
                 html1 += '</table><a href="javascript:na.analytics.view.fillDates(jQuery(\'#siteContent .vividDialogContent\')[0]);">Back</a><br/><br/><br/><br/><br/>';
                 
                 jQuery(rootElement).html (html1);
-                setTimeout (function() {
-                    na.sp.containerSizeChanged (jQuery('#siteContent__scrollpane')[0], true);
-                }, 200);
             },
             200);
         },
@@ -407,7 +404,7 @@ na.analytics = {
                 s = na.analytics.settings;
                 html1 = '';
                 
-                html1 += '<a href="javascript:na.analytics.view.fillDates(jQuery(\'#siteContent\')[0]);">Back</a><br/><br/>';
+                html1 += '<a href="javascript:na.analytics.view.fillDates(jQuery(\'#siteContent .vividDialogContent\')[0]);">Back</a><br/><br/>';
                 html1 += '<table cellpadding="5" border="0" style=""><tr style="background:rgba(0,50,0,0.5);"><th>IP</th><th>message</th><th>date time</th><th>tzOffset</th><th>time difference (milliseconds)</th><th>HTML</th><th>event type</th></tr>';
                 var docs = s.db[jsSessionID];
                 var startDateTime = null;
