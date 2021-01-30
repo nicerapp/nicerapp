@@ -29,7 +29,7 @@ img.bg_last {
     overflow : auto;
     display : block;
     margin : 10px;
-    width : calc(100vw - 100px);
+    width : calc(98vw - 15px);
     height: calc(100vh - 120px);
     z-index : 1100; 
 }

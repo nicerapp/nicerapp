@@ -490,7 +490,7 @@ na.analytics = {
             IP : IP
         },
         ajaxCmd = {
-            url : '/nicerapp/apps/analytics/geoIP.html.php',
+            url : '/nicerapp/apps/nicerapp/analytics/geoIP.html.php',
             type : 'GET',
             data : dataToServer,
             async : true,
