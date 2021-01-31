@@ -44,7 +44,7 @@ img.bg_last {
     font-size : 1rem;
     z-index : 1000;
 }
-.vividButton {
+.vividButton, .vividButtonSelected {
     display : flex;
     justify-content : center;
     align-items : center;
@@ -54,7 +54,7 @@ img.bg_last {
     font-size : 1rem;
     font-weight : bold;
 }
-.vividButton.level1 {
+.vividButton.level1, .vividButtonSelected.level1 {
     margin-top : 5px;
 }
 
