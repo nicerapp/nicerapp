@@ -33,7 +33,9 @@ img.bg_last {
     height: calc(100vh - 120px);
     z-index : 1100; 
 }
-
+.vividDialogContent table {
+    z-index : 1101;
+}
 
 .vividButton, .vividMenu, .vividDialog {
     position : absolute;
