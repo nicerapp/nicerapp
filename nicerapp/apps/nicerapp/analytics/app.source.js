@@ -393,11 +393,17 @@ na.analytics = {
                 jQuery(rootElement).html (html1);
                 setTimeout (function() {
                     $('.ip').hover(function(evt) {
-                        na.analytics.geoIP(evt.originalEvent,$(this).html());
+                        clearTimeout (na.analytics.settings.ipHoverTimeout);
+                        na.analytics.settings.ipHoverTimeout = setTimeout(function(){
+                            na.analytics.geoIP(evt.originalEvent,$(this).html());
+                        },250);
                     }, function(evt) {
-                        $('.geoIP').remove();
+                        clearTimeout (na.analytics.settings.ipHoverTimeout);
+                        na.analytics.settings.ipHoverTimeout = setTimeout(function() {
+                            $('.geoIP').remove();
+                        },250);
                     });
-                }, 500);
+                }, 100);
             },
             200);
         },
@@ -461,12 +467,17 @@ na.analytics = {
                 jQuery(rootElement).html (html1);
                 setTimeout (function() {
                     $('.ip').hover(function(evt) {
-                        //debugger;
-                        na.analytics.geoIP(evt.originalEvent,$(this).html());
+                        clearTimeout (na.analytics.settings.ipHoverTimeout);
+                        na.analytics.settings.ipHoverTimeout = setTimeout(function(){
+                            na.analytics.geoIP(evt.originalEvent,$(this).html());
+                        },250);
                     }, function(evt) {
-                        $('.geoIP').remove();
+                        clearTimeout (na.analytics.settings.ipHoverTimeout);
+                        na.analytics.settings.ipHoverTimeout = setTimeout(function() {
+                            $('.geoIP').remove();
+                        },250);
                     });
-                }, 500);
+                }, 100);
             },
             200);
         }
