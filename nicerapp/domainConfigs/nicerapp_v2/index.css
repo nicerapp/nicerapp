@@ -37,6 +37,7 @@ img.bg_last {
     z-index : 1101;
 }
 
+
 .vividButton, .vividMenu, .vividDialog {
     position : absolute;
     display : flex;
