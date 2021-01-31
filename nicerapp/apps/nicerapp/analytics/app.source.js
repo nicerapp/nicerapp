@@ -393,7 +393,7 @@ na.analytics = {
                 jQuery(rootElement).html (html1);
                 setTimeout (function() {
                     $('.ip').hover(function(evt) {
-                        na.analytics.geoIP(evt,$(this).html());
+                        na.analytics.geoIP(evt.originalEvent,$(this).html());
                     }, function(evt) {
                         $('.geoIP').remove();
                     });
@@ -461,8 +461,8 @@ na.analytics = {
                 jQuery(rootElement).html (html1);
                 setTimeout (function() {
                     $('.ip').hover(function(evt) {
-                        debugger;
-                        na.analytics.geoIP(evt,$(this).html());
+                        //debugger;
+                        na.analytics.geoIP(evt.originalEvent,$(this).html());
                     }, function(evt) {
                         $('.geoIP').remove();
                     });
