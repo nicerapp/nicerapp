@@ -11,7 +11,7 @@ if (!array_key_exists($_GET['IP'],$_SESSION['geoIP'])) {
 };
 
 $record = $_SESSION['geoIP'][$_GET['IP']];
-if (array_key_exists(0,$record->subdivisions)) {
+if (!is_null($record->subdivisions)) {
 $html = 
     '<table>'
         .'<tr><th>Continent</th><td>'.$record->continent->names['en'].'</td></tr>'
