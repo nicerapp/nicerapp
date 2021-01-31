@@ -70,12 +70,21 @@ a:visited {
     background-image: -webkit-linear-gradient(bottom, rgba(50,50,50,0.4) 25%, rgba(150,150,150,0.8) 81%);
     background-image: -ms-linear-gradient(bottom, rgba(50,50,50,0.4) 25%, rgba(150,150,150,0.8) 81%);
     background-image: linear-gradient(bottom, rgba(50,50,50,0.4) 25%, rgba(150,150,150,0.8) 81%);
+    border : 3px ridge rgba(255,255,255,0.7);
     padding : 5px;
     border-radius : 20px;
     z-index : 1;
     pointer-events : none;
 }  
-.vividButton[theme="light"] a {
+.vividButtonSelected[theme="light"] {
+    border : 3px ridge rgba(255,255,255,0.7);
+    padding : 5px;
+    border-radius : 20px;
+    z-index : 1;
+    pointer-events : none;
+}    
+
+.vividButton[theme="light"] a, .vividButtonSelected[theme="light"] a {
   color : white;
   text-decoration : none;
 }
