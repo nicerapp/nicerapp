@@ -224,6 +224,9 @@ var mp3site = {
 		};
         if (!file) debugger;
         na.analytics.logMetaEvent ('musicPlayer : selectMP3() file='+file);
+        
+        $('.mp3').removeClass('selected');
+        $('#'+id).addClass('selected');
 
 		var ajaxCommand = {
 			type : 'GET',
