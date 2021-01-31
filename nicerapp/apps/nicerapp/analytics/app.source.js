@@ -380,7 +380,7 @@ na.analytics = {
                             ?'class="dateDetails succesful" style="cursor:zoom-in;background:rgba(0,255,0,0.5);color:white;"'
                             :'class="dateDetails failed" style="cursor:zoom-in;background:rgba(255,0,0,0.5);color:yellow;"'
                         )+'>'
-                            +'<td class="ip" style="text-align:center;" onmouseenter="na.analytics.geoIP(event,\''+d.ip+'\');" onmouseleave="jQuery(\'.geoIP\').remove();">'+d.ip+'</td>'
+                            +'<td class="ip" style="text-align:center;">'+d.ip+'</td>'
                             +'<td class="datetime" style="text-align:center;" onmouseenter="na.analytics.datetimeConvertToOwnersTimezone(event,'+d.tzOffset+','+d.datetime+');" onmouseleave="jQuery(\'.datetimeLocal\').remove();">'+d.datetimeStr+'</td>'
                             +'<td class="tzOffset" style="text-align:center;">'+d.tzOffset+'</td>'
                             +'<td class="totalTimeOnSite" style="text-align:center;">'+totalTimeOnSite+'</td>'                            
@@ -391,6 +391,13 @@ na.analytics = {
                 html1 += '</table><a href="javascript:na.analytics.view.fillDates(jQuery(\'#siteContent .vividDialogContent\')[0]);">Back</a><br/><br/><br/><br/><br/>';
                 
                 jQuery(rootElement).html (html1);
+                setTimeout (function() {
+                    $('.ip').hover(function(evt) {
+                        na.analytics.geoIP(evt,$(this).html());
+                    }, function(evt) {
+                        $('.geoIP').remove();
+                    });
+                }, 500);
             },
             200);
         },
@@ -423,7 +430,7 @@ na.analytics = {
                     if (!entryDoc) {
                         html1 += 
                             '<tr style="background:rgba(0,0,50,0.4);">'
-                                +'<td class="geoIPshow" geoip="'+d.ip+'" style="text-align:center;" class="ip" onmouseenter="na.analytics.geoIP(event,\''+d.ip+'\');" onmouseleave="setTimeout(function(){jQuery(\'.geoIP\').remove();},1000);">'+d.ip+'</td>'
+                                +'<td class="geoIPshow" geoip="'+d.ip+'" style="text-align:center;" class="ip">'+d.ip+'</td>'
                                 +'<td style="text-align:center;overflow-wrap:break-word;">'+d.msg+'</td>'
                                 +'<td style="text-align:center;" class="datetime" onmouseenter="na.analytics.datetimeConvertToOwnersTimezone(event,'+d.tzOffset+','+d.datetime+');" onmouseleave="setTimeout(function(){jQuery(\'.datetimeLocal\').remove();},1000);">'+d.datetimeStr+'</td>'
                                 +'<td style="text-align:center;" class="tzOffset">'+d.tzOffset+'</td>'
@@ -435,7 +442,7 @@ na.analytics = {
                     } else {
                         html1 += 
                             '<tr style="background:rgba(0,0,50,0.4);">'
-                                +'<td class="geoIPshow" geoip="'+d.ip+'" style="text-align:center;" class="ip" onmouseenter="na.analytics.geoIP(event,\''+d.ip+'\');" onmouseleave="setTimeout(function(){jQuery(\'.geoIP\').remove();},1000);">'+d.ip+'</td>'
+                                +'<td style="text-align:center;" class="ip">'+d.ip+'</td>'
                                 +'<td style="text-align:center;overflow-wrap:break-word;">'+d.msg+'</td>'
                                 +'<td style="text-align:center;" class="datetime" onmouseenter="na.analytics.datetimeConvertToOwnersTimezone(event,'+d.tzOffset+','+d.datetime+');" onmouseleave="setTimeout(function(){jQuery(\'.datetimeLocal\').remove();},1000);">'+d.datetimeStr+'</td>'
                                 +'<td style="text-align:center;" class="tzOffset">'+d.tzOffset+'</td>'
@@ -453,8 +460,8 @@ na.analytics = {
                 
                 jQuery(rootElement).html (html1);
                 setTimeout (function() {
-                    $('.geoIPshow').hover(function(evt) {
-                        na.analytics.geoIP(evt,$(this).attr('geoip'));
+                    $('.ip').hover(function(evt) {
+                        na.analytics.geoIP(evt,$(this).html());
                     }, function(evt) {
                         $('.geoIP').remove();
                     });
