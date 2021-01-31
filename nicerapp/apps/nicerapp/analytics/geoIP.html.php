@@ -11,6 +11,7 @@ if (!array_key_exists($_GET['IP'],$_SESSION['geoIP'])) {
 };
 
 $record = $_SESSION['geoIP'][$_GET['IP']];
+if (array_key_exists(0,$record->subdivisions)) {
 $html = 
     '<table>'
         .'<tr><th>Continent</th><td>'.$record->continent->names['en'].'</td></tr>'
@@ -18,6 +19,13 @@ $html =
         .'<tr><th>Province</th><td>'.$record->subdivisions[0]->names['en'].'</td></tr>'
         .'<tr><th>City</th><td>'.$record->city->names['en'].'</td></tr>'
     .'</table>';
+} else {
+$html = 
+    '<table>'
+        .'<tr><th>Continent</th><td>'.$record->continent->names['en'].'</td></tr>'
+        .'<tr><th>Country</th><td>'.$record->country->names['en'].'</td></tr>'
+    .'</table>';
+}
 //$html = '<pre style="font-size:70%">'.json_encode($record, JSON_PRETTY_PRINT).'</pre>';        
 
 echo $html;
