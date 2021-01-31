@@ -399,10 +399,10 @@ na.analytics = {
                             na.analytics.geoIP(evt.originalEvent,$(na.analytics.settings.ipHoverElement).html());
                         },250);
                     }, function(evt) {
-                        clearTimeout (na.analytics.settings.ipHoverTimeout);
-                        na.analytics.settings.ipHoverTimeout = setTimeout(function() {
+                        //clearTimeout (na.analytics.settings.ipHoverTimeout);
+                        //na.analytics.settings.ipHoverTimeout = setTimeout(function() {
                             $('.geoIP').remove();
-                        },250);
+                        //},250);
                     });
                 }, 100);
             },
@@ -474,10 +474,10 @@ na.analytics = {
                             na.analytics.geoIP(evt.originalEvent,$(na.analytics.settings.ipHoverElement).html());
                         },250);
                     }, function(evt) {
-                        clearTimeout (na.analytics.settings.ipHoverTimeout);
-                        na.analytics.settings.ipHoverTimeout = setTimeout(function() {
+                        //clearTimeout (na.analytics.settings.ipHoverTimeout);
+                        //na.analytics.settings.ipHoverTimeout = setTimeout(function() {
                             $('.geoIP').remove();
-                        },250);
+                        //},250);
                     });
                 }, 100);
             },
