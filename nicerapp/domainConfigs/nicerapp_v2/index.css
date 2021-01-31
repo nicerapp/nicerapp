@@ -33,7 +33,7 @@ img.bg_last {
     height: calc(100vh - 120px);
     z-index : 1100; 
 }
-.vividDialogContent table {
+.vividDialogContent table, .vividDialogContent td {
     z-index : 1101;
 }
 
