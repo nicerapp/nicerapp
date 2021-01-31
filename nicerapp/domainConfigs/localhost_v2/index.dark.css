@@ -169,7 +169,7 @@ a:visited {
     border-radius : 20px;
     z-index: -1;
     transition: opacity 0.5s linear;
-    opacity: 0;
+    opacity: 1;
 }    
 .vividButton.selected[theme="dark"]:hover::before {
     opacity: 1;
