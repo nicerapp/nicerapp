@@ -452,11 +452,13 @@ na.analytics = {
 //                 html1 += '<br/><br/><br/><br/><br/>';
                 
                 jQuery(rootElement).html (html1);
-                $('.geoIPshow').hover(function(evt) {
-                    na.analytics.geoIP(evt,$(this).attr('geoip'));
-                }, function(evt) {
-                    $('.geoIP').remove();
-                });
+                setTimeout (function() {
+                    $('.geoIPshow').hover(function(evt) {
+                        na.analytics.geoIP(evt,$(this).attr('geoip'));
+                    }, function(evt) {
+                        $('.geoIP').remove();
+                    });
+                }, 500);
             },
             200);
         }
