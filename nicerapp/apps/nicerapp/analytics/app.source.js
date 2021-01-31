@@ -435,7 +435,7 @@ na.analytics = {
                     } else {
                         html1 += 
                             '<tr style="background:rgba(0,0,50,0.4);">'
-                                +'<td style="text-align:center;" class="ip" onmouseenter="na.analytics.geoIP(event,\''+d.ip+'\');" onmouseleave="setTimeout(function(){jQuery(\'.geoIP\').remove();},1000);">'+d.ip+'</td>'
+                                +'<td style="text-align:center;" class="ip" onmouseenter="debugger;na.analytics.geoIP(event,\''+d.ip+'\');" onmouseleave="debugger;setTimeout(function(){jQuery(\'.geoIP\').remove();},1000);">'+d.ip+'</td>'
                                 +'<td style="text-align:center;overflow-wrap:break-word;">'+d.msg+'</td>'
                                 +'<td style="text-align:center;" class="datetime" onmouseenter="na.analytics.datetimeConvertToOwnersTimezone(event,'+d.tzOffset+','+d.datetime+');" onmouseleave="setTimeout(function(){jQuery(\'.datetimeLocal\').remove();},1000);">'+d.datetimeStr+'</td>'
                                 +'<td style="text-align:center;" class="tzOffset">'+d.tzOffset+'</td>'
