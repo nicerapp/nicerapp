@@ -380,7 +380,7 @@ na.analytics = {
                             ?'class="dateDetails succesful" style="cursor:zoom-in;background:rgba(0,255,0,0.5);color:white;"'
                             :'class="dateDetails failed" style="cursor:zoom-in;background:rgba(255,0,0,0.5);color:yellow;"'
                         )+'>'
-                            +'<td class="ip" style="text-align:center;" onmouseover="na.analytics.geoIP(event,\''+d.ip+'\');" onmouseout="jQuery(\'.geoIP\').remove();">'+d.ip+'</td>'
+                            +'<td class="ip" style="text-align:center;" onmouseover="debugger;na.analytics.geoIP(event,\''+d.ip+'\');" onmouseout="debugger;jQuery(\'.geoIP\').remove();">'+d.ip+'</td>'
                             +'<td class="datetime" style="text-align:center;" onmouseover="na.analytics.datetimeConvertToOwnersTimezone(event,'+d.tzOffset+','+d.datetime+');" onmouseout="jQuery(\'.datetimeLocal\').remove();">'+d.datetimeStr+'</td>'
                             +'<td class="tzOffset" style="text-align:center;">'+d.tzOffset+'</td>'
                             +'<td class="totalTimeOnSite" style="text-align:center;">'+totalTimeOnSite+'</td>'                            
