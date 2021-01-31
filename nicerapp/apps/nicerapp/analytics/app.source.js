@@ -394,8 +394,9 @@ na.analytics = {
                 setTimeout (function() {
                     $('.ip').hover(function(evt) {
                         clearTimeout (na.analytics.settings.ipHoverTimeout);
+                        na.analytics.settings.ipHoverElement = this;
                         na.analytics.settings.ipHoverTimeout = setTimeout(function(){
-                            na.analytics.geoIP(evt.originalEvent,$(this).html());
+                            na.analytics.geoIP(evt.originalEvent,$(na.analytics.settings.ipHoverElement).html());
                         },250);
                     }, function(evt) {
                         clearTimeout (na.analytics.settings.ipHoverTimeout);
@@ -468,8 +469,9 @@ na.analytics = {
                 setTimeout (function() {
                     $('.ip').hover(function(evt) {
                         clearTimeout (na.analytics.settings.ipHoverTimeout);
+                        na.analytics.settings.ipHoverElement = this;
                         na.analytics.settings.ipHoverTimeout = setTimeout(function(){
-                            na.analytics.geoIP(evt.originalEvent,$(this).html());
+                            na.analytics.geoIP(evt.originalEvent,$(na.analytics.settings.ipHoverElement).html());
                         },250);
                     }, function(evt) {
                         clearTimeout (na.analytics.settings.ipHoverTimeout);
