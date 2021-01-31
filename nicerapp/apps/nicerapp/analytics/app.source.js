@@ -380,8 +380,8 @@ na.analytics = {
                             ?'class="dateDetails succesful" style="cursor:zoom-in;background:rgba(0,255,0,0.5);color:white;"'
                             :'class="dateDetails failed" style="cursor:zoom-in;background:rgba(255,0,0,0.5);color:yellow;"'
                         )+'>'
-                            +'<td class="ip" style="text-align:center;" onmouseover="debugger;na.analytics.geoIP(event,\''+d.ip+'\');" onmouseout="debugger;jQuery(\'.geoIP\').remove();">'+d.ip+'</td>'
-                            +'<td class="datetime" style="text-align:center;" onmouseover="na.analytics.datetimeConvertToOwnersTimezone(event,'+d.tzOffset+','+d.datetime+');" onmouseout="jQuery(\'.datetimeLocal\').remove();">'+d.datetimeStr+'</td>'
+                            +'<td class="ip" style="text-align:center;" onmouseenter="na.analytics.geoIP(event,\''+d.ip+'\');" onmouseleave="jQuery(\'.geoIP\').remove();">'+d.ip+'</td>'
+                            +'<td class="datetime" style="text-align:center;" onmouseenter="na.analytics.datetimeConvertToOwnersTimezone(event,'+d.tzOffset+','+d.datetime+');" onmouseleave="jQuery(\'.datetimeLocal\').remove();">'+d.datetimeStr+'</td>'
                             +'<td class="tzOffset" style="text-align:center;">'+d.tzOffset+'</td>'
                             +'<td class="totalTimeOnSite" style="text-align:center;">'+totalTimeOnSite+'</td>'                            
                             +'<td class="backgroundChanges" style="text-align:center;">'+session.backgroundChanges+'</td>'                            
@@ -423,7 +423,7 @@ na.analytics = {
                     if (!entryDoc) {
                         html1 += 
                             '<tr style="background:rgba(0,0,50,0.4);">'
-                                +'<td style="text-align:center;" class="ip" onmouseenter="debugger;na.analytics.geoIP(event,\''+d.ip+'\');" onmouseleave="debugger;setTimeout(function(){jQuery(\'.geoIP\').remove();},1000);">'+d.ip+'</td>'
+                                +'<td style="text-align:center;" class="ip" onmouseenter="na.analytics.geoIP(event,\''+d.ip+'\');" onmouseleave="setTimeout(function(){jQuery(\'.geoIP\').remove();},1000);">'+d.ip+'</td>'
                                 +'<td style="text-align:center;overflow-wrap:break-word;">'+d.msg+'</td>'
                                 +'<td style="text-align:center;" class="datetime" onmouseenter="na.analytics.datetimeConvertToOwnersTimezone(event,'+d.tzOffset+','+d.datetime+');" onmouseleave="setTimeout(function(){jQuery(\'.datetimeLocal\').remove();},1000);">'+d.datetimeStr+'</td>'
                                 +'<td style="text-align:center;" class="tzOffset">'+d.tzOffset+'</td>'
@@ -435,7 +435,7 @@ na.analytics = {
                     } else {
                         html1 += 
                             '<tr style="background:rgba(0,0,50,0.4);">'
-                                +'<td style="text-align:center;" class="ip" onmouseenter="debugger;na.analytics.geoIP(event,\''+d.ip+'\');" onmouseleave="debugger;setTimeout(function(){jQuery(\'.geoIP\').remove();},1000);">'+d.ip+'</td>'
+                                +'<td style="text-align:center;" class="ip" onmouseenter="na.analytics.geoIP(event,\''+d.ip+'\');" onmouseleave="setTimeout(function(){jQuery(\'.geoIP\').remove();},1000);">'+d.ip+'</td>'
                                 +'<td style="text-align:center;overflow-wrap:break-word;">'+d.msg+'</td>'
                                 +'<td style="text-align:center;" class="datetime" onmouseenter="na.analytics.datetimeConvertToOwnersTimezone(event,'+d.tzOffset+','+d.datetime+');" onmouseleave="setTimeout(function(){jQuery(\'.datetimeLocal\').remove();},1000);">'+d.datetimeStr+'</td>'
                                 +'<td style="text-align:center;" class="tzOffset">'+d.tzOffset+'</td>'
@@ -498,8 +498,8 @@ na.analytics = {
                 var 
                 evt = na.analytics.settings.evt,
                 html = '<div class="geoIP" style="position:absolute;top:'+evt.layerY+'px;left:'+evt.layerX+'px;background:rgba(0,0,0,0.8);border:3px ridge white;border-radius:5px;z-index:1200;">'+data+'</div>';
-                jQuery('#siteContent .vividDialogContent').append(html);
-                //debugger;
+                jQuery('#siteContent').prepend(html);
+                debugger;
             }
         };
         na.analytics.settings.evt = evt;
