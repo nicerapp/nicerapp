@@ -225,8 +225,8 @@ var mp3site = {
         if (!file) debugger;
         na.analytics.logMetaEvent ('musicPlayer : selectMP3() file='+file);
         
-        $('.mp3').removeClass('selected');
-        $('#'+id).addClass('selected');
+        $('.mp3').removeClass('selected').removeClass('vividButtonSelected').addClass('vividButton');
+        $('#'+id).addClass('selected').removeClass('vividButton').addClass('vividButtonSelected');
 
 		var ajaxCommand = {
 			type : 'GET',
