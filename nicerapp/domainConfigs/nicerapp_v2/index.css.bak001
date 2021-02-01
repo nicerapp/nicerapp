@@ -18,6 +18,15 @@ img.bg_last {
     z-index : 11;
 }
 
+/*
+#siteContent {
+    top : 48vh;
+    height : 4vh;
+    left : 48vw;
+    width : 4vw;
+    border-radius : 20px;
+}
+*/
 #siteContent {
     top : calc(1vh + 4rem);
     left : 1vw;
@@ -29,12 +38,9 @@ img.bg_last {
     overflow : auto;
     display : block;
     margin : 10px;
-    width : calc(98vw - 15px);
+    width : calc(100vw - 100px);
     height: calc(100vh - 120px);
     z-index : 1100; 
-}
-.vividDialogContent table, .vividDialogContent td {
-    z-index : 1101;
 }
 
 
@@ -44,7 +50,7 @@ img.bg_last {
     font-size : 1rem;
     z-index : 1000;
 }
-.vividButton, .vividButtonSelected {
+.vividButton {
     display : flex;
     justify-content : center;
     align-items : center;
@@ -54,10 +60,49 @@ img.bg_last {
     font-size : 1rem;
     font-weight : bold;
 }
-.vividButton.level1, .vividButtonSelected.level1 {
+.vividButton.level1 {
     margin-top : 5px;
 }
 
+/*
+#siteContent.started {
+    animation : anim_siteContent_started 0.7s;
+    animation-fill-mode : forwards;
+    animation-timing-function : cubic-bezier(1,1,0,1);
+}
+@keyframes anim_siteContent_started {
+    100% {
+        top : calc(1vh + 4rem);
+        left : 1vw;
+        width : 98vw;
+        height : calc(98vh - 4rem);
+    }
+}
+*/
+
+/*
+#siteDateTime {
+    top : 1vh;
+    left : -10vh;
+    width : 250px;
+    height : 2rem;
+    font-size : 1rem;
+    font-weight : bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius : 10px;
+}
+#siteDateTime.started {
+    animation : anim_siteDateTime_started 0.7s;
+    animation-fill-mode : forwards;
+    animation-timing-function : cubic-bezier(1,1,0,1);
+}
+@keyframes anim_siteDateTime_started {
+    100% {
+        left : 1vw;
+    }
+}*/
 #siteDateTime {
     top : 1vh;
     left : 1vw;
@@ -71,33 +116,34 @@ img.bg_last {
     border-radius : 10px;
 }
 
+/*
 #btnThemeSwitch {
     position : absolute;
-    top : -200px; /*calc(1vh - 3px);*/
+    top : -10vh;
+    left : calc(1vw + 270px);
+    z-index : 1100;
+    animation : anim_btnThemeSwitch_started 0.7s;
+    animation-fill-mode : forwards;
+    animation-timing-function : cubic-bezier(1,1,0,1);
+}
+@keyframes anim_btnThemeSwitch_started {
+    100% {
+        top : 1vh;
+    }
+}*/
+#btnThemeSwitch {
+    position : absolute;
+    top : calc(1vh - 3px);
     left : calc(1vw + 245px);
-    width : 40px;
     z-index : 1100;
     border : 3px ridge lime;
     border-radius : 10px;
     box-shadow : 7px 7px 5px rgba(0,0,0,0.7), inset -2px -2px 2px rgba(0,0,0,0.8), inset 2px 2px 2px rgba(0,0,0,0.8);
 }
-#btnThemeSwitch.phoneView {
-    left : calc(1vw + 6px);
-}
-#btnThemeSwitch.started {
-    animation : anim_btnThemeSwitch_started 2s;
-    animation-iteration-count : 1;
-    animation-fill-mode : forwards;
-}
-@keyframes anim_btnThemeSwitch_started {
-    100% {
-        top : calc(1vh - 3px);
-    }
-}
 
 #btnChangeBackground {
     position : absolute;
-    top : -200px; /*calc(1vh - 3px);*/
+    top : calc(1vh - 3px);
     left : calc(1vw + 300px);
     width : 40px;
     background : rgba(255,255,255,0.5);
@@ -106,29 +152,28 @@ img.bg_last {
     border-radius : 10px;
     box-shadow : 7px 7px 5px rgba(0,0,0,0.7), inset -2px -2px 2px rgba(0,0,0,0.8), inset 2px 2px 2px rgba(0,0,0,0.8);
 }
-#btnChangeBackground.phoneView {
-    left : calc(99vw - 50px);
-}
-#btnChangeBackground.started {
-    animation : anim_btnChangeBackground_started 2s;
-    animation-iteration-count : 1;
+
+
+/*
+#siteMenu.started {
+    animation : anim_siteMenu_started 0.7s;
     animation-fill-mode : forwards;
+    animation-timing-function : cubic-bezier(1,1,0,1);
 }
-@keyframes anim_btnChangeBackground_started {
+@keyframes anim_siteMenu_started {
     100% {
-        top : calc(1vh - 3px);
+        top : 1vh;
+        left : calc(2vw + 300px);
+        width : 5vw;
+        height : 2rem;
     }
 }
-
-
+*/
 #siteMenu {
     top : 1vh;
     left : calc(2vw + 340px);
     width : 5vw;
     height : 1.5rem;
-}
-#siteMenu.phoneView {
-    left : calc(50vw - 100px);
 }
 
 select, optgroup {
@@ -152,63 +197,83 @@ select, optgroup {
 }
 
 
-.mainTooltipTheme {
-	border:1px solid navy;
+.mainTooltipTheme .tooltipster-box {
+    width : 120%;
     border-radius : 7px;
-    box-shadow : 2px 2px 1px rgba(0,0,0,0.7), 0px 0px 5px rgba(0,0,0,0.7), inset 2px 2px 2px rgba(0,0,0,0.87), inset -2px -2px 2px rgba(0,0,0,0.87);
+    border : 1px solid yellow;
+    box-shadow : 2px 2px 1px rgba(0,0,0,0.7), 0px 0px 7px rgba(50,255,50,0.7);
+    /*background : url('/nicerapp/siteMedia/backgrounds/tiled/active/grey/seamless_texture_of_ice.jpg') repeat;*/
+    background : rgba(255,255,255,0.7);
     opacity : 1;
-    z-index : 2765;
-	text-align:left;
-	color:#8c3901;
-	background-color:#fef9d9;
-/*	background-image:url(/nicerapp/3rd-party/jQuery/poshytip/src/tip-yellow/tip-yellow.png); */
+    color : black;
+}
+.mainTooltipTheme .tooltipster-content {
+    color : black;
     font-family : Architects Daughter;
-    font-size : 15px;
+    font-size : 20px;
     font-weight : bold;
     padding : 8px 10px;
    /* animation : mainTooltipThemeAnim 2s infinite;*/
     border-radius : 7px;
 }
-.mainTooltipTheme .tip-arrow-top {
-	margin-top:-7px;
-	margin-left:15px;
-	top:0;
-	left:0;
-	width:16px;
-	height:10px;
-    z-index : 2761;
-	background:url(/nicerapp/3rd-party/jQuery/poshytip/src/tip-yellow/tip-yellow_arrows.png) no-repeat;
+/*
+@keyframes mainTooltipThemeAnim {
+    0% {
+        background : rgba(50,50,255,0)
+    }
+    50% {
+        background : rgba(50,50,255,0.33)
+    }
+    100% { 
+        background : rgba(50,50,255,0)
+    }
 }
-.mainTooltipTheme .tip-arrow-right {
-	margin-top:-9px; /* approx. half the height to center it */
-	margin-left:-4px;
-	top:50%;
-	left:100%;
-	width:10px;
-	height:20px;
-    z-index : 2761;
-	background:url(/nicerapp/3rd-party/jQuery/poshytip/src/tip-yellow/tip-yellow_arrows.png) no-repeat -16px 0;
+
+@keyframes mainTooltipThemeAnim2a {
+    0% {
+        border-bottom-color : rgba(255,255,255,0)
+    }
+    50% {
+        border-bottom-color : rgba(50,50,255,0.7)
+    }
+    100% { 
+        border-bottom-color : rgba(255,255,255,0)
+    }
 }
-.mainTooltipTheme .tip-arrow-bottom {
-	margin-top:-6px;
-	margin-left:15px;
-	top:100%;
-	left:0;
-	width:16px;
-	height:13px;
-    z-index : 2761;
-	background:url(/nicerapp/3rd-party/jQuery/poshytip/src/tip-yellow/tip-yellow_arrows.png) no-repeat -32px 0;
+@keyframes mainTooltipThemeAnim2b {
+    0% {
+        border-left-color : rgba(255,255,255,0)
+    }
+    50% {
+        border-left-color : rgba(50,50,255,0.7)
+    }
+    100% { 
+        border-left-color : rgba(255,255,255,0)
+    }
 }
-.mainTooltipTheme .tip-arrow-left {
-	margin-top:-9px; /* approx. half the height to center it */
-	margin-left:-6px;
-	top:50%;
-	left:0;
-	width:10px;
-	height:20px;
-    z-index : 2761;
-	background:url(/nicerapp/3rd-party/jQuery/poshytip/src/tip-yellow/tip-yellow_arrows.png) no-repeat -48px 0;
+@keyframes mainTooltipThemeAnim2c {
+    0% {
+        border-right-color : rgba(255,255,255,0)
+    }
+    50% {
+        border-right-color : rgba(50,50,255,0.7)
+    }
+    100% { 
+        border-right-color : rgba(255,255,255,0)
+    }
 }
+@keyframes mainTooltipThemeAnim2d {
+    0% {
+        border-top-color : rgba(255,255,255,0)
+    }
+    50% {
+        border-top-color : rgba(50,50,255,0.7)
+    }
+    100% { 
+        border-top-color : rgba(255,255,255,0)
+    }
+}
+*/
 
 
 .mainTooltipTheme.tooltipster-sidetip .tooltipster-arrow-background {
