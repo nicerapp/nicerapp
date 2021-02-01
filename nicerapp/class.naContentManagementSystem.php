@@ -35,7 +35,7 @@ class nicerAppCMS {
     public function getSite() {
         $templateFile = realpath(dirname(__FILE__).'/domainConfigs/'.$this->domain.'/index.template.php');
         
-        $getAsIndividualLinks = false;//$this->domain==='localhost_v2';
+        $getAsIndividualLinks = $this->domain==='localhost_v2';
         if ($getAsIndividualLinks) {
             $cssFiles = $this->getFiles_asIndividualLinks('css', 'css');
             $cssThemeFiles = $this->getFiles_asIndividualLinks('css', 'cssTheme');

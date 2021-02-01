@@ -87,56 +87,45 @@ var nas = na.site = {
             
             if (el.id=='btnThemeSwitch') {
                 nas.settings.btnThemeSwitch = this;
-                $(el).poshytip({
-                    className : $(el).attr('tooltipTheme'),//'mainTooltipTheme',
+                $(el).tooltipster({
+                    theme : $(el).attr('tooltipTheme'),//'mainTooltipTheme',
                     contentAsHTML : true,
                     content : $(el).attr('title'),
                     //animation : 'grow',
-                    alignTo : 'target',
-                    alignX : 'inner-left',
-                    offsetX : 10,
-                    fade : true,
-                    slide : true,
-                    slideOffset : 25
+                    offsetX : 10
                 });
-                $(this).poshytip('show');
-                $(this).poshytip('hide');
+                $(this).tooltipster('show');
+                $(this).tooltipster('hide');
                 $(this).addClass('started');
                 setTimeout (function() {
-                    $(nas.settings.btnThemeSwitch).poshytip('show');
+                    $(nas.settings.btnThemeSwitch).tooltipster('show')
                     setTimeout(function() {
-                        $(nas.settings.btnThemeSwitch).poshytip('hide');
+                        debugger;
+                        $(nas.settings.btnThemeSwitch).tooltipster('hide');
                     }, 2500);
                 }, 2770);
                 
             } else if (el.id=='btnChangeBackground') {
-                nas.settings.btnChangeBackground = el;
-                $(el).poshytip({
-                    className : $(el).attr('tooltipTheme'),//'mainTooltipTheme',
+                $(el).tooltipster({
+                    theme : $(el).attr('tooltipTheme'),//'mainTooltipTheme',
                     contentAsHTML : true,
                     content : $(el).attr('title'),
                     animation : 'grow',
-                    alignTo : 'target',
-                    alignX : 'inner-right',
-                    offsetX : -20,
-                    fade : true,
-                    slide : true,
-                    slideOffset : 25
+                    offsetX : 10
                 });
-                $(el).poshytip('show');
-                $(el).poshytip('hide');
-                $(el).addClass('started');
+                $(this).tooltipster('show');
+                $(this).tooltipster('hide');
+                $(this).addClass('started');
+                nas.settings.btnChangeBackground = this;
                 setTimeout (function() {
-                    $(el).poshytip('show');
-                    if (na.m.userDevice.isPhone) $('.mainTooltipTheme').css({left:$('.mainTooltipTheme').offset().left-20});
-                    $('.tip-arrow').css({left:$(el).offset().left-$('.mainTooltipTheme').offset().left});
+                    $(nas.settings.btnChangeBackground).tooltipster('show')
                     setTimeout(function() {
-                        $(el).poshytip('hide');
+                        $(nas.settings.btnChangeBackground).tooltipster('hide');
                     }, 2500);
                 }, 7270);
                 
             } else {
-                $(el).poshytip({
+                $(el).tooltipster({
                     theme : $(el).attr('tooltipTheme'),//'mainTooltipTheme',
                     contentAsHTML : true,
                     content : $(el).attr('title'),
@@ -155,31 +144,6 @@ var nas = na.site = {
             display : 'flex'
         });
         //$('#siteBackground img.bg_first').fadeIn(2000);
-        
-        if ($(window).width() < 1680) {
-            jQuery('#siteContent').css ({ fontSize : '70%' });
-            jQuery('#tableFor_saCompanyLogo').css ({ width : 80, height : 80 });
-            jQuery('#divFor_saCompanyLogo').css ({ width : 70, height : 70, marginLeft : 0 });
-            jQuery('#saCompanyLogo').attr('width',70).attr('height',70);
-            jQuery('#headerSite, #headerSite h1, #headerSite h2, #headerSite h3').css ({ fontSize : '84%', paddingLeft : 0 });
-            jQuery('.td_spacer').css ({ height : 100 });
-            jQuery('#headerSiteDiv').css ({ height : 70, width : 120 });
-            jQuery('#headerSiteDiv div').css ({ height : 0, width : 120 });
-        } else {
-            jQuery('#siteContent').css ({ fontSize : '100%' });
-            jQuery('#mainCSS').html('.vividMenu_item td { font-size : 80%; }; #siteStatus td { font-weight : bold };');
-            jQuery('#tableFor_saCompanyLogo').css ({ width : 200, height : 200 });
-            jQuery('#divFor_saCompanyLogo').css ({ width : 200, height : 200, marginLeft : 40 });
-            jQuery('#datetime').css({marginLeft:40,marginTop:20});
-            jQuery('#saCompanyLogo').attr('width',200).attr('height',200);
-            jQuery('#headerSite h1').css ({ fontSize : '200%', paddingLeft : 20 });
-            jQuery('#headerSite h2').css ({ fontSize : '140%', paddingLeft : 20 });
-            jQuery('#headerSite, #headerSite h3').css ({ fontSize : '100%', paddingLeft : 20 });
-            
-            jQuery('.td_spacer').css ({ height : 100 });
-            jQuery('#headerSiteDiv').css ({ height : 200, width : 320 });
-            jQuery('#headerSiteDiv div').css ({ height : 10, width : 320 });
-        };        
     },
     
     reloadMenu : function() {
