@@ -295,7 +295,7 @@ class naVividMenu {
     onclick(it) {
         var a = $(it.b.el).children('a');
         if (a.attr('href1')!=='') {
-            window.open(a.attr('href1'),'_blank').focus();
+            window.open(a.attr('href1'),a.attr('windowTitle')).focus();
         } else {
             var href = a.attr('href');
             if (href.match(/javascript:/)) eval(href.replace('javascript:','')); else window.location.href = href;
