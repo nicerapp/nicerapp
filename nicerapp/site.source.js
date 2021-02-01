@@ -211,7 +211,7 @@ var nas = na.site = {
                         $(el).attr('href', '');
                     }).click (function() {
                         debugger;
-                        window.open($(this).attr('href1'),'_blank').focus();
+                        window.open($(this).attr('href1'),'_new').focus();
                     });
                 }, 1000);
 
