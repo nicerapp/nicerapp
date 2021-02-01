@@ -206,9 +206,12 @@ var nas = na.site = {
                 
                 setTimeout (function() {
                     //debugger;
-                    $('.linkToNewPage').click (function() {
+                    $('.linkToNewPage').each(function(idx,el){
+                        $(el).attr('href1', $(el).attr('href'));
+                        $(el).attr('href', '');
+                    }).click (function() {
                         debugger;
-                        window.open($(this).attr('href'),'_blank').focus();
+                        window.open($(this).attr('href1'),'_blank').focus();
                     });
                 }, 1000);
 
