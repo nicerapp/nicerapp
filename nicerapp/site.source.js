@@ -209,9 +209,6 @@ var nas = na.site = {
                     $('.linkToNewPage').each(function(idx,el){
                         $(el).attr('href1', $(el).attr('href'));
                         $(el).attr('href', '');
-                    }).click (function() {
-                        debugger;
-                        window.open($(this).attr('href1'),'_new').focus();
                     });
                 }, 1000);
 

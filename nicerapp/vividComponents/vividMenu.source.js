@@ -293,7 +293,12 @@ class naVividMenu {
     }
 
     onclick(it) {
-        var href = $(it.b.el).children('a').attr('href');
-        if (href.match(/javascript:/)) eval(href.replace('javascript:','')); else window.location.href = href;
+        var a = $(it.b.el).children('a');
+        if ($(a).attr('href1')!=='') {
+            window.open($(this).attr('href1'),'_blank').focus();
+        } else {
+            var href = a.attr('href');
+            if (href.match(/javascript:/)) eval(href.replace('javascript:','')); else window.location.href = href;
+        }
     }
 }
