@@ -205,6 +205,7 @@ var nas = na.site = {
                 nas.s.menus['#siteMenu'] = new naVividMenu($('#siteMenu')[0]);
                 
                 setTimeout (function() {
+                    debugger;
                     $('.linkToNewPage').on('click', function() {
                         debugger;
                         window.open($(this).attr('href'),'_blank').focus();
