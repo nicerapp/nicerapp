@@ -24,6 +24,10 @@ var nas = na.site = {
         $('.vividButton').each(function(idx,el){
             nas.s.buttons['#'+el.id] = new naVividButton(el);
         });
+        
+        $('.linkToNewPage').on('click', function() {
+            window.open($(this).attr('href'),'_blank').focus();
+        });
 
         $(window).resize (function() {
             $('#siteBackground img').css({
