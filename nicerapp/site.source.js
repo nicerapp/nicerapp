@@ -25,10 +25,6 @@ var nas = na.site = {
             nas.s.buttons['#'+el.id] = new naVividButton(el);
         });
         
-        $('.linkToNewPage').on('click', function() {
-            window.open($(this).attr('href'),'_blank').focus();
-        });
-
         $(window).resize (function() {
             $('#siteBackground img').css({
                 width : $(window).width(),
@@ -207,6 +203,12 @@ var nas = na.site = {
                 $('#siteMenu')[0].innerHTML = menu.substr(0,p1) + contentMenu + menu.substr(p1+mlp.length);
                 
                 nas.s.menus['#siteMenu'] = new naVividMenu($('#siteMenu')[0]);
+                
+                $('.linkToNewPage').on('click', function() {
+                    window.open($(this).attr('href'),'_blank').focus();
+                });
+
+                
             },
             failure : function (xhr, ajaxOptions, thrownError) {
                 debugger;
