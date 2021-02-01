@@ -34,6 +34,24 @@ class nicerAppCMS {
     
     public function getSite() {
         $templateFile = realpath(dirname(__FILE__).'/domainConfigs/'.$this->domain.'/index.template.php');
+
+        if (array_key_exists('apps', $_GET)) {
+            $app = json_decode (base64_decode_url($_GET['apps']), true);
+            //echo '<pre>'; var_dump ($app); 
+            $files = getFilePathList (realpath(dirname(__FILE__)).'/apps', true, '/app.title.sit.*.php/', array('file'));
+            //echo '<pre>'; var_dump ($files); die();
+            foreach ($files as $idx => $file) {
+                foreach ($app as $appName => $appSettings) {
+                    if (strpos($file,$appName)!==false) {
+                        $titleFile = $file;
+                    }
+                }
+            }
+        } else {    
+            //$contentFile = realpath(dirname(__FILE__).'/domainConfigs/'.$this->domain.'/frontpage.siteContent.php');
+            $titleFile = realpath(dirname(__FILE__).'/domainConfigs/'.$this->domain.'/index.title.php');
+        }
+        
         
         $getAsIndividualLinks = $this->domain==='localhost_v2';
         if ($getAsIndividualLinks) {
@@ -49,6 +67,7 @@ class nicerAppCMS {
         $div_siteContent = $this->getDivSiteContent();
         $div_siteMenu = $this->getSiteMenu();
         $replacements = array (
+            '{$title}' => execPHP($titleFile),
             '{$domain}' => $this->domain,
             '{$cssFiles}' => $cssFiles,
             '{$cssThemeFiles}' => $cssThemeFiles,

@@ -203,16 +203,6 @@ var nas = na.site = {
                 $('#siteMenu')[0].innerHTML = menu.substr(0,p1) + contentMenu + menu.substr(p1+mlp.length);
                 
                 nas.s.menus['#siteMenu'] = new naVividMenu($('#siteMenu')[0]);
-                
-                setTimeout (function() {
-                    //debugger;
-                    $('.linkToNewPage').each(function(idx,el){
-                        $(el).attr('href1', $(el).attr('href'));
-                        $(el).attr('href', '');
-                    });
-                }, 1000);
-
-                
             },
             failure : function (xhr, ajaxOptions, thrownError) {
                 debugger;

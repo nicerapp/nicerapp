@@ -24,7 +24,7 @@ na.m.globals = {
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
 
-    <title>nicer.app web apps framework</title>
+    <title>{$title}</title>
 </head>
 <body onload="nas.onload(event);">
     <div id="siteBackground"> 
