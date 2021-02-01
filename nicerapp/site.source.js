@@ -78,7 +78,7 @@ var nas = na.site = {
         t = 'light';
         if (x=='light') t = 'dark';
         $('#siteTheme').val(t);
-        $.cookie('siteTheme',t);
+        $.cookie('siteTheme',t, na.m.cookieOptions());
         $('#siteSettings').submit();
     },
 
@@ -246,6 +246,14 @@ na.m = {
         str2 = str2.replace ('-', '+');
         str2 = str2.replace ('_', '/');
         return atob(str2);
+    },
+    
+    cookieOptions : function () {
+        var d = new Date();
+        return {
+            expires : new Date(d.getTime() + 10 * 365 * 24 * 60 * 60 * 1000), // 10 years from now
+            path : '/'
+        };
     },
     
 	secondsToTime : function (secs) {
