@@ -99,6 +99,27 @@ var nas = na.site = {
             if (el.id=='btnThemeSwitch') {
                 $(this).tooltipster('show');
                 $(this).tooltipster('hide');
+                $(this).addClass('started');
+                nas.settings.btnThemeSwitch = this;
+                setTimeout (function() {
+                    $(nas.settings.btnThemeSwitch).tooltipster('show')
+                    setTimeout(function() {
+                        $(nas.settings.btnThemeSwitch).tooltipster('hide');
+                    }, 4000);
+                }, 2770);
+            };
+
+            if (el.id=='btnChangeBackground') {
+                $(this).tooltipster('show');
+                $(this).tooltipster('hide');
+                $(this).addClass('started');
+                nas.settings.btnChangeBackground = this;
+                setTimeout (function() {
+                    $(nas.settings.btnChangeBackground).tooltipster('show')
+                    setTimeout(function() {
+                        $(nas.settings.btnChangeBackground).tooltipster('hide');
+                    }, 4000);
+                }, 7270);
             };
             
         });
