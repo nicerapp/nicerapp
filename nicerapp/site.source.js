@@ -204,10 +204,12 @@ var nas = na.site = {
                 
                 nas.s.menus['#siteMenu'] = new naVividMenu($('#siteMenu')[0]);
                 
-                $('.linkToNewPage').on('click', function() {
-                    debugger;
-                    window.open($(this).attr('href'),'_blank').focus();
-                });
+                setTimeout (function() {
+                    $('.linkToNewPage').on('click', function() {
+                        debugger;
+                        window.open($(this).attr('href'),'_blank').focus();
+                    });
+                }, 1000);
 
                 
             },
