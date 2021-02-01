@@ -156,7 +156,7 @@ var nas = na.site = {
         });
         //$('#siteBackground img.bg_first').fadeIn(2000);
         
-        if ($(window).width() < 1680) {
+        if ($(window).width() < 1000) {
             jQuery('#siteContent').css ({ fontSize : '70%' });
             jQuery('#tableFor_saCompanyLogo').css ({ width : 80, height : 80 });
             jQuery('#divFor_saCompanyLogo').css ({ width : 70, height : 70, marginLeft : 0 });
