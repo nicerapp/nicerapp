@@ -5,166 +5,34 @@ var mp3site = {
 		license : 'http://nicer.app/LICENSE.txt',
 		version : '3.1.0',
 		firstReleased : '2011',
-		lastUpdated : '2018-10-03(Wednesday) 17:55 CEST Amsterdam.NL timezone',
+		lastUpdated : '2020-02-04(Thursday) 18:20 Amsterdam.NL timezone',
 		knownBugs : {
 			1 : "None atm, I think. Please report any bugs you find.."
 		}
 	},
     globals : {
-        url : '/nicerapp/apps/nicerapp/musicPlayer/appContent/musicPlayer/'
+        url : '/nicerapp/apps/nicerapp/music/'
     },
 	settings : {
 		playingIndex : 0,
 		paused : false,
 		stopped : true,
 		repeating : false,
-		
-		masterLeftOffset : null,
-		
-		loadedIn : {
-			'#siteContent__iframe' : {
-				/*settings : {
-					initialized : false
-				},
-				saConfigUpdate : function (settings) {
-					na.apps.loaded.cardgame_tarot.globals.desktop.configs = na.apps.loaded.cardgame_tarot.globals.desktop.calculate.configs();
-					na.desktop.settings.allConfigs = na.apps.loaded.cardgame_tarot.globals.desktop.configs;
-				},
-				onload : function (settings) {
-					na.apps.loaded.cardgame_tarot.nestedStartApp();
-				},*/
-				onresize : function (settings) {
-					$(document.body).css({
-                        width : $(window.top.document.getElementById('siteContent'))[0].offsetWidth,
-                        height : $(window.top.document.getElementById('siteContent'))[0].offsetHeight
-					});
-					setTimeout(mp3site.onWindowResize, 10);
-				}
-			}
-		}
-		
+		masterLeftOffset : null
 	},
 	language : {
 		siteTitle : "DJ FireSnake's mixes"
 	},
-	startAppNested : function () {
-		if (mp3site.settings.loaded) return false; else mp3site.settings.loaded = true;
-		
-		if (window === window.top) {
-			mp3site.startApp();
-		} else if (
-			window.parent 
-			&& window.parent.window
-			&& window.parent.window.na
-		) {
-			mp3site.startApp();
-			
-			/*
-			debugger;
-			var f = window.parent.window.na.m.settings.iframeLoaded;
-			console.log ('mp3site.nestedStartApp 3:', ''+f);
-			$('#iframe-content', window.parent.window.document).addClass('saDontHijackLinksInThis');
-			if (typeof f==='function') f(mp3site.startApp);
-			*/
-		}
-	},
 	
 	startApp : function () {
         na.analytics.logMetaEvent ('musicPlayer : startApp()');
-        mp3site.vividsInitialized();
-	},
-	
-	vividsInitialized : function () {
-		$('.vividDialog_dialog, #playlist_wrapper, #infoWindow_mp3desc, #infoWindow_comments, #mp3s, #player').css({opacity:0.0001});
+
+        if (mp3site.settings.loaded) return false; else mp3site.settings.loaded = true;
 
         mp3site.setupDragNDrop();
+		$('.vividDialog_dialog, #playlist_wrapper, #infoWindow_mp3desc, #infoWindow_comments, #mp3s, #player').css({opacity:0.0001});
 
-        mp3site.editorInitialized();
-	},
-	
-	editorInitialized : function () {
-		//debugger;
-        na.analytics.logMetaEvent ('musicPlayer : editorInitialized()');
-		if (mp3site.settings.editorInitialized) return false;
-		mp3site.settings.editorInitialized = true;
-	
-		mp3site.hideCommentsEditor();
-		$('#siteBackground_img').fadeIn (700);
-		setTimeout (function() {
-			// now show the previously hidden site widgets and dialogs
-				setTimeout (function() {
-          			mp3site.onWindowResize();
-					
-					// For browsers that do not support the HTML5 History API:
-					if (window.location.hash!=='') mp3site.selectMP3fromLocation (window.location.hash.replace(/#/,''));
-					// For browsers that do support the HTML5 History API:
-					//if (window.location.href.match('play/')) mp3site.selectMP3fromLocation(window.location.href.replace(na.m.globals.urls.app,'').replace(/#.*/,''));
-				},10); // the fade in takes 700!
-		},10);
-	},
-	
-	enterNewComment : function () {
-		var 
-		ed = tinyMCE.get('newComment'),
-		now = new Date(),
-		now_utc = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),  now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds());
-		var entry = {
-			subscription : 'DJ_FireSnake',
-			from : $('#newCommentFrom')[0].value,
-			when : na.m.dateForComments(),
-			whenGetTime : now.getTime(),
-			whenTimezoneOffset : now.getTimezoneOffset(),
-			whenUTC : now_utc.getTime(),
-			comment : ed.getContent()
-		};
-		$.cookie ('commentFrom', $('#newCommentFrom')[0].value);
-		na.comments.newComment (entry, function (result, statusAsText) {
-			$('#comments').prepend (result);
-			window.top.document.body.na.s.c.transformLinks ($('#comments')[0]);
-			na.s.c.hideCommentsEditor();
-		});
-	},
-	
-	removeComment : function (subscriptionName, commentIdx, result, statusAsText) {
-		var $c = $('#fwaComment_subscription_' + subscriptionName + '_item_' + commentIdx);
-		$c.slideUp('slow', function () {
-			$c.remove();
-			na.sp.containerSizeChanged($('#comments')[0]);
-		});
-	},
-	
-	hideCommentsEditor : function () {
-	},
-	
-	showCommentsEditor : function () {
-	},
-	
-	toggleView : function (buttonID, divID) {
-		var d = $('#'+divID)[0];
-		if (!mp3site.settings.toggleView) mp3site.settings.toggleView = {};
-		if (!mp3site.settings.toggleView[divID]) mp3site.settings.toggleView[divID] = false;
-		mp3site.settings.toggleView[divID] = !mp3site.settings.toggleView[divID];
-		$('#'+divID).css ({visibility:'visible'});
-		if (divID=='infoWindow_tools') $('#infoWindow_tools_content').css ({display:'block'});
-		if (mp3site.settings.toggleView[divID]) {
-			$('#'+divID+'').css ({
-				display : 'block',
-				visibility : 'hidden'
-			});
-			$('#'+divID+'').css ({
-				display : 'none',
-				visibility : 'visible',
-				top : ($('#'+buttonID).offset().top + $('#'+buttonID)[0].offsetHeight + 10) + 'px',
-				left : ($('#'+buttonID).offset().left + $('#'+buttonID)[0].offsetWidth - $('#'+divID+'')[0].offsetWidth) + 'px'
-			}).fadeIn('slow');
-		} else {
-			na.vcc.changeState (
-				document.getElementById(buttonID),
-				document.getElementById(buttonID+'__item__0'),
-				'normal'
-			);
-			$('#'+divID+'').fadeOut ('slow');
-		}
+        mp3site.onWindowResize();
 	},
 	
 	queueMP3 : function (id, file) {
@@ -192,28 +60,6 @@ var mp3site = {
         }
 	},
 	
-	selectMP3fromLocation : function (location) {
-		location = location.replace ('/play/', '').replace(/_/g,' ');
-
-		// check if mix to play is already in playlist;
-		var winner = null;
-		var pl = document.getElementById('playlist');
-		for (var i=0; i<pl.children.length; i++) {
-			if (pl.children[i].getAttribute('file').match(location)) winner = pl.children[i];
-		};
-		if (winner) {
-			mp3site.selectMP3 (winner, winner.getAttribute('file'));
-		} else {
-			// mix to play is not in playlist, add it to playlist if we can find it in the main mp3 list;
-			var mp3list = document.getElementById('mp3s');
-			
-			for (var i=0; i<mp3list.children.length; i++) {
-				if (mp3list.children[i].id!='mp3s__images' && mp3list.children[i].getAttribute('file').match(location)) winner = mp3list.children[i];
-			};
-			if (winner) mp3site.queueMP3 (winner, winner.getAttribute('file'));
-		}
-	},
-
 	selectMP3 : function (id, file, firstRun) {
 		mp3site.settings.activeID = id;
 		
@@ -281,43 +127,16 @@ var mp3site = {
             });
             
             
-            setTimeout (function () {
-                /*
-                if ($('#mp3desc__container').length>0) {
-                    $('#mp3desc__container').css ({
-                        height : $('#infoWindow_mp3desc').height() + 'px'
-                    });
-                    na.sp.containerSizeChanged($('#infoWindow_mp3desc')[0]);
-                };
-                na.sp.containerSizeChanged($('#infoWindow_mp3desc')[0]);
-                */
-/*
-                if ($('#infoWindow_mp3desc').css('visibility')=='hidden') {
-                    $('#infoWindow_mp3desc').css ({
-                        display : 'none',
-                        visibility:'visible'
-                    }).fadeIn ('slow');
-                    $('#infoWindow_mp3desc').css({visibility:'visible'});
-                }
-*/						
+            //setTimeout (function () {
                 if (!firstRun) {
                     var 
                     mp3 = '/nicerapp/apps/nicerapp/music/music/'+naLocationBarInfo['apps']['music']['set']+'/' + file;
                     $('#audioTag')[0].src = mp3;
                     $('#audioTag')[0].play();
-                    /*
-                    $('#jplayer.jp-jplayer').jPlayer("setMedia", {
-                        // SLOW, CLOGS ADSL LINE : 
-                        mp3: na.m.globals.urls.app + '/nicerapp/apps/nicerapp/musicPlayer/appContent/musicPlayer/music/'+naLocationBarInfo['apps']['musicPlayer']['set']+'/' + file
-                        //mp3 : na.m.globals.urls.upstream.apps.nicerapp.musicPlayer.cloudhosting['DJ_FireSnake'].saApp.musicPlayer.music['DJ_FireSnake'].hosting['godaddy.com'] + file,
-                    }).jPlayer("play");
-                    */
                     mp3site.settings.stopped = false;
                     mp3site.setTimeDisplayInterval();
                 }
-
-                
-            }, 100);
+            //}, 100);
         });
 
     },
@@ -473,20 +292,15 @@ var mp3site = {
                 return div;
 			}
 		});
-		/*$('#playlist').sortable({
+		$('#playlist').sortable({
 			revert : true,
 			start : function (evt, ui) {
-				//var buttonID = ui.item[0].children[0].id.replace(/__item__0/,'');
-				//na.vcc.settings[buttonID].items[0].ignoreClickEvent = true;
 			},
 			stop : function (evt, ui) {
-				//var buttonID = ui.item[0].children[0].id.replace(/__item__0/,'');
-				//na.vcc.settings[buttonID].items[0].ignoreClickEvent = false;
 			}
-		});*/
+		});
 		$('#playlist').droppable ({
 			drop : function (evt, ui) {
-                //debugger;
                 var pl = $('#playlist')[0];
 				var dragged = $(ui.draggable[0]).clone(true,true)[0];
 				var pc = mp3site.playlistCount;
@@ -503,9 +317,10 @@ var mp3site = {
                 dragged.style.height = '30px';
                 $(dragged).attr('file', original.attr('file'));
                 dragged.file = original.attr('file');
-                $(dragged).attr('onclick','debugger;'+original[0].onclick.toString().replace('function onclick(event) {', '').replace('\n}','').replace (new RegExp(oldID), dragged.id));
+                $(dragged).attr('onclick',''+original[0].onclick.toString().replace('function onclick(event) {', '').replace('\n}','').replace (new RegExp(oldID), dragged.id));
                 
                 pl.append(dragged);
+                $(dragged).remove();
 
                 if (mp3site.settings.stopped) mp3site.selectMP3 (dragged.id, $(dragged).attr('file'), false);
                 mp3site.onWindowResize();
@@ -537,46 +352,21 @@ var mp3site = {
 			mp3site.settings.masterLeftOffset = masterLeftOffset;
 		}
 		
-		$('.vd_btns').css({display:'none'}),
-		failed = false;
-//debugger;
 		var 
 		timeDelay = 10,
 		timeIncrease = 50,
         leftOffset = masterLeftOffset + 20;
-		
-		//debugger;
-			/*
-			function resizeIframe_mp3site () {
-				$(window).resize(function(){
-						$("#siteContent__iframe", window.parent.document.body).css({
-							width:$("#siteContent__contentDimensions", window.parent.document.body)[0].offsetWidth, 
-							height:$("#siteContent__contentDimensions", window.parent.document.body)[0].offsetHeight
-						})
-				});
-				$("#siteContent__iframe", window.parent.document.body).css({
-						width:$("#siteContent__contentDimensions", window.parent.document.body)[0].offsetWidth, 
-						height:$("#siteContent__contentDimensions", window.parent.document.body)[0].offsetHeight
-				});		
-			}*/	
-
-			//resizeIframe();
-			
-			/*
-			$("#siteContent__iframe", window.top.document.body).css({
-				width:$("#siteContent__contentDimensions", window.top.document.body)[0].offsetWidth, 
-				height:$("#siteContent__contentDimensions", window.top.document.body)[0].offsetHeight
-			})*/
-
 			
 		$('#horizontalMover__containmentBox2').css({
 			left : 0,
+            top : 0,
 			width : myWidth - 30,
 			opacity : 0.001,
 			display : 'block'
 		}).animate ({opacity:0.1},1000);
 		$('#horizontalMover__containmentBox1').css({
 			left : 2,
+            top : 0,
 			width : myWidth - 34,
 			opacity : 0.001,
 			display : 'block'
@@ -599,38 +389,32 @@ var mp3site = {
             //}, 1000);
         }
 		
-		//debugger;
-        //na.vcc.applyTheme ('infoWindow_mp3desc');				
-		
-        //setTimeout (function() {
-            $('#infoWindow_mp3desc, #infoWindow_mp3desc__CSS3, #infoWindow_mp3desc__item__0, #infoWindow_mp3desc__item__0__img1, infoWindow_mp3desc__item__0__img2, #infoWindow_mp3desc, #infoWindow_mp3desc').css({
-                position : 'absolute',
-                width : 300,
-                height : (myHeight - 40 - 120) /2,
-                opacity : 1                                                                                                                                                                                                                                                
-            });
-            $('#infoWindow_mp3desc').css({
-                left : leftOffset + 250 + 20,
-                top : 30 + $('#player')[0].offsetHeight + 20,
-                width : 300,
-                height : ((myHeight - 40 - 120) /2),
-                opacity : 1
-            });
-			$('#infoWindow_mp3desc__CSS3').css({
-				width : 300,
-				height : (myHeight - 40 - 120) /2,
-                opacity : 0.5
-			});
-            $('#mp3descText').css({ marginLeft : 40 });
-            
-            
-            $('#infoWindow_mp3desc > table').css({
-                width : '',
-                height : ((myHeight - 40 - 120) /2),
-                opacity : 1
-            });
-        //}, timeDelay);// + (1 * timeIncrease) );
-			
+        $('#infoWindow_mp3desc, #infoWindow_mp3desc__CSS3, #infoWindow_mp3desc__item__0, #infoWindow_mp3desc__item__0__img1, infoWindow_mp3desc__item__0__img2, #infoWindow_mp3desc, #infoWindow_mp3desc').css({
+            position : 'absolute',
+            width : 300,
+            height : (myHeight - 40 - 120) /2,
+            opacity : 1                                                                                                                                                                                                                                                
+        });
+        $('#infoWindow_mp3desc').css({
+            left : leftOffset + 250 + 20,
+            top : 30 + $('#player')[0].offsetHeight + 20,
+            width : 300,
+            height : ((myHeight - 40 - 120) /2),
+            opacity : 1
+        });
+        $('#infoWindow_mp3desc__CSS3').css({
+            width : 300,
+            height : (myHeight - 40 - 120) /2,
+            opacity : 0.5
+        });
+        $('#mp3descText').css({ marginLeft : 40 });
+        
+        
+        $('#infoWindow_mp3desc > table').css({
+            width : '',
+            height : ((myHeight - 40 - 120) /2),
+            opacity : 1
+        });
 	 
 		var dialogMP3sList = '#mp3s';
 		if ($('#infoWindow_mp3desc').length>0) var dialogMP3desc = '#infoWindow_mp3desc'; 
@@ -698,5 +482,5 @@ var mp3site = {
 	
 };
 $(document).ready(function() {
-    mp3site.startAppNested();
+    mp3site.startApp();
 });
