@@ -6,35 +6,35 @@
                 <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape darkmode scenery');">Scenery</a></li>
             </ul>
         </li>
-        <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyVideoHD);">HD Video</a>
+        <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'youtube');">HD Video</a>
             <!-- see .../nicerapp/siteMedia/iframe/youtube -->
             <ul>
-            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyVideoHD, '4K');">4K</a>
+            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'youtube 4K');">4K</a>
                 <ul>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyVideoHD, '4K airtravel');">Air travel</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyVideoHD, '4K animals');">Animals</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyVideoHD, '4K beach');">Beaches</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyVideoHD, '4K car drive');">Car drives</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyVideoHD, '4K city');">Cities</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyVideoHD, '4K drone');">Drone Footage</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyVideoHD, '4K fireplace');">Fireplaces</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyVideoHD, '4K fireplace');">Forest</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyVideoHD, '4K epic');">Game Videos</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyVideoHD, '4K nature');">Nature</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyVideoHD, '4K river');">Rivers</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyVideoHD, '4K slowtv');">SlowTV</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyVideoHD, '4K space');">Space</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'youtube 4K airtravel');">Air travel</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'youtube 4K animals');">Animals</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'youtube 4K beach');">Beaches</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'youtube 4K car drive');">Car drives</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'youtube 4K city');">Cities</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'youtube 4K drone');">Drone Footage</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'youtube 4K fireplace');">Fireplaces</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'youtube 4K fireplace');">Forest</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'youtube 4K epic');">Game Videos</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'youtube 4K nature');">Nature</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'youtube 4K river');">Rivers</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'youtube 4K slowtv');">SlowTV</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'youtube 4K space');">Space</a></li>
                 </ul>
             </li>
-            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyVideoHD, 'beach');">Beaches</a></li>
-            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyVideoHD, 'fireplace');">Fireplaces</a></li>
-            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyVideoHD, 'epic good');">Game Videos</a></li>
-            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyVideoHD, 'music');">Music</a></li>
-            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyVideoHD, 'nature');">Nature</a></li>
-            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyVideoHD, 'slowtv');">Slow TV</a></li>
-            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyVideoHD, 'trains');">Trains</a></li>
-            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyVideoHD, 'vacation');">Vacations</a></li>
-            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyVideoHD, 'women');">Women</a></li>
+            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'youtube beach');">Beaches</a></li>
+            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'youtube fireplace');">Fireplaces</a></li>
+            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'youtube epic good');">Game Videos</a></li>
+            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'youtube music');">Music</a></li>
+            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'youtube nature');">Nature</a></li>
+            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'youtube slowtv');">Slow TV</a></li>
+            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'youtube trains');">Trains</a></li>
+            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'youtube vacation');">Vacations</a></li>
+            <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'youtube women');">Women</a></li>
             </ul>
         </li>
         <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyCGI);">CGI</a>
@@ -196,11 +196,11 @@
             <ul>
             <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyVideoHD);">HD Video</a>
                 <ul>
-                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyVideoHD, 'beaches');">Beaches</a></li>
-                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyVideoHD, 'epic good');">Epic</a></li>
-                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyVideoHD, 'music');">Music</a></li>
-                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyVideoHD, 'nature');">Nature</a></li>
-                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyVideoHD, 'women');">Women</a></li>
+                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', 'youtube beaches');">Beaches</a></li>
+                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', 'youtube epic good');">Epic</a></li>
+                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', 'youtube music');">Music</a></li>
+                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', 'youtube nature');">Nature</a></li>
+                <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', 'youtube women');">Women</a></li>
                 </ul>
             </li>
             <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteContent', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyCGI);">CGI</a>

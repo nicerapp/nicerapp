@@ -294,7 +294,10 @@ class naVividMenu {
 
     onclick(it) {
         var a = $(it.b.el).children('a');
-        if (a.attr('windowName')!=='') {
+        if (
+            typeof a.attr('windowName') == 'string'
+            && a.attr('windowName')!==''
+        ) {
             window.open(a.attr('href'),a.attr('windowName')).focus();
         } else {
             var href = a.attr('href');

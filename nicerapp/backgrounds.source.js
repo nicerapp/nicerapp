@@ -35,17 +35,72 @@ na.backgrounds = {
         var
         url = '/nicerapp/siteMedia/backgrounds'+hits[Math.floor(Math.random() * Math.floor(hits.length))],
         bgf = $(div+' img.bg_first')[0],
-        bgl = $(div+' img.bg_last')[0];
+        bgl = $(div+' img.bg_last')[0],
+        bgDiv = $(div+'_bg')[0];
         
-        bgl.onload=function(){
-            jQuery(bgl).fadeIn(1000, function(){
-                bgf.src = bgl.src;
-                setTimeout (function(){
-                    jQuery(bgl).fadeOut('fast');
-                }, 500);
-            });
-        };
-        bgl.src = url;
+        if (url.match('youtube')) {
+            $(bgf).add(bgl).fadeOut('fast');
+            var ac = {
+                type : 'GET',
+                url : url,
+                success : function (data, ts, xhr) {
+                    var
+                    outsideURL = data;
+                    
+                    if (outsideURL.indexOf('?')===-1) outsideURL += '?'; else outsideURL += '&';
+                    outsideURL += 'wmode=transparent&enablejsapi=1&html5=1&origin='+document.location.href;
+
+                    var vidID = /embed\/(.*)\?/.exec(outsideURL);
+                    if (vidID) {
+                        vidID = vidID[1]; 
+                    } else {
+                        vidID = /watch\?v\=(.*)\&/.exec(outsideURL);
+                        if (vidID) vidID = vidID[1];
+                    };
+
+                    jQuery(bgDiv).tubeplayer('destroy');
+                    jQuery(bgDiv).fadeIn(1500).tubeplayer({
+                        width: jQuery(window).width(),
+                        height: jQuery(window).height(),
+                        initialVideo : vidID,
+                        autoPlay : true,
+                        showControls: true,
+                        showRelated: true,
+                        annotations : false,
+                        showinfo : true,
+                        modestbranding : false,
+                        loop : false,
+                        onPlayerPlaying : function () {
+                            /*if (jQuery(bgDiv).attr('saBGinit')=='true') {
+                                jQuery(bgDiv).attr('saBGinit', 'false');
+                                na.bg.youtube.videoLoaded (el, bgDiv, bgURL, bgContainerIdx, lIdx, layerCount, preFadeInCSS, fadeTime);
+                            }*/
+                        }
+                    });
+                    
+                    //debugger;
+                },
+                failure : function (xhr, ajaxOptions, thrownError) {
+                    debugger;
+                }
+            };
+            $.ajax(ac);
+
+        } else {        
+            bgl.onload=function(){
+                //debugger;
+                jQuery(bgl).fadeIn(1500, function(){
+                    //debugger;
+                    bgf.src = bgl.src;
+                    $(bgf).css ({ display : 'block', opacity : 1 });
+                    jQuery(bgDiv).fadeOut('normal', function(){
+                        $(bgDiv).tubeplayer('destroy');
+                    });
+                });
+            };
+            $(bgl).css({display:'none'});
+            bgl.src = url;
+        }
         $.cookie('siteBackground_img', url, na.m.cookieOptions());
         na.analytics.logMetaEvent ('selectionEngines.random.next : url='+url);
     }

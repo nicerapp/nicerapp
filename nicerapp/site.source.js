@@ -19,7 +19,7 @@ var nas = na.site = {
 
         $('#siteBackground img.bg_first')[0].src = $.cookie('siteBackground_img');
         
-        $('#siteContent .vividDialogContent').focus();
+        $('#siteContent .vividDialogContent').animate({opacity:1},'slow').focus();
         
         $('.vividButton').each(function(idx,el){
             nas.s.buttons['#'+el.id] = new naVividButton(el);
