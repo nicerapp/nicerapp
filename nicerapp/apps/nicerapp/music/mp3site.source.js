@@ -309,7 +309,7 @@ var mp3site = {
                 var 
                 oldID = ui.helper[0].children[0].id,
                 original = $('#'+oldID),
-                newID = 'playlist_'+pc;//ui.helper[0].children[0].id;
+                newID = 'playlist_'+pc;
                 
                 if (oldID.match('playlist_')) return false;
                 dragged.id = newID;
