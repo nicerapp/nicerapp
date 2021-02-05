@@ -1,5 +1,6 @@
 <?php
     global $cms;
+    //echo '<pre>';var_dump ($_SERVER);
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -11,7 +12,7 @@
 <script type="text/javascript">
 na.m.globals = {
     couchdb : <?php echo file_get_contents(dirname(__FILE__).'/couchdb.json');?>,
-    referer : '<?php echo $_SERVER['HTTP_REFERER'];?>',
+    referer : '<?php echo (array_key_exists('HTTP_REFERER',$_SERVER)?$_SERVER['HTTP_REFERER']:'');?>',
     myip : '<?php echo str_replace('.','_',(array_key_exists('X-Forwarded-For',apache_request_headers())?apache_request_headers()['X-Forwarded-For'] : $_SERVER['REMOTE_ADDR']))?>',
     domain : '{$domain}'
 };

@@ -17,7 +17,9 @@ var nas = na.site = {
             $('#btnThemeSwitch, #btnChangeBackground, #siteMenu').addClass('phoneView');
         } 
 
-        $('#siteBackground img.bg_first')[0].src = $.cookie('siteBackground_img');
+        //$('#siteBackground img.bg_first')[0].src = $.cookie('siteBackground_img');
+        if (typeof $.cookie('siteBackground_search')==='string' && $.cookie('siteBackground_search')!=='')
+        na.backgrounds.next ('#siteBackground', $.cookie('siteBackground_search'), $.cookie('siteBackground_url'));
         
         $('#siteContent .vividDialogContent').animate({opacity:1},'slow').focus();
         
