@@ -44,6 +44,8 @@ na.backgrounds = {
         
         if (url.match('youtube')) {
             $(bgf).add(bgl).fadeOut('fast');
+            
+            
             var ac = {
                 type : 'GET',
                 url : url,
@@ -53,7 +55,7 @@ na.backgrounds = {
                     
                     if (outsideURL.indexOf('?')===-1) outsideURL += '?'; else outsideURL += '&';
                     outsideURL += 'wmode=transparent&enablejsapi=1&html5=1&origin='+document.location.href;
-
+                    
                     var vidID = /embed\/(.*)\?/.exec(outsideURL);
                     if (vidID) {
                         vidID = vidID[1]; 
@@ -105,6 +107,7 @@ na.backgrounds = {
             $(bgl).css({display:'none'});
             bgl.src = url;
         }
+        console.log ('background set to '+url);
         $.cookie('siteBackground_search', search, na.m.cookieOptions());
         $.cookie('siteBackground_url', url, na.m.cookieOptions());
         na.analytics.logMetaEvent ('selectionEngines.random.next : url='+url);
