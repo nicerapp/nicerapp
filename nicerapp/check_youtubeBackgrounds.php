@@ -58,5 +58,5 @@ foreach($files as $idx => $file) {
     $output = $header.$data;
     sleep (1);
 }
-echo 'Results : '.count($files).' files, '.$cOffline.' offline';
+echo 'Results : '.count($files).' files, '.$cOffline.' offline' ;
 ?>
