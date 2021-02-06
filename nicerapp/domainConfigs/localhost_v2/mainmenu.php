@@ -66,8 +66,8 @@ function forWidestScreen() {
 ?>
 	<ul style="display:none;">
 		<?php echo require_return (dirname(__FILE__).'/mainmenu.items.apps-games.php');?>
-		<?php //echo require_return (dirname(__FILE__).'/mainmenu.items.dialog-configurations.php');?>
-		<?php //echo require_return (dirname(__FILE__).'/mainmenu.items.dialogs.php');?>
+		<?php echo require_return (dirname(__FILE__).'/mainmenu.items.dialog-configurations.php');?>
+		<?php echo require_return (dirname(__FILE__).'/mainmenu.items.dialogs.php');?>
 		<?php echo require_return (dirname(__FILE__).'/mainmenu.items.new-background.php');?>
 		<?php //echo require_return (dirname(__FILE__).'/mainmenu.items.admin.php');?>		
 		<li class="contentMenu"><a href="-contentMenu-">-contentMenu-</a></li>
@@ -79,14 +79,14 @@ function forMax5itemsWide() {
 ?>
 	<ul style="display:none;">
 		<?php echo require_return (dirname(__FILE__).'/mainmenu.items.apps-games.php');?>
-		<!--<li><a href="#">Site</a>
+		<li><a href="#">Site</a>
 		<ul>
-            <?php //echo require_return (dirname(__FILE__).'/mainmenu.items.dialog-configurations.php');?>
-            <?php //echo require_return (dirname(__FILE__).'/mainmenu.items.dialogs.php');?>
+            <?php echo require_return (dirname(__FILE__).'/mainmenu.items.dialog-configurations.php');?>
+            <?php echo require_return (dirname(__FILE__).'/mainmenu.items.dialogs.php');?>
         </ul>
-        </li>-->
+        </li>
 		<?php echo require_return (dirname(__FILE__).'/mainmenu.items.new-background.php');?>
-		<?php //echo require_return (dirname(__FILE__).'/mainmenu.items.admin.php');?>		
+		<?php echo require_return (dirname(__FILE__).'/mainmenu.items.admin.php');?>		
 		<li class="contentMenu"><a href="-contentMenu-">-contentMenu-</a></li>
 	</ul>
 <?php
@@ -96,13 +96,13 @@ function forMax4itemsWide () {
 ?>
 	<ul style="display:none;">
 		<?php echo require_return (dirname(__FILE__).'/mainmenu.items.apps-games.php');?>
-		<!--<li><a href="#">Site</a>
+		<li><a href="#">Site</a>
 		<ul>
-            <?php //echo require_return (dirname(__FILE__).'/mainmenu.items.dialog-configurations.php');?>
-            <?php //echo require_return (dirname(__FILE__).'/mainmenu.items.dialogs.php');?>
-            <?php //echo require_return (dirname(__FILE__).'/mainmenu.items.admin.php');?>		
+            <?php echo require_return (dirname(__FILE__).'/mainmenu.items.dialog-configurations.php');?>
+            <?php echo require_return (dirname(__FILE__).'/mainmenu.items.dialogs.php');?>
+            <?php echo require_return (dirname(__FILE__).'/mainmenu.items.admin.php');?>		
         </ul>
-        </li>-->
+        </li>
 		<?php echo require_return (dirname(__FILE__).'/mainmenu.items.new-background.php');?>
 		<li class="contentMenu"><a href="-contentMenu-">-contentMenu-</a></li>
 	</ul>
@@ -113,14 +113,14 @@ function forMax3itemsWide () {
 ?>
 	<ul style="display:none;">
 		<?php echo require_return (dirname(__FILE__).'/mainmenu.items.apps-games.php');?>
-		<!--<li><a href="#">Site</a>
-		<ul>-->
-            <?php //echo require_return (dirname(__FILE__).'/mainmenu.items.dialog-configurations.php');?>
-            <?php //echo require_return (dirname(__FILE__).'/mainmenu.items.dialogs.php');?>
+		<li><a href="#">Site</a>
+		<ul>
+            <?php echo require_return (dirname(__FILE__).'/mainmenu.items.dialog-configurations.php');?>
+            <?php echo require_return (dirname(__FILE__).'/mainmenu.items.dialogs.php');?>
             <?php echo require_return (dirname(__FILE__).'/mainmenu.items.new-background.php');?>
-            <?php //echo require_return (dirname(__FILE__).'/mainmenu.items.admin.php');?>		
-        <!--</ul>
-        </li>-->
+            <?php echo require_return (dirname(__FILE__).'/mainmenu.items.admin.php');?>		
+        </ul>
+        </li>
 		<li class="contentMenu"><a href="-contentMenu-">-contentMenu-</a></li>
 	</ul>
 <?php
@@ -132,10 +132,10 @@ function forMax2itemsWide () {
         <li><a href="#">Site</a>
             <ul>
                 <?php echo require_return (dirname(__FILE__).'/mainmenu.items.apps-games.php');?>
-                <?php //echo require_return (dirname(__FILE__).'/mainmenu.items.dialog-configurations.php');?>
-                <?php //echo require_return (dirname(__FILE__).'/mainmenu.items.dialogs.php');?>
+                <?php echo require_return (dirname(__FILE__).'/mainmenu.items.dialog-configurations.php');?>
+                <?php echo require_return (dirname(__FILE__).'/mainmenu.items.dialogs.php');?>
                 <?php echo require_return (dirname(__FILE__).'/mainmenu.items.new-background.php');?>
-                <?php //echo require_return (dirname(__FILE__).'/mainmenu.items.admin.php');?>		
+                <?php echo require_return (dirname(__FILE__).'/mainmenu.items.admin.php');?>		
             </ul>
 		</li>
         <li class="contentMenu"><a href="-contentMenu-">-contentMenu-</a></li>
@@ -149,10 +149,10 @@ function forMax1itemWide () {
         <li><a href="#">Site</a>
             <ul>
                 <?php echo require_return (dirname(__FILE__).'/mainmenu.items.apps-games.php');?>
-                <?php //echo require_return (dirname(__FILE__).'/mainmenu.items.dialog-configurations.php');?>
-                <?php //echo require_return (dirname(__FILE__).'/mainmenu.items.dialogs.php');?>
+                <?php echo require_return (dirname(__FILE__).'/mainmenu.items.dialog-configurations.php');?>
+                <?php echo require_return (dirname(__FILE__).'/mainmenu.items.dialogs.php');?>
                 <?php echo require_return (dirname(__FILE__).'/mainmenu.items.new-background.php');?>
-                <?php //echo require_return (dirname(__FILE__).'/mainmenu.items.admin.php');?>		
+                <?php echo require_return (dirname(__FILE__).'/mainmenu.items.admin.php');?>		
                 <li class="contentMenu"><a href="-contentMenu-">-contentMenu-</a></li>
             </ul>
 		</li>

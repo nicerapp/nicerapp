@@ -1,3 +1,18 @@
+#siteComments {
+    color : white;
+    background : none;
+}
+#siteComments::before {
+    content : "";
+    background : url('/nicerapp/siteMedia/backgrounds/tiled/active/blue/seamless-texture-blue-watercolor.jpg') repeat;
+    opacity : 0.7;
+    z-index : 1100;position: absolute;
+      top: 0px;
+      right: 0px;
+      bottom: 0px;
+      left: 0px;
+}
+
 a {
     color : lime;
     text-decoration : none;

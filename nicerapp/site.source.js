@@ -27,16 +27,21 @@ var nas = na.site = {
             nas.s.buttons['#'+el.id] = new naVividButton(el);
         });
         
+        na.desktop.init();
+        
         $(window).resize (function() {
             $('#siteBackground img').css({
                 width : $(window).width(),
                 height : $(window).height()
             });
+            na.desktop.resize();
+        
             if (nas.s.timeoutWindowResize) clearTimeout(nas.s.timeoutWindowResize);
             nas.s.timeoutWindowResize = setTimeout (function() {
                 nas.onresize();
             }, 250);
         });
+        nas.onresize();
         
         setInterval (nas.updateDateTime, 1000);
         
@@ -52,7 +57,6 @@ var nas = na.site = {
         };
         $.ajax(ac);
 
-        nas.onresize();
         
         na.analytics.logMetaEvent ('startup : html and js fully loaded, browserWidth='+$(window).width()+', browserHeight='+$(window).height()+', referer='+na.m.globals.referer+', userAgent='+navigator.userAgent);
         
@@ -433,6 +437,24 @@ na.m = {
         
         return r;
     },
+    
+	negotiateOptions : function () {
+		// na.m.negotiateOptions() can't handle functions, and I dont trust jQuery.extend
+		var r = {};
+		for (var i = 0; i < arguments.length; i++) {
+			var a = arguments[i];
+			if (typeof a=='object' && a!==null && typeof a.length=='number') r =[];
+			if (a===null || typeof a==='undefined') continue;
+			for (k in a) {
+				if (typeof a[k] == 'object') {
+					r[k] = na.m.negotiateOptions(r[k], a[k]);
+				} else {
+					r[k] = a[k];
+				}
+			}
+		}
+		return r;
+	},
     
     extend : function () {
 		var r = arguments[0];
