@@ -39,6 +39,9 @@ na.m.globals = {
     </div>
     </div>
     
+    <div id="siteComments" class="vividDialog" theme="{$theme}">
+    </div>
+    
     <div id="siteDateTime" class="vividDialog" theme="{$theme}"></div>
     
     <img id="btnThemeSwitch" src="/nicerapp/siteMedia/btnThemeSwitch_icon.png" class="tooltip" title="Switch between light and dark theme" alt="Switch between light and dark theme" tooltipTheme="mainTooltipTheme" onclick="nas.themeSwitch()"/>
