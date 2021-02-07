@@ -97,9 +97,9 @@ $htmlTitleMeta = file_get_contents ($setPath.'/index.title_meta.html');
             }
             ?>
         </audio>
-		<table id="player_table" style="margin-left:35px;visibility:hidden;">
+		<table id="player_table" style="margin-left:30px;visibility:hidden;width:100%;">
 			<tr>
-				<td>
+				<td style="width:92%">
 					<div id="jplayer" class="jp-jplayer"></div>
 					<div id="jp_container_1" class="jp-audio">
 						<div class="jp-type-single">
