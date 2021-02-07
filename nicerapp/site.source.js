@@ -9,9 +9,9 @@ var nas = na.site = {
     settings : {
         defaultStatusMsg : (
             $.cookie('agreedToPolicies')!=='true'
-            ? '<table style="width:100%;"><tr><td>This site uses cookies for remembering user settings, analytics and advertising.<br/>'
+            ? '<table style="width:100%;height:100%;"><tr><td>This site uses cookies for remembering user settings, analytics and advertising.<br/>'
                 + 'By using this site, you agree to such cookies getting stored on, and read from, your computer.</td><td style="width:220px;"><div class="vividButton" theme="dark" style="position:relative;color:white;" onclick="na.site.dismissCookieWarning();">Ok</div></td></table>'
-            : 'Copyright (c) and All Rights Reserved (r) 2021 by Rene A.J.M. Veerman'
+            : '<table style="width:100%;height:100%;"><tr><td>Copyright (c) and All Rights Reserved (r) 2021 by Rene A.J.M. Veerman</td><td style="width:220px;"><div class="vividButton" theme="dark" style="position:relative;color:white;" onclick="na.site.dismissCopyrightMessage();">Ok</div></td></table>'
         ),
         buttons : {},
         menus : {}
@@ -24,11 +24,19 @@ var nas = na.site = {
         
     },
     
+    dismissCopyrightMessage : function () {
+        $.cookie('showStatusbar', 'false', na.m.cookieOptions());
+        na.desktop.settings.visibleDivs.remove('#siteStatusbar');
+        na.desktop.resize();
+    },
+    
     onload : function (evt) {
         if (na.m.userDevice.isPhone) {
             $('#siteDateTime').css({display:'none'});
             $('#btnThemeSwitch, #btnChangeBackground, #siteMenu').addClass('phoneView');
-        } 
+        } else {
+            na.d.s.visibleDivs[na.d.s.visibleDivs.length] = '#siteDateTime';
+        }
 
         //$('#siteBackground img.bg_first')[0].src = $.cookie('siteBackground_img');
         if (typeof $.cookie('siteBackground_search')==='string' && $.cookie('siteBackground_search')!=='')
@@ -40,7 +48,8 @@ var nas = na.site = {
             nas.s.buttons['#'+el.id] = new naVividButton(el);
         });
         
-        na.site.setStatusMsg(na.site.settings.defaultStatusMsg);
+        if ($.cookie('agreedToPolicies')!=='true') $.cookie('showStatusbar', 'true', na.m.cookieOptions());
+        na.site.setStatusMsg(na.site.settings.defaultStatusMsg); // calls na.desktop.resize() as well
         na.desktop.init();
         
         $(window).resize (function() {
@@ -48,14 +57,12 @@ var nas = na.site = {
                 width : $(window).width(),
                 height : $(window).height()
             });
-            na.desktop.resize();
         
             if (nas.s.timeoutWindowResize) clearTimeout(nas.s.timeoutWindowResize);
             nas.s.timeoutWindowResize = setTimeout (function() {
                 nas.onresize();
             }, 250);
         });
-        nas.onresize();
         
         setInterval (nas.updateDateTime, 1000);
         
@@ -107,7 +114,7 @@ var nas = na.site = {
             
             if (el.id=='btnThemeSwitch') {
                 nas.settings.btnThemeSwitch = this;
-                $(el).poshytip({
+                var ptSettings = {
                     className : $(el).attr('tooltipTheme'),//'mainTooltipTheme',
                     contentAsHTML : true,
                     content : $(el).attr('title'),
@@ -118,7 +125,9 @@ var nas = na.site = {
                     fade : true,
                     slide : true,
                     slideOffset : 25
-                });
+                };
+                if (na.m.userDevice.isPhone) ptSettings.showOn = 'none';
+                $(el).poshytip(ptSettings);
                 $(this).poshytip('show');
                 $(this).poshytip('hide');
                 $(this).addClass('started');
@@ -131,7 +140,7 @@ var nas = na.site = {
                 
             } else if (el.id=='btnChangeBackground') {
                 nas.settings.btnChangeBackground = el;
-                $(el).poshytip({
+                var ptSettings = {
                     className : $(el).attr('tooltipTheme'),//'mainTooltipTheme',
                     contentAsHTML : true,
                     content : $(el).attr('title'),
@@ -142,7 +151,9 @@ var nas = na.site = {
                     fade : true,
                     slide : true,
                     slideOffset : 25
-                });
+                };
+                if (na.m.userDevice.isPhone) ptSettings.showOn = 'none';
+                $(el).poshytip(ptSettings);
                 $(el).poshytip('show');
                 $(el).poshytip('hide');
                 $(el).addClass('started');
@@ -156,13 +167,15 @@ var nas = na.site = {
                 }, 7270);
                 
             } else {
-                $(el).poshytip({
+                var ptSettings = {
                     theme : $(el).attr('tooltipTheme'),//'mainTooltipTheme',
                     contentAsHTML : true,
                     content : $(el).attr('title'),
                     animation : 'grow',
                     offset : 10
-                });
+                };
+                if (na.m.userDevice.isPhone) ptSettings.showOn = 'none';
+                $(el).poshytip(ptSettings);
             }
         });
     },
@@ -178,7 +191,7 @@ var nas = na.site = {
         
         if ($(window).width() < 1000) {
             jQuery('#siteContent, #siteStatusbar').css ({ fontSize : '70%' });
-            jQuery('#siteStatusbar').css({height:'5rem'});
+            jQuery('#siteStatusbar').css({height:'5.5rem'});
             jQuery('#siteStatusbar .vividButton').css({width : 50});
             jQuery('#siteStatusbar td:nth-child(2)').css({width:55});
             jQuery('#tableFor_saCompanyLogo').css ({ width : 80, height : 80 });
@@ -205,7 +218,9 @@ var nas = na.site = {
             jQuery('.td_spacer').css ({ height : 100 });
             jQuery('#headerSiteDiv').css ({ height : 200, width : 320 });
             jQuery('#headerSiteDiv div').css ({ height : 10, width : 320 });
-        };        
+        }; 
+        
+        na.desktop.resize();
     },
     
     reloadMenu : function() {
@@ -242,8 +257,11 @@ var nas = na.site = {
     },
     
     setStatusMsg : function (msg) {
-        $('#siteStatusbar').animate({opacity:0.0001},'slow', function () {
-            $('#siteStatusbar').html(msg).animate({opacity:1},'slow').css({display:'flex'});
+        na.site.onresize();
+        $('#siteStatusbar .vividDialogContent').animate({opacity:0.0001},'slow', function () {
+            $('#siteStatusbar .vividDialogContent').html(msg).css({display:'block',margin:0}).animate({opacity:1},'slow');
+            
+            na.site.onresize();
             
             if (msg !== na.site.settings.defaultStatusMsg)
             setTimeout (function () {
@@ -547,6 +565,17 @@ Date.prototype.stdTimezoneOffset = function() {
 Date.prototype.dst = function() {
 	return (this.getTimezoneOffset() < this.stdTimezoneOffset());
 };	
+
+Array.prototype.remove = function() {
+    var what, a = arguments, L = a.length, ax;
+    while (L && this.length) {
+        what = a[--L];
+        while ((ax = this.indexOf(what)) !== -1) {
+            this.splice(ax, 1);
+        }
+    }
+    return this;
+};
 
 window.onerror = function (msg, url, lineno, colno, error) {
     console.log (msg+'\n'+url+'\n'+lineno+' - '+colno+'\n'+error);

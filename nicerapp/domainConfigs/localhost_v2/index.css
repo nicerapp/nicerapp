@@ -39,7 +39,6 @@ img.bg_last {
 }
 .vividDialogContent {
     overflow : auto;
-    display : none;
     margin : 10px;
     /*width : calc(98vw - 15px);
     height: calc(100vh - 120px);*/
@@ -50,6 +49,13 @@ img.bg_last {
 }
 .vividDialogContent table, .vividDialogContent td {
     z-index : 1101;
+}
+
+#siteDateTime {
+    display : flex;
+    justify-content : center;
+    align-items : center;
+    text-align : center;
 }
 
 #siteComments {
@@ -65,6 +71,11 @@ img.bg_last {
     left : 1vw;
     width : 98vw;
 }
+#siteStatusbar .vividDialogContent td {
+    vertical-align: middle;
+}
+
+
 
 #siteVideo {
     top : 2vh;
@@ -82,15 +93,13 @@ img.bg_last {
 
 .vividDialog {
     position : absolute;
-    display : none;
+    display : block;
     z-index : 1000;
-    justify-content : center;
-    align-items : center;
 }
 .vividButton, .vividMenu {
     position : absolute;
     display : flex;
-    font-size : 0.8rem;
+    font-size : 0.55rem;
     z-index : 1000;
     justify-content : center;
     align-items : center;
@@ -101,8 +110,8 @@ img.bg_last {
     justify-content : center;
     align-items : center;
     text-align : center;
-    width : 200px;
-    height : 1rem;
+    width : 150px;
+    height : 0.7rem;
     font-size : 0.8rem;
     font-weight : bold;
 }
@@ -176,7 +185,7 @@ img.bg_last {
 #siteMenu {
     top : 1vh;
     left : calc(2vw + 340px);
-    width : 5vw;
+    width : 220px;
     height : 1.5rem;
 }
 #siteMenu.phoneView {

@@ -48,7 +48,8 @@ $htmlTitleMeta = file_get_contents ($setPath.'/index.title_meta.html');
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>    
     <script src="/nicerapp/3rd-party/jQuery/cookie/jquery.cookie.js" crossorigin="anonymous"></script>    
-    
+    <script src="/nicerapp/3rd-party/jQuery/poshytip/src/jquery.poshytip.js" crossorigin="anonymous"></script>    
+    <script type="text/javascript" src="/nicerapp/3rd-party/jQuery/jquery.tubeplayer-1.1.6.source.js"></script>  
     <script src="/nicerapp/3rd-party/jQuery/tooltipster/dist/js/tooltipster.bundle.js" integrity="sha256-zlPjbp8aqrjCJtu4LM5w1RIZVE5UBAL7hiyApuqhQhg=" crossorigin="anonymous"></script>    
 	<script type="text/javascript" src="/nicerapp/apps/nicerapp/music/mp3site.source.js?changed=<?php echo date('Ymd-His', filectime(dirname(__FILE__).'/mp3site.source.js'));?>"></script>
 

@@ -377,137 +377,192 @@ na.canvasLogo = na.logo = {
         //console.log ('COLOR ANIMATION 1');
         //console.log (x);
         
-        
-        var
-        // all angles are in degrees.
-        animDegreesCount = 360,
-        outlyingShapesCount = 4,
-        squareASDangle = 0,
-        animCalculationData = [];
-        for (var i=0; i<animDegreesCount; i++) {
-            var 
-            animStep = [];
-            for (var j=0; j<outlyingShapesCount; j++) {
+
+            var
+            // all angles are in degrees.
+            animDegreesCount = 360,
+            outlyingShapesCount = 4,
+            squareASDangle = 0,
+            animCalculationData = [];
+            for (var i=0; i<animDegreesCount; i++) {
                 var 
-                squareASDangle = -90 + ((360/animDegreesCount)*i)+((360/outlyingShapesCount)*j),
-                asd = { // asd = animStepData
-                    sas : squareASDangle, //sas = stepAngleSquare
-                    sas1 : squareASDangle - (dbg.angleBetweenPoint1and2/2),
-                    sas2 : squareASDangle + (dbg.angleBetweenPoint1and2/2),
-                    sas3 : squareASDangle - (dbg.angleBetweenPoint3and4/2),
-                    sas4 : squareASDangle + (dbg.angleBetweenPoint3and4/2),
-                    sat5 : squareASDangle + dbg.angleToPoint5,// sat = stepAngleTriangle
-                    sat6 : squareASDangle + dbg.angleToPoint6,
-                    sat7 : squareASDangle + dbg.angleToPoint7,
-                    dtp5 : dbg.dtp5, // dtp = distanceToPoint
-                    dtp6 : dbg.dtp6,
-                    dtp7 : dbg.dtp7,
-                    shapeSquare : new createjs.Shape(),
-                    shapeSquareShadow : new createjs.Shape(),
-                    shapeTriangle : new createjs.Shape(),
-                    shapeTriangleShadow : new createjs.Shape()
+                animStep = [];
+                for (var j=0; j<outlyingShapesCount; j++) {
+                    var 
+                    squareASDangle = -90 + ((360/animDegreesCount)*i)+((360/outlyingShapesCount)*j),
+                    asd = { // asd = animStepData
+                        sas : squareASDangle, //sas = stepAngleSquare
+                        sas1 : squareASDangle - (dbg.angleBetweenPoint1and2/2),
+                        sas2 : squareASDangle + (dbg.angleBetweenPoint1and2/2),
+                        sas3 : squareASDangle - (dbg.angleBetweenPoint3and4/2),
+                        sas4 : squareASDangle + (dbg.angleBetweenPoint3and4/2),
+                        sat5 : squareASDangle + dbg.angleToPoint5,// sat = stepAngleTriangle
+                        sat6 : squareASDangle + dbg.angleToPoint6,
+                        sat7 : squareASDangle + dbg.angleToPoint7,
+                        dtp5 : dbg.dtp5, // dtp = distanceToPoint
+                        dtp6 : dbg.dtp6,
+                        dtp7 : dbg.dtp7,
+                        shapeSquare : new createjs.Shape(),
+                        shapeSquareShadow : new createjs.Shape(),
+                        shapeTriangle : new createjs.Shape(),
+                        shapeTriangleShadow : new createjs.Shape()
+                    };
+                    while (asd.sas1 < 0) asd.sas1 += 360;
+                    while (asd.sas1 > 360) asd.sas1 -= 360;
+                    while (asd.sas2 < 0) asd.sas2 += 360;
+                    while (asd.sas2 > 360) asd.sas2 -= 360;
+                    while (asd.sas3 < 0) asd.sas3 += 360;
+                    while (asd.sas3 > 360) asd.sas3 -= 360;
+                    while (asd.sas4 < 0) asd.sas4 += 360;
+                    while (asd.sas4 > 360) asd.sas4 -= 360;
+                    while (asd.sat5 < 0) asd.sat5 += 360;
+                    while (asd.sat5 > 360) asd.sat5 -= 360;
+                    while (asd.sat6 < 0) asd.sat6 += 360;
+                    while (asd.sat6 > 360) asd.sat6 -= 360;
+                    while (asd.sat7 < 0) asd.sat7 += 360;
+                    while (asd.sat7 > 360) asd.sat7 -= 360;
+    
+                    asd.point0 = {x:w/2, y:h/2};
+                    //square
+                    asd.point1 = xyc.pointOnCircumference(w/2,h/2,asd.sas1,cOuterRadius);
+                    asd.point2 = xyc.pointOnCircumference(w/2,h/2,asd.sas2,cOuterRadius);
+                    asd.point3 = xyc.pointOnCircumference(w/2,h/2,asd.sas3,cOuterRadius+(squareWidth));
+                    asd.point4 = xyc.pointOnCircumference(w/2,h/2,asd.sas4,cOuterRadius+(squareWidth));
+                    //triangle or arrow-head
+                    asd.point5 = xyc.pointOnCircumference(w/2,h/2,asd.sat5, asd.dtp5);
+                    asd.point6 = xyc.pointOnCircumference(w/2,h/2,asd.sat6, asd.dtp6);
+                    asd.point7 = xyc.pointOnCircumference(w/2,h/2,asd.sat7, asd.dtp7);
+                    //if (i===0 && j===0) debugger;
+                    
+                    asd.shapeSquare.colorStroke = colorSquaresStroke;
+                    asd.shapeSquare.colorFill = colorSquaresFill;
+                    asd.shapeSquare.graphics
+                        .setStrokeStyle (squareStrokeStyle.width, squareStrokeStyle.style)
+                        .beginStroke(colorSquaresStroke)
+                        .beginFill(colorSquaresFill);
+                    asd.shapeSquareShadow.colorStroke = sqShadow.colorStroke;
+                    asd.shapeSquareShadow.colorFill = sqShadow.colorFdbg0ill;
+                    asd.shapeSquareShadow.graphics
+                        .setStrokeStyle (sqShadow.width, squareStrokeStyle.style)
+                        .beginStroke(sqShadow.colorStroke)
+                        .beginFill(sqShadow.colorFill);
+                        
+                    asd.shapeTriangle.colorStroke = colorTrianglesStroke;
+                    asd.shapeTriangle.colorFill = colorTrianglesFill;
+                    asd.shapeTriangle.graphics
+                        .setStrokeStyle (triangleStrokeStyle.width, triangleStrokeStyle.style)
+                        .beginStroke(colorTrianglesStroke)
+                        .beginFill(colorTrianglesFill);
+                    asd.shapeTriangleShadow.colorStroke = trShadow.colorStroke;
+                    asd.shapeTriangleShadow.colorFill = trShadow.colorFill;
+                    asd.shapeTriangleShadow.graphics
+                        .setStrokeStyle (trShadow.width, triangleStrokeStyle.style)
+                        .beginStroke(trShadow.colorStroke)
+                        .beginFill(trShadow.colorFill);
+                        
+                    //squareASDangle += (360/animDegreesCount);
+                    animStep.push (asd);
                 };
-                while (asd.sas1 < 0) asd.sas1 += 360;
-                while (asd.sas1 > 360) asd.sas1 -= 360;
-                while (asd.sas2 < 0) asd.sas2 += 360;
-                while (asd.sas2 > 360) asd.sas2 -= 360;
-                while (asd.sas3 < 0) asd.sas3 += 360;
-                while (asd.sas3 > 360) asd.sas3 -= 360;
-                while (asd.sas4 < 0) asd.sas4 += 360;
-                while (asd.sas4 > 360) asd.sas4 -= 360;
-                while (asd.sat5 < 0) asd.sat5 += 360;
-                while (asd.sat5 > 360) asd.sat5 -= 360;
-                while (asd.sat6 < 0) asd.sat6 += 360;
-                while (asd.sat6 > 360) asd.sat6 -= 360;
-                while (asd.sat7 < 0) asd.sat7 += 360;
-                while (asd.sat7 > 360) asd.sat7 -= 360;
- 
-                asd.point0 = {x:w/2, y:h/2};
-                //square
-                asd.point1 = xyc.pointOnCircumference(w/2,h/2,asd.sas1,cOuterRadius);
-                asd.point2 = xyc.pointOnCircumference(w/2,h/2,asd.sas2,cOuterRadius);
-                asd.point3 = xyc.pointOnCircumference(w/2,h/2,asd.sas3,cOuterRadius+(squareWidth));
-                asd.point4 = xyc.pointOnCircumference(w/2,h/2,asd.sas4,cOuterRadius+(squareWidth));
-                //triangle or arrow-head
-                asd.point5 = xyc.pointOnCircumference(w/2,h/2,asd.sat5, asd.dtp5);
-                asd.point6 = xyc.pointOnCircumference(w/2,h/2,asd.sat6, asd.dtp6);
-                asd.point7 = xyc.pointOnCircumference(w/2,h/2,asd.sat7, asd.dtp7);
-                //if (i===0 && j===0) debugger;
-                
-                asd.shapeSquare.colorStroke = colorSquaresStroke;
-                asd.shapeSquare.colorFill = colorSquaresFill;
-                asd.shapeSquare.graphics
-                    .setStrokeStyle (squareStrokeStyle.width, squareStrokeStyle.style)
-                    .beginStroke(colorSquaresStroke)
-                    .beginFill(colorSquaresFill);
-                asd.shapeSquareShadow.colorStroke = sqShadow.colorStroke;
-                asd.shapeSquareShadow.colorFill = sqShadow.colorFdbg0ill;
-                asd.shapeSquareShadow.graphics
-                    .setStrokeStyle (sqShadow.width, squareStrokeStyle.style)
-                    .beginStroke(sqShadow.colorStroke)
-                    .beginFill(sqShadow.colorFill);
-                    
-                asd.shapeTriangle.colorStroke = colorTrianglesStroke;
-                asd.shapeTriangle.colorFill = colorTrianglesFill;
-                asd.shapeTriangle.graphics
-                    .setStrokeStyle (triangleStrokeStyle.width, triangleStrokeStyle.style)
-                    .beginStroke(colorTrianglesStroke)
-                    .beginFill(colorTrianglesFill);
-                asd.shapeTriangleShadow.colorStroke = trShadow.colorStroke;
-                asd.shapeTriangleShadow.colorFill = trShadow.colorFill;
-                asd.shapeTriangleShadow.graphics
-                    .setStrokeStyle (trShadow.width, triangleStrokeStyle.style)
-                    .beginStroke(trShadow.colorStroke)
-                    .beginFill(trShadow.colorFill);
-                    
-                //squareASDangle += (360/animDegreesCount);
-                animStep.push (asd);
+                animCalculationData.push(animStep);
             };
-            animCalculationData.push(animStep);
-        };
-        //console.log ('CIRCLE ANIMATION CALCULATION DATA');
-        //console.log (animCalculationData);
-        var
-        doAnim_rotation = true;
-        doAnim_colors = true;
-        
-        if (doAnim_colors && doAnim_rotation) {
-            if (colorSchemeSquaresStroke) {
-                var
-                colorAnim_stepsCount = 77,
-                colorAnim_step = 0,
-                rotationAnim_stepsCount = 5;
-                colorAnimSquaresStroke = na.colorGradients.generateList_basic (colorSchemeSquaresStroke, colorAnim_stepsCount),
-                colorAnimSquaresFill = na.colorGradients.generateList_basic (colorSchemeSquaresFill, colorAnim_stepsCount),
-                colorAnimTrianglesStroke = na.colorGradients.generateList_basic (colorSchemeTrianglesStroke, colorAnim_stepsCount),
-                colorAnimTrianglesFill = na.colorGradients.generateList_basic (colorSchemeTrianglesFill, colorAnim_stepsCount);
-                if (na.logo.settings.timeouts) {
-                    for (var m=0; m<na.logo.settings.timeouts.length; m++) {
-                        clearTimeout (na.logo.settings.timeouts[m]);
-                    }
+            //console.log ('CIRCLE ANIMATION CALCULATION DATA');
+            //console.log (animCalculationData);
+            var
+            doAnim_rotation = true;
+            doAnim_colors = true;
+            
+            if (doAnim_colors && doAnim_rotation) {
+                if (colorSchemeSquaresStroke) {
+                    var
+                    colorAnim_stepsCount = 77,
+                    colorAnim_step = 0,
+                    rotationAnim_stepsCount = 5;
+                    colorAnimSquaresStroke = na.colorGradients.generateList_basic (colorSchemeSquaresStroke, colorAnim_stepsCount),
+                    colorAnimSquaresFill = na.colorGradients.generateList_basic (colorSchemeSquaresFill, colorAnim_stepsCount),
+                    colorAnimTrianglesStroke = na.colorGradients.generateList_basic (colorSchemeTrianglesStroke, colorAnim_stepsCount),
+                    colorAnimTrianglesFill = na.colorGradients.generateList_basic (colorSchemeTrianglesFill, colorAnim_stepsCount);
+                    if (na.logo.settings.timeouts) {
+                        for (var m=0; m<na.logo.settings.timeouts.length; m++) {
+                            clearTimeout (na.logo.settings.timeouts[m]);
+                        }
+                    } else {
+                        na.logo.settings.timeouts = [];
+                    };
+                    for (var rotationAnim_step=0; rotationAnim_step<rotationAnim_stepsCount; rotationAnim_step++) {
+                        na.logo.settings.timeouts.push(setTimeout (function (rotationAnim_step) {
+                            for (var i=0; i<animDegreesCount; i++) {
+                                na.logo.settings.timeouts.push(setTimeout (function(rotationAnim_step, i) {
+                                    var 
+                                    animStep = animCalculationData[i];
+                                    
+                                    colorAnim_step++;
+                                    if (colorAnim_step>=colorAnim_stepsCount) colorAnim_step=0;
+                                    //console.log ('CIRCLE ANIMATION STEP CALCULATION DATA');
+                                    //console.log (animStep);
+                                    for (var j=0; j<outlyingShapesCount; j++) {
+                                        asd = animStep[j];
+
+                                        for (var l=0; l<animDegreesCount; l++) {
+                                            stage.removeChild(animCalculationData[l][j].childSquare);
+                                            stage.removeChild(animCalculationData[l][j].childSquareShadow);
+                                            stage.removeChild(animCalculationData[l][j].childTriangle);
+                                            stage.removeChild(animCalculationData[l][j].childTriangleShadow);
+                                        }
+                    
+                                        var dc = { // dc = drawCommand
+                                            stage : stage,
+                                            canvasContext : canvasContext,
+                                            asd : asd, // asd = animationStepData
+                                            i : i, // animCalculationData[i]
+                                            j : j, // animCalculationData[i][j]
+                                            sqShadow : sqShadow,
+                                            trShadow : trShadow,
+                                            animDegreesCount : animDegreesCount,
+                                            rotationAnim_step : rotationAnim_step,
+                                            colorAnim_stepsCount : colorAnim_stepsCount,
+                                            colorAnim_step : colorAnim_step,
+                                            colorSquaresFill : colorAnimSquaresFill,
+                                            colorSquaresStroke : colorAnimSquaresStroke,
+                                            squareStrokeStyle : squareStrokeStyle,
+                                            colorTrianglesFill : colorAnimTrianglesFill,
+                                            colorTrianglesStroke : colorAnimTrianglesStroke,
+                                            triangleStrokeStyle : triangleStrokeStyle
+                                        };
+                                        na.canvasLogo.drawSquaresAndTriangles_do(dc);
+                                    }
+                                    stage.update();
+                                }, 50+(10*i), rotationAnim_step, i));
+                            }
+                        }, rotationAnim_step*(50+(10*animDegreesCount)+(390*rotationAnim_stepsCount)+(5*colorAnim_stepsCount)), rotationAnim_step));
+                    };
+                    
                 } else {
-                    na.logo.settings.timeouts = [];
+                    console.log ('na.canvasLogo : FATAL ERROR - CAN NOT DETERMINE LIST OF COLORS FOR COLOR ANIMATION');
+                    debugger;
                 };
-                for (var rotationAnim_step=0; rotationAnim_step<rotationAnim_stepsCount; rotationAnim_step++) {
-                    na.logo.settings.timeouts.push(setTimeout (function (rotationAnim_step) {
-                        for (var i=0; i<animDegreesCount; i++) {
-                            na.logo.settings.timeouts.push(setTimeout (function(rotationAnim_step, i) {
-                                var 
-                                animStep = animCalculationData[i];
-                                
-                                colorAnim_step++;
-                                if (colorAnim_step>=colorAnim_stepsCount) colorAnim_step=0;
+                
+            } else if (doAnim_rotation) {
+                for (var rotationAnim_step=0; rotationAnim_step<5; rotationAnim_step++) {
+                    setTimeout (function() {
+                        for (var i=0; i<animDegreesCount; i++) {        
+                            setTimeout (function(i) {
+                                var animStep = animCalculationData[i];
                                 //console.log ('CIRCLE ANIMATION STEP CALCULATION DATA');
                                 //console.log (animStep);
                                 for (var j=0; j<outlyingShapesCount; j++) {
                                     asd = animStep[j];
 
-                                    for (var l=0; l<animDegreesCount; l++) {
-                                        stage.removeChild(animCalculationData[l][j].childSquare);
-                                        stage.removeChild(animCalculationData[l][j].childSquareShadow);
-                                        stage.removeChild(animCalculationData[l][j].childTriangle);
-                                        stage.removeChild(animCalculationData[l][j].childTriangleShadow);
-                                    }
+                                    if (i>1) {
+                                        var k = i-1;
+                                    } else if (i===1) {
+                                        var k = 0;
+                                    } else if (i===0) {
+                                        var k = 359;
+                                    };
+                                    stage.removeChild(animCalculationData[k][j].childSquare);
+                                    stage.removeChild(animCalculationData[k][j].childSquareShadow);
+                                    stage.removeChild(animCalculationData[k][j].childTriangle);
+                                    stage.removeChild(animCalculationData[k][j].childTriangleShadow);
                 
                                     var dc = { // dc = drawCommand
                                         stage : stage,
@@ -519,51 +574,36 @@ na.canvasLogo = na.logo = {
                                         trShadow : trShadow,
                                         animDegreesCount : animDegreesCount,
                                         rotationAnim_step : rotationAnim_step,
-                                        colorAnim_stepsCount : colorAnim_stepsCount,
-                                        colorAnim_step : colorAnim_step,
-                                        colorSquaresFill : colorAnimSquaresFill,
-                                        colorSquaresStroke : colorAnimSquaresStroke,
-                                        squareStrokeStyle : squareStrokeStyle,
-                                        colorTrianglesFill : colorAnimTrianglesFill,
-                                        colorTrianglesStroke : colorAnimTrianglesStroke,
-                                        triangleStrokeStyle : triangleStrokeStyle
+                                        colorAnim_stepsCount : 0,
+                                        colorSquaresFill : colorSquaresFill,
+                                        colorSquaresStroke : colorSquaresStroke,
+                                        colorTrianglesFill : colorTrianglesFill,
+                                        colorTrianglesStroke : colorTrianglesStroke
                                     };
                                     na.canvasLogo.drawSquaresAndTriangles_do(dc);
                                 }
                                 stage.update();
-                            }, 50+(10*i), rotationAnim_step, i));
-                        }
-                    }, rotationAnim_step*(50+(10*animDegreesCount)+(390*rotationAnim_stepsCount)+(5*colorAnim_stepsCount)), rotationAnim_step));
+                            }, 50+(25*i), i);
+                        };
+                    }, (360*30*rotationAnim_step));
                 };
                 
-            } else {
-                console.log ('na.canvasLogo : FATAL ERROR - CAN NOT DETERMINE LIST OF COLORS FOR COLOR ANIMATION');
-                debugger;
-            };
-            
-        } else if (doAnim_rotation) {
-            for (var rotationAnim_step=0; rotationAnim_step<5; rotationAnim_step++) {
-                setTimeout (function() {
-                    for (var i=0; i<animDegreesCount; i++) {        
-                        setTimeout (function(i) {
-                            var animStep = animCalculationData[i];
-                            //console.log ('CIRCLE ANIMATION STEP CALCULATION DATA');
-                            //console.log (animStep);
+            } else if (doAnim_colors) {
+                if (colorSchemeSquaresStroke) {
+                    var
+                    colorAnim_stepsCount = 100,
+                    colorAnimSquaresStroke = na.colorGradients.generateList_basic (colorSchemeSquaresStroke, colorAnim_stepsCount),
+                    colorAnimSquaresFill = na.colorGradients.generateList_basic (colorSchemeSquaresFill, colorAnim_stepsCount),
+                    colorAnimTrianglesStroke = na.colorGradients.generateList_basic (colorSchemeTrianglesStroke, colorAnim_stepsCount),
+                    colorAnimTrianglesFill = na.colorGradients.generateList_basic (colorSchemeTrianglesFill, colorAnim_stepsCount),
+                    i = 0,
+                    animStep = animCalculationData[i];
+                    //console.log ('dc CALCULATION DATA');
+                    //console.log (animStep);
+                    for (var colorAnim_step=0; colorAnim_step<colorAnim_stepsCount; colorAnim_step++) {
+                        setTimeout (function(colorAnim_step) {
                             for (var j=0; j<outlyingShapesCount; j++) {
                                 asd = animStep[j];
-
-                                if (i>1) {
-                                    var k = i-1;
-                                } else if (i===1) {
-                                    var k = 0;
-                                } else if (i===0) {
-                                    var k = 359;
-                                };
-                                stage.removeChild(animCalculationData[k][j].childSquare);
-                                stage.removeChild(animCalculationData[k][j].childSquareShadow);
-                                stage.removeChild(animCalculationData[k][j].childTriangle);
-                                stage.removeChild(animCalculationData[k][j].childTriangleShadow);
-             
                                 var dc = { // dc = drawCommand
                                     stage : stage,
                                     canvasContext : canvasContext,
@@ -572,99 +612,59 @@ na.canvasLogo = na.logo = {
                                     j : j, // animCalculationData[i][j]
                                     sqShadow : sqShadow,
                                     trShadow : trShadow,
-                                    animDegreesCount : animDegreesCount,
-                                    rotationAnim_step : rotationAnim_step,
-                                    colorAnim_stepsCount : 0,
-                                    colorSquaresFill : colorSquaresFill,
-                                    colorSquaresStroke : colorSquaresStroke,
-                                    colorTrianglesFill : colorTrianglesFill,
-                                    colorTrianglesStroke : colorTrianglesStroke
+                                    animDegreesCount : 0,
+                                    rotationAnim_step : 0,
+                                    colorAnim_stepsCount : colorAnim_stepsCount,
+                                    colorAnim_step : colorAnim_step,
+                                    colorSquaresFill : colorAnimSquaresFill,
+                                    colorSquaresStroke : colorAnimSquaresStroke,
+                                    squareStrokeStyle : squareStrokeStyle,
+                                    colorTrianglesFill : colorAnimTrianglesFill,
+                                    colorTrianglesStroke : colorAnimTrianglesStroke,
+                                    triangleStrokeStyle : triangleStrokeStyle
                                 };
                                 na.canvasLogo.drawSquaresAndTriangles_do(dc);
+                                stage.update();
                             }
-                            stage.update();
-                        }, 50+(25*i), i);
-                    };
-                }, (360*30*rotationAnim_step));
-            };
-            
-        } else if (doAnim_colors) {
-            if (colorSchemeSquaresStroke) {
-                var
-                colorAnim_stepsCount = 100,
-                colorAnimSquaresStroke = na.colorGradients.generateList_basic (colorSchemeSquaresStroke, colorAnim_stepsCount),
-                colorAnimSquaresFill = na.colorGradients.generateList_basic (colorSchemeSquaresFill, colorAnim_stepsCount),
-                colorAnimTrianglesStroke = na.colorGradients.generateList_basic (colorSchemeTrianglesStroke, colorAnim_stepsCount),
-                colorAnimTrianglesFill = na.colorGradients.generateList_basic (colorSchemeTrianglesFill, colorAnim_stepsCount),
+                        }, 100 + (25*colorAnim_step), colorAnim_step);
+                    stage.update();
+                    }
+                } else {
+                    console.log ('na.canvasLogo : FATAL ERROR - CAN NOT DETERMINE LIST OF COLORS FOR COLOR ANIMATION');
+                    debugger;
+                };
+                
+            } else {
+                var 
                 i = 0,
                 animStep = animCalculationData[i];
                 //console.log ('dc CALCULATION DATA');
                 //console.log (animStep);
-                for (var colorAnim_step=0; colorAnim_step<colorAnim_stepsCount; colorAnim_step++) {
-                    setTimeout (function(colorAnim_step) {
-                        for (var j=0; j<outlyingShapesCount; j++) {
-                            asd = animStep[j];
-                            var dc = { // dc = drawCommand
-                                stage : stage,
-                                canvasContext : canvasContext,
-                                asd : asd, // asd = animationStepData
-                                i : i, // animCalculationData[i]
-                                j : j, // animCalculationData[i][j]
-                                sqShadow : sqShadow,
-                                trShadow : trShadow,
-                                animDegreesCount : 0,
-                                rotationAnim_step : 0,
-                                colorAnim_stepsCount : colorAnim_stepsCount,
-                                colorAnim_step : colorAnim_step,
-                                colorSquaresFill : colorAnimSquaresFill,
-                                colorSquaresStroke : colorAnimSquaresStroke,
-                                squareStrokeStyle : squareStrokeStyle,
-                                colorTrianglesFill : colorAnimTrianglesFill,
-                                colorTrianglesStroke : colorAnimTrianglesStroke,
-                                triangleStrokeStyle : triangleStrokeStyle
-                            };
-                            na.canvasLogo.drawSquaresAndTriangles_do(dc);
-                            stage.update();
-                        }
-                    }, 100 + (25*colorAnim_step), colorAnim_step);
-                stage.update();
+                for (var j=0; j<outlyingShapesCount; j++) {
+                    asd = animStep[j];
+                    var dc = { // dc = drawCommand
+                        stage : stage,
+                        canvasContext : canvasContext,
+                        asd : asd, // asd = animationStepData
+                        i : i, // animCalculationData[i]
+                        j : j, // animCalculationData[i][j]
+                        sqShadow : sqShadow,
+                        trShadow : trShadow,
+                        animDegreesCount : 0,
+                        rotationAnim_step : 0,
+                        colorAnim_stepsCount : 0,
+                        colorAnim_step : 0,
+                        colorSquaresFill : colorSquaresFill,
+                        colorSquaresStroke : colorSquaresStroke,
+                        squareStrokeStyle : squareStrokeStyle,
+                        colorTrianglesFill : colorTrianglesFill,
+                        colorTrianglesStroke : colorTrianglesStroke,
+                        triangleStrokeStyle : triangleStrokeStyle
+                    };
+                    na.canvasLogo.drawSquaresAndTriangles_do(dc);
                 }
-            } else {
-                console.log ('na.canvasLogo : FATAL ERROR - CAN NOT DETERMINE LIST OF COLORS FOR COLOR ANIMATION');
-                debugger;
+                stage.update();
             };
-            
-        } else {
-            var 
-            i = 0,
-            animStep = animCalculationData[i];
-            //console.log ('dc CALCULATION DATA');
-            //console.log (animStep);
-            for (var j=0; j<outlyingShapesCount; j++) {
-                asd = animStep[j];
-                var dc = { // dc = drawCommand
-                    stage : stage,
-                    canvasContext : canvasContext,
-                    asd : asd, // asd = animationStepData
-                    i : i, // animCalculationData[i]
-                    j : j, // animCalculationData[i][j]
-                    sqShadow : sqShadow,
-                    trShadow : trShadow,
-                    animDegreesCount : 0,
-                    rotationAnim_step : 0,
-                    colorAnim_stepsCount : 0,
-                    colorAnim_step : 0,
-                    colorSquaresFill : colorSquaresFill,
-                    colorSquaresStroke : colorSquaresStroke,
-                    squareStrokeStyle : squareStrokeStyle,
-                    colorTrianglesFill : colorTrianglesFill,
-                    colorTrianglesStroke : colorTrianglesStroke,
-                    triangleStrokeStyle : triangleStrokeStyle
-                };
-                na.canvasLogo.drawSquaresAndTriangles_do(dc);
-            }
-            stage.update();
-        };
         
 		stage.update();
 	},

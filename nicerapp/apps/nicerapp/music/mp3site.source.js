@@ -485,5 +485,7 @@ var mp3site = {
 	
 };
 $(document).ready(function() {
+    setTimeout (function() {
     mp3site.startApp();
+    }, 500);
 });

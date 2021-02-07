@@ -1,6 +1,6 @@
 na.desktop = {
     globals : {
-        divs : [ '#siteContent', '#siteVideo', '#siteVideoSearch', '#siteComments', '#siteStatusbar' ],
+        divs : [ '#siteDateTime', '#siteContent', '#siteVideo', '#siteVideoSearch', '#siteComments', '#siteStatusbar' ],
         configs : {
             'all' : [ '#siteContent', '#siteVideo', '#siteVideoSearch', '#siteStatusbar' ],
             'content' : [ '#siteContent' ],
@@ -11,6 +11,39 @@ na.desktop = {
             'musicAndMusicSearch' : [ '#siteVideo', '#siteVideoSearch' ],
             'musicComments' : [ '#siteVideo', '#siteComments' ]
         },
+        defaultPos : {
+            '#siteDateTime' : {
+                top : -100,
+                left : 10,
+                opacity : 0.0001
+            },
+            '#siteContent' : {
+                top : ($(window).height()/2)-50,
+                left : ($(window).width()/2)-50,
+                width : 100,
+                height : 100,
+                opacity : 0.0001
+            },
+            '#siteVideo' : {
+                top : $('#siteDateTime').height()+20,
+                left : $(window).width()+100,
+                opacity : 0.0001
+            },
+            '#siteVideoSearch' : {
+                top : $('#siteDateTime').height()+20+$('#siteVideo').height()+10,
+                left : $(window).width()+100,
+                opacity : 0.0001
+            },
+            '#siteComments' : {
+                top : $('#siteDateTime').height()+20,
+                left : $(window).width()+100,
+                opacity : 0.0001
+            },
+            '#siteStatusbar' : {
+                top : $(window).height() + 50,
+                opacity : 0.0001
+            }
+        },                
         margin : 10
     },
     settings : {
@@ -20,6 +53,7 @@ na.desktop = {
     init : function () {
         var divs = [], cookies = false;
         for (var divIdx in na.d.g.divs) {
+            if (typeof na.d.g.divs[divIdx]!=='string') continue;
             var divID = na.d.g.divs[divIdx];
             var cookie = $.cookie('visible_'+divID.substr(1));            
             if (cookie=='true') {
@@ -52,7 +86,10 @@ na.desktop = {
     
     goto : function (visibleDivs, pageInit) {
         
-        if ($.cookie('agreedToPolicies')!=='true') {
+        if (
+            $.cookie('agreedToPolicies')!=='true'
+            || $.cookie('showStatusbar')==='true'
+        ) {
             if (!visibleDivs.includes('#siteStatusbar')) visibleDivs[visibleDivs.length] = '#siteStatusbar';
         }
         
@@ -60,7 +97,8 @@ na.desktop = {
         var calculate = {
             'calculate_2nd_topbar' : na.m.negotiateOptions(
                 (
-                    {
+                    visibleDivs.includes('#siteDateTime')
+                    ? {
                         '#siteDateTime' : {
                             snapTo : [
                                 { element : 'body', edge : 'top' },
@@ -86,6 +124,14 @@ na.desktop = {
                             ]
                         }
                     }
+                    : {
+                        '#btnThemeSwitch' : {
+                            snapTo : [
+                                { element : 'body', edge : 'top' },
+                                { element : 'body', edge : 'left' }
+                            ]
+                        }
+                    }
                 )
             ),
             'calculate_3rd_visible' : na.m.negotiateOptions(
@@ -107,7 +153,7 @@ na.desktop = {
                     ? {
                         '#siteVideo' : {
                             snapTo : [
-                                { element : '#siteDateTime', edge : 'bottom' },
+                                { element : '#btnThemeSwitch', edge : 'bottom' },
                                 { element : 'body', edge : 'right' }
                             ]
                         },
@@ -131,7 +177,7 @@ na.desktop = {
                     ? {
                         '#siteVideo' : {
                             snapTo : [
-                                { element : '#siteDateTime', edge : 'bottom' },
+                                { element : '#btnThemeSwitch', edge : 'bottom' },
                                 { element : 'body', edge : 'right' }
                             ]
                         },
@@ -155,7 +201,7 @@ na.desktop = {
                     ? {
                         '#siteComments' : {
                             snapTo : [
-                                { element : '#siteDateTime', edge : 'bottom' },
+                                { element : '#btnThemeSwitch', edge : 'bottom' },
                                 { element : 'body', edge : 'right' }
                             ],
                             growTo : 'maxY',
@@ -173,7 +219,7 @@ na.desktop = {
                     ? {
                         '#siteContent' : {
                             snapTo : [
-                                { element : '#siteDateTime', edge : 'bottom' },
+                                { element : '#btnThemeSwitch', edge : 'bottom' },
                                 { element : 'body', edge : 'left' }
                             ],
                             growTo : 'max',
@@ -195,7 +241,7 @@ na.desktop = {
                     ? {
                         '#siteContent' : {
                             snapTo : [
-                                { element : '#siteDateTime', edge : 'bottom' },
+                                { element : '#btnThemeSwitch', edge : 'bottom' },
                                 { element : 'body', edge : 'left' }
                             ],
                             growTo : 'max',
@@ -212,7 +258,9 @@ na.desktop = {
                                             { element : '#siteStatusbar', edge : 'top' },
                                             { element : '#siteComments', edge : 'left' }
                                         ]
-                                        : []
+                                        : [
+                                            { element : '#siteStatusbar', edge : 'top' }
+                                        ]
                                 : visibleDivs.includes('#siteVideo')
                                     ? [
                                         { element : '#siteVideo', edge : 'left' }
@@ -230,7 +278,7 @@ na.desktop = {
             ) // calculate_3rd_visible
         };
         
-        debugger;
+        //debugger;
         var divs = {};
         for (var sectionID in calculate) {
             var section = calculate[sectionID];
@@ -240,23 +288,23 @@ na.desktop = {
                     var sn = section[divID].snapTo[i];
                     switch (sn.edge) {
                         case 'top':
-                            divs[divID].top = $(sn.element).offset().top;// + (na.d.g.margin * 2);
+                            if (sn.element==='body') divs[divID].top = 0; else divs[divID].top = divs[sn.element].top;
                             break;
                         case 'bottom':
                             if (sn.element==='body') {
-                                divs[divID].top = $(window).height() - $(divID).outerHeight();// - na.d.g.margin;
+                                divs[divID].top = $(window).height() - $(divID).outerHeight();
                             } else {
-                                divs[divID].top = $(sn.element).offset().top + $(sn.element).outerHeight();// + (na.d.g.margin * 2);
+                                divs[divID].top = divs[sn.element].top + $(sn.element).outerHeight();
                             }
                             break;
                         case 'left':
-                            divs[divID].left = $(sn.element).offset().left;// + (na.d.g.margin * 2);
+                            if (sn.element==='body') divs[divID].left = 0; else divs[divID].left = divs[sn.element].left;
                             break;
                         case 'right':
                             if (sn.element=='body') {
-                                divs[divID].left = $(window).width() - $(divID).outerWidth();// - (na.d.g.margin * 1);
+                                divs[divID].left = $(window).width() - $(divID).outerWidth();
                             } else {
-                                divs[divID].left = $(sn.element).offset().left + $(sn.element).outerWidth();// + (na.d.g.margin * 2);
+                                divs[divID].left = divs[sn.element].left + $(sn.element).outerWidth();
                             }
                             break;
                     }
@@ -264,16 +312,16 @@ na.desktop = {
 
                 switch (section[divID].growTo) {
                     case 'max':
-                        divs[divID].width = $(window).width() - divs[divID].left;// - (na.d.g.margin*2);
-                        divs[divID].height = $(window).height() - divs[divID].top;// - (na.d.g.margin*2);
+                        divs[divID].width = $(window).width() - divs[divID].left;
+                        divs[divID].height = $(window).height() - divs[divID].top;
                         break;
                     case 'maxX':
-                        divs[divID].width = $(window).width() - divs[divID].left;// - (na.d.g.margin*3);
+                        divs[divID].width = $(window).width() - divs[divID].left;
                         divs[divID].height = $(divID).height();
                         break;
                     case 'maxY':
                         divs[divID].width = $(divID).width();
-                        divs[divID].height = $(window).height() - divs[divID].top;// - (na.d.g.margin*2);
+                        divs[divID].height = $(window).height() - divs[divID].top;
                         break;
                 }
                 
@@ -285,7 +333,6 @@ na.desktop = {
                             divs[divID].width -= ($(window).width() - divs[gtl.element].left);
                             break;
                         case 'top':
-                            debugger;
                             divs[divID].height -= ($(window).height() - divs[gtl.element].top);
                             break;
                     }
@@ -340,8 +387,8 @@ na.desktop = {
                         break;
                 }
                 
-                if (pageInit) 
-                $(divID).stop(true,true).fadeIn('slow').css ({
+                if (na.m.userDevice.isPhone) 
+                $(divID).css ({
                     top : divs[divID].top,
                     left : divs[divID].left,
                     width : divs[divID].width,
@@ -349,7 +396,7 @@ na.desktop = {
                     display : 'flex',
                     opacity : 1
                 }); else
-                $(divID).stop(true,true).css({display:'flex',opacity:0.0001}).animate ({
+                $(divID).stop(true,true).animate ({
                     top : divs[divID].top,
                     left : divs[divID].left,
                     width : divs[divID].width,
@@ -362,7 +409,7 @@ na.desktop = {
         for (var i=0; i<na.d.g.divs.length; i++) {
             var divID = na.d.g.divs[i], shown = false;
             for (var divID2 in divs) if (divID2==divID) shown = true;
-            if (!shown) $(divID).stop(true,true).fadeOut ('slow');
+            if (!shown) $(divID).stop(true,true).animate(na.d.g.defaultPos[divID],'slow');
         }
     } // goto()
 };
