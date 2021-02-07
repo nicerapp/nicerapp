@@ -31,6 +31,8 @@ var nas = na.site = {
     },
     
     onload : function (evt) {
+        na.desktop.init();
+        
         if (na.m.userDevice.isPhone) {
             $('#siteDateTime').css({display:'none'});
             $('#btnThemeSwitch, #btnChangeBackground, #siteMenu').addClass('phoneView');
@@ -48,21 +50,22 @@ var nas = na.site = {
             nas.s.buttons['#'+el.id] = new naVividButton(el);
         });
         
+        
         if ($.cookie('agreedToPolicies')!=='true') $.cookie('showStatusbar', 'true', na.m.cookieOptions());
         na.site.setStatusMsg(na.site.settings.defaultStatusMsg); // calls na.desktop.resize() as well
-        na.desktop.init();
-        
+
         $(window).resize (function() {
             $('#siteBackground img').css({
                 width : $(window).width(),
                 height : $(window).height()
             });
         
-            if (nas.s.timeoutWindowResize) clearTimeout(nas.s.timeoutWindowResize);
-            nas.s.timeoutWindowResize = setTimeout (function() {
+            if (na.site.settings.timeoutWindowResize) clearTimeout(nas.s.timeoutWindowResize);
+            na.site.settings.timeoutWindowResize = setTimeout (function() {
                 nas.onresize();
             }, 250);
         });
+        na.site.onresize();
         
         setInterval (nas.updateDateTime, 1000);
         
@@ -257,11 +260,8 @@ var nas = na.site = {
     },
     
     setStatusMsg : function (msg) {
-        na.site.onresize();
         $('#siteStatusbar .vividDialogContent').animate({opacity:0.0001},'slow', function () {
             $('#siteStatusbar .vividDialogContent').html(msg).css({display:'block',margin:0}).animate({opacity:1},'slow');
-            
-            na.site.onresize();
             
             if (msg !== na.site.settings.defaultStatusMsg)
             setTimeout (function () {
