@@ -93,7 +93,12 @@ na.desktop = {
             if (!visibleDivs.includes('#siteStatusbar')) visibleDivs[visibleDivs.length] = '#siteStatusbar';
         }
         
+        if (!na.m.userDevice.isPhone && !visibleDivs.includes('#siteDateTime')) {
+            visibleDivs[visibleDivs.length] = '#siteDateTime';
+        }
+        
         na.d.s.visibleDivs = visibleDivs;
+        debugger;
         var calculate = {
             'calculate_2nd_topbar' : na.m.negotiateOptions(
                 (
