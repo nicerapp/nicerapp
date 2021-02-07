@@ -7,8 +7,21 @@ var nas = na.site = {
     },
     
     settings : {
+        defaultStatusMsg : (
+            $.cookie('agreedToPolicies')!=='true'
+            ? '<table style="width:100%;"><tr><td>This site uses cookies for remembering user settings, analytics and advertising.<br/>'
+                + 'By using this site, you agree to such cookies getting stored on, and read from, your computer.</td><td style="width:220px;"><div class="vividButton" theme="dark" style="position:relative;color:white;" onclick="na.site.dismissCookieWarning();">Ok</div></td></table>'
+            : 'Copyright (c) and All Rights Reserved (r) 2021 by Rene A.J.M. Veerman'
+        ),
         buttons : {},
         menus : {}
+    },
+    
+    dismissCookieWarning : function () {
+        $.cookie('agreedToPolicies', 'true', na.m.cookieOptions());
+        na.site.settings.defaultStatusMsg = na.site.about.copyright;
+        na.site.setStatusMsg (na.site.about.copyright);
+        
     },
     
     onload : function (evt) {
@@ -27,6 +40,7 @@ var nas = na.site = {
             nas.s.buttons['#'+el.id] = new naVividButton(el);
         });
         
+        na.site.setStatusMsg(na.site.settings.defaultStatusMsg);
         na.desktop.init();
         
         $(window).resize (function() {
@@ -163,7 +177,10 @@ var nas = na.site = {
         //$('#siteBackground img.bg_first').fadeIn(2000);
         
         if ($(window).width() < 1000) {
-            jQuery('#siteContent').css ({ fontSize : '70%' });
+            jQuery('#siteContent, #siteStatusbar').css ({ fontSize : '70%' });
+            jQuery('#siteStatusbar').css({height:'5rem'});
+            jQuery('#siteStatusbar .vividButton').css({width : 50});
+            jQuery('#siteStatusbar td:nth-child(2)').css({width:55});
             jQuery('#tableFor_saCompanyLogo').css ({ width : 80, height : 80 });
             jQuery('#divFor_saCompanyLogo').css ({ width : 70, height : 70, marginLeft : 0 });
             jQuery('#saCompanyLogo').attr('width',70).attr('height',70);
@@ -172,7 +189,10 @@ var nas = na.site = {
             jQuery('#headerSiteDiv').css ({ height : 70, width : 120 });
             jQuery('#headerSiteDiv div').css ({ height : 0, width : 120 });
         } else {
-            jQuery('#siteContent').css ({ fontSize : '100%' });
+            jQuery('#siteContent, #siteStatusbar').css ({ fontSize : '100%' });
+            jQuery('#siteStatusbar').css({height:'3rem'});
+            jQuery('#siteStatusbar .vividButton').css({width : 220});
+            jQuery('#siteStatusbar td:nth-child(2)').css({width:225});
             jQuery('#mainCSS').html('.vividMenu_item td { font-size : 80%; }; #siteStatus td { font-weight : bold };');
             jQuery('#tableFor_saCompanyLogo').css ({ width : 200, height : 200 });
             jQuery('#divFor_saCompanyLogo').css ({ width : 200, height : 200, marginLeft : 40 });
@@ -219,6 +239,17 @@ var nas = na.site = {
     
     changeBackground : function () {
         na.backgrounds.next ('#siteBackground', na.backgrounds.s.lastMenuSelection);
+    },
+    
+    setStatusMsg : function (msg) {
+        $('#siteStatusbar').animate({opacity:0.0001},'slow', function () {
+            $('#siteStatusbar').html(msg).animate({opacity:1},'slow').css({display:'flex'});
+            
+            if (msg !== na.site.settings.defaultStatusMsg)
+            setTimeout (function () {
+                na.site.setStatusMsg (na.site.settings.defaultStatusMsg);
+            }, 2500);
+        });
     }
 }
 nas.s = nas.settings;

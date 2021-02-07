@@ -38,8 +38,18 @@ na.m.globals = {
 {$div_siteContent}    
     </div>
     </div>
+
+    <div id="siteVideo" class="vividDialog" theme="{$theme}">
+    </div>
+
+    <div id="siteVideoSearch" class="vividDialog" theme="{$theme}">
+    </div>
+
     
     <div id="siteComments" class="vividDialog" theme="{$theme}">
+    </div>
+    
+    <div id="siteStatusbar" class="vividDialog" theme="{$theme}">
     </div>
     
     <div id="siteDateTime" class="vividDialog" theme="{$theme}"></div>
