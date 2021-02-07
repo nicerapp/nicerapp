@@ -39,17 +39,22 @@ na.m.globals = {
     </div>
     </div>
 
-    <div id="siteVideo" class="vividDialog" theme="{$theme}">
+    <div id="siteVideo" class="vividDialog" style="display:flex;justify-content:center;align-items:center;text-align:center;" theme="{$theme}">
+        Coming soon
     </div>
 
-    <div id="siteVideoSearch" class="vividDialog" theme="{$theme}">
+    <div id="siteVideoSearch" class="vividDialog" style="display:flex;justify-content:center;align-items:center;text-align:center;" theme="{$theme}">
+        Coming soon
     </div>
 
     
-    <div id="siteComments" class="vividDialog" theme="{$theme}">
+    <div id="siteComments" class="vividDialog" style="display:flex;justify-content:center;align-items:center;text-align:center;" theme="{$theme}">
+        Coming soon
     </div>
     
     <div id="siteStatusbar" class="vividDialog" theme="{$theme}">
+    <div class="vividDialogContent">
+    </div>
     </div>
     
     <div id="siteDateTime" class="vividDialog" theme="{$theme}"></div>

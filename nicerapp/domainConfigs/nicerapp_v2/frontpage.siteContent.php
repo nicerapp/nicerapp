@@ -9,7 +9,7 @@
                                     <script type="text/javascript">
                                         setTimeout (function () {
                                             startLogo('saCompanyLogo', 'countryOfOriginColors');
-                                        }, 500);
+                                        }, 1500);
                                     </script> 
                                     
                                 </div>
