@@ -59,17 +59,42 @@ img.bg_last {
     width : 250px;
 }
 
+#siteStatusbar {
+    top : 102vh;
+    height : 3rem;
+    left : 1vw;
+    width : 98vw;
+}
+
+#siteVideo {
+    top : 2vh;
+    left : 102vw;
+    height : 250px;
+    width : 250px;
+}
+
+#siteVideoSearch {
+    top : calc(2vh + 260px);
+    left : 102vw;
+    height : calc(97vh - 260px);
+    width : 230px;
+}
 
 .vividDialog {
     position : absolute;
     display : none;
     z-index : 1000;
+    justify-content : center;
+    align-items : center;
 }
 .vividButton, .vividMenu {
     position : absolute;
     display : flex;
-    font-size : 1rem;
+    font-size : 0.8rem;
     z-index : 1000;
+    justify-content : center;
+    align-items : center;
+    text-align : center;
 }
 .vividButton, .vividButtonSelected {
     display : flex;
@@ -78,7 +103,7 @@ img.bg_last {
     text-align : center;
     width : 200px;
     height : 1rem;
-    font-size : 1rem;
+    font-size : 0.8rem;
     font-weight : bold;
 }
 .vividButton.level1, .vividButtonSelected.level1 {
