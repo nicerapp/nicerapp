@@ -1416,7 +1416,7 @@ na.apps.loaded.newsApp = {
         ),
         wt = 0, // wt = width target
         i = 0; // counter of news items measured horizontally
-
+alert (5.5);
         
         while (wt < wo) {
             wt += iw;
@@ -1425,23 +1425,28 @@ na.apps.loaded.newsApp = {
         wt -= iw;
         i--;
         
+alert (5.6);
         var
         wu = wt, // wu = width used
         wl = wo - wu, // wl = width left over
         we = (wl) / i; // we = width extra per news item (above iw)
         w = iw + we - 50; // 50 or 60 is the magic number here.. don't know why..
         
+alert (5.7);
         na.apps.loaded.newsApp.settings.itemWidth = w;
         $('.newsApp__item__outer, .newsApp__item__outer > table').css({height:'',width:w});
+alert (5.71);
         
         $('#siteContent__header').css({
             height : $('#siteContent__header table').height()
         });
+alert (5.72);
         
         $('#newsApp_content_shadow, #newsApp_content').css({
             height : oh - $('#siteContent__header').height(),
             width : ow
         });
+alert (5.73);
     }
     
 };	
