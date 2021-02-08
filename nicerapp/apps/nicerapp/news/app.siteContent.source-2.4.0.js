@@ -231,9 +231,9 @@ na.apps.loaded.newsApp = {
         settings = {
             section : urlp[0]
         };
-       alert(4); 
+
         na.analytics.logMetaEvent ('newsApp : startApp()');
-        alert(5);
+
         /*
         var loaderIconTheme = na.s.c.globals.loaderIconTheme('appLoading');
         na.apps.loaded.newsApp.settings.loaderIcon = na.acs.addIcon(
@@ -284,7 +284,7 @@ na.apps.loaded.newsApp = {
         //setTimeout (function() {
             //debugger;
             c.firstRun = true;
-            alert (7);
+
             na1.loadNews_read_loop ();
         //}, 10 * 1000);
         
@@ -470,7 +470,7 @@ na.apps.loaded.newsApp = {
         url = '/nicerapp/apps/nicerapp/news/ajax_get_items.php?section='+settings.replace(/-/g,'/').replace(/ /g, '_')+'&dateBegin='+dtBeginURL+'&dateEnd='+dtEndURL;
         
         if (c.searchQuery) url += '&q='+c.searchQuery;
-        alert (url);
+
         na.analytics.logMetaEvent ('newsApp : loadNews_get_forDateTimeRange() url='+url);
         ajaxCommand = {
             type : 'GET',
@@ -495,7 +495,7 @@ na.apps.loaded.newsApp = {
         
                 var
                 itemsLoadedCount = c.idx - idxStart;
-                alert (url + ' - '+itemsLoadedCount);
+        
                 na.analytics.logMetaEvent ('newsApp : loadNews_get_forDateTimeRange() data fetched sucessfully for itemsLoadedCount='+itemsLoadedCount+' and url='+url);
        //debugger;
                 
@@ -1416,7 +1416,6 @@ na.apps.loaded.newsApp = {
         ),
         wt = 0, // wt = width target
         i = 0; // counter of news items measured horizontally
-alert (5.5);
         
         while (wt < wo) {
             wt += iw;
@@ -1425,28 +1424,23 @@ alert (5.5);
         wt -= iw;
         i--;
         
-alert (5.6);
         var
         wu = wt, // wu = width used
         wl = wo - wu, // wl = width left over
         we = (wl) / i; // we = width extra per news item (above iw)
         w = iw + we - 50; // 50 or 60 is the magic number here.. don't know why..
         
-alert (5.7);
         na.apps.loaded.newsApp.settings.itemWidth = w;
         $('.newsApp__item__outer, .newsApp__item__outer > table').css({height:'',width:w});
-alert (5.71);
         
         $('#siteContent__header').css({
             height : $('#siteContent__header table').height()
         });
-alert (5.72);
         
         $('#newsApp_content_shadow, #newsApp_content').css({
             height : oh - $('#siteContent__header').height(),
             width : ow
         });
-alert (5.73);
     }
     
 };	
