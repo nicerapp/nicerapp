@@ -93,7 +93,7 @@ na.apps.loaded.newsApp = {
                         c.oldContentBorder = $('#siteContent__dialog').css('border');
                         c.oldContentBoxShadow = $('#siteContent__dialog').css('boxShadow');
                         */
-alert(2);
+
                         //$('#siteContent').removeClass('vividScrollpane__scroll_black').addClass('vividScrollpane__hidden');
                         na.m.waitForCondition('siteContent dialog reappearance', function () {
                             
@@ -104,7 +104,7 @@ alert(2);
                             //return true;
                         }, function () {
                             //na.analytics.logMetaEvent ('newsApp : init-stage-4');
-         alert(3);                   
+
                             /*
                             var vividTextCmd = {
                                     el : $('#newsApp_info')[0],
@@ -231,8 +231,8 @@ alert(2);
         settings = {
             section : urlp[0]
         };
+       alert(4); 
         na.analytics.logMetaEvent ('newsApp : startApp()');
-        
         /*
         var loaderIconTheme = na.s.c.globals.loaderIconTheme('appLoading');
         na.apps.loaded.newsApp.settings.loaderIcon = na.acs.addIcon(
@@ -485,7 +485,6 @@ alert(2);
                     textStatus : textStatus
                 });
                 */
-                
                 var
                 idxStart = c.idx;
 
@@ -493,6 +492,7 @@ alert(2);
         
                 var
                 itemsLoadedCount = c.idx - idxStart;
+                alert (url + ' - '+itemsLoadedCount);
                 na.analytics.logMetaEvent ('newsApp : loadNews_get_forDateTimeRange() data fetched sucessfully for itemsLoadedCount='+itemsLoadedCount+' and url='+url);
        //debugger;
                 
@@ -1444,7 +1444,6 @@ alert(2);
 };	
 //window.top.na.s.c.settings.contentLoaded = true;
 na.apps.loaded.newsApp.settings.loadedIn['#siteContent'].onload({});
-alert(1);
 
 }, 100); // na.m.waitForCondition (); to load this app
 //}); // $(document).ready(function(){});
