@@ -467,7 +467,7 @@ na.apps.loaded.newsApp = {
         url = '/nicerapp/apps/nicerapp/news/ajax_get_items.php?section='+settings.replace(/-/g,'/').replace(/ /g, '_')+'&dateBegin='+dtBeginURL+'&dateEnd='+dtEndURL;
         
         if (c.searchQuery) url += '&q='+c.searchQuery;
-        
+        alert (url);
         na.analytics.logMetaEvent ('newsApp : loadNews_get_forDateTimeRange() url='+url);
         ajaxCommand = {
             type : 'GET',
