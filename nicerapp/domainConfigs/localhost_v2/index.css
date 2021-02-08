@@ -40,6 +40,7 @@ img.bg_last {
 .vividDialogContent {
     overflow : auto;
     margin : 10px;
+    display : none;
     /*width : calc(98vw - 15px);
     height: calc(100vh - 120px);*/
     width : 100%;
