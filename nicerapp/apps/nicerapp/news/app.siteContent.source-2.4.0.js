@@ -93,7 +93,7 @@ na.apps.loaded.newsApp = {
                         c.oldContentBorder = $('#siteContent__dialog').css('border');
                         c.oldContentBoxShadow = $('#siteContent__dialog').css('boxShadow');
                         */
-
+alert(2);
                         //$('#siteContent').removeClass('vividScrollpane__scroll_black').addClass('vividScrollpane__hidden');
                         na.m.waitForCondition('siteContent dialog reappearance', function () {
                             
@@ -104,7 +104,7 @@ na.apps.loaded.newsApp = {
                             //return true;
                         }, function () {
                             //na.analytics.logMetaEvent ('newsApp : init-stage-4');
-                            
+         alert(3);                   
                             /*
                             var vividTextCmd = {
                                     el : $('#newsApp_info')[0],
@@ -1444,6 +1444,7 @@ na.apps.loaded.newsApp = {
 };	
 //window.top.na.s.c.settings.contentLoaded = true;
 na.apps.loaded.newsApp.settings.loadedIn['#siteContent'].onload({});
+alert(1);
 
-}, 1000); // na.m.waitForCondition (); to load this app
+}, 100); // na.m.waitForCondition (); to load this app
 //}); // $(document).ready(function(){});
