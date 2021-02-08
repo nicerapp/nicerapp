@@ -258,7 +258,6 @@ na.apps.loaded.newsApp = {
         }, 20);
         
         na1.onresize();
-        alert (6);
         
         c.dtCurrent = new Date(new Date().getTime() - (1000 * 60 * 10));
         c.dtEnd = new Date();
