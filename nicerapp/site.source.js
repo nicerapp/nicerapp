@@ -580,6 +580,8 @@ Array.prototype.remove = function() {
 };
 
 window.onerror = function (msg, url, lineno, colno, error) {
-    console.log (msg+'\n'+url+'\n'+lineno+' - '+colno+'\n'+error);
+    var err = msg+'\n'+url+'\n'+lineno+' - '+colno+'\n'+error;
+    alert (err);
+    console.log (err);
 };
     
