@@ -258,7 +258,7 @@ na.apps.loaded.newsApp = {
         }, 20);
         
         na1.onresize();
-        
+
         c.dtCurrent = new Date(new Date().getTime() - (1000 * 60 * 10));
         c.dtEnd = new Date();
         c.lastCurrentGet = new Date();
@@ -270,23 +270,8 @@ na.apps.loaded.newsApp = {
         if (!c.read_loop_minutesIntoPast) c.read_loop_minutesIntoPast = 10;
         if (!c.read_loop_millisecondsToDoNext) c.read_loop_millisecondsToDoNext = 1000 * 1;
         
-        /*
-        // set up reading of news into the past
-        setTimeout (function () {
-            na1.loadNews_read_loop_old(new Date(dtBegin.getTime() - 1000 * 60 * 60), dtBegin, dtQuit, settings, 5, -60 * 60);
-        }, 1000 * 5);
-        */
-        
-        //set up reading of current news
-        //na1.loadNews_read_loop_old(new Date(dtBegin.getTime() - 1000 * 60 * 5), dtBegin, undefined, settings, 60, 60);
-        //c.timerDisplayNews_loop = setTimeout (na1.displayNews_loop, 10);
-        //setTimeout (function() {
-            //debugger;
-            c.firstRun = true;
-
-            na1.loadNews_read_loop ();
-        //}, 10 * 1000);
-        
+        c.firstRun = true;
+        na1.loadNews_read_loop ();
     },
     
     onkeyup : function (evt) {
@@ -494,7 +479,6 @@ na.apps.loaded.newsApp = {
         
                 var
                 itemsLoadedCount = c.idx - idxStart;
-        
                 na.analytics.logMetaEvent ('newsApp : loadNews_get_forDateTimeRange() data fetched sucessfully for itemsLoadedCount='+itemsLoadedCount+' and url='+url);
        //debugger;
                 
