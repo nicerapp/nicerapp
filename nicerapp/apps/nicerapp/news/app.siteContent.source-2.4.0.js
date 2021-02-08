@@ -233,6 +233,7 @@ na.apps.loaded.newsApp = {
         };
        alert(4); 
         na.analytics.logMetaEvent ('newsApp : startApp()');
+        alert(5);
         /*
         var loaderIconTheme = na.s.c.globals.loaderIconTheme('appLoading');
         na.apps.loaded.newsApp.settings.loaderIcon = na.acs.addIcon(
@@ -257,6 +258,7 @@ na.apps.loaded.newsApp = {
         }, 20);
         
         na1.onresize();
+        alert (6);
         
         c.dtCurrent = new Date(new Date().getTime() - (1000 * 60 * 10));
         c.dtEnd = new Date();
@@ -282,6 +284,7 @@ na.apps.loaded.newsApp = {
         //setTimeout (function() {
             //debugger;
             c.firstRun = true;
+            alert (7);
             na1.loadNews_read_loop ();
         //}, 10 * 1000);
         
