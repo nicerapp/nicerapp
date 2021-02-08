@@ -98,7 +98,6 @@ na.desktop = {
         }
         
         na.d.s.visibleDivs = visibleDivs;
-        debugger;
         var calculate = {
             'calculate_2nd_topbar' : na.m.negotiateOptions(
                 (

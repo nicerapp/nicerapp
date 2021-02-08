@@ -263,6 +263,8 @@ var nas = na.site = {
         $('#siteStatusbar .vividDialogContent').animate({opacity:0.0001},'slow', function () {
             $('#siteStatusbar .vividDialogContent').html(msg).css({display:'block',margin:0}).animate({opacity:1},'slow');
             
+            na.site.onresize();
+            
             if (msg !== na.site.settings.defaultStatusMsg)
             setTimeout (function () {
                 na.site.setStatusMsg (na.site.settings.defaultStatusMsg);
