@@ -25,7 +25,7 @@ $appParams = array (
         <style>
         </style>
 
-        
+    
             <div id="siteContent__header" class="saHeaderInDialog" style="position:absolute;width:100%;height:2em">
                 <table id="newsApp_title_table" style="width:100%;">
                     <tr>
@@ -71,6 +71,12 @@ $appParams = array (
             -->
             
 
+         <div class="loader">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
             
             <div id ="siteContent__content" class="saContent" style="position:absolute;top:0px;left:0px;width:100%;height:100%;">
                 <div id="newsApp_content_shadow" class="" style="position:absolute;width:100%;height:100%;opacity:0.0001;z-index:-1"></div>
