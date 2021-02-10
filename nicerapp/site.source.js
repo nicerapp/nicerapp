@@ -117,7 +117,7 @@ var nas = na.site = {
     startTooltips : function(evt) {
         $('.tooltip').each (function(idx,el) {
             
-            if (el.id=='btnThemeSwitch') {
+            if (el.id=='btnThemeSwitch' && $.cookie('haveShownTutorial')!=='true') {
                 nas.settings.btnThemeSwitch = this;
                 var ptSettings = {
                     className : $(el).attr('tooltipTheme'),//'mainTooltipTheme',
@@ -143,7 +143,7 @@ var nas = na.site = {
                     }, 2500);
                 }, 2770);
                 
-            } else if (el.id=='btnChangeBackground') {
+            } else if (el.id=='btnChangeBackground' && $.cookie('haveShownTutorial')!=='true') {
                 nas.settings.btnChangeBackground = el;
                 var ptSettings = {
                     className : $(el).attr('tooltipTheme'),//'mainTooltipTheme',
@@ -170,8 +170,8 @@ var nas = na.site = {
                         $(el).poshytip('hide');
                     }, 2500);
                 }, 7270);
-                
-            } else {
+                $.cookie('haveShownTutorial', 'true', na.m.cookieOptions());
+            } else if (&& $.cookie('haveShownTutorial')!=='true') {
                 var ptSettings = {
                     theme : $(el).attr('tooltipTheme'),//'mainTooltipTheme',
                     contentAsHTML : true,
