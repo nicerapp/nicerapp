@@ -57,6 +57,7 @@
 }
 
 .loader {
+    flex : 0 0 300px;
     position: relative;
     width: 300px;
     height: 300px;
@@ -111,6 +112,7 @@
     border-radius: 50%;
 }
 .loaderAfter {
+    flex : 1;
     width: 300px;
     color : white;
     font-weight : bold;
