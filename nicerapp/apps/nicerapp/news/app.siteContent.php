@@ -8,7 +8,7 @@ $appParams = array (
     )
 );
 $app = json_decode (base64_decode_url($_GET['apps']), true);
-echo '<pre>'.json_encode($app,JSON_PRETTY_PRINT); die();
+//echo '<pre>'.json_encode($app,JSON_PRETTY_PRINT); die();
 //$newsApp_content = getNewsAppContent ($appParams);
 
 	global $saSiteHTTP; global $saSiteDomain; global $saSiteRootFolder; global $saFrameworkFolder;
@@ -19,7 +19,7 @@ echo '<pre>'.json_encode($app,JSON_PRETTY_PRINT); die();
 	global $saUpstreamRootURL; global $locationbarInfo;
 	global $saUIdefaults;
 
-    $pageTitle = str_replace('__', '&nbsp;', $appParams['apps']['news']['section']);
+    $pageTitle = str_replace('__', '&nbsp;', $app['apps']['news']);
     $pageTitle = str_replace('_', '&nbsp;', $pageTitle);
 ?>
         <link type="text/css" rel="StyleSheet" media="screen" href="/nicerapp/apps/nicerapp/news/index.css?changed=<?php echo date('Ymd-His', filectime(dirname(__FILE__).'/index.css'));?>"/>
