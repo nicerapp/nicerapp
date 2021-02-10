@@ -137,9 +137,10 @@ class nicerAppCMS {
         foreach ($files as $idx => $file) {
             $file = str_replace ('{$domain}', $this->domain, $file);
             $url = str_replace ($this->basePath,'',$file);
-            $search = array ('{$src}', '{$changed}');
-            $replace = array ($url, date('Ymd_His', filemtime($this->basePath.'/'.$file)));
-            $lines .= str_replace ($search, $replace, $lineSrc);
+            //$search = array ('{$src}', '{$changed}');
+            //$replace = array ($url, date('Ymd_His', filemtime($this->basePath.'/'.$file)));
+            //$lines .= str_replace ($search, $replace, $lineSrc);
+            $lines .= str_replace ('{$src}', $url, $lineSrc);
         };
         return $lines;
     }
