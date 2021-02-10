@@ -142,7 +142,7 @@ img.bg_last {
     z-index : 1100;
     border : 3px ridge lime;
     border-radius : 10px;
-    box-shadow : 7px 7px 5px rgba(0,0,0,0.7), inset -2px -2px 2px rgba(0,0,0,0.8), inset 2px 2px 2px rgba(0,0,0,0.8);
+    box-shadow : 4px 4px 2px rgba(0,0,0,0.7), inset -2px -2px 2px rgba(0,0,0,0.8), inset 2px 2px 2px rgba(0,0,0,0.8);
 }
 #btnThemeSwitch.phoneView {
     left : calc(1vw + 6px);
@@ -157,7 +157,7 @@ img.bg_last {
     z-index : 1100;
     border : 3px ridge lime;
     border-radius : 10px;
-    box-shadow : 7px 7px 5px rgba(0,0,0,0.7), inset -2px -2px 2px rgba(0,0,0,0.8), inset 2px 2px 2px rgba(0,0,0,0.8);
+    box-shadow : 4px 4px 2px rgba(0,0,0,0.7), inset -2px -2px 2px rgba(0,0,0,0.8), inset 2px 2px 2px rgba(0,0,0,0.8);
 }
 #btnChangeBackground.phoneView {
     left : calc(99vw - 50px);
