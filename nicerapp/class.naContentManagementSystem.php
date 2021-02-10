@@ -65,7 +65,7 @@ class nicerAppCMS {
             $javascriptFiles = $this->getFiles('js', 'javascripts');
         }*/
         
-        $div_siteContent = $this->getDivSiteContent();
+        //$div_siteContent = $this->getDivSiteContent();
         /*
         $div_siteMenu = $this->getSiteMenu();
         $replacements = array (
@@ -82,7 +82,7 @@ class nicerAppCMS {
         $replace = array_values($replacements);
         $html = str_replace ($search, $replace, execPHP($templateFile));
         */
-        return $div_siteContent;
+        return $templateFile;
         return $html;
     }
     
