@@ -456,6 +456,7 @@ another example:
 						$aTimeMin, $aTimeMax, $mTimeMin, $mTimeMax,
 						$cTimeMin, $cTimeMax, $listCall);
 					array_splice ($result, count($result)+1, 0, $subdir);
+					var_dump ($result);
 				}
 			}
 			}

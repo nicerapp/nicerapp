@@ -152,7 +152,7 @@ class nicerAppCMS {
             $app = json_decode (base64_decode_url($_GET['apps']), true);
             //var_dump ($app); 
             //$files = getFilePathList (realpath(dirname(__FILE__)).'/apps', true, '/app.site.*.php/', array('file'), 3);
-            $folders = getFilePathList (realpath(dirname(__FILE__)).'/apps', true, '/.*/', array('dir'), 2);
+            $folders = getFilePathList (realpath(dirname(__FILE__)).'/apps', true, '/.*/', array('dir'), 3);
             //echo '<pre>'; var_dump ($files); die();
             foreach ($folders as $idx => $folder) {
                 foreach ($app as $appName => $appSettings) {
