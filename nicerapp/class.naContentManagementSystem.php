@@ -44,7 +44,7 @@ class nicerAppCMS {
             foreach ($folders as $idx => $folder) {
                 foreach ($app as $appName => $appSettings) {
                     $filename = '/apps/'.basename($folder).'/'.$appName.'/app.title.site.php';
-                    if (file_exists(dirname(__FILE__).$filename)) $titleFile = $filename;
+                    if (file_exists(dirname(__FILE__).$filename)) $titleFile = dirname(__FILE__).$filename;
                 }
             }
         } else {    
