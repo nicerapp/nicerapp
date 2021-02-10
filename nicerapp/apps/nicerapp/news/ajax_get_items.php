@@ -14,6 +14,7 @@
     $_GET['dateEnd'] = 'Tue Mar 20 2018 17:31:58 GMT+0100 (CET)';
     echo $_GET['dateBegin'].' to '.$_GET['dateEnd'].'<br/>'.PHP_EOL;
     */
+    echo $_GET['dateBegin'].' to '.$_GET['dateEnd'].'<br/>'.PHP_EOL;die();
     $dateBeginStr = str_replace('.','0',$_GET['dateBegin']);
     $dateEndStr = str_replace('.','0',$_GET['dateEnd']);
     $dateBeginStr = str_replace ('GMT000', 'GMT+0000', $dateBeginStr);
