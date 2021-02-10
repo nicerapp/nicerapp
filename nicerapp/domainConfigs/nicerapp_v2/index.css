@@ -136,7 +136,7 @@ img.bg_last {
 
 #btnThemeSwitch {
     position : absolute;
-    top : -200px; /*calc(1vh - 3px);*/
+    top : calc(1vh - 3px);
     left : calc(1vw + 245px);
     width : 40px;
     z-index : 1100;
@@ -147,20 +147,10 @@ img.bg_last {
 #btnThemeSwitch.phoneView {
     left : calc(1vw + 6px);
 }
-#btnThemeSwitch.started {
-    animation : anim_btnThemeSwitch_started 2s;
-    animation-iteration-count : 1;
-    animation-fill-mode : forwards;
-}
-@keyframes anim_btnThemeSwitch_started {
-    100% {
-        top : calc(1vh - 3px);
-    }
-}
 
 #btnChangeBackground {
     position : absolute;
-    top : -200px; /*calc(1vh - 3px);*/
+    top : calc(1vh - 3px);
     left : calc(1vw + 300px);
     width : 40px;
     background : rgba(255,255,255,0.5);
@@ -171,16 +161,6 @@ img.bg_last {
 }
 #btnChangeBackground.phoneView {
     left : calc(99vw - 50px);
-}
-#btnChangeBackground.started {
-    animation : anim_btnChangeBackground_started 2s;
-    animation-iteration-count : 1;
-    animation-fill-mode : forwards;
-}
-@keyframes anim_btnChangeBackground_started {
-    100% {
-        top : calc(1vh - 3px);
-    }
 }
 
 
