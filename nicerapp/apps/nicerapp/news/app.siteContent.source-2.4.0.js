@@ -233,7 +233,12 @@ na.apps.loaded.newsApp = {
         };
 
         na.analytics.logMetaEvent ('newsApp : startApp()');
-
+$('#siteContent .vividDialogContent').css ({
+    display : 'flex',
+    justifyContent : 'center',
+    alignItems : 'center',
+    textAlign : 'center'
+});
         /*
         var loaderIconTheme = na.s.c.globals.loaderIconTheme('appLoading');
         na.apps.loaded.newsApp.settings.loaderIcon = na.acs.addIcon(
@@ -472,7 +477,15 @@ na.apps.loaded.newsApp = {
                     textStatus : textStatus
                 });
                 */
-                $('.loader').fadeOut('normal',function(){ $('.loader, .loaderAfter').remove(); });
+                $('.loader').fadeOut('normal',function(){ 
+                    $('.loader, .loaderAfter').remove(); 
+                    $('#siteContent .vividDialogContent').css ({
+                        display : 'block',
+                        justifyContent : '',
+                        alignItems : '',
+                        textAlign : ''
+                    });                    
+                });
                 
                 
                 var
