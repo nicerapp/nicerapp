@@ -245,7 +245,7 @@ na.apps.loaded.newsApp = {
         
         na1.onresize();
 
-        c.dtCurrent = new Date(new Date().getTime() - (1000 * 60 * 60));
+        c.dtCurrent = new Date(new Date().getTime() - (1000 * 60 * 30));
         c.dtEnd = new Date();
         c.lastCurrentGet = new Date();
         
@@ -253,7 +253,7 @@ na.apps.loaded.newsApp = {
         if (!c.dtStart) c.dtStart = new Date();
         if (!c.intervalMailLogCountdown) c.intervalMailLogCountdown = setInterval (na1.intervalMailLogCountdown, 250);
 
-        if (!c.read_loop_minutesIntoPast) c.read_loop_minutesIntoPast = 60;
+        if (!c.read_loop_minutesIntoPast) c.read_loop_minutesIntoPast = 30;
         if (!c.read_loop_millisecondsToDoNext) c.read_loop_millisecondsToDoNext = 1000 * .5;
         
         c.firstRun = true;
