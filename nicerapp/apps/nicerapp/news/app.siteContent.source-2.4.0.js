@@ -458,17 +458,15 @@ na.apps.loaded.newsApp = {
                     textStatus : textStatus
                 });
                 */
-                $('.loader').fadeOut('normal',function(){ 
-                    $('.loader, .loaderAfter').remove(); 
-                    $('#siteContent .vividDialogContent').css ({
-                        display : 'block',
-                        justifyContent : '',
-                        alignItems : '',
-                        textAlign : '',
-                        background : ''
-                    });                    
-                });
+                $('.loader, .loaderAfter').remove(); 
                 $('#newsApp_title, #newsApp_searchbar, #newsApp_searchbar__enterQuery, #newsApp_searchbar__abandonQuery, #newsApp_info, #newsApp_timer, #newsApp_header_buttons').css({display:'block'});
+                $('#siteContent .vividDialogContent').css ({
+                    display : 'block',
+                    justifyContent : '',
+                    alignItems : '',
+                    textAlign : '',
+                    background : ''
+                });                    
                 $('#siteContent__content').css({
                     top : $('#siteContent__header').height(),
                     left : 0,
