@@ -50,6 +50,7 @@
 
 #siteContent .vividDialogContent {
     display : flex;
+    flex-wrap : wrap;
     justify-content : center;
     align-items : center;
     background : rgba(0,0,0,0.2);
