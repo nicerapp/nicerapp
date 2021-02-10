@@ -170,7 +170,7 @@ var nas = na.site = {
                         $(el).poshytip('hide');
                     }, 2500);
                 }, 7270);
-            } else if (&& $.cookie('haveShownTutorial')!=='true') {
+            } else if ($.cookie('haveShownTutorial')!=='true') {
                 var ptSettings = {
                     theme : $(el).attr('tooltipTheme'),//'mainTooltipTheme',
                     contentAsHTML : true,
