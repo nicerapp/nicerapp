@@ -49,8 +49,8 @@
 
 .loader {
     position: relative;
-    width: 350px;
-    height: 350px;
+    width: 300px;
+    height: 300px;
     border-radius: 50%;
     background: linear-gradient(#f07e6e, #84cdfa, #5ad1cd);
     animation: animate 1.2s linear infinite;

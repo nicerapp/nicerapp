@@ -472,11 +472,15 @@ na.apps.loaded.newsApp = {
                     textStatus : textStatus
                 });
                 */
+                $('.loader').fadeOut('normal',function(){ $('.loader').remove(); });
+                
+                
                 var
                 idxStart = c.idx;
-
+                
                 na.m.walkArray (data, undefined, na1.loadNews_get_forDateTimeRange_walkValue);
         
+                
                 var
                 itemsLoadedCount = c.idx - idxStart;
                 console.log (itemsLoadedCount + ' - ' + url);
