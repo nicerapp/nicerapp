@@ -7,7 +7,8 @@ $appParams = array (
         'news' => $_GET
     )
 );
-var_dump ($appParams); die();
+$app = json_decode (base64_decode_url($_GET['apps']), true);
+echo '<pre>'.json_encode($app,JSON_PRETTY_PRINT); die();
 //$newsApp_content = getNewsAppContent ($appParams);
 
 	global $saSiteHTTP; global $saSiteDomain; global $saSiteRootFolder; global $saFrameworkFolder;
