@@ -14,7 +14,7 @@
     $_GET['dateEnd'] = 'Tue Mar 20 2018 17:31:58 GMT+0100 (CET)';
     echo $_GET['dateBegin'].' to '.$_GET['dateEnd'].'<br/>'.PHP_EOL;
     */
-    echo $_GET['dateBegin'].' to '.$_GET['dateEnd'].'<br/>'.PHP_EOL;die();
+    //echo $_GET['dateBegin'].' to '.$_GET['dateEnd'].'<br/>'.PHP_EOL;die();
     $dateBeginStr = str_replace('.','0',$_GET['dateBegin']);
     $dateEndStr = str_replace('.','0',$_GET['dateEnd']);
     $dateBeginStr = str_replace ('GMT000', 'GMT+0000', $dateBeginStr);
@@ -62,13 +62,16 @@
         
         
         //echo $dataRoot.'/'.$dateRelativePath.PHP_EOL;
-        if (!file_exists($dataRoot.'/'.$dateRelativePath)) {
+        if (
+            $dateRelativePath2===$dateRelativePath
+            || (!file_exists($dataRoot.'/'.$dateRelativePath))
+        ) {
             //echo '!file_exists '.$dataRoot.'/'.$dateRelativePath.PHP_EOL;
             $dateScanning = $dateScanning->add (new DateInterval('PT9M'));
             continue;
         }
         
-        if ($dateRelativePath2!=='' && $dateRelativePath2!==$dateRelativePath) $dirs = getFilePathList ($dataRoot.'/'.$dateRelativePath, true, $preg, array('dir'));
+        $dirs = getFilePathList ($dataRoot.'/'.$dateRelativePath, true, $preg, array('dir'));
 
 
         /*

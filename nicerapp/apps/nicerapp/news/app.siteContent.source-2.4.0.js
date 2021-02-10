@@ -457,7 +457,7 @@ na.apps.loaded.newsApp = {
                     textStatus : textStatus
                 });
                 */
-alert(data);
+//alert(data);
                 $('.loader, .loaderAfter').remove(); 
                 $('#newsApp_searchbar__enterQuery, #newsApp_searchbar__abandonQuery, #newsApp_info, #newsApp_timer').css({display:'block'});
                 $('#newsApp_title, #newsApp_searchbar, #newsApp_header_buttons').css({display:'table-cell'});
