@@ -74,7 +74,9 @@
         transform: rotate(360deg);
     }
 }
-
+.loading {
+    height : 330px;
+}
 
 .loader span {
     position: absolute;
