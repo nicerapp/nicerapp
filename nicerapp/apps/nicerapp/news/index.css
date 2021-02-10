@@ -116,6 +116,7 @@
 }
 .loaderAfter {
     flex : 0 0 100%;
+    position:absolute;
     width: 300px;
     color : white;
     font-weight : bold;
