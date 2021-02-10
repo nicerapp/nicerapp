@@ -53,7 +53,7 @@ class nicerAppCMS {
         }
         
         
-        $getAsIndividualLinks = $this->domain==='localhost_v2';
+        $getAsIndividualLinks = true;//$this->domain==='localhost_v2';
         if ($getAsIndividualLinks) {
             $cssFiles = $this->getFiles_asIndividualLinks('css', 'css');
             $cssThemeFiles = $this->getFiles_asIndividualLinks('css', 'cssTheme');
