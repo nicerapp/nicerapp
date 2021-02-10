@@ -259,7 +259,7 @@ na.apps.loaded.newsApp = {
         
         na1.onresize();
 
-        c.dtCurrent = new Date(new Date().getTime() - (1000 * 60 * 10));
+        c.dtCurrent = new Date(new Date().getTime() - (1000 * 60 * 120));
         c.dtEnd = new Date();
         c.lastCurrentGet = new Date();
         
