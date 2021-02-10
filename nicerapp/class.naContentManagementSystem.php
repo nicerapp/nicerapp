@@ -35,6 +35,7 @@ class nicerAppCMS {
     public function getSite() {
         $templateFile = realpath(dirname(__FILE__).'/domainConfigs/'.$this->domain.'/index.template.php');
 
+        /*
         if (array_key_exists('apps', $_GET)) {
             $app = json_decode (base64_decode_url($_GET['apps']), true);
             //echo '<pre>'; var_dump ($app); 
@@ -50,9 +51,9 @@ class nicerAppCMS {
         } else {    
             //$contentFile = realpath(dirname(__FILE__).'/domainConfigs/'.$this->domain.'/frontpage.siteContent.php');
             $titleFile = realpath(dirname(__FILE__).'/domainConfigs/'.$this->domain.'/index.title.php');
-        }
+        }*/
         
-        
+        /*
         $getAsIndividualLinks = true;//$this->domain==='localhost_v2';
         if ($getAsIndividualLinks) {
             $cssFiles = $this->getFiles_asIndividualLinks('css', 'css');
@@ -62,9 +63,10 @@ class nicerAppCMS {
             $cssFiles = $this->getFiles('css', 'css');
             $cssThemeFiles = $this->getFiles('css', 'cssTheme');
             $javascriptFiles = $this->getFiles('js', 'javascripts');
-        }
+        }*/
         
         $div_siteContent = $this->getDivSiteContent();
+        /*
         $div_siteMenu = $this->getSiteMenu();
         $replacements = array (
             '{$title}' => execPHP($titleFile),
@@ -79,6 +81,8 @@ class nicerAppCMS {
         $search = array_keys($replacements);
         $replace = array_values($replacements);
         $html = str_replace ($search, $replace, execPHP($templateFile));
+        */
+        return $div_siteContent;
         return $html;
     }
     
