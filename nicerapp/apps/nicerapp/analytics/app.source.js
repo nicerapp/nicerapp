@@ -149,7 +149,7 @@ na.analytics = {
             ("0" + m.getHours()).slice(-2) + ":" +
             ("0" + m.getMinutes()).slice(-2) + ":" +
             ("0" + m.getSeconds()).slice(-2) + "." +
-            (m.getMilliseconds());
+            na.m.padNumber(m.getMilliseconds(),4,'0');
         return r;
     },
     
