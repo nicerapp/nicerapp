@@ -35,24 +35,21 @@ class nicerAppCMS {
     public function getSite() {
         $templateFile = realpath(dirname(__FILE__).'/domainConfigs/'.$this->domain.'/index.template.php');
 
-        
         if (array_key_exists('apps', $_GET)) {
             $app = json_decode (base64_decode_url($_GET['apps']), true);
-            //echo '<pre>'; var_dump ($app); 
-            $files = getFilePathList (realpath(dirname(__FILE__)).'/apps', true, '/app.title.sit.*.php/', array('file'), 2);
+            //var_dump ($app); 
+            //$files = getFilePathList (realpath(dirname(__FILE__)).'/apps', true, '/app.site.*.php/', array('file'), 3);
+            $folders = getFilePathList (realpath(dirname(__FILE__)).'/apps', true, '/.*/', array('dir'), 1);
             //echo '<pre>'; var_dump ($files); die();
-            foreach ($files as $idx => $file) {
+            foreach ($folders as $idx => $folder) {
                 foreach ($app as $appName => $appSettings) {
-                    if (strpos($file,$appName)!==false) {
-                        $titleFile = $file;
-                    }
+                    $filename = '/apps/'.basename($folder).'/'.$appName.'/app.title.site.php';
+                    if (file_exists(dirname(__FILE__).$filename)) $titleFile = $filename;
                 }
             }
         } else {    
-            //$contentFile = realpath(dirname(__FILE__).'/domainConfigs/'.$this->domain.'/frontpage.siteContent.php');
             $titleFile = realpath(dirname(__FILE__).'/domainConfigs/'.$this->domain.'/index.title.php');
         }
-        
         
         $getAsIndividualLinks = true;//$this->domain==='localhost_v2';
         if ($getAsIndividualLinks) {
@@ -157,14 +154,13 @@ class nicerAppCMS {
             foreach ($folders as $idx => $folder) {
                 foreach ($app as $appName => $appSettings) {
                     $filename = '/apps/'.basename($folder).'/'.$appName.'/app.siteContent.php';
-                    echo realpath(dirname(__FILE__).$filename); 
                     if (file_exists(dirname(__FILE__).$filename)) $contentFile = $filename;
                 }
             }
         } else {    
             $contentFile = realpath(dirname(__FILE__).'/domainConfigs/'.$this->domain.'/frontpage.siteContent.php');
         }
-        die();
+
         $content = execPHP($contentFile);
         return $content;
     }

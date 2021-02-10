@@ -449,14 +449,12 @@ another example:
 					$result[count($result)] = "[$pass]".$filepath;
 				}
 				
-				echo $level.' - '.$depth.'<br/>';
 				if ($recursive && $ft=="dir" && (is_null($depth) || $level<$depth)) {
 					$subdir = getFilePathList ($filepath,$recursive, $fileSpecRE, 
 						$fileTypesFilter, $depth, $level+1, $ownerFilter, $fileSizeMin, $fileSizeMax, 
 						$aTimeMin, $aTimeMax, $mTimeMin, $mTimeMax,
 						$cTimeMin, $cTimeMax, $listCall);
 					array_splice ($result, count($result)+1, 0, $subdir);
-					var_dump ($result);
 				}
 			}
 			}
