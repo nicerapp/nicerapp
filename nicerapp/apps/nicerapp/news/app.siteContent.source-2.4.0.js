@@ -237,7 +237,7 @@ $('#siteContent .vividDialogContent').css ({
     display : 'flex',
     justifyContent : 'center',
     alignItems : 'center',
-    textAlign : 'center'
+    background : 'rgba(0,0,0,0.5)'
 });
         /*
         var loaderIconTheme = na.s.c.globals.loaderIconTheme('appLoading');
