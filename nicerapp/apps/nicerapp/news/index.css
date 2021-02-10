@@ -90,9 +90,7 @@
 }
 
 .loader:after {
-    content: 'Now loading';
-    color : white;
-    font-weight : bold;
+    content: '';
     position: absolute;
     top: 10px;
     left: 10px;
@@ -101,6 +99,10 @@
     background: rgba(0,0,0,0.5);
     border: solid white 10px;
     border-radius: 50%;
+}
+.loaderAfter {
+        color : white;
+    font-weight : bold;
     display: flex;
     justify-content: center;
     align-items: center;
