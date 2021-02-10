@@ -26,6 +26,7 @@
     $dateEnd = new DateTime($dateEndStr);
     //$dateEnd = $dateEnd->add (new DateInterval('PT2M'));
     
+    $dateRelativePath2 = '';
     
     $dateBegin->setTimeZone(new DateTimeZone(date_default_timezone_get()));
     $dateScanning->setTimeZone(new DateTimeZone(date_default_timezone_get()));
@@ -44,6 +45,14 @@
     $i = 0;
     while ($dateScanning->format('U') <= $dateEnd->format('U')) {
         $dateRelativePath = $dateScanning->format('Y/m/d/H'); // years, months without leading 0, days without leading 0, hours without leading 0
+        
+        
+        if ($dateRelativePath2===$dateRelativePath) {
+            $dateScanning = $dateScanning->add (new DateInterval('PT9M'));
+            continue;
+        }
+        
+        
         //echo $dateRelativePath.'<br/>'.PHP_EOL;
         $i++;
         //if ($i > 10) die();
@@ -141,6 +150,7 @@
         }
         
         $dateScanning = $dateScanning->add (new DateInterval('PT9M'));
+        $dateRelativePath2 = $dateRelativePath;
     }
     $dirs = $dirs2; unset ($dirs2);
 
