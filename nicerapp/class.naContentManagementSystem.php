@@ -128,15 +128,16 @@ class nicerAppCMS {
         $filename = realpath(dirname(__FILE__).'/domainConfigs').'/'.$this->domain.'/index.'.$indexPrefix.$filenamePrefix.'.json';
         $files = json_decode(file_get_contents($filename), true);
         switch ($type) {
-            case 'css': $lineSrc = "\t".'<link type="text/css" rel="StyleSheet" href="{$src}?c={$changed}">'."\r\n"; break;
-            case 'js': $lineSrc = "\t".'<script type="text/javascript" src="{$src}?c={$changed}"></script>'."\r\n"; break;
+            //case 'css': $lineSrc = "\t".'<link type="text/css" rel="StyleSheet" href="{$src}?c={$changed}">'."\r\n"; break;
+            case 'css': $lineSrc = "\t".'<link type="text/css" rel="StyleSheet" href="{$src}">'."\r\n"; break;
+            //case 'js': $lineSrc = "\t".'<script type="text/javascript" src="{$src}?c={$changed}"></script>'."\r\n"; break;
+            case 'js': $lineSrc = "\t".'<script type="text/javascript" src="{$src}"></script>'."\r\n"; break;
         };
         $lines = '';    
         foreach ($files as $idx => $file) {
             $file = str_replace ('{$domain}', $this->domain, $file);
             $url = str_replace ($this->basePath,'',$file);
             $search = array ('{$src}', '{$changed}');
-            clearstatcache();
             $replace = array ($url, date('Ymd_His', filemtime($this->basePath.'/'.$file)));
             $lines .= str_replace ($search, $replace, $lineSrc);
         };
