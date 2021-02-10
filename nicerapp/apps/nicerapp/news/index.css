@@ -101,7 +101,8 @@
     border-radius: 50%;
 }
 .loaderAfter {
-        color : white;
+    width: 300px;
+    color : white;
     font-weight : bold;
     display: flex;
     justify-content: center;

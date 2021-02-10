@@ -472,7 +472,7 @@ na.apps.loaded.newsApp = {
                     textStatus : textStatus
                 });
                 */
-                $('.loader').fadeOut('normal',function(){ $('.loader').remove(); });
+                $('.loader').fadeOut('normal',function(){ $('.loader, .loaderAfter').remove(); });
                 
                 
                 var
