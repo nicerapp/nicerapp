@@ -237,7 +237,7 @@ $('#siteContent .vividDialogContent').css ({
     display : 'flex',
     justifyContent : 'center',
     alignItems : 'center',
-    background : 'rgba(0,0,0,0.5)'
+    background : 'rgba(0,0,0,0.2)'
 });
         /*
         var loaderIconTheme = na.s.c.globals.loaderIconTheme('appLoading');
@@ -483,7 +483,8 @@ $('#siteContent .vividDialogContent').css ({
                         display : 'block',
                         justifyContent : '',
                         alignItems : '',
-                        textAlign : ''
+                        textAlign : '',
+                        background : ''
                     });                    
                 });
                 
