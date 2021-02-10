@@ -170,7 +170,6 @@ var nas = na.site = {
                         $(el).poshytip('hide');
                     }, 2500);
                 }, 7270);
-                $.cookie('haveShownTutorial', 'true', na.m.cookieOptions());
             } else if (&& $.cookie('haveShownTutorial')!=='true') {
                 var ptSettings = {
                     theme : $(el).attr('tooltipTheme'),//'mainTooltipTheme',
@@ -183,6 +182,7 @@ var nas = na.site = {
                 $(el).poshytip(ptSettings);
             }
         });
+        $.cookie('haveShownTutorial', 'true', na.m.cookieOptions());
     },
     
     onresize : function() {
