@@ -70,7 +70,7 @@ $appParams = array (
             <div id ="siteContent__sidebar__right" class="saSidebarRightInDialog" style="position:absolute;top:0px;left:0px;width:30px;height:10px;background:yellow;z-index:200;"></div>
             -->
             
-
+<div class="loading">
          <div class="loader">
             <span></span>
             <span></span>
@@ -80,7 +80,7 @@ $appParams = array (
         <div class="loaderAfter">
         Now Loading
         </div>
-            
+</div>            
             <div id ="siteContent__content" class="saContent" style="position:absolute;top:0px;left:0px;width:100%;height:100%;">
                 <div id="newsApp_content_shadow" class="" style="position:absolute;width:100%;height:100%;opacity:0.0001;z-index:-1"></div>
                 <div id="newsApp_content" class="" style="position:absolute;width:100%;height:100%;z-index:10"></div>
