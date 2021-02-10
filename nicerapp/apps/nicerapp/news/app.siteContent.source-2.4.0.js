@@ -254,7 +254,7 @@ na.apps.loaded.newsApp = {
         if (!c.intervalMailLogCountdown) c.intervalMailLogCountdown = setInterval (na1.intervalMailLogCountdown, 250);
 
         if (!c.read_loop_minutesIntoPast) c.read_loop_minutesIntoPast = 20;
-        if (!c.read_loop_millisecondsToDoNext) c.read_loop_millisecondsToDoNext = 1000 * .5;
+        if (!c.read_loop_millisecondsToDoNext) c.read_loop_millisecondsToDoNext = 1000 * 10;
         
         c.firstRun = true;
         na1.loadNews_read_loop ();
@@ -404,8 +404,6 @@ na.apps.loaded.newsApp = {
             c.lastCurrentGet = dtBegin;
             na1.loadNews_get_forDateTimeRange (new Date(dtBegin.getTime() - 1000 * 60 * 6), dtBegin, settings);
         };
-        
-        c.timerLoadNews_read_loop = setTimeout (na1.loadNews_read_loop, c.read_loop_millisecondsToDoNext);
     },
     
     /*
@@ -499,13 +497,13 @@ na.apps.loaded.newsApp = {
                     //c.dtCurrent = new Date(c.dtCurrent.getTime() - 1000 * 60 * c.read_loop_minutesIntoPast);
 
                     c.read_loop_minutesIntoPast = 60 * 4;
-                    c.read_loop_millisecondsToDoNext = 1000 * 20;
+                    c.read_loop_millisecondsToDoNext = 1000 * .5;
                 } else if (itemsLoadedCount < 100) {
                     c.read_loop_minutesIntoPast = 60 * 2;
-                    c.read_loop_millisecondsToDoNext = 1000 * 20;
+                    c.read_loop_millisecondsToDoNext = 1000 * .5;
                 } else {
                     c.read_loop_minutesIntoPast = 60;
-                    c.read_loop_millisecondsToDoNext = 1000 * 20;
+                    c.read_loop_millisecondsToDoNext = 1000 * .5;
                 };
                 
                 // na.m.extend() works with pointers (i think, i hope) and does not let go of old data in a recursive array/object,
@@ -557,6 +555,7 @@ na.apps.loaded.newsApp = {
                 c.displayCounts = '<span class="newsApp__header__displayCounts">' + (-1 * (g.buffer-parseInt(c.displayCounts))) + '</span>';
                 $('#newsApp_timer').html(na1.formatDateForHeader()+ ' ' +(c.displayCounts));
                 
+                c.timerLoadNews_read_loop = setTimeout (na1.loadNews_read_loop, c.read_loop_millisecondsToDoNext);
             }
         };
         //na.m.log (20, url);
