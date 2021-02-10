@@ -152,16 +152,19 @@ class nicerAppCMS {
             $app = json_decode (base64_decode_url($_GET['apps']), true);
             //var_dump ($app); 
             //$files = getFilePathList (realpath(dirname(__FILE__)).'/apps', true, '/app.site.*.php/', array('file'), 3);
+            $folders = getFilePathList (realpath(dirname(__FILE__)).'/apps', true, '/.*/', array('dir'), 1);
             //echo '<pre>'; var_dump ($files); die();
-            foreach ($app as $appName => $appSettings) {
-                $filename = '/apps/nicerapp/'.$appName.'/app.siteContent.php';
-                echo realpath(dirname(__FILE__).$filename); die();
-                if (file_exists(dirname(__FILE__).$filename)) $contentFile = $filename;
+            foreach ($folders as $idx => $folder) {
+                foreach ($app as $appName => $appSettings) {
+                    $filename = '/apps/'.$folder.'/'.$appName.'/app.siteContent.php';
+                    echo realpath(dirname(__FILE__).$filename); 
+                    if (file_exists(dirname(__FILE__).$filename)) $contentFile = $filename;
+                }
             }
         } else {    
             $contentFile = realpath(dirname(__FILE__).'/domainConfigs/'.$this->domain.'/frontpage.siteContent.php');
         }
-        
+        die();
         $content = execPHP($contentFile);
         return $content;
     }
