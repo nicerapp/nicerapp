@@ -96,7 +96,7 @@
     left: 10px;
     right: 10px;
     bottom: 10px;
-    background: #f1f1f1;
+    background: rgba(0,0,0,0.5);
     border: solid white 10px;
     border-radius: 50%;
 }
