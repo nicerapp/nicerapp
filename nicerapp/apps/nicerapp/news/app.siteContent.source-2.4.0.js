@@ -459,7 +459,8 @@ na.apps.loaded.newsApp = {
                 });
                 */
                 $('.loader, .loaderAfter').remove(); 
-                $('#newsApp_title, #newsApp_searchbar, #newsApp_searchbar__enterQuery, #newsApp_searchbar__abandonQuery, #newsApp_info, #newsApp_timer, #newsApp_header_buttons').css({display:'block'});
+                $('#newsApp_searchbar__enterQuery, #newsApp_searchbar__abandonQuery, #newsApp_info, #newsApp_timer').css({display:'block'});
+                $('#newsApp_title, #newsApp_searchbar, #newsApp_header_buttons').css({display:'table-cell'});
                 $('#siteContent .vividDialogContent').css ({
                     display : 'block',
                     justifyContent : '',
