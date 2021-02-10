@@ -233,12 +233,6 @@ na.apps.loaded.newsApp = {
         };
 
         na.analytics.logMetaEvent ('newsApp : startApp()');
-$('#siteContent .vividDialogContent').css ({
-    display : 'flex',
-    justifyContent : 'center',
-    alignItems : 'center',
-    background : 'rgba(0,0,0,0.2)'
-});
         /*
         var loaderIconTheme = na.s.c.globals.loaderIconTheme('appLoading');
         na.apps.loaded.newsApp.settings.loaderIcon = na.acs.addIcon(

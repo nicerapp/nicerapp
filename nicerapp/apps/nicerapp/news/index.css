@@ -47,6 +47,14 @@
 }
 
 
+
+#siteContent .vividDialogContent {
+    display : flex;
+    justify-content : center;
+    align-items : center;
+    background : rgba(0,0,0,0.2);
+}
+
 .loader {
     position: relative;
     width: 300px;
@@ -64,6 +72,7 @@
         transform: rotate(360deg);
     }
 }
+
 
 .loader span {
     position: absolute;
