@@ -442,6 +442,7 @@ na.apps.loaded.newsApp = {
         if (c.searchQuery) url += '&q='+c.searchQuery;
 
         na.analytics.logMetaEvent ('newsApp : loadNews_get_forDateTimeRange() url='+url);
+        alert (url);
         ajaxCommand = {
             type : 'GET',
             url : url,
@@ -489,6 +490,7 @@ na.apps.loaded.newsApp = {
                 var
                 itemsLoadedCount = c.idx - idxStart;
                 console.log (itemsLoadedCount + ' - ' + url);
+                alert (itemsLoadedCount);
                 //alert (itemsLoadedCount + ' - ' + url);
                 na.analytics.logMetaEvent ('newsApp : loadNews_get_forDateTimeRange() data fetched sucessfully for itemsLoadedCount='+itemsLoadedCount+' and url='+url);
        //debugger;
