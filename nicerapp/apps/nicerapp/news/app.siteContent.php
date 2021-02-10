@@ -7,6 +7,7 @@ $appParams = array (
         'news' => $_GET
     )
 );
+var_dump ($appParams); die();
 //$newsApp_content = getNewsAppContent ($appParams);
 
 	global $saSiteHTTP; global $saSiteDomain; global $saSiteRootFolder; global $saFrameworkFolder;
