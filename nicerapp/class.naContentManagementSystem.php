@@ -151,7 +151,7 @@ class nicerAppCMS {
         if (array_key_exists('apps', $_GET)) {
             $app = json_decode (base64_decode_url($_GET['apps']), true);
             //var_dump ($app); 
-            $files = getFilePathList (realpath(dirname(__FILE__)).'/apps', true, '/app.site.*.php/', array('file'), 2);
+            $files = getFilePathList (realpath(dirname(__FILE__)).'/apps', true, '/app.site.*.php/', array('file'), 3);
             //echo '<pre>'; var_dump ($files); die();
             foreach ($files as $idx => $file) {
                 foreach ($app as $appName => $appSettings) {
