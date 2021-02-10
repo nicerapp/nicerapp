@@ -466,7 +466,7 @@ na.apps.loaded.newsApp = {
                     justifyContent : '',
                     alignItems : '',
                     textAlign : '',
-                    background : ''
+                    background : 'rgba(0,0,0,0)'
                 });                    
                 $('#siteContent__content').css({
                     top : $('#siteContent__header').height(),
