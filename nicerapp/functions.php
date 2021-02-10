@@ -448,6 +448,8 @@ another example:
 					//htmlOut ("PASSED - checks failed");
 					$result[count($result)] = "[$pass]".$filepath;
 				}
+				
+				echo $level.' - '.$depth.'<br/>';
 				if ($recursive && $ft=="dir" && (is_null($depth) || $level<$depth)) {
 					$subdir = getFilePathList ($filepath,$recursive, $fileSpecRE, 
 						$fileTypesFilter, $depth, $level+1, $ownerFilter, $fileSizeMin, $fileSizeMax, 
