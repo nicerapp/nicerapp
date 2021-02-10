@@ -254,7 +254,7 @@ na.apps.loaded.newsApp = {
         if (!c.intervalMailLogCountdown) c.intervalMailLogCountdown = setInterval (na1.intervalMailLogCountdown, 250);
 
         if (!c.read_loop_minutesIntoPast) c.read_loop_minutesIntoPast = 60;
-        if (!c.read_loop_millisecondsToDoNext) c.read_loop_millisecondsToDoNext = 1000 * 1;
+        if (!c.read_loop_millisecondsToDoNext) c.read_loop_millisecondsToDoNext = 1000 * 20;
         
         c.firstRun = true;
         na1.loadNews_read_loop ();
@@ -497,13 +497,13 @@ na.apps.loaded.newsApp = {
                     //c.dtCurrent = new Date(c.dtCurrent.getTime() - 1000 * 60 * c.read_loop_minutesIntoPast);
 
                     c.read_loop_minutesIntoPast = 60 * 4;
-                    c.read_loop_millisecondsToDoNext = 1000 * 1;
+                    c.read_loop_millisecondsToDoNext = 1000 * 20;
                 } else if (itemsLoadedCount < 100) {
                     c.read_loop_minutesIntoPast = 60 * 2;
-                    c.read_loop_millisecondsToDoNext = 1000 * 1;
+                    c.read_loop_millisecondsToDoNext = 1000 * 20;
                 } else {
                     c.read_loop_minutesIntoPast = 60;
-                    c.read_loop_millisecondsToDoNext = 1000 * 1;
+                    c.read_loop_millisecondsToDoNext = 1000 * 20;
                 };
                 
                 // na.m.extend() works with pointers (i think, i hope) and does not let go of old data in a recursive array/object,
