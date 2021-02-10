@@ -489,7 +489,7 @@ na.apps.loaded.newsApp = {
                 var
                 itemsLoadedCount = c.idx - idxStart;
                 console.log (itemsLoadedCount + ' - ' + url);
-                alert (itemsLoadedCount + ' - ' + url);
+                //alert (itemsLoadedCount + ' - ' + url);
                 na.analytics.logMetaEvent ('newsApp : loadNews_get_forDateTimeRange() data fetched sucessfully for itemsLoadedCount='+itemsLoadedCount+' and url='+url);
        //debugger;
                 
