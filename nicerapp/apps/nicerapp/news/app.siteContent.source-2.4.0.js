@@ -254,7 +254,7 @@ na.apps.loaded.newsApp = {
         if (!c.intervalMailLogCountdown) c.intervalMailLogCountdown = setInterval (na1.intervalMailLogCountdown, 250);
 
         if (!c.read_loop_minutesIntoPast) c.read_loop_minutesIntoPast = 60;
-        if (!c.read_loop_millisecondsToDoNext) c.read_loop_millisecondsToDoNext = 1000 * 20;
+        if (!c.read_loop_millisecondsToDoNext) c.read_loop_millisecondsToDoNext = 1000 * .5;
         
         c.firstRun = true;
         na1.loadNews_read_loop ();
