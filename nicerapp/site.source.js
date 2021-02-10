@@ -67,8 +67,7 @@ var nas = na.site = {
             }, 250);
         });
         na.site.onresize();
-        
-        setInterval (nas.updateDateTime, 1000);
+        $('#siteContent').css({display:'block'});
         
         var ac = {
             type : 'GET',
@@ -84,6 +83,8 @@ var nas = na.site = {
 
         
         na.analytics.logMetaEvent ('startup : html and js fully loaded, browserWidth='+$(window).width()+', browserHeight='+$(window).height()+', referer='+na.m.globals.referer+', userAgent='+navigator.userAgent);
+        
+        setInterval (nas.updateDateTime, 1000);
         
         setInterval (function() {
             na.analytics.logMetaEvent ('keep-alive');
@@ -126,8 +127,8 @@ var nas = na.site = {
                     alignTo : 'target',
                     alignX : 'inner-left',
                     offsetX : 10,
-                    fade : true,
-                    slide : true,
+                    fade : !na.m.userDevice.isPhone,
+                    slide : !na.m.userDevice.isPhone,
                     slideOffset : 25
                 };
                 if (na.m.userDevice.isPhone) ptSettings.showOn = 'none';
@@ -152,8 +153,8 @@ var nas = na.site = {
                     alignTo : 'target',
                     alignX : 'inner-right',
                     offsetX : -20,
-                    fade : true,
-                    slide : true,
+                    fade : !na.m.userDevice.isPhone,
+                    slide : !na.m.userDevice.isPhone,
                     slideOffset : 25
                 };
                 if (na.m.userDevice.isPhone) ptSettings.showOn = 'none';
@@ -175,8 +176,8 @@ var nas = na.site = {
                     theme : $(el).attr('tooltipTheme'),//'mainTooltipTheme',
                     contentAsHTML : true,
                     content : $(el).attr('title'),
-                    animation : 'grow',
-                    offset : 10
+                    alignTo : 'target',
+                    alignX : 'center'
                 };
                 if (na.m.userDevice.isPhone) ptSettings.showOn = 'none';
                 $(el).poshytip(ptSettings);

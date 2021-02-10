@@ -27,19 +27,21 @@ img.bg_last {
 }
 
 #siteContent {
-    /*top : calc(1vh + 4rem);
+    top : calc(1vh + 4rem);
     left : 1vw;
     width : calc(98vw - 6px);
-    height : calc(97vh - 4rem - 6px);*/
-    top : 48vh;
+    height : calc(97vh - 4rem - 6px);
+    display : none;
+    /*top : 48vh;
     left : 48vw;
     width : 4vw;
-    height : 4vh;
+    height : 4vh;*/
     border-radius : 20px;
 }
 .vividDialogContent {
     overflow : auto;
     margin : 10px;
+    display : none;
     /*width : calc(98vw - 15px);
     height: calc(100vh - 120px);*/
     width : 100%;
