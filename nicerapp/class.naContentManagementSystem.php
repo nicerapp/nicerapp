@@ -155,14 +155,14 @@ class nicerAppCMS {
             //echo '<pre>'; var_dump ($files); die();
             foreach ($app as $appName => $appSettings) {
                 $filename = '/apps/'.$appName.'/app.siteContent.php';
-                echo realpath(dirname(__FILE__).$filename);
+                echo realpath(dirname(__FILE__).$filename); die();
                 if (file_exists(dirname(__FILE__).$filename)) $contentFile = $filename;
             }
         } else {    
             $contentFile = realpath(dirname(__FILE__).'/domainConfigs/'.$this->domain.'/frontpage.siteContent.php');
         }
         
-        //$content = execPHP($contentFile);
+        $content = execPHP($contentFile);
         return $content;
     }
     
