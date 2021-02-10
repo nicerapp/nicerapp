@@ -17,7 +17,7 @@ $appParams = array (
 	global $saUpstreamRootURL; global $locationbarInfo;
 	global $saUIdefaults;
 
-    $pageTitle = str_replace('__', '&nbsp;', $appParams['apps']['news']);
+    $pageTitle = str_replace('__', '&nbsp;', $appParams['apps']['news']['section']);
     $pageTitle = str_replace('_', '&nbsp;', $pageTitle);
 ?>
         <link type="text/css" rel="StyleSheet" media="screen" href="/nicerapp/apps/nicerapp/news/index.css?changed=<?php echo date('Ymd-His', filectime(dirname(__FILE__).'/index.css'));?>"/>
