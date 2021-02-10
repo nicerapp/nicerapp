@@ -45,14 +45,6 @@
     $i = 0;
     while ($dateScanning->format('U') <= $dateEnd->format('U')) {
         $dateRelativePath = $dateScanning->format('Y/m/d/H'); // years, months without leading 0, days without leading 0, hours without leading 0
-        
-        
-        if ($dateRelativePath2===$dateRelativePath) {
-            $dateScanning = $dateScanning->add (new DateInterval('PT9M'));
-            continue;
-        }
-        
-        
         //echo $dateRelativePath.'<br/>'.PHP_EOL;
         $i++;
         //if ($i > 10) die();
@@ -75,7 +67,7 @@
             continue;
         }
         
-        $dirs = getFilePathList ($dataRoot.'/'.$dateRelativePath, true, $preg, array('dir'));
+        if ($dateRelativePath2!=='' && $dateRelativePath2!==$dateRelativePath) $dirs = getFilePathList ($dataRoot.'/'.$dateRelativePath, true, $preg, array('dir'));
 
 
         /*
