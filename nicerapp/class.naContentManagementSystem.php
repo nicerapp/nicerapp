@@ -154,7 +154,7 @@ class nicerAppCMS {
             //$files = getFilePathList (realpath(dirname(__FILE__)).'/apps', true, '/app.site.*.php/', array('file'), 3);
             //echo '<pre>'; var_dump ($files); die();
             foreach ($app as $appName => $appSettings) {
-                $filename = '/apps/'.$appName.'/app.siteContent.php';
+                $filename = '/apps/nicerapp/'.$appName.'/app.siteContent.php';
                 echo realpath(dirname(__FILE__).$filename); die();
                 if (file_exists(dirname(__FILE__).$filename)) $contentFile = $filename;
             }
