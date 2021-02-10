@@ -76,7 +76,7 @@ $appParams = array (
             <span></span>
             <span></span>
             <span></span>
-        </div>
+        </div><br/>
         <div class="loaderAfter">
         Now Loading
         </div>
