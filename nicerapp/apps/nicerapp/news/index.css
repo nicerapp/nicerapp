@@ -112,7 +112,7 @@
     border-radius: 50%;
 }
 .loaderAfter {
-    flex : 1;
+    flex : 0 0 100%;
     width: 300px;
     color : white;
     font-weight : bold;
