@@ -150,7 +150,7 @@ class nicerAppCMS {
     public function getDivSiteContent() {
         if (array_key_exists('apps', $_GET)) {
             $app = json_decode (base64_decode_url($_GET['apps']), true);
-            //var_dump ($app); 
+            var_dump ($app); 
             $files = getFilePathList (realpath(dirname(__FILE__)).'/apps', true, '/app.site.*.php/', array('file'), 3);
             //echo '<pre>'; var_dump ($files); die();
             foreach ($files as $idx => $file) {
@@ -164,7 +164,7 @@ class nicerAppCMS {
             $contentFile = realpath(dirname(__FILE__).'/domainConfigs/'.$this->domain.'/frontpage.siteContent.php');
         }
         
-        $content = execPHP($contentFile);
+        //$content = execPHP($contentFile);
         return $content;
     }
     
