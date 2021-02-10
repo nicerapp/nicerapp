@@ -53,12 +53,12 @@
     flex-wrap : wrap;
     justify-content : center;
     align-items : center;
-    text-align:center;
     background : rgba(0,0,0,0.2);
 }
 
 .loading {
     height : 280px;
+    width:250px;
 }
 
 .loader {
