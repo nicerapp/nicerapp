@@ -515,13 +515,14 @@ na.apps.loaded.newsApp = {
                     var 
                     dtNow = new Date();
                     
+                    /*
                     if (c.dtStart.getTime() + 1000 * 15 < dtNow.getTime()) {
                         clearInterval (c.intervalMailLogCountdown);
                         alert ('startup of news app failed. sorry.');
                         debugger;
                         na1.settings.loadedIn['#siteContent'].ondestroy();
                         
-                    }
+                    }*/
                 } else {
                     clearInterval (c.intervalMailLogCountdown);
                     $('#newsApp_debug').animate({opacity:0.001}, {complete :function () {
