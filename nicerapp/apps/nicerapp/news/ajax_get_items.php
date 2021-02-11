@@ -197,6 +197,9 @@
     
     
        // read in relevant files
+    echo '<pre>'.json_encode($dirs,JSON_PRETTY_PRINT); die();
+       
+       
     foreach ($dirs as $idx => $dir) {
 		if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
 		    $fn = $dataRoot.'\\'.$dir.str_replace('_',' ', preg_replace('/__/','\\',$_GET['section'])).'\\items.json';
