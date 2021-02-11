@@ -136,7 +136,7 @@ function t2_getNumberOfDecks_recurse ($d) {
 	$r = 0;
 	if (is_array($d) && count($d)>0) {
 		foreach ($d as $n => $v) {
-			if (!is_array($v)) {
+			if (is_array($v) && count($v)===0) {
 				$r++;
 			} else {
 				$r += t2_getNumberOfDecks_recurse($v);

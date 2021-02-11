@@ -109,7 +109,7 @@ require_once (dirname(__FILE__).'/functions2.php');
 			<?php echo t2_html_draw_cards($reading); ?>
 		</div>
 		<div id="intro" class="text" style="display:none;">
-			<h1 id="pageTitle" style="text-shadow:2px 2px 1px rgba(0,0,0,0.7)">Free Tarot Reading (191 decks, 9 reading types)</h1>
+			<h1 id="pageTitle" style="text-shadow:2px 2px 1px rgba(0,0,0,0.7)">Free Tarot Reading</h1>
 			<script type="text/javascript">
                 /*setTimeout(function() {
                     var vividTextCmd = {

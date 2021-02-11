@@ -110,7 +110,8 @@ class naVividMenu {
                         column++;
                         columnIdx = 1;
                     } else columnIdx++;
-                }
+                } 
+                
             };
             
             var           
