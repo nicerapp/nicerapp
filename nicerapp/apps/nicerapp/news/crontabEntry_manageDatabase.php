@@ -12,6 +12,7 @@ $fnLock = dirname(__FILE__).'/crontabEntry_manageDatabase.lock.txt';
 if (!file_exists($fnLock)) {
     file_put_contents ($fnLock, 'locked');
     echo 'nicerapp/apps/nicerapp/news/crontabEntry_manageDatabase.php : Reading data from disk'.PHP_EOL;
+    //echo '123'; die();
     $newsApp2->readFromDisk();
     $doo = file_exists($fnLock);
     while ($doo) {

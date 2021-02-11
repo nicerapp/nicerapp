@@ -185,8 +185,14 @@ var nas = na.site = {
         $.cookie('haveShownTutorial', 'true', na.m.cookieOptions());
     },
     
-    onresize : function() {
-        nas.reloadMenu();
+    onresize : function(settings) {
+        if (
+            !settings
+            || (typeof settings=='object' && settings.reloadMenu===true)
+        ) setTimeout (function () {
+            na.site.reloadMenu();
+        }, 2500);
+        
         $('#siteBackground img').css({
             width : $(window).width(),
             height : $(window).height(),
@@ -247,6 +253,8 @@ var nas = na.site = {
                 menu = $('#siteMenu')[0].innerHTML,
                 p1 = menu.indexOf(mlp);
                 $('#siteMenu')[0].innerHTML = menu.substr(0,p1) + contentMenu + menu.substr(p1+mlp.length);
+                //alert ($('li', $('#siteMenu')).length + ' menu items');
+                debugger;
                 
                 nas.s.menus['#siteMenu'] = new naVividMenu($('#siteMenu')[0]);
             },
@@ -265,7 +273,7 @@ var nas = na.site = {
         $('#siteStatusbar .vividDialogContent').animate({opacity:0.0001},'slow', function () {
             $('#siteStatusbar .vividDialogContent').html(msg).css({display:'block',margin:0}).animate({opacity:1},'slow');
             
-            na.site.onresize();
+            na.site.onresize({reloadMenu : false});
             
             if (msg !== na.site.settings.defaultStatusMsg)
             setTimeout (function () {

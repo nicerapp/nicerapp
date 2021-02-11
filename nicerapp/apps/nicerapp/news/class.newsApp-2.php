@@ -164,6 +164,7 @@ class newsApp2_class {
     
     public function readFromDisk () {
         $dataRoot = dirname(__FILE__).'/newsItems';
+        //echo $dataRoot; die();
         
         // fetch relevant directories
         $dirs = getFilePathList ($dataRoot, true, '/.*/', array('dir'), 7);
@@ -251,7 +252,7 @@ class newsApp2_class {
                         foreach ($Hd as $i => &$id) {
                             foreach ($id as $s => &$sd) {
                                 $path = $Y.'/'.leading_zero($m).'/'.leading_zero($d).'/'.leading_zero($H).'/'.leading_zero($i).'/'.leading_zero($s);
-                                //echo '<pre>';var_dump ($path);echo'</pre>';
+                                //echo '<pre>';var_dump ($path);echo'</pre>'; die();
                                 $this->writeToDisk_node($sd, $path);
                             }
                         }
@@ -294,7 +295,7 @@ class newsApp2_class {
         
         if (!file_exists($fn)) {
             file_put_contents ($fn, json_encode($d));
-            //echo '$fn1='.$fn.', filesize='.filesizeHumanReadable(filesize($fn)).PHP_EOL;
+            //echo '$fn1='.$fn.', filesize='.filesizeHumanReadable(filesize($fn)).PHP_EOL; die();
         }
     }
     

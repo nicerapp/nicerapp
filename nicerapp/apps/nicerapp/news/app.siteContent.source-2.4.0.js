@@ -438,8 +438,8 @@ na.apps.loaded.newsApp = {
         url = '/nicerapp/apps/nicerapp/news/ajax_get_items.php?section='+settings.replace(/-/g,'/').replace(/ /g, '_')+'&dateBegin='+dtBeginURL+'&dateEnd='+dtEndURL;
         
         if (c.searchQuery) url += '&q='+c.searchQuery;
-
         na.analytics.logMetaEvent ('newsApp : loadNews_get_forDateTimeRange() url='+url);
+//alert (url);
         ajaxCommand = {
             type : 'GET',
             url : url,
@@ -457,6 +457,8 @@ na.apps.loaded.newsApp = {
                 });
                 */
 //alert(data);
+//alert ('POST LOAD : '+url);
+                
                 $('.loader, .loaderAfter').remove(); 
                 $('#newsApp_searchbar__enterQuery, #newsApp_searchbar__abandonQuery, #newsApp_info, #newsApp_timer').css({display:'block'});
                 $('#newsApp_title, #newsApp_searchbar, #newsApp_header_buttons').css({display:'table-cell'});
@@ -556,6 +558,9 @@ na.apps.loaded.newsApp = {
                 $('#newsApp_timer').html(na1.formatDateForHeader()+ ' ' +(c.displayCounts));
                 
                 c.timerLoadNews_read_loop = setTimeout (na1.loadNews_read_loop, c.read_loop_millisecondsToDoNext);
+            },
+            failure : function (xhr, ajaxOptions, thrownError) {
+                alert (thrownError);
             }
         };
         //na.m.log (20, url);
