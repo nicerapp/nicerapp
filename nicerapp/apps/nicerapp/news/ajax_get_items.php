@@ -41,7 +41,7 @@
     ) {
         //die();
     }
-    
+    /*
     $dirs2 = array();
     $i = 0;
     while ($dateScanning->format('U') <= $dateEnd->format('U')) {
@@ -54,7 +54,7 @@
         //echo '/([0-9]+|'.str_replace('_',' ', preg_replace('/__/','|',$_GET['section'])).')/'; die();
             
             // fetch relevant directories
-        //$dirs = getFilePathList ($dataRoot.'/'.$_GET['date'], true, '/.*/', array('dir'), 7);
+        //$dirs = getFilePathList ($dataRoot.'/'.$_GET['date'], true, '/.* /', array('dir'), 7);
         
         $preg = '/[0-9]+|'.str_replace('_',' ', preg_replace('/__/','|',$_GET['section'])).'/i';
         //$preg = '|.*nglish .*|i';
@@ -78,7 +78,7 @@
         echo '<div style="background:orange;color:white;">Data on disk (relevant disk locations only)</div>'.PHP_EOL;
         echo '<pre style="color:blue">'; var_dump ($dirs); echo '</pre>';
         die();
-        */
+        * /
         
         foreach ($dirs as $idx => $dir) {
 			if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
@@ -133,7 +133,7 @@
 
                 );
                 $dirs2[] = $r;
-                */
+                * /
                
 				
                 if (
@@ -154,7 +154,7 @@
     echo '<div style="background:red;color:white;">Data on disk (relevant disk locations only)</div>'.PHP_EOL;
     echo '<pre style="color:blue">'; var_dump ($dirs); echo '</pre>';
 	die();
-	*/
+	* /
 	
     $dirs2 = array();
     foreach ($dirs as $idx => $dir) {
@@ -194,12 +194,12 @@
     } else {
         $searchQueryRegx = null;
     }
-    
+    */
     
        // read in relevant files
-    echo '<pre>'.json_encode($dirs,JSON_PRETTY_PRINT); die();
+    //echo '<pre>'.json_encode($dirs,JSON_PRETTY_PRINT); die();
        
-       
+    $dirs = json_decode('{"0": "2021\/02\/11\/16\/47\/06\/","3": "2021\/02\/11\/16\/52\/06\/","6": "2021\/02\/11\/16\/32\/06\/","9": "2021\/02\/11\/16\/27\/05\/","12": "2021\/02\/11\/16\/42\/06\/","15": "2021\/02\/11\/16\/37\/06\/","18": "2021\/02\/11\/16\/57\/06\/"}', true);
     foreach ($dirs as $idx => $dir) {
 		if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
 		    $fn = $dataRoot.'\\'.$dir.str_replace('_',' ', preg_replace('/__/','\\',$_GET['section'])).'\\items.json';
