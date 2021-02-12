@@ -259,7 +259,7 @@ na.analytics = {
             if (!s.db) {
                 s.db = {};
                 s.dbSummary = {};
-                s.dbSummary.byDate = {byIP : []};
+                s.dbSummary.byDate = {};
                 s.pouchdb[dbName].allDocs ({ include_docs : true, attachments : true }).then(function(result) {
                     for (var i=0; i<result.rows.length; i++) {
                         var 
