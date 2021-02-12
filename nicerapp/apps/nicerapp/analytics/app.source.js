@@ -275,13 +275,13 @@ na.analytics = {
                         s.db[d.jsSessionID][l] = d;
                         if (!s.dbSummary.byDate[date]) s.dbSummary.byDate[date] = {byIP : [], sessions : {}, success : 0, fail : 0}; // assume failure
                         if (!s.dbSummary.byDate[date].byIP.includes(d.ip)) {        
-                            if (date=='2021-02-11') debugger;
+                            //if (date=='2021-02-11') debugger;
                             s.dbSummary.byDate[date].byIP[s.dbSummary.byDate[date].byIP.length] = d.ip;
                         }
                                                                                              
                         if (!s.dbSummary.byDate[date].sessions[d.jsSessionID]) {
                             //if (d.jsSessionID==='LDFYxv3Y3YHevxKy0P0txla07b9vdm') debugger;
-                            if (date=='2021-02-11') debugger;
+                            //if (date=='2021-02-11') debugger;
                             s.dbSummary.byDate[date].sessions[d.jsSessionID] = { afterDesktopResize : false, backgroundChanges : 0 };
                             
                             for (var date2 in s.dbSummary.byDate) {
