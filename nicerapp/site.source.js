@@ -13,6 +13,7 @@ var nas = na.site = {
                 + 'By using this site, you agree to such cookies getting stored on, and read from, your computer.</td><td style="width:220px;"><div class="vividButton" theme="dark" style="position:relative;color:white;" onclick="na.site.dismissCookieWarning();">Ok</div></td></table>'
             : '<table style="width:100%;height:100%;"><tr><td>Copyright (c) and All Rights Reserved (r) 2021 by Rene A.J.M. Veerman</td><td style="width:220px;"><div class="vividButton" theme="dark" style="position:relative;color:white;" onclick="na.site.dismissCopyrightMessage();">Ok</div></td></table>'
         ),
+        dialogs : {},
         buttons : {},
         menus : {}
     },
@@ -48,7 +49,11 @@ var nas = na.site = {
         if ($('.vividDialogContent').css('display')==='none') $('.vividDialogContent').css({display:'block'});
         
         $('.vividButton').each(function(idx,el){
-            nas.s.buttons['#'+el.id] = new naVividButton(el);
+            na.site.settings.buttons['#'+el.id] = new naVividButton(el);
+        });
+        
+        $('.vividDialog').each(function(idx,el){
+            na.site.settings.dialogs['#'+el.id] = new naVividDialog(el);
         });
         
         
@@ -171,9 +176,12 @@ var nas = na.site = {
                         $(el).poshytip('hide');
                     }, 2500);
                 }, 7270);
-            } else if ($.cookie('haveShownTutorial')!=='true') {
+            } else if (
+                el.id!=='btnChangeBackground'
+                && el.id!=='btnThemeSwitch'
+            ) {
                 var ptSettings = {
-                    theme : $(el).attr('tooltipTheme'),//'mainTooltipTheme',
+                    className : $(el).attr('tooltipTheme'),//'mainTooltipTheme',
                     contentAsHTML : true,
                     content : $(el).attr('title'),
                     alignTo : 'target',

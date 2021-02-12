@@ -1,0 +1,30 @@
+.mce-floatpanel {
+    z-index : 300100;
+    background-color : rgba(0,0,0,0.8);
+}
+
+.mce-container,.mce-container *,.mce-widget,.mce-widget *,.mce-reset{
+    background-color : rgba(0,0,0,0.2);
+}
+
+.mce-panel {
+}
+
+.mce-tabs,.mce-tabs+.mce-container-body {
+}
+
+.mce-tab {
+    background-color : rgba(0,0,50,0.4);
+}
+
+.mce-tab.mce-active {
+    background-color : rgba(0,0,100,0.4);
+}
+
+.mce-tab:hover {
+    background-color : rgba(0,0,100,0.7);
+}
+
+.mce-textbox {
+    background-color : rgba(200,200,100,0.58);
+}

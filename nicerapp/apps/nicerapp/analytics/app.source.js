@@ -385,7 +385,7 @@ na.analytics = {
                 html1 = '';
                 
                 html1 += '<table cellpadding="5" border="0" style="">'
-                    + '<tr style="background:rgba(0,50,0,0.5);"><th>IP</th><th>date time</th><th>tzOffset</th><th>total time on site</th><th>background changes</th><th>resolution</th></tr>';
+                    + '<tr style="background:rgba(0,50,0,0.5);"><th>IP</th><th>date time</th><th>tzOffset</th><th>total time on site</th><th>url</th><th>background changes</th><th>resolution</th></tr>';
                 for (var jsSessionID in s.dbSummary.byDate[date].sessions) {
                     var 
                     docs = s.db[jsSessionID],
@@ -406,6 +406,8 @@ na.analytics = {
                             +'<td class="datetime" style="text-align:center;" onmouseenter="na.analytics.datetimeConvertToOwnersTimezone(event,'+d.tzOffset+','+d.datetime+');" onmouseleave="jQuery(\'.datetimeLocal\').remove();">'+d.datetimeStr+'</td>'
                             +'<td class="tzOffset" style="text-align:center;">'+d.tzOffset+'</td>'
                             +'<td class="totalTimeOnSite" style="text-align:center;">'+totalTimeOnSite+'</td>'                            
+                            +'<td class="url" style="text-align:center;">'+d.url+'</td>'
+                            +'<td class="apps" style="text-align:center;"><pre>'+JSON.stringify(d.apps, null, 2)+'</pre></td>'
                             +'<td class="backgroundChanges" style="text-align:center;">'+session.backgroundChanges+'</td>'                            
                             +'<td class="resolution" style="text-align:center;">'+session.resolution+'</td>'                            
                         +'</tr>';
