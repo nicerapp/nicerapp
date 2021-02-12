@@ -189,9 +189,8 @@ var nas = na.site = {
         if (
             !settings
             || (typeof settings=='object' && settings.reloadMenu===true)
-        ) setTimeout (function () {
-            na.site.reloadMenu();
-        }, 2500);
+        ) na.site.reloadMenu();
+        
         
         $('#siteBackground img').css({
             width : $(window).width(),
