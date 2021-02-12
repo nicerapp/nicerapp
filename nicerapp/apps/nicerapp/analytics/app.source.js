@@ -281,6 +281,7 @@ na.analytics = {
                                                                                              
                         if (!s.dbSummary.byDate[date].sessions[d.jsSessionID]) {
                             //if (d.jsSessionID==='LDFYxv3Y3YHevxKy0P0txla07b9vdm') debugger;
+                            debugger;
                             s.dbSummary.byDate[date].sessions[d.jsSessionID] = { afterDesktopResize : false, backgroundChanges : 0 };
                             
                             for (var date2 in s.dbSummary.byDate) {
