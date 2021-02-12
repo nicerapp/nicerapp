@@ -302,14 +302,24 @@ na.analytics = {
                             s.dbSummary.byDate[date].success++;
                         };
                         
+                        
+                        var m = d.msg.match(/startup : url=(.*)/);
+                        if (m && m[1]) {
+                            var session = s.dbSummary.byDate[date].sessions[d.jsSessionID];
+                            session.url = m[1];
+                        };
+
+                        var m = d.msg.match(/startApp : (.*)/);
+                        if (m && m[1]) {
+                            var session = s.dbSummary.byDate[date].sessions[d.jsSessionID];
+                            if (!session.apps) session.apps = [];
+                            session.apps[session.apps.length] = m[1];
+                        }
+
                         if (d.msg.match(/startup : html and js fully loaded/)) {
                             //if (d.jsSessionID==='LDFYxv3Y3YHevxKy0P0txla07b9vdm') debugger;
                             s.dbSummary.byDate[date].sessions[d.jsSessionID].afterDesktopResize = true;
                         };
-                        
-                        if (d.msg.match(/selectionEngines.random.next/)) {
-                            s.dbSummary.byDate[date].sessions[d.jsSessionID].backgroundChanges++;
-                        }
                         
                         var m = d.msg.match(/browserWidth=(.*), browserHeight=(.*), referer=(.*), userAgent=(.*)/);
                         if (m && m[1]) {
@@ -318,7 +328,10 @@ na.analytics = {
                             session.referer = m[3];
                             session.userAgent = m[4];
                         }
-                                                                                             
+
+                        if (d.msg.match(/selectionEngines.random.next/)) {
+                            s.dbSummary.byDate[date].sessions[d.jsSessionID].backgroundChanges++;
+                        }
                     };
                     for (var date in s.dbSummary.byDate) {
                         for (var jsSessionID in s.dbSummary.byDate[date].sessions) {
