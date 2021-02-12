@@ -259,7 +259,7 @@ na.analytics = {
             if (!s.db) {
                 s.db = {};
                 s.dbSummary = {};
-                s.dbSummary.byDate = {};
+                s.dbSummary.byDate = {byIP : []};
                 s.pouchdb[dbName].allDocs ({ include_docs : true, attachments : true }).then(function(result) {
                     for (var i=0; i<result.rows.length; i++) {
                         var 
@@ -273,7 +273,8 @@ na.analytics = {
                         if (!s.db[d.jsSessionID]) s.db[d.jsSessionID] = [];
                         var l = s.db[d.jsSessionID].length;
                         s.db[d.jsSessionID][l] = d;
-                        if (!s.dbSummary.byDate[date]) s.dbSummary.byDate[date] = {sessions : {}, success : 0, fail : 0}; // assume failure
+                        if (!s.dbSummary.byDate[date]) s.dbSummary.byDate[date] = {byIP : [], sessions : {}, success : 0, fail : 0}; // assume failure
+                        if (!s.dbSummary.byDate[date].byIP[d.ip]) s.dbSummary.byDate[date].byIP[s.dbSummary.byDate[date].byIP.length] = d.ip;
                                                                                              
                         if (!s.dbSummary.byDate[date].sessions[d.jsSessionID]) {
                             //if (d.jsSessionID==='LDFYxv3Y3YHevxKy0P0txla07b9vdm') debugger;
@@ -337,12 +338,13 @@ na.analytics = {
                 s = na.analytics.settings,
                 html1 = '';
                 
-                html1 += '<table border="0" cellpadding="5" style=""><tr style="background:rgba(0,50,0,0.5);"><td>Day</td><td>Succesful views</td><td>Unsuccesful views</td></tr>';
+                html1 += '<table border="0" cellpadding="5" style=""><tr style="background:rgba(0,50,0,0.5);"><td>Day</td><td>Visitors</td><td>Succesful views</td><td>Unsuccesful views</td></tr>';
                 for (var date in s.dbSummary.byDate) {
                     var d = s.dbSummary.byDate[date];
                     
                     html1 += '<tr style="cursor:zoom-in;background:rgba(0,0,50,0.3)" onclick="javascript:na.analytics.view.fillDateDetails(jQuery(\'#siteContent .vividDialogContent\')[0], \''+date+'\');">'
                             + '<td style="text-align:center;">'+date+'</td>'
+                            + '<td style="text-align:center;">'+d.byIP.length+'</td>'
                             + '<td style="text-align:center;">'+d.success+'</td>'
                             + '<td style="text-align:center;">'+d.fail+'</td>'
                           + '</tr>';

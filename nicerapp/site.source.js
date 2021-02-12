@@ -191,7 +191,6 @@ var nas = na.site = {
             || (typeof settings=='object' && settings.reloadMenu===true)
         ) na.site.reloadMenu();
         
-        
         $('#siteBackground img').css({
             width : $(window).width(),
             height : $(window).height(),
