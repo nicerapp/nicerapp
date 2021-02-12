@@ -57,6 +57,7 @@ na.analytics = {
                 datetimeStr : datetimeStr,
                 date : dateStr,
                 tzOffset : datetime.getTimezoneOffset(),
+                userAgent : navigator.userAgent,
                 username : un,
                 ip : myip,
                 htmlID : (
@@ -128,6 +129,7 @@ na.analytics = {
                 date : dateStr,
                 tzOffset : datetime.getTimezoneOffset(),
                 username : un,
+                userAgent : navigator.userAgent,
                 ip : myip,
                 htmlID : '[NULL]',
                 eventType : '[META]',
