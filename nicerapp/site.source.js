@@ -81,8 +81,9 @@ var nas = na.site = {
         };
         $.ajax(ac);
 
-        
         na.analytics.logMetaEvent ('startup : html and js fully loaded, browserWidth='+$(window).width()+', browserHeight='+$(window).height()+', referer='+na.m.globals.referer+', userAgent='+navigator.userAgent+', isPhone='+(na.m.userDevice.isPhone?'true':'false'));
+
+        na.analytics.logMetaEvent ('startup : url='+document.location.href);
         
         setInterval (nas.updateDateTime, 1000);
         

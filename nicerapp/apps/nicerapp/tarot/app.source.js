@@ -71,7 +71,7 @@ na.apps.loaded.cardgame_tarot = {
 	
 	startApp : function () {
         if (jQuery('#appGame').css('display')=='none') jQuery('#appGame').fadeIn(2000);
-        na.analytics.logMetaEvent ('tarot : startApp()');
+        na.analytics.logMetaEvent ('startApp : tarot');
         
 		if (jQuery('#app_mainmenu').length==0) return false;
 	

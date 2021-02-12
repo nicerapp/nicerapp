@@ -25,7 +25,7 @@ var mp3site = {
 	},
 	
 	startApp : function () {
-        na.analytics.logMetaEvent ('musicPlayer : startApp()');
+        na.analytics.logMetaEvent ('startApp : musicPlayer');
 
         if (mp3site.settings.loaded) return false; else mp3site.settings.loaded = true;
 

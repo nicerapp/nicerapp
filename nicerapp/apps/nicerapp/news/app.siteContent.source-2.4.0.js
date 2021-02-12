@@ -232,7 +232,7 @@ na.apps.loaded.newsApp = {
             section : urlp[0]
         };
 
-        na.analytics.logMetaEvent ('newsApp : startApp()');
+        na.analytics.logMetaEvent ('startApp : news');
         /*
         var loaderIconTheme = na.s.c.globals.loaderIconTheme('appLoading');
         na.apps.loaded.newsApp.settings.loaderIcon = na.acs.addIcon(
