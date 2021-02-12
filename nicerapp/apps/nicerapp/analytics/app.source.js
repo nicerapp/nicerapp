@@ -165,7 +165,7 @@ na.analytics = {
         seconds = seconds % 60;
         //seconds = Math.round(seconds*1000)/1000;
         seconds = Math.floor(seconds);
-        var r = hours+":"+minutes+":"+seconds;
+        var r = hours+":"+minutes+":"+seconds+':'+((seconds-Math.floor(seconds))*1000);
         return r;
     },
 
