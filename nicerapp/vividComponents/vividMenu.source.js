@@ -11,7 +11,7 @@ class naVividMenu {
     initItems() {
         var t = this;
         $(t.el).find('li').each(function(idx,li) {
-            var html = '<div id="'+t.el.id+'_'+idx+'" class="vividButton" theme="'+t.t+'">'+$(li).children('a')[0].outerHTML+'</div>';
+            var html = '<div id="'+t.el.id+'_'+idx+'" class="vividButton" theme="'+t.t+'" style="display:none">'+$(li).children('a')[0].outerHTML+'</div>';
             t.items[idx] = {
                 li : li,
                 b : new naVividButton(null,html,t.el),
@@ -47,133 +47,152 @@ class naVividMenu {
         //debugger;
     }
     
-    onresize() {
+    onresize(t, levels) {
         var
-        t = this,
-        levels = {},
         bw = $(window).width(),
         pl = null;
+    
+        if (!t) t = this;
+        if (!levels) levels = {};
         
-        for (var i=0; i<t.items.length; i++) {
-            var it = t.items[i];
-            it.label = $(it.b.el).children('a').html();
-            it.pul = $(it.li).parents('ul')[0];
-            
-            $(it.pul).children('li').each(function(idx,li) {
-                if (it.li === li) {
-                    it.levelIdx = idx;
-                }
-            });
-            
-            var 
-            parent = t.items[it.parent],
-            l = levels['path '+it.path],
-            placing = 'right',
-            right = (bw - jQuery(it.b.el).offset().left /* - ($(it.b.el).width() * 0.7)*/ - (parent ? parent.offsetX : $(it.b.el).width())),
-            left = jQuery(it.b.el).offset().left + (parent ? parent.offsetX : $(it.b.el).width());
-            
-            if (left > right) placing = 'left';
-            if (placing=='left') var width = left; else var width = right;
-
-            var
-            columnCount = Math.floor((width-($(it.b.el).width()/3)) / $(it.b.el).width()),
-            itemsOnLevelCount = 0;
-            
-            for (var j=0; j<t.items.length; j++) {
-                var it2 = t.items[j];
-                if (it2.parent === it.parent && it2.level === it.level) itemsOnLevelCount++;
-            };
-            
-            var
-            rowCount = Math.ceil(itemsOnLevelCount / columnCount);
-            
-            if (it.level===0) {
-                columnCount = 1;
-                rowCount = 9999;
-            } else if (columnCount > rowCount) {
-                columnCount = Math.floor(Math.sqrt(itemsOnLevelCount));
-                rowCount = Math.ceil(itemsOnLevelCount / columnCount);
-            };
-            //rowCount++;
-            //rowCount++;
-            
-            var
-            column = 0,
-            columnIdx = 1;
-            
-            for (var j=0; j<t.items.length; j++) {
-                var it2 = t.items[j];
-                if (it2.parent === it.parent && it2.level === it.level) {
-                    if ((it.levelIdx+1) <= (column * rowCount) + columnIdx ) {
-                        //columnIdx--;
-                    } else if (columnIdx >= rowCount) {
-                        column++;
-                        columnIdx = 1;
-                    } else columnIdx++;
-                } 
+        if (!t.resizeDoingIdx) t.resizeDoingIdx=0;
+        if (!t.resizeDoneCount) t.resizeDoneCount=0;
+        t.resizeDoneCount++;
+        debugger;
+        if (t.resizeDoneCount>25) {
+            setTimeout(function() {
+                t.resizeDoneCount = 0;
+                t.onresize(t, levels);
+            }, 500);
+        } else {
+            if (t.resizeDoingIdx>=t.items.length) {
+                t.resizeDoingIdx = 0;
+                t.resizeDoneCount = 0;
+            } else {
+                var it = t.items[t.resizeDoingIdx];
+                it.label = $(it.b.el).children('a').html();
+                it.pul = $(it.li).parents('ul')[0];
                 
-            };
-            
-            var           
-			l = levels['path '+it.path];
-  			it.childrenPlacement = placing;
-            it.columnIdx = columnIdx;
-            it.column = column;
-            it.offsetX = (
-                it.level === 1
-                ? ($(it.b.el).width() + 20) * it.levelIdx
-                : l
-                    ? it.level === 2
-                        ? placing==='right'
-                            ? l.offsetX + parent.offsetX + ( ($(it.b.el).width()+20) * it.column) 
-                            : l.offsetX + parent.offsetX - ( ($(it.b.el).width()+20) * it.column) 
-                        : placing==='right'
-                            ? l.offsetX + parent.offsetX + ( ($(it.b.el).width()+20) * it.column) + ($(it.b.el).width()/2)
-                            : l.offsetX + parent.offsetX - ( ($(it.b.el).width()+20) * it.column) - ($(it.b.el).width()/2)
-                    : it.level === 2
-                        ? placing==='right'
-                            ? parent.offsetX + ( ($(it.b.el).width()+20) * it.column) 
-                            : parent.offsetX - ( ($(it.b.el).width()+20) * it.column) 
-                        : placing==='right'
-                            ? parent.offsetX + ( ($(it.b.el).width()+20) * it.column) + ($(it.b.el).width()/2)
-                            : parent.offsetX - ( ($(it.b.el).width()+20) * it.column) - ($(it.b.el).width()/2)
-            );
-            it.offsetY = (
-                it.level === 1
-                ? 0
-                : it.level === 2
-                    ? parent.offsetY + ( ($(it.b.el).height()+20) * it.columnIdx )
-                    : parent.offsetY + ( ($(it.b.el).height()+20) * (it.columnIdx-1) )+ ($(it.b.el).height())
-            );
-            
-            if (!l) {
-                if (!parent) {
-                    pl = {
-                        offsetX : 0,
-                        offsetY : 0,
-                        zIndexOffset : 0
+                $(it.pul).children('li').each(function(idx,li) {
+                    if (it.li === li) {
+                        it.levelIdx = idx;
                     }
-                } else {
-                    pl = levels['path '+parent.path];
-                }
+                });
                 
-                var zof = pl.zIndexOffset + 1;
-                levels['path '+it.path] = jQuery.extend({}, pl);
-                levels['path '+it.path].offsetX = pl.offsetX;
-				levels['path '+it.path].offsetY = pl.offsetY;
-                levels['path '+it.path].zIndexOffset = zof;
-                l = levels['path '+it.path];
-            };
-            it.zIndex = (100 * 1000) + l.zIndexOffset;
+                var 
+                parent = t.items[it.parent],
+                l = levels['path '+it.path],
+                placing = 'right',
+                right = (bw - jQuery(it.b.el).offset().left /* - ($(it.b.el).width() * 0.7)*/ - (parent ? parent.offsetX : $(it.b.el).width())),
+                left = jQuery(it.b.el).offset().left + (parent ? parent.offsetX : $(it.b.el).width());
+                
+                if (left > right) placing = 'left';
+                if (placing=='left') var width = left; else var width = right;
 
-            $(it.b.el).css({
-                display : 'none',
-                left : it.offsetX,
-                top : it.offsetY,
-                zIndex : it.zIndex
-            });
-            if (it.level===1) $(it.b.el).css({display:'flex'});
-            //$(it.b.el).fitText();
+                var
+                columnCount = Math.floor((width-($(it.b.el).width()/3)) / $(it.b.el).width()),
+                itemsOnLevelCount = 0;
+                
+                for (var j=0; j<t.items.length; j++) {
+                    var it2 = t.items[j];
+                    if (it2.parent === it.parent && it2.level === it.level) itemsOnLevelCount++;
+                };
+                
+                var
+                rowCount = Math.ceil(itemsOnLevelCount / columnCount);
+                
+                if (it.level===0) {
+                    columnCount = 1;
+                    rowCount = 9999;
+                } else if (columnCount > rowCount) {
+                    columnCount = Math.floor(Math.sqrt(itemsOnLevelCount));
+                    rowCount = Math.ceil(itemsOnLevelCount / columnCount);
+                };
+                //rowCount++;
+                //rowCount++;
+                
+                var
+                column = 0,
+                columnIdx = 1;
+                
+                for (var j=0; j<t.items.length; j++) {
+                    var it2 = t.items[j];
+                    if (it2.parent === it.parent && it2.level === it.level) {
+                        if ((it.levelIdx+1) <= (column * rowCount) + columnIdx ) {
+                            //columnIdx--;
+                        } else if (columnIdx >= rowCount) {
+                            column++;
+                            columnIdx = 1;
+                        } else columnIdx++;
+                    } 
+                    
+                };
+                
+                var           
+                l = levels['path '+it.path];
+                it.childrenPlacement = placing;
+                it.columnIdx = columnIdx;
+                it.column = column;
+                it.offsetX = (
+                    it.level === 1
+                    ? ($(it.b.el).width() + 20) * it.levelIdx
+                    : l
+                        ? it.level === 2
+                            ? placing==='right'
+                                ? l.offsetX + parent.offsetX + ( ($(it.b.el).width()+20) * it.column) 
+                                : l.offsetX + parent.offsetX - ( ($(it.b.el).width()+20) * it.column) 
+                            : placing==='right'
+                                ? l.offsetX + parent.offsetX + ( ($(it.b.el).width()+20) * it.column) + ($(it.b.el).width()/2)
+                                : l.offsetX + parent.offsetX - ( ($(it.b.el).width()+20) * it.column) - ($(it.b.el).width()/2)
+                        : it.level === 2
+                            ? placing==='right'
+                                ? parent.offsetX + ( ($(it.b.el).width()+20) * it.column) 
+                                : parent.offsetX - ( ($(it.b.el).width()+20) * it.column) 
+                            : placing==='right'
+                                ? parent.offsetX + ( ($(it.b.el).width()+20) * it.column) + ($(it.b.el).width()/2)
+                                : parent.offsetX - ( ($(it.b.el).width()+20) * it.column) - ($(it.b.el).width()/2)
+                );
+                it.offsetY = (
+                    it.level === 1
+                    ? 0
+                    : it.level === 2
+                        ? parent.offsetY + ( ($(it.b.el).height()+20) * it.columnIdx )
+                        : parent.offsetY + ( ($(it.b.el).height()+20) * (it.columnIdx-1) )+ ($(it.b.el).height())
+                );
+                
+                if (!l) {
+                    if (!parent) {
+                        pl = {
+                            offsetX : 0,
+                            offsetY : 0,
+                            zIndexOffset : 0
+                        }
+                    } else {
+                        pl = levels['path '+parent.path];
+                    }
+                    
+                    var zof = pl.zIndexOffset + 1;
+                    levels['path '+it.path] = jQuery.extend({}, pl);
+                    levels['path '+it.path].offsetX = pl.offsetX;
+                    levels['path '+it.path].offsetY = pl.offsetY;
+                    levels['path '+it.path].zIndexOffset = zof;
+                    l = levels['path '+it.path];
+                };
+                it.zIndex = (100 * 1000) + l.zIndexOffset;
+
+                $(it.b.el).css({
+                    display : 'none',
+                    left : it.offsetX,
+                    top : it.offsetY,
+                    zIndex : it.zIndex,
+                    display : (it.level===1?'flex':'none')
+                });
+                //if (it.level===1) $(it.b.el).css({display:'flex'});
+                //$(it.b.el).fitText();
+                
+                t.resizeDoingIdx++;
+                setTimeout (function(){t.onresize(t, levels)}, 10);
+            }
         }
         //debugger;
     }
