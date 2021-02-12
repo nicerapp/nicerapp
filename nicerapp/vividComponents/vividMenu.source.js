@@ -58,7 +58,6 @@ class naVividMenu {
         if (!t.resizeDoingIdx) t.resizeDoingIdx=0;
         if (!t.resizeDoneCount) t.resizeDoneCount=0;
         t.resizeDoneCount++;
-        debugger;
         if (t.resizeDoneCount>25) {
             setTimeout(function() {
                 t.resizeDoneCount = 0;

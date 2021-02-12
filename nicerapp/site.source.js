@@ -252,7 +252,6 @@ var nas = na.site = {
                 p1 = menu.indexOf(mlp);
                 $('#siteMenu')[0].innerHTML = menu.substr(0,p1) + contentMenu + menu.substr(p1+mlp.length);
                 //alert ($('li', $('#siteMenu')).length + ' menu items');
-                debugger;
                 
                 nas.s.menus['#siteMenu'] = new naVividMenu($('#siteMenu')[0]);
             },
