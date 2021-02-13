@@ -10,7 +10,7 @@ export class na3D_fileBrowser {
         this.scene = new THREE.Scene();
         this.camera = new THREE.PerspectiveCamera( 75, $(el).width() / $(el).height(), 0.1, 1000 );
 
-        this.renderer = new THREE.WebGLRenderer();
+        this.renderer = new THREE.WebGLRenderer({alpha:true});
         this.renderer.setSize( $(el).width()-20, $(el).height()-20 );
         el.appendChild( this.renderer.domElement );
         
@@ -19,7 +19,11 @@ export class na3D_fileBrowser {
         this.loader.load( '/nicerapp/3rd-party/3D/models/002/scene.gltf', function ( gltf ) {
             t.cube = gltf.scene;
             t.scene.add( gltf.scene );
-
+            
+            const color = 0xFFFFFF;
+            const intensity = 100;
+            const light = new THREE.AmbientLight(color, intensity);
+            t.scene.add(light);
         }, function ( xhr ) {
 
             console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
@@ -35,7 +39,7 @@ export class na3D_fileBrowser {
         this.raycaster = new THREE.Raycaster();
         this.mouse = new THREE.Vector2();
 
-        this.camera.position.z = 50;
+        this.camera.position.z = 500;
         /*this.cube.rotation.x = 0.3;
         this.cube.rotation.y = 0.4;*/
         this.animate(this);
