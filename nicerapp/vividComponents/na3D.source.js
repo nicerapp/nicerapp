@@ -127,7 +127,7 @@ export class na3D_fileBrowser {
         t.parent = parent;
          
         while (t.ld[level].initItemsDoingIdx < t.ld[level].keys.length) {
-            var itd = data[t.ld[level].keys[t.ld[level].initItemsDoingIdx]];
+            var itd = data[t.ld[level].keys[ t.ld[level].initItemsDoingIdx ]];
             if (typeof itd == 'object') {
                 var path2 = (t.path==='')?'':t.path+',';
                 path2+=t.parent;
@@ -154,24 +154,12 @@ export class na3D_fileBrowser {
                 
                 t.loader.load( '/nicerapp/3rd-party/3D/models/folder icon/scene.gltf', function ( gltf, it ) {
                     gltf.scene.scale.setScalar (20);
-                    
                     t.scene.add (gltf.scene);
                     it.model = gltf.scene;
                     it.model.it = it;
-                    
                     t.updateTextureEncoding(t, gltf.scene);
-                    //setTimeout (function() {
-                    
-                        debugger;
-                        t.initializeItems (t, items, itd, t.ld[level].initItemsDoingIdx, level + 1);
-                    //}, 100);
-                    
-                    //t.ld[level].initItemsDoingIdx++;
-                    //t.levelIdx++;
-                    /*t.initializeItems (t, items, data, parent, level, levelIdx, initItemsDoingIdx, path);
-                    */
-                    
-                    
+                    debugger;
+                    t.initializeItems (t, items, itd, t.ld[level].initItemsDoingIdx, level + 1);
                 }, function ( xhr ) {
                     console.log( 'model "folder icon" : ' + ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
                 }, function ( error ) {
