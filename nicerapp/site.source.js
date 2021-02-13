@@ -87,6 +87,19 @@ var nas = na.site = {
         };
         $.ajax(ac);
 
+        var ac = {
+            type : 'GET',
+            url : '/nicerapp/domainConfigs/'+na.m.globals.domain+'/ajax_backgrounds_recursive.php',
+            success : function (data, ts, xhr) {
+                var dataDecoded = JSON.parse(data);
+                na.site.settings.backgroundsRecursive = dataDecoded;
+            },
+            failure : function (xhr, ajaxOptions, thrownError) {
+                debugger;
+            }                
+        };
+        $.ajax(ac);
+        
         na.analytics.logMetaEvent ('startup : html and js fully loaded, browserWidth='+$(window).width()+', browserHeight='+$(window).height()+', referer='+na.m.globals.referer+', userAgent='+navigator.userAgent+', isPhone='+(na.m.userDevice.isPhone?'true':'false'));
 
         na.analytics.logMetaEvent ('startup : url='+document.location.href);

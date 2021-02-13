@@ -328,6 +328,7 @@ function getFilePathList (
 	$fileTypesFilter = array (),		// array (int=>string (filetype() result) ==== int=>"file"|"dir" )
 	$depth = null,
 	$level = 1,
+	$returnRecursive = false,
 	$ownerFilter = array (),			// array (int=>string (username) ); only return files owned by someone in $ownerFilter.
 	$fileSizeMin = null,				// If >=0, any files returned must have a minimum size of $fileSizeMin bytes.
 	$fileSizeMax = null,				// same as above, but maximum size
@@ -442,19 +443,27 @@ another example:
 					if (!empty($listCall)) eval ($ev);
 					$idx = count ($result);
 					if (!empty($r)) $r = " - [listCall=$r]";
-					$result[$idx] = $filepath.$r;
+					if (!$returnRecursive) {
+                        $result[$idx] = $filepath.$r;
+                    } else {
+                        $result[$idx] = basename($filepath.$r);
+                    }
 				}
 				if (is_string($pass)) {
 					//htmlOut ("PASSED - checks failed");
-					$result[count($result)] = "[$pass]".$filepath;
+                    $result[count($result)] = "[$pass]".$filepath;
 				}
 				
 				if ($recursive && $ft=="dir" && (is_null($depth) || $level<$depth)) {
 					$subdir = getFilePathList ($filepath,$recursive, $fileSpecRE, 
-						$fileTypesFilter, $depth, $level+1, $ownerFilter, $fileSizeMin, $fileSizeMax, 
+						$fileTypesFilter, $depth, $level+1, $returnRecursive, $ownerFilter, $fileSizeMin, $fileSizeMax, 
 						$aTimeMin, $aTimeMax, $mTimeMin, $mTimeMax,
 						$cTimeMin, $cTimeMax, $listCall);
-					array_splice ($result, count($result)+1, 0, $subdir);
+					if (!$returnRecursive) {
+                        array_splice ($result, count($result)+1, 0, $subdir);
+                    } else {
+                        $result[basename($filepath.$r)] = $subdir;
+                    }
 				}
 			}
 			}

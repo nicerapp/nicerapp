@@ -95,6 +95,12 @@
         'analytics' => array (
             'analytics' => array()
         ),
+        '3Dcube' => array (
+            '3Dcube' => array()
+        ),
+        '3Dmodels' => array (
+            '3Dmodels' => array()
+        ),
         'backgroundsBrowser' => array (
             'backgroundsBrowser' => array()
         ),
@@ -125,6 +131,8 @@
         <li><a href="<?php echo $urls['newsHeadlines_englishNews_worldHeadlines'];?>">English News : World Headlines only</a></li>
     </ul>
     
+    <a href="<?php echo $urls['3Dcube'];?>"><h3>3D demo : cube</h3></a>
+    <a href="<?php echo $urls['3Dmodels'];?>"><h3>3D demo : loading of models (slow to start up)</h3></a>
     <a href="<?php echo $urls['backgroundsBrowser'];?>"><h3>3D backgrounds browser</h3></a>
     
     <a href="<?php echo $urls['tarot'];?>"><h3>Tarot game</h3></a>

@@ -212,12 +212,12 @@ img.bg_last {
     height : 1rem;
 }
 
-#site3D_backgroundsBrowser {
+#site3D_backgroundsBrowser, #site3D_demo_cube, #site3D_demo_models {
     position : absolute;
-    top : calc(1vh + 4rem);
-    left : 1vw;
-    width : calc(98vw - 6px);
-    height : calc(97vh - 4rem - 6px);
+    top : 0;
+    left : 0;
+    width : 100%;
+    height : 100%;
     padding : 15px;
     z-index : 2000;
     justify-content : center;
