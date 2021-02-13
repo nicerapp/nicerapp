@@ -174,6 +174,93 @@ img.bg_last {
     left : calc(50vw - 100px);
 }
 
+#siteRegistration {
+    display : none;
+    position : absolute;
+    width : 300px;
+    height : 250px;
+    left : calc(50% - 150px);
+    top : calc(50% - 125px);
+    padding : 15px;
+    z-index : 2000;
+    justify-content : center;
+}
+#siteRegistration::before { 
+    content : '';
+    background : url('/nicerapp/siteMedia/backgrounds/tiled/active/blue/seamless-texture-blue-watercolor.jpg') repeat;
+    opacity : 0.7;
+    position:absolute;
+    z-index:-1;
+    border-radius : 15px;
+    top : 0;
+    left : 0;
+    width : 100%;
+    height : 100%;
+}
+#siteRegistrationContainer {
+    position : relative;
+    height : auto;
+    text-align : center;
+    display : flex;
+    flex-direction : column;
+    align-items : center;
+}
+#btnSrfSubmit {
+    position : relative;
+}
+#btnSrfSubmit img {
+    height : 1rem;
+}
+
+#site3D_backgroundsBrowser {
+    position : absolute;
+    top : calc(1vh + 4rem);
+    left : 1vw;
+    width : calc(98vw - 6px);
+    height : calc(97vh - 4rem - 6px);
+    padding : 15px;
+    z-index : 2000;
+    justify-content : center;
+    background : rgba(0,0,0,0);
+}
+/*#site3D_backgroundsBrowser::before { 
+    content : '';
+    background : url('/nicerapp/siteMedia/backgrounds/tiled/active/blue/seamless-texture-blue-watercolor.jpg') repeat;
+    opacity : 0.5;
+    position:absolute;
+    z-index:-1;
+    border-radius : 15px;
+    top : 0;
+    left : 0;
+    width : 100%;
+    height : 100%;
+}*/
+
+
+#site3D_demo {
+    display : none;
+    position : absolute;
+    width : 300px;
+    height : 200px;
+    left : calc(50% - 150px);
+    top : calc(50% - 100px);
+    padding : 15px;
+    z-index : 2000;
+    justify-content : center;
+}
+#site3D_demo::before { 
+    content : '';
+    background : url('/nicerapp/siteMedia/backgrounds/tiled/active/blue/seamless-texture-blue-watercolor.jpg') repeat;
+    opacity : 0.7;
+    position:absolute;
+    z-index:-1;
+    border-radius : 15px;
+    top : 0;
+    left : 0;
+    width : 100%;
+    height : 100%;
+}
+
 select, optgroup {
     font-size : 2rem;
 }
