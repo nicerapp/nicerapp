@@ -53,7 +53,7 @@ export class na3D_fileBrowser {
         this.loader = new GLTFLoader();
         
         this.loader.load( '/nicerapp/3rd-party/3D/models/001/scene.gltf', function ( gltf ) {
-            gltf.scene.position.x = -80;
+            gltf.scene.position.x = -120;
             gltf.scene.scale.setScalar (10);
             t.cube = gltf.scene;
             t.scene.add (t.cube);
