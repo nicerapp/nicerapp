@@ -21,7 +21,7 @@ export class na3D_fileBrowser {
             t.scene.add( gltf.scene );
             
             const color = 0xFFFFFF;
-            const intensity = 100;
+            const intensity = 500;
             const light = new THREE.AmbientLight(color, intensity);
             t.scene.add(light);
         }, function ( xhr ) {
@@ -39,7 +39,7 @@ export class na3D_fileBrowser {
         this.raycaster = new THREE.Raycaster();
         this.mouse = new THREE.Vector2();
 
-        this.camera.position.z = 500;
+        this.camera.position.z = 1000;
         /*this.cube.rotation.x = 0.3;
         this.cube.rotation.y = 0.4;*/
         this.animate(this);
@@ -58,9 +58,9 @@ export class na3D_fileBrowser {
         t.raycaster.setFromCamera (t.mouse, t.camera);
         
         const intersects = t.raycaster.intersectObjects (t.scene.children, true);
-        for (var i=0; i<intersects.length; i++) {
-            intersects[i].object.rotation.x += 0.02;
-            intersects[i].object.rotation.y += 0.02;
+        if (intersects[0]) {
+            t.cube.rotation.x += 0.02;
+            t.cube.rotation.y += 0.02;
         }
         
         t.renderer.render( t.scene, t.camera );
