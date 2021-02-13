@@ -16,30 +16,44 @@ export class na3D_fileBrowser {
         
         this.loader = new GLTFLoader();
         
-        this.loader.load( '/nicerapp/3rd-party/3D/models/002/scene.gltf', function ( gltf ) {
+        this.loader.load( '/nicerapp/3rd-party/3D/models/001/scene.gltf', function ( gltf ) {
+            gltf.scene.position.x = -20;
+            gltf.scene.position.z = 550;
             t.cube = gltf.scene;
-            t.scene.add( gltf.scene );
+            t.scene.add (t.cube);
             
             const color = 0xFFFFFF;
-            const intensity = 500;
+            const intensity = 300;
             const light = new THREE.AmbientLight(color, intensity);
             t.scene.add(light);
         }, function ( xhr ) {
-
-            console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
-
+            console.log( 'cube 1 : ' + ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
         }, function ( error ) {
-
             console.error( error );
-
+        } );
+        this.loader.load( '/nicerapp/3rd-party/3D/models/002/scene.gltf', function ( gltf ) {
+            gltf.scene.position.x = 200;
+            t.cube2 = gltf.scene;
+            t.scene.add (t.cube2);
+            
+            const color = 0xFFFFFF;
+            const intensity = 300;
+            const light = new THREE.AmbientLight(color, intensity);
+            t.scene.add(light);
+        }, function ( xhr ) {
+            console.log( 'cube 2 : ' + ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+        }, function ( error ) {
+            console.error( error );
         } );
         
         $(el).bind('mousemove', function() { t.onMouseMove (event, t) });
         
         this.raycaster = new THREE.Raycaster();
         this.mouse = new THREE.Vector2();
+        this.mouse.x = 0;
+        this.mouse.y = 0;
 
-        this.camera.position.z = 1000;
+        this.camera.position.z = 700;
         /*this.cube.rotation.x = 0.3;
         this.cube.rotation.y = 0.4;*/
         this.animate(this);
@@ -59,8 +73,8 @@ export class na3D_fileBrowser {
         
         const intersects = t.raycaster.intersectObjects (t.scene.children, true);
         if (intersects[0]) {
-            t.cube.rotation.x += 0.02;
             t.cube.rotation.y += 0.02;
+            t.cube2.rotation.y += 0.02;
         }
         
         t.renderer.render( t.scene, t.camera );
