@@ -1,0 +1,11 @@
+Model Information:
+* title:	ZENIT TTL
+* source:	https://sketchfab.com/3d-models/zenit-ttl-426adf7793cf41449e263b5a0dda3ba2
+* author:	Lisa (https://sketchfab.com/lisasereda99)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "ZENIT TTL" (https://sketchfab.com/3d-models/zenit-ttl-426adf7793cf41449e263b5a0dda3ba2) by Lisa (https://sketchfab.com/lisasereda99) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

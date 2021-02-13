@@ -95,6 +95,9 @@
         'analytics' => array (
             'analytics' => array()
         ),
+        'backgroundsBrowser' => array (
+            'backgroundsBrowser' => array()
+        ),
         'tarot' => array (
             'tarot' => array (
                 'reading' => '3-Cards',
@@ -121,6 +124,8 @@
         <li><a href="<?php echo $urls['newsHeadlines_englishNews'];?>">English News</a></li>
         <li><a href="<?php echo $urls['newsHeadlines_englishNews_worldHeadlines'];?>">English News : World Headlines only</a></li>
     </ul>
+    
+    <a href="<?php echo $urls['backgroundsBrowser'];?>"><h3>3D backgrounds browser</h3></a>
     
     <a href="<?php echo $urls['tarot'];?>"><h3>Tarot game</h3></a>
     

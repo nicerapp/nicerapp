@@ -15,7 +15,8 @@ var nas = na.site = {
         ),
         dialogs : {},
         buttons : {},
-        menus : {}
+        menus : {},
+        na3D : {}
     },
     
     dismissCookieWarning : function () {
@@ -56,7 +57,6 @@ var nas = na.site = {
             na.site.settings.dialogs['#'+el.id] = new naVividDialog(el);
         });
         
-        
         if ($.cookie('agreedToPolicies')!=='true') $.cookie('showStatusbar', 'true', na.m.cookieOptions());
         na.site.setStatusMsg(na.site.settings.defaultStatusMsg); // calls na.desktop.resize() as well
 
@@ -78,7 +78,8 @@ var nas = na.site = {
             type : 'GET',
             url : '/nicerapp/domainConfigs/'+na.m.globals.domain+'/ajax_backgrounds.php',
             success : function (data, ts, xhr) {
-                nas.s.backgrounds = JSON.parse(data);
+                var dataDecoded = JSON.parse(data);
+                na.site.settings.backgrounds = dataDecoded;
             },
             failure : function (xhr, ajaxOptions, thrownError) {
                 debugger;

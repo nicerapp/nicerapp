@@ -7,6 +7,7 @@
     "/nicerapp/3rd-party/pouchdb/node_modules/pouchdb/dist/pouchdb.min.js",
     "/nicerapp/3rd-party/createjs.min.js",
     "/nicerapp/3rd-party/EaselJS-1.0.0/easeljs.min.js",
+    "/nicerapp/3rd-party/3D/libs/three.js/build/three.js",
     "/nicerapp/jsEngineeringMath/index.source.js",
     "/nicerapp/jsEngineeringMath/math_basics.source.js",
     "/nicerapp/jsEngineeringMath/physics_waves.source.js",
