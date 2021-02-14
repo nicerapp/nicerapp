@@ -123,19 +123,46 @@
         $urls[$appName] = '/apps/'.base64_encode_url($json[$appName]);
     };
 ?>
-    <h2>Available Apps</h2>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('.contentSectionTitle').each (function(idx,el) {
+            setTimeout (function() {
+                vividTextCmd = {
+                        el : el,
+                        theme : na.cg.themes.saColorgradientSchemeOrangeYellow, 
+                        animationType : na.vividText.globals.animationTypes[0],
+                        animationSpeed : 4 * 1000
+                };
+                na.vividText.initElement (vividTextCmd);	
+            }, 1500 * idx);
+        });
+        
+        
+    });
+    </script>
+    <h2 class="contentSectionTitle">What is nicerapp?</h2>
+    <div>
+    Nicerapp embraces the latest web technologies to provide beautiful new views to your data and files.<br/>
+    </div>
     
-    <h3>News</h3>
+
+    <h2 class="contentSectionTitle">Available Apps</h2>
+    
+    <h3 class="contentSectionTitle">News</h3>
     <ul>
         <li><a href="<?php echo $urls['newsHeadlines_englishNews'];?>">English News</a></li>
         <li><a href="<?php echo $urls['newsHeadlines_englishNews_worldHeadlines'];?>">English News : World Headlines only</a></li>
     </ul>
     
-    <a href="<?php echo $urls['3Dcube'];?>"><h3>3D demo : cube</h3></a>
-    <a href="<?php echo $urls['3Dmodels'];?>"><h3>3D demo : loading of models (slow to start up)</h3></a>
-    <a href="<?php echo $urls['backgroundsBrowser'];?>"><h3>3D backgrounds browser</h3></a>
-    
     <a href="<?php echo $urls['tarot'];?>"><h3>Tarot game</h3></a>
     
     <a href="<?php echo $urls['music'];?>"><h3>Music</h3></a>
+    
+    <h2 class="contentSectionTitle">Apps in development</h2>
+    <a href="<?php echo $urls['backgroundsBrowser'];?>"><h3>3D backgrounds browser</h3></a><br/>
+    <div>This will grow into a 3D file and data viewer-and-manager. (Near-)daily updates will be provided.</div>
 
+    <h2 class="contentSectionTitle" >Demos</h2>
+    <a href="<?php echo $urls['3Dcube'];?>"><h3>3D demo : cube</h3></a>
+    <a href="<?php echo $urls['3Dmodels'];?>"><h3>3D demo : loading of models (slow to start up)</h3></a>
+    

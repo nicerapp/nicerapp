@@ -319,18 +319,10 @@ export class na3D_fileBrowser {
                 it.column = column;
                 it.offsetX = (
                     l
-                    ? it.level === 2
-                        ? placing==='right'
-                            ? l.offsetX + parent.offsetX + ( (50*it.column)) 
-                            : l.offsetX + parent.offsetX - ( (50*it.column)) 
-                        : placing==='right'
+                    ? placing==='right'
                             ? l.offsetX + parent.offsetX + ( (50*it.column)) + (40/2)
                             : l.offsetX + parent.offsetX - ( (50*it.column)) - (40/2)
-                    : it.level === 2
-                        ? placing==='right'
-                            ? parent.offsetX + ( (50*it.column)) 
-                            : parent.offsetX - ( (50*it.column)) 
-                        : placing==='right'
+                    : placing==='right'
                             ? parent.offsetX + ( (50*it.column)) + (40/2)
                             : parent.offsetX - ( (50*it.column)) - (40/2)
                 );
