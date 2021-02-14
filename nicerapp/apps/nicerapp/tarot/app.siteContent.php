@@ -111,7 +111,7 @@ require_once (dirname(__FILE__).'/functions2.php');
 		<div id="intro" class="text" style="display:none;">
 			<h1 id="pageTitle" style="text-shadow:2px 2px 1px rgba(0,0,0,0.7)">Free Tarot Reading</h1>
 			<script type="text/javascript">
-                /*setTimeout(function() {
+                setTimeout(function() {
                     var vividTextCmd = {
                         el : jQuery('#pageTitle')[0],
                         theme : na.cg.themes.saColorgradientScheme_text_005, 
@@ -119,7 +119,7 @@ require_once (dirname(__FILE__).'/functions2.php');
                         animationSpeed : 10 * 1000
                     };
                     na.vividText.initElement (vividTextCmd);	   
-                }, 1000);*/
+                }, 1000);
 			</script>
 
 			
