@@ -40,8 +40,10 @@ export class na3D_fileBrowser {
         
         this.lights = [];
         this.folders = [];
-        this.ld = {};
-   
+        this.ld1 = {}; //levelDataOne
+        this.ld2 = {}; //levelDataTwo
+        
+        
         this.items = [{
             name : 'backgrounds',
             offsetX : 0,
@@ -67,7 +69,7 @@ export class na3D_fileBrowser {
         //this.controls.listenToKeyEvents( window ); // optional
         
         this.loader = new GLTFLoader();
-        this.initializeItems (this, this.items, this.data, 0, 1);
+        this.initializeItems (this, this.items, this.data, 0, 1, 0);
 
         const light1  = new AmbientLight(0xFFFFFF, 0.3);
         light1.name = 'ambient_light';
@@ -124,20 +126,32 @@ export class na3D_fileBrowser {
         t.renderer.render( t.scene, t.camera );
     }
     
-    initializeItems (t, items, data, parent, level) {
-        if (!t.ld[level]) t.ld[level] = { parent : parent, initItemsDoingIdx : 0, path : '' };
-        if (!t.ld[level].keys) t.ld[level].keys = Object.keys(data);
-        if (t.ld[level].initItemsDoingIdx >= t.ld[level].keys.length) return false;
+    onMouseMove( event, t ) {
+        var rect = t.renderer.domElement.getBoundingClientRect();
+        t.mouse.x = ( ( event.clientX - rect.left ) / ( rect.width - rect.left ) ) * 2 - 1;
+        t.mouse.y = - ( ( event.clientY - rect.top ) / ( rect.bottom - rect.top) ) * 2 + 1;        
+        $('#site3D_label').html(t.hoverOverName).css({ position:'absolute', padding : 10, zIndex : 5000, top : event.layerY + 10, left : event.layerX + 30 });
+    }
+    
+    initializeItems (t, items, data, parent, level, levelDepth) {
+        if (!t.ld2[level]) t.ld2[level] = { parent : parent, initItemsDoingIdx : 0, path : '' };
+        if (!t.ld2[level].keys) t.ld2[level].keys = Object.keys(data);
+        if (t.ld2[level].initItemsDoingIdx >= t.ld2[level].keys.length) return false;
         
-        if (!t.ld[level].levelIdx) t.ld[level].levelIdx = 0;
-        if (!t.ld[level].path) t.ld[level].path = '';
+        if (!t.ld2[level].levelIdx) t.ld2[level].levelIdx = 0;
+        if (!t.ld2[level].path) t.ld2[level].path = '';
+        
+        if (!t.ld1[level]) t.ld1[level] = { levelIdx : 0 };
          
-        while (t.ld[level].initItemsDoingIdx < t.ld[level].keys.length) {
-            var itd = data[t.ld[level].keys[ t.ld[level].initItemsDoingIdx ]];
+        while (t.ld2[level].initItemsDoingIdx < t.ld2[level].keys.length) {
+            var itd = data[t.ld2[level].keys[ t.ld2[level].initItemsDoingIdx ]];
             if (typeof itd == 'object') {
                 var createdNewLevel = false;
-                if (!t.ld[level+1]) {
-                    t.ld[level+1] = {
+                if (!t.ld1[level]) t.ld1[level]= {
+                    levelIdx : 0
+                };
+                if (!t.ld2[t.ld1[level].levelIdx]) {
+                    t.ld2[t.ld1[level].levelIdx] = {
                         parent : parent,//t.ld[level].initItemsDoingIdx,
                         initItemsDoingIdx : 0,
                         levelIdx : 0,
@@ -145,43 +159,45 @@ export class na3D_fileBrowser {
                     };
                     createdNewLevel = true;
                 };
-                var path2 = (t.ld[level].path==='')?'':t.ld[level].path+',';
-                path2+=t.ld[level+1].parent;
-                if (createdNewLevel) t.ld[level+1].path = path2;
+                var path2 = (t.ld2[level].path==='')?'':t.ld2[level].path+',';
+                path2+=t.ld2[t.ld1[level].levelIdx].parent;
+                if (createdNewLevel) t.ld2[t.ld1[level].levelIdx].path = path2;
                 
                 
                 var it = {
-                    level : level,
-                    name : t.ld[level].keys[t.ld[level].initItemsDoingIdx],
+                    level : levelDepth,
+                    name : t.ld2[level].keys[t.ld2[level].initItemsDoingIdx],
                     idx : items.length,
-                    levelIdx : t.ld[level+1].levelIdx,
-                    parent : t.ld[level+1].parent,
-                    children : [],
-                    path : t.ld[level+1].path,
+                    levelIdx : t.ld2[level].levelIdx,
+                    parent : t.ld2[level].parent,
+                    path : t.ld2[level].path,
                     offsetX : 0,
                     offsetY : 0
                 }
                 items[items.length] = it;
-                t.ld[level+1].initItemsDoingIdx++;
-                t.ld[level+1].levelIdx++;
+                t.ld2[level].initItemsDoingIdx++;
+                t.ld2[level].levelIdx++;
                 //debugger;
                 
-                t.loader.load( '/nicerapp/3rd-party/3D/models/folder icon/scene.gltf', function ( gltf, t, it, items, itd ) {
-                    gltf.scene.scale.setScalar (20);
+                t.loader.load( '/nicerapp/3rd-party/3D/models/folder icon/scene.gltf', function ( gltf, t, it, items, itd, level, levelDepth ) {
+                    gltf.scene.scale.setScalar (10);
                     t.scene.add (gltf.scene);
                     it.model = gltf.scene;
                     it.model.it = it;
                     t.updateTextureEncoding(t, gltf.scene);
                     //debugger;
-                    t.initializeItems (t, items, itd, it.idx, level + 1);
+                    //setTimeout (function() {
+                    t.initializeItems (t, items, itd, it.idx, parseInt(Object.keys(t.ld2).reduce(function(a, b){ return t.ld2[a] > t.ld2[b] ? a : b }))+1, levelDepth + 1);
+                    
+                    //}, 250);
                 }, function ( xhr ) {
                     console.log( 'model "folder icon" : ' + ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
                 }, function ( error ) {
                     console.error( error );
-                },  t, it, items, itd  );
+                },  t, it, items, itd, level, levelDepth  );
             } 
-            t.ld[level].initItemsDoingIdx++;
-            //t.ld[level].levelIdx++;
+            t.ld2[level].initItemsDoingIdx++;
+            //t.ld2[level].levelIdx++;
             
             clearTimeout (t.onresizeTimeout);
             t.onresizeTimeout = setTimeout(function() {
@@ -246,8 +262,10 @@ export class na3D_fileBrowser {
                 var width = $(t.el).width(), placing = 'left';
 
                 var
-                columnCount = Math.floor((width-(50/3)) / 50),
+                columnCount = Math.floor((width-(150/3)) / 150),
+                
                 itemsOnLevelCount = 0;
+                debugger;
                 
                 for (var j=0; j<t.items.length; j++) {
                     var it2 = t.items[j];
@@ -290,198 +308,28 @@ export class na3D_fileBrowser {
                 it.columnIdx = columnIdx;
                 it.column = column;
                 it.offsetX = (
-                    it.level === 1
-                    ? (100 + 20) * it.levelIdx
-                    : l
-                        ? it.level === 2
-                            ? placing==='right'
-                                ? l.offsetX + parent.offsetX + ( (100*it.column)) 
-                                : l.offsetX + parent.offsetX - ( (100*it.column)) 
-                            : placing==='right'
-                                ? l.offsetX + parent.offsetX + ( (100*it.column)) + (40/2)
-                                : l.offsetX + parent.offsetX - ( (100*it.column)) - (40/2)
-                        : it.level === 2
-                            ? placing==='right'
-                                ? parent.offsetX + ( (100*it.column)) 
-                                : parent.offsetX - ( (100*it.column)) 
-                            : placing==='right'
-                                ? parent.offsetX + ( (100*it.column)) + (40/2)
-                                : parent.offsetX - ( (100*it.column)) - (40/2)
+                    l
+                    ? it.level === 2
+                        ? placing==='right'
+                            ? l.offsetX + parent.offsetX + ( (50*it.column)) 
+                            : l.offsetX + parent.offsetX - ( (50*it.column)) 
+                        : placing==='right'
+                            ? l.offsetX + parent.offsetX + ( (50*it.column)) + (40/2)
+                            : l.offsetX + parent.offsetX - ( (50*it.column)) - (40/2)
+                    : it.level === 2
+                        ? placing==='right'
+                            ? parent.offsetX + ( (50*it.column)) 
+                            : parent.offsetX - ( (50*it.column)) 
+                        : placing==='right'
+                            ? parent.offsetX + ( (50*it.column)) + (40/2)
+                            : parent.offsetX - ( (50*it.column)) - (40/2)
                 );
                 it.offsetY = (
-                    it.level === 1
-                    ? 0
-                    : it.level === 2
-                        ? parent.offsetY + ( (100) * it.columnIdx )
-                         : parent.offsetY + ( (100) * (it.columnIdx-1) )+ (70)
+                         parent.offsetY + ( 50 * (it.columnIdx-1) )+ 20
                 );
                 
                 if (!l) {
                     if (parent.parent===0) {
-                        pl = {
-                            offsetX : 0,
-                            offsetY : 0,
-                            zIndexOffset : 0
-                        }
-                    } else {
-                        pl = levels['path '+parent.path];
-                    }
-                    
-                    var zof = pl.zIndexOffset + 1;
-                    levels['path '+it.path] = jQuery.extend({}, pl);
-                    levels['path '+it.path].offsetX = it.offsetX;
-                    levels['path '+it.path].offsetY = it.offsetY;
-                    levels['path '+it.path].zIndexOffset = zof;
-                    l = levels['path '+it.path];
-                };
-                it.zIndex = (100 * 1000) + l.zIndexOffset;
-
-                /*
-                $(it.b.el).css({
-                    display : 'none',
-                    left : it.offsetX,
-                    top : it.offsetY,
-                    zIndex : it.zIndex,
-                    display : (it.level===1?'flex':'none')
-                });*/
-                it.model.position.x = it.offsetX;
-                it.model.position.y = it.offsetY;
-                it.model.position.z = -1 * it.level * 25;
-                //if (it.level===1) $(it.b.el).css({display:'flex'});
-                //$(it.b.el).fitText();
-                
-                t.resizeDoingIdx++;
-                setTimeout (function(){t.onresize(t, levels)}, 10);
-            }
-        }
-    }
-
-    
-    /*
-    onresize(t, levels) {
-        var
-        bw = $(window).width(),
-        pl = null;
-    
-        if (!t) t = this;
-        if (!levels) {
-            levels = {};
-            t.resizeDoingIdx=0;
-            t.resizeDoneCount=0;
-        }
-        
-        if (!t.resizeDoingIdx) t.resizeDoingIdx=0;
-        if (!t.resizeDoneCount) t.resizeDoneCount=0;
-        t.resizeDoneCount++;
-        if (t.resizeDoneCount>25) {
-            setTimeout(function() {
-                t.resizeDoneCount = 0;
-                t.onresize(t, levels);
-            }, 500);
-        } else {
-            if (t.resizeDoingIdx >= t.items.length) {
-                t.resizeDoingIdx = 0;
-                t.resizeDoneCount = 0;
-            } else {
-                var it = t.items[t.resizeDoingIdx];
-                //it.label = $(it.b.el).children('a').html();
-                //it.pul = $(it.li).parents('ul')[0];
-                
-                /*$(it.pul).children('li').each(function(idx,li) {
-                    if (it.li === li) {
-                        it.levelIdx = idx;
-                    }
-                });*/
-                
-                /*
-                var 
-                parent = t.items[it.parent],
-                l = levels['path '+it.path];
-                
-                
-                
-                placing = 'right',
-                right = (bw - jQuery(it.b.el).offset().left /* - (100 * 0.7)* / - (parent ? parent.offsetX : 100)),
-                left = jQuery(it.b.el).offset().left + (parent ? parent.offsetX : 100);
-                
-                if (left > right) placing = 'left';
-                if (placing=='left') var width = left; else var width = right;
-                * /
-                var width = $(t.el).width(), placing = 'left';
-
-                var
-                columnCount = Math.floor((width-(50/3)) / 50),
-                itemsOnLevelCount = 0;
-                
-                for (var j=0; j<t.items.length; j++) {
-                    var it2 = t.items[j];
-                    if (it2.parent === it.parent && it2.level === it.level) itemsOnLevelCount++;
-                };
-                
-                var
-                rowCount = Math.ceil(itemsOnLevelCount / columnCount);
-                
-                if (it.level===0) {
-                    columnCount = 1;
-                    rowCount = 9999;
-                } else if (columnCount > rowCount) {
-                    columnCount = Math.floor(Math.sqrt(itemsOnLevelCount));
-                    rowCount = Math.ceil(itemsOnLevelCount / columnCount);
-                };
-                //rowCount++;
-                //rowCount++;
-                
-                var
-                column = 0,
-                columnIdx = 1;
-                
-                for (var j=0; j<t.items.length; j++) {
-                    var it2 = t.items[j];
-                    if (it2.parent === it.parent && it2.level === it.level) {
-                        if ((it.levelIdx+1) <= (column * rowCount) + columnIdx ) {
-                            //columnIdx--;
-                        } else if (columnIdx >= rowCount) {
-                            column++;
-                            columnIdx = 1;
-                        } else columnIdx++;
-                    } 
-                    
-                };
-                
-                var           
-                l = levels['path '+it.path];
-                it.childrenPlacement = placing;
-                it.columnIdx = columnIdx;
-                it.column = column;
-                it.offsetX = (
-                    it.level === 1
-                    ? (100 + 20) * it.levelIdx
-                    : l
-                        ? it.level === 2
-                            ? placing==='right'
-                                ? l.offsetX + parent.offsetX + ( (100*it.column)) 
-                                : l.offsetX + parent.offsetX - ( (100*it.column)) 
-                            : placing==='right'
-                                ? l.offsetX + parent.offsetX + ( (100*it.column)) + (100/2)
-                                : l.offsetX + parent.offsetX - ( (100*it.column)) - (100/2)
-                        : it.level === 2
-                            ? placing==='right'
-                                ? parent.offsetX + ( (100*it.column)) 
-                                : parent.offsetX - ( (100*it.column)) 
-                            : placing==='right'
-                                ? parent.offsetX + ( (100*it.column)) + (100/2)
-                                : parent.offsetX - ( (100*it.column)) - (100/2)
-                );
-                it.offsetY = (
-                    it.level === 1
-                    ? 0
-                    : it.level === 2
-                        ? parent.offsetY + ( (30) * it.columnIdx )
-                         : parent.offsetY + ( (30) * (it.columnIdx-1) )+ (70)
-                );
-                
-                if (!l) {
-                    if (!parent) {
                         pl = {
                             offsetX : 0,
                             offsetY : 0,
@@ -507,10 +355,10 @@ export class na3D_fileBrowser {
                     top : it.offsetY,
                     zIndex : it.zIndex,
                     display : (it.level===1?'flex':'none')
-                });* /
+                });*/
                 it.model.position.x = it.offsetX;
                 it.model.position.y = it.offsetY;
-                it.model.position.z = it.level * 100;
+                it.model.position.z = -1 * it.level * 75;
                 //if (it.level===1) $(it.b.el).css({display:'flex'});
                 //$(it.b.el).fitText();
                 
@@ -518,9 +366,8 @@ export class na3D_fileBrowser {
                 setTimeout (function(){t.onresize(t, levels)}, 10);
             }
         }
-    }*/
-       
-    
+    }
+
     updateTextureEncoding (t, content) {
         /*const encoding = this.state.textureEncoding === 'sRGB'
         ? sRGBEncoding
@@ -591,14 +438,6 @@ export class na3D_fileBrowser {
 
                 }, undefined, reject );
         });
-    }
-
-    
-    onMouseMove( event, t ) {
-        var rect = t.renderer.domElement.getBoundingClientRect();
-        t.mouse.x = ( ( event.clientX - rect.left ) / ( rect.width - rect.left ) ) * 2 - 1;
-        t.mouse.y = - ( ( event.clientY - rect.top ) / ( rect.bottom - rect.top) ) * 2 + 1;        
-        $('#site3D_label').html(t.hoverOverName).css({ position:'absolute', padding : 10, zIndex : 5000, top : event.clientY, left : event.clientX });
     }
 }
 
