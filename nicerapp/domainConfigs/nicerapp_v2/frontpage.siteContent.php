@@ -97,7 +97,7 @@
             //'#siteContent' => 'nicerapp/news/newsApp.siteContent.php?section=English%20News%20World%20Headlines',
             //'news' => array ('section' => 'English_News__World_Headlines')
             'news' => array (
-                'section => 'English_News__World_Headlines'
+                'section' => 'English_News__World_Headlines'
             )
         ),
         'analytics' => array (
