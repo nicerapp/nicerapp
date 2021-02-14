@@ -160,24 +160,19 @@ export class na3D_fileBrowser {
             var itd = data[ t.ld2[level].keys[ t.ld2[level].initItemsDoingIdx ] ];
             if (typeof itd == 'object') {
                 let 
-                p0 = t.ld2[level].path,
-                p1 = p0.indexOf(',')!==-1?p0.substr(0, p0.lastIndexOf(',')):'',
-                p2 = p0.indexOf(',')!==-1?parseInt(p0.substr(p0.lastIndexOf(',')+1, p0.length-p0.lastIndexOf(',')-1)+1):p0,
                 path2 = !t.items[parent]||t.items[parent].path===''?''+parent:t.items[parent].path+','+parent,
                 it = {
                     level : levelDepth,
                     name : t.ld2[level].keys[t.ld2[level].initItemsDoingIdx],
                     idx : items.length,
-                    path : path2,//p1,
+                    path : path2,
                     levelIdx : t.ld2[level].levelIdx,
-                    parent : parent,//p2,//.substr(t.ld2[level].path.lastIndexOf(',')),
+                    parent : parent,
                     offsetX : 0,
                     offsetY : 0
                 };
-                if (it.name=='dogs' || it.name=='simple') debugger;
                 
                 items[items.length] = it;
-                t.ld2[level].initItemsDoingIdx++;
                 t.ld2[level].levelIdx++;
                 
                 let 
@@ -190,8 +185,6 @@ export class na3D_fileBrowser {
                     path : path2,
                     levelDepth : levelDepth + 1
                 };
-//debugger;
-                
                 //debugger;
                 clearTimeout (t.onresizeTimeout);
                 t.loader.load( '/nicerapp/3rd-party/3D/models/folder icon/scene.gltf', function ( gltf, cd) {
@@ -200,7 +193,7 @@ export class na3D_fileBrowser {
                     cd.it.model = gltf.scene;
                     cd.it.model.it = cd.it;
                     cd.t.updateTextureEncoding(t, gltf.scene);
-                    //setTimeout (function() {
+                    
                     var
                     newLevel = (
                         Object.keys(t.ld2).length > 1
@@ -210,8 +203,6 @@ export class na3D_fileBrowser {
                     cd.level = newLevel;
                     //debugger;
                     cd.t.initializeItems (cd.t, cd.items, cd.itd, cd.it.idx, newLevel, cd.levelDepth, cd.path);
-                    
-                    //}, 250);
                 }, function ( xhr ) {
                     console.log( 'model "folder icon" : ' + ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
                 }, function ( error ) {
@@ -219,11 +210,9 @@ export class na3D_fileBrowser {
                 },  cd );
             } 
             t.ld2[level].initItemsDoingIdx++;
-            //t.ld2[level].levelIdx++;
             
             clearTimeout (t.onresizeTimeout);
             t.onresizeTimeout = setTimeout(function() {
-                //debugger;
                 t.onresize (t);
             }, 500);
         }
@@ -370,7 +359,7 @@ export class na3D_fileBrowser {
                     var zof = pl.zIndexOffset + 1;
                     levels['path '+it.path] = jQuery.extend({}, pl);
                     
-                    var moreToCheck = true;
+                    var moreToCheck = true, checkCounter = 0;
                     while (moreToCheck) {
                         /*
                         levels['path '+it.path].offsetX = pl.offsetX + (
@@ -383,33 +372,48 @@ export class na3D_fileBrowser {
                             ? Math.floor(Math.random() * 200)
                             : -1 * Math.floor(Math.random() * 200)
                         );*/
-                        pl.offsetX = levels['path '+it.path].offsetX + (
+                        levels['path '+it.path].zIndexOffset = zof;
+                        levels['path '+it.path].offsetX = pl.offsetX + (
                             Math.random() > 0.5
-                            ? Math.floor(Math.random() * pl.columnCount * 100)
-                            : -1 * Math.floor(Math.random() * pl.columnCount * 100)
-                        );
-                        pl.offsetY = levels['path '+it.path].offsetY+ (
+                            ? (50*checkCounter)
+                            : -1 * (50*checkCounter)
+                        );/*(
                             Math.random() > 0.5
-                            ? Math.floor(Math.random() * pl.rowCount * 100)
-                            : -1 * Math.floor(Math.random() * pl.rowCount* 100)
-                        );
+                            ? Math.floor(Math.random() * 100)
+                            : -1 * Math.floor(Math.random() * 100)
+                        );*/
+                        levels['path '+it.path].offsetY = pl.offsetY + (
+                            Math.random() > 0.5
+                            ? (50*checkCounter)
+                            : -1 * (50*checkCounter)
+                        );/* (
+                            Math.random() > 0.5
+                            ? Math.floor(Math.random() * 100)
+                            : -1 * Math.floor(Math.random() * 100)
+                        );*/
                         for (var p1 in levels) {
                             var 
-                            l1 = pl,//levels['path '+it.path],
+                            l1 = levels['path '+it.path],
                             l2 = levels[p1];
+                            if (p1!=='path '+it.path) {
                             if (moreToCheck) moreToCheck = (
                                 l1.offsetX > l2.offsetX 
                                 || l1.offsetX < l2.offsetX + (l2.columnCount*75)
+                                || l1.offsetX + (l1.columnCount*75) > l2.offsetX
+                                || l1.offsetX + (l1.columnCount*75) < l2.offsetX + (l2.columnCount*75)
                             );
                             if (moreToCheck) moreToCheck = (
                                 l1.offsetY > l2.offsetY
                                 || l1.offsetY < l2.offsetY + (l2.rowCount*75)
+                                || l1.offsetY + (l1.rowCount*75) > l2.offsetY
+                                || l1.offsetY + (l1.rowCount*75) < l2.offsetY + (l2.rowCount*75)
                             );
+                            }
                         }
                         // if (moreToCheck) { /* success = true for the Math.random() offsetX and offsetY */ }
+                        checkCounter++;
                         if (moreToCheck===false) moreToCheck = true; else moreToCheck = false;
                     }
-                    levels['path '+it.path].zIndexOffset = zof;
                     l = levels['path '+it.path];
                 };
                 it.zIndex = (100 * 1000) + l.zIndexOffset;
@@ -423,8 +427,8 @@ export class na3D_fileBrowser {
                     display : (it.level===1?'flex':'none')
                 });*/
                 it.model.position.x = it.offsetX;
-                it.model.position.y = it.offsetY;
-                it.model.position.z = -1 * it.level * 150;
+                it.model.position.z = -1 * it.offsetY;
+                it.model.position.y = -1 * it.level * ((levels['path '+it.path].zIndexOffset*20) + 75);
                 //if (it.level===1) $(it.b.el).css({display:'flex'});
                 //$(it.b.el).fitText();
                 
