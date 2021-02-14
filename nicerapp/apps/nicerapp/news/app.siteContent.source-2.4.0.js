@@ -228,9 +228,7 @@ na.apps.loaded.newsApp = {
         dtBegin = new Date(),
         //dtQuit = new Date(dtBegin.getTime() - 1000 * 60 * 60 * 1.5), //(na.m.userDevice.isPhone ? 2.5 : 24.5)),
         urlp = na1.getURLparameters(location.href),
-        settings = {
-            section : urlp[0]
-        };
+        settings = urlp[0];
 
         na.analytics.logMetaEvent ('startApp : news');
         /*
@@ -354,7 +352,7 @@ na.apps.loaded.newsApp = {
         var
         na1 = na.apps.loaded.newsApp, g = na1.globals, s = na1.settings, c = s.current, db = c.db,
         urlp = na1.getURLparameters(location.href),
-        settings = { section : urlp[0] },
+        settings = urlp[0],
         dtBegin = new Date(),
         dc = { 0 : 0 },
         di = { 0 : [] },
