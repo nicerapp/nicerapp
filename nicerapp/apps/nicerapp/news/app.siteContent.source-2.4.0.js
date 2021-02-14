@@ -229,7 +229,7 @@ na.apps.loaded.newsApp = {
         //dtQuit = new Date(dtBegin.getTime() - 1000 * 60 * 60 * 1.5), //(na.m.userDevice.isPhone ? 2.5 : 24.5)),
         urlp = na1.getURLparameters(location.href),
         settings = {
-            section : urlp[0].section
+            section : urlp[0]
         };
 
         na.analytics.logMetaEvent ('startApp : news');
