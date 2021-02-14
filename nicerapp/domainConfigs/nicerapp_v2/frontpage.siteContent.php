@@ -48,13 +48,15 @@
                                     <div style="height:10px;">&nbsp;</div>
                                     <h1 id="pageTitle" style="padding-left:20px;font-family:Krona One;margin-block-start:0;margin-block-end:0.2em;font-size:200%;text-shadow:4px 4px 2px rgba(0,0,0,0.7)">nicer.app</h1>
                                     <script type="text/javascript">
-                                    var vividTextCmd = {
-                                            el : jQuery('#pageTitle')[0],
-                                            theme : na.cg.themes.saColorgradientSchemeOrangeYellow, 
-                                            animationType : na.vividText.globals.animationTypes[0],
-                                            animationSpeed : 4 * 1000
-                                    };
-                                    na.vividText.initElement (vividTextCmd);	
+                                    setTimeout(function() {
+                                        var vividTextCmd = {
+                                                el : jQuery('#pageTitle')[0],
+                                                theme : na.cg.themes.saColorgradientSchemeOrangeYellow, 
+                                                animationType : na.vividText.globals.animationTypes[0],
+                                                animationSpeed : 4 * 1000
+                                        };
+                                        na.vividText.initElement (vividTextCmd);	
+                                    }, 500);
                                     </script>
                                     <!--The web/pad/phone user-interface framework for bold new frontiers.-->
                                     <h2 id="tagline1" style="padding-left:20px;font-family:ABeeZee;font-size:140%;text-shadow:2px 2px 1px rgba(0,0,0,0.7)">
@@ -64,6 +66,7 @@
                                     </h2>
                                     <h3 id="pageSubTitle" style="padding-left:20px;font-family:Krona One;text-shadow:4px 4px 2px rgba(0,0,0,0.7)">Beta phase</h3>
                                     <script type="text/javascript">
+                                    setTimeout(function() {
                                     var vividTextCmd = {
                                             el : jQuery('#pageSubTitle')[0],
                                             theme : na.cg.themes.saColorgradientSchemeOrangeYellow, 
@@ -71,6 +74,7 @@
                                             animationSpeed : 4 * 1000
                                     };
                                     na.vividText.initElement (vividTextCmd);	
+                                    }, 1000);
                                     </script>
                                 </div>
                             </td>
@@ -125,7 +129,7 @@
 ?>
     <script type="text/javascript">
     $(document).ready(function() {
-        $('.contentSectionTitle').each (function(idx,el) {
+        $('.contentSectionTitle2').each (function(idx,el) {
             setTimeout (function() {
                 vividTextCmd = {
                         el : el,
@@ -134,21 +138,32 @@
                         animationSpeed : 4 * 1000
                 };
                 na.vividText.initElement (vividTextCmd);	
-            }, 1500 * idx);
+            }, 2000 * (idx + 1) );
         });
         
+        $('.contentSectionTitle3').each (function(idx,el) {
+            setTimeout (function() {
+                vividTextCmd = {
+                        el : el,
+                        theme : na.cg.themes.saColorgradientSchemeGreenVividText, 
+                        animationType : na.vividText.globals.animationTypes[0],
+                        animationSpeed : 4 * 1000
+                };
+                na.vividText.initElement (vividTextCmd);	
+            }, 2000 * idx);
+        });
         
     });
     </script>
-    <h2 class="contentSectionTitle">What is nicerapp?</h2>
+    <h2 class="contentSectionTitle2">What is nicerapp?</h2>
     <div>
     Nicerapp embraces the latest web technologies to provide beautiful new views to your data and files.<br/>
     </div>
     
 
-    <h2 class="contentSectionTitle">Available Apps</h2>
+    <h2 class="contentSectionTitle2">Available Apps</h2>
     
-    <h3 class="contentSectionTitle">News</h3>
+    <h3 class="contentSectionTitle3">News</h3>
     <ul>
         <li><a href="<?php echo $urls['newsHeadlines_englishNews'];?>">English News</a></li>
         <li><a href="<?php echo $urls['newsHeadlines_englishNews_worldHeadlines'];?>">English News : World Headlines only</a></li>
@@ -158,11 +173,11 @@
     
     <a href="<?php echo $urls['music'];?>"><h3>Music</h3></a>
     
-    <h2 class="contentSectionTitle">Apps in development</h2>
+    <h2 class="contentSectionTitle2">Apps in development</h2>
     <a href="<?php echo $urls['backgroundsBrowser'];?>"><h3>3D backgrounds browser</h3></a><br/>
     <div>This will grow into a 3D file and data viewer-and-manager. (Near-)daily updates will be provided.</div>
 
-    <h2 class="contentSectionTitle" >Demos</h2>
+    <h2 class="contentSectionTitle2" >Demos</h2>
     <a href="<?php echo $urls['3Dcube'];?>"><h3>3D demo : cube</h3></a>
     <a href="<?php echo $urls['3Dmodels'];?>"><h3>3D demo : loading of models (slow to start up)</h3></a>
     
