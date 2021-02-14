@@ -69,7 +69,7 @@ export class na3D_fileBrowser {
         //this.controls.listenToKeyEvents( window ); // optional
         
         this.loader = new GLTFLoader();
-        this.initializeItems (this, this.items, this.data, 0, 1, 0);
+        this.initializeItems (this, this.items, this.data, 0, 0, 0, '');
 
         const light1  = new AmbientLight(0xFFFFFF, 0.3);
         light1.name = 'ambient_light';
@@ -106,21 +106,33 @@ export class na3D_fileBrowser {
     animate(t) {
         requestAnimationFrame( function() { t.animate (t) } );
         
-        t.raycaster.setFromCamera (t.mouse, t.camera);
-        
-        const intersects = t.raycaster.intersectObjects (t.scene.children, true);
-        //if (intersects[0]) {
-        for (var i=0; i<intersects.length; i++) {
-            var model = intersects[i].object.parent.parent.parent.parent.parent.parent;
-            model = model.parent.parent;
-            t.hoverOverName = model.it.name;
-            $('#site3D_label').css({display:'flex'});
-            //console.log (model.it.name);
-            //debugger;
-            //model.rotation.x += 0.015;
-            //model.rotation.y += 0.02;
+        if (t.mouse.x!==0 || t.mouse.y!==0) {        
+            t.raycaster.setFromCamera (t.mouse, t.camera);
+            
+            const intersects = t.raycaster.intersectObjects (t.scene.children, true);
+            //if (intersects[0]) {
+            for (var i=0; i<intersects.length; i++) {
+                var p = intersects[i].object;
+                //debugger;
+                while (p) {
+                    p = p.parent;
+                    if (p && p.it) {
+                        t.hoverOverName = p.it.name;
+                        //debugger;
+                    }
+                }
+                $('#site3D_label').css({display:'flex'});
+                //console.log (model.it.name);
+                //model.rotation.x += 0.015;
+                //model.rotation.y += 0.02;
+            }
+            if (!intersects[0]) {
+                $('#site3D_label').fadeOut();
+            } else {
+                var model = intersects[0].object.parent.parent.parent.parent.parent.parent;
+                model.rotation.y += 0.02;
+            }
         }
-        if (!intersects[0]) $('#site3D_label').fadeOut();
 
         
         t.renderer.render( t.scene, t.camera );
@@ -133,74 +145,85 @@ export class na3D_fileBrowser {
         $('#site3D_label').html(t.hoverOverName).css({ position:'absolute', padding : 10, zIndex : 5000, top : event.layerY + 10, left : event.layerX + 30 });
     }
     
-    initializeItems (t, items, data, parent, level, levelDepth) {
-        if (!t.ld2[level]) t.ld2[level] = { parent : parent, initItemsDoingIdx : 0, path : '' };
+    initializeItems (t, items, data, parent, level, levelDepth, path) {
+        if (!t.ld2[level]) t.ld2[level] = { parent : parent, initItemsDoingIdx : 0, path : path };
         if (!t.ld2[level].keys) t.ld2[level].keys = Object.keys(data);
         if (t.ld2[level].initItemsDoingIdx >= t.ld2[level].keys.length) return false;
         
         if (!t.ld2[level].levelIdx) t.ld2[level].levelIdx = 0;
-        if (!t.ld2[level].path) t.ld2[level].path = '';
         
         if (!t.ld1[level]) t.ld1[level] = { levelIdx : 0 };
+        
+        if (!t.initCounter) t.initCounter=0;
          
         while (t.ld2[level].initItemsDoingIdx < t.ld2[level].keys.length) {
-            var itd = data[t.ld2[level].keys[ t.ld2[level].initItemsDoingIdx ]];
+            var itd = data[ t.ld2[level].keys[ t.ld2[level].initItemsDoingIdx ] ];
             if (typeof itd == 'object') {
-                var createdNewLevel = false;
-                if (!t.ld1[level]) t.ld1[level]= {
-                    levelIdx : 0
-                };
-                if (!t.ld2[t.ld1[level].levelIdx]) {
-                    t.ld2[t.ld1[level].levelIdx] = {
-                        parent : parent,//t.ld[level].initItemsDoingIdx,
-                        initItemsDoingIdx : 0,
-                        levelIdx : 0,
-                        keys : Object.keys(itd)
-                    };
-                    createdNewLevel = true;
-                };
-                var path2 = (t.ld2[level].path==='')?'':t.ld2[level].path+',';
-                path2+=t.ld2[t.ld1[level].levelIdx].parent;
-                if (createdNewLevel) t.ld2[t.ld1[level].levelIdx].path = path2;
-                
-                
-                var it = {
+                let 
+                p0 = t.ld2[level].path,
+                p1 = p0.indexOf(',')!==-1?p0.substr(0, p0.lastIndexOf(',')):'',
+                p2 = p0.indexOf(',')!==-1?parseInt(p0.substr(p0.lastIndexOf(',')+1, p0.length-p0.lastIndexOf(',')-1)+1):p0,
+                path2 = !t.items[parent]||t.items[parent].path===''?''+parent:t.items[parent].path+','+parent,
+                it = {
                     level : levelDepth,
                     name : t.ld2[level].keys[t.ld2[level].initItemsDoingIdx],
                     idx : items.length,
+                    path : path2,//p1,
                     levelIdx : t.ld2[level].levelIdx,
-                    parent : t.ld2[level].parent,
-                    path : t.ld2[level].path,
+                    parent : parent,//p2,//.substr(t.ld2[level].path.lastIndexOf(',')),
                     offsetX : 0,
                     offsetY : 0
-                }
+                };
+                if (it.name=='dogs' || it.name=='simple') debugger;
+                
                 items[items.length] = it;
                 t.ld2[level].initItemsDoingIdx++;
                 t.ld2[level].levelIdx++;
-                //debugger;
                 
-                t.loader.load( '/nicerapp/3rd-party/3D/models/folder icon/scene.gltf', function ( gltf, t, it, items, itd, level, levelDepth ) {
+                let 
+                cd = { //call data
+                    t : t,
+                    it : it,
+                    items : items,
+                    itd : itd,
+                    parent : parent,
+                    path : path2,
+                    levelDepth : levelDepth + 1
+                };
+//debugger;
+                
+                //debugger;
+                clearTimeout (t.onresizeTimeout);
+                t.loader.load( '/nicerapp/3rd-party/3D/models/folder icon/scene.gltf', function ( gltf, cd) {
                     gltf.scene.scale.setScalar (10);
                     t.scene.add (gltf.scene);
-                    it.model = gltf.scene;
-                    it.model.it = it;
-                    t.updateTextureEncoding(t, gltf.scene);
-                    //debugger;
+                    cd.it.model = gltf.scene;
+                    cd.it.model.it = cd.it;
+                    cd.t.updateTextureEncoding(t, gltf.scene);
                     //setTimeout (function() {
-                    t.initializeItems (t, items, itd, it.idx, parseInt(Object.keys(t.ld2).reduce(function(a, b){ return t.ld2[a] > t.ld2[b] ? a : b }))+1, levelDepth + 1);
+                    var
+                    newLevel = (
+                        Object.keys(t.ld2).length > 1
+                        ? parseInt(Object.keys(t.ld2).reduce(function(a, b){ return t.ld2[a] > t.ld2[b] ? a : b }))+1
+                        : 2
+                    );
+                    cd.level = newLevel;
+                    //debugger;
+                    cd.t.initializeItems (cd.t, cd.items, cd.itd, cd.it.idx, newLevel, cd.levelDepth, cd.path);
                     
                     //}, 250);
                 }, function ( xhr ) {
                     console.log( 'model "folder icon" : ' + ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
                 }, function ( error ) {
                     console.error( error );
-                },  t, it, items, itd, level, levelDepth  );
+                },  cd );
             } 
             t.ld2[level].initItemsDoingIdx++;
             //t.ld2[level].levelIdx++;
             
             clearTimeout (t.onresizeTimeout);
             t.onresizeTimeout = setTimeout(function() {
+                //debugger;
                 t.onresize (t);
             }, 500);
         }
@@ -265,7 +288,6 @@ export class na3D_fileBrowser {
                 columnCount = Math.floor((width-(150/3)) / 150),
                 
                 itemsOnLevelCount = 0;
-                debugger;
                 
                 for (var j=0; j<t.items.length; j++) {
                     var it2 = t.items[j];
@@ -284,7 +306,6 @@ export class na3D_fileBrowser {
                 };
                 //rowCount++;
                 //rowCount++;
-                
                 var
                 column = 0,
                 columnIdx = 1;
@@ -303,7 +324,7 @@ export class na3D_fileBrowser {
                 };
                 
                 var           
-                l = null;//levels['path '+it.path];
+                l = levels['path '+it.path];
                 it.childrenPlacement = placing;
                 it.columnIdx = columnIdx;
                 it.column = column;
@@ -325,24 +346,69 @@ export class na3D_fileBrowser {
                             : parent.offsetX - ( (50*it.column)) - (40/2)
                 );
                 it.offsetY = (
-                         parent.offsetY + ( 50 * (it.columnIdx-1) )+ 20
+                       l
+                       ? l.offsetY + parent.offsetY + ( 50 * (it.columnIdx-1) )+ 20
+                       : parent.offsetY + ( 50 * (it.columnIdx-1) )+ 20
                 );
                 
                 if (!l) {
-                    if (parent.parent===0) {
+                    if (!parent.parent) {
                         pl = {
                             offsetX : 0,
                             offsetY : 0,
-                            zIndexOffset : 0
+                            zIndexOffset : 0,
+                            rowCount : 1,
+                            columnCount : 1
                         }
                     } else {
                         pl = levels['path '+parent.path];
                     }
                     
+                    pl.columnCount = columnCount;
+                    pl.rowCount = rowCount;
+                
                     var zof = pl.zIndexOffset + 1;
                     levels['path '+it.path] = jQuery.extend({}, pl);
-                    levels['path '+it.path].offsetX = pl.offsetX;
-                    levels['path '+it.path].offsetY = pl.offsetY;
+                    
+                    var moreToCheck = true;
+                    while (moreToCheck) {
+                        /*
+                        levels['path '+it.path].offsetX = pl.offsetX + (
+                            Math.random() > 0.5
+                            ? Math.floor(Math.random() * 200)
+                            : -1 * Math.floor(Math.random() * 200)
+                        );
+                        levels['path '+it.path].offsetY = pl.offsetY+ (
+                            Math.random() > 0.5
+                            ? Math.floor(Math.random() * 200)
+                            : -1 * Math.floor(Math.random() * 200)
+                        );*/
+                        pl.offsetX = levels['path '+it.path].offsetX + (
+                            Math.random() > 0.5
+                            ? Math.floor(Math.random() * pl.columnCount * 100)
+                            : -1 * Math.floor(Math.random() * pl.columnCount * 100)
+                        );
+                        pl.offsetY = levels['path '+it.path].offsetY+ (
+                            Math.random() > 0.5
+                            ? Math.floor(Math.random() * pl.rowCount * 100)
+                            : -1 * Math.floor(Math.random() * pl.rowCount* 100)
+                        );
+                        for (var p1 in levels) {
+                            var 
+                            l1 = pl,//levels['path '+it.path],
+                            l2 = levels[p1];
+                            if (moreToCheck) moreToCheck = (
+                                l1.offsetX > l2.offsetX 
+                                || l1.offsetX < l2.offsetX + (l2.columnCount*75)
+                            );
+                            if (moreToCheck) moreToCheck = (
+                                l1.offsetY > l2.offsetY
+                                || l1.offsetY < l2.offsetY + (l2.rowCount*75)
+                            );
+                        }
+                        // if (moreToCheck) { /* success = true for the Math.random() offsetX and offsetY */ }
+                        if (moreToCheck===false) moreToCheck = true; else moreToCheck = false;
+                    }
                     levels['path '+it.path].zIndexOffset = zof;
                     l = levels['path '+it.path];
                 };
@@ -358,7 +424,7 @@ export class na3D_fileBrowser {
                 });*/
                 it.model.position.x = it.offsetX;
                 it.model.position.y = it.offsetY;
-                it.model.position.z = -1 * it.level * 75;
+                it.model.position.z = -1 * it.level * 150;
                 //if (it.level===1) $(it.b.el).css({display:'flex'});
                 //$(it.b.el).fitText();
                 
