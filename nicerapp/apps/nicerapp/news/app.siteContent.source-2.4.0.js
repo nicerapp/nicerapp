@@ -1391,7 +1391,7 @@ na.apps.loaded.newsApp = {
         arr = JSON.parse(json);
         //debugger;
         return [
-            arr.news
+            arr.news.section
         ];
 	},
     
