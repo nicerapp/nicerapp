@@ -229,7 +229,7 @@ na.apps.loaded.newsApp = {
         //dtQuit = new Date(dtBegin.getTime() - 1000 * 60 * 60 * 1.5), //(na.m.userDevice.isPhone ? 2.5 : 24.5)),
         urlp = na1.getURLparameters(location.href),
         settings = {
-            section : urlp[0]
+            section : urlp[0].section
         };
 
         na.analytics.logMetaEvent ('startApp : news');
@@ -573,7 +573,7 @@ na.apps.loaded.newsApp = {
         na1 = na.apps.loaded.newsApp, g = na1.globals, s = na1.settings, c = s.current, db = c.db,
         urlp = na1.getURLparameters(location.href),
         settings = {
-            section : urlp[0].replace(/__/g,'/').replace(/_/g,' ')
+            section : urlp[0].section.replace(/__/g,'/').replace(/_/g,' ')
         };
         
         if (cd.v && cd.v.items) {
@@ -626,7 +626,7 @@ na.apps.loaded.newsApp = {
         
         //$('#siteContent__content').css ({ top : 0 });
         $('#siteContent__header').animate({opacity:1},700);
-        $('#newsApp_title').html (urlp[0].replace(/__/g, ' ').replace(/_/g, ' '));
+        $('#newsApp_title').html (urlp[0].section.replace(/__/g, ' ').replace(/_/g, ' '));
         $('#newsApp_content .newsApp__item__outer').animate({opacity:1},'normal');
 
         if (s.loaderIcon) {
