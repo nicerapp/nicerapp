@@ -118,7 +118,7 @@ var GLTFLoader = ( function () {
 
 		constructor: GLTFLoader,
 
-		load: function ( url, onLoad, onProgress, onError, it ) {
+		load: function ( url, onLoad, onProgress, onError,  t, it, items, itd  ) {
 
 			var scope = this;
 
@@ -173,7 +173,7 @@ var GLTFLoader = ( function () {
 
 					scope.parse( data, resourcePath, function ( gltf ) {
 
-                        onLoad( gltf, it );
+                        onLoad( gltf, t, it, items, itd );
 
 						scope.manager.itemEnd( url );
 

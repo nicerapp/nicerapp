@@ -43,7 +43,10 @@ export class na3D_fileBrowser {
         this.ld = {};
    
         this.items = [{
-            name : 'backgrounds'
+            name : 'backgrounds',
+            offsetX : 0,
+            offsetY : 0,
+            path : ''
         }];
         
         this.scene = new THREE.Scene();
@@ -108,66 +111,77 @@ export class na3D_fileBrowser {
         for (var i=0; i<intersects.length; i++) {
             var model = intersects[i].object.parent.parent.parent.parent.parent.parent;
             model = model.parent.parent;
+            t.hoverOverName = model.it.name;
+            $('#site3D_label').css({display:'flex'});
             //console.log (model.it.name);
             //debugger;
             //model.rotation.x += 0.015;
             //model.rotation.y += 0.02;
         }
+        if (!intersects[0]) $('#site3D_label').fadeOut();
+
         
         t.renderer.render( t.scene, t.camera );
     }
     
     initializeItems (t, items, data, parent, level) {
-        if (!t.ld[level]) t.ld[level] = { parent : parent, initItemsDoingIdx : 0 };
+        if (!t.ld[level]) t.ld[level] = { parent : parent, initItemsDoingIdx : 0, path : '' };
         if (!t.ld[level].keys) t.ld[level].keys = Object.keys(data);
         if (t.ld[level].initItemsDoingIdx >= t.ld[level].keys.length) return false;
         
         if (!t.ld[level].levelIdx) t.ld[level].levelIdx = 0;
-        if (!t.path) t.path = '';
-        t.parent = parent;
+        if (!t.ld[level].path) t.ld[level].path = '';
          
         while (t.ld[level].initItemsDoingIdx < t.ld[level].keys.length) {
             var itd = data[t.ld[level].keys[ t.ld[level].initItemsDoingIdx ]];
             if (typeof itd == 'object') {
-                var path2 = (t.path==='')?'':t.path+',';
-                path2+=t.parent;
-                if (!t.ld[level+1]) t.ld[level+1] = {
-                    parent : t.ld[level].initItemsDoingIdx,
-                    path : path2,
-                    initItemsDoingIdx : 0,
-                    levelIdx : 0,
-                    keys : Object.keys(itd)
+                var createdNewLevel = false;
+                if (!t.ld[level+1]) {
+                    t.ld[level+1] = {
+                        parent : parent,//t.ld[level].initItemsDoingIdx,
+                        initItemsDoingIdx : 0,
+                        levelIdx : 0,
+                        keys : Object.keys(itd)
+                    };
+                    createdNewLevel = true;
                 };
+                var path2 = (t.ld[level].path==='')?'':t.ld[level].path+',';
+                path2+=t.ld[level+1].parent;
+                if (createdNewLevel) t.ld[level+1].path = path2;
+                
                 
                 var it = {
                     level : level,
                     name : t.ld[level].keys[t.ld[level].initItemsDoingIdx],
-                    levelIdx : t.ld[level].levelIdx,
-                    parent : t.ld[level].parent,
+                    idx : items.length,
+                    levelIdx : t.ld[level+1].levelIdx,
+                    parent : t.ld[level+1].parent,
                     children : [],
-                    path : t.ld[level].path
+                    path : t.ld[level+1].path,
+                    offsetX : 0,
+                    offsetY : 0
                 }
                 items[items.length] = it;
                 t.ld[level+1].initItemsDoingIdx++;
                 t.ld[level+1].levelIdx++;
-                debugger;
+                //debugger;
                 
-                t.loader.load( '/nicerapp/3rd-party/3D/models/folder icon/scene.gltf', function ( gltf, it ) {
+                t.loader.load( '/nicerapp/3rd-party/3D/models/folder icon/scene.gltf', function ( gltf, t, it, items, itd ) {
                     gltf.scene.scale.setScalar (20);
                     t.scene.add (gltf.scene);
                     it.model = gltf.scene;
                     it.model.it = it;
                     t.updateTextureEncoding(t, gltf.scene);
-                    debugger;
-                    t.initializeItems (t, items, itd, t.ld[level].initItemsDoingIdx, level + 1);
+                    //debugger;
+                    t.initializeItems (t, items, itd, it.idx, level + 1);
                 }, function ( xhr ) {
                     console.log( 'model "folder icon" : ' + ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
                 }, function ( error ) {
                     console.error( error );
-                }, it );
+                },  t, it, items, itd  );
             } 
             t.ld[level].initItemsDoingIdx++;
-            t.ld[level].levelIdx++;
+            //t.ld[level].levelIdx++;
             
             clearTimeout (t.onresizeTimeout);
             t.onresizeTimeout = setTimeout(function() {
@@ -275,35 +289,35 @@ export class na3D_fileBrowser {
                 it.childrenPlacement = placing;
                 it.columnIdx = columnIdx;
                 it.column = column;
-                it.offsetY = (
+                it.offsetX = (
                     it.level === 1
                     ? (100 + 20) * it.levelIdx
                     : l
                         ? it.level === 2
                             ? placing==='right'
-                                ? l.offsetX + parent.offsetX + ( (20*it.column)) 
-                                : l.offsetX + parent.offsetX - ( (20*it.column)) 
+                                ? l.offsetX + parent.offsetX + ( (100*it.column)) 
+                                : l.offsetX + parent.offsetX - ( (100*it.column)) 
                             : placing==='right'
-                                ? l.offsetX + parent.offsetX + ( (20*it.column)) + (40/2)
-                                : l.offsetX + parent.offsetX - ( (20*it.column)) - (40/2)
+                                ? l.offsetX + parent.offsetX + ( (100*it.column)) + (40/2)
+                                : l.offsetX + parent.offsetX - ( (100*it.column)) - (40/2)
                         : it.level === 2
                             ? placing==='right'
-                                ? parent.offsetY + ( (20*it.column)) 
-                                : parent.offsetY - ( (20*it.column)) 
+                                ? parent.offsetX + ( (100*it.column)) 
+                                : parent.offsetX - ( (100*it.column)) 
                             : placing==='right'
-                                ? parent.offsetY + ( (20*it.column)) + (40/2)
-                                : parent.offsetY - ( (20*it.column)) - (40/2)
+                                ? parent.offsetX + ( (100*it.column)) + (40/2)
+                                : parent.offsetX - ( (100*it.column)) - (40/2)
                 );
-                it.offsetX = (
+                it.offsetY = (
                     it.level === 1
                     ? 0
                     : it.level === 2
-                        ? parent.offsetX + ( (100) * it.columnIdx )
-                         : parent.offsetX + ( (100) * (it.columnIdx-1) )+ (70)
+                        ? parent.offsetY + ( (100) * it.columnIdx )
+                         : parent.offsetY + ( (100) * (it.columnIdx-1) )+ (70)
                 );
                 
                 if (!l) {
-                    if (!parent) {
+                    if (parent.parent===0) {
                         pl = {
                             offsetX : 0,
                             offsetY : 0,
@@ -332,7 +346,7 @@ export class na3D_fileBrowser {
                 });*/
                 it.model.position.x = it.offsetX;
                 it.model.position.y = it.offsetY;
-                it.model.position.z = -1 * it.level * 100;
+                it.model.position.z = -1 * it.level * 25;
                 //if (it.level===1) $(it.b.el).css({display:'flex'});
                 //$(it.b.el).fitText();
                 
@@ -445,18 +459,18 @@ export class na3D_fileBrowser {
                     : l
                         ? it.level === 2
                             ? placing==='right'
-                                ? l.offsetX + parent.offsetX + ( (20*it.column)) 
-                                : l.offsetX + parent.offsetX - ( (20*it.column)) 
+                                ? l.offsetX + parent.offsetX + ( (100*it.column)) 
+                                : l.offsetX + parent.offsetX - ( (100*it.column)) 
                             : placing==='right'
-                                ? l.offsetX + parent.offsetX + ( (20*it.column)) + (100/2)
-                                : l.offsetX + parent.offsetX - ( (20*it.column)) - (100/2)
+                                ? l.offsetX + parent.offsetX + ( (100*it.column)) + (100/2)
+                                : l.offsetX + parent.offsetX - ( (100*it.column)) - (100/2)
                         : it.level === 2
                             ? placing==='right'
-                                ? parent.offsetX + ( (20*it.column)) 
-                                : parent.offsetX - ( (20*it.column)) 
+                                ? parent.offsetX + ( (100*it.column)) 
+                                : parent.offsetX - ( (100*it.column)) 
                             : placing==='right'
-                                ? parent.offsetX + ( (20*it.column)) + (100/2)
-                                : parent.offsetX - ( (20*it.column)) - (100/2)
+                                ? parent.offsetX + ( (100*it.column)) + (100/2)
+                                : parent.offsetX - ( (100*it.column)) - (100/2)
                 );
                 it.offsetY = (
                     it.level === 1
@@ -584,6 +598,7 @@ export class na3D_fileBrowser {
         var rect = t.renderer.domElement.getBoundingClientRect();
         t.mouse.x = ( ( event.clientX - rect.left ) / ( rect.width - rect.left ) ) * 2 - 1;
         t.mouse.y = - ( ( event.clientY - rect.top ) / ( rect.bottom - rect.top) ) * 2 + 1;        
+        $('#site3D_label').html(t.hoverOverName).css({ position:'absolute', padding : 10, zIndex : 5000, top : event.clientY, left : event.clientX });
     }
 }
 
