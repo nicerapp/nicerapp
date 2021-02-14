@@ -573,7 +573,7 @@ na.apps.loaded.newsApp = {
         na1 = na.apps.loaded.newsApp, g = na1.globals, s = na1.settings, c = s.current, db = c.db,
         urlp = na1.getURLparameters(location.href),
         settings = {
-            section : urlp[0].section.replace(/__/g,'/').replace(/_/g,' ')
+            section : urlp[0].replace(/__/g,'/').replace(/_/g,' ')
         };
         
         if (cd.v && cd.v.items) {
