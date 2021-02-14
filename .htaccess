@@ -21,7 +21,7 @@ RewriteRule ^music__dj_firesnake$ /apps/eyJtdXNpYyI6eyJzZXQiOiJESl9GaXJlU25ha2Ui
 
 RewriteRule ^tarot$ /apps/eyJ0YXJvdCI6eyJkZWNrIjoiT3JpZ2luYWwtUmlkZXItV2FpdGUiLCJyZWFkaW5nIjoiMy1DYXJkcyJ9fQ [R,L]
 
-RewriteRule ^news$ /apps/eyJuZXdzIjoiRW5nbGlzaF9OZXdzIn0 [R,L]
+RewriteRule ^news$ /apps/eyJuZXdzIjp7InNlY3Rpb24iOiJFbmdsaXNoX05ld3MifX0 [R,L]
 
 
 RewriteCond %{REQUEST_URI} !^/nicerapp/apps/nicerapp/music/.*$
