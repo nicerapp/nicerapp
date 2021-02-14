@@ -626,7 +626,7 @@ na.apps.loaded.newsApp = {
         
         //$('#siteContent__content').css ({ top : 0 });
         $('#siteContent__header').animate({opacity:1},700);
-        $('#newsApp_title').html (urlp[0].section.replace(/__/g, ' ').replace(/_/g, ' '));
+        $('#newsApp_title').html (urlp[0].replace(/__/g, ' ').replace(/_/g, ' '));
         $('#newsApp_content .newsApp__item__outer').animate({opacity:1},'normal');
 
         if (s.loaderIcon) {
