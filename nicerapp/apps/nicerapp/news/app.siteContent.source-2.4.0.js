@@ -435,7 +435,7 @@ na.apps.loaded.newsApp = {
         na1 = na.apps.loaded.newsApp, g = na1.globals, s = na1.settings, c = s.current, db = c.db,
         dtBeginURL = na1.formatDateForLoading(dtBegin),//('' + dtBegin).replace('+', '%2B'),
         dtEndURL = na1.formatDateForLoading(dtEnd),//('' + dtEnd).replace('+', '%2B'),
-        url = '/nicerapp/apps/nicerapp/news/ajax_get_items.php?section='+settings.section.replace(/-/g,'/').replace(/ /g, '_')+'&dateBegin='+dtBeginURL+'&dateEnd='+dtEndURL;
+        url = '/nicerapp/apps/nicerapp/news/ajax_get_items.php?section='+settings.replace(/-/g,'/').replace(/ /g, '_')+'&dateBegin='+dtBeginURL+'&dateEnd='+dtEndURL;
         
         if (c.searchQuery) url += '&q='+c.searchQuery;
         na.analytics.logMetaEvent ('newsApp : loadNews_get_forDateTimeRange() url='+url);
