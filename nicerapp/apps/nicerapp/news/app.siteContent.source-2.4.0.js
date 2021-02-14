@@ -354,7 +354,7 @@ na.apps.loaded.newsApp = {
         var
         na1 = na.apps.loaded.newsApp, g = na1.globals, s = na1.settings, c = s.current, db = c.db,
         urlp = na1.getURLparameters(location.href),
-        settings = urlp[0],
+        settings = { section : urlp[0] },
         dtBegin = new Date(),
         dc = { 0 : 0 },
         di = { 0 : [] },
