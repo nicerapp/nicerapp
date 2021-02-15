@@ -130,7 +130,7 @@ export class na3D_fileBrowser {
             if (!intersects[0]) {
                 $('#site3D_label').fadeOut();
             } else {
-                var model = intersects[0].object.parent.parent.parent.parent.parent.parent;
+                //var model = intersects[0].object.parent.parent.parent.parent.parent.parent;
                 //model.rotation.y += 0.02;
             }
         }
