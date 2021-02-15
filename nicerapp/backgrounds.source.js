@@ -44,7 +44,6 @@ na.backgrounds = {
         
         if (url.match('tiled')) {
             $(bgf).add(bgl).fadeOut('fast');
-            debugger;
             $(bgDiv).css ({
                 width: jQuery(window).width(),
                 height: jQuery(window).height(),

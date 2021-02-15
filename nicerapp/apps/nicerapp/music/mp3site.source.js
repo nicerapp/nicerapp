@@ -67,21 +67,20 @@ var mp3site = {
 		mp3site.settings.activeID = id;
 		
         mp3site.settings.playingIndex = false;
+        delete mp3site.settings.stopped;
 		var pl = $('#playlist')[0];
 		for (var i=0; i<pl.children.length; i++) {
-			if (pl.children[i].id==id) mp3site.settings.playingIndex = i;
+            if (pl.children[i].id==id || (pl.children[i].children[0] && pl.children[i].children[0].id==id)) mp3site.settings.playingIndex = i;
 		};
         if (!file) debugger;
-        na.analytics.logMetaEvent ('musicPlayer : selectMP3() file='+file);
+        na.analytics.logMetaEvent ('appEvent : musicPlayer : selectMP3() file='+file);
         
         $('.mp3').removeClass('selected').removeClass('vividButtonSelected').addClass('vividButton');
         $('#'+id).addClass('selected').removeClass('vividButton').addClass('vividButtonSelected');
 
 		var ajaxCommand = {
 			type : 'GET',
-			// LOCAL = SLOW, CLOGS ADSL LINE : 
 			url : '/nicerapp/apps/nicerapp/music/music/'+naLocationBarInfo['apps']['music']['set']+'/' + file + '.json',
-			//url : na.m.globals.urls.upstream.apps.nicerapp.musicPlayer.cloudhosting['DJ_FireSnake'].saApp.musicPlayer.music['DJ_FireSnake'].hosting['godaddy.com'] + file + '.json',
             error: function(l0_jqXHR, l0_textStatus, l0_errorThrown) {
 				var html = '';
                 html += '<table>';
@@ -154,6 +153,7 @@ var mp3site = {
                 strCurrentTime = mp3site.convertSecondsToTimeString(currentTime);
                 
                 if (currentTime==length) {
+                    debugger;
                     mp3site.next();
                 } else {
                     
@@ -164,7 +164,8 @@ var mp3site = {
                     widthSeekBar = $('.jp-seek-bar').width(),
                     widthPlayBar = Math.floor((widthSeekBar * currentTime)/length);
                     
-                    $('.jp-play-bar')[0].style.width = widthPlayBar+'px';
+                    if (!mp3site.settings.maxPlayBarWidth) mp3site.settings.maxPlayBarWidth = widthPlayBar;
+                    $('.jp-play-bar')[0].style.width = (widthPlayBar <= mp3site.settings.maxPlayBarWidth ? widthPlayBar : mp3site.settings.maxPlayBarWidth)+'px';
                 }
                 
             }, 1000);
@@ -221,14 +222,23 @@ var mp3site = {
                     mp3site.selectMP3 (newIndex, pl.children[i].file, false);
                     return true;
                 }
+                if (pl.children[i].children[0] && pl.children[i].children[0].id== newIndex) {
+                    mp3site.selectMP3 (newIndex, pl.children[i].children[0].file, false);
+                    return true;
+                }
             }
             //var x = $('#btn_repeat').hasClass('selected');
             //if (x) {
-            var x = na.vcc.settings['btn_repeat'].items[0].stateCurrent;
-            if (x === 'selected') {
+            //var x = na.vcc.settings['btn_repeat'].items[0].stateCurrent;
+            //if (x === 'selected') {
+            if (mp3site.settings.repeating) {
                 var newIndex = 'playlist_0';
-                if (pl.children[0].id == newIndex) {
-                    mp3site.selectMP3 (newIndex, pl.children[0].file, false);
+                if (pl.children[i].id == newIndex) {
+                    mp3site.selectMP3 (newIndex, pl.children[i].file, false);
+                    return true;
+                }
+                if (pl.children[i].children[0] && pl.children[i].children[0].id== newIndex) {
+                    mp3site.selectMP3 (newIndex, pl.children[i].children[0].file, false);
                     return true;
                 }
             }
@@ -305,7 +315,7 @@ var mp3site = {
 		$('#playlist').droppable ({
 			drop : function (evt, ui) {
                 var pl = $('#playlist')[0];
-				var dragged = $(ui.draggable[0]).clone(true,true)[0];
+				var dragged = ui.draggable[0].children[0];//).clone(true,true)[0];
 				var pc = mp3site.playlistCount;
                 if (!ui.helper[0].children[0]) return false;
             
@@ -315,17 +325,14 @@ var mp3site = {
                 newID = 'playlist_'+pc;
                 
                 if (oldID.match('playlist_')) return false;
-                dragged.id = newID;
-                dragged.className = 'mp3 vividButton';
-                dragged.style.height = '30px';
+                $(dragged).attr('id', newID);
+                $(dragged).attr('class', 'mp3 vividButton');
+                $(dragged).css({height : 30});
                 $(dragged).attr('file', original.attr('file'));
                 dragged.file = original.attr('file');
-                $(dragged).attr('onclick',''+original[0].onclick.toString().replace('function onclick(event) {', '').replace('\n}','').replace (new RegExp(oldID), dragged.id));
+                $(dragged).attr('onclick',''+original[0].onclick.toString().replace("'"+oldID+"'", "'"+newID+"'").replace('function onclick(event) {', '').replace('\n}','').replace (new RegExp(oldID), dragged.id));
                 
-                pl.append(dragged);
-                $(dragged).remove();
-
-                if (mp3site.settings.stopped) mp3site.selectMP3 (dragged.id, $(dragged).attr('file'), false);
+                if (mp3site.settings.stopped) mp3site.selectMP3 (newID, $(dragged).attr('file'), false);
                 mp3site.onWindowResize();
 				mp3site.playlistCount++;
 			}
