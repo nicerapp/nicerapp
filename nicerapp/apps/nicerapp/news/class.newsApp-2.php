@@ -28,7 +28,7 @@ class newsApp2_class {
         $r = array(
             'name' => 'newsApp',
             'address' => 'https://nicer.app/news',
-            'copyright' => 'Copyright (c) and All Rights Reserved (r) 2018-2020 by Rene AJM Veerman',
+            'copyright' => 'Copyright (c) and All Rights Reserved (r) 2018-2021 by Rene AJM Veerman',
             'version' => '2.1.1'
         );
         return $r;

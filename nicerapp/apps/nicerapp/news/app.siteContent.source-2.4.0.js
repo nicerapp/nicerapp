@@ -20,7 +20,7 @@ na.m.waitForCondition (
 na.apps.loaded.newsApp = {
 	about : {
 		whatsThis : 'Application code for this news app (RSS reader)',
-		copyright : 'Copyrighted (c) and All Rights Reserved (r) 2018-2020 by Rene AJM Veerman, Amsterdam, Netherlands',
+		copyright : 'Copyrighted (c) and All Rights Reserved (r) 2011-2021 by Rene AJM Veerman, Amsterdam, Netherlands',
 		license : 'May only be used on https://nicer.app',
 		firstCreated : '2018',
 		lastModified : '2020',

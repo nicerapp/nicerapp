@@ -13,7 +13,7 @@ class nicerAppCMS {
         ),
         'created' => 'Sunday, 10 January 2021 11:45 CET',
         'lastModified' => 'Sunday, 22 January 2021 14:14 CET',
-        'copyright' => 'Copyright (c) and All Rights Reserved (r) 2021 by Rene A.J.M. Veerman <rene.veerman.netherlands@gmail.com>'
+        'copyright' => 'Copyright (c) 2021 by Rene A.J.M. Veerman <rene.veerman.netherlands@gmail.com>'
     );
     
     public $domain;

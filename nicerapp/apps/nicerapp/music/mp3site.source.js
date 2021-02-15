@@ -1,7 +1,7 @@
 var mp3site = {
 	about : {
 		whatsThis : 'Complete application code for the music playback-and-download site on http://nicer.app/musicPlayer',
-		copyright : 'Copyrighted (c) and All Rights Reserved (r) and All Rights Reserved (r) 2011-2018 by Rene AJM Veerman - rene.veerman.netherlands@gmail.com',
+		copyright : 'Copyrighted (c) and All Rights Reserved (r) 2011-2021 by Rene AJM Veerman - rene.veerman.netherlands@gmail.com',
 		license : 'http://nicer.app/LICENSE.txt',
 		version : '3.1.0',
 		firstReleased : '2011',
