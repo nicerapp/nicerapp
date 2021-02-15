@@ -112,14 +112,16 @@ export class na3D_fileBrowser {
             
             const intersects = t.raycaster.intersectObjects (t.scene.children, true);
             //if (intersects[0]) {
-            for (var i=0; i<intersects.length; i++) {
-                var p = intersects[i].object;
+            if (intersects[0]) for (var i=0; i<1/*intersects.length <-- this just gets an endless series of hits from camera into the furthest reaches of what's visible behind the mouse pointer */; i++) {
+                var p = intersects[i].object, done = false;
                 //debugger;
-                while (p) {
+                while (p && !done) {
                     p = p.parent;
-                    if (p && p.it) {
+                    
+                    if (p && p.it && !done) {
                         t.hoverOverName = p.it.name;
                         //debugger;
+                        done = true;
                         
                         var 
                         it = p.it,
