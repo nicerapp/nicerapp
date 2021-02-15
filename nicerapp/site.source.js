@@ -3,7 +3,7 @@ var nas = na.site = {
     about : {
         firstCreated : '10 January 2021 13:15 CET',
         lastModified : '10 January 2021 13:15 CET',
-        copyright : 'Copyright (c) and All Rights Reserved (r) 2021 by Rene A.J.M. Veerman <rene.veerman.netherlands@gmail.com>'
+        copyright : 'Copyright (c) 2021 (actually since 2002 if you count all the previous major versions) by Rene A.J.M. Veerman <rene.veerman.netherlands@gmail.com>'
     },
     
     settings : {
