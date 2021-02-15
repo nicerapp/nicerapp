@@ -69,9 +69,13 @@ img.bg_last {
 
 #siteStatusbar {
     top : 102vh;
-    height : 3rem;
+    height : 4rem;
     left : 1vw;
     width : 98vw;
+}
+#siteStatusbar .vividDialogContent {
+    width : 100%;
+    height : 100%;
 }
 #siteStatusbar .vividDialogContent td {
     vertical-align: middle;
