@@ -44,7 +44,7 @@ var nas = na.site = {
 
         if (!$.cookie('siteBackground_url') || $.cookie('siteBackground_url')==='') {
         //if (true) {
-            $.cookie('siteBackground_search', 'tiled yellow', na.m.cookieOptions());
+            $.cookie('siteBackground_search', 'landscape', na.m.cookieOptions());
             $.cookie('siteBackground_url', '/nicerapp/siteMedia/backgrounds/tiled/active/grey/cracked-surface-seamless-gray-background.jpg', na.m.cookieOptions());
         }; 
         //if (typeof $.cookie('siteBackground_search')==='string' && $.cookie('siteBackground_search')!=='')
