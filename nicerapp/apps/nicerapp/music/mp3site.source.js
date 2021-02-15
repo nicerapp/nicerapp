@@ -298,6 +298,7 @@ var mp3site = {
 			containment : 'window',
             connectToSortable : '#playlist',
 			helper : function (evt, ui) {
+                if (this.id===mp3site.settings.resortedItem) return false;
                 var div = document.createElement('div');
                 $(this).clone(true,true).appendTo(div).css({zIndex:1100, color:'yellow'});
                 $(document.body).append(div);
@@ -308,15 +309,17 @@ var mp3site = {
 		$('#playlist').sortable({
 			revert : true,
 			start : function (evt, ui) {
+                
 			},
 			stop : function (evt, ui) {
+                
 			}
 		});
 		$('#playlist').droppable ({
 			drop : function (evt, ui) {
                 var pl = $('#playlist')[0];
 				var dragged = ui.draggable[0].children[0];//).clone(true,true)[0];
-				var pc = mp3site.playlistCount;
+                var pc = mp3site.playlistCount;
                 if (!ui.helper[0].children[0]) return false;
             
                 var 
@@ -326,11 +329,20 @@ var mp3site = {
                 
                 if (oldID.match('playlist_')) return false;
                 $(dragged).attr('id', newID);
-                $(dragged).attr('class', 'mp3 vividButton');
+                $(dragged).attr('class', 'mp3 vividButton ui-draggable ui-draggable-handle');
                 $(dragged).css({height : 30});
                 $(dragged).attr('file', original.attr('file'));
                 dragged.file = original.attr('file');
+                dragged.oldID = oldID;
                 $(dragged).attr('onclick',''+original[0].onclick.toString().replace("'"+oldID+"'", "'"+newID+"'").replace('function onclick(event) {', '').replace('\n}','').replace (new RegExp(oldID), dragged.id));
+                
+                $(dragged).draggable({
+                    containment : '#playlist',
+                    connectToSortable : '#playlist',
+                    helper : function (evt, ui) {
+                        mp3site.settings.resortedItem = dragged.oldID;
+                    }
+                });
                 
                 if (mp3site.settings.stopped) mp3site.selectMP3 (newID, $(dragged).attr('file'), false);
                 mp3site.onWindowResize();
