@@ -218,10 +218,9 @@ var nas = na.site = {
             || (typeof settings=='object' && settings.reloadMenu===true)
         ) na.site.reloadMenu();
         
-        $('#siteBackground img').css({
+        $('#siteBackground img, #siteBackground div, #siteBackground iframe').css({
             width : $(window).width(),
-            height : $(window).height(),
-            display : 'flex'
+            height : $(window).height()
         });
         //$('#siteBackground img.bg_first').fadeIn(2000);
         

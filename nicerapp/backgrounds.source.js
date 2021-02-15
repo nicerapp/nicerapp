@@ -93,6 +93,15 @@ na.backgrounds = {
                         }
                     });
                     
+                    // how i really want and kinda need a --ignoreAspectRatioAndFillWindow setting on the (jquery) youtube player..
+                    jQuery(window).resize (function () {
+                        jQuery(bgDiv).css ({ paddingBottom : '0.1%'});
+                        debugger;
+                        jQuery(bgDiv).tubeplayer({
+                            width: jQuery(window).width(),
+                            height: jQuery(window).height()
+                        });
+                    });
                     //debugger;
                 },
                 failure : function (xhr, ajaxOptions, thrownError) {
