@@ -141,6 +141,7 @@ a:visited {
     border-radius : 15px;
 }
 
+/*
 .vividDialogContent::-webkit-scrollbar {
   width: 1rem;
 }
@@ -183,7 +184,7 @@ a:visited {
 .vividDialogContent::-webkit-scrollbar-thumb {
   background : url('/nicerapp/siteMedia/backgrounds/tiled/active/blue/blue174.jpg') repeat;
   border-radius : 20px;
-}
+}*/
 
 .vividButton[theme="dark"] {
     border : 3px ridge rgba(255,255,255,0.7);
