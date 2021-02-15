@@ -9,7 +9,7 @@ var nas = na.site = {
     settings : {
         defaultStatusMsg : (
             $.cookie('agreedToPolicies')!=='true'
-            ? '<table style="width:100%;height:100%;"><tr><td>This site uses cookies for remembering user settings, analytics and advertising.<br/>'
+            ? '<table style="width:100%;height:100%;"><tr><td>This site uses cookies for remembering user settings and analytics.<br/>'
                 + 'By using this site, you agree to such cookies getting stored on, and read from, your computer.</td><td style="width:220px;"><div class="vividButton" theme="dark" style="position:relative;color:white;" onclick="na.site.dismissCookieWarning();">Ok</div></td></table>'
             : '<table style="width:100%;height:100%;"><tr><td>Copyright (c) and All Rights Reserved (r) 2021 by Rene A.J.M. Veerman</td><td style="width:220px;"><div class="vividButton" theme="dark" style="position:relative;color:white;" onclick="na.site.dismissCopyrightMessage();">Ok</div></td></table>'
         ),
