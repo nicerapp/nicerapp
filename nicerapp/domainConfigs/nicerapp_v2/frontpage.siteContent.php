@@ -100,6 +100,26 @@
                 'section' => 'English_News__World_Headlines'
             )
         ),
+        'newsHeadlines_nederlandsNieuws' => array (
+            'news' => array (
+                'section' => 'Nederlands_Nieuws'
+            )
+        ),
+        'newsHeadlines_nederlandsNieuws_wereldNieuws' => array (
+            'news' => array (
+                'section' => 'Nederlands_Nieuws__Wereld'
+            )
+        ),
+        'newsHeadlines_deutscheNachrichten' => array (
+            'news' => array (
+                'section' => 'Deutsche_nachrichten'
+            )
+        ),
+        'newsHeadlines_arabic' => array (
+            'news' => array (
+                'section' => 'Arabic'
+            )
+        ),
         'analytics' => array (
             'analytics' => array()
         ),
@@ -170,9 +190,15 @@
     <h2 class="contentSectionTitle2">Available Apps</h2>
     
     <h3 class="contentSectionTitle3">News</h3>
+    Some of these can be further categorized throught the menu that will load up at the top-right side of the site.<br/>
+    
     <ul>
         <li><a href="<?php echo $urls['newsHeadlines_englishNews'];?>">English News</a></li>
         <li><a href="<?php echo $urls['newsHeadlines_englishNews_worldHeadlines'];?>">English News : World Headlines only</a></li>
+        <li><a href="<?php echo $urls['newsHeadlines_nederlandsNieuws'];?>">Nederlands Nieuws</a></li>
+        <li><a href="<?php echo $urls['newsHeadlines_nederlandsNieuws_wereldNieuws'];?>">Nederlands Nieuws : alleen internationale headlines</a></li>
+        <li><a href="<?php echo $urls['newsHeadlines_deutscheNachrichten'];?>">Deutsche Nachrichten</a></li>
+        <li><a href="<?php echo $urls['newsHeadlines_arabic'];?>">Arabic News (in English)</a></li>
     </ul>
     
     <a href="<?php echo $urls['tarot'];?>"><h3>Tarot game</h3></a>
