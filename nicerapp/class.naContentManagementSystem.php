@@ -137,7 +137,7 @@ class nicerAppCMS {
             $file = str_replace ('{$domain}', $this->domain, $file);
             $url = str_replace ($this->basePath,'',$file);
             $search = array ('{$src}', '{$changed}');
-            $replace = array ($url, date('Ymd_His', filemtime($this->basePath.'/'.$file)));
+            $replace = array ($url, date('Ymd_His', filectime($this->basePath.'/'.$file)));
             $lines .= str_replace ($search, $replace, $lineSrc);
             //$lines .= str_replace ('{$src}', $url, $lineSrc);
         };

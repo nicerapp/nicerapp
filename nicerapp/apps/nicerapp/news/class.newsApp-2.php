@@ -407,7 +407,7 @@ class newsApp2_class {
             
         
         //var_dump ($cd['v']); die();
-        $json = '{"news":"'.$path2a.'"}';
+        $json = '{"news":{"section":"'.$path2a.'"}}';
         $href = '/apps/'.base64_encode_url($json);
         $cd['params']['html'] .= $indent.'<li><a href="'.$href.'">'.$cd['k'].'</a>';
         $cd['params']['keyCount'] = $cd['params']['keyCount'] + 1;
