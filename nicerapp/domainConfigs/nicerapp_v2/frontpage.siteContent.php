@@ -162,6 +162,8 @@
     <h2 class="contentSectionTitle2">What is nicerapp?</h2>
     <div>
     Nicerapp embraces the latest web technologies to provide beautiful new views to your data and files.<br/>
+    It is also licensed under the <i>non-revocable</i> <a href="https://creativecommons.org/licenses/by/4.0/" target="CCA">Create Commons Attribution license</a>, making it free (for ever!) for any type of use including commercial use.<br/>
+    Full sources are available at <a href="https://github.com/nicerapp/nicerapp_v2" target="naGithub">https://github.com/nicerapp/nicerapp_v2</a>.
     </div>
     
 
