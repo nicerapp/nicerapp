@@ -162,7 +162,7 @@
                         animationSpeed : 4 * 1000
                 };
                 na.vividText.initElement (vividTextCmd);	
-            }, 2000 * (idx + 1) );
+            }, 20 * (idx + 1) );
         });
         
         $('.contentSectionTitle3').each (function(idx,el) {
@@ -174,7 +174,7 @@
                         animationSpeed : 4 * 1000
                 };
                 na.vividText.initElement (vividTextCmd);	
-            }, 2000 * idx);
+            }, 20 * idx);
         });
         
     });

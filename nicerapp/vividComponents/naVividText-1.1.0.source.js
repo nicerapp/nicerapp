@@ -110,7 +110,8 @@ nicerapp.vt = nicerapp.vividText = {
 			}, function () {*/
 				//debugger;
                 for (var i=0; i<na.vt.settings.commands.length; i++) {
-                    setTimeout (function () {
+                    if (!cmd.initializing) setTimeout (function () {
+                        cmd.initializing = true;
                         na.vt.initAnimationsOnElement(cmd.el);
                     }, i * 100); // calculate only 1 at a time. the number is in milliseconds.
                 }
