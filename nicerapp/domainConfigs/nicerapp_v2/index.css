@@ -216,6 +216,10 @@ img.bg_last {
     height : 1rem;
 }
 
+#siteLogin {
+    display : none;
+}
+
 #site3D_backgroundsBrowser, #site3D_demo_cube, #site3D_demo_models {
     position : absolute;
     top : 0;

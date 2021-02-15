@@ -2,7 +2,7 @@
     color : white;
     background : none;
 }
-#siteVideo::before {
+#siteVideo:before {
     content : "";
     background : url('/nicerapp/siteMedia/backgrounds/tiled/active/red/318801228_12f7b6a8a2.jpg') repeat;
     opacity : 0.7;
@@ -20,7 +20,7 @@
     color : white;
     background : none;
 }
-#siteVideoSearch::before {
+#siteVideoSearch:before {
     content : "";
     background : url('/nicerapp/siteMedia/backgrounds/tiled/active/red/318801228_12f7b6a8a2.jpg') repeat;
     opacity : 0.7;
@@ -38,7 +38,7 @@
     color : white;
     background : none;
 }
-#siteComments::before {
+#siteComments:before {
     content : "";
     background : url('/nicerapp/siteMedia/backgrounds/tiled/active/blue/seamless-texture-blue-watercolor.jpg') repeat;
     opacity : 0.7;
@@ -58,7 +58,7 @@
     font-weight : bold;
 }
 
-#siteStatusbar::before {
+#siteStatusbar:before {
     content : "";
     background : url('/nicerapp/siteMedia/backgrounds/tiled/active/yellow/318849091_f2d312f7a4.jpg') repeat;
     opacity : 0.7;
@@ -210,7 +210,7 @@ a:visited {
   color : white;
   text-decoration : none;
 }
-.vividButton[theme="dark"]::before {
+.vividButton[theme="dark"]:before {
     content: "";
     position: absolute;
     pointer-events: all;
@@ -228,7 +228,7 @@ a:visited {
     transition: opacity 0.5s linear;
     opacity: 0;
 }    
-.vividButton[theme="dark"]:hover::before {
+.vividButton[theme="dark"]:hover:before {
     opacity: 1;
     background-image: -o-linear-gradient(bottom, rgba(0,0,50,0.4) 25%, rgba(40,40,80,0.8) 81%);
     background-image: -moz-linear-gradient(bottom, rgba(0,0,50,0.4)  25%, rgba(40,40,80,0.8) 81%);
@@ -236,7 +236,7 @@ a:visited {
     background-image: -ms-linear-gradient(bottom, rgba(0,0,50,0.4) 25%, rgba(40,40,80,0.8) 81%);
     background-image: linear-gradient(bottom, rgba(0,0,50,0.4) 25%, rgba(40,40,80,0.8) 81%);
 }
-.vividButtonSelected.selected[theme="dark"]::before {
+.vividButtonSelected.selected[theme="dark"]:before {
     content: "";
     position: absolute;
     pointer-events: all;
@@ -254,7 +254,7 @@ a:visited {
     transition: opacity 0.5s linear;
     opacity: 1;
 }    
-.vividButtonSelected.selected[theme="dark"]:hover::before {
+.vividButtonSelected.selected[theme="dark"]:hover:before {
     opacity: 1;
     background-image: -o-linear-gradient(bottom, rgba(0,100,0,0.4) 25%, rgba(40,255,40,0.8) 81%);
     background-image: -moz-linear-gradient(bottom, rgba(0,100,0,0.4)  25%, rgba(40,255,40,0.8) 81%);
