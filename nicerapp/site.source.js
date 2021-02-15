@@ -3,7 +3,7 @@ var nas = na.site = {
     about : {
         firstCreated : '10 January 2021 13:15 CET',
         lastModified : '10 January 2021 13:15 CET',
-        copyright : '<table style="width:100%;height:100%;"><tr><td>Copyright (c) 2021 by Rene A.J.M. Veerman <a href="mailto:rene.veerman.netherlands@gmail.com">&lt;rene.veerman.netherlands@gmail.com&gt;</a></td><td style="width:220px;"><div class="vividButton" theme="dark" style="position:relative;color:white;" onclick="na.site.dismissCopyrightMessage();">Ok</div></td></table>' // actually (c) 2002-2021 if you count in all the previous major versions of this nicerapp platform (it also had other names in previous versions, but 'nicerapp' will be it's final name).
+        copyright : '<table style="width:100%;height:100%;"><tr><td>Copyright (c) 2021 by Rene A.J.M. Veerman <a href="mailto:rene.veerman.netherlands@gmail.com" style="color:green">&lt;rene.veerman.netherlands@gmail.com&gt;</a></td><td style="width:220px;"><div class="vividButton" theme="dark" style="position:relative;color:white;" onclick="na.site.dismissCopyrightMessage();">Ok</div></td></table>' // actually (c) 2002-2021 if you count in all the previous major versions of this nicerapp platform (it also had other names in previous versions, but 'nicerapp' will be it's final name).
     },
     
     settings : {
@@ -11,7 +11,7 @@ var nas = na.site = {
             $.cookie('agreedToPolicies')!=='true'
             ? '<table style="width:100%;height:100%;"><tr><td>This site uses cookies for remembering user settings, and for analytics.<br/>'
                 + 'By using this site, you agree to such cookies getting stored on, and read from, your computer.</td><td style="width:220px;"><div class="vividButton" theme="dark" style="position:relative;color:white;" onclick="na.site.dismissCookieWarning();">Ok</div></td></table>'
-            : '<table style="width:100%;height:100%;"><tr><td>Copyright (c) 2021 by Rene A.J.M. Veerman <a href="mailto:rene.veerman.netherlands@gmail.com">&lt;rene.veerman.netherlands@gmail.com&gt;</a></td><td style="width:220px;"><div class="vividButton" theme="dark" style="position:relative;color:white;" onclick="na.site.dismissCopyrightMessage();">Ok</div></td></table>'
+            : '<table style="width:100%;height:100%;"><tr><td>Copyright (c) 2021 by Rene A.J.M. Veerman <a href="mailto:rene.veerman.netherlands@gmail.com" style="color:green">&lt;rene.veerman.netherlands@gmail.com&gt;</a></td><td style="width:220px;"><div class="vividButton" theme="dark" style="position:relative;color:white;" onclick="na.site.dismissCopyrightMessage();">Ok</div></td></table>'
         ),
         dialogs : {},
         buttons : {},
