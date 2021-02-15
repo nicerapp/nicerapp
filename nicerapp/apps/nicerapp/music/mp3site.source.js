@@ -33,7 +33,7 @@ var mp3site = {
 		$('.vividDialog_dialog, #playlist_wrapper, #infoWindow_mp3desc, #infoWindow_comments, #mp3s, #player').css({opacity:0.0001});
 
         $(window).resize(function() {
-            mp3site.onWindowResize();
+            setTimeout(mp3site.onWindowResize,1000);
         });
         mp3site.onWindowResize();
 	},
@@ -346,14 +346,14 @@ var mp3site = {
 		sc_scrollpaneContainer = $('#siteContent', window.top.document.body),
 		sc_siteContent = $('#siteContent', window.top.document.body);
 
-		if (typeof mp3site.settings.masterLeftOffset == 'number') {
+		/*if (typeof mp3site.settings.masterLeftOffset == 'number') {
 			var masterLeftOffset = mp3site.settings.masterLeftOffset;
 			if (masterLeftOffset<0) masterLeftOffset=0;
-		} else {
+		} else {*/
 			var masterLeftOffset = ((myWidth - contentWidth) / 2);
 			if (masterLeftOffset<0) masterLeftOffset=0;
 			mp3site.settings.masterLeftOffset = masterLeftOffset;
-		}
+		//}
 		
 		var 
 		timeDelay = 10,
