@@ -50,6 +50,7 @@ export class na3D_fileBrowser {
             offsetY : 0,
             path : ''
         }];
+        this.lines = [];
         
         this.scene = new THREE.Scene();
         this.camera = new THREE.PerspectiveCamera( 75, $(el).width() / $(el).height(), 0.1, 10 * 1000 );
@@ -130,9 +131,14 @@ export class na3D_fileBrowser {
                 $('#site3D_label').fadeOut();
             } else {
                 var model = intersects[0].object.parent.parent.parent.parent.parent.parent;
-                model.rotation.y += 0.02;
+                //model.rotation.y += 0.02;
             }
         }
+        
+        for (var i=0; i<t.lines.length; i++) {
+            var it = t.lines[i];
+            it.geometry.verticesNeedUpdate = true;
+        };
 
         
         t.renderer.render( t.scene, t.camera );
@@ -187,12 +193,15 @@ export class na3D_fileBrowser {
                 };
                 //debugger;
                 clearTimeout (t.onresizeTimeout);
+                clearTimeout (t.linedrawTimeout);
+                
                 t.loader.load( '/nicerapp/3rd-party/3D/models/folder icon/scene.gltf', function ( gltf, cd) {
                     gltf.scene.scale.setScalar (10);
                     t.scene.add (gltf.scene);
                     cd.it.model = gltf.scene;
                     cd.it.model.it = cd.it;
                     cd.t.updateTextureEncoding(t, gltf.scene);
+                    t.initCounter++;
                     
                     var
                     newLevel = (
@@ -213,11 +222,42 @@ export class na3D_fileBrowser {
             
             clearTimeout (t.onresizeTimeout);
             t.onresizeTimeout = setTimeout(function() {
+                debugger;
                 t.onresize (t);
             }, 500);
+            
+            clearTimeout (t.linedrawTimeout);
+            t.linedrawTimeout = setTimeout(function() {
+                debugger;
+                t.drawLines (t);
+            }, 1000);
         }
-        
+    }
+    
+    drawLines (t) {
+        for (var i=0; i<t.items.length; i++) {
+            var 
+            it = t.items[i],
+            parent = t.items[it.parent];
+            
+            if (parent && parent.model) {
+                var geometry = new THREE.Geometry();
+                geometry.dynamic = true;
+                geometry.vertices.push(it.model.position);
+                geometry.vertices.push(parent.model.position);
+                geometry.verticesNeedUpdate = true;
 
+                var material = new THREE.LineBasicMaterial({ color: 0xCCCCFF });
+                var line = new THREE.Line( geometry, material );
+                t.scene.add(line);
+
+                t.lines[t.lines.length] = {
+                    line : line,
+                    geometry : geometry,
+                    material : material
+                };
+            }
+        }
     }
 
     onresize(t, levels) {
@@ -367,8 +407,8 @@ export class na3D_fileBrowser {
                         levels['path '+it.path].zIndexOffset = zof;
                         levels['path '+it.path].offsetX = pl.offsetX + (
                             Math.random() > 0.5
-                            ? (50*checkCounter)
-                            : -1 * (50*checkCounter)
+                            ? (200*checkCounter)
+                            : -1 * (200*checkCounter)
                         );/*(
                             Math.random() > 0.5
                             ? Math.floor(Math.random() * 100)
@@ -376,8 +416,8 @@ export class na3D_fileBrowser {
                         );*/
                         levels['path '+it.path].offsetY = pl.offsetY + (
                             Math.random() > 0.5
-                            ? (50*checkCounter)
-                            : -1 * (50*checkCounter)
+                            ? (200*checkCounter)
+                            : -1 * (200*checkCounter)
                         );/* (
                             Math.random() > 0.5
                             ? Math.floor(Math.random() * 100)
