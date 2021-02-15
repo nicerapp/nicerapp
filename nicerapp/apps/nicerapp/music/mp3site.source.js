@@ -164,7 +164,7 @@ var mp3site = {
                     widthSeekBar = $('.jp-seek-bar').width(),
                     widthPlayBar = Math.floor((widthSeekBar * currentTime)/length);
                     
-                    if (!mp3site.settings.maxPlayBarWidth) mp3site.settings.maxPlayBarWidth = widthPlayBar;
+                    if (!mp3site.settings.maxPlayBarWidth) mp3site.settings.maxPlayBarWidth = widthSeekBar;
                     $('.jp-play-bar')[0].style.width = (widthPlayBar <= mp3site.settings.maxPlayBarWidth ? widthPlayBar : mp3site.settings.maxPlayBarWidth)+'px';
                 }
                 
