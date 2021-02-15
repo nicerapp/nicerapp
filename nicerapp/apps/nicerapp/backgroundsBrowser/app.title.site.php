@@ -1,1 +1,1 @@
-3D backgrounds browser on nicer.app
+3D file manager on nicer.app
