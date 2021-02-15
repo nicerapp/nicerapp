@@ -42,8 +42,12 @@ var nas = na.site = {
             na.d.s.visibleDivs[na.d.s.visibleDivs.length] = '#siteDateTime';
         }
 
-        //$('#siteBackground img.bg_first')[0].src = $.cookie('siteBackground_img');
-        if (typeof $.cookie('siteBackground_search')==='string' && $.cookie('siteBackground_search')!=='')
+        if (!$.cookie('siteBackground_url') || $.cookie('siteBackground_url')==='') {
+        //if (true) {
+            $.cookie('siteBackground_search', 'tiled yellow', na.m.cookieOptions());
+            $.cookie('siteBackground_url', '/nicerapp/siteMedia/backgrounds/tiled/active/grey/cracked-surface-seamless-gray-background.jpg', na.m.cookieOptions());
+        }; 
+        //if (typeof $.cookie('siteBackground_search')==='string' && $.cookie('siteBackground_search')!=='')
         na.backgrounds.next ('#siteBackground', $.cookie('siteBackground_search'), $.cookie('siteBackground_url'));
         
         $('#siteContent .vividDialogContent').animate({opacity:1},'slow').focus();
@@ -61,7 +65,7 @@ var nas = na.site = {
         na.site.setStatusMsg(na.site.settings.defaultStatusMsg); // calls na.desktop.resize() as well
 
         $(window).resize (function() {
-            $('#siteBackground img').css({
+            $('#siteBackground img, #siteBackground div').css({
                 width : $(window).width(),
                 height : $(window).height()
             });

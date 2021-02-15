@@ -42,7 +42,16 @@ na.backgrounds = {
         bgl = $(div+' img.bg_last')[0],
         bgDiv = $(div+'_bg')[0];
         
-        if (url.match('youtube')) {
+        if (url.match('tiled')) {
+            $(bgf).add(bgl).fadeOut('fast');
+            debugger;
+            $(bgDiv).css ({
+                width: jQuery(window).width(),
+                height: jQuery(window).height(),
+                background : 'url("'+url+'") repeat'
+            });
+            
+        } else if (url.match('youtube')) {
             $(bgf).add(bgl).fadeOut('fast');
             
             
