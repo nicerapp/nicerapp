@@ -47,7 +47,7 @@ export class na3D_fileBrowser {
         this.items = [{
             name : 'backgrounds',
             offsetX : 0,
-            offsetY : 0,
+            offsetZ : 0,
             path : ''
         }];
         this.lines = [];
@@ -120,6 +120,50 @@ export class na3D_fileBrowser {
                     if (p && p.it) {
                         t.hoverOverName = p.it.name;
                         //debugger;
+                        
+                        var 
+                        it = p.it,
+                        parent = t.items[it.parent],
+                        haveLine = false;
+                        
+                        for (var j=0; j<t.lines.length; j++) {
+                            if (t.lines[j].it === it) {
+                                haveLine = true;
+                            } else {
+                                t.scene.remove(t.lines[j]);
+                                t.lines[j].geometry.dispose();
+                            }
+                        }
+                        
+                        if (parent && parent.model) {
+                            if (!haveLine) {
+                                var 
+                                geometry = new THREE.Geometry(), 
+                                p1 = it.model.position, 
+                                p2 = parent.model.position;
+                                
+                                geometry.dynamic = true;
+                                geometry.vertices.push(p1);
+                                geometry.vertices.push(p2);
+                                geometry.verticesNeedUpdate = true;
+
+                                var material = new THREE.LineBasicMaterial({ color: 0xCCCCFF });
+                                var line = new THREE.Line( geometry, material );
+                                t.scene.add(line);
+
+                                t.lines[t.lines.length] = {
+                                    it : it,
+                                    line : line,
+                                    geometry : geometry,
+                                    material : material
+                                };
+                            } else {
+                                for (var j=0; j<t.lines.length; j++) {
+                                    t.lines[j].geometry.verticesNeedUpdate = true;
+                                }
+                            }
+                        }
+                        
                     }
                 }
                 $('#site3D_label').css({display:'flex'});
@@ -134,11 +178,12 @@ export class na3D_fileBrowser {
                 //model.rotation.y += 0.02;
             }
         }
-        
+
+        /*
         for (var i=0; i<t.lines.length; i++) {
             var it = t.lines[i];
             it.geometry.verticesNeedUpdate = true;
-        };
+        };*/
 
         
         t.renderer.render( t.scene, t.camera );
@@ -175,7 +220,7 @@ export class na3D_fileBrowser {
                     levelIdx : t.ld2[level].levelIdx,
                     parent : parent,
                     offsetX : 0,
-                    offsetY : 0
+                    offsetZ : 0
                 };
                 
                 items[items.length] = it;
@@ -222,15 +267,14 @@ export class na3D_fileBrowser {
             
             clearTimeout (t.onresizeTimeout);
             t.onresizeTimeout = setTimeout(function() {
-                debugger;
                 t.onresize (t);
             }, 500);
             
+            /*
             clearTimeout (t.linedrawTimeout);
             t.linedrawTimeout = setTimeout(function() {
-                debugger;
                 t.drawLines (t);
-            }, 1000);
+            }, 1000);*/
         }
     }
     
@@ -241,10 +285,14 @@ export class na3D_fileBrowser {
             parent = t.items[it.parent];
             
             if (parent && parent.model) {
-                var geometry = new THREE.Geometry();
+                var 
+                geometry = new THREE.Geometry(), 
+                p1 = it.model.position, 
+                p2 = parent.model.position;
+                
                 geometry.dynamic = true;
-                geometry.vertices.push(it.model.position);
-                geometry.vertices.push(parent.model.position);
+                geometry.vertices.push(p1);
+                geometry.vertices.push(p2);
                 geometry.verticesNeedUpdate = true;
 
                 var material = new THREE.LineBasicMaterial({ color: 0xCCCCFF });
@@ -311,7 +359,7 @@ export class na3D_fileBrowser {
                 if (left > right) placing = 'left';
                 if (placing=='left') var width = left; else var width = right;
                 */
-                var width = $(t.el).width(), placing = 'left';
+                var width = $(t.el).width(), placing = Math.random()>0.5?'right':'left';
 
                 var
                 columnCount = Math.floor((width-(150/3)) / 150),
@@ -329,7 +377,7 @@ export class na3D_fileBrowser {
                 if (it.level===0) {
                     columnCount = 1;
                     rowCount = 9999;
-                } else if (columnCount > rowCount) {
+                } else /*if (columnCount > rowCount) */{
                     columnCount = Math.floor(Math.sqrt(itemsOnLevelCount));
                     rowCount = Math.ceil(itemsOnLevelCount / columnCount);
                 };
@@ -360,23 +408,23 @@ export class na3D_fileBrowser {
                 it.offsetX = (
                     l
                     ? placing==='right'
-                            ? l.offsetX + parent.offsetX + ( (50*it.column)) + (40/2)
-                            : l.offsetX + parent.offsetX - ( (50*it.column)) - (40/2)
+                            ? l.offsetX + parent.offsetX + ( (50*it.column))// + (50*(parent.column?parent.column:0))
+                            : l.offsetX + parent.offsetX - ( (50*it.column))// - (50*(parent.column?parent.column:0))
                     : placing==='right'
-                            ? parent.offsetX + ( (50*it.column)) + (40/2)
-                            : parent.offsetX - ( (50*it.column)) - (40/2)
+                            ? parent.offsetX + ( (50*it.column))// + (50*(parent.column?parent.column:0))
+                            : parent.offsetX - ( (50*it.column))// - (50*(parent.column?parent.column:0))
                 );
-                it.offsetY = (
+                it.offsetZ = (
                        l
-                       ? l.offsetY + parent.offsetY + ( 50 * (it.columnIdx-1) )+ 20
-                       : parent.offsetY + ( 50 * (it.columnIdx-1) )+ 20
+                       ? l.offsetZ + parent.offsetZ + ( 50 * (it.columnIdx-1) )//+ (50*(parent.columIdx?parent.columIdx-1:0))
+                       : parent.offsetZ + ( 50 * (it.columnIdx-1) )//+ (50*(parent.columnIdx?parent.columIdx-1:0))
                 );
                 
                 if (!l) {
                     if (!parent.parent) {
                         pl = {
                             offsetX : 0,
-                            offsetY : 0,
+                            offsetZ : 0,
                             zIndexOffset : 0,
                             rowCount : 1,
                             columnCount : 1
@@ -385,7 +433,7 @@ export class na3D_fileBrowser {
                         pl = levels['path '+parent.path];
                     }
                     
-                    pl.columnCount = columnCount;
+                    pl.columnCount = columnCount; // problem is here.. combined with the fact that this is a setTimeout()-curated loop
                     pl.rowCount = rowCount;
                 
                     var zof = pl.zIndexOffset + 1;
@@ -393,17 +441,6 @@ export class na3D_fileBrowser {
                     
                     var moreToCheck = true, checkCounter = 0;
                     while (moreToCheck) {
-                        /*
-                        levels['path '+it.path].offsetX = pl.offsetX + (
-                            Math.random() > 0.5
-                            ? Math.floor(Math.random() * 200)
-                            : -1 * Math.floor(Math.random() * 200)
-                        );
-                        levels['path '+it.path].offsetY = pl.offsetY+ (
-                            Math.random() > 0.5
-                            ? Math.floor(Math.random() * 200)
-                            : -1 * Math.floor(Math.random() * 200)
-                        );*/
                         levels['path '+it.path].zIndexOffset = zof;
                         levels['path '+it.path].offsetX = pl.offsetX + (
                             Math.random() > 0.5
@@ -414,7 +451,7 @@ export class na3D_fileBrowser {
                             ? Math.floor(Math.random() * 100)
                             : -1 * Math.floor(Math.random() * 100)
                         );*/
-                        levels['path '+it.path].offsetY = pl.offsetY + (
+                        levels['path '+it.path].offsetZ = pl.offsetZ + (
                             Math.random() > 0.5
                             ? (200*checkCounter)
                             : -1 * (200*checkCounter)
@@ -428,40 +465,28 @@ export class na3D_fileBrowser {
                             l1 = levels['path '+it.path],
                             l2 = levels[p1];
                             if (p1!=='path '+it.path) {
-                            if (moreToCheck) moreToCheck = (
-                                l1.offsetX > l2.offsetX 
-                                || l1.offsetX < l2.offsetX + (l2.columnCount*75)
-                                || l1.offsetX + (l1.columnCount*75) > l2.offsetX
-                                || l1.offsetX + (l1.columnCount*75) < l2.offsetX + (l2.columnCount*75)
-                            );
-                            if (moreToCheck) moreToCheck = (
-                                l1.offsetY > l2.offsetY
-                                || l1.offsetY < l2.offsetY + (l2.rowCount*75)
-                                || l1.offsetY + (l1.rowCount*75) > l2.offsetY
-                                || l1.offsetY + (l1.rowCount*75) < l2.offsetY + (l2.rowCount*75)
-                            );
+                                if (moreToCheck) moreToCheck = (
+                                    l1.offsetX > l2.offsetX 
+                                    || l1.offsetX < l2.offsetX + (l2.columnCount*75)
+                                    || l1.offsetX + (l1.columnCount*75) > l2.offsetX
+                                    || l1.offsetX + (l1.columnCount*75) < l2.offsetX + (l2.columnCount*75)
+                                );
+                                if (moreToCheck) moreToCheck = (
+                                    l1.offsetZ > l2.offsetZ
+                                    || l1.offsetZ < l2.offsetZ + (l2.rowCount*75)
+                                    || l1.offsetZ + (l1.rowCount*75) > l2.offsetZ
+                                    || l1.offsetZ + (l1.rowCount*75) < l2.offsetZ + (l2.rowCount*75)
+                                );
                             }
                         }
-                        // if (moreToCheck) { /* success = true for the Math.random() offsetX and offsetY */ }
                         checkCounter++;
                         if (moreToCheck===false) moreToCheck = true; else moreToCheck = false;
                     }
                     l = levels['path '+it.path];
                 };
-                it.zIndex = (100 * 1000) + l.zIndexOffset;
-
-                /*
-                $(it.b.el).css({
-                    display : 'none',
-                    left : it.offsetX,
-                    top : it.offsetY,
-                    zIndex : it.zIndex,
-                    display : (it.level===1?'flex':'none')
-                });*/
                 it.model.position.x = it.offsetX;
-                it.model.position.z = -1 * it.offsetY;
-                it.model.position.y = -1 * it.level * ((levels['path '+it.path].zIndexOffset*20) + 75);
-                //if (it.level===1) $(it.b.el).css({display:'flex'});
+                it.model.position.z = -1 * it.offsetZ;
+                it.model.position.y = -1 * it.level * ((levels['path '+it.path].zIndexOffset*15) + 50);
                 //$(it.b.el).fitText();
                 
                 t.resizeDoingIdx++;
