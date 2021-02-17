@@ -129,11 +129,14 @@ export class na3D_fileBrowser {
                         haveLine = false;
                         
                         for (var j=0; j<t.lines.length; j++) {
-                            if (t.lines[j].it === it) {
-                                haveLine = true;
-                            } else {
-                                t.scene.remove(t.lines[j]);
-                                t.lines[j].geometry.dispose();
+                            if (t.lines[j]) {
+                                if (t.lines[j].it === it) {
+                                    haveLine = true;
+                                } else {
+                                    t.scene.remove(t.lines[j].line);
+                                    t.lines[j].geometry.dispose();
+                                    delete t.lines[j];
+                                }
                             }
                         }
                         
@@ -161,7 +164,7 @@ export class na3D_fileBrowser {
                                 };
                             } else {
                                 for (var j=0; j<t.lines.length; j++) {
-                                    t.lines[j].geometry.verticesNeedUpdate = true;
+                                    if (t.lines[j]) t.lines[j].geometry.verticesNeedUpdate = true;
                                 }
                             }
                         }
@@ -239,6 +242,8 @@ export class na3D_fileBrowser {
                     levelDepth : levelDepth + 1
                 };
                 //debugger;
+                if (it.name==='landscape' || it.name==='portrait') debugger;
+                
                 clearTimeout (t.onresizeTimeout);
                 clearTimeout (t.linedrawTimeout);
                 
@@ -336,7 +341,7 @@ export class na3D_fileBrowser {
                 t.resizeDoneCount = 0;
             } else {
                 var it = t.items[t.resizeDoingIdx];
-                if (!it.parent) {
+                if (typeof it.parent==='undefined') {
                     t.resizeDoingIdx++;
                     setTimeout (function(){t.onresize(t, levels)}, 10);
                     return false;
@@ -407,6 +412,9 @@ export class na3D_fileBrowser {
                 it.childrenPlacement = placing;
                 it.columnIdx = columnIdx;
                 it.column = column;
+
+                debugger;
+                if (it.name==='landscape' || it.name==='portrait') debugger;
                 it.offsetX = (
                     l
                     ? placing==='right'
