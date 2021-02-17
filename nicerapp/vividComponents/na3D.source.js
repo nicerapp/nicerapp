@@ -280,7 +280,7 @@ export class na3D_fileBrowser {
             clearTimeout (t.linedrawTimeout);
             t.linedrawTimeout = setTimeout(function() {
                 t.drawLines (t);
-            }, 12500);
+            }, 20000);
         }
     }
     
