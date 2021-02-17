@@ -277,11 +277,10 @@ export class na3D_fileBrowser {
                 t.onresize (t);
             }, 500);
             
-            /*
             clearTimeout (t.linedrawTimeout);
             t.linedrawTimeout = setTimeout(function() {
                 t.drawLines (t);
-            }, 1000);*/
+            }, 12500);
         }
     }
     
@@ -302,15 +301,16 @@ export class na3D_fileBrowser {
                 geometry.vertices.push(p2);
                 geometry.verticesNeedUpdate = true;
 
-                var material = new THREE.LineBasicMaterial({ color: 0xCCCCFF });
+                var material = new THREE.LineBasicMaterial({ color: 0x5555FF });
                 var line = new THREE.Line( geometry, material );
                 t.scene.add(line);
 
+                /*
                 t.lines[t.lines.length] = {
                     line : line,
                     geometry : geometry,
                     material : material
-                };
+                };*/
             }
         }
     }
@@ -346,31 +346,13 @@ export class na3D_fileBrowser {
                     setTimeout (function(){t.onresize(t, levels)}, 10);
                     return false;
                 }
-                //it.label = $(it.b.el).children('a').html();
-                //it.pul = $(it.li).parents('ul')[0];
-                
-                /*$(it.pul).children('li').each(function(idx,li) {
-                    if (it.li === li) {
-                        it.levelIdx = idx;
-                    }
-                });*/
                 
                 var 
                 parent = t.items[it.parent],
-                l = levels['path '+it.path];
-                /*
-                placing = 'right',
-                right = (bw - jQuery(it.b.el).offset().left /* - (100 * 0.7)* / - (parent ? parent.offsetX : 100)),
-                left = jQuery(it.b.el).offset().left + (parent ? parent.offsetX : 100);
-                
-                if (left > right) placing = 'left';
-                if (placing=='left') var width = left; else var width = right;
-                */
-                var width = $(t.el).width(), placing = Math.random()>0.5?'right':'left';
-
-                var
-                columnCount = Math.floor((width-(150/3)) / 150),
-                
+                l = levels['path '+it.path],
+                width = $(t.el).width(), 
+                placing = Math.random()>0.5?'right':'left',
+                columnCount = Math.floor((width-(150/3)) / 150),                
                 itemsOnLevelCount = 0;
                 
                 for (var j=0; j<t.items.length; j++) {
@@ -413,8 +395,6 @@ export class na3D_fileBrowser {
                 it.columnIdx = columnIdx;
                 it.column = column;
 
-                debugger;
-                if (it.name==='landscape' || it.name==='portrait') debugger;
                 it.offsetX = (
                     l
                     ? placing==='right'
@@ -494,9 +474,9 @@ export class na3D_fileBrowser {
                     }
                     l = levels['path '+it.path];
                 };
-                it.model.position.x = it.offsetX;
-                it.model.position.z = -1 * it.offsetZ;
-                it.model.position.y = -1 * it.level * ((levels['path '+it.path].zIndexOffset*15) + 50);
+                it.model.position.y = it.offsetX;
+                it.model.position.x = -1 * it.offsetZ;
+                it.model.position.z = -1 * it.level * ((levels['path '+it.path].zIndexOffset*15) + 50);
                 //$(it.b.el).fitText();
                 
                 t.resizeDoingIdx++;
