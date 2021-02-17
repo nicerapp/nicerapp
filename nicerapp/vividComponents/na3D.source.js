@@ -113,32 +113,34 @@ export class na3D_fileBrowser {
             const intersects = t.raycaster.intersectObjects (t.scene.children, true);
             //if (intersects[0]) {
             if (intersects[0]) for (var i=0; i<1/*intersects.length <-- this just gets an endless series of hits from camera into the furthest reaches of what's visible behind the mouse pointer */; i++) {
-                var p = intersects[i].object, done = false;
+                var hoveredItem = intersects[i].object, done = false;
                 //debugger;
-                while (p && !done) {
-                    p = p.parent;
-                    
-                    if (p && p.it && !done) {
-                        t.hoverOverName = p.it.name;
-                        //debugger;
-                        done = true;
-                        
-                        var 
-                        it = p.it,
-                        parent = t.items[it.parent],
-                        haveLine = false;
-                        
-                        for (var j=0; j<t.lines.length; j++) {
-                            if (t.lines[j]) {
-                                if (t.lines[j].it === it) {
-                                    haveLine = true;
-                                } else {
-                                    t.scene.remove(t.lines[j].line);
-                                    t.lines[j].geometry.dispose();
-                                    delete t.lines[j];
-                                }
+                
+                
+                while (hoveredItem && !done) {
+                    hoveredItem = hoveredItem.parent;
+                
+                    for (var j=0; j<t.lines.length; j++) {
+                        if (t.lines[j]) {
+                            if (t.lines[j].it === it) {
+                                haveLine = true;
+                            } else {
+                                t.scene.remove(t.lines[j].line);
+                                t.lines[j].geometry.dispose();
+                                delete t.lines[j];
                             }
                         }
+                    }
+
+                    // build a line towards parent
+                    if (hoveredItem && hoveredItem.it && !done) {
+                        t.hoverOverName = hoveredItem.it.name;
+
+                        // draw line to parent
+                        var 
+                        it = hoveredItem.it,
+                        parent = t.items[it.parent],
+                        haveLine = false;
                         
                         if (parent && parent.model) {
                             if (!haveLine) {
@@ -168,19 +170,50 @@ export class na3D_fileBrowser {
                                 }
                             }
                         }
-                        
+                        for (var j=0; j<t.items.length; j++) {
+                            var child = t.items[j];
+                            if (
+                                hoveredItem && hoveredItem.it && hoveredItem.it.model && child.model
+                                && hoveredItem.it.idx === child.parent
+                            ) {
+                                var
+                                geometry = new THREE.Geometry(), 
+                                p1 = child.model.position, 
+                                p2 = hoveredItem.it.model.position,
+                                x = child.name;
+                                
+                                geometry.dynamic = true;
+                                geometry.vertices.push(p1);
+                                geometry.vertices.push(p2);
+                                geometry.verticesNeedUpdate = true;
+
+                                var material = new THREE.LineBasicMaterial({ color: 0x000050 });
+                                var line = new THREE.Line( geometry, material );
+                                t.scene.add(line);
+
+                                t.lines[t.lines.length] = {
+                                    it : it,
+                                    line : line,
+                                    geometry : geometry,
+                                    material : material
+                                };
+                            }
+                        }
+                        done = true;
                     }
+                    
                 }
+                
+                // show folder name for item under mouse and closest to the country
                 $('#site3D_label').css({display:'flex'});
-                //console.log (model.it.name);
-                //model.rotation.x += 0.015;
-                //model.rotation.y += 0.02;
             }
             if (!intersects[0]) {
                 $('#site3D_label').fadeOut();
             } else {
-                //var model = intersects[0].object.parent.parent.parent.parent.parent.parent;
-                //model.rotation.y += 0.02;
+                if (intersects[0] && intersects[0].object && intersects[0].object.parent && intersects[0].object.parent.parent) {
+                    var model = intersects[0].object.parent.parent.parent.parent.parent.parent;
+                    model.rotation.z += 0.02; //TODO : auto revert back to model.rotation.z = 0;
+                }
             }
         }
 
@@ -242,7 +275,7 @@ export class na3D_fileBrowser {
                     levelDepth : levelDepth + 1
                 };
                 //debugger;
-                if (it.name==='landscape' || it.name==='portrait') debugger;
+                //if (it.name==='landscape' || it.name==='portrait') debugger;
                 
                 clearTimeout (t.onresizeTimeout);
                 clearTimeout (t.linedrawTimeout);
@@ -277,10 +310,10 @@ export class na3D_fileBrowser {
                 t.onresize (t);
             }, 500);
             
-            clearTimeout (t.linedrawTimeout);
+          /*  clearTimeout (t.linedrawTimeout);
             t.linedrawTimeout = setTimeout(function() {
                 t.drawLines (t);
-            }, 20000);
+            }, 15*1000);*/
         }
     }
     
