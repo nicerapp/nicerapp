@@ -28,6 +28,7 @@ $app = json_decode (base64_decode_url($_GET['apps']), true);
                     + '<p>Hold the right mouse button and drag to manually pan the camera.</p>'
                     + '<p>Double click a mouse button to toggle automatic rotation of the data.</p>'
                     + '<p>Triple click a mouse button to reverse direction for automatic rotation of the data.</p>'
+                    + '<p>Use the mouse wheel to zoom in or out.</p>'
                     + '<div id="newColors" class="vividButton" theme="dark" style="position:relative;" onclick="for (var id in na.site.settings.na3D) { var td = na.site.settings.na3D[id]; td.useNewColors(); }">New Colors</div>'
                     + '<div id="autoRotate" class="vividButtonSelected" theme="dark" style="position:relative;" onclick="for (var id in na.site.settings.na3D) { var td = na.site.settings.na3D[id]; td.toggleAutoRotate(); }">Auto-rotate</div>';
                 

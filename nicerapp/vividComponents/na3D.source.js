@@ -53,11 +53,10 @@ export class na3D_fileBrowser {
         this.lines = []; // onhover lines only in here
         this.permaLines = []; // permanent lines, the lines that show all of the parent-child connections.
         
-        if (typeof $.cookie('3DFDM_lineColors')=='string' && $.cookie('3DFDM_lineColors')!=='') {
-            var 
-            c = $.cookie('3DFDM_lineColors'),
-            d = JSON.parse(c);
-            this.lineColors = d;
+        var 
+        c = $.cookie('3DFDM_lineColors');
+        if (typeof c=='string' && c!=='') {
+            this.lineColors = JSON.parse(c);
         }
         
         this.scene = new THREE.Scene();
@@ -79,6 +78,9 @@ export class na3D_fileBrowser {
             event.preventDefault(); 
             if (event.detail === 2) { // double click
                 t.controls.autoRotate = !t.controls.autoRotate 
+                if (t.controls.autoRotate) $('#autoRotate').removeClass('vividButton').addClass('vividButtonSelected'); 
+                else $('#autoRotate').removeClass('vividButtonSelected').addClass('vividButton');
+                    
             } else if (event.detail === 3) { // triple click
                 if (t.controls.autoRotateSpeed<0) t.controls.autoRotateSpeed = 1; else t.controls.autoRotateSpeed = -1;
             }
@@ -135,10 +137,9 @@ export class na3D_fileBrowser {
             
             const intersects = t.raycaster.intersectObjects (t.scene.children, true);
             //if (intersects[0]) {
-            if (intersects[0]) for (var i=0; i<1/*intersects.length <-- this just gets an endless series of hits from camera into the furthest reaches of what's visible behind the mouse pointer */; i++) {
+            if (intersects[0] && intersects[0].object.type!=='Line') 
+            for (var i=0; i<1/*intersects.length <-- this just gets an endless series of hits from camera into the furthest reaches of what's visible behind the mouse pointer */; i++) {
                 var hoveredItem = intersects[i].object, done = false;
-                //debugger;
-                
                 
                 while (hoveredItem && !done) {
                     hoveredItem = hoveredItem.parent;
@@ -236,7 +237,7 @@ export class na3D_fileBrowser {
                 if (intersects[0] && intersects[0].object && intersects[0].object.parent && intersects[0].object.parent.parent) {
                     var model = intersects[0].object.parent.parent.parent.parent.parent.parent;
                     //model.rotation.z += 0.02; //TODO : auto revert back to model.rotation.z = 0;
-                    if (hoveredItem && hoveredItem.it) console.log (hoveredItem.it.name + ' '+hoveredItem.it.offsetY+' - '+hoveredItem.it.offsetX+' - '+hoveredItem.it.level+' - '+hoveredItem.it.zIndexOffset);
+                   // if (hoveredItem && hoveredItem.it) console.log (hoveredItem.it.name + ' '+hoveredItem.it.offsetY+' - '+hoveredItem.it.offsetX+' - '+hoveredItem.it.level+' - '+hoveredItem.it.zIndexOffset);
                     
                     
                 }
@@ -326,7 +327,7 @@ export class na3D_fileBrowser {
                     //debugger;
                     cd.t.initializeItems (cd.t, cd.items, cd.itd, cd.it.idx, newLevel, cd.levelDepth, cd.path);
                 }, function ( xhr ) {
-                    console.log( 'model "folder icon" : ' + ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+                    //console.log( 'model "folder icon" : ' + ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
                 }, function ( error ) {
                     console.error( error );
                 },  cd );
@@ -341,7 +342,7 @@ export class na3D_fileBrowser {
     }
     
     drawLines (t) {
-        debugger;
+        //debugger;
         for (var i=0; i<t.items.length; i++) {
             var 
             it = t.items[i],
