@@ -67,7 +67,15 @@ export class na3D_fileBrowser {
         el.appendChild( this.renderer.domElement );
         
         $(el).bind('mousemove', function() { event.preventDefault(); t.onMouseMove (event, t) });
-        $(el).dblclick (function(event) {  event.preventDefault(); t.controls.autoRotate = !t.controls.autoRotate });
+        $(el).click (function(event) {  
+            event.preventDefault(); 
+            if (event.detail === 2) { // double click
+                t.controls.autoRotate = !t.controls.autoRotate 
+            } else if (event.detail === 3) { // triple click
+                t.controls.autoRotateSpeed *= -1;
+            }
+            
+        });
         $(document).on('keyup', function(event) {
             event.preventDefault();
             if (event.keyCode===32) t.controls.autoRotate = !t.controls.autoRotate;
@@ -109,7 +117,7 @@ export class na3D_fileBrowser {
         
         this.animate(this);
     }
-    aw
+    
     animate(t) {
         requestAnimationFrame( function() { t.animate (t) } );
         
@@ -160,7 +168,7 @@ export class na3D_fileBrowser {
                                 geometry.vertices.push(p2);
                                 geometry.verticesNeedUpdate = true;
 
-                                var material = new THREE.LineBasicMaterial({ color: 0xCCCCFF });
+                                var material = new THREE.LineBasicMaterial({ color: 0xCCCCFF, linewidth:4 });
                                 var line = new THREE.Line( geometry, material );
                                 t.scene.add(line);
 
@@ -193,7 +201,7 @@ export class na3D_fileBrowser {
                                 geometry.vertices.push(p2);
                                 geometry.verticesNeedUpdate = true;
 
-                                var material = new THREE.LineBasicMaterial({ color: 0x000050 });
+                                var material = new THREE.LineBasicMaterial({ color: 0x000050, linewidth : 4 });
                                 var line = new THREE.Line( geometry, material );
                                 t.scene.add(line);
 
