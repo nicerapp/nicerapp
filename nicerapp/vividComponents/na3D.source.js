@@ -66,6 +66,13 @@ export class na3D_fileBrowser {
         
         el.appendChild( this.renderer.domElement );
         
+        $(el).bind('mousemove', function() { event.preventDefault(); t.onMouseMove (event, t) });
+        $(el).dblclick (function(event) {  event.preventDefault(); t.controls.autoRotate = !t.controls.autoRotate });
+        $(document).on('keyup', function(event) {
+            event.preventDefault();
+            if (event.keyCode===32) t.controls.autoRotate = !t.controls.autoRotate;
+        });
+        
         this.controls = new OrbitControls( this.camera, this.renderer.domElement );
         this.controls.autoRotate = true;
         //this.controls.listenToKeyEvents( window ); // optional
@@ -92,8 +99,6 @@ export class na3D_fileBrowser {
         this.pmremGenerator.compileEquirectangularShader();
         
         this.updateEnvironment(this);
-        
-        $(el).bind('mousemove', function() { t.onMouseMove (event, t) });
         
         this.raycaster = new THREE.Raycaster();
         this.mouse = new THREE.Vector2();
@@ -313,9 +318,8 @@ export class na3D_fileBrowser {
             
             clearTimeout (t.onresizeTimeout);
             t.onresizeTimeout = setTimeout(function() {
-                debugger;
                 t.onresize (t);
-            }, 500);
+            }, 1000);
         }
     }
     
@@ -337,7 +341,14 @@ export class na3D_fileBrowser {
                 geometry.verticesNeedUpdate = true;
                 
                 if (!t.lineColors) t.lineColors = {};
-                if (!t.lineColors[it.parent]) t.lineColors[it.parent] = Math.floor(Math.random()*16777215).toString(16);
+                if (!t.lineColors[it.parent]) {
+                    var x=Math.round(0xffffff * Math.random()).toString(16);
+                    var y=(6-x.length);
+                    var z="000000";
+                    var z1 = z.substring(0,y);
+                    var color= z1 + x;                    
+                    t.lineColors[it.parent] = color;
+                }
                 var color = t.lineColors[it.parent];
                 
                 var
@@ -456,6 +467,7 @@ export class na3D_fileBrowser {
                         pl = {
                             offsetY : 0,
                             offsetX : 0,
+                            offsetZ : 0,
                             zIndexOffset : 0,
                             rowCount : 1,
                             columnCount : 1
@@ -471,31 +483,33 @@ export class na3D_fileBrowser {
                     levels['path '+it.path] = jQuery.extend({}, pl);
                     levels['path '+it.path].level = it.level;
                     levels['path '+it.path].zIndexOffset = zof;
-                    levels['path '+it.path].offsetY = pl.offsetY;// + 10;
                     levels['path '+it.path].offsetX = pl.offsetX;// + 10;
+                    levels['path '+it.path].offsetY = pl.offsetY;// + 10;
+                    levels['path '+it.path].offsetZ = pl.offsetZ;// + 10;
                     
                     l = levels['path '+it.path];
                 };
-                    if (it.name==='active' || it.name=='halloween') debugger;
+                
+                if (!pl) pl = levels['path '+parent.path];
                 
                 var moreToCheck = true, checkCounter = 0, foundOverlappingItem = false;
                 while (moreToCheck) {
-                     if (checkCounter > 2) break;
+                     if (checkCounter > 10) break;
                     it.offsetY = (
                         l
                         ? placing==='right'
-                                ? l.offsetY + parent.offsetY +  (100*it.column)//+ (50*checkCounter))// + (50*(parent.column?parent.column:0))
-                                : l.offsetY + parent.offsetY -  (100*it.column)//+ (50*checkCounter))// - (50*(parent.column?parent.column:0))
+                                ? l.offsetY + parent.offsetY +  (100*it.column)//+ (50*checkCounter)// + (50*(parent.column?parent.column:0))
+                                : l.offsetY + parent.offsetY -  (100*it.column)//+ (50*checkCounter)// - (50*(parent.column?parent.column:0))
                         : placing==='right'
-                                ? parent.offsetY +  (100*it.column)//+ (50*checkCounter))// + (50*(parent.column?parent.column:0))
-                                : parent.offsetY -  (100*it.column)//+ (50*checkCounter))// - (50*(parent.column?parent.column:0))
+                                ? parent.offsetY +  (100*it.column)+ (50*checkCounter)// + (50*(parent.column?parent.column:0))
+                                : parent.offsetY -  (100*it.column)+ (50*checkCounter)// - (50*(parent.column?parent.column:0))
                     );
                     it.offsetX = (
                         l
-                        ? l.offsetX + parent.offsetX + ( 100 * (it.columnIdx-1))// + (50*checkCounter) )//+ (50*(parent.columIdx?parent.columIdx-1:0))
+                        ? l.offsetX + parent.offsetX + ( 100 * (it.columnIdx-1) )//+ (50*checkCounter) )//+ (50*(parent.columIdx?parent.columIdx-1:0))
                         : parent.offsetX + ( 100 * (it.columnIdx-1))// + (50*checkCounter) )//+ (50*(parent.columnIdx?parent.columIdx-1:0))
                     );
-                    it.offsetZ = checkCounter;
+                    it.offsetZ = (pl?pl.offsetZ+(checkCounter/3):(checkCounter/3));//checkCounter;
                    // if (placing==='right') placing='left'; else placing='right';
 
                     
@@ -696,7 +710,7 @@ export class na3D_demo_models {
         this.pmremGenerator = new PMREMGenerator( this.renderer );
         this.pmremGenerator.compileEquirectangularShader();
         
-        this.updateEnvironment(this);
+        //this.updateEnvironment(this);
         
         $(el).bind('mousemove', function() { t.onMouseMove (event, t) });
         
