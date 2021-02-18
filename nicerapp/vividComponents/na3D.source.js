@@ -50,7 +50,15 @@ export class na3D_fileBrowser {
             offsetX : 0,
             path : ''
         }];
-        this.lines = [];
+        this.lines = []; // onhover lines only in here
+        this.permaLines = []; // permanent lines, the lines that show all of the parent-child connections.
+        
+        if (typeof $.cookie('3DFDM_lineColors')=='string' && $.cookie('3DFDM_lineColors')!=='') {
+            var 
+            c = $.cookie('3DFDM_lineColors'),
+            d = JSON.parse(c);
+            this.lineColors = d;
+        }
         
         this.scene = new THREE.Scene();
         this.camera = new THREE.PerspectiveCamera( 75, $(el).width() / $(el).height(), 0.1, 10 * 1000 );
@@ -72,7 +80,7 @@ export class na3D_fileBrowser {
             if (event.detail === 2) { // double click
                 t.controls.autoRotate = !t.controls.autoRotate 
             } else if (event.detail === 3) { // triple click
-                t.controls.autoRotateSpeed *= -1;
+                if (t.controls.autoRotateSpeed<0) t.controls.autoRotateSpeed = 1; else t.controls.autoRotateSpeed = -1;
             }
             
         });
@@ -114,6 +122,7 @@ export class na3D_fileBrowser {
         this.mouse.y = 0;
 
         this.camera.position.z = 700;
+        this.camera.position.x = 500;
         
         this.animate(this);
     }
@@ -327,17 +336,26 @@ export class na3D_fileBrowser {
             clearTimeout (t.onresizeTimeout);
             t.onresizeTimeout = setTimeout(function() {
                 t.onresize (t);
-            }, 1000);
+            }, 500);
         }
     }
     
     drawLines (t) {
+        debugger;
         for (var i=0; i<t.items.length; i++) {
             var 
             it = t.items[i],
-            parent = t.items[it.parent];
+            parent = t.items[it.parent],
+            haveThisLineAlready = false;
             
-            if (parent && parent.model) {
+            for (var j=0; j<t.permaLines.length; j++) {
+                if (t.permaLines[j].it === it) {
+                    haveThisLineAlready = true;
+                    break;
+                }
+            };
+            
+            if ( parent && parent.model) {
                 var 
                 geometry = new THREE.Geometry(), 
                 p1 = it.model.position, 
@@ -364,14 +382,37 @@ export class na3D_fileBrowser {
                 line = new THREE.Line( geometry, material );
                 t.scene.add(line);
 
-                /*
-                t.lines[t.lines.length] = {
+                t.permaLines[t.permaLines.length] = {
                     line : line,
                     geometry : geometry,
-                    material : material
-                };*/
+                    material : material,
+                    it : it
+                };
             }
         }
+        $.cookie('3DFDM_lineColors', JSON.stringify(t.lineColors), na.m.cookieOptions());
+    }
+    
+    useNewColors () {
+        var t = this;
+        debugger;
+        for (var i=0; i<t.permaLines.length; i++) {
+            t.scene.remove (t.permaLines[i].line);
+            t.permaLines[i].geometry.dispose();
+            t.permaLines[i].material.dispose();
+        }
+        t.permaLines = [];
+        delete t.lineColors;
+        setTimeout (function () {
+            t.drawLines (t);
+        }, 500);
+    }
+    
+    toggleAutoRotate () {
+        var t = this;
+        t.controls.autoRotate = !t.controls.autoRotate;
+        if (t.controls.autoRotate) $('#autoRotate').removeClass('vividButton').addClass('vividButtonSelected'); 
+        else $('#autoRotate').removeClass('vividButtonSelected').addClass('vividButton');
     }
 
     onresize(t, levels) {

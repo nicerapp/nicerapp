@@ -51,6 +51,25 @@
     border-radius : 15px;
 }
 
+#siteToolbarRight {
+    color : white;
+    background : none;
+}
+#siteToolbarRight:before {
+    content : "";
+    background : url('/nicerapp/siteMedia/backgrounds/tiled/active/blue/seamless-texture-blue-watercolor.jpg') repeat;
+    opacity : 0.7;
+    z-index : -1;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    border-radius : 15px;
+}
+
+
+
 #siteStatusbar {
     color : darkred;
     background : none;

@@ -53,6 +53,18 @@ na.m.globals = {
         Coming soon
     </div>
     
+    <div id="siteToolbarTop" class="vdToolbar vividDialog" theme="{$theme}">
+    <div class="vividDialogContent vividScrollpane">
+    </div>
+    </div>
+
+    <div id="siteToolbarRight" class="vdToolbar vividDialog" theme="{$theme}">
+    <div class="vividDialogContent vividScrollpane">
+
+    </div>
+    </div>
+
+    
     <div id="siteStatusbar" class="vividDialog" theme="{$theme}">
     <div class="vividDialogContent vividScrollpane">
     </div>

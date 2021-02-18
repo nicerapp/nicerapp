@@ -67,6 +67,13 @@ img.bg_last {
     width : 250px;
 }
 
+#siteToolbarRight {
+    top : 2vh;
+    height : 96vh;
+    left : 102vw;
+    width : 215px;
+}
+
 #siteStatusbar {
     top : 102vh;
     height : 4rem;

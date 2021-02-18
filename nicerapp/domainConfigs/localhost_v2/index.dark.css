@@ -51,6 +51,26 @@
     border-radius : 15px;
 }
 
+#siteToolbarRight {
+    color : white;
+    background : none;
+    text-shadow : 2px 2px 2px rgba(0,0,0,0.45);
+}
+#siteToolbarRight:before {
+    content : "";
+    background : url('/nicerapp/siteMedia/backgrounds/tiled/active/blue/seamless-texture-blue-watercolor.jpg') repeat;
+    opacity : 0.7;
+    z-index : -1;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    border-radius : 15px;
+}
+
+
+
 #siteStatusbar {
     color : darkred;
     background : none;
@@ -236,7 +256,7 @@ a:visited {
     background-image: -ms-linear-gradient(bottom, rgba(0,0,50,0.4) 25%, rgba(40,40,80,0.8) 81%);
     background-image: linear-gradient(bottom, rgba(0,0,50,0.4) 25%, rgba(40,40,80,0.8) 81%);
 }
-.vividButtonSelected.selected[theme="dark"]:before {
+.vividButtonSelected[theme="dark"]:before {
     content: "";
     position: absolute;
     pointer-events: all;
@@ -254,7 +274,7 @@ a:visited {
     transition: opacity 0.5s linear;
     opacity: 1;
 }    
-.vividButtonSelected.selected[theme="dark"]:hover:before {
+.vividButtonSelected[theme="dark"]:hover:before {
     opacity: 1;
     background-image: -o-linear-gradient(bottom, rgba(0,100,0,0.4) 25%, rgba(40,255,40,0.8) 81%);
     background-image: -moz-linear-gradient(bottom, rgba(0,100,0,0.4)  25%, rgba(40,255,40,0.8) 81%);
