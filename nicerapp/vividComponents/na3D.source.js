@@ -46,8 +46,8 @@ export class na3D_fileBrowser {
         
         this.items = [{
             name : 'backgrounds',
+            offsetY : 0,
             offsetX : 0,
-            offsetZ : 0,
             path : ''
         }];
         this.lines = [];
@@ -212,7 +212,10 @@ export class na3D_fileBrowser {
             } else {
                 if (intersects[0] && intersects[0].object && intersects[0].object.parent && intersects[0].object.parent.parent) {
                     var model = intersects[0].object.parent.parent.parent.parent.parent.parent;
-                    model.rotation.z += 0.02; //TODO : auto revert back to model.rotation.z = 0;
+                    //model.rotation.z += 0.02; //TODO : auto revert back to model.rotation.z = 0;
+                    if (hoveredItem && hoveredItem.it) console.log (hoveredItem.it.name + ' '+hoveredItem.it.offsetY+' - '+hoveredItem.it.offsetX+' - '+hoveredItem.it.level+' - '+hoveredItem.it.zIndexOffset);
+                    
+                    
                 }
             }
         }
@@ -257,8 +260,8 @@ export class na3D_fileBrowser {
                     path : path2,
                     levelIdx : t.ld2[level].levelIdx,
                     parent : parent,
-                    offsetX : 0,
-                    offsetZ : 0
+                    offsetY : 0,
+                    offsetX : 0
                 };
                 
                 items[items.length] = it;
@@ -307,13 +310,9 @@ export class na3D_fileBrowser {
             
             clearTimeout (t.onresizeTimeout);
             t.onresizeTimeout = setTimeout(function() {
+                debugger;
                 t.onresize (t);
             }, 500);
-            
-          /*  clearTimeout (t.linedrawTimeout);
-            t.linedrawTimeout = setTimeout(function() {
-                t.drawLines (t);
-            }, 15*1000);*/
         }
     }
     
@@ -384,7 +383,7 @@ export class na3D_fileBrowser {
                 parent = t.items[it.parent],
                 l = levels['path '+it.path],
                 width = $(t.el).width(), 
-                placing = Math.random()>0.5?'right':'left',
+                placing = 'right',//Math.random()>0.5?'right':'left',
                 columnCount = Math.floor((width-(150/3)) / 150),                
                 itemsOnLevelCount = 0;
                 
@@ -428,26 +427,27 @@ export class na3D_fileBrowser {
                 it.columnIdx = columnIdx;
                 it.column = column;
 
-                it.offsetX = (
+                it.offsetY = (
                     l
                     ? placing==='right'
-                            ? l.offsetX + parent.offsetX + ( (50*it.column))// + (50*(parent.column?parent.column:0))
-                            : l.offsetX + parent.offsetX - ( (50*it.column))// - (50*(parent.column?parent.column:0))
+                            ? l.offsetY + parent.offsetY + ( (50*it.column))// + (50*(parent.column?parent.column:0))
+                            : l.offsetY + parent.offsetY - ( (50*it.column))// - (50*(parent.column?parent.column:0))
                     : placing==='right'
-                            ? parent.offsetX + ( (50*it.column))// + (50*(parent.column?parent.column:0))
-                            : parent.offsetX - ( (50*it.column))// - (50*(parent.column?parent.column:0))
+                            ? parent.offsetY + ( (50*it.column))// + (50*(parent.column?parent.column:0))
+                            : parent.offsetY - ( (50*it.column))// - (50*(parent.column?parent.column:0))
                 );
-                it.offsetZ = (
+                it.offsetX = (
                        l
-                       ? l.offsetZ + parent.offsetZ + ( 50 * (it.columnIdx-1) )//+ (50*(parent.columIdx?parent.columIdx-1:0))
-                       : parent.offsetZ + ( 50 * (it.columnIdx-1) )//+ (50*(parent.columnIdx?parent.columIdx-1:0))
+                       ? l.offsetX + parent.offsetX + ( 50 * (it.columnIdx-1) )//+ (50*(parent.columIdx?parent.columIdx-1:0))
+                       : parent.offsetX + ( 50 * (it.columnIdx-1) )//+ (50*(parent.columnIdx?parent.columIdx-1:0))
                 );
-                
+                //debugger;
                 if (!l) {
+                    
                     if (!parent.parent) {
                         pl = {
+                            offsetY : 0,
                             offsetX : 0,
-                            offsetZ : 0,
                             zIndexOffset : 0,
                             rowCount : 1,
                             columnCount : 1
@@ -458,62 +458,82 @@ export class na3D_fileBrowser {
                     
                     pl.columnCount = columnCount; // problem is here.. combined with the fact that this is a setTimeout()-curated loop
                     pl.rowCount = rowCount;
-                
+                    
                     var zof = pl.zIndexOffset + 1;
                     levels['path '+it.path] = jQuery.extend({}, pl);
+                    levels['path '+it.path].level = it.level;
+                    levels['path '+it.path].zIndexOffset = zof;
+                    levels['path '+it.path].offsetY = pl.offsetY;// + 10;
+                    levels['path '+it.path].offsetX = pl.offsetX;// + 10;
                     
-                    var moreToCheck = true, checkCounter = 0;
-                    while (moreToCheck) {
-                        levels['path '+it.path].zIndexOffset = zof;
-                        levels['path '+it.path].offsetX = pl.offsetX + (
-                            Math.random() > 0.5
-                            ? (200*checkCounter)
-                            : -1 * (200*checkCounter)
-                        );/*(
-                            Math.random() > 0.5
-                            ? Math.floor(Math.random() * 100)
-                            : -1 * Math.floor(Math.random() * 100)
-                        );*/
-                        levels['path '+it.path].offsetZ = pl.offsetZ + (
-                            Math.random() > 0.5
-                            ? (200*checkCounter)
-                            : -1 * (200*checkCounter)
-                        );/* (
-                            Math.random() > 0.5
-                            ? Math.floor(Math.random() * 100)
-                            : -1 * Math.floor(Math.random() * 100)
-                        );*/
-                        for (var p1 in levels) {
-                            var 
-                            l1 = levels['path '+it.path],
-                            l2 = levels[p1];
-                            if (p1!=='path '+it.path) {
-                                if (moreToCheck) moreToCheck = (
-                                    l1.offsetX > l2.offsetX 
-                                    || l1.offsetX < l2.offsetX + (l2.columnCount*75)
-                                    || l1.offsetX + (l1.columnCount*75) > l2.offsetX
-                                    || l1.offsetX + (l1.columnCount*75) < l2.offsetX + (l2.columnCount*75)
-                                );
-                                if (moreToCheck) moreToCheck = (
-                                    l1.offsetZ > l2.offsetZ
-                                    || l1.offsetZ < l2.offsetZ + (l2.rowCount*75)
-                                    || l1.offsetZ + (l1.rowCount*75) > l2.offsetZ
-                                    || l1.offsetZ + (l1.rowCount*75) < l2.offsetZ + (l2.rowCount*75)
-                                );
-                            }
-                        }
-                        checkCounter++;
-                        if (moreToCheck===false) moreToCheck = true; else moreToCheck = false;
-                    }
                     l = levels['path '+it.path];
                 };
-                it.model.position.y = it.offsetX;
-                it.model.position.x = -1 * it.offsetZ;
-                it.model.position.z = -1 * it.level * ((levels['path '+it.path].zIndexOffset*15) + 50);
+                    if (it.name==='active' || it.name=='halloween') debugger;
+                
+                var moreToCheck = true, checkCounter = 0, foundOverlappingItem = false;
+                while (moreToCheck) {
+                     if (checkCounter > 2) break;
+                    it.offsetY = (
+                        l
+                        ? placing==='right'
+                                ? l.offsetY + parent.offsetY +  (100*it.column)//+ (50*checkCounter))// + (50*(parent.column?parent.column:0))
+                                : l.offsetY + parent.offsetY -  (100*it.column)//+ (50*checkCounter))// - (50*(parent.column?parent.column:0))
+                        : placing==='right'
+                                ? parent.offsetY +  (100*it.column)//+ (50*checkCounter))// + (50*(parent.column?parent.column:0))
+                                : parent.offsetY -  (100*it.column)//+ (50*checkCounter))// - (50*(parent.column?parent.column:0))
+                    );
+                    it.offsetX = (
+                        l
+                        ? l.offsetX + parent.offsetX + ( 100 * (it.columnIdx-1))// + (50*checkCounter) )//+ (50*(parent.columIdx?parent.columIdx-1:0))
+                        : parent.offsetX + ( 100 * (it.columnIdx-1))// + (50*checkCounter) )//+ (50*(parent.columnIdx?parent.columIdx-1:0))
+                    );
+                    it.offsetZ = checkCounter;
+                   // if (placing==='right') placing='left'; else placing='right';
+
+                    
+                    foundOverlappingItem = false;
+                    for (var k=0; k<t.items.length; k++) {
+                        var itc = t.items[k];
+                        if (itc.idx === it.idx) continue;
+                        if (!foundOverlappingItem) {
+                            foundOverlappingItem = (
+                                it.offsetY === itc.offsetY
+                                && it.offsetX === itc.offsetX
+                                && it.level === itc.level
+                                && it.offsetZ === itc.offsetZ
+                            );
+                            if (foundOverlappingItem) {
+                               // debugger;
+                                break;
+                            }
+                        } else break;
+                    };
+                    //if (!foundOverlappingItem) debugger;
+                    if (foundOverlappingItem) moreToCheck = true; else moreToCheck = false;
+                    if (moreToCheck && Object.keys(levels).length===1) {
+                        moreToCheck = false;
+                    }
+                            
+                    checkCounter++;
+
+                }
+                
+                
+                it.model.position.x = it.offsetX;
+                it.model.position.y = it.offsetY;
+                it.model.position.z = -1 * ((it.level * 150) + (it.offsetZ * 150) + 70);
+
+                it.zIndexOffset = zof;
                 //$(it.b.el).fitText();
                 
                 t.resizeDoingIdx++;
                 setTimeout (function(){t.onresize(t, levels)}, 10);
+                
+                clearTimeout (t.linedrawTimeout);
+                t.linedrawTimeout = setTimeout(function() {
+                    t.drawLines (t);
+                }, 500);
+                
             }
         }
     }
