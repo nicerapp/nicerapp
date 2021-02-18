@@ -159,7 +159,7 @@ export class na3D_fileBrowser {
                     // build a line towards parent
                     if (hoveredItem && hoveredItem.it && !done) {
                         t.hoverOverName = hoveredItem.it.name;
-
+                        
                         // draw line to parent
                         var 
                         it = hoveredItem.it,
@@ -229,7 +229,7 @@ export class na3D_fileBrowser {
                 }
                 
                 // show folder name for item under mouse and closest to the country
-                $('#site3D_label').css({display:'flex'});
+                $('#site3D_label').html(t.hoverOverName).css({display:'flex'});
             }
             if (!intersects[0]) {
                 $('#site3D_label').fadeOut();
