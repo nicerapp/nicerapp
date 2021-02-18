@@ -67,6 +67,7 @@ export class na3D_fileBrowser {
         el.appendChild( this.renderer.domElement );
         
         this.controls = new OrbitControls( this.camera, this.renderer.domElement );
+        this.controls.autoRotate = true;
         //this.controls.listenToKeyEvents( window ); // optional
         
         this.loader = new GLTFLoader();
@@ -219,6 +220,8 @@ export class na3D_fileBrowser {
                 }
             }
         }
+        
+        t.controls.update();
 
         /*
         for (var i=0; i<t.lines.length; i++) {
