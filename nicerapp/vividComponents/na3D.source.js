@@ -104,7 +104,7 @@ export class na3D_fileBrowser {
         
         this.animate(this);
     }
-    
+    aw
     animate(t) {
         requestAnimationFrame( function() { t.animate (t) } );
         
@@ -335,9 +335,14 @@ export class na3D_fileBrowser {
                 geometry.vertices.push(p1);
                 geometry.vertices.push(p2);
                 geometry.verticesNeedUpdate = true;
-
-                var material = new THREE.LineBasicMaterial({ color: 0x5555FF });
-                var line = new THREE.Line( geometry, material );
+                
+                if (!t.lineColors) t.lineColors = {};
+                if (!t.lineColors[it.parent]) t.lineColors[it.parent] = Math.floor(Math.random()*16777215).toString(16);
+                var color = t.lineColors[it.parent];
+                
+                var
+                material = new THREE.LineBasicMaterial({ color: '#'+color }),
+                line = new THREE.Line( geometry, material );
                 t.scene.add(line);
 
                 /*
