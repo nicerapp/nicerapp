@@ -1,6 +1,6 @@
 <?php 
     require_once(dirname(__FILE__).'/../../boot.php');
-    $cacheFile = realpath(dirname(__FILE__).'/../../siteCache/backgrounds.json');
+    $cacheFile = realpath(dirname(__FILE__).'/../../siteCache').'/backgrounds.json';
     
     if (!file_exists($cacheFile)) {
         $root = realpath(dirname(__FILE__).'/../../siteMedia/backgrounds');
