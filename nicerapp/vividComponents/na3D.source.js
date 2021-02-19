@@ -319,35 +319,42 @@ export class na3D_fileBrowser {
                 clearTimeout (t.onresizeTimeout);
                 clearTimeout (t.linedrawTimeout);
                 
-                t.loader.load( '/nicerapp/3rd-party/3D/models/folder icon/scene.gltf', function ( gltf, cd) {
-                    gltf.scene.scale.setScalar (10);
-                    t.scene.add (gltf.scene);
-                    cd.it.model = gltf.scene;
-                    cd.it.model.it = cd.it;
-                    cd.t.updateTextureEncoding(t, gltf.scene);
-                    t.initCounter++;
-                    
-                    var
-                    newLevel = (
-                        Object.keys(t.ld2).length > 1
-                        ? parseInt(Object.keys(t.ld2).reduce(function(a, b){ return t.ld2[a] > t.ld2[b] ? a : b }))+1
-                        : 2
-                    );
-                    cd.level = newLevel;
-                    //debugger;
-                    cd.t.initializeItems (cd.t, cd.items, cd.itd, cd.it.idx, newLevel, cd.levelDepth, cd.path);
-                }, function ( xhr ) {
-                    //console.log( 'model "folder icon" : ' + ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
-                }, function ( error ) {
-                    console.error( error );
-                },  cd );
+                setTimeout (function () {
+                    t.loader.load( '/nicerapp/3rd-party/3D/models/folder icon/scene.gltf', function ( gltf, cd) {
+                        gltf.scene.scale.setScalar (10);
+                        t.scene.add (gltf.scene);
+                        cd.it.model = gltf.scene;
+                        cd.it.model.it = cd.it;
+                        cd.t.updateTextureEncoding(t, gltf.scene);
+                        t.initCounter++;
+                        
+                        var
+                        newLevel = (
+                            Object.keys(t.ld2).length > 1
+                            ? parseInt(Object.keys(t.ld2).reduce(function(a, b){ return t.ld2[a] > t.ld2[b] ? a : b }))+1
+                            : 2
+                        );
+                        cd.level = newLevel;
+                        
+                        //cd.t.onresize (cd.t);
+                clearTimeout (t.onresizeTimeout);
+                        
+                        //debugger;
+                        cd.t.initializeItems (cd.t, cd.items, cd.itd, cd.it.idx, newLevel, cd.levelDepth, cd.path);
+                    }, function ( xhr ) {
+                        //console.log( 'model "folder icon" : ' + ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+                    }, function ( error ) {
+                        console.error( error );
+                    },  cd );
+                }, 1000);
             } 
             t.ld2[level].initItemsDoingIdx++;
+            
             
             clearTimeout (t.onresizeTimeout);
             t.onresizeTimeout = setTimeout(function() {
                 t.onresize (t);
-            }, 250);
+            }, 1000);
         }
     }
     
@@ -371,6 +378,13 @@ export class na3D_fileBrowser {
     
     drawLines (t) {
         //debugger;
+        for (var i=0; i<t.permaLines.length; i++) {
+            var l = t.permaLines[i];
+            t.scene.remove(l.line);
+            l.geometry.dispose();
+            l.material.dispose();
+        };
+        
         for (var i=1; i<t.items.length; i++) {
             var 
             it = t.items[i],
@@ -378,6 +392,7 @@ export class na3D_fileBrowser {
             haveThisLineAlready = false;
             
             if (!this.showLines) return false;
+            if (!it.model) return false;
             
             if (it.parent===0 || typeof it.parent === 'undefined') continue;
             
@@ -495,50 +510,46 @@ export class na3D_fileBrowser {
                 l = levels['path '+it.path],
                 width = $(t.el).width(), 
                 placing = 'right',//Math.random()>0.5?'right':'left',
-                columnCount = Math.floor((width-(50/3)) / 50),                
+                //columnCount = Math.floor((width-(250/2)) / 250), // <-- results in jubmled view               
+                rowCount = 4,
                 itemsOnLevelCount = 0;
                 
-                var parentIt = it, parent1 = it.parent;
-                while (parent1 !== 0 && typeof parent1 !== 'undefined') {
-                    if (t.items[parent1].level === 1) {
-                        if (t.items[parent1].levelIdx < t.firstLevelCount/2) {debugger;placing = 'left';}
-                        break;
+                var levelItemCount = 0;
+                for (var j=0; j<t.items.length; j++) {
+                    var it2 = t.items[j];
+                    if (it2.level===it.level) levelItemCount++;
+                };
+                if (it.level>=1) {
+                    if (it.level===1) {
+                        if (it.levelIdx < levelItemCount/2) placing='left';
                     } else {
-                        parentIt = t.items[parent1];
-                        parent1 = parentIt.parent;
+                        var parent1 = it.parent;
+                        while (typeof parent1=='number' && parent1!==0 && t.items[parent1].level!==1) parent1 = t.items[parent1].parent;
+                        placing = t.items[parent1].childrenPlacement;
                     }
                 }
-                
+                    
                 for (var j=0; j<t.items.length; j++) {
                     var it2 = t.items[j];
                     if (it2.parent === it.parent && it2.level === it.level) itemsOnLevelCount++;
                 };
                 
                 var
-                rowCount = Math.ceil(itemsOnLevelCount / columnCount);
+                columnCount = Math.ceil(itemsOnLevelCount / rowCount);
                 
-                /*if (it.level===0) {
-                    columnCount = 1;
-                    rowCount = 9999;
-                } else */if (columnCount > rowCount) {
-                    columnCount = Math.floor(Math.sqrt(itemsOnLevelCount));
-                    rowCount = Math.ceil(itemsOnLevelCount / columnCount);
-                };
-                //rowCount++;
-                //rowCount++;
                 var
                 column = 0,
-                columnIdx = 1;
+                row = 1;
                 
                 for (var j=0; j<t.items.length; j++) {
                     var it2 = t.items[j];
                     if (it2.parent === it.parent && it2.level === it.level) {
-                        if ((it.levelIdx+1) <= (column * rowCount) + columnIdx ) {
-                            //columnIdx--;
-                        } else if (columnIdx >= rowCount) {
+                        if ((it.levelIdx+1) <= (column * rowCount) + row ) {
+                            //row--;
+                        } else if (row >= rowCount) {
                             column++;
-                            columnIdx = 1;
-                        } else columnIdx++;
+                            row = 1;
+                        } else row++;
                     } 
                     
                 };
@@ -546,37 +557,28 @@ export class na3D_fileBrowser {
                 var           
                 l = levels['path '+it.path];
                 it.childrenPlacement = placing;
-                it.columnIdx = columnIdx;
+                it.columnCount = columnCount;
+                it.rowCount = rowCount;
+                it.row = row;
                 it.column = column;
-//debugger;
-                it.offsetY = (
-                    l
-                    ? placing==='right'
-                            ? l.offsetY + parent.offsetY + ( (50*it.column)) - (50*rowCount/2)
-                            : l.offsetY + parent.offsetY - ( (50*it.column)) + (50*rowCount/2)
-                    : placing==='right'
-                            ? parent.offsetY + ( (50*it.column)) - (50*rowCount/2)
-                            : parent.offsetY - ( (50*it.column)) + (50*rowCount/2)
-                );
-                it.offsetX = (
-                       l
-                       ? l.offsetX + parent.offsetX + ( 50 * (it.columnIdx-1) ) - (50*columnCount/2)
-                       : parent.offsetX + ( 50 * (it.columnIdx-1) ) + (50*columnCount/2)
-                );
-                //debugger;
+
+                var 
+                spacingBetweenSubfoldersOnSameLevel = 75,
+                extraOffset = spacingBetweenSubfoldersOnSameLevel;//it.parent!==0?-1*spacingBetweenSubfoldersOnSameLevel*t.items[it.parent].columnCount/2:0; // <-- drop the '-1*' here to draw the tree as a root system instead
+                // ((levelItemCount-it.levelIdx)*50)*
+
                 if (!l) {
                     
-                    if (!parent.parent) {
+                    var pl = levels['path '+parent.path];
+                    if (!pl) {
                         pl = {
                             offsetY : 0,
                             offsetX : 0,
                             offsetZ : 0,
                             zIndexOffset : 0,
-                            rowCount : 1,
-                            columnCount : 1
+                            rowCount : rowCount,
+                            columnCount : columnCount
                         }
-                    } else {
-                        pl = levels['path '+parent.path];
                     }
                     
                     pl.columnCount = columnCount; // problem is here.. combined with the fact that this is a setTimeout()-curated loop
@@ -596,23 +598,43 @@ export class na3D_fileBrowser {
                 if (!pl) pl = levels['path '+parent.path];
                 
                 var moreToCheck = true, checkCounter = 0, foundOverlappingItem = false;
+                debugger;
                 while (moreToCheck) {
-                     if (checkCounter > 10) break;
+                    if (checkCounter > 4) break;
+                    var 
+                    extraOffsetX = 100 * checkCounter,//.5*it.levelIdx,//placing=='left'?-1*5*it.levelIdx:5*it.levelIdx,
+                    extraOffsetY = 100 * checkCounter,//*checkCounter,
+                    placing2 = t.items[it.parent].childrenPlacement;
+                    //if (l) l.offsetX += (placing==='left'?extraOffset2:-1*extraOffset2);
+                    /*
                     it.offsetY = (
                         l
                         ? placing==='right'
-                                ? l.offsetY + parent.offsetY +  (100*it.column)//+ (50*checkCounter)// + (50*(parent.column?parent.column:0))
-                                : l.offsetY + parent.offsetY -  (100*it.column)//+ (50*checkCounter)// - (50*(parent.column?parent.column:0))
+                                ? l.offsetY + parent.offsetY +  (50*(it.row-1)) + extraOffset
+                                : l.offsetY + parent.offsetY -  (50*(it.row-1)) - extraOffset
                         : placing==='right'
-                                ? parent.offsetY +  (100*it.column)+ (50*checkCounter)// + (50*(parent.column?parent.column:0))
-                                : parent.offsetY -  (100*it.column)+ (50*checkCounter)// - (50*(parent.column?parent.column:0))
-                    );
-                    it.offsetX = (
-                        l
-                        ? l.offsetX + parent.offsetX + ( 100 * (it.columnIdx-1) )//+ (50*checkCounter) )//+ (50*(parent.columIdx?parent.columIdx-1:0))
-                        : parent.offsetX + ( 100 * (it.columnIdx-1))// + (50*checkCounter) )//+ (50*(parent.columnIdx?parent.columIdx-1:0))
-                    );
-                    it.offsetZ = (pl?pl.offsetZ+(checkCounter/3):(checkCounter/3));//checkCounter;
+                                ? parent.offsetY +  (50*(it.row-1)) + extraOffset
+                                : parent.offsetY -  (50*(it.row-1)) - extraOffset
+                    );*/
+                    
+                    for (var k=0; k<t.items.length; k++) {
+                        var it2 = t.items[k],
+                        l2 = levels['path '+it2.path],
+                        pl2 = it2.parent > 0 ? levels['path '+t.items[it2.parent].path] : null;
+                        if (it2.parent === it.parent) {
+                            it2.offsetX = (
+                                l2
+                                ? l2.offsetX + it2.parent.offsetX + ( 50 * (it2.column-1) )+ extraOffsetX
+                                : it2.parent.offsetX + ( 50 * (it2.column-1)) + extraOffsetX
+                            );
+                            it2.offsetY = (
+                                l2
+                                ? l2.offsetY + it2.parent.offsetY +  (50*(it2.row-1)) + extraOffsetY
+                                : it2.parent.offsetY +  (50*(it2.row-1)) + extraOffsetY
+                            );
+                            it2.offsetZ = (pl2?pl2.offsetZ+(checkCounter/3):(checkCounter/3));//checkCounter;
+                        }
+                    }
                    // if (placing==='right') placing='left'; else placing='right';
 
                     
@@ -643,21 +665,24 @@ export class na3D_fileBrowser {
 
                 }
                 
-                
-                it.model.position.x = it.offsetX;
-                it.model.position.y = it.offsetY;
-                it.model.position.z = -1 * ((it.level * 150) + (it.offsetZ * 150) + 70);
 
-                it.zIndexOffset = zof;
-                //$(it.b.el).fitText();
-                
-                t.resizeDoingIdx++;
+                if (it.model) {
+                    it.model.position.x = it.offsetX;
+                    it.model.position.y = it.offsetY;
+                    it.model.position.z = -1 * ((it.level * 150) + (it.offsetZ * 150) + 70);
+
+                    it.zIndexOffset = zof;
+                    //$(it.b.el).fitText();
+                    
+                    t.resizeDoingIdx++;
+                    
+                }
                 setTimeout (function(){t.onresize(t, levels)}, 10);
                 
                 clearTimeout (t.linedrawTimeout);
                 t.linedrawTimeout = setTimeout(function() {
                     t.drawLines (t);
-                }, 250);
+                }, 500);
                 
             }
         }

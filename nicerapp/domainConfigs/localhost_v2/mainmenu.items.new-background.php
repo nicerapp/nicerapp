@@ -17,8 +17,8 @@
                     <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'youtube 4K car drive');">Car drives</a></li>
                     <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'youtube 4K city');">Cities</a></li>
                     <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'youtube 4K drone');">Drone Footage</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'youtube 4K fireplace');">Fireplaces</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'youtube 4K fireplace');">Forest</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'youtube 4K fire');">Fire</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'youtube 4K forest');">Forest</a></li>
                     <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'youtube 4K epic');">Game Videos</a></li>
                     <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'youtube 4K nature');">Nature</a></li>
                     <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'youtube 4K river');">Rivers</a></li>
