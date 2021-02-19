@@ -337,17 +337,21 @@ export class na3D_fileBrowser {
             clearTimeout (t.onresizeTimeout);
             t.onresizeTimeout = setTimeout(function() {
                 t.onresize (t);
-            }, 500);
+            }, 2500);
         }
     }
     
     drawLines (t) {
         //debugger;
-        for (var i=0; i<t.items.length; i++) {
+        console.log ('---')
+        for (var i=1; i<t.items.length; i++) {
             var 
             it = t.items[i],
             parent = t.items[it.parent],
             haveThisLineAlready = false;
+            
+            if (it.parent===0 || typeof it.parent === 'undefined') continue;
+            console.log (it.parent);
             
             for (var j=0; j<t.permaLines.length; j++) {
                 if (t.permaLines[j].it === it) {
@@ -361,6 +365,8 @@ export class na3D_fileBrowser {
                 geometry = new THREE.Geometry(), 
                 p1 = it.model.position, 
                 p2 = parent.model.position;
+                if (p1.x===0 && p1.y===0 && p1.z===0) continue;
+                if (p2.x===0 && p2.y===0 && p2.z===0) continue;
                 
                 geometry.dynamic = true;
                 geometry.vertices.push(p1);
@@ -432,6 +438,7 @@ export class na3D_fileBrowser {
         if (!t.resizeDoneCount) t.resizeDoneCount=0;
         t.resizeDoneCount++;
         if (t.resizeDoneCount>25) {
+            //clearTimeout (t.linedrawTimeout); // <!-- uncomment to show all the parent-child lines in one go.
             setTimeout(function() {
                 t.resizeDoneCount = 0;
                 t.onresize(t, levels);
@@ -604,7 +611,7 @@ export class na3D_fileBrowser {
                 clearTimeout (t.linedrawTimeout);
                 t.linedrawTimeout = setTimeout(function() {
                     t.drawLines (t);
-                }, 500);
+                }, 250);
                 
             }
         }
