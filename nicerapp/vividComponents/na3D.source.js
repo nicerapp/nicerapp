@@ -32,17 +32,18 @@ import { RGBELoader } from '/nicerapp/3rd-party/3D/libs/three.js/examples/jsm/lo
 export class na3D_fileBrowser {
     constructor(el, parent, data) {
         var t = this;
+        
+        this.autoRotate = true;
+        this.showLines = true;
+        
         this.p = parent;
         this.el = el;
         this.t = $(this.el).attr('theme');
-        
         this.data = data;
-        
         this.lights = [];
         this.folders = [];
         this.ld1 = {}; //levelDataOne
         this.ld2 = {}; //levelDataTwo
-        
         
         this.items = [{
             name : 'backgrounds',
@@ -124,7 +125,7 @@ export class na3D_fileBrowser {
         this.mouse.y = 0;
 
         this.camera.position.z = 700;
-        this.camera.position.x = 500;
+        this.camera.position.y = 200;
         
         this.animate(this);
     }
@@ -350,6 +351,24 @@ export class na3D_fileBrowser {
         }
     }
     
+    toggleShowLines () {
+        var t = this;
+        t.showLines = !t.showLines;
+        if (t.showLines) {
+            t.drawLines(t);
+            $('#showLines').removeClass('vividButton').addClass('vividButtonSelected');
+        } else {
+            for (var i=0; i<t.permaLines.length; i++) {
+                var l = t.permaLines[i];
+                t.scene.remove (l.line);
+                l.geometry.dispose();
+                l.material.dispose();
+            }
+            t.permaLines = [];
+            $('#showLines').removeClass('vividButtonSelected').addClass('vividButton');
+        }
+    }
+    
     drawLines (t) {
         //debugger;
         for (var i=1; i<t.items.length; i++) {
@@ -357,6 +376,8 @@ export class na3D_fileBrowser {
             it = t.items[i],
             parent = t.items[it.parent],
             haveThisLineAlready = false;
+            
+            if (!this.showLines) return false;
             
             if (it.parent===0 || typeof it.parent === 'undefined') continue;
             
@@ -441,6 +462,13 @@ export class na3D_fileBrowser {
             t.resizeDoneCount=0;
         }
         
+        if (!t.firstLevelCount) {
+            t.firstLevelCount = 0;
+            for (var i=0; i<t.items.length; i++) {
+                if (t.items[i].level===1) t.firstLevelCount++;
+            }
+        }
+        
         if (!t.resizeDoingIdx) t.resizeDoingIdx=0;
         if (!t.resizeDoneCount) t.resizeDoneCount=0;
         t.resizeDoneCount++;
@@ -467,8 +495,19 @@ export class na3D_fileBrowser {
                 l = levels['path '+it.path],
                 width = $(t.el).width(), 
                 placing = 'right',//Math.random()>0.5?'right':'left',
-                columnCount = Math.floor((width-(150/3)) / 150),                
+                columnCount = Math.floor((width-(50/3)) / 50),                
                 itemsOnLevelCount = 0;
+                
+                var parentIt = it, parent1 = it.parent;
+                while (parent1 !== 0 && typeof parent1 !== 'undefined') {
+                    if (t.items[parent1].level === 1) {
+                        if (t.items[parent1].levelIdx < t.firstLevelCount/2) {debugger;placing = 'left';}
+                        break;
+                    } else {
+                        parentIt = t.items[parent1];
+                        parent1 = parentIt.parent;
+                    }
+                }
                 
                 for (var j=0; j<t.items.length; j++) {
                     var it2 = t.items[j];
@@ -478,10 +517,10 @@ export class na3D_fileBrowser {
                 var
                 rowCount = Math.ceil(itemsOnLevelCount / columnCount);
                 
-                if (it.level===0) {
+                /*if (it.level===0) {
                     columnCount = 1;
                     rowCount = 9999;
-                } else /*if (columnCount > rowCount) */{
+                } else */if (columnCount > rowCount) {
                     columnCount = Math.floor(Math.sqrt(itemsOnLevelCount));
                     rowCount = Math.ceil(itemsOnLevelCount / columnCount);
                 };
@@ -509,20 +548,20 @@ export class na3D_fileBrowser {
                 it.childrenPlacement = placing;
                 it.columnIdx = columnIdx;
                 it.column = column;
-
+//debugger;
                 it.offsetY = (
                     l
                     ? placing==='right'
-                            ? l.offsetY + parent.offsetY + ( (50*it.column))// + (50*(parent.column?parent.column:0))
-                            : l.offsetY + parent.offsetY - ( (50*it.column))// - (50*(parent.column?parent.column:0))
+                            ? l.offsetY + parent.offsetY + ( (50*it.column)) - (50*rowCount/2)
+                            : l.offsetY + parent.offsetY - ( (50*it.column)) + (50*rowCount/2)
                     : placing==='right'
-                            ? parent.offsetY + ( (50*it.column))// + (50*(parent.column?parent.column:0))
-                            : parent.offsetY - ( (50*it.column))// - (50*(parent.column?parent.column:0))
+                            ? parent.offsetY + ( (50*it.column)) - (50*rowCount/2)
+                            : parent.offsetY - ( (50*it.column)) + (50*rowCount/2)
                 );
                 it.offsetX = (
                        l
-                       ? l.offsetX + parent.offsetX + ( 50 * (it.columnIdx-1) )//+ (50*(parent.columIdx?parent.columIdx-1:0))
-                       : parent.offsetX + ( 50 * (it.columnIdx-1) )//+ (50*(parent.columnIdx?parent.columIdx-1:0))
+                       ? l.offsetX + parent.offsetX + ( 50 * (it.columnIdx-1) ) - (50*columnCount/2)
+                       : parent.offsetX + ( 50 * (it.columnIdx-1) ) + (50*columnCount/2)
                 );
                 //debugger;
                 if (!l) {
