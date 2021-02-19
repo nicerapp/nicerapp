@@ -661,7 +661,7 @@ export class na3D_fileBrowser {
                                 ? parent.offsetY +  (50*(it.row-1)) + extraOffsetY
                                 : parent.offsetY -  (50*(it.row-1)) - extraOffsetY
                     );
-                    it.offsetZ = (pl?pl.offsetZ+extraOffsetZ:extraOffsetZ);//checkCounter;
+                    it.offsetZ = (pl?pl.offsetZ+50:50);//checkCounter;
                     
                     /*
                     for (var k=0; k<t.items.length; k++) {
