@@ -160,40 +160,49 @@ export class na3D_fileBrowser {
                     if (hoveredItem && hoveredItem.it && !done) {
                         t.hoverOverName = hoveredItem.it.name;
                         
-                        // draw line to parent
                         var 
                         it = hoveredItem.it,
                         parent = t.items[it.parent],
                         haveLine = false;
                         
-                        if (parent && parent.model) {
-                            if (!haveLine) {
-                                var 
-                                geometry = new THREE.Geometry(), 
-                                p1 = it.model.position, 
-                                p2 = parent.model.position;
-                                
-                                geometry.dynamic = true;
-                                geometry.vertices.push(p1);
-                                geometry.vertices.push(p2);
-                                geometry.verticesNeedUpdate = true;
+                        // draw line to parent(s)
+                        while (it.parent && it.parent!==0 && typeof it.parent !== 'undefined') {
+                            var 
+                            parent = t.items[it.parent],
+                            haveLine = false;
+                            
+                            if (parent && parent.model) {
+                                if (!haveLine) {
+                                    var 
+                                    geometry = new THREE.Geometry(), 
+                                    p1 = it.model.position, 
+                                    p2 = parent.model.position;
+                                    
+                                    geometry.dynamic = true;
+                                    geometry.vertices.push(p1);
+                                    geometry.vertices.push(p2);
+                                    geometry.verticesNeedUpdate = true;
 
-                                var material = new THREE.LineBasicMaterial({ color: 0xCCCCFF, linewidth:4 });
-                                var line = new THREE.Line( geometry, material );
-                                t.scene.add(line);
+                                    var material = new THREE.LineBasicMaterial({ color: 0xCCCCFF, linewidth:4 });
+                                    var line = new THREE.Line( geometry, material );
+                                    t.scene.add(line);
 
-                                t.lines[t.lines.length] = {
-                                    it : it,
-                                    line : line,
-                                    geometry : geometry,
-                                    material : material
-                                };
-                            } else {
-                                for (var j=0; j<t.lines.length; j++) {
-                                    if (t.lines[j]) t.lines[j].geometry.verticesNeedUpdate = true;
+                                    t.lines[t.lines.length] = {
+                                        it : it,
+                                        line : line,
+                                        geometry : geometry,
+                                        material : material
+                                    };
+                                } else {
+                                    for (var j=0; j<t.lines.length; j++) {
+                                        if (t.lines[j]) t.lines[j].geometry.verticesNeedUpdate = true;
+                                    }
                                 }
                             }
+                            it = t.items[it.parent];
                         }
+                                                
+                        // draw lines to children
                         for (var j=0; j<t.items.length; j++) {
                             var child = t.items[j];
                             if (
