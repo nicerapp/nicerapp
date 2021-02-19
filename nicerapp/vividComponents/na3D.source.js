@@ -40,6 +40,8 @@ export class na3D_fileBrowser {
         this.el = el;
         this.t = $(this.el).attr('theme');
         this.data = data;
+        this.loading = false;
+        this.resizing = false;
         this.lights = [];
         this.folders = [];
         this.ld1 = {}; //levelDataOne
@@ -274,6 +276,21 @@ export class na3D_fileBrowser {
     }
     
     initializeItems (t, items, data, parent, level, levelDepth, path) {
+        if (!t) t = this;
+        debugger;
+        na.m.waitForCondition ('waiting for other onresize commands to finish',
+            function () {
+                debugger;
+                return t.loading === false;
+            },
+            function () {
+                debugger;
+                t.initializeItems_do (t, items, data, parent, level, levelDepth, path);
+            }, 100
+        );
+    }
+    
+    initializeItems_do (t, items, data, parent, level, levelDepth, path) {
         if (!t.ld2[level]) t.ld2[level] = { parent : parent, initItemsDoingIdx : 0, path : path };
         if (!t.ld2[level].keys) t.ld2[level].keys = Object.keys(data);
         if (t.ld2[level].initItemsDoingIdx >= t.ld2[level].keys.length) return false;
@@ -319,6 +336,7 @@ export class na3D_fileBrowser {
                 clearTimeout (t.onresizeTimeout);
                 clearTimeout (t.linedrawTimeout);
                 
+                t.loading = true;
                 setTimeout (function () {
                     t.loader.load( '/nicerapp/3rd-party/3D/models/folder icon/scene.gltf', function ( gltf, cd) {
                         gltf.scene.scale.setScalar (10);
@@ -340,6 +358,7 @@ export class na3D_fileBrowser {
                 clearTimeout (t.onresizeTimeout);
                         
                         //debugger;
+                        t.loading = false;
                         cd.t.initializeItems (cd.t, cd.items, cd.itd, cd.it.idx, newLevel, cd.levelDepth, cd.path);
                     }, function ( xhr ) {
                         //console.log( 'model "folder icon" : ' + ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
@@ -464,13 +483,31 @@ export class na3D_fileBrowser {
         if (t.controls.autoRotate) $('#autoRotate').removeClass('vividButton').addClass('vividButtonSelected'); 
         else $('#autoRotate').removeClass('vividButtonSelected').addClass('vividButton');
     }
+    
+    onresize (t, levels) {
+        if (!t) t = this;
+        debugger;
+        na.m.waitForCondition ('waiting for other onresize commands to finish',
+            function () {
+                debugger;
+                return t.resizing === false;
+            },
+            function () {
+                debugger;
+                t.onresize_do (t, levels);
+            }, 100
+        );
+    }
 
-    onresize(t, levels) {
+    onresize_do(t, levels) {
         var
         bw = $(window).width(),
         pl = null;
-    
+        
         if (!t) t = this;
+        
+        t.resizing = true;
+        
         if (!levels) {
             levels = {};
             t.resizeDoingIdx=0;
@@ -491,17 +528,19 @@ export class na3D_fileBrowser {
             //clearTimeout (t.linedrawTimeout); // <!-- uncomment to show all the parent-child lines in one go.
             setTimeout(function() {
                 t.resizeDoneCount = 0;
+                t.resizing = false;
                 t.onresize(t, levels);
             }, 500);
         } else {
             if (t.resizeDoingIdx >= t.items.length) {
                 t.resizeDoingIdx = 0;
                 t.resizeDoneCount = 0;
+                t.resizing = false;
             } else {
                 var it = t.items[t.resizeDoingIdx];
                 if (typeof it.parent==='undefined') {
                     t.resizeDoingIdx++;
-                    setTimeout (function(){t.onresize(t, levels)}, 10);
+                    setTimeout (function(){t.onresize_do(t, levels)}, 10);
                     return false;
                 }
                 
@@ -561,7 +600,7 @@ export class na3D_fileBrowser {
                 it.rowCount = rowCount;
                 it.row = row;
                 it.column = column;
-
+            if (it.name=='animals' || it.name=='anime art' || it.name == 'autumn') debugger;
                 var 
                 spacingBetweenSubfoldersOnSameLevel = 75,
                 extraOffset = spacingBetweenSubfoldersOnSameLevel;//it.parent!==0?-1*spacingBetweenSubfoldersOnSameLevel*t.items[it.parent].columnCount/2:0; // <-- drop the '-1*' here to draw the tree as a root system instead
@@ -597,44 +636,52 @@ export class na3D_fileBrowser {
                 
                 if (!pl) pl = levels['path '+parent.path];
                 
-                var moreToCheck = true, checkCounter = 0, foundOverlappingItem = false;
+                var moreToCheck = true, checkCounter = 0, foundOverlappingItem = false, placing='right';
                 debugger;
                 while (moreToCheck) {
                     if (checkCounter > 4) break;
                     var 
-                    extraOffsetX = 100 * checkCounter,//.5*it.levelIdx,//placing=='left'?-1*5*it.levelIdx:5*it.levelIdx,
-                    extraOffsetY = 100 * checkCounter,//*checkCounter,
+                    extraOffsetX = 50 * checkCounter,//.5*it.levelIdx,//placing=='left'?-1*5*it.levelIdx:5*it.levelIdx,
+                    extraOffsetY = 50 * checkCounter,//*checkCounter,
+                    extraOffsetZ = 50 * checkCounter,//*checkCounter,
                     placing2 = t.items[it.parent].childrenPlacement;
                     //if (l) l.offsetX += (placing==='left'?extraOffset2:-1*extraOffset2);
-                    /*
+                    
+                    it.offsetX = (
+                        l
+                        ? l.offsetX + parent.offsetX + ( 50 * (it.column-1) )+ extraOffsetX
+                        : parent.offsetX + ( 50 * (it.column-1)) + extraOffsetX
+                    );
                     it.offsetY = (
                         l
                         ? placing==='right'
-                                ? l.offsetY + parent.offsetY +  (50*(it.row-1)) + extraOffset
-                                : l.offsetY + parent.offsetY -  (50*(it.row-1)) - extraOffset
+                                ? l.offsetY + parent.offsetY +  (50*(it.row-1)) + extraOffsetY
+                                : l.offsetY + parent.offsetY -  (50*(it.row-1)) - extraOffsetY
                         : placing==='right'
-                                ? parent.offsetY +  (50*(it.row-1)) + extraOffset
-                                : parent.offsetY -  (50*(it.row-1)) - extraOffset
-                    );*/
+                                ? parent.offsetY +  (50*(it.row-1)) + extraOffsetY
+                                : parent.offsetY -  (50*(it.row-1)) - extraOffsetY
+                    );
+                    it.offsetZ = (pl?pl.offsetZ+extraOffsetZ:extraOffsetZ);//checkCounter;
                     
+                    /*
                     for (var k=0; k<t.items.length; k++) {
                         var it2 = t.items[k],
                         l2 = levels['path '+it2.path],
                         pl2 = it2.parent > 0 ? levels['path '+t.items[it2.parent].path] : null;
                         if (it2.parent === it.parent) {
-                            it2.offsetX = (
-                                l2
-                                ? l2.offsetX + it2.parent.offsetX + ( 50 * (it2.column-1) )+ extraOffsetX
-                                : it2.parent.offsetX + ( 50 * (it2.column-1)) + extraOffsetX
+                            it.offsetX = (
+                                l
+                                ? l.offsetX + parent.offsetX + ( 50 * (it2.column-1) )+ extraOffsetX
+                                : it.parent.offsetX + ( 50 * (it2.column-1)) + extraOffsetX
                             );
-                            it2.offsetY = (
-                                l2
-                                ? l2.offsetY + it2.parent.offsetY +  (50*(it2.row-1)) + extraOffsetY
-                                : it2.parent.offsetY +  (50*(it2.row-1)) + extraOffsetY
+                            it.offsetY = (
+                                l
+                                ? l.offsetY + parent.offsetY +  (50*(it2.row-1)) + extraOffsetY
+                                : parent.offsetY +  (50*(it2.row-1)) + extraOffsetY
                             );
-                            it2.offsetZ = (pl2?pl2.offsetZ+(checkCounter/3):(checkCounter/3));//checkCounter;
+                            it.offsetZ = (pl?pl.offsetZ+(checkCounter/3):(checkCounter/3));//checkCounter;
                         }
-                    }
+                    }*/
                    // if (placing==='right') placing='left'; else placing='right';
 
                     
@@ -669,7 +716,7 @@ export class na3D_fileBrowser {
                 if (it.model) {
                     it.model.position.x = it.offsetX;
                     it.model.position.y = it.offsetY;
-                    it.model.position.z = -1 * ((it.level * 150) + (it.offsetZ * 150) + 70);
+                    it.model.position.z = -1 * ((it.level * 50) + (it.offsetZ) + 70);
 
                     it.zIndexOffset = zof;
                     //$(it.b.el).fitText();
@@ -677,7 +724,7 @@ export class na3D_fileBrowser {
                     t.resizeDoingIdx++;
                     
                 }
-                setTimeout (function(){t.onresize(t, levels)}, 10);
+                setTimeout (function(){t.onresize_do(t, levels)}, 10);
                 
                 clearTimeout (t.linedrawTimeout);
                 t.linedrawTimeout = setTimeout(function() {
