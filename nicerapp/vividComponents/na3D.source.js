@@ -641,7 +641,7 @@ export class na3D_fileBrowser {
                 while (moreToCheck) {
                     if (checkCounter > 4) break;
                     var 
-                    extraOffsetX = 50 * checkCounter,//.5*it.levelIdx,//placing=='left'?-1*5*it.levelIdx:5*it.levelIdx,
+                    extraOffsetX = 0,//25 * checkCounter,//.5*it.levelIdx,//placing=='left'?-1*5*it.levelIdx:5*it.levelIdx,
                     extraOffsetY = 50 * checkCounter,//*checkCounter,
                     extraOffsetZ = 50 * checkCounter,//*checkCounter,
                     placing2 = t.items[it.parent].childrenPlacement;
@@ -649,8 +649,8 @@ export class na3D_fileBrowser {
                     
                     it.offsetX = (
                         l
-                        ? l.offsetX + parent.offsetX + ( 50 * (it.column-1) )+ extraOffsetX
-                        : parent.offsetX + ( 50 * (it.column-1)) + extraOffsetX
+                        ? l.offsetX + parent.offsetX + ( 25 * (it.column-1) )+ extraOffsetX
+                        : parent.offsetX + ( 25 * (it.column-1)) + extraOffsetX
                     );
                     it.offsetY = (
                         l
