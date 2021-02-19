@@ -577,7 +577,7 @@ export class na3D_fileBrowser {
                 columnCount = Math.ceil(itemsOnLevelCount / rowCount);
                 
                 var
-                column = 0,
+                column = 1,
                 row = 1;
                 
                 for (var j=0; j<t.items.length; j++) {
@@ -649,8 +649,8 @@ export class na3D_fileBrowser {
                     
                     it.offsetX = (
                         l
-                        ? l.offsetX + parent.offsetX + ( 25 * (it.column-1) )+ extraOffsetX
-                        : parent.offsetX + ( 25 * (it.column-1)) + extraOffsetX
+                        ? l.offsetX + parent.offsetX + ( 75 * (it.column-1) )+ extraOffsetX
+                        : parent.offsetX + ( 75 * (it.column-1)) + extraOffsetX
                     );
                     it.offsetY = (
                         l
