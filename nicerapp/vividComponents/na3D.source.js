@@ -337,13 +337,12 @@ export class na3D_fileBrowser {
             clearTimeout (t.onresizeTimeout);
             t.onresizeTimeout = setTimeout(function() {
                 t.onresize (t);
-            }, 2500);
+            }, 250);
         }
     }
     
     drawLines (t) {
         //debugger;
-        console.log ('---')
         for (var i=1; i<t.items.length; i++) {
             var 
             it = t.items[i],
@@ -351,7 +350,6 @@ export class na3D_fileBrowser {
             haveThisLineAlready = false;
             
             if (it.parent===0 || typeof it.parent === 'undefined') continue;
-            console.log (it.parent);
             
             for (var j=0; j<t.permaLines.length; j++) {
                 if (t.permaLines[j].it === it) {
