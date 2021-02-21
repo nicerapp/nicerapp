@@ -51,6 +51,11 @@ export class na3D_fileBrowser {
             name : 'backgrounds',
             offsetY : 0,
             offsetX : 0,
+            offsetZ : 0,
+            column : 0,
+            row : 0,
+            columnCount : 1,
+            rowCount : 1,
             path : ''
         }];
         this.lines = []; // onhover lines only in here
@@ -277,18 +282,57 @@ export class na3D_fileBrowser {
     
     initializeItems (t, items, data, parent, level, levelDepth, path) {
         if (!t) t = this;
-        debugger;
+        //debugger;
         na.m.waitForCondition ('waiting for other onresize commands to finish',
             function () {
-                debugger;
+                //debugger;
                 return t.loading === false;
             },
             function () {
-                debugger;
+                //debugger;
                 t.initializeItems_do (t, items, data, parent, level, levelDepth, path);
             }, 100
         );
     }
+
+    /*
+    initializeItems_loadModel (t, items, data, parent, level, levelDepth, path) {
+        let 
+        it = items[0],
+        cd = { //call data
+            t : t,
+            it : it,
+            items : items,
+            itd : itd,
+            parent : parent,
+            path : path2,
+            levelDepth : levelDepth + 1
+        };
+        
+        t.loader.load( '/nicerapp/3rd-party/3D/models/folder icon/scene.gltf', function ( gltf, cd) {
+            gltf.scene.scale.setScalar (10);
+            t.scene.add (gltf.scene);
+            cd.it.model = gltf.scene;
+            cd.it.model.it = cd.it;
+            cd.t.updateTextureEncoding(t, gltf.scene);
+            t.initCounter++;
+            
+            var
+            newLevel = (
+                Object.keys(t.ld2).length > 1
+                ? parseInt(Object.keys(t.ld2).reduce(function(a, b){ return t.ld2[a] > t.ld2[b] ? a : b }))+1
+                : 2
+            );
+            cd.level = newLevel;
+            
+            t.loading = false;
+            cd.t.initializeItems_do (cd.t, cd.items, cd.itd, cd.it.idx, newLevel, cd.levelDepth, cd.path);
+        }, function ( xhr ) {
+            //console.log( 'model "folder icon" : ' + ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+        }, function ( error ) {
+            console.error( error );
+        },  cd );
+    }*/
     
     initializeItems_do (t, items, data, parent, level, levelDepth, path) {
         if (!t.ld2[level]) t.ld2[level] = { parent : parent, initItemsDoingIdx : 0, path : path };
@@ -337,8 +381,9 @@ export class na3D_fileBrowser {
                 clearTimeout (t.linedrawTimeout);
                 
                 t.loading = true;
-                setTimeout (function () {
+                //setTimeout (function () {
                     t.loader.load( '/nicerapp/3rd-party/3D/models/folder icon/scene.gltf', function ( gltf, cd) {
+                //var gltf = $.extend({},t.items[0].model);
                         gltf.scene.scale.setScalar (10);
                         t.scene.add (gltf.scene);
                         cd.it.model = gltf.scene;
@@ -359,13 +404,14 @@ export class na3D_fileBrowser {
                         
                         //debugger;
                         t.loading = false;
+                    
                         cd.t.initializeItems (cd.t, cd.items, cd.itd, cd.it.idx, newLevel, cd.levelDepth, cd.path);
                     }, function ( xhr ) {
                         //console.log( 'model "folder icon" : ' + ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
                     }, function ( error ) {
                         console.error( error );
                     },  cd );
-                }, 1000);
+                //}, 1000);
             } 
             t.ld2[level].initItemsDoingIdx++;
             
@@ -373,7 +419,7 @@ export class na3D_fileBrowser {
             clearTimeout (t.onresizeTimeout);
             t.onresizeTimeout = setTimeout(function() {
                 t.onresize (t);
-            }, 1000);
+            }, 2000);
         }
     }
     
@@ -486,19 +532,19 @@ export class na3D_fileBrowser {
     
     onresize (t, levels) {
         if (!t) t = this;
-        debugger;
+        //debugger;
         na.m.waitForCondition ('waiting for other onresize commands to finish',
             function () {
-                debugger;
+                //debugger;
                 return t.resizing === false;
             },
             function () {
-                debugger;
                 t.onresize_do (t, levels);
-            }, 100
+            }, 1500
         );
     }
 
+    
     onresize_do(t, levels) {
         var
         bw = $(window).width(),
@@ -524,18 +570,21 @@ export class na3D_fileBrowser {
         if (!t.resizeDoingIdx) t.resizeDoingIdx=0;
         if (!t.resizeDoneCount) t.resizeDoneCount=0;
         t.resizeDoneCount++;
-        if (t.resizeDoneCount>25) {
+        /*if (t.resizeDoneCount>25) {
             //clearTimeout (t.linedrawTimeout); // <!-- uncomment to show all the parent-child lines in one go.
             setTimeout(function() {
                 t.resizeDoneCount = 0;
                 t.resizing = false;
                 t.onresize(t, levels);
             }, 500);
-        } else {
+        } else {*/
+        while (t.resizeDoingIdx < t.items.length) {
+            //debugger;
             if (t.resizeDoingIdx >= t.items.length) {
                 t.resizeDoingIdx = 0;
                 t.resizeDoneCount = 0;
                 t.resizing = false;
+                debugger;
             } else {
                 var it = t.items[t.resizeDoingIdx];
                 if (typeof it.parent==='undefined') {
@@ -547,60 +596,98 @@ export class na3D_fileBrowser {
                 var 
                 parent = t.items[it.parent],
                 l = levels['path '+it.path],
-                width = $(t.el).width(), 
-                placing = 'right',//Math.random()>0.5?'right':'left',
+                height = $(t.el).height(), 
+                placingX = 'right',//Math.random()>0.5?'right':'left',
+                placingY = 'top',
                 //columnCount = Math.floor((width-(250/2)) / 250), // <-- results in jubmled view               
-                rowCount = 4,
+                rowCount = 5,//Math.floor(((height/2)-100)/50),
                 itemsOnLevelCount = 0;
                 
+                /*
                 var levelItemCount = 0;
                 for (var j=0; j<t.items.length; j++) {
                     var it2 = t.items[j];
-                    if (it2.level===it.level) levelItemCount++;
+                    if (it2.parent === it.parent && it2.level===it.level) levelItemCount++;
                 };
                 if (it.level>=1) {
                     if (it.level===1) {
-                        if (it.levelIdx < levelItemCount/2) placing='left';
+                        if (it.levelIdx < levelItemCount/2) placingX='left';
                     } else {
                         var parent1 = it.parent;
                         while (typeof parent1=='number' && parent1!==0 && t.items[parent1].level!==1) parent1 = t.items[parent1].parent;
-                        placing = t.items[parent1].childrenPlacement;
+                        placingX = t.items[parent1].placingX;
                     }
-                }
+                }*/
                     
                 for (var j=0; j<t.items.length; j++) {
                     var it2 = t.items[j];
                     if (it2.parent === it.parent && it2.level === it.level) itemsOnLevelCount++;
                 };
+                it.itemsOnLevelCount = itemsOnLevelCount;
                 
                 var
                 columnCount = Math.ceil(itemsOnLevelCount / rowCount);
                 
                 var
-                column = 1,
+                column = 0,
                 row = 1;
+
                 
                 for (var j=0; j<t.items.length; j++) {
                     var it2 = t.items[j];
-                    if (it2.parent === it.parent && it2.level === it.level) {
-                        if ((it.levelIdx+1) <= (column * rowCount) + row ) {
-                            //row--;
-                        } else if (row >= rowCount) {
-                            column++;
-                            row = 1;
-                        } else row++;
+                    if (it2.parent === it.parent && it2.levelIdx <= it.levelIdx) {
+                        if (column >= columnCount) {
+                            row++;
+                            column = 1;
+                        } else column++;
                     } 
                     
                 };
+                //column += columnCount - ( (it.levelIdx+1) - (columnCount * row) );
+                /*
+                if (column < columnCount/2) {
+                    placingX = 'left'
+                };
+                if (row < rowCount/2) {
+                    placingY = 'bottom'
+                };*/
                 
                 var           
                 l = levels['path '+it.path];
-                it.childrenPlacement = placing;
+                it.placingX = placingX;
+                it.placingY = placingY;
                 it.columnCount = columnCount;
                 it.rowCount = rowCount;
                 it.row = row;
                 it.column = column;
-            if (it.name=='animals' || it.name=='anime art' || it.name == 'autumn') debugger;
+                it.offsetX = 0;
+                it.offsetY = 0;
+                it.offsetZ = 0;
+
+                
+            }
+            t.resizeDoingIdx++;
+        }
+        t.resizeDoingIdx = 0;
+        while (t.resizeDoingIdx < t.items.length) {
+            //if (it.name=='animals' || it.name=='anime art' || it.name == 'autumn') debugger;
+            //if (it.name=='Milkyway' || it.name=='galaxies') debugger;
+            if (t.resizeDoingIdx >= t.items.length) {
+                t.resizeDoingIdx = 0;
+                t.resizeDoneCount = 0;
+                t.resizing = false;
+                debugger;
+            } else {
+                var it = t.items[t.resizeDoingIdx];
+                if (typeof it.parent==='undefined') {
+                    t.resizeDoingIdx++;
+                    continue;
+                }
+                
+                var 
+                parent = t.items[it.parent],
+                l = levels['path '+it.path];
+                
                 var 
                 spacingBetweenSubfoldersOnSameLevel = 75,
                 extraOffset = spacingBetweenSubfoldersOnSameLevel;//it.parent!==0?-1*spacingBetweenSubfoldersOnSameLevel*t.items[it.parent].columnCount/2:0; // <-- drop the '-1*' here to draw the tree as a root system instead
@@ -636,55 +723,56 @@ export class na3D_fileBrowser {
                 
                 if (!pl) pl = levels['path '+parent.path];
                 
-                var moreToCheck = true, checkCounter = 0, foundOverlappingItem = false, placing='right';
-                debugger;
+                var moreToCheck = true, checkCounter = 0, foundOverlappingItem = false;
                 while (moreToCheck) {
                     if (checkCounter > 4) break;
                     var 
-                    extraOffsetX = 0,//25 * checkCounter,//.5*it.levelIdx,//placing=='left'?-1*5*it.levelIdx:5*it.levelIdx,
-                    extraOffsetY = 50 * checkCounter,//*checkCounter,
-                    extraOffsetZ = 50 * checkCounter,//*checkCounter,
-                    placing2 = t.items[it.parent].childrenPlacement;
-                    //if (l) l.offsetX += (placing==='left'?extraOffset2:-1*extraOffset2);
-                    
-                    it.offsetX = (
-                        l
-                        ? l.offsetX + parent.offsetX + ( 75 * (it.column-1) )+ extraOffsetX
-                        : parent.offsetX + ( 75 * (it.column-1)) + extraOffsetX
+                    extraOffsetX = it.column*200*checkCounter,
+                    extraOffsetY = it.row*200*checkCounter,//50 * checkCounter,
+                    extraOffsetZ = 50 * checkCounter,
+                    placingX2 = 'right',//placingX,//t.items[it.parent].placingX,
+                    placingY2 = 'top',//placingY;//t.items[it.parent].placingY;
+                    items = [];
+                    //debugger;
+                    for (var k=0; k<t.items.length; k++) {
+                        var it2 = t.items[k];
+                        
+                        if (it.parent === it2.parent /*&& it.idx!==it2.idx*/) {
+                        
+                            it2.offsetX = (
+                                it2.placingX=='right'
+                                ? parent.offsetX + ( 50 * (it2.column)) + extraOffsetX
+                                : parent.offsetX - ( 50 * (it2.column)) - extraOffsetX
+                            );
+                            it2.offsetY = (
+                                it2.placingY == 'top'
+                                ? parent.offsetY + (50*(it2.row)) + extraOffsetY
+                                : parent.offsetY - (50*(it2.row)) - extraOffsetY
+                            );
+                            it2.offsetZ = -1 * ((it2.level*200)+extraOffsetZ);
+                            items.push (it2);
+
+                            if (it2.model) {
+                                it2.model.position.x = it2.offsetX;
+                                it2.model.position.y = it2.offsetY;
+                                it2.model.position.z = it2.offsetZ;
+                            }
+                        }
+                    }
+                     if (it.name=='webgl' || (it.name=='good' && t.items[it.parent].name=='webgl')) debugger;                        
+                    /*it.offsetX = (
+                        it.placingX=='right'
+                        ? parent.offsetX + ( 75 * (it2.column))
+                        : parent.offsetX - ( 75 * (it2.column))
                     );
                     it.offsetY = (
-                        l
-                        ? placing==='right'
-                                ? l.offsetY + parent.offsetY +  (50*(it.row-1)) + extraOffsetY
-                                : l.offsetY + parent.offsetY -  (50*(it.row-1)) - extraOffsetY
-                        : placing==='right'
-                                ? parent.offsetY +  (50*(it.row-1)) + extraOffsetY
-                                : parent.offsetY -  (50*(it.row-1)) - extraOffsetY
+                        it.placingY == 'top'
+                        ? parent.offsetY + (50*(it2.row))
+                        : parent.offsetY - (50*(it2.row))
                     );
-                    it.offsetZ = (pl?pl.offsetZ+50:50);//checkCounter;
-                    
-                    /*
-                    for (var k=0; k<t.items.length; k++) {
-                        var it2 = t.items[k],
-                        l2 = levels['path '+it2.path],
-                        pl2 = it2.parent > 0 ? levels['path '+t.items[it2.parent].path] : null;
-                        if (it2.parent === it.parent) {
-                            it.offsetX = (
-                                l
-                                ? l.offsetX + parent.offsetX + ( 50 * (it2.column-1) )+ extraOffsetX
-                                : it.parent.offsetX + ( 50 * (it2.column-1)) + extraOffsetX
-                            );
-                            it.offsetY = (
-                                l
-                                ? l.offsetY + parent.offsetY +  (50*(it2.row-1)) + extraOffsetY
-                                : parent.offsetY +  (50*(it2.row-1)) + extraOffsetY
-                            );
-                            it.offsetZ = (pl?pl.offsetZ+(checkCounter/3):(checkCounter/3));//checkCounter;
-                        }
-                    }*/
-                   // if (placing==='right') placing='left'; else placing='right';
-
-                    
+                    it.offsetZ = (it.level*50);
+                    */
+                            
                     foundOverlappingItem = false;
                     for (var k=0; k<t.items.length; k++) {
                         var itc = t.items[k];
@@ -712,19 +800,236 @@ export class na3D_fileBrowser {
 
                 }
                 
+                     if (it.name=='webgl' || (it.name=='good' && t.items[it.parent].name=='webgl')) debugger;                        
 
-                if (it.model) {
+                     /*
+                if (false && it.model) {
                     it.model.position.x = it.offsetX;
                     it.model.position.y = it.offsetY;
                     it.model.position.z = -1 * ((it.level * 50) + (it.offsetZ) + 70);
+                    
 
                     it.zIndexOffset = zof;
                     //$(it.b.el).fitText();
                     
-                    t.resizeDoingIdx++;
                     
                 }
-                setTimeout (function(){t.onresize_do(t, levels)}, 10);
+                */
+                t.resizeDoingIdx++;
+                //setTimeout (function(){t.onresize_do(t, levels)}, 10);
+                
+                clearTimeout (t.linedrawTimeout);
+                t.linedrawTimeout = setTimeout(function() {
+                    t.drawLines (t);
+                }, 500);
+                
+            }
+        }
+    }
+    
+    
+    onresize_do_skyscrapers(t, levels) {
+        var
+        bw = $(window).width(),
+        pl = null;
+        
+        if (!t) t = this;
+        
+        t.resizing = true;
+        
+        if (!levels) {
+            levels = {};
+            t.resizeDoingIdx=0;
+            t.resizeDoneCount=0;
+        }
+        
+        if (!t.firstLevelCount) {
+            t.firstLevelCount = 0;
+            for (var i=0; i<t.items.length; i++) {
+                if (t.items[i].level===1) t.firstLevelCount++;
+            }
+        }
+        
+        if (!t.resizeDoingIdx) t.resizeDoingIdx=0;
+        if (!t.resizeDoneCount) t.resizeDoneCount=0;
+        t.resizeDoneCount++;
+        if (t.resizeDoneCount>25) {
+            //clearTimeout (t.linedrawTimeout); // <!-- uncomment to show all the parent-child lines in one go.
+            setTimeout(function() {
+                t.resizeDoneCount = 0;
+                t.resizing = false;
+                t.onresize(t, levels); // BUG:must call onresize_do_skyscrapers
+            }, 500);
+        } else {
+            if (t.resizeDoingIdx >= t.items.length) {
+                t.resizeDoingIdx = 0;
+                t.resizeDoneCount = 0;
+                t.resizing = false;
+            } else {
+                var it = t.items[t.resizeDoingIdx];
+                if (typeof it.parent==='undefined') {
+                    t.resizeDoingIdx++;
+                    setTimeout (function(){t.onresize_do_skyscrapers(t, levels)}, 10);
+                    return false;
+                }
+                
+                var 
+                parent = t.items[it.parent],
+                l = levels['path '+it.path],
+                width = $(t.el).width(), 
+                placingX = 'right',//Math.random()>0.5?'right':'left',
+                //columnCount = Math.floor((width-(250/2)) / 250), // <-- results in jubmled view               
+                rowCount = 4,
+                itemsOnLevelCount = 0;
+                
+                var levelItemCount = 0;
+                for (var j=0; j<t.items.length; j++) {
+                    var it2 = t.items[j];
+                    if (it2.level===it.level) levelItemCount++;
+                };
+                if (it.level>=1) {
+                    if (it.level===1) {
+                        if (it.levelIdx < levelItemCount/2) placingX='left';
+                    } else {
+                        var parent1 = it.parent;
+                        while (typeof parent1=='number' && parent1!==0 && t.items[parent1].level!==1) parent1 = t.items[parent1].parent;
+                        placingX = t.items[parent1].placingX;
+                    }
+                }
+                    
+                for (var j=0; j<t.items.length; j++) {
+                    var it2 = t.items[j];
+                    if (it2.parent === it.parent && it2.level === it.level) itemsOnLevelCount++;
+                };
+                
+                var
+                columnCount = Math.ceil(itemsOnLevelCount / rowCount);
+                
+                var
+                column = 1,
+                row = 1;
+                
+                for (var j=0; j<t.items.length; j++) {
+                    var it2 = t.items[j];
+                    if (it2.parent === it.parent && it2.level === it.level) {
+                        if ((it.levelIdx+1) <= (column * rowCount) + row ) {
+                            //row--;
+                        } else if (row >= rowCount) {
+                            column++;
+                            row = 1;
+                        } else row++;
+                    } 
+                    
+                };
+                
+                var           
+                l = levels['path '+it.path];
+                it.placingX = placingX;
+                it.columnCount = columnCount;
+                it.rowCount = rowCount;
+                it.row = row;
+                it.column = column;
+
+                var 
+                spacingBetweenSubfoldersOnSameLevel = 75,
+                extraOffset = spacingBetweenSubfoldersOnSameLevel;//it.parent!==0?-1*spacingBetweenSubfoldersOnSameLevel*t.items[it.parent].columnCount/2:0; // <-- drop the '-1*' here to draw the tree as a root system instead
+                // ((levelItemCount-it.levelIdx)*50)*
+
+                if (!l) {
+                    
+                    var pl = levels['path '+parent.path];
+                    if (!pl) {
+                        pl = {
+                            offsetY : 0,
+                            offsetX : 0,
+                            offsetZ : 0,
+                            zIndexOffset : 0,
+                            rowCount : rowCount,
+                            columnCount : columnCount
+                        }
+                    }
+                    
+                    pl.columnCount = columnCount; // problem is here.. combined with the fact that this is a setTimeout()-curated loop
+                    pl.rowCount = rowCount;
+                    
+                    var zof = pl.zIndexOffset + 1;
+                    levels['path '+it.path] = jQuery.extend({}, pl);
+                    levels['path '+it.path].level = it.level;
+                    levels['path '+it.path].zIndexOffset = zof;
+                    levels['path '+it.path].offsetX = pl.offsetX;// + 10;
+                    levels['path '+it.path].offsetY = pl.offsetY;// + 10;
+                    levels['path '+it.path].offsetZ = pl.offsetZ;// + 10;
+                    
+                    l = levels['path '+it.path];
+                };
+                
+                if (!pl) pl = levels['path '+parent.path];
+                
+                var moreToCheck = true, checkCounter = 0, foundOverlappingItem = false, placingX='right';
+                while (moreToCheck) {
+                    if (checkCounter > 4) break;
+                    var 
+                    extraOffsetX = 0,
+                    extraOffsetY = 50 * checkCounter,
+                    extraOffsetZ = 50 * checkCounter,
+                    placingX2 = t.items[it.parent].placingX;
+                    
+                    it.offsetX = (
+                        l
+                        ? l.offsetX + parent.offsetX + ( 75 * (it.column-1) )+ extraOffsetX
+                        : parent.offsetX + ( 75 * (it.column-1)) + extraOffsetX
+                    );
+                    it.offsetY = (
+                        l
+                        ? placingX==='right'
+                                ? l.offsetY + parent.offsetY +  (50*(it.row-1)) + extraOffsetY
+                                : l.offsetY + parent.offsetY -  (50*(it.row-1)) - extraOffsetY
+                        : placingX==='right'
+                                ? parent.offsetY +  (50*(it.row-1)) + extraOffsetY
+                                : parent.offsetY -  (50*(it.row-1)) - extraOffsetY
+                    );
+                    it.offsetZ = (pl?pl.offsetZ+50:50);//checkCounter;
+                    
+                    foundOverlappingItem = false;
+                    for (var k=0; k<t.items.length; k++) {
+                        var itc = t.items[k];
+                        if (itc.idx === it.idx) continue;
+                        if (!foundOverlappingItem) {
+                            foundOverlappingItem = (
+                                it.offsetY === itc.offsetY
+                                && it.offsetX === itc.offsetX
+                                && it.level === itc.level
+                                && it.offsetZ === itc.offsetZ
+                            );
+                            if (foundOverlappingItem) {
+                               // debugger;
+                                break;
+                            }
+                        } else break;
+                    };
+                    //if (!foundOverlappingItem) debugger;
+                    if (foundOverlappingItem) moreToCheck = true; else moreToCheck = false;
+                    if (moreToCheck && Object.keys(levels).length===1) {
+                        moreToCheck = false;
+                    }
+                    checkCounter++;
+
+                }
+                
+                if (it.model) {
+                    /*
+                    it.model.position.x = it.offsetX;
+                    it.model.position.y = it.offsetY;
+                    it.model.position.z = -1 * ((it.level * 50) + (it.offsetZ) + 70);
+                    */
+                    it.zIndexOffset = zof;
+                    //$(it.b.el).fitText();
+                }    
+                    t.resizeDoingIdx++;
+                    
+                //}
+                
+                setTimeout (function(){t.onresize_do_skyscrapers(t, levels)}, 10);
                 
                 clearTimeout (t.linedrawTimeout);
                 t.linedrawTimeout = setTimeout(function() {
