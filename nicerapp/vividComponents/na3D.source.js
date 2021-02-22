@@ -166,7 +166,7 @@ export class na3D_fileBrowser {
 
                     // build a line towards parent
                     if (hoveredItem && hoveredItem.it && !done) {
-                        t.hoverOverName = hoveredItem.it.name + ' - ' + hoveredItem.it.model.position.z;
+                        t.hoverOverName = hoveredItem.it.model.position.z + ' : ' + hoveredItem.it.name;
                         
                         var 
                         it = hoveredItem.it,
@@ -358,7 +358,8 @@ export class na3D_fileBrowser {
                     levelIdx : t.ld2[level].levelIdx,
                     parent : parent,
                     offsetY : 0,
-                    offsetX : 0
+                    offsetX : 0,
+                    offsetZ : 0
                 };
                 
                 items[items.length] = it;
@@ -663,21 +664,17 @@ export class na3D_fileBrowser {
             }
             t.resizeDoingIdx++;
         }
-        t.resizeDoingIdx = 0;
+        t.resizeDoingIdx = 1;
         while (t.resizeDoingIdx < t.items.length) {
-            //if (it.name=='animals' || it.name=='anime art' || it.name == 'autumn') debugger;
-            //if (it.name=='Milkyway' || it.name=='galaxies') debugger;
+//             debugger;
             if (t.resizeDoingIdx >= t.items.length) {
                 t.resizeDoingIdx = 0;
                 t.resizeDoneCount = 0;
                 t.resizing = false;
                 debugger;
+                return true;
             } else {
                 var it = t.items[t.resizeDoingIdx];
-                if (typeof it.parent==='undefined') {
-                    t.resizeDoingIdx++;
-                    continue;
-                }
                 
                 var 
                 parent = t.items[it.parent],
@@ -718,7 +715,7 @@ export class na3D_fileBrowser {
                 
                 if (!pl) pl = levels['path '+parent.path];
                 
-                var moreToCheck = true, checkCounter = 1, foundOverlappingItem = false, overlapParents = [];
+                var moreToCheck = true, checkCounter = 1, foundOverlappingItem = false;
                 while (moreToCheck) {
                     if (checkCounter > 4) break;
                     var 
@@ -747,15 +744,7 @@ export class na3D_fileBrowser {
                             it2.offsetZ = -1 * ((it2.level*100)+extraOffsetZ);
                             items.push (it2);
 
-                            //if (it2.model) {
-                                //if (!overlapParents.includes(it2.parent)) {
-                                    console.log (it2.name+'('+it2.idx+') - ('+it2.offsetX+', '+it2.offsetY+', '+it2.offsetZ+')');
-                                    overlapParents[overlapParents.length] = it2.parent;
-                                //};
-                                it2.model.position.x = it2.offsetX;
-                                it2.model.position.y = it2.offsetY;
-                                it2.model.position.z = it2.offsetZ;
-                            //}
+                            console.log (it2.name+'('+it2.idx+') - ('+it2.offsetX+', '+it2.offsetY+', '+it2.offsetZ+')');
                         }
                     }
                     if (it.name=='fox' || (it.name=='ricepaddy')) debugger;                        
@@ -772,7 +761,7 @@ export class na3D_fileBrowser {
                                 && it.offsetZ === itc.offsetZ
                             );
                             if (foundOverlappingItem) {
-                               // debugger;
+                                //debugger;
                                 break;
                             }
                         } else break;
@@ -785,23 +774,21 @@ export class na3D_fileBrowser {
                     checkCounter++;
                 }
                 
+                for (var k=0; k<t.items.length; k++) {
+                    var it2 = t.items[k];
+                    
+                    if (it.parent === it2.parent && it2.model.position.x===0) {
+                        it2.model.position.x = it2.offsetX;
+                        it2.model.position.y = it2.offsetY;
+                        it2.model.position.z = it2.offsetZ;
+                        it2.model.position.needsUpdate = true;
+                        if (it.name=='fox' || (it.name=='ricepaddy')) debugger;                        
+                    }
+                }
+                
                 if (it.name=='fox' || (it.name=='ricepaddy')) debugger;                        
 
-                     /*
-                if (false && it.model) {
-                    it.model.position.x = it.offsetX;
-                    it.model.position.y = it.offsetY;
-                    it.model.position.z = -1 * ((it.level * 50) + (it.offsetZ) + 70);
-                    
-
-                    it.zIndexOffset = zof;
-                    //$(it.b.el).fitText();
-                    
-                    
-                }
-                */
                 t.resizeDoingIdx++;
-                //setTimeout (function(){t.onresize_do(t, levels)}, 10);
                 
                 clearTimeout (t.linedrawTimeout);
                 t.linedrawTimeout = setTimeout(function() {
