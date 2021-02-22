@@ -175,7 +175,7 @@
             <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'portrait  good');">Good</a></li>
             </ul>-->
         </li>
-        <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', nicerapp.site.themes.groups.guests.calculate.stages[0].backgrounds.favorites.onlyTiled);">Tiled</a>
+        <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'tiled');">Tiled</a>
                 <ul>
                 <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'tiled black');">Black</a></li>
                 <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'tiled grey');">Grey</a></li>

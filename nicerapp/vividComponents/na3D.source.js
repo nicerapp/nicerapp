@@ -713,7 +713,7 @@ export class na3D_fileBrowser {
                 
                 if (!pl) pl = levels['path '+parent.path];
                 
-                var moreToCheck = true, checkCounter = 1, foundOverlappingItem = false, overlapParents = [];
+                var moreToCheck = true, checkCounter = 0/*change to 1 to spread items out more*/, foundOverlappingItem = false, overlapParents = [];
                 while (moreToCheck) {
                     if (checkCounter > 4) break;
                     var 
