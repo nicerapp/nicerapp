@@ -1,1 +1,1 @@
-3D backgrounds browser on nicer.app
+3D demo : highres GLTF models, on nicer.app
