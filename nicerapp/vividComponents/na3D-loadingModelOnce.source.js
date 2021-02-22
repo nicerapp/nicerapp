@@ -290,41 +290,49 @@ export class na3D_fileBrowser {
             },
             function () {
                 //debugger;
-                t.initializeItems_do (t, items, data, parent, level, levelDepth, path);
+                t.initializeItems_loadModel (t, items, data, parent, level, levelDepth, path);
             }, 100
         );
     }
 
-    /*
     initializeItems_loadModel (t, items, data, parent, level, levelDepth, path) {
+        if (!t.ld2[level]) t.ld2[level] = { parent : parent, initItemsDoingIdx : 0, path : path };
+        if (!t.ld2[level].keys) t.ld2[level].keys = Object.keys(data);
+        if (t.ld2[level].initItemsDoingIdx >= t.ld2[level].keys.length) return false;
+        
+        if (!t.ld2[level].levelIdx) t.ld2[level].levelIdx = 0;
+        
+        if (!t.ld1[level]) t.ld1[level] = { levelIdx : 0 };
+        
+        if (!t.initCounter) t.initCounter=0;
+        
         let 
         it = items[0],
         cd = { //call data
             t : t,
             it : it,
             items : items,
-            itd : itd,
+            itd : t.data[t.ld2[level].keys[ t.ld2[level].initItemsDoingIdx ] ],
             parent : parent,
-            path : path2,
-            levelDepth : levelDepth + 1
+            path : '0',
+            levelDepth : 1
         };
+        it.idx = 0;
         
+        t.loading = true;
         t.loader.load( '/nicerapp/3rd-party/3D/models/folder icon/scene.gltf', function ( gltf, cd) {
+            t.gltf = gltf;
+            
             gltf.scene.scale.setScalar (10);
-            t.scene.add (gltf.scene);
-            cd.it.model = gltf.scene;
-            cd.it.model.it = cd.it;
             cd.t.updateTextureEncoding(t, gltf.scene);
-            t.initCounter++;
-            
-            var
-            newLevel = (
-                Object.keys(t.ld2).length > 1
-                ? parseInt(Object.keys(t.ld2).reduce(function(a, b){ return t.ld2[a] > t.ld2[b] ? a : b }))+1
-                : 2
-            );
-            cd.level = newLevel;
-            
+            debugger;
+                        var
+                        newLevel = (
+                            Object.keys(t.ld2).length > 1
+                            ? parseInt(Object.keys(t.ld2).reduce(function(a, b){ return t.ld2[a] > t.ld2[b] ? a : b }))+1
+                            : 2
+                        );
+                        cd.level = newLevel;
             t.loading = false;
             cd.t.initializeItems_do (cd.t, cd.items, cd.itd, cd.it.idx, newLevel, cd.levelDepth, cd.path);
         }, function ( xhr ) {
@@ -332,7 +340,7 @@ export class na3D_fileBrowser {
         }, function ( error ) {
             console.error( error );
         },  cd );
-    }*/
+    }
     
     initializeItems_do (t, items, data, parent, level, levelDepth, path) {
         if (!t.ld2[level]) t.ld2[level] = { parent : parent, initItemsDoingIdx : 0, path : path };
@@ -347,6 +355,8 @@ export class na3D_fileBrowser {
          
         while (t.ld2[level].initItemsDoingIdx < t.ld2[level].keys.length) {
             var itd = data[ t.ld2[level].keys[ t.ld2[level].initItemsDoingIdx ] ];
+            if (t.ld2[level].keys[ t.ld2[level].initItemsDoingIdx ]=='landscape') debugger;
+            if (t.ld2[level].keys[ t.ld2[level].initItemsDoingIdx ]=='space stars night sky darkmode') debugger;
             if (typeof itd == 'object') {
                 let 
                 path2 = !t.items[parent]||t.items[parent].path===''?''+parent:t.items[parent].path+','+parent,
@@ -383,13 +393,12 @@ export class na3D_fileBrowser {
                 
                 t.loading = true;
                 //setTimeout (function () {
-                    t.loader.load( '/nicerapp/3rd-party/3D/models/folder icon/scene.gltf', function ( gltf, cd) {
+                    //t.loader.load( '/nicerapp/3rd-party/3D/models/folder icon/scene.gltf', function ( gltf, cd) {
                 //var gltf = $.extend({},t.items[0].model);
-                        gltf.scene.scale.setScalar (10);
-                        t.scene.add (gltf.scene);
-                        cd.it.model = gltf.scene;
+                        const model = t.gltf.scene.clone();
+                        t.scene.add (model);
+                        cd.it.model = model;
                         cd.it.model.it = cd.it;
-                        cd.t.updateTextureEncoding(t, gltf.scene);
                         t.initCounter++;
                         
                         var
@@ -400,18 +409,22 @@ export class na3D_fileBrowser {
                         );
                         cd.level = newLevel;
                         
-                        clearTimeout (t.onresizeTimeout);
+                        //cd.t.onresize (cd.t);
+                clearTimeout (t.onresizeTimeout);
                         
+                        //debugger;
                         t.loading = false;
                     
-                        cd.t.initializeItems (cd.t, cd.items, cd.itd, cd.it.idx, newLevel, cd.levelDepth, cd.path);
+                        cd.t.initializeItems_do (cd.t, cd.items, cd.itd, cd.it.idx, newLevel, cd.levelDepth, cd.path);
+                    /*
                     }, function ( xhr ) {
-                        console.log( 'model "folder icon" : ' + ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+                        //console.log( 'model "folder icon" : ' + ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
                     }, function ( error ) {
                         console.error( error );
-                    },  cd );
+                    },  cd );*/
                 //}, 1000);
             } 
+            
             t.ld2[level].initItemsDoingIdx++;
             
             
@@ -592,7 +605,7 @@ export class na3D_fileBrowser {
                 l = levels['path '+it.path],
                 height = $(t.el).height(), 
                 placingX = 'right',//Math.random()>0.5?'right':'left',
-                placingY = 'bottom',
+                placingY = 'top',
                 //columnCount = Math.floor((width-(250/2)) / 250), // <-- results in jubmled view               
                 rowCount = 5,//Math.floor(((height/2)-100)/50),
                 itemsOnLevelCount = 0;
@@ -638,13 +651,13 @@ export class na3D_fileBrowser {
                     
                 };
                 //column += columnCount - ( (it.levelIdx+1) - (columnCount * row) );
-                
+                /*
                 if (column < columnCount/2) {
                     placingX = 'left'
                 };
                 if (row < rowCount/2) {
-                    placingY = 'top'
-                };
+                    placingY = 'bottom'
+                };*/
                 
                 var           
                 l = levels['path '+it.path];
@@ -713,12 +726,12 @@ export class na3D_fileBrowser {
                 
                 if (!pl) pl = levels['path '+parent.path];
                 
-                var moreToCheck = true, checkCounter = 1, foundOverlappingItem = false, overlapParents = [];
+                var moreToCheck = true, checkCounter = 1, foundOverlappingItem = false;
                 while (moreToCheck) {
                     if (checkCounter > 4) break;
                     var 
-                    extraOffsetX = parent.column*50*checkCounter,
-                    extraOffsetY = parent.row*50*checkCounter,//50 * checkCounter,
+                    extraOffsetX = 0,//parent.column*50*checkCounter,
+                    extraOffsetY = 0,//parent.row*50*checkCounter,//50 * checkCounter,
                     extraOffsetZ = 100 * checkCounter,
                     placingX2 = 'right',//placingX,//t.items[it.parent].placingX,
                     placingY2 = 'top',//placingY;//t.items[it.parent].placingY;
@@ -727,24 +740,25 @@ export class na3D_fileBrowser {
                     for (var k=0; k<t.items.length; k++) {
                         var it2 = t.items[k];
                         
-                        if (it.parent === it2.parent) {
+                        if (it.parent === it2.parent /*&& it.idx!==it2.idx*/) {
                         
                             it2.offsetX = (
-                                parent.placingX=='right'
+                                it2.placingX=='right'
                                 ? parent.offsetX + ( 50 * (it2.column)) + extraOffsetX
                                 : parent.offsetX - ( 50 * (it2.column)) - extraOffsetX
                             );
                             it2.offsetY = (
-                                parent.placingY == 'top'
+                                it2.placingY == 'top'
                                 ? parent.offsetY + (50*(it2.row)) + extraOffsetY
                                 : parent.offsetY - (50*(it2.row)) - extraOffsetY
                             );
-                            it2.offsetZ = parent.offsetZ + (-1 * ((it2.level*100)+extraOffsetZ));
+                            it2.offsetZ = -1 * ((it2.level*100)+extraOffsetZ);
                             items.push (it2);
 
                             console.log (it2.name+'('+it2.idx+') - ('+it2.offsetX+', '+it2.offsetY+', '+it2.offsetZ+')');
                         }
                     }
+                    if (it.name=='fox' || (it.name=='ricepaddy')) debugger;                        
                             
                     foundOverlappingItem = false;
                     for (var k=0; k<t.items.length; k++) {
@@ -758,7 +772,7 @@ export class na3D_fileBrowser {
                                 && it.offsetZ === itc.offsetZ
                             );
                             if (foundOverlappingItem) {
-                               // debugger;
+                                //debugger;
                                 break;
                             }
                         } else break;
@@ -768,7 +782,6 @@ export class na3D_fileBrowser {
                         moreToCheck = false;
                     }
 
-                    
                     checkCounter++;
                 }
                 
@@ -780,9 +793,12 @@ export class na3D_fileBrowser {
                         it2.model.position.y = it2.offsetY;
                         it2.model.position.z = it2.offsetZ;
                         it2.model.position.needsUpdate = true;
+                        if (it.name=='fox' || (it.name=='ricepaddy')) debugger;                        
                     }
                 }
                 
+                if (it.name=='fox' || (it.name=='ricepaddy')) debugger;                        
+
                 t.resizeDoingIdx++;
                 
                 clearTimeout (t.linedrawTimeout);
