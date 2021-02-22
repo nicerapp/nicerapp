@@ -25,8 +25,9 @@ import Stats from '/nicerapp/3rd-party/3D/libs/three.js/examples/jsm/libs/stats.
 import { GLTFLoader } from '/nicerapp/3rd-party/3D/libs/three.js/examples/jsm/loaders/GLTFLoader.js';
 import { KTX2Loader } from '/nicerapp/3rd-party/3D/libs/three.js/examples/jsm/loaders/KTX2Loader.js';
 import { DRACOLoader } from '/nicerapp/3rd-party/3D/libs/three.js/examples/jsm/loaders/DRACOLoader.js';
-import { OrbitControls } from '/nicerapp/3rd-party/3D/libs/three.js/examples/jsm/controls/OrbitControls.js';
+import { OrbitControls } from '/nicerapp/3rd-party/3D/libs/three.js/examples/jsm/controls/OrbitControls-noPreventDefault.js';
 import { RGBELoader } from '/nicerapp/3rd-party/3D/libs/three.js/examples/jsm/loaders/RGBELoader.js';
+import { DragControls } from '/nicerapp/3rd-party/3D/libs/three.js/examples/jsm/controls/DragControls.js';
 //import { GLTFLoader } from '/nicerapp/3rd-party/3D/libs/three.js/examples/jsm/loaders/GLTFLoader.js';
 
 export class na3D_fileBrowser {
@@ -76,12 +77,14 @@ export class na3D_fileBrowser {
         this.renderer.outputEncoding = sRGBEncoding;
         this.renderer.setPixelRatio (window.devicePixelRatio);
         this.renderer.setSize( $(el).width()-20, $(el).height()-20 );
-        
         this.renderer.toneMappingExposure = 1.0;
         
         el.appendChild( this.renderer.domElement );
         
-        $(el).bind('mousemove', function() { event.preventDefault(); t.onMouseMove (event, t) });
+        $(el).bind('mousemove', function() {
+            event.preventDefault(); 
+            t.onMouseMove (event, t)
+        });
         $(el).click (function(event) {  
             event.preventDefault(); 
             if (event.detail === 2) { // double click
@@ -98,10 +101,6 @@ export class na3D_fileBrowser {
             event.preventDefault();
             if (event.keyCode===32) t.controls.autoRotate = !t.controls.autoRotate;
         });
-        
-        this.controls = new OrbitControls( this.camera, this.renderer.domElement );
-        this.controls.autoRotate = true;
-        //this.controls.listenToKeyEvents( window ); // optional
         
         this.loader = new GLTFLoader();
         this.initializeItems (this, this.items, this.data, 0, 0, 0, '');
@@ -133,6 +132,7 @@ export class na3D_fileBrowser {
 
         this.camera.position.z = 700;
         this.camera.position.y = 200;
+        this.camera.position.x = 400;
         
         this.animate(this);
     }
@@ -166,7 +166,9 @@ export class na3D_fileBrowser {
 
                     // build a line towards parent
                     if (hoveredItem && hoveredItem.it && !done) {
-                        t.hoverOverName = hoveredItem.it.model.position.z + ' : ' + hoveredItem.it.name;
+                        let p = hoveredItem.it.model.position;
+                        t.hoverOverName = '('+p.x+', '+p.y+', '+p.z + ') : ' + hoveredItem.it.name;
+                        //t.hoverOverName = hoveredItem.it.name;
                         
                         var 
                         it = hoveredItem.it,
@@ -261,13 +263,16 @@ export class na3D_fileBrowser {
             }
         }
         
-        t.controls.update();
+        if (t.controls) t.controls.update();
 
-        /*
         for (var i=0; i<t.lines.length; i++) {
             var it = t.lines[i];
-            it.geometry.verticesNeedUpdate = true;
-        };*/
+            if (it && it.geometry) it.geometry.verticesNeedUpdate = true;
+        };
+        for (var i=0; i<t.permaLines.length; i++) {
+            var it = t.permaLines[i];
+            if (it && it.geometry) it.geometry.verticesNeedUpdate = true;
+        };
 
         
         t.renderer.render( t.scene, t.camera );
@@ -277,13 +282,16 @@ export class na3D_fileBrowser {
         var rect = t.renderer.domElement.getBoundingClientRect();
         t.mouse.x = ( ( event.clientX - rect.left ) / ( rect.width - rect.left ) ) * 2 - 1;
         t.mouse.y = - ( ( event.clientY - rect.top ) / ( rect.bottom - rect.top) ) * 2 + 1;        
+        t.mouse.layerX =  event.layerX;
+        t.mouse.layerY =  event.layerY;
+
         $('#site3D_label').html(t.hoverOverName).css({ position:'absolute', padding : 10, zIndex : 5000, top : event.layerY + 10, left : event.layerX + 30 });
     }
     
     initializeItems (t, items, data, parent, level, levelDepth, path) {
         if (!t) t = this;
         //debugger;
-        na.m.waitForCondition ('waiting for other onresize commands to finish',
+        na.m.waitForCondition ('waiting for other initializeItems_do() commands to finish',
             function () {
                 //debugger;
                 return t.loading === false;
@@ -295,45 +303,6 @@ export class na3D_fileBrowser {
         );
     }
 
-    /*
-    initializeItems_loadModel (t, items, data, parent, level, levelDepth, path) {
-        let 
-        it = items[0],
-        cd = { //call data
-            t : t,
-            it : it,
-            items : items,
-            itd : itd,
-            parent : parent,
-            path : path2,
-            levelDepth : levelDepth + 1
-        };
-        
-        t.loader.load( '/nicerapp/3rd-party/3D/models/folder icon/scene.gltf', function ( gltf, cd) {
-            gltf.scene.scale.setScalar (10);
-            t.scene.add (gltf.scene);
-            cd.it.model = gltf.scene;
-            cd.it.model.it = cd.it;
-            cd.t.updateTextureEncoding(t, gltf.scene);
-            t.initCounter++;
-            
-            var
-            newLevel = (
-                Object.keys(t.ld2).length > 1
-                ? parseInt(Object.keys(t.ld2).reduce(function(a, b){ return t.ld2[a] > t.ld2[b] ? a : b }))+1
-                : 2
-            );
-            cd.level = newLevel;
-            
-            t.loading = false;
-            cd.t.initializeItems_do (cd.t, cd.items, cd.itd, cd.it.idx, newLevel, cd.levelDepth, cd.path);
-        }, function ( xhr ) {
-            //console.log( 'model "folder icon" : ' + ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
-        }, function ( error ) {
-            console.error( error );
-        },  cd );
-    }*/
-    
     initializeItems_do (t, items, data, parent, level, levelDepth, path) {
         if (!t.ld2[level]) t.ld2[level] = { parent : parent, initItemsDoingIdx : 0, path : path };
         if (!t.ld2[level].keys) t.ld2[level].keys = Object.keys(data);
@@ -378,7 +347,7 @@ export class na3D_fileBrowser {
                 //debugger;
                 //if (it.name==='landscape' || it.name==='portrait') debugger;
                 
-                clearTimeout (t.onresizeTimeout);
+                clearTimeout (t.onresizeInitTimeout);
                 clearTimeout (t.linedrawTimeout);
                 
                 t.loading = true;
@@ -400,7 +369,7 @@ export class na3D_fileBrowser {
                         );
                         cd.level = newLevel;
                         
-                        clearTimeout (t.onresizeTimeout);
+                        clearTimeout (t.onresizeInitTimeout);
                         
                         t.loading = false;
                     
@@ -415,10 +384,59 @@ export class na3D_fileBrowser {
             t.ld2[level].initItemsDoingIdx++;
             
             
-            clearTimeout (t.onresizeTimeout);
-            t.onresizeTimeout = setTimeout(function() {
+            clearTimeout (t.onresizeInitTimeout);
+            t.onresizeInitTimeout = setTimeout(function() {
+                var objs = [];
+                for (var i=0; i<t.items.length; i++) if (t.items[i].model) objs[objs.length] = t.items[i].model.children[0];
+                t.dragndrop = new DragControls( objs, t.camera, t.renderer.domElement );
+                
+                t.dragndrop.addEventListener( 'dragstart', function ( event ) {
+                    t.controls.enabled = false;
+                    t.dragndrop.mouseX = t.mouse.layerX;
+                    t.dragndrop.mouseY = t.mouse.layerY;
+                } );
+                
+                t.dragndrop.addEventListener( 'drag', function (event) {
+                    let p = event.object.parent;
+                    while (!p.position || p.position.x===0) p = p.parent;
+                                             
+                    for (let i=0; i<t.items.length; i++) {
+                        let it = t.items[i];
+                        if (it.parent === p.it.parent) {
+                            it.model.position.x -= ((t.dragndrop.mouseX - t.mouse.layerX));
+                            it.model.position.y += ((t.dragndrop.mouseY - t.mouse.layerY));
+                        }
+                    }
+                    t.dragndrop.mouseX = t.mouse.layerX;
+                    t.dragndrop.mouseY = t.mouse.layerY;
+                    
+                    if (t.showLines) {
+                        for (var i=0; i<t.permaLines.length; i++) {
+                            var l = t.permaLines[i];
+                            t.scene.remove (l.line);
+                            l.geometry.dispose();
+                            l.material.dispose();
+                        }
+                        t.permaLines = [];
+                        t.drawLines(t);
+                    }
+    
+                });
+
+                t.dragndrop.addEventListener( 'dragend', function ( event ) {
+                    //event.object.material.emissive.set( 0x000000 );
+                    t.controls.enabled = true;
+                    if (t.showLines) t.drawLines(t);
+                } );
+                
+                t.controls = new OrbitControls( t.camera, t.renderer.domElement );
+                //this.controls.autoRotate = true;
+                $('#autoRotate').removeClass('vividButtonSelected').addClass('vividButton');
+                
+                //t.controls.listenToKeyEvents( window ); // optional
+                
                 t.onresize (t);
-            }, 2000);
+            }, 4000);
         }
     }
     
@@ -592,7 +610,7 @@ export class na3D_fileBrowser {
                 l = levels['path '+it.path],
                 height = $(t.el).height(), 
                 placingX = 'right',//Math.random()>0.5?'right':'left',
-                placingY = 'bottom',
+                placingY = 'top',
                 //columnCount = Math.floor((width-(250/2)) / 250), // <-- results in jubmled view               
                 rowCount = 5,//Math.floor(((height/2)-100)/50),
                 itemsOnLevelCount = 0;
@@ -643,7 +661,7 @@ export class na3D_fileBrowser {
                     placingX = 'left'
                 };
                 if (row < rowCount/2) {
-                    placingY = 'top'
+                    placingY = 'bottom'
                 };
                 
                 var           
@@ -713,7 +731,7 @@ export class na3D_fileBrowser {
                 
                 if (!pl) pl = levels['path '+parent.path];
                 
-                var moreToCheck = true, checkCounter = 0/*change to 1 to spread items out more*/, foundOverlappingItem = false, overlapParents = [];
+                var moreToCheck = true, checkCounter = 1/*change to 1 to spread items out more*/, foundOverlappingItem = false, overlapParents = [];
                 while (moreToCheck) {
                     if (checkCounter > 4) break;
                     var 
@@ -721,8 +739,7 @@ export class na3D_fileBrowser {
                     extraOffsetY = parent.row*50*checkCounter,//50 * checkCounter,
                     extraOffsetZ = 100 * checkCounter,
                     placingX2 = 'right',//placingX,//t.items[it.parent].placingX,
-                    placingY2 = 'top',//placingY;//t.items[it.parent].placingY;
-                    items = [];
+                    placingY2 = 'top';//placingY;//t.items[it.parent].placingY;
                     //debugger;
                     for (var k=0; k<t.items.length; k++) {
                         var it2 = t.items[k];
@@ -740,11 +757,9 @@ export class na3D_fileBrowser {
                                 : parent.offsetY - (50*(it2.row)) - extraOffsetY
                             );
                             it2.offsetZ = parent.offsetZ + (-1 * ((it2.level*100)+extraOffsetZ));
-                            items.push (it2);
-
-                            console.log (it2.name+'('+it2.idx+') - ('+it2.offsetX+', '+it2.offsetY+', '+it2.offsetZ+')');
                         }
                     }
+                    console.log (it.name+'('+it.idx+') - ('+it.offsetX+', '+it.offsetY+', '+it.offsetZ+')');
                             
                     foundOverlappingItem = false;
                     for (var k=0; k<t.items.length; k++) {
@@ -775,7 +790,7 @@ export class na3D_fileBrowser {
                 for (var k=0; k<t.items.length; k++) {
                     var it2 = t.items[k];
                     
-                    if (it.parent === it2.parent && it2.model.position.x===0) {
+                    if (it.parent === it2.parent && it2.model && it2.model.position.x===0) {
                         it2.model.position.x = it2.offsetX;
                         it2.model.position.y = it2.offsetY;
                         it2.model.position.z = it2.offsetZ;
