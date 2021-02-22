@@ -702,7 +702,7 @@ export class na3D_fileBrowser {
                         }
                     }
                     
-                    pl.columnCount = columnCount; // problem is here.. combined with the fact that this is a setTimeout()-curated loop
+                    pl.columnCount = columnCount; 
                     pl.rowCount = rowCount;
                     
                     var zof = pl.zIndexOffset + 1;
