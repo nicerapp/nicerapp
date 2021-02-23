@@ -137,8 +137,7 @@ var nas = na.site = {
     
 	stateChange : function(){ 
 		var 
-		state = History.getState(),
-		dontHijackLinks = jQuery('#iframe-content').is('.saDontHijackLinksInThis') ? true : false;
+		state = History.getState();
 
         na.m.log (200, 'na.site.stateChange() : url = '+state.url);
 		//na.s.c.urlSpecificSettings(state.url, function () {
