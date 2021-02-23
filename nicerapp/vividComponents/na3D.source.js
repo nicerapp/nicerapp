@@ -424,8 +424,11 @@ export class na3D_fileBrowser {
                             it.model.position.y += ((t.dragndrop.mouseY - t.mouse.layerY));
                         }
                     }
+                    debugger;
+                    setTimeout(function(){
                     t.dragndrop.mouseX = t.mouse.layerX;
                     t.dragndrop.mouseY = t.mouse.layerY;
+                    },500);
                     
                     if (t.showLines) {
                         for (var i=0; i<t.permaLines.length; i++) {
