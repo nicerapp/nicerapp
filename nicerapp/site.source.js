@@ -161,6 +161,7 @@ var nas = na.site = {
                     $('#siteToolbarRight .vividDialogContent').html(d.siteToolbarRight).fadeIn('normal');
                     na.site.transformLinks($('#siteToolbarRight')[0]);
                 });
+                na.site.reloadMenu();
             }, 
             failure : function (xhr, ajaxOptions, thrownError) {
                 debugger;
