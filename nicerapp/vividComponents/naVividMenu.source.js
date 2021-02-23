@@ -62,7 +62,7 @@ class naVividMenu {
             setTimeout(function() {
                 t.resizeDoneCount = 0;
                 t.onresize(t, levels);
-            }, 500);
+            }, 200);
         } else {
             if (t.resizeDoingIdx>=t.items.length) {
                 t.resizeDoingIdx = 0;
