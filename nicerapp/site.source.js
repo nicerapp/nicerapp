@@ -156,12 +156,12 @@ var nas = na.site = {
                 if (d.siteContent) $('#siteContent .vividDialogContent').fadeOut('normal', function() {
                     $('#siteContent .vividDialogContent').html(d.siteContent).fadeIn('normal');
                     na.site.transformLinks($('#siteContent')[0]);
+                    na.site.reloadMenu();
                 });
                 if (d.siteToolbarRight) $('#siteContent .vividDialogContent').fadeOut('normal', function() {
                     $('#siteToolbarRight .vividDialogContent').html(d.siteToolbarRight).fadeIn('normal');
                     na.site.transformLinks($('#siteToolbarRight')[0]);
                 });
-                na.site.reloadMenu();
             }, 
             failure : function (xhr, ajaxOptions, thrownError) {
                 debugger;
