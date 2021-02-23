@@ -388,17 +388,30 @@ export class na3D_fileBrowser {
             t.onresizeInitTimeout = setTimeout(function() {
                 var objs = [];
                 for (var i=0; i<t.items.length; i++) if (t.items[i].model) objs[objs.length] = t.items[i].model.children[0];
+                                               
+                t.controls = new OrbitControls( t.camera, t.renderer.domElement );
+                //this.controls.autoRotate = true;
+                $('#autoRotate').removeClass('vividButtonSelected').addClass('vividButton');
+                //t.controls.listenToKeyEvents( window ); // optional
+                t.controls.enabled = false;
+                setTimeout (function(){
+                     t.controls.enabled = true;
+                }, 1000);
+                                               
                 t.dragndrop = new DragControls( objs, t.camera, t.renderer.domElement );
                 
                 t.dragndrop.addEventListener( 'dragstart', function ( event ) {
-                    t.controls.enabled = false;
+                    if (t.controls) t.controls.dispose();
                     t.dragndrop.mouseX = t.mouse.layerX;
                     t.dragndrop.mouseY = t.mouse.layerY;
                 } );
                 
                 t.dragndrop.addEventListener( 'drag', function (event) {
                     let p = event.object.parent;
-                    while (!p.position || p.position.x===0) p = p.parent;
+                    while (!p.position || p.position.x===0) {
+                        p = p.parent;
+                        if (!p) return false;
+                    }
                                              
                     for (let i=0; i<t.items.length; i++) {
                         let it = t.items[i];
@@ -425,15 +438,14 @@ export class na3D_fileBrowser {
 
                 t.dragndrop.addEventListener( 'dragend', function ( event ) {
                     //event.object.material.emissive.set( 0x000000 );
+                    t.controls = new OrbitControls( t.camera, t.renderer.domElement );
+                    //this.controls.autoRotate = true;
+                    $('#autoRotate').removeClass('vividButtonSelected').addClass('vividButton');
+                    //t.controls.listenToKeyEvents( window ); // optional
                     t.controls.enabled = true;
+                    
                     if (t.showLines) t.drawLines(t);
                 } );
-                
-                t.controls = new OrbitControls( t.camera, t.renderer.domElement );
-                //this.controls.autoRotate = true;
-                $('#autoRotate').removeClass('vividButtonSelected').addClass('vividButton');
-                
-                //t.controls.listenToKeyEvents( window ); // optional
                 
                 t.onresize (t);
             }, 4000);
@@ -759,7 +771,7 @@ export class na3D_fileBrowser {
                             it2.offsetZ = parent.offsetZ + (-1 * ((it2.level*100)+extraOffsetZ));
                         }
                     }
-                    console.log (it.name+'('+it.idx+') - ('+it.offsetX+', '+it.offsetY+', '+it.offsetZ+')');
+                    //console.log (it.name+'('+it.idx+') - ('+it.offsetX+', '+it.offsetY+', '+it.offsetZ+')');
                             
                     foundOverlappingItem = false;
                     for (var k=0; k<t.items.length; k++) {

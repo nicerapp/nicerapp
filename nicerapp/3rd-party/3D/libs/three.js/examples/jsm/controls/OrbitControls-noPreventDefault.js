@@ -289,7 +289,7 @@ var OrbitControls = function ( object, domElement ) {
 		//scope.dispatchEvent( { type: 'dispose' } ); // should this be added here?
 
 	};
-
+    
 	//
 	// internals
 	//
@@ -487,8 +487,8 @@ var OrbitControls = function ( object, domElement ) {
 	//
 
 	function handleMouseDownRotate( event ) {
-
-		rotateStart.set( event.clientX, event.clientY );
+		
+        rotateStart.set( event.clientX, event.clientY );
 
 	}
 
@@ -506,7 +506,7 @@ var OrbitControls = function ( object, domElement ) {
 
 	function handleMouseMoveRotate( event ) {
 
-		rotateEnd.set( event.clientX, event.clientY );
+        rotateEnd.set( event.clientX, event.clientY );
 
 		rotateDelta.subVectors( rotateEnd, rotateStart ).multiplyScalar( scope.rotateSpeed );
 
