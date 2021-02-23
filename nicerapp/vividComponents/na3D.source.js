@@ -400,6 +400,10 @@ export class na3D_fileBrowser {
                                                
                 t.dragndrop = new DragControls( objs, t.camera, t.renderer.domElement );
                 
+                $(t.renderer.domElement).contextmenu(function() {
+                    return false;
+                });
+                
                 t.dragndrop.addEventListener( 'dragstart', function ( event ) {
                     if (t.controls) t.controls.dispose();
                     t.dragndrop.mouseX = t.mouse.layerX;
