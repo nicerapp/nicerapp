@@ -114,8 +114,246 @@ var nas = na.site = {
             na.analytics.logMetaEvent ('keep-alive');
         }, 5000);
         
+        na.site.transformLinks ($('#siteContent')[0]);
+		History.Adapter.bind(window,'statechange', na.site.stateChange); // use HTML5 History API if available:
     },
+    
+    transformLinks : function (rootElement) {
+        $('a', rootElement).not('noPushState').each(function(idx, el){
+            let x = el.href, y = el.target;
+            if (el.href.match(document.location.origin)) {
+                let h = "javascript:na.site.loadContent('"+el.href.replace(document.location.origin,'').replace('/apps/','')+"');";
+                el.href = h;
+                $(el).attr('targetDisabled',$(el).attr('target'));
+                $(el).attr('target','');
+                
+            }
+        });
+    },
+    
+    loadContent : function (url) {
+        History.pushState (null, '', document.location.origin+'/apps/'+url);
+    },
+    
+	stateChange : function(){ 
+		var 
+		state = History.getState(),
+		dontHijackLinks = jQuery('#iframe-content').is('.saDontHijackLinksInThis') ? true : false;
 
+        na.m.log (200, 'na.site.stateChange() : url = '+state.url);
+		//na.s.c.urlSpecificSettings(state.url, function () {
+          //  na.m.log (200, 'na.s.c.stateChange(2) : url = '+state.url);
+            na.site.loadContent_getAndDisplayContent (state.url.replace(document.location.origin,'').replace('/apps/', ''));
+        //});
+	},
+
+    loadContent_getAndDisplayContent : function (url) {
+        var ac = {
+            type : 'GET',
+            url : '/apps_content/'+url.replace(document.location.host,'').replace(document.location.origin,'').replace('/apps/', ''),
+            success : function (data, ts, xhr) {
+                //debugger;
+                var d = JSON.parse(data);
+                if (d.siteContent) $('#siteContent .vividDialogContent').fadeOut('normal', function() {
+                    $('#siteContent .vividDialogContent').html(d.siteContent).fadeIn('normal');
+                    na.site.transformLinks($('#siteContent')[0]);
+                });
+                if (d.siteToolbarRight) $('#siteContent .vividDialogContent').fadeOut('normal', function() {
+                    $('#siteToolbarRight .vividDialogContent').html(d.siteToolbarRight).fadeIn('normal');
+                    na.site.transformLinks($('#siteToolbarRight')[0]);
+                });
+            }, 
+            failure : function (xhr, ajaxOptions, thrownError) {
+                debugger;
+                alert ('na.site.loadContent() : '+thrownError);
+            }
+        };
+        ac.url = ac.url.replace('\/\/','/');
+        //debugger;
+        $.ajax(ac);
+      
+        na.analytics.logMetaEvent('na.site.loadContent() : url='+url);
+    },
+    
+    /*
+	transformLinks : function (rootElement, isIframe) {
+		var logLevel = 20000;
+		//if (jQuery('a', rootElement).length==0) debugger;
+		jQuery('form', rootElement).each (na.m.traceFunction(function (idx) {
+			if (jQuery(this).attr('action')!='') {
+				var 
+				o = jQuery(this).attr('action');
+				
+				if (!o || o.match('javascript:')) return false;
+				
+				var
+				thisSite = 'http://'+location.hostname+(location.port ? ':'+location.port: '')+'/',
+				isCompleteURL = o.match(thisSite);
+				baseURL = (
+					isCompleteURL 
+					? (
+						o.match(na.m.globals.urls.app+'url/')
+						? o.replace(na.m.globals.urls.app+'url/','')
+						: o.replace(thisSite, document.location.href.replace(na.m.globals.urls.app+'url/',''))
+					)
+					: ''
+				),
+				pos = baseURL.indexOf('/'),
+				baseURL = (pos === -1 ? baseURL : baseURL.substr(0,pos+1)),
+				baseURL = baseURL.substr(baseURL.length-1,1)==='/' ? baseURL : baseURL + '/',
+				baseURL = baseURL.substr(0,1)==='/' ? baseURL.substr(1) : baseURL,
+				newURL = na.m.globals.urls.subURL + (document.location.href.match('url/')?'url/':'') + baseURL + o.replace(thisSite, '').replace('http://','').replace('https://','').replace("'", "\\'"),
+				p = isIframe ? 'window.parent.window.' :'',
+				jQueryinputs = jQuery('input', this),//jQuery(':text', this).add('input', this).add("input[type='email']", this).add("input[type='password']", this),
+				inputURL = '',
+				inputIDs = '',
+				cnt = 0;
+				
+				jQueryinputs.each(na.m.traceFunction (function (idx2) {
+					if (inputIDs!=='') inputIDs +=', ';
+					if (this.name!=='') {
+						if (!this.id) {
+							this.id = 'saForeign_input'+(cnt++);
+						}
+						inputIDs += '#' + this.id;
+					}
+				}));
+				
+				
+				na.m.log (1, 't25', o, baseURL, newURL, thisSite, document.location.href.replace(na.m.globals.urls.app+'url/',''));
+				
+				//na.m.log (logLevel, { codeExecPath : 3, sample : 1, newURL : newURL } );
+				if (this.className.match('noPushState')) {
+					var n = n1 = 'javascript:'+newURL;
+					
+				} else {
+					var n = 'javascript:'+p+'na.site.pushState (null, \'' + this.title + '\', "' + newURL + '");';
+					
+					var n1 = 'javascript:'+p+'na.site.pushForm ("'+newURL+'", "'+inputIDs+'", '+(isIframe?'true':'false')+');';
+				}
+				
+				
+				
+				jQuery(this).attr('urlO', o).attr('urlC', this.href).attr('baseURL',baseURL).attr('action', n1);
+
+				na.m.log (logLevel, { codeExecPath : 7, sample : 2, msg : o + ' diverted to '+n } );
+
+				
+				
+			}
+		}));
+        //debugger;
+		jQuery('a', rootElement).not('.noPushState').each (na.m.traceFunction(function (idx) {
+            var pageTitle = jQuery(this).attr('pageTitle');
+			if (typeof pageTitle=='string') {
+				pageTitle = pageTitle.replace('\'','\\\'');
+			} else {
+				pageTitle = 'nicer.app'
+			};
+
+            if (
+				this.className.match('nomod')
+				|| this.href.match('javascript:')
+				|| this.href.match('mailto:')
+                
+			) {
+                // if it works, don't fix it...			
+			} else if (!this.href.match(na.m.globals.urls.app)) {
+                this.target = this.href.replace(':','_').replace('/','-');
+            } else { 
+				if (jQuery(this).parents('#comments').length>0) {
+					this.target='_new';
+				} else if (this.href=='#' || this.href=='/#' || this.href=='//#' || this.href==na.m.globals.urls.app+'#') {
+					this.href='#';
+				} else if (jQuery(this).parents('.jsonViewer').length>0) {
+						// dont mess with these links
+						
+					} else if (this.href.substr(0,4)==='http' /*&& !this.href.match(na.m.globals.urls.app)* / ) {
+						var 
+						o = this.href,
+						thisSite = 'https://'+location.hostname+(location.port ? ':'+location.port: '')+'/',
+						isCompleteURL = this.href.match(thisSite),
+						baseURL = (
+							true // isCompleteURL 
+							? (
+								this.href.match(na.m.globals.urls.app+'url/')
+								? this.href.replace(na.m.globals.urls.app+'url/','')
+								: this.href.match(na.m.globals.urls.app)
+									? document.location.href.match(na.m.globals.urls.app+'url/')
+										? document.location.href.replace(na.m.globals.urls.app+'url/','').replace(na.m.globals.urls.app,'') + '/' + this.href.replace(na.m.globals.urls.app,'')
+										: this.href.replace(na.m.globals.urls.app,'')
+									: this.href.match(thisSite)
+										? this.href.replace(thisSite, document.location.href.replace(na.m.globals.urls.app+'url/',''))
+										: this.href.replace('http://','').replace('https://','')
+							)
+							: ''
+						),
+						href = this.href,
+						p1 = href.indexOf ('url?q='),
+						p2 = (
+							p1 !== -1
+							? href.indexOf('&', p1)
+							: -1
+						),
+						p2 = (
+							p2 === -1
+							? href.length
+							: p2
+						),
+						hrefResolved = (
+							p1 !== -1 
+							? href.substr (p1+6, p2-p1-6)
+							: href
+						),
+						newURL = 
+							na.m.globals.urls.subURL 
+							+ (document.location.href.match('url/')?'url/':'') 
+							+ baseURL,
+						p = isIframe ? 'window.parent.window.' :'';
+
+						this.href = 'javascript:'+p+'na.site.pushState (null, \'' + pageTitle  + '\', "' + newURL + '");';
+						jQuery(this).attr('urlO', o).attr('urlC', this.href).attr('baseURL',baseURL).attr('hrefResolved', hrefResolved);
+
+						na.m.log (logLevel, { codeExecPath : 3, sample : 2, msg : o + ' diverted to '+this.href } );
+						
+						
+						
+					
+					} else {
+						this.target = ''; 
+
+					// regular internal links:
+					
+						na.m.log (logLevel, { codeExecPath : 4, msg : 'binding click for ajaxification of ' + this.href } );
+						if (this.addEventListener) {
+						//Chrome, FireFox, Safari, "standards browsers":
+							this.addEventListener ('click', function (evt) {
+								na.m.log (undefined, { codeExecPath : 4.1, msg : 'na.site.transformLinks(): '+this.href+' fired! ajaxifying! :)' } );
+								evt.preventDefault();
+								na.site.pushState (null, this.title, this.href.replace('{$SA_SITE_HD}', na.m.globals.urls.app));
+							}, true);
+						} else if (this.attachEvent) {
+						//Internet Explorer:
+							this.attachEvent ('onclick', function (evt) {
+								na.m.log (undefined, { codeExecPath : 4.2, msg : 'na.site.transformLinks(): '+this.href+' fired! ajaxifying! :)' } );
+								evt.preventDefault();
+								na.site.pushState (null, this.title, this.href.replace('{$SA_SITE_HD}', na.m.globals.urls.app));
+							});							
+						}
+					}
+			}
+		}));
+	},
+    
+	pushState : function (data, title, url, dontHijackLinks) {
+        na.m.log (200, 'na.site.pushState : url = '+url);
+		if (false) { //url==window.location.href) {
+			na.site.loadContent (url, dontHijackLinks ?'true':'false');
+		} else {
+            window.top.History.pushState (data, title, url);
+		}
+	},*/
+	
     updateDateTime : function() {
 		var 
 		d = new Date(),

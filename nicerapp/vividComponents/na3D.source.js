@@ -81,11 +81,11 @@ export class na3D_fileBrowser {
         
         el.appendChild( this.renderer.domElement );
         
-        $(el).bind('mousemove', function() {
+        $(this.renderer.domElement).bind('mousemove', function() {
             event.preventDefault(); 
             t.onMouseMove (event, t)
         });
-        $(el).click (function(event) {  
+        $(this.renderer.domElement).click (function(event) {  
             event.preventDefault(); 
             if (event.detail === 2) { // double click
                 t.controls.autoRotate = !t.controls.autoRotate 
@@ -424,11 +424,10 @@ export class na3D_fileBrowser {
                             it.model.position.y += ((t.dragndrop.mouseY - t.mouse.layerY));
                         }
                     }
-                    debugger;
-                    setTimeout(function(){
+                    setTimeout(function() {
                     t.dragndrop.mouseX = t.mouse.layerX;
                     t.dragndrop.mouseY = t.mouse.layerY;
-                    },500);
+                    },10);
                     
                     if (t.showLines) {
                         for (var i=0; i<t.permaLines.length; i++) {

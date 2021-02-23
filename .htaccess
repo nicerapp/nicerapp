@@ -26,7 +26,8 @@ RewriteRule ^news$ /apps/eyJuZXdzIjp7InNlY3Rpb24iOiJFbmdsaXNoX05ld3MifX0 [R,L]
 
 RewriteCond %{REQUEST_URI} !^/nicerapp/apps/nicerapp/music/.*$
 RewriteRule ^apps/(.*)$ index.php?apps=$1 [L]
-
+RewriteRule ^apps_content/$ ajax_get_content.php?app=frontpage [L]
+RewriteRule ^apps_content/(.*)$ ajax_get_content.php?apps=$1 [L]
 
 <ifModule mod_gzip.c>
 mod_gzip_on Yes
