@@ -46,7 +46,7 @@
                             <td>
                                 <div id="headerSiteDiv" style="height:200px;width:320px;background:rgba(0,0,0,0.7);border-radius:10px;border:solid rgba(0,0,0,0.8);padding:5px;box-shadow:4px 4px 2px rgba(0,0,0,0.7)">
                                     <div style="height:10px;">&nbsp;</div>
-                                    <h1 id="pageTitle" style="padding-left:20px;font-family:Krona One;margin-block-start:0;margin-block-end:0.2em;font-size:200%;text-shadow:4px 4px 2px rgba(0,0,0,0.7)">nicer.app</h1>
+                                    <h1 id="pageTitle" style="padding-left:20px;font-family:Krona One;margin-block-start:0;margin-block-end:0.2em;text-shadow:4px 4px 2px rgba(0,0,0,0.7)">nicer.app</h1>
                                     <script type="text/javascript">
                                     setTimeout(function() {
                                         var vividTextCmd = {
@@ -59,7 +59,7 @@
                                     }, 500);
                                     </script>
                                     <!--The web/pad/phone user-interface framework for bold new frontiers.-->
-                                    <h2 id="tagline1" style="padding-left:20px;font-family:ABeeZee;font-size:140%;text-shadow:2px 2px 1px rgba(0,0,0,0.7)">
+                                    <h2 id="tagline1" style="padding-left:20px;font-family:ABeeZee;text-shadow:2px 2px 1px rgba(0,0,0,0.7)">
                                     THE web/pad/phone/TV<br/>
                                     user-interface framework<br/>
                                     and apps platform
