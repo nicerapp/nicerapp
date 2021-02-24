@@ -85,10 +85,10 @@
 <script type="text/javascript" src="http://localhost/nicerapp/siteLogic/na.site.code.source.js"></script>
 <script type="text/javascript" src="http://localhost/nicerapp/ui/canvasLogo-1.0.0.source.js"></script>
 <script type="text/javascript">
-na.m.globals.developersOptions = {
+na.site.globals.developersOptions = {
 	developerMode : true
 };
-na.m.globals.urls = {
+na.site.globals.urls = {
 	 app : "http://localhost",
 	 subURL : "",
 	 framework : "http://localhost/nicerapp",

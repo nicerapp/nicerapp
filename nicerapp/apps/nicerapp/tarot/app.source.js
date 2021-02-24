@@ -76,8 +76,8 @@ na.apps.loaded.cardgame_tarot = {
 		if (jQuery('#app_mainmenu').length==0) return false;
 	
 		//alert ('-1-');
-		//na.m.globals.urls.settings = na.m.globals.urls.app + na.apps.loaded.cardgame_tarot.globals.url.replace('/content/','');
-		na.m.log (1, 'na.apps.loaded.cardgame_tarot.startApp:', na.m.globals.urls);
+		//na.site.globals.urls.settings = na.site.globals.urls.app + na.apps.loaded.cardgame_tarot.globals.url.replace('/content/','');
+		na.m.log (1, 'na.apps.loaded.cardgame_tarot.startApp:', na.site.globals.urls);
 		na.m.settings.logLevel = 20;
 		na.apps.loaded.cardgame_tarot.settings.mode = 'initial';
 		
@@ -414,7 +414,7 @@ na.apps.loaded.cardgame_tarot = {
 		
 		var ajaxCommand = {
 			type : 'GET',
-			url : na.m.globals.urls.app+'apps/cardgame_tarot/appContent/tarotSite/ajax_get_reading.php',
+			url : na.site.globals.urls.app+'apps/cardgame_tarot/appContent/tarotSite/ajax_get_reading.php',
 			data : {
 				deck : u[1],
 				reading : u[2],
@@ -430,7 +430,7 @@ na.apps.loaded.cardgame_tarot = {
 					na.apps.loaded.cardgame_tarot.showContentPage('initial');
 					na.apps.loaded.cardgame_tarot.bindEvents();
 					na.apps.loaded.cardgame_tarot.resizeCards();
-					window.top.na.m.globals.urls.current = na.m.globals.urls.app + newURL;
+					window.top.na.site.globals.urls.current = na.site.globals.urls.app + newURL;
 				});
 			}
 		};
@@ -526,7 +526,7 @@ na.apps.loaded.cardgame_tarot = {
 	addOrUpdateSocialShareToolbar_currentState_openInNewTab : function (href, shorthandLinkID) {
 		var ajaxCommand = {
 			type : 'GET',
-			url : na.m.globals.urls.app + 'ajax_storeState.php',
+			url : na.site.globals.urls.app + 'ajax_storeState.php',
 			data : {
 				href : href,
 				shorthandLinkID : shorthandLinkID

@@ -119,6 +119,7 @@ img.bg_last {
     text-align : center;
 }
 .vividButton, .vividButtonSelected {
+    position : absolute;
     display : flex;
     justify-content : center;
     align-items : center;

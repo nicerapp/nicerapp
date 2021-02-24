@@ -92,7 +92,7 @@ var mp3site = {
 			success : function (json, ts) {
 				var mixTitle = file.replace ('- DJ FireSnake.mp3','').replace('.mp3','');
 				var mixLoc = file.replace (' - DJ FireSnake.mp3','').replace('.mp3','').replace(/ /g, '_');
-				//window.History.pushState (null, mp3site.language.siteTitle + ' - ' + mixTitle, na.m.globals.urls.app+'/musicPlayer(play\''+mixLoc+'\')');
+				//window.History.pushState (null, mp3site.language.siteTitle + ' - ' + mixTitle, na.site.globals.urls.app+'/musicPlayer(play\''+mixLoc+'\')');
 			
 				if (typeof json!=='object') json = eval ('('+json+') ');
                 if (json.description) {
@@ -365,14 +365,14 @@ var mp3site = {
 		sc_scrollpaneContainer = $('#siteContent', window.top.document.body),
 		sc_siteContent = $('#siteContent', window.top.document.body);
 
-		/*if (typeof mp3site.settings.masterLeftOffset == 'number') {
+		if (typeof mp3site.settings.masterLeftOffset == 'number') {
 			var masterLeftOffset = mp3site.settings.masterLeftOffset;
 			if (masterLeftOffset<0) masterLeftOffset=0;
-		} else {*/
+		} else {
 			var masterLeftOffset = ((myWidth - contentWidth) / 2);
 			if (masterLeftOffset<0) masterLeftOffset=0;
 			mp3site.settings.masterLeftOffset = masterLeftOffset;
-		//}
+		}
 		
 		var 
 		timeDelay = 10,

@@ -24,7 +24,8 @@ $app = json_decode (base64_decode_url($_GET['apps']), true);
                 var 
                 html = 
                     '<h2 id="titleHowTo">How To</h2>'
-                    + '<p>Drag and drop folders to re-arrange them.</p>'
+                    + '<p>Drag and drop folders to re-arrange them.<br/>'
+                    + 'Your folder-arrangement will be saved for your next visit to this page.</p>'
                     + '<p>Hold the left mouse button and drag to manually rotate the data.</p>'
                     + '<p>Hold the right mouse button and drag to manually pan the camera.</p>'
                     + '<p>Double click a mouse button to toggle automatic rotation of the data.</p>'

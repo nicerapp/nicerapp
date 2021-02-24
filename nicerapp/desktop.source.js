@@ -78,6 +78,10 @@ na.desktop = {
         na.d.goto (divs, true);
     },
     
+    isVisible : function (id) {
+        return na.desktop.settings.visibleDivs.includes(id);
+    },
+    
     setConfig : function (configName) {
         var divs = [];
         for (var i=0; i<na.d.g.divs.length; i++) {
@@ -90,6 +94,21 @@ na.desktop = {
             $.cookie ('visible_'+divID.substr(1), 'true', na.m.cookieOptions());
         };
         na.d.goto (divs, false);
+        na.site.settings.menus['#siteMenu'].updateItemStates();
+    },
+    
+    inConfig : function (configName) {
+        var vdivs = [];
+        for (var i=0; i<na.d.s.visibleDivs.length; i++) {
+            var div = na.d.s.visibleDivs[i];
+            if (div!=='#siteDateTime' && div!=='#siteStatusbar') vdivs.push(div);
+        };
+        var 
+        json1 = JSON.stringify(vdivs),
+        json2 = JSON.stringify(na.d.g.configs[configName]),
+        r = json1 === json2;
+
+        return r;
     },
     
     resize : function () {
@@ -102,11 +121,11 @@ na.desktop = {
             $.cookie('agreedToPolicies')!=='true'
             || $.cookie('showStatusbar')==='true'
         ) {
-            if (!visibleDivs.includes('#siteStatusbar')) visibleDivs[visibleDivs.length] = '#siteStatusbar';
+            if (!visibleDivs.includes('#siteStatusbar')) visibleDivs.push('#siteStatusbar');
         }
         
         if (!na.m.userDevice.isPhone && !visibleDivs.includes('#siteDateTime')) {
-            visibleDivs[visibleDivs.length] = '#siteDateTime';
+            visibleDivs.push('#siteDateTime');
         }
         
         na.d.s.visibleDivs = visibleDivs;

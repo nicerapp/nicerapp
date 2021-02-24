@@ -2,7 +2,6 @@ var nicerapp = na = {};
 var nas = na.site = {
     about : {
         firstCreated : '10 January 2021 13:15 CET',
-        lastModified : '10 January 2021 13:15 CET',
         copyright : '<table style="width:100%;height:100%;"><tr><td>Copyright (c) 2021 by Rene A.J.M. Veerman <a href="mailto:rene.veerman.netherlands@gmail.com" style="color:green">&lt;rene.veerman.netherlands@gmail.com&gt;</a></td><td style="width:220px;"><div class="vividButton" theme="dark" style="position:relative;color:white;" onclick="na.site.dismissCopyrightMessage();">Ok</div></td></table>' // actually (c) 2002-2021 if you count in all the previous major versions of this nicerapp platform (it also had other names in previous versions, but 'nicerapp' will be it's final name).
     },
     
@@ -39,7 +38,7 @@ var nas = na.site = {
             $('#siteDateTime').css({display:'none'});
             $('#btnThemeSwitch, #btnChangeBackground, #siteMenu').addClass('phoneView');
         } else {
-            na.d.s.visibleDivs[na.d.s.visibleDivs.length] = '#siteDateTime';
+            na.d.s.visibleDivs.push('#siteDateTime');
         }
 
         if (!$.cookie('siteBackground_url') || $.cookie('siteBackground_url')==='') {
@@ -80,7 +79,7 @@ var nas = na.site = {
         
         var ac = {
             type : 'GET',
-            url : '/nicerapp/domainConfigs/'+na.m.globals.domain+'/ajax_backgrounds.php',
+            url : '/nicerapp/domainConfigs/'+na.site.globals.domain+'/ajax_backgrounds.php',
             success : function (data, ts, xhr) {
                 var dataDecoded = JSON.parse(data);
                 na.site.settings.backgrounds = dataDecoded;
@@ -93,7 +92,7 @@ var nas = na.site = {
 
         var ac = {
             type : 'GET',
-            url : '/nicerapp/domainConfigs/'+na.m.globals.domain+'/ajax_backgrounds_recursive.php',
+            url : '/nicerapp/domainConfigs/'+na.site.globals.domain+'/ajax_backgrounds_recursive.php',
             success : function (data, ts, xhr) {
                 var dataDecoded = JSON.parse(data);
                 na.site.settings.backgroundsRecursive = dataDecoded;
@@ -104,7 +103,7 @@ var nas = na.site = {
         };
         $.ajax(ac);
         
-        na.analytics.logMetaEvent ('startup : html and js fully loaded, browserWidth='+$(window).width()+', browserHeight='+$(window).height()+', referer='+na.m.globals.referer+', userAgent='+navigator.userAgent+', isPhone='+(na.m.userDevice.isPhone?'true':'false'));
+        na.analytics.logMetaEvent ('startup : html and js fully loaded, browserWidth='+$(window).width()+', browserHeight='+$(window).height()+', referer='+na.site.globals.referer+', userAgent='+navigator.userAgent+', isPhone='+(na.m.userDevice.isPhone?'true':'false'));
 
         na.analytics.logMetaEvent ('startup : url='+document.location.href);
         
@@ -320,7 +319,7 @@ var nas = na.site = {
     reloadMenu : function() {
         var ac = {
             type : 'POST',
-            url : '/nicerapp/domainConfigs/'+na.m.globals.domain+'/mainmenu.php',
+            url : '/nicerapp/domainConfigs/'+na.site.globals.domain+'/mainmenu.php',
             data : {
                 na_js__screenWidth : $(window).width(),
                 na_js__menuSpace : $(window).width() - $('#siteMenu').offset().left,

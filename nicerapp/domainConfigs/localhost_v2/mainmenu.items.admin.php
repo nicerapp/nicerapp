@@ -9,6 +9,6 @@
         <li><a class="noPushState" href="javascript:na.site.code.clearCaches();">Clear Caches</a></li>
         </ul>
     </li>
-    <li><a vividMenu_changeStateCondition="na.m.globals.visitorIsDeveloper===true ? 'selected' : 'normal'" vividMenu_changeStateKey="#admin_VisitorIsDeveloper" href="javascript:na.m.globals.visitorIsDeveloper = !na.m.globals.visitorIsDeveloper;">Developer Mode</a></li>
+    <li><a vividMenu_changeStateCondition="na.site.globals.visitorIsDeveloper===true ? 'selected' : 'normal'" vividMenu_changeStateKey="#admin_VisitorIsDeveloper" href="javascript:na.site.globals.visitorIsDeveloper = !na.site.globals.visitorIsDeveloper;">Developer Mode</a></li>
     </ul>
 </li>

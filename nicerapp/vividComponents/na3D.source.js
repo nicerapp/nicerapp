@@ -47,8 +47,9 @@ export class na3D_fileBrowser {
         this.folders = [];
         this.ld1 = {}; //levelDataOne
         this.ld2 = {}; //levelDataTwo
+        this.settings = { pouchdb : {} };
         
-        this.items = [{
+        this.items = [ {
             name : 'backgrounds',
             offsetY : 0,
             offsetX : 0,
@@ -58,7 +59,8 @@ export class na3D_fileBrowser {
             columnCount : 1,
             rowCount : 1,
             path : ''
-        }];
+        } ];
+        
         this.lines = []; // onhover lines only in here
         this.permaLines = []; // permanent lines, the lines that show all of the parent-child connections.
         
@@ -132,7 +134,6 @@ export class na3D_fileBrowser {
 
         this.camera.position.z = 700;
         this.camera.position.y = 200;
-        this.camera.position.x = 400;
         
         this.animate(this);
     }
@@ -255,10 +256,7 @@ export class na3D_fileBrowser {
             } else {
                 if (intersects[0] && intersects[0].object && intersects[0].object.parent && intersects[0].object.parent.parent) {
                     var model = intersects[0].object.parent.parent.parent.parent.parent.parent;
-                    model.rotation.z += 0.02; //TODO : auto revert back to model.rotation.z = 0;
-                   // if (hoveredItem && hoveredItem.it) console.log (hoveredItem.it.name + ' '+hoveredItem.it.offsetY+' - '+hoveredItem.it.offsetX+' - '+hoveredItem.it.level+' - '+hoveredItem.it.zIndexOffset);
-                    
-                    
+                    //model.rotation.z += 0.02; //TODO : auto revert back to model.rotation.z = 0;
                 }
             }
         }
@@ -344,42 +342,37 @@ export class na3D_fileBrowser {
                     path : path2,
                     levelDepth : levelDepth + 1
                 };
-                //debugger;
-                //if (it.name==='landscape' || it.name==='portrait') debugger;
                 
                 clearTimeout (t.onresizeInitTimeout);
                 clearTimeout (t.linedrawTimeout);
                 
                 t.loading = true;
-                //setTimeout (function () {
-                    t.loader.load( '/nicerapp/3rd-party/3D/models/folder icon/scene.gltf', function ( gltf, cd) {
-                //var gltf = $.extend({},t.items[0].model);
-                        gltf.scene.scale.setScalar (10);
-                        t.scene.add (gltf.scene);
-                        cd.it.model = gltf.scene;
-                        cd.it.model.it = cd.it;
-                        cd.t.updateTextureEncoding(t, gltf.scene);
-                        t.initCounter++;
-                        
-                        var
-                        newLevel = (
-                            Object.keys(t.ld2).length > 1
-                            ? parseInt(Object.keys(t.ld2).reduce(function(a, b){ return t.ld2[a] > t.ld2[b] ? a : b }))+1
-                            : 2
-                        );
-                        cd.level = newLevel;
-                        
-                        clearTimeout (t.onresizeInitTimeout);
-                        
-                        t.loading = false;
+                t.loader.load( '/nicerapp/3rd-party/3D/models/folder icon/scene.gltf', function ( gltf, cd) {
+                    clearTimeout (t.onresizeInitTimeout);
                     
-                        cd.t.initializeItems (cd.t, cd.items, cd.itd, cd.it.idx, newLevel, cd.levelDepth, cd.path);
-                    }, function ( xhr ) {
-                        console.log( 'model "folder icon" : ' + ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
-                    }, function ( error ) {
-                        console.error( error );
-                    },  cd );
-                //}, 1000);
+                    gltf.scene.scale.setScalar (10);
+                    t.scene.add (gltf.scene);
+                    cd.it.model = gltf.scene;
+                    cd.it.model.it = cd.it;
+                    cd.t.updateTextureEncoding(t, gltf.scene);
+                    t.initCounter++;
+                    
+                    var
+                    newLevel = (
+                        Object.keys(t.ld2).length > 1
+                        ? parseInt(Object.keys(t.ld2).reduce(function(a, b){ return t.ld2[a] > t.ld2[b] ? a : b }))+1
+                        : 2
+                    );
+                    cd.level = newLevel;
+                    
+                    t.loading = false;                
+                    cd.t.initializeItems (cd.t, cd.items, cd.itd, cd.it.idx, newLevel, cd.levelDepth, cd.path);
+                    
+                }, function ( xhr ) {
+                    console.log( 'model "folder icon" : ' + ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+                }, function ( error ) {
+                    console.error( error );
+                },  cd );
             } 
             t.ld2[level].initItemsDoingIdx++;
             
@@ -429,6 +422,11 @@ export class na3D_fileBrowser {
                     t.dragndrop.mouseY = t.mouse.layerY;
                     },10);
                     
+                    clearTimeout (t.posDataToDB);
+                    t.posDataToDB = setTimeout(function() {
+                        t.posDataToDatabase(t);
+                    }, 1000);
+                    
                     if (t.showLines) {
                         for (var i=0; i<t.permaLines.length; i++) {
                             var l = t.permaLines[i];
@@ -453,9 +451,87 @@ export class na3D_fileBrowser {
                     if (t.showLines) t.drawLines(t);
                 } );
                 
-                t.onresize (t);
-            }, 4000);
+                t.databaseToPosData(t, function(loadedPosData) {
+                    if (!loadedPosData) t.onresize (t); else if (t.showLines) t.drawLines(t);
+                });
+                
+            }, 500);
         }
+    }
+    
+    posDataToDatabase (t) {
+        let address = function (databaseName, username, password) {
+            var r = 
+                na.site.globals.couchdb.http
+                +(typeof username=='string' && username!=='' ? username : na.a.settings.username)+':'
+                +(typeof password=='string' && password!=='' ? password : na.a.settings.password)+'@'
+                +na.site.globals.couchdb.domain
+                +':'+na.site.globals.couchdb.port
+                +'/'+na.site.globals.domain+'___'+databaseName;
+            return r;
+        },
+        s = t.settings,
+        un = na.a.settings.username,
+        unl = un.toLowerCase(),
+        pw = na.a.settings.password,
+        dbName = 'three_d_positions',
+        myip = na.site.globals.myip.replace(/_/g,'.');
+        
+        if (!s.pouchdb[dbName]) s.pouchdb[dbName] = new PouchDB(address(dbName,un,pw));
+        
+        let
+        doc = {
+            _id : 'positions_'+un,
+            positions : [{ x : 0, y : 0, z : 0 }]
+        };
+        
+        for (let i=0; i<t.items.length; i++) {
+            if (t.items[i].model) doc.positions[i] = {
+                x : t.items[i].model.position.x,
+                y : t.items[i].model.position.y,
+                z : t.items[i].model.position.z
+            }
+        };
+        
+        s.pouchdb[dbName].get(doc._id).then(function(docStored){
+            doc._rev = docStored._rev;
+            return s.pouchdb[dbName].put(doc);
+        }).catch(function(err){
+            return s.pouchdb[dbName].put(doc);
+        });
+    }
+    
+    databaseToPosData (t, callback) {
+        let address = function (databaseName, username, password) {
+            var r = 
+                na.site.globals.couchdb.http
+                +(typeof username=='string' && username!=='' ? username : na.a.settings.username)+':'
+                +(typeof password=='string' && password!=='' ? password : na.a.settings.password)+'@'
+                +na.site.globals.couchdb.domain
+                +':'+na.site.globals.couchdb.port
+                +'/'+na.site.globals.domain+'___'+databaseName;
+            return r;
+        },
+        s = t.settings,
+        un = na.a.settings.username,
+        unl = un.toLowerCase(),
+        pw = na.a.settings.password,
+        dbName = 'three_d_positions',
+        myip = na.site.globals.myip.replace(/_/g,'.');
+        
+        if (!s.pouchdb[dbName]) s.pouchdb[dbName] = new PouchDB(address(dbName,un,pw));
+        s.pouchdb[dbName].get('positions_'+un).then(function(doc){
+            for (let i=0; i<doc.positions.length; i++) {
+                if (t.items[i].model) {
+                    t.items[i].model.position.x = doc.positions[i].x;
+                    t.items[i].model.position.y = doc.positions[i].y;
+                    t.items[i].model.position.z = doc.positions[i].z;
+                }
+            }
+            callback(true);
+        }).catch(function(err){
+            callback(false);
+        });
     }
     
     toggleShowLines () {
@@ -575,7 +651,7 @@ export class na3D_fileBrowser {
             },
             function () {
                 t.onresize_do (t, levels);
-            }, 1500
+            }, 200
         );
     }
 
@@ -633,22 +709,6 @@ export class na3D_fileBrowser {
                 rowCount = 5,//Math.floor(((height/2)-100)/50),
                 itemsOnLevelCount = 0;
                 
-                /*
-                var levelItemCount = 0;
-                for (var j=0; j<t.items.length; j++) {
-                    var it2 = t.items[j];
-                    if (it2.parent === it.parent && it2.level===it.level) levelItemCount++;
-                };
-                if (it.level>=1) {
-                    if (it.level===1) {
-                        if (it.levelIdx < levelItemCount/2) placingX='left';
-                    } else {
-                        var parent1 = it.parent;
-                        while (typeof parent1=='number' && parent1!==0 && t.items[parent1].level!==1) parent1 = t.items[parent1].parent;
-                        placingX = t.items[parent1].placingX;
-                    }
-                }*/
-                    
                 for (var j=0; j<t.items.length; j++) {
                     var it2 = t.items[j];
                     if (it2.parent === it.parent && it2.level === it.level) itemsOnLevelCount++;
@@ -673,7 +733,6 @@ export class na3D_fileBrowser {
                     } 
                     
                 };
-                //column += columnCount - ( (it.levelIdx+1) - (columnCount * row) );
                 
                 if (column < columnCount/2) {
                     placingX = 'left'
@@ -711,45 +770,9 @@ export class na3D_fileBrowser {
                 var it = t.items[t.resizeDoingIdx];
                 
                 var 
-                parent = t.items[it.parent],
-                l = levels['path '+it.path];
+                parent = t.items[it.parent];
                 
-                var 
-                spacingBetweenSubfoldersOnSameLevel = 75,
-                extraOffset = spacingBetweenSubfoldersOnSameLevel;//it.parent!==0?-1*spacingBetweenSubfoldersOnSameLevel*t.items[it.parent].columnCount/2:0; // <-- drop the '-1*' here to draw the tree as a root system instead
-                // ((levelItemCount-it.levelIdx)*50)*
-
-                if (!l) {
-                    
-                    var pl = levels['path '+parent.path];
-                    if (!pl) {
-                        pl = {
-                            offsetY : 0,
-                            offsetX : 0,
-                            offsetZ : 0,
-                            zIndexOffset : 0,
-                            rowCount : rowCount,
-                            columnCount : columnCount
-                        }
-                    }
-                    
-                    pl.columnCount = columnCount; 
-                    pl.rowCount = rowCount;
-                    
-                    var zof = pl.zIndexOffset + 1;
-                    levels['path '+it.path] = jQuery.extend({}, pl);
-                    levels['path '+it.path].level = it.level;
-                    levels['path '+it.path].zIndexOffset = zof;
-                    levels['path '+it.path].offsetX = pl.offsetX;// + 10;
-                    levels['path '+it.path].offsetY = pl.offsetY;// + 10;
-                    levels['path '+it.path].offsetZ = pl.offsetZ;// + 10;
-                    
-                    l = levels['path '+it.path];
-                };
-                
-                if (!pl) pl = levels['path '+parent.path];
-                
-                var moreToCheck = true, checkCounter = 1/*change to 1 to spread items out more*/, foundOverlappingItem = false, overlapParents = [];
+                var moreToCheck = true, checkCounter = 1, foundOverlappingItem = false, overlapParents = [];
                 while (moreToCheck) {
                     if (checkCounter > 4) break;
                     var 
@@ -822,6 +845,38 @@ export class na3D_fileBrowser {
                 t.linedrawTimeout = setTimeout(function() {
                     t.drawLines (t);
                 }, 500);
+                
+                var
+                l = levels['path '+it.path];                
+                if (!l) {
+                    
+                    var pl = levels['path '+parent.path];
+                    if (!pl) {
+                        pl = {
+                            offsetY : 0,
+                            offsetX : 0,
+                            offsetZ : 0,
+                            zIndexOffset : 0,
+                            rowCount : rowCount,
+                            columnCount : columnCount
+                        }
+                    }
+                    
+                    pl.columnCount = columnCount; 
+                    pl.rowCount = rowCount;
+                    
+                    var zof = pl.zIndexOffset + 1;
+                    levels['path '+it.path] = jQuery.extend({}, pl);
+                    levels['path '+it.path].level = it.level;
+                    levels['path '+it.path].zIndexOffset = zof;
+                    levels['path '+it.path].offsetX = it.offsetX;// + 10;
+                    levels['path '+it.path].offsetY = it.offsetY;// + 10;
+                    levels['path '+it.path].offsetZ = it.offsetZ;// + 10;
+                    
+                    l = levels['path '+it.path];
+                    //debugger;
+                };
+                //if (!pl) var pl = levels['path '+parent.path];
                 
             }
         }

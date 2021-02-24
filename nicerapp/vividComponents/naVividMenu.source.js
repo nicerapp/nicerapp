@@ -6,6 +6,7 @@ class naVividMenu {
         t.items = [];
         t.initItems();
         t.onresize();
+        t.updateItemStates();
     }
     
     initItems() {
@@ -45,6 +46,25 @@ class naVividMenu {
             });
         });
         //debugger;
+    }
+    
+    updateItemStates() {
+        var t = this;
+        $(this.el).find('li > a').each(function(idx,li) {
+            let 
+            isc = $(li).attr('vividMenu_isSelected_condition');
+            
+            if (isc) {
+                var 
+                menuItem = t.items[idx].b.el,
+                r = eval(isc);
+                
+                if (r)
+                    $(menuItem).addClass('vividButtonSelected').removeClass('vividButton');
+                else
+                    $(menuItem).removeClass('vividButtonSelected').addClass('vividButton')
+            }
+        });
     }
     
     onresize(t, levels) {

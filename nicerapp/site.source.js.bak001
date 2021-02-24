@@ -44,7 +44,7 @@ var nas = na.site = {
         
         var ac = {
             type : 'GET',
-            url : '/nicerapp/domainConfigs/'+na.m.globals.domain+'/ajax_backgrounds.php',
+            url : '/nicerapp/domainConfigs/'+na.site.globals.domain+'/ajax_backgrounds.php',
             success : function (data, ts, xhr) {
                 nas.s.backgrounds = JSON.parse(data);
             },
@@ -56,7 +56,7 @@ var nas = na.site = {
 
         nas.onresize();
         
-        na.analytics.logMetaEvent ('startup : html and js fully loaded, browserWidth='+$(window).width()+', browserHeight='+$(window).height()+', referer='+na.m.globals.referer+', userAgent='+navigator.userAgent);
+        na.analytics.logMetaEvent ('startup : html and js fully loaded, browserWidth='+$(window).width()+', browserHeight='+$(window).height()+', referer='+na.site.globals.referer+', userAgent='+navigator.userAgent);
         
     },
     /*
@@ -173,7 +173,7 @@ var nas = na.site = {
     reloadMenu : function() {
         var ac = {
             type : 'POST',
-            url : '/nicerapp/domainConfigs/'+na.m.globals.domain+'/mainmenu.php',
+            url : '/nicerapp/domainConfigs/'+na.site.globals.domain+'/mainmenu.php',
             data : {
                 na_js__screenWidth : $(window).width(),
                 na_js__menuSpace : $(window).width() - $('#siteMenu').offset().left,

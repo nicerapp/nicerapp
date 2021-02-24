@@ -319,10 +319,10 @@ na.apps.loaded.newsApp = {
         na1 = na.apps.loaded.newsApp, g = na1.globals, s = na1.settings, c = s.current, db = c.db,
         lock = $('#newsApp_lock')[0];
         if (lock.src.match('_on')) {
-            lock.src = na.m.globals.urls.app + '/nicerapp/apps/nicerapp/news/appContent/newsApp/2.0.0/btnLock_off.png';
+            lock.src = na.site.globals.urls.app + '/nicerapp/apps/nicerapp/news/appContent/newsApp/2.0.0/btnLock_off.png';
             c.locked = false;            
         } else {
-            lock.src = na.m.globals.urls.app + '/nicerapp/apps/nicerapp/news/appContent/newsApp/2.0.0/btnLock_on.png';
+            lock.src = na.site.globals.urls.app + '/nicerapp/apps/nicerapp/news/appContent/newsApp/2.0.0/btnLock_on.png';
             c.locked = true;            
         }
         
@@ -1230,7 +1230,7 @@ na.apps.loaded.newsApp = {
         html += '<span class="newsApp__item__copy"><a class="nomod" href="javascript:var el = $(\'#newsApp__item__'+it.idx+'\')[0], textarea = $(\'#siteContent__textareaCopy\')[0]; if (!textarea) { var el2=document.createElement(\'textarea\'); window.top.document.append(el2); textarea=el2 }; el_html = el.innerHTML; el.innerHTML = el.innerHTML.replace(\/<span class..newsApp__item__copy.>.*newsApp__item__date.><.span><.a>\/,\'\') + \'Found via <a href=\\\'https://nicer.app/news\\\' target=\\\'_new\\\'>nicer.app/news</a>\'; var selection = window.getSelection(); var range = document.createRange(); range.selectNodeContents(el); selection.removeAllRanges(); selection.addRange(range); window.top.document.execCommand(\'copy\');setTimeout(function(){selection.removeAllRanges(); el.innerHTML=el_html;},1000);">Copy</span> ';
         html += '<span class="newsApp__item__date"><a class="nomod" target="newsAppItem_'+it.idx+'" href="' + it.u+'">' + na.apps.loaded.newsApp.formatDate(it.pd, true, true)+'</a></span><br/>';
          
-        //html+= '<img class="newsApp__btnInfo dontResize" style="position:sticky;bottom:5px;left:'+(w-35)+'px;width:30px;height:30px;" src="'+na.m.globals.urls.app+'/nicerapp/apps/nicerapp/news/appContent/newsApp/2.0.0/btnInfo.png" title="test"/>';
+        //html+= '<img class="newsApp__btnInfo dontResize" style="position:sticky;bottom:5px;left:'+(w-35)+'px;width:30px;height:30px;" src="'+na.site.globals.urls.app+'/nicerapp/apps/nicerapp/news/appContent/newsApp/2.0.0/btnInfo.png" title="test"/>';
                        
         var html2 = '';
         html2+= '<span class="newsApp__item__url"><a class="nomod" target="newsAppItem_'+it.idx+'" href="' + it.u+'">Article</a> discovered via ';

@@ -106,13 +106,13 @@ $numberOfReadings = getNumberOfReadings();
 	<script type="text/javascript" src="<?php echo getSiteRootURL();?>/nicerapp/get_javascript.php?want=all"></script>
 
 	<script type="text/javascript">
-		na.m.globals.urls = {
+		na.site.globals.urls = {
 			os : '<?php echo SA_WEB?>',
 			app : '<?php echo SA_SITE_WEB?>',
 			subURL : '<?php echo SA_SITE_SUBDIR?>'
 		};
-		na.m.globals.serverIsForDevelopment = <?php echo SA_DEVELOPMENT_SERVER?'true':'false'?>;
-		na.m.globals.visitorIsDeveloper = <?php echo SA_VISITOR_IS_DEVELOPER?'true':'false'?>;
+		na.site.globals.serverIsForDevelopment = <?php echo SA_DEVELOPMENT_SERVER?'true':'false'?>;
+		na.site.globals.visitorIsDeveloper = <?php echo SA_VISITOR_IS_DEVELOPER?'true':'false'?>;
 
 		Date.prototype.getMonthName = function(lang) {
 			lang = lang && (lang in Date.locale) ? lang : 'en';

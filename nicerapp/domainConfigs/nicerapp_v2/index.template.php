@@ -10,9 +10,18 @@
 {$cssThemeFiles}
 {$javascriptFiles}
     <script type="module" src="/nicerapp/vividComponents/na3D.source.js"></script>
+
+<?php 
+    $couchdbSettings = json_decode(file_get_contents(dirname(__FILE__).'/couchdb.json'), true);
+    unset ($couchdbSettings['adminUsername']);
+    unset ($couchdbSettings['adminPassword']);
+    $couchdbSettingsStr = json_encode($couchdbSettings, JSON_PRETTY_PRINT);
+    $couchdbSettingsStr = str_replace("\n    ", "\n\t\t", $couchdbSettingsStr);
+    $couchdbSettingsStr = str_replace("}", "\t}", $couchdbSettingsStr);    
+?>
 <script type="text/javascript">
-na.m.globals = {
-    couchdb : <?php echo file_get_contents(dirname(__FILE__).'/couchdb.json');?>,
+na.site.globals = {
+    couchdb : <?php echo $couchdbSettingsStr?>,
     referer : '<?php echo (array_key_exists('HTTP_REFERER',$_SERVER)?$_SERVER['HTTP_REFERER']:'');?>',
     myip : '<?php echo str_replace('.','_',(array_key_exists('X-Forwarded-For',apache_request_headers())?apache_request_headers()['X-Forwarded-For'] : $_SERVER['REMOTE_ADDR']))?>',
     domain : '{$domain}'

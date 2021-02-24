@@ -15,12 +15,12 @@ na.analytics = {
     pouchdb : { // pouchdb = 3rd-party javascript interface component towards couchdb no-sql/json-document database engine with CORS support installed (see /README-setup.txt)
         address : function (databaseName, username, password) {
             var r = 
-                na.m.globals.couchdb.http
+                na.site.globals.couchdb.http
                 +(typeof username=='string' && username!=='' ? username : na.a.settings.username)+':'
                 +(typeof password=='string' && password!=='' ? password : na.a.settings.password)+'@'
-                +na.m.globals.couchdb.domain
-                +':'+na.m.globals.couchdb.port
-                +'/'+na.m.globals.domain+'___'+databaseName;
+                +na.site.globals.couchdb.domain
+                +':'+na.site.globals.couchdb.port
+                +'/'+na.site.globals.domain+'___'+databaseName;
             return r;
         },
         
@@ -31,7 +31,7 @@ na.analytics = {
             unl = un.toLowerCase(),
             pw = na.a.settings.password,
             dbName = 'analytics',
-            myip = na.m.globals.myip.replace(/_/g,'.');
+            myip = na.site.globals.myip.replace(/_/g,'.');
 
             if (
                 myip==='127.0.0.1' 
@@ -102,7 +102,7 @@ na.analytics = {
             unl = un.toLowerCase(),
             pw = na.a.settings.password,
             dbName = 'analytics',
-            myip = na.m.globals.myip.replace(/_/g,'.');
+            myip = na.site.globals.myip.replace(/_/g,'.');
 
             if (
                 myip==='127.0.0.1' 
@@ -246,7 +246,7 @@ na.analytics = {
             unl = un.toLowerCase(),
             pw = na.a.settings.password,
             dbName = 'analytics',
-            myip = na.m.globals.myip.replace(/_/g,'.');
+            myip = na.site.globals.myip.replace(/_/g,'.');
 
             /*
             if (
