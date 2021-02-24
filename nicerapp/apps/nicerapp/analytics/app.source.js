@@ -136,6 +136,7 @@ na.analytics = {
                 msg : msg
             };
             //debugger;
+            
             s.pouchdb[dbName].put (doc); 
             na.m.log (1, doc);
         }
