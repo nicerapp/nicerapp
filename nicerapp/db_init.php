@@ -36,7 +36,8 @@ function couchdb_client($tableName=null, $username=null, $password=null) {
 
 
 $client = couchdb_client(); 
-$serverHTTPhost = str_replace('.','_',$_SERVER['HTTP_HOST']);
+global $cms;
+$serverHTTPhost = $cms->domain;//str_replace('.','_',$_SERVER['HTTP_HOST']);
 
 $security = Array(
     'members'=>Array(
