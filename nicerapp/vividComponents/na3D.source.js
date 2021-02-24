@@ -482,7 +482,8 @@ export class na3D_fileBrowser {
         let
         doc = {
             _id : 'positions_'+un,
-            positions : [{ x : 0, y : 0, z : 0 }]
+            positions : [{ x : 0, y : 0, z : 0 }],
+            lineColors : {}
         };
         
         for (let i=0; i<t.items.length; i++) {
@@ -492,6 +493,9 @@ export class na3D_fileBrowser {
                 z : t.items[i].model.position.z
             }
         };
+        for (var parent in t.lineColors) {
+            doc.lineColors[parent] = t.lineColors[parent];
+        }
         
         s.pouchdb[dbName].get(doc._id).then(function(docStored){
             doc._rev = docStored._rev;
@@ -528,6 +532,10 @@ export class na3D_fileBrowser {
                     t.items[i].model.position.z = doc.positions[i].z;
                 }
             }
+            for (var parent in doc.lineColors) {
+                t.lineColors[parent] = doc.lineColors[parent];
+            };
+            
             callback(true);
         }).catch(function(err){
             callback(false);
