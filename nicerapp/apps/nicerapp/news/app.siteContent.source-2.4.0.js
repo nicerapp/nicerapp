@@ -1387,7 +1387,7 @@ na.apps.loaded.newsApp = {
         var 
         json = na.m.base64_decode_url (apps),
         arr = JSON.parse(json);
-        debugger;
+        //debugger;
         return [
             arr.news.section
         ];
