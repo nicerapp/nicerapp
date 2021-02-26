@@ -205,11 +205,8 @@
     
     <a href="<?php echo $urls['music'];?>"><h3>Music</h3></a>
     
-    <h2 class="contentSectionTitle2">Apps in development</h2>
-    <a href="<?php echo $urls['backgroundsBrowser'];?>"><h3>3D file manager</h3></a><br/>
-    <div>This will grow into a 3D file and data viewer-and-manager. (Near-)daily updates will be provided.</div>
-
     <h2 class="contentSectionTitle2" >Demos</h2>
     <a href="<?php echo $urls['3Dcube'];?>"><h3>3D demo : cube</h3></a>
     <a href="<?php echo $urls['3Dmodels'];?>"><h3>3D demo : loading of models (slow to start up)</h3></a>
+    <a href="<?php echo $urls['backgroundsBrowser'];?>"><h3>3D file manager</h3></a>
     

@@ -86,7 +86,7 @@
                 <ul>
                     <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape anime somethings');">20-somethings</a></li>
                     <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape anime teenagers');">Teenagers</a></li>
-                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape anime girls');">Kids</a></li>
+                    <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape anime girls');">Girls (for children)</a></li>
                     <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape anime couples');">Couples</a></li>
                     <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape anime families');">Groups</a></li>
                     <li><a class="noPushState" href="javascript:na.backgrounds.next('#siteBackground', 'landscape anime warriors');">Warriors</a></li>
