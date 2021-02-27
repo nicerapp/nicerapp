@@ -29,6 +29,10 @@ RewriteRule ^apps/(.*)$ index.php?apps=$1 [L]
 RewriteRule ^apps_content/$ ajax_get_content.php?app=frontpage [L]
 RewriteRule ^apps_content/(.*)$ ajax_get_content.php?apps=$1 [L]
 
+<Files ".htaccess">  
+  Require all denied
+</Files>
+
 <ifModule mod_gzip.c>
 mod_gzip_on Yes
 mod_gzip_dechunk Yes

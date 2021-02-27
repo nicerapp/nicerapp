@@ -1,0 +1,3 @@
+<Files "couchdb.json">  
+  Require all denied
+</Files>
