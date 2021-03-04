@@ -1,3 +1,3 @@
-for the license itself, please go to https://www.gnu.org/licenses/lgpl-3.0.html
+for the license itself, please go to https://opensource.org/licenses/MIT
 
 https://github.com/nicerapp/nicerapp_v2 and https://nicer.app are Copyrighted (c) 2021 by Rene A.J.M. Veerman from The Netherlands.
