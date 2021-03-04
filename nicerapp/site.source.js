@@ -34,6 +34,11 @@ var nas = na.site = {
     onload : function (evt) {
         na.desktop.init();
         
+        var startTime = new Date();
+        na.m.settings.siteStartTime = startTime.getTime();
+        na.m.settings.debugLevel = 'show all';
+        na.m.settings.debugCategoriesVisible = [ 'all' ];
+        
         if (na.m.userDevice.isPhone) {
             $('#siteDateTime').css({display:'none'});
             $('#btnThemeSwitch, #btnChangeBackground, #siteMenu').addClass('phoneView');
@@ -454,7 +459,34 @@ na.m = {
 	},
     
     log : function (level, msg) {
-        console.log (level + ' - ' + msg);
+        var
+        date = new Date(),
+        timeInMilliseconds = date.getTime(),
+        appRuntime = timeInMilliseconds - na.m.settings.startTime;
+        
+        if (na.m.settings.debugLevel == 'show all')
+            na.m.settings.debugLevel = 0;
+        
+        if (level >= na.m.settings.debugLevel) {
+            if (typeof msg=='object') {
+                msg.runtimeInMilliseconds = appRuntime;
+                if (na.m.settings.debugCategoriesVisible.include('all')) {
+                    console.log (msg);
+                } else {
+                    var writtenAlready = false;
+                    for (var cat in msg.categories) {
+                        if (na.m.settings.debugCategoriesVisible.include(cat)
+                            && !writtenAlready
+                        ) {
+                            console.log (msg);
+                            writtenAlready = true
+                        }
+                    }
+                }                
+            } else if (typeof msg=='string') {
+                console.log (appRuntime + ' : ('+level+') '+msg);
+            }
+        }
     },
 	
     
