@@ -301,7 +301,7 @@ var nas = na.site = {
             jQuery('#headerSiteDiv div').css ({ height : 0, width : 120 });
         } else {
             jQuery('#siteContent, #siteStatusbar').css ({ fontSize : '100%' });
-            jQuery('#siteStatusbar').css({height:'3rem'});
+            jQuery('#siteStatusbar').css({height:'4.5rem'});
             jQuery('#siteStatusbar .vividButton').css({width : 220});
             jQuery('#siteStatusbar td:nth-child(2)').css({width:225});
             jQuery('#mainCSS').html('.vividMenu_item td { font-size : 80%; }; #siteStatus td { font-weight : bold };');
