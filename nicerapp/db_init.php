@@ -1,101 +1,87 @@
+<h1>nicerapp couchdb initialization script</h1>
 <?php 
 require_once (dirname(__FILE__).'/boot.php');
-require_once (dirname(__FILE__).'/3rd-party/vendor/autoload.php');
-
-function couchdb_address ($tableName=null, $username=null, $password=null) {
-    global $naCouchDB;
-    global $cms;
-    if (!$cms) {
-        $cms = new nicerAppCMS();
-        $cms->init();
-    }
-    if (!$naCouchDB) {
-        $fn = realpath(dirname(__FILE__).'/domainConfigs').'/'.$cms->domain.'/couchdb.json';
-        //echo $fn.' - '; var_dump(file_exists($fn)); die();
-        $naCouchDB = json_decode(file_get_contents($fn), true);
-    }
-    $r = 
-        $naCouchDB['http']
-        .(is_null($username) || $username==='' ? $naCouchDB['adminUsername'] : $username)
-        .($username!=='' ? ':' : '')
-        .(is_null($password) || $password==='' ? $naCouchDB['adminPassword'] : $password)
-        .($password!=='' ? '@' : '')
-        .$naCouchDB['domain']
-        .':'
-        .$naCouchDB['port']
-        .(!is_null($tableName) ? '/'.$tableName : '');
-        
-    //echo $r; die();
-    return $r;
-}
-
-function couchdb_client($tableName=null, $username=null, $password=null) {
-    $client = new \PHPCouchDB\Server(["url" => couchdb_address(null, $username, $password)]);
-    return $client;
-}
+require_once (dirname(__FILE__).'/3rd-party/sag/src/Sag.php');
 
 
-$client = couchdb_client(); 
 global $cms;
-$serverHTTPhost = $cms->domain;//str_replace('.','_',$_SERVER['HTTP_HOST']);
+$cms = new nicerAppCMS();
+$cms->init();
 
-$security = Array(
-    'members'=>Array(
-        'roles'=>Array('guests')
-    ),
-    'admins'=>Array(
-        'roles'=>Array('guests')
-    )
-);
+$couchdbConfigFilepath = realpath(dirname(__FILE__)).'/domainConfigs/'.$cms->domain.'/couchdb.json';
+$cdbConfig = json_decode(file_get_contents($couchdbConfigFilepath), true);
 
-echo 'deleting any old databases entirely so they can be re-initialized<br/>';
-$dbs = $client->getAllDbs();
-foreach ($dbs as $idx => $dbName) {
-    if (substr($dbName,0,1)!=='_') {
-        $do = true;
-        try { $db = $client->useDb(['name'=>$dbName,'create_if_not_exists'=>false]); } catch (Exception $e) { echo $e->getMessage(); echo '<br/>'; $do = false; }
-        echo 'deleting db '.$dbName.'<br/>';
-        if ($do) try { $db->delete(); } catch (Exception $e) { echo $e->getMessage(); echo '<br/>'; };
+$cdb = new Sag($cdbConfig['domain'], $cdbConfig['port']);
+$cdb->setHTTPAdapter($cdbConfig['httpAdapter']);
+$cdb->useSSL($cdbConfig['useSSL']);
+$cdb->login($cdbConfig['adminUsername'], $cdbConfig['adminPassword']);
+
+// create users
+$uid = 'org.couchdb.user:Administrator';
+$got = true;
+$cdb->setDatabase('_users',false);
+try { $call = $cdb->get($uid); } catch (Exception $e) { $got = false; }
+if (!$got) {
+    try {
+        $rec = array (
+            '_id' => $uid,
+            'name' => 'Administrator', 
+            'password' => (array_key_exists('AdministratorPassword',$_REQUEST) ? $_REQUEST['AdministratorPassword'] : 'Administrator'), 
+            'realname' => 'nicerapp Administrator', 
+            'email' => (array_key_exists('AdministratorEmail',$_REQUEST) ? $_REQUEST['AdministratorEmail'] : 'root@localhost'), 
+            'roles' => [ "guests", "administrators", "editors" ], 
+            'type' => "user"
+        );
+        $call = $cdb->post ($rec);
+        if ($call->body->ok) echo 'Created Administrator user record.<br/>'; else echo '<span style="color:red">Could not create Administrator user record.</span><br/>';
+    } catch (Exception $e) {
+        echo '<pre style="color:red">'; var_dump ($e); echo '</pre>';
     }
+} else {
+    echo 'Already have an Administrator user record.<br/>';
 }
 
-echo 'creating couchdb+nicerapp user "Administrator"<br/>';
-$db = $client->useDb(["name" => '_users', 'create_if_not_exists' => true]);
-$do = false; try { $doc = $db->getDocById('org.couchdb.user:Administrator'); } catch (Exception $e) { $do = true; };
-if ($do) $db->create([
-    'id' => 'org.couchdb.user:Administrator', 
-    'name' => 'Administrator', 
-    'password' => (array_key_exists('AdministratorPassword',$_REQUEST) ? $_REQUEST['AdministratorPassword'] : 'Administrator'), 
-    'realname' => 'nicerapp Administrator', 
-    'email' => (array_key_exists('AdministratorEmail',$_REQUEST) ? $_REQUEST['AdministratorEmail'] : 'root@localhost'), 
-    'roles' => [ "guests", "administrators", "editors" ], 
-    'type' => "user"
-]);
+$uid = 'org.couchdb.user:Guest';
+$got = true;
+$cdb->setDatabase('_users',false);
+try { $call = $cdb->get($uid); } catch (Exception $e) { $got = false; }
+if (!$got) {
+    try {
+        $rec = array (
+            '_id' => $uid, 
+            'name' => 'Guest', 
+            'password' => 'Guest', 
+            'realname' => 'nicerapp Guest', 
+            'email' => 'guest@localhost', 
+            'roles' => [ "guests" ], 
+            'type' => "user"
+        );
+        $call = $cdb->post ($rec);
+        if ($call->body->ok) echo 'Created Guest user record.<br/>'; else echo '<span style="color:red">Could not create Guest user record.</span><br/>';
+    } catch (Exception $e) {
+        echo '<pre style="color:red">'; var_dump ($e); echo '</pre>';
+    }
+} else {
+    echo 'Already have a Guest user record.<br/>';
+}
 
-echo 'creating couchdb+nicerapp user "Guest"<br/>';
-$do = false; try { $doc = $db->getDocById('org.couchdb.user:Guest'); } catch (Exception $e) { $do = true; };
-if ($do) $db->create([
-    'id' => 'org.couchdb.user:Guest', 
-    'name' => 'Guest', 
-    'password' => 'Guest', 
-    'realname' => 'nicerapp Guest', 
-    'email' => 'guest@localhost', 
-    'roles' => [ "guests" ], 
-    'type' => "user"
-]);
 
-echo 'creating couchdb database analytics<br/>';
-$db = $client->useDb(["name" => $serverHTTPhost.'___analytics', 'create_if_not_exists' => true]);
+$cdb->setDatabase($cms->domain.'___analytics',true);
 $json = '{ "admins": { "names": [], "roles": ["guests"] }, "members": { "names": ["Administrator"], "roles": ["guests"] } }';
-$db->setAdmins ($json);
+try { 
+    $call = $cdb->setAdmins ($json);
+} catch (Exception $e) {
+    echo '<pre style="color:red">'; var_dump ($e); echo '</pre>'; die();
+}
+echo 'Created database '.$cms->domain.'___analytics<br/>';
 
-echo 'creating couchdb database analytics_self<br/>';
-$db = $client->useDb(["name" => $serverHTTPhost.'___analytics_self', 'create_if_not_exists' => true]);
-$json = '{ "admins": { "names": [], "roles": ["guests"] }, "members": { "names": ["Administrator"], "roles": ["guests"] } }';
-$db->setAdmins ($json);
 
-echo 'creating couchdb database three_d_positions<br/>';
-$db = $client->useDb(["name" => $serverHTTPhost.'___three_d_positions', 'create_if_not_exists' => true]);
+$cdb->setDatabase($cms->domain.'___three_d_positions',true);
 $json = '{ "admins": { "names": [], "roles": ["guests"] }, "members": { "names": ["Administrator"], "roles": ["guests"] } }';
-$db->setAdmins ($json);
+try { 
+    $call = $cdb->setAdmins ($json);
+} catch (Exception $e) {
+    echo '<pre style="color:red">'; var_dump ($e); echo '</pre>'; die();
+}
+echo 'Created database '.$cms->domain.'___three_d_positions<br/>';
 ?>
