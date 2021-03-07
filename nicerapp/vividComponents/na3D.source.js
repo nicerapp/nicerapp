@@ -398,6 +398,7 @@ export class na3D_fileBrowser {
                 });
                 
                 t.dragndrop.addEventListener( 'dragstart', function ( event ) {
+                    
                     if (t.controls) t.controls.dispose();
                     t.dragndrop.mouseX = t.mouse.layerX;
                     t.dragndrop.mouseY = t.mouse.layerY;
@@ -405,9 +406,9 @@ export class na3D_fileBrowser {
                 
                 t.dragndrop.addEventListener( 'drag', function (event) {
                     let p = event.object.parent;
-                    while (!p.position || p.position.x===0) {
+                    while (!p.position || (p.position.x===0 && p.position.y===0 && p.position.z===0)) {
                         p = p.parent;
-                        if (!p) return false;
+                        if (!p) { return false; }
                     }
                                              
                     for (let i=0; i<t.items.length; i++) {

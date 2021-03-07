@@ -64,6 +64,7 @@
                                     user-interface framework<br/>
                                     and apps platform
                                     </h2>
+                                    <!--
                                     <h3 id="pageSubTitle" style="padding-left:20px;font-family:Krona One;text-shadow:4px 4px 2px rgba(0,0,0,0.7)">Beta phase</h3>
                                     <script type="text/javascript">
                                     setTimeout(function() {
@@ -76,6 +77,7 @@
                                     na.vividText.initElement (vividTextCmd);	
                                     }, 1000);
                                     </script>
+                                    -->
                                 </div>
                             </td>
                         </tr>
