@@ -99,9 +99,25 @@ export class na3D_fileBrowser {
             }
             
         });
+        $(document).on('keydown', function(event) {
+            event.preventDefault();
+            if (event.keyCode===16 || event.keyCode===38) {
+                t.mouse.z = 0;
+                t.zoomInterval = setInterval (function () {
+                    t.mouse.z -= 25;
+                }, 500);
+            };
+            if (event.keyCode===17 || event.keyCode===40) { 
+                t.mouse.z = 0; 
+                t.zoomInterval = setInterval (function () {
+                    t.mouse.z += 25;
+                }, 500);
+            };
+            if (event.keyCode===32) t.controls.autoRotate = !t.controls.autoRotate;
+        });
         $(document).on('keyup', function(event) {
             event.preventDefault();
-            if (event.keyCode===32) t.controls.autoRotate = !t.controls.autoRotate;
+            clearInterval(t.zoomInterval);
         });
         
         this.loader = new GLTFLoader();
@@ -131,6 +147,7 @@ export class na3D_fileBrowser {
         this.mouse = new THREE.Vector2();
         this.mouse.x = 0;
         this.mouse.y = 0;
+        this.mouse.z = 0;
 
         this.camera.position.z = 700;
         this.camera.position.y = 200;
@@ -286,6 +303,10 @@ export class na3D_fileBrowser {
         $('#site3D_label').html(t.hoverOverName).css({ position:'absolute', padding : 10, zIndex : 5000, top : event.layerY + 10, left : event.layerX + 30 });
     }
     
+    onMouseWheel( event, t ) {
+        debugger;
+    }
+    
     initializeItems (t, items, data, parent, level, levelDepth, path) {
         if (!t) t = this;
         //debugger;
@@ -398,10 +419,10 @@ export class na3D_fileBrowser {
                 });
                 
                 t.dragndrop.addEventListener( 'dragstart', function ( event ) {
-                    debugger;
                     if (t.controls) t.controls.dispose();
                     t.dragndrop.mouseX = t.mouse.layerX;
                     t.dragndrop.mouseY = t.mouse.layerY;
+                    t.mouse.z = 0;
                 } );
                 
                 t.dragndrop.addEventListener( 'drag', function (event) {
@@ -416,11 +437,13 @@ export class na3D_fileBrowser {
                         if (it.parent === p.it.parent) {
                             it.model.position.x -= ((t.dragndrop.mouseX - t.mouse.layerX));
                             it.model.position.y += ((t.dragndrop.mouseY - t.mouse.layerY));
+                            it.model.position.z += t.mouse.z;
                         }
                     }
                     setTimeout(function() {
                     t.dragndrop.mouseX = t.mouse.layerX;
                     t.dragndrop.mouseY = t.mouse.layerY;
+                    t.mouse.z = 0;
                     },10);
                     
                     clearTimeout (t.posDataToDB);
@@ -1150,6 +1173,10 @@ export class na3D_demo_models {
         var rect = t.renderer.domElement.getBoundingClientRect();
         t.mouse.x = ( ( event.clientX - rect.left ) / ( rect.width - rect.left ) ) * 2 - 1;
         t.mouse.y = - ( ( event.clientY - rect.top ) / ( rect.bottom - rect.top) ) * 2 + 1;        
+    }
+    
+    onMouseWheel( event, t ) {
+        debugger;
     }
 }
 
