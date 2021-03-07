@@ -398,7 +398,7 @@ export class na3D_fileBrowser {
                 });
                 
                 t.dragndrop.addEventListener( 'dragstart', function ( event ) {
-                    
+                    debugger;
                     if (t.controls) t.controls.dispose();
                     t.dragndrop.mouseX = t.mouse.layerX;
                     t.dragndrop.mouseY = t.mouse.layerY;
