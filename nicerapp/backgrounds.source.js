@@ -12,6 +12,12 @@ na.backgrounds = {
         sk = search.split(/\s+/),
         hits = [];
         
+        $('#siteBackground, #siteBackground img, #siteBackground div, #siteBackground iframe').css({
+            position:'absolute',
+            width : $(window).width(),
+            height : $(window).height()
+        });
+        
         na.bg.s.lastMenuSelection = search;
         
         if (typeof url !== 'string' || url === '') {
@@ -111,17 +117,15 @@ na.backgrounds = {
 
         } else {        
             bgl.onload=function(){
-                //debugger;
-                jQuery(bgl).fadeIn(1500, function(){
-                    //debugger;
+                jQuery(bgl).css({display:'none',zIndex:3,opacity:1}).fadeIn(1500, function(){
                     bgf.src = bgl.src;
-                    $(bgf).css ({ display : 'block', opacity : 1 });
+                    $(bgf).css ({ zIndex : 4, display : 'block', opacity : 1 });
                     jQuery(bgDiv).fadeOut('normal', function(){
                         $(bgDiv).tubeplayer('destroy');
                     });
                 });
             };
-            $(bgl).css({display:'none'});
+            $(bgl).css({position:'absolute'}).hide();
             bgl.src = url;
         }
         console.log ('background set to '+url);
