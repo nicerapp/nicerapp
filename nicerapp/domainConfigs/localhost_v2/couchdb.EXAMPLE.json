@@ -1,8 +1,11 @@
 {
-    "http" : "http://",
-    "adminUsername" : "admin",
-    "adminPassword" : "password",
     "domain" : "localhost",
-    "port" : "5984"
+    "port" : "5984",
+    "useSSL" : false,
+    "httpAdapter" : "HTTP_CURL",
+    "username" : "Guest",
+    "password" : "Guest",
+    "adminUsername" : "admin",
+    "adminPassword" : "adminsPassword"
 }
     
