@@ -117,7 +117,7 @@ na.backgrounds = {
 
         } else {        
             bgl.onload=function(){
-                jQuery(bgl).css({display:'none',zIndex:3,opacity:1}).fadeIn(1500, function(){
+                jQuery(bgl).css({display:'none',zIndex:3,opacity:1}).fadeIn('normal', function(){
                     bgf.src = bgl.src;
                     $(bgf).css ({ zIndex : 4, display : 'block', opacity : 1 });
                     jQuery(bgDiv).fadeOut('normal', function(){
