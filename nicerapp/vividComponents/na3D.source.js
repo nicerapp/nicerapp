@@ -100,7 +100,6 @@ export class na3D_fileBrowser {
             
         });
         $(document).on('keydown', function(event) {
-            event.preventDefault();
             if (event.keyCode===16 || event.keyCode===38) {
                 t.mouse.z = 0;
                 t.zoomInterval = setInterval (function () {
