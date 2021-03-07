@@ -117,9 +117,10 @@ na.backgrounds = {
 
         } else {        
             bgl.onload=function(){
-                jQuery(bgl).css({display:'none',zIndex:3,opacity:1}).fadeIn('normal', function(){
+                jQuery(bgl).css({display:'none',zIndex:4,opacity:1}).fadeIn('normal', function(){
                     bgf.src = bgl.src;
-                    $(bgf).css ({ zIndex : 4, display : 'block', opacity : 1 });
+                    $(bgf).css ({ zIndex : 3, display : 'block', opacity : 1 });
+                    $(bgl).hide();
                     jQuery(bgDiv).fadeOut('normal', function(){
                         $(bgDiv).tubeplayer('destroy');
                     });
