@@ -36,8 +36,6 @@ var nas = na.site = {
         
         var startTime = new Date();
         na.m.settings.siteStartTime = startTime.getTime();
-        na.m.settings.debugLevel = 'show all';
-        na.m.settings.debugCategoriesVisible = [ 'all' ];
         
         if (na.m.userDevice.isPhone) {
             $('#siteDateTime').css({display:'none'});
@@ -383,6 +381,8 @@ na.account = na.a = {
 
 na.m = {
     settings : {
+        debugLevel : 'show all',
+        debugCategoriesVisible : [ 'all' ],
         waitForCondition : {}
     },
     

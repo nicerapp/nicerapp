@@ -663,6 +663,7 @@ export class na3D_fileBrowser {
             
             if (!ob.modifiedColumn) ob.modifiedColumn = 1;
             if (!ob.modifiedRow) ob.modifiedRow = 1;
+            if (!ob.modifiedCount) ob.modifiedCount = 0;
             
             
             //if (i===mostConflicts.j) {
@@ -672,8 +673,8 @@ export class na3D_fileBrowser {
                     var modifierColumn = ob.modifiedColumn, modifierRow = ob.modifiedRow;
                     
                     if (it.model) {
-                        it.model.position.x += modifierColumn * it.modifierColumn * 100;
-                        it.model.position.y += modifierRow * it.modifierRow * 100;
+                        it.model.position.x += modifierColumn * it.modifierColumn * 50;
+                        it.model.position.y += modifierRow * it.modifierRow * 50;
                     }
                 }
                 
@@ -688,31 +689,36 @@ export class na3D_fileBrowser {
                         && it.path.substr(0,o.pathb.length)==o.pathb
                         && (it.path.replace(o.pathb+',','').match(/,/g) || []).length === 0
                     ) {
-                        it.model.position.x += modifierColumn * p.modifierColumn * 100;
-                        it.model.position.y += modifierRow * p.modifierRow * 100;
+                        it.model.position.x += modifierColumn * p.modifierColumn * 50;
+                        it.model.position.y += modifierRow * p.modifierRow * 50;
                     }
                 }
-                if (ob.modifiedColumn===1 && ob.modifiedRow===1) {
-                    ob.modifiedColumn = 0;
-                    ob.modifiedRow = 1;
-                } else if (ob.modifiedColumn===0 && ob.modifiedRow===1) {
-                    ob.modifiedColumn = 0;
-                    ob.modifiedRow = -1;
-                } else if (ob.modifiedColumn===0 && ob.modifiedRow===-1) {
-                    ob.modifiedColumn = -1;
-                    ob.modifiedRow = -1;
-                } else if (ob.modifiedColumn===-1 && ob.modifiedRow===-1) {
-                    ob.modifiedColumn = -1;
-                    ob.modifiedRow = 0;
-                } else if (ob.modifiedColumn===-1 && ob.modifiedRow===0) {
-                    ob.modifiedColumn = 0;
-                    ob.modifiedRow = 0;
-                } else if (ob.modifiedColumn===0 && ob.modifiedRow===0) {
-                    ob.modifiedColumn = 1;
-                    ob.modifiedRow = 0;
-                } else if (ob.modifiedColumn===1 && ob.modifiedRow===0) {
-                    ob.modifiedColumn = 1;
-                    ob.modifiedRow = 1;
+                if (ob.modifiedCount>1) {
+                    ob.modifiedCount = 0;
+                    if (ob.modifiedColumn===1 && ob.modifiedRow===1) {
+                        ob.modifiedColumn = 0;
+                        ob.modifiedRow = 1;
+                    } else if (ob.modifiedColumn===0 && ob.modifiedRow===1) {
+                        ob.modifiedColumn = 0;
+                        ob.modifiedRow = -1;
+                    } else if (ob.modifiedColumn===0 && ob.modifiedRow===-1) {
+                        ob.modifiedColumn = -1;
+                        ob.modifiedRow = -1;
+                    } else if (ob.modifiedColumn===-1 && ob.modifiedRow===-1) {
+                        ob.modifiedColumn = -1;
+                        ob.modifiedRow = 0;
+                    } else if (ob.modifiedColumn===-1 && ob.modifiedRow===0) {
+                        ob.modifiedColumn = 0;
+                        ob.modifiedRow = 0;
+                    } else if (ob.modifiedColumn===0 && ob.modifiedRow===0) {
+                        ob.modifiedColumn = 1;
+                        ob.modifiedRow = 0;
+                    } else if (ob.modifiedColumn===1 && ob.modifiedRow===0) {
+                        ob.modifiedColumn = 1;
+                        ob.modifiedRow = 1;
+                    }
+                } else {
+                    ob.modifiedCount++;
                 }
             }
         }
