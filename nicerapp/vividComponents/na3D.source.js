@@ -673,8 +673,8 @@ export class na3D_fileBrowser {
                 var 
                 o = t.overlaps[i],
                 oa = t.ld3[o.patha],
-                ob = t.ld3[o.pathb],
-                pathc = o.pathb.substr(0,o.pathb.lastIndexOf(','));
+                ob = t.ld3[o.pathb];
+                //pathc = o.pathb.substr(0,o.pathb.lastIndexOf(','));
                 
                 //if (!ob.modifiedColumn) 
                     ob.modifiedColumn = Math.random() < 0.5 ? 1 : -1;
@@ -684,13 +684,6 @@ export class na3D_fileBrowser {
                     ob.modifierColumn = Math.random() < 0.5 ? 1 : -1;
                 //if (!ob.modifierRow) 
                     ob.modifierRow = Math.random() < 0.5 ? 1 : -1;
-                    
-                /*if (pathc.match(it.path) && ) {
-                    var
-                    modifiedColumn = 1,
-                    modifiedRow = 1,
-                    modifier*/
-                
                     
                 if (!ob.modifiedCount) ob.modifiedCount = 0;
                 
@@ -710,7 +703,7 @@ export class na3D_fileBrowser {
                         var 
                         it2 = t.items[k];
                         
-                        if (it2.parent === it.parent) {
+                        //if (it2.parent === it.parent) {
                             var
                             p = t.items[it.parent],
                             oap = t.items[oa.parent];
@@ -740,40 +733,38 @@ export class na3D_fileBrowser {
                                         && it2.path.substr(0,o.pathb.length)==o.pathb
                                        // && (it2.path.replace(o.pathb+',','').match(/,/g) || []).length === 0
                                     )
-                                    || (
+                                    /*|| (
                                         pathc.match(it.path)
-                                    )
+                                    )*/
                                 )
-                                && it2.adjusted===0
+                                //&& it2.adjusted===0
                                 /*|| (
                                     it.path!=='' && o.pathb.match(it.path)
                                 )*/
                             ) {
-                                it2.model.position.x = it2.model.position.x + ob.modifierColumn * p.modifierColumn * 50;
-                                it2.model.position.y = it2.model.position.y + ob.modifierRow * p.modifierRow * 50;
+                                it2.model.position.x = p.model.position.x + ob.modifierColumn * p.modifierColumn * 50;
+                                it2.model.position.y = p.model.position.y + ob.modifierRow * p.modifierRow * 50;
                                 it2.adjusted++;
                             }
-                        }
+                        //}
                     }
                 }
                 
-                
-                
                 if (ob.lastDiffX < ob.diffX) 
-                    ob.modifierColumn = -1 * ob.modifiedColumn;
-                else
                     ob.modifierColumn = ob.modifiedColumn;
-                if (ob.lastDiffY < ob.diffY) 
-                    ob.modifierRow = -1 * ob.modifiedRow;
                 else
+                    ob.modifierColumn = -1 * ob.modifiedColumn;
+                if (ob.lastDiffY < ob.diffY) 
                     ob.modifierRow = ob.modifiedRow;
+                else
+                    ob.modifierRow = -1 * ob.modifiedRow;
             }
         }
         
         if (t.overlaps.length > 0) {
             setTimeout (function() {
                 t.onresize_do_overlapChecks(t, callback);
-            }, 50);
+            }, 10);
         } else if (typeof callback=='function') callback(t);
     }
  
