@@ -662,16 +662,18 @@ export class na3D_fileBrowser {
                 for (var j=0; j<ob.items.length; j++) {
                     var it = t.items[ ob.items[j] ];
                     if (it.model) {
-                        it.model.position.x += -1 * it.modifierColumn * 50;
-                        it.model.position.y += -1 * it.modifierRow * 50;
+                        it.model.position.x += it.modifierColumn * 50;
+                        it.model.position.y += it.modifierRow * 50;
                     }
                 }
                 
                 for (var j=0; j<t.items.length; j++) {
                     var it = t.items[j];
+                    var p = t.items[it.parent];
+                    //if (p && p.name=='3D' && it.path.substr(0,o.pathb.length)==o.pathb) debugger;
                     if (it.model && it.path!==o.pathb && it.path.substr(0,o.pathb.length)==o.pathb) {
-                        it.model.position.x += -1 * it.modifierColumn * 50;
-                        it.model.position.y += -1 * it.modifierRow * 50;
+                        it.model.position.x += it.modifierColumn * 50;
+                        it.model.position.y += it.modifierRow * 50;
                     }
                 }
             }
