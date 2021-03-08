@@ -503,7 +503,7 @@ export class na3D_fileBrowser {
                 /*t.databaseToPosData(t, function(loadedPosData) {
                     if (!loadedPosData) t.onresize (t); else if (t.showLines) t.drawLines(t);
                 });*/
-                t.onresize (t); 
+                t.onresize_do (t); 
                 
             }, 500);
         }
@@ -524,7 +524,7 @@ export class na3D_fileBrowser {
     }
 
     
-    onresize_do(t, levels) {
+    onresize_do(t) {
         t.resizing = true;
         
         let 
