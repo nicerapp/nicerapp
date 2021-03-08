@@ -333,6 +333,15 @@ Array.prototype.remove = function() {
     return this;
 };
 
+Array.prototype.includes = function (x) {
+    for (var i = 0; i < this.length; i++) {
+        if (this[i] === x) {
+            return true;
+        }
+    }
+    return false;
+};
+
 window.onerror = function (msg, url, lineno, colno, error) {
     var err = msg+'\n'+url+'\n'+lineno+' - '+colno+'\n'+error;
     //alert (err);
