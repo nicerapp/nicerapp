@@ -565,25 +565,25 @@ export class na3D_fileBrowser {
             
             if (p && p.path && p.path!=='') {
                 var
-                ld3p = t.ld3[p.path],
-                modifierColumn = p.column < (ld3p.rowColumnCount/2) ? 1 : -1,
-                modifierRow = p.row < (ld3p.rowColumnCount/2) ? 1 : -1;
+                ld3p = t.ld3[p.path];
+                if (!ld3p.modifierColumn) ld3p.modifierColumn = Math.random() < 0.5 ? -1 : 1;
+                if (!ld3p.modifierRow) ld3p.modifierRow = Math.random() < 0.5 ? -1 : 1;
+                it.modifierColumn = ld3p.modifierColumn,//p.column < (ld3p.rowColumnCount/2) ? 1 : -1,
+                it.modifierRow = ld3p.modifierRow;//p.row < (ld3p.rowColumnCount/2) ? 1 : -1;
             } else {
-                var
-                modifierColumn = it.column < ld3.rowColumnCount/2 ? 1 : -1,
-                modifierRow = it.row < ld3.rowColumnCount/2 ? 1 : -1;
+                if (!ld3.modifierColumn) ld3.modifierColumn = Math.random() < 0.5 ? -1 : 1;
+                if (!ld3.modifierRow) ld3.modifierRow = Math.random() < 0.5 ? -1 : 1;
+                it.modifierColumn = ld3.modifierColumn,//it.column < ld3.rowColumnCount/2 ? 1 : -1,
+                it.modifierRow = ld3.modifierRow;//it.row < ld3.rowColumnCount/2 ? 1 : -1;
             };
             
-            it.modifierColumn = modifierColumn;
-            it.modifierRow = modifierRow;
-            
             if (it.model && p && p.model) {
-                it.model.position.x = p.model.position.x + (modifierColumn * (it.column-1) * 50);
-                it.model.position.y = p.model.position.y + (modifierRow * (it.row-1) * 50);
+                it.model.position.x = p.model.position.x + (it.modifierColumn * (it.column-1) * 50);
+                it.model.position.y = p.model.position.y + (it.modifierRow * (it.row-1) * 50);
                 it.model.position.z = p.model.position.z - ((it.level+1) * 50);
             } else if (it.model) {
-                it.model.position.x = modifierColumn * (it.column-1) * 50;
-                it.model.position.y = modifierRow * (it.row-1) * 50;
+                it.model.position.x = it.modifierColumn * (it.column-1) * 50;
+                it.model.position.y = it.modifierRow * (it.row-1) * 50;
                 it.model.position.z = -1 * (it.level+1) * 50;
             }
         }
@@ -610,6 +610,41 @@ export class na3D_fileBrowser {
                             
                             for (var j=0; j<ld3b.items.length; j++) {
                                 var itb = t.items[ld3b.items[j]];
+                                
+                                /*
+                                var
+                                p = t.items[itb.parent],
+                                ld3 = t.ld3[itb.path];
+                                
+                                delete ld3.modifierColumn;
+                                delete ld3.modifierRow;
+                                
+                                if (p && p.path && p.path!=='') {
+                                    var
+                                    ld3p = t.ld3[p.path];
+                                    delete ld3p.modifierColumn;
+                                    delete ld3p.modifierRow;
+                                    if (!ld3p.modifierColumn) ld3p.modifierColumn = Math.random() < 0.5 ? -1 : 1;
+                                    if (!ld3p.modifierRow) ld3p.modifierRow = Math.random() < 0.5 ? -1 : 1;
+                                    itb.modifierColumn = ld3p.modifierColumn,//p.column < (ld3p.rowColumnCount/2) ? 1 : -1,
+                                    itb.modifierRow = ld3p.modifierRow;//p.row < (ld3p.rowColumnCount/2) ? 1 : -1;
+                                } else {
+                                    if (!ld3.modifierColumn) ld3.modifierColumn = Math.random() < 0.5 ? -1 : 1;
+                                    if (!ld3.modifierRow) ld3.modifierRow = Math.random() < 0.5 ? -1 : 1;
+                                    itb.modifierColumn = ld3.modifierColumn,//it.column < ld3.rowColumnCount/2 ? 1 : -1,
+                                    itb.modifierRow = ld3.modifierRow;//it.row < ld3.rowColumnCount/2 ? 1 : -1;
+                                };
+                                
+                                if (itb.model && p && p.model) {
+                                    itb.model.position.x = p.model.position.x + (itb.modifierColumn * (itb.column-1) * 50);
+                                    itb.model.position.y = p.model.position.y + (itb.modifierRow * (itb.row-1) * 50);
+                                    itb.model.position.z = p.model.position.z - ((itb.level+1) * 50);
+                                } else if (itb.model) {
+                                    itb.model.position.x = itb.modifierColumn * (itb.column-1) * 50;
+                                    itb.model.position.y = itb.modifierRow * (itb.row-1) * 50;
+                                    itb.model.position.z = -1 * (itb.level+1) * 50;
+                                }*/
+                                
                                 if (
                                     ita.model && itb.model
                                     && ita.model.position.x === itb.model.position.x
@@ -669,11 +704,10 @@ export class na3D_fileBrowser {
             
                 for (var j=0; j<ob.items.length; j++) {
                     var it = t.items[ ob.items[j] ];
-                    var modifierColumn = ob.modifiedColumn, modifierRow = ob.modifiedRow;
                     
                     if (it.model) {
-                        it.model.position.x += modifierColumn * it.modifierColumn * 50;
-                        it.model.position.y += modifierRow * it.modifierRow * 50;
+                        it.model.position.x += ob.modifierColumn * it.modifierColumn * 50;
+                        it.model.position.y += ob.modifierRow * it.modifierRow * 50;
                     }
                 }
                 
@@ -681,18 +715,17 @@ export class na3D_fileBrowser {
                     var it = t.items[j];
                     var p = t.items[it.parent];
 
-                    var modifierColumn = ob.modifiedColumn, modifierRow = ob.modifiedRow;
                     if (
                         it.model 
                         && it.path!==o.pathb 
                         && it.path.substr(0,o.pathb.length)==o.pathb
                         && (it.path.replace(o.pathb+',','').match(/,/g) || []).length === 0
                     ) {
-                        it.model.position.x += modifierColumn * p.modifierColumn * 50;
-                        it.model.position.y += modifierRow * p.modifierRow * 50;
+                        it.model.position.x += ob.modifierColumn * p.modifierColumn * 50;
+                        it.model.position.y += ob.modifierRow * p.modifierRow * 50;
                     }
                 }
-                if (ob.modifiedCount>0) {
+                if (ob.modifiedCount>2) {
                     ob.modifiedCount = 0;
                     if (ob.modifiedColumn===1 && ob.modifiedRow===1) {
                         ob.modifiedColumn = 0;
@@ -724,7 +757,7 @@ export class na3D_fileBrowser {
         
         if (t.overlaps.length > 0) {
             setTimeout (function() {
-                t.onresize_do_overlapChecks(t);
+                t.onresize_do_overlapChecks(t, callback);
             }, 50);
         } else if (typeof callback=='function') callback(t);
     }
