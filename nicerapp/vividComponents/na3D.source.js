@@ -694,21 +694,24 @@ export class na3D_fileBrowser {
                 }
                 if (ob.modifiedColumn===1 && ob.modifiedRow===1) {
                     ob.modifiedColumn = 0;
-                };
-                if (ob.modifiedColumn===0 && ob.modifiedRow===1) {
-                    ob.modifiedColumn = 1;
-                    ob.modifiedRow = 0;
-                }
-                if (ob.modifiedColumn===1 && ob.modifiedRow===0) {
+                    ob.modifiedRow = 1;
+                } else if (ob.modifiedColumn===0 && ob.modifiedRow===1) {
                     ob.modifiedColumn = 0;
                     ob.modifiedRow = -1;
-                }
-                if (ob.modifiedColumn===0 && ob.modifiedRow===-1) {
+                } else if (ob.modifiedColumn===0 && ob.modifiedRow===-1) {
                     ob.modifiedColumn = -1;
                     ob.modifiedRow = -1;
-                }
-                if (ob.modifiedColumn===-1 && ob.modifiedRow===-1) {
+                } else if (ob.modifiedColumn===-1 && ob.modifiedRow===-1) {
+                    ob.modifiedColumn = -1;
+                    ob.modifiedRow = 0;
+                } else if (ob.modifiedColumn===-1 && ob.modifiedRow===0) {
                     ob.modifiedColumn = 0;
+                    ob.modifiedRow = 0;
+                } else if (ob.modifiedColumn===0 && ob.modifiedRow===0) {
+                    ob.modifiedColumn = 1;
+                    ob.modifiedRow = 0;
+                } else if (ob.modifiedColumn===1 && ob.modifiedRow===0) {
+                    ob.modifiedColumn = 1;
                     ob.modifiedRow = 1;
                 }
             }
