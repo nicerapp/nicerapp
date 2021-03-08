@@ -505,7 +505,7 @@ export class na3D_fileBrowser {
                 });*/
                 t.onresize_do (t); 
                 
-            }, 500);
+            }, 1000);
         }
     }
     
@@ -571,8 +571,8 @@ export class na3D_fileBrowser {
                 modifierRow = p.row < (ld3p.rowColumnCount/2) ? -1 : 1;
             } else {
                 var
-                modifierColumn = 1,
-                modifierRow = 1;
+                modifierColumn = it.column < ld3.rowColumnCount/2 ? -1 : 1,
+                modifierRow = it.row < ld3.rowColumnCount/2 ? -1 : 1;
             };
             
             it.modifierColumn = modifierColumn;
@@ -647,9 +647,11 @@ export class na3D_fileBrowser {
             }
         }
         
-        var largest = {conflicts : 1, j : -1};
+        var mostConflicts = {conflicts : 1, j : -1}, largest = null;
         for (var j=0; j<t.overlaps.length; j++) {
-            if (t.overlaps[j].conflicts > largest.conflicts) largest = {conflicts:t.overlaps[j].conflicts, j : j};
+            if (t.overlaps[j].conflicts > mostConflicts.conflicts) mostConflicts = {conflicts:t.overlaps[j].conflicts, j : j};
+            if (!largest || t.ld3[t.overlaps[j].pathb].itemCount > largest.itemCount) largest = { pathb : t.overlaps[j].pathb, itemCount : t.ld3[t.overlaps[j].pathb].itemCount, j : j };
+                
         }
 
         for (var i=0; i<t.overlaps.length; i++) {
@@ -658,6 +660,7 @@ export class na3D_fileBrowser {
             oa = t.ld3[o.patha],
             ob = t.ld3[o.pathb];
             
+            //if (i===mostConflicts.j) {
             if (i===largest.j) {
                 for (var j=0; j<ob.items.length; j++) {
                     var it = t.items[ ob.items[j] ];
@@ -670,7 +673,7 @@ export class na3D_fileBrowser {
                 for (var j=0; j<t.items.length; j++) {
                     var it = t.items[j];
                     var p = t.items[it.parent];
-                    //if (p && p.name=='3D' && it.path.substr(0,o.pathb.length)==o.pathb) debugger;
+
                     if (
                         it.model 
                         && it.path!==o.pathb 
