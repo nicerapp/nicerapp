@@ -612,7 +612,8 @@ export class na3D_fileBrowser {
                             for (var j=0; j<ld3b.items.length; j++) {
                                 var itb = t.items[ld3b.items[j]];
                                 if (
-                                    ita.model.position.x === itb.model.position.x
+                                    ita.model && itb.model
+                                    && ita.model.position.x === itb.model.position.x
                                     && ita.model.position.y === itb.model.position.y
                                     && ita.model.position.z === itb.model.position.z
                                 ) {
