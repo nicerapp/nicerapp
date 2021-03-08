@@ -591,7 +591,7 @@ export class na3D_fileBrowser {
         
         setTimeout(function() {
             t.onresize_do_overlapChecks(t);
-        }, 250);
+        }, 50);
         
         t.drawLines(t);
     }
@@ -661,6 +661,7 @@ export class na3D_fileBrowser {
             for (var j=0; j<ob.items.length; j++) {
                 var it = t.items[ ob.items[j] ];
                 it.model.position.x += it.modifierColumn * 50;
+                it.model.position.y += it.modifierRow * 50;
             }
         }
         
@@ -668,7 +669,7 @@ export class na3D_fileBrowser {
             setTimeout (function() {
                 t.onresize_do_overlapChecks(t);
             }, 50);
-        } else debugger;
+        } /*else debugger;*/
     }
  
     posDataToDatabase (t) {
