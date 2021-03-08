@@ -671,7 +671,12 @@ export class na3D_fileBrowser {
                     var it = t.items[j];
                     var p = t.items[it.parent];
                     //if (p && p.name=='3D' && it.path.substr(0,o.pathb.length)==o.pathb) debugger;
-                    if (it.model && it.path!==o.pathb && it.path.substr(0,o.pathb.length)==o.pathb) {
+                    if (
+                        it.model 
+                        && it.path!==o.pathb 
+                        && it.path.substr(0,o.pathb.length)==o.pathb
+                        && (it.path.replace(o.pathb+',','').match(/,/g) || []).length === 0
+                    ) {
                         it.model.position.x += it.modifierColumn * 50;
                         it.model.position.y += it.modifierRow * 50;
                     }
