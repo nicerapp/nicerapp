@@ -364,8 +364,8 @@ export class na3D_fileBrowser {
                 items[items.length] = it;
                 t.ld2[level].levelIdx++;
 
-        if (!t.ld3[path2]) t.ld3[path2] = { itemCount : 0, items : [] };
-        t.ld3[path2].itemCount++;
+                if (!t.ld3[path2]) t.ld3[path2] = { itemCount : 0, items : [] };
+                t.ld3[path2].itemCount++;
 
                 t.ld3[path2].items.push (it.idx);
                 
@@ -421,8 +421,8 @@ export class na3D_fileBrowser {
                 for (var i=0; i<t.items.length; i++) if (t.items[i].model) objs[objs.length] = t.items[i].model.children[0];
                                                
                 t.controls = new OrbitControls( t.camera, t.renderer.domElement );
-                //this.controls.autoRotate = true;
-                $('#autoRotate').removeClass('vividButtonSelected').addClass('vividButton');
+                t.controls.autoRotate = true;
+                //$('#autoRotate').removeClass('vividButtonSelected').addClass('vividButton');
                 //t.controls.listenToKeyEvents( window ); // optional
                 t.controls.enabled = false;
                 setTimeout (function(){
@@ -505,7 +505,7 @@ export class na3D_fileBrowser {
                 });*/
                 t.onresize_do (t); 
                 
-            }, 1000);
+            }, 2000);
         }
     }
     
@@ -567,12 +567,12 @@ export class na3D_fileBrowser {
             if (p && p.path && p.path!=='') {
                 var
                 ld3p = t.ld3[p.path],
-                modifierColumn = p.column < (ld3p.rowColumnCount/2) ? -1 : 1,
-                modifierRow = p.row < (ld3p.rowColumnCount/2) ? -1 : 1;
+                modifierColumn = p.column < (ld3p.rowColumnCount/2) ? 1 : -1,
+                modifierRow = p.row < (ld3p.rowColumnCount/2) ? 1 : -1;
             } else {
                 var
-                modifierColumn = it.column < ld3.rowColumnCount/2 ? -1 : 1,
-                modifierRow = it.row < ld3.rowColumnCount/2 ? -1 : 1;
+                modifierColumn = it.column < ld3.rowColumnCount/2 ? 1 : -1,
+                modifierRow = it.row < ld3.rowColumnCount/2 ? 1 : -1;
             };
             
             it.modifierColumn = modifierColumn;
@@ -647,10 +647,11 @@ export class na3D_fileBrowser {
             }
         }
         
-        var mostConflicts = {conflicts : 1, j : -1}, largest = null;
+        var mostConflicts = {conflicts : 1, j : -1}, largest = null, smallest = null;
         for (var j=0; j<t.overlaps.length; j++) {
             if (t.overlaps[j].conflicts > mostConflicts.conflicts) mostConflicts = {conflicts:t.overlaps[j].conflicts, j : j};
             if (!largest || t.ld3[t.overlaps[j].pathb].itemCount > largest.itemCount) largest = { pathb : t.overlaps[j].pathb, itemCount : t.ld3[t.overlaps[j].pathb].itemCount, j : j };
+            if (!smallest || t.ld3[t.overlaps[j].pathb].itemCount > smallest.itemCount) smallest = { pathb : t.overlaps[j].pathb, itemCount : t.ld3[t.overlaps[j].pathb].itemCount, j : j };
                 
         }
 
@@ -661,12 +662,12 @@ export class na3D_fileBrowser {
             ob = t.ld3[o.pathb];
             
             //if (i===mostConflicts.j) {
-            if (i===largest.j) {
+            if (i===smallest.j) {
                 for (var j=0; j<ob.items.length; j++) {
                     var it = t.items[ ob.items[j] ];
                     if (it.model) {
-                        it.model.position.x += it.modifierColumn * 50;
-                        it.model.position.y += it.modifierRow * 50;
+                        it.model.position.x += it.modifierColumn * 100;
+                        it.model.position.y += it.modifierRow * 100;
                     }
                 }
                 
@@ -680,8 +681,8 @@ export class na3D_fileBrowser {
                         && it.path.substr(0,o.pathb.length)==o.pathb
                         && (it.path.replace(o.pathb+',','').match(/,/g) || []).length === 0
                     ) {
-                        it.model.position.x += p.modifierColumn * 50;
-                        it.model.position.y += p.modifierRow * 50;
+                        it.model.position.x += p.modifierColumn * 100;
+                        it.model.position.y += p.modifierRow * 100;
                     }
                 }
             }
