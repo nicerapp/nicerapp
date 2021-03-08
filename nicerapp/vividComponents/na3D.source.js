@@ -660,13 +660,15 @@ export class na3D_fileBrowser {
             if (i===largest.j) {
                 for (var j=0; j<ob.items.length; j++) {
                     var it = t.items[ ob.items[j] ];
-                    it.model.position.x += -1 * it.modifierColumn * 50;
-                    it.model.position.y += -1 * it.modifierRow * 50;
+                    if (it.model) {
+                        it.model.position.x += -1 * it.modifierColumn * 50;
+                        it.model.position.y += -1 * it.modifierRow * 50;
+                    }
                 }
                 
                 for (var j=0; j<t.items.length; j++) {
                     var it = t.items[j];
-                    if (it.path!==o.pathb && it.path.substr(0,o.pathb.length)==o.pathb) {
+                    if (it.model && it.path!==o.pathb && it.path.substr(0,o.pathb.length)==o.pathb) {
                         it.model.position.x += -1 * it.modifierColumn * 50;
                         it.model.position.y += -1 * it.modifierRow * 50;
                     }
