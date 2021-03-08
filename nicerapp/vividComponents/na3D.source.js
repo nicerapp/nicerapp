@@ -677,8 +677,8 @@ export class na3D_fileBrowser {
                         && it.path.substr(0,o.pathb.length)==o.pathb
                         && (it.path.replace(o.pathb+',','').match(/,/g) || []).length === 0
                     ) {
-                        it.model.position.x += it.modifierColumn * 50;
-                        it.model.position.y += it.modifierRow * 50;
+                        it.model.position.x += p.modifierColumn * 50;
+                        it.model.position.y += p.modifierRow * 50;
                     }
                 }
             }
