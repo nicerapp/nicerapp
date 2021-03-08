@@ -500,10 +500,9 @@ export class na3D_fileBrowser {
                     if (t.showLines) t.drawLines(t);
                 } );
                 
-                /*t.databaseToPosData(t, function(loadedPosData) {
+                t.databaseToPosData(t, function(loadedPosData) {
                     if (!loadedPosData) t.onresize (t); else if (t.showLines) t.drawLines(t);
-                });*/
-                t.onresize_do (t); 
+                });
                 
             }, 2000);
         }
@@ -524,7 +523,7 @@ export class na3D_fileBrowser {
     }
 
     
-    onresize_do(t) {
+    onresize_do(t, callback) {
         t.resizing = true;
         
         let 
@@ -590,13 +589,13 @@ export class na3D_fileBrowser {
         }
         
         setTimeout(function() {
-            t.onresize_do_overlapChecks(t);
+            t.onresize_do_overlapChecks(t, callback);
         }, 50);
         
         t.drawLines(t);
     }
     
-    onresize_do_overlapChecks (t) {
+    onresize_do_overlapChecks (t, callback) {
         t.overlaps = [];
         
         for (var patha in t.ld3) {
@@ -651,23 +650,23 @@ export class na3D_fileBrowser {
         for (var j=0; j<t.overlaps.length; j++) {
             if (t.overlaps[j].conflicts > mostConflicts.conflicts) mostConflicts = {conflicts:t.overlaps[j].conflicts, j : j};
             if (!largest || t.ld3[t.overlaps[j].pathb].itemCount > largest.itemCount) largest = { pathb : t.overlaps[j].pathb, itemCount : t.ld3[t.overlaps[j].pathb].itemCount, j : j };
-            if (!smallest || t.ld3[t.overlaps[j].pathb].itemCount > smallest.itemCount) smallest = { pathb : t.overlaps[j].pathb, itemCount : t.ld3[t.overlaps[j].pathb].itemCount, j : j };
+            if (!smallest || t.ld3[t.overlaps[j].pathb].itemCount < smallest.itemCount) smallest = { pathb : t.overlaps[j].pathb, itemCount : t.ld3[t.overlaps[j].pathb].itemCount, j : j };
                 
         }
 
         for (var i=0; i<t.overlaps.length; i++) {
-            var 
-            o = t.overlaps[i],
-            oa = t.ld3[o.patha],
-            ob = t.ld3[o.pathb];
-            
-            if (!ob.modifiedColumn) ob.modifiedColumn = 1;
-            if (!ob.modifiedRow) ob.modifiedRow = 1;
-            if (!ob.modifiedCount) ob.modifiedCount = 0;
-            
-            
             //if (i===mostConflicts.j) {
-            if (i===mostConflicts.j) {
+            if (i===smallest.j) {
+                var 
+                o = t.overlaps[largest.j],
+                oa = t.ld3[o.patha],
+                ob = t.ld3[o.pathb];
+                
+                if (!ob.modifiedColumn) ob.modifiedColumn = Math.random() < 0.5 ? 1 : -1;
+                if (!ob.modifiedRow) ob.modifiedRow = Math.random() < 0.5 ? 1 : -1;
+                if (!ob.modifiedCount) ob.modifiedCount = 0;
+                
+            
                 for (var j=0; j<ob.items.length; j++) {
                     var it = t.items[ ob.items[j] ];
                     var modifierColumn = ob.modifiedColumn, modifierRow = ob.modifiedRow;
@@ -693,7 +692,7 @@ export class na3D_fileBrowser {
                         it.model.position.y += modifierRow * p.modifierRow * 50;
                     }
                 }
-                if (ob.modifiedCount>1) {
+                if (ob.modifiedCount>0) {
                     ob.modifiedCount = 0;
                     if (ob.modifiedColumn===1 && ob.modifiedRow===1) {
                         ob.modifiedColumn = 0;
@@ -727,7 +726,7 @@ export class na3D_fileBrowser {
             setTimeout (function() {
                 t.onresize_do_overlapChecks(t);
             }, 50);
-        } /*else debugger;*/
+        } else if (typeof callback=='function') callback(t);
     }
  
     posDataToDatabase (t) {
@@ -858,7 +857,7 @@ export class na3D_fileBrowser {
                 }
             };
             
-            if ( parent && parent.model) {
+            if (parent && parent.model) {
                 var 
                 geometry = new THREE.Geometry(), 
                 p1 = it.model.position, 
@@ -898,9 +897,13 @@ export class na3D_fileBrowser {
         $.cookie('3DFDM_lineColors', JSON.stringify(t.lineColors), na.m.cookieOptions());
     }
     
+    useNewArrangement () {
+        var t = this;
+        t.onresize_do(t, t.posDataToDatabase);
+    }
+    
     useNewColors () {
         var t = this;
-        debugger;
         for (var i=0; i<t.permaLines.length; i++) {
             t.scene.remove (t.permaLines[i].line);
             t.permaLines[i].geometry.dispose();
