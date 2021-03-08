@@ -1,353 +1,4 @@
 var nicerapp = na = {};
-na.apps = {
-    loaded : {}
-};
-
-na.account = na.a = {
-    settings : {
-        username : 'Guest',
-        password : 'Guest'
-    }
-};
-
-na.m = {
-    settings : {
-        debugLevel : 'show all',
-        debugCategoriesVisible : [ 'all' ],
-        waitForCondition : {}
-    },
-    
-    base64_encode_url : function (str) {
-        var str2 = btoa(str);
-        str2 = str2.replace (/=/g, '');
-        str2 = str2.replace ('+', '-');
-        str2 = str2.replace ('/', '_');
-        return str2;
-    },
-    
-    base64_decode_url : function (str) {
-        var str2 = str;
-        str2 = str2.replace ('-', '+');
-        str2 = str2.replace ('_', '/');
-        return atob(str2);
-    },
-    
-    cookieOptions : function () {
-        var d = new Date();
-        return {
-            expires : new Date(d.getTime() + 10 * 365 * 24 * 60 * 60 * 1000), // 10 years from now
-            path : '/'
-        };
-    },
-    
-	secondsToTime : function (secs) {
-		//thx 
-		// http://codeaid.net/javascript/convert-seconds-to-hours-minutes-and-seconds-%28javascript%29
-		//and
-		// http://stackoverflow.com/questions/175554/how-to-convert-milliseconds-into-human-readable-form
-		var days = Math.floor(secs / (60 * 60 * 24));
-		var hours = Math.floor(secs / (60 * 60));
-		var divisor_for_minutes = secs % (60 * 60);
-		var minutes = Math.floor(divisor_for_minutes / 60);
-		var divisor_for_seconds = divisor_for_minutes % 60;
-		var seconds = Math.floor(divisor_for_seconds);
-		var milliSeconds = Math.round((secs - Math.floor(secs)) * 1000);
-
-		var obj = {
-			days : days,
-			hours: hours,
-			minutes: minutes,
-			seconds: seconds,
-			milliSeconds : milliSeconds
-		};
-
-		return obj;
-	},
-
-	secondsToTimeString : function (secs) {
-		var d = na.m.secondsToTime(secs);
-		var s = '';
-		if (d.days>0) {
-			s += d.days + 'd';
-		};
-		if (d.hours>0) {
-			if (s!='') s+=', ';
-			s += d.hours + 'h';
-		};
-		if (d.minutes>0) {
-			if (s!='') s+=', ';
-			s += d.minutes + 'm';
-		};
-		if (d.seconds>0) {
-			if (s!='') s+=', ';
-			s += d.seconds + 's';
-		};
-		if (d.milliSeconds>0) {
-			if (s!='') s+=', ';
-			s += d.milliSeconds + 'ms';
-		};
-		return s;
-	},
-    
-    log : function (level, msg) {
-        var
-        date = new Date(),
-        timeInMilliseconds = date.getTime(),
-        appRuntime = timeInMilliseconds - na.m.settings.startTime;
-        
-        if (na.m.settings.debugLevel == 'show all')
-            na.m.settings.debugLevel = 0;
-        
-        if (level >= na.m.settings.debugLevel) {
-            if (typeof msg=='object') {
-                msg.runtimeInMilliseconds = appRuntime;
-                if (na.m.settings.debugCategoriesVisible.includes('all')) {
-                    console.log (msg);
-                } else {
-                    var writtenAlready = false;
-                    for (var cat in msg.categories) {
-                        if (na.m.settings.debugCategoriesVisible.includes(cat)
-                            && !writtenAlready
-                        ) {
-                            console.log (msg);
-                            writtenAlready = true
-                        }
-                    }
-                }                
-            } else if (typeof msg=='string') {
-                console.log (appRuntime + ' : ('+level+') '+msg);
-            }
-        }
-    },
-	
-    
-	padNumber : function (number, characterPositions, paddingWith) {
-		var 
-		r = '' + number,
-		padding = '';
-		for (var i=0; i<characterPositions-r.length; i++) {
-			padding += paddingWith;
-		};
-		r = padding + number;
-		return r;
-	},
-    
-	userDevice : {
-		isPhone : 
-                navigator.userAgent === 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) CriOS/56.0.2924.75 Mobile/14E5239e Safari/602.1' // iPhone 8 and iPhone 8 Plus
-                || navigator.userAgent === 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) CriOS/56.0.2924.75 Mobile/14E5239e Safari/602.1' // iPhone 7 and iPhone 7 Plus
-                || navigator.userAgent === 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36' // iPhoneX and iPhoneX Plus
-                || navigator.userAgent.match(/Moto/)
-				|| navigator.userAgent.match(/iPhone/i)
-				|| navigator.userAgent.match(/iPad/i)
-				|| navigator.userAgent.match(/Mobile Safari/i)
-				|| navigator.userAgent.match(/BlackBerry/i)
-				|| navigator.userAgent.match(/PlayStation/i)
-				|| navigator.userAgent.match(/IEMobile/i)
-				|| navigator.userAgent.match(/Windows CE/i)
-				|| navigator.userAgent.match(/Windows Phone/i)
-				|| navigator.userAgent.match(/SymbianOS/i)
-				|| navigator.userAgent.match(/Android/i)
-				|| navigator.userAgent.match(/PalmOS/i)
-				|| navigator.userAgent.match(/PalmSource/i)
-				|| navigator.userAgent.match(/SonyEricsson/i)
-				|| navigator.userAgent.match(/Opera Mini/i)
-				|| navigator.userAgent.match(/Vodafone/i)
-				|| navigator.userAgent.match(/DoCoMo/i)
-				|| navigator.userAgent.match(/AvantGo/i)
-				|| navigator.userAgent.match(/J-PHONE/i)
-				|| navigator.userAgent.match(/UP.Browser/i)
-	},
-    
-	waitForCondition : function (label, condition, callback, frequency, context) {
-		var _fncn = 'na.m.waitForCondition(): ';
-		if (typeof label!=='string') { na.m.log ( { error : _fncn+'invalid label' } ); return false;};
-		if (typeof condition!=='function') { na.m.log ( { error : _fncn+'invalid condition' } ); return false; };
-		if (typeof callback!=='function') { na.m.log ( { error : _fncn+'invalid callback' } ); return false; };
-		if (typeof frequency=='undefined' || frequency<50) frequency = 50; 
-		
-		var r = condition(context);
-
-		if (r) {
-		// condition()==true, we're done waiting
-			clearTimeout (na.m.settings.waitForCondition[label]);
-			delete na.m.settings.waitForCondition[label];
-			callback();
-		} else {
-		// condition()==false, more waiting
-			if (!na.m.settings.waitForCondition[label]) { // prevents double checks & activations of callback().
-				na.m.settings.waitForCondition[label] = setTimeout (function () {
-					clearTimeout (na.m.settings.waitForCondition[label]);
-					delete na.m.settings.waitForCondition[label];
-					na.m.waitForCondition (label, condition, callback, frequency, context); 
-				}, frequency);
-			} 
-		}
-		return r;
-	},
-    
-    walkArray : function (a, keyCallback, valueCallback, callKeyForValues, callbackParams, k, level, path) {
-        if (!path) path = '';
-        if (typeof a !== 'object') {
-            debugger;
-        } else {
-            for (var k in a) {
-                var 
-                v = a[k],
-                cd = {
-                    type : 'key',
-                    path : path,
-                    level : level,
-                    k : k,
-                    v : v,
-                    params : callbackParams
-                };
-                if (typeof keyCallback=='function' && (callKeyForValues || typeof v==='object')) keyCallback (cd);
-                if (typeof v==='object') {
-                    cd.type = 'value';
-                    if (typeof valueCallback=='function') valueCallback(cd);
-                    na.m.walkArray (a[k], keyCallback, valueCallback, callKeyForValues, callbackParams, k, level+1, path+'/'+k);
-                } else {
-                    cd.type = 'value';
-                    if (typeof valueCallback=='function') valueCallback(cd);
-                }
-            }
-        }
-    },
-    
-    chaseToPath : function (wm, path, create) {
-        var 
-        nodes = path.split('/');
-        
-        return na.m.chase (wm, nodes, create);
-    },
-    
-    chase : function (arr, indexes, create) {
-        var 
-        r = arr;
-        
-        for (var i=0; i<indexes.length; i++) {
-            var idx = indexes[i];
-            if (
-                typeof r === 'object'
-                && (
-                    create === true
-                    || r[idx]
-                )
-            ) {
-                if (create===true && !r[idx]) r[idx]={};
-                r = r[idx];
-            }
-        }
-        
-        return r;
-    },
-    
-	negotiateOptions : function () {
-		// na.m.negotiateOptions() can't handle functions, and I dont trust jQuery.extend
-		var r = {};
-		for (var i = 0; i < arguments.length; i++) {
-			var a = arguments[i];
-			if (typeof a=='object' && a!==null && typeof a.length=='number') r =[];
-			if (a===null || typeof a==='undefined') continue;
-			for (k in a) {
-				if (typeof a[k] == 'object') {
-					r[k] = na.m.negotiateOptions(r[k], a[k]);
-				} else {
-					r[k] = a[k];
-				}
-			}
-		}
-		return r;
-	},
-    
-    extend : function () {
-		var r = arguments[0];
-		for (var i = 1; i < arguments.length; i++) {
-			var a = arguments[i];
-			if (typeof a=='object' && a!==null && typeof a.length=='number') r =[];
-			if (a===null || typeof a==='undefined') continue;
-			for (k in a) {
-				if (typeof a[k] == 'object') {
-                    if (!r[k]) r[k] = {};
-					r[k] = na.m.extend(r[k], a[k]);
-				} else {
-					r[k] = a[k];
-				}
-			}
-		}
-		return r;
-    }
-    
-
-    
-};
-
-Date.prototype.getMonthName = function(lang) {
-	lang = lang && (lang in Date.locale) ? lang : 'en';
-	return Date.locale[lang].month_names[this.getMonth()];
-};
-
-Date.prototype.getMonthNameShort = function(lang) {
-	lang = lang && (lang in Date.locale) ? lang : 'en';
-	return Date.locale[lang].month_names_short[this.getMonth()];
-};
-
-Date.prototype.getDayName = function(lang) {
-	lang = lang && (lang in Date.locale) ? lang : 'en';
-	return Date.locale[lang].day_names[this.getDay()];
-};
-
-Date.prototype.getDayNameShort = function(lang) {
-	lang = lang && (lang in Date.locale) ? lang : 'en';
-	return Date.locale[lang].day_names_short[this.getDay()];
-};
-
-Date.locale = {
-	en: {
-		month_names: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-		month_names_short: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-        day_names : ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-        day_names_short : ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-	}
-};
-
-Date.prototype.stdTimezoneOffset = function() {
-	var jan = new Date(this.getFullYear(), 0, 1);
-	var jul = new Date(this.getFullYear(), 6, 1);
-	return Math.max(jan.getTimezoneOffset(), jul.getTimezoneOffset());
-};
-
-Date.prototype.dst = function() {
-	return (this.getTimezoneOffset() < this.stdTimezoneOffset());
-};	
-
-Array.prototype.remove = function() {
-    var what, a = arguments, L = a.length, ax;
-    while (L && this.length) {
-        what = a[--L];
-        while ((ax = this.indexOf(what)) !== -1) {
-            this.splice(ax, 1);
-        }
-    }
-    return this;
-};
-
-/*Array.prototype.include = function (x) {
-    for (var i = 0; i < this.length; i++) {
-        if (this[i] === x) {
-            return true;
-        }
-    }
-    return false;
-};*/
-
-window.onerror = function (msg, url, lineno, colno, error) {
-    var err = msg+'\n'+url+'\n'+lineno+' - '+colno+'\n'+error;
-    //alert (err);
-    console.log (err);
-};
-
 var nas = na.site = {
     about : {
         firstCreated : '10 January 2021 13:15 CET',
@@ -718,3 +369,351 @@ var nas = na.site = {
 nas.s = nas.settings;
 
     
+na.apps = {
+    loaded : {}
+};
+
+na.account = na.a = {
+    settings : {
+        username : 'Guest',
+        password : 'Guest'
+    }
+};
+
+na.m = {
+    settings : {
+        debugLevel : 'show all',
+        debugCategoriesVisible : [ 'all' ],
+        waitForCondition : {}
+    },
+    
+    base64_encode_url : function (str) {
+        var str2 = btoa(str);
+        str2 = str2.replace (/=/g, '');
+        str2 = str2.replace ('+', '-');
+        str2 = str2.replace ('/', '_');
+        return str2;
+    },
+    
+    base64_decode_url : function (str) {
+        var str2 = str;
+        str2 = str2.replace ('-', '+');
+        str2 = str2.replace ('_', '/');
+        return atob(str2);
+    },
+    
+    cookieOptions : function () {
+        var d = new Date();
+        return {
+            expires : new Date(d.getTime() + 10 * 365 * 24 * 60 * 60 * 1000), // 10 years from now
+            path : '/'
+        };
+    },
+    
+	secondsToTime : function (secs) {
+		//thx 
+		// http://codeaid.net/javascript/convert-seconds-to-hours-minutes-and-seconds-%28javascript%29
+		//and
+		// http://stackoverflow.com/questions/175554/how-to-convert-milliseconds-into-human-readable-form
+		var days = Math.floor(secs / (60 * 60 * 24));
+		var hours = Math.floor(secs / (60 * 60));
+		var divisor_for_minutes = secs % (60 * 60);
+		var minutes = Math.floor(divisor_for_minutes / 60);
+		var divisor_for_seconds = divisor_for_minutes % 60;
+		var seconds = Math.floor(divisor_for_seconds);
+		var milliSeconds = Math.round((secs - Math.floor(secs)) * 1000);
+
+		var obj = {
+			days : days,
+			hours: hours,
+			minutes: minutes,
+			seconds: seconds,
+			milliSeconds : milliSeconds
+		};
+
+		return obj;
+	},
+
+	secondsToTimeString : function (secs) {
+		var d = na.m.secondsToTime(secs);
+		var s = '';
+		if (d.days>0) {
+			s += d.days + 'd';
+		};
+		if (d.hours>0) {
+			if (s!='') s+=', ';
+			s += d.hours + 'h';
+		};
+		if (d.minutes>0) {
+			if (s!='') s+=', ';
+			s += d.minutes + 'm';
+		};
+		if (d.seconds>0) {
+			if (s!='') s+=', ';
+			s += d.seconds + 's';
+		};
+		if (d.milliSeconds>0) {
+			if (s!='') s+=', ';
+			s += d.milliSeconds + 'ms';
+		};
+		return s;
+	},
+    
+    log : function (level, msg) {
+        var
+        date = new Date(),
+        timeInMilliseconds = date.getTime(),
+        appRuntime = timeInMilliseconds - na.m.settings.startTime;
+        
+        if (na.m.settings.debugLevel == 'show all')
+            na.m.settings.debugLevel = 0;
+        
+        if (level >= na.m.settings.debugLevel) {
+            if (typeof msg=='object') {
+                msg.runtimeInMilliseconds = appRuntime;
+                if (na.m.settings.debugCategoriesVisible.includes('all')) {
+                    console.log (msg);
+                } else {
+                    var writtenAlready = false;
+                    for (var cat in msg.categories) {
+                        if (na.m.settings.debugCategoriesVisible.includes(cat)
+                            && !writtenAlready
+                        ) {
+                            console.log (msg);
+                            writtenAlready = true
+                        }
+                    }
+                }                
+            } else if (typeof msg=='string') {
+                console.log (appRuntime + ' : ('+level+') '+msg);
+            }
+        }
+    },
+	
+    
+	padNumber : function (number, characterPositions, paddingWith) {
+		var 
+		r = '' + number,
+		padding = '';
+		for (var i=0; i<characterPositions-r.length; i++) {
+			padding += paddingWith;
+		};
+		r = padding + number;
+		return r;
+	},
+    
+	userDevice : {
+		isPhone : 
+                navigator.userAgent === 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) CriOS/56.0.2924.75 Mobile/14E5239e Safari/602.1' // iPhone 8 and iPhone 8 Plus
+                || navigator.userAgent === 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) CriOS/56.0.2924.75 Mobile/14E5239e Safari/602.1' // iPhone 7 and iPhone 7 Plus
+                || navigator.userAgent === 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36' // iPhoneX and iPhoneX Plus
+                || navigator.userAgent.match(/Moto/)
+				|| navigator.userAgent.match(/iPhone/i)
+				|| navigator.userAgent.match(/iPad/i)
+				|| navigator.userAgent.match(/Mobile Safari/i)
+				|| navigator.userAgent.match(/BlackBerry/i)
+				|| navigator.userAgent.match(/PlayStation/i)
+				|| navigator.userAgent.match(/IEMobile/i)
+				|| navigator.userAgent.match(/Windows CE/i)
+				|| navigator.userAgent.match(/Windows Phone/i)
+				|| navigator.userAgent.match(/SymbianOS/i)
+				|| navigator.userAgent.match(/Android/i)
+				|| navigator.userAgent.match(/PalmOS/i)
+				|| navigator.userAgent.match(/PalmSource/i)
+				|| navigator.userAgent.match(/SonyEricsson/i)
+				|| navigator.userAgent.match(/Opera Mini/i)
+				|| navigator.userAgent.match(/Vodafone/i)
+				|| navigator.userAgent.match(/DoCoMo/i)
+				|| navigator.userAgent.match(/AvantGo/i)
+				|| navigator.userAgent.match(/J-PHONE/i)
+				|| navigator.userAgent.match(/UP.Browser/i)
+	},
+    
+	waitForCondition : function (label, condition, callback, frequency, context) {
+		var _fncn = 'na.m.waitForCondition(): ';
+		if (typeof label!=='string') { na.m.log ( { error : _fncn+'invalid label' } ); return false;};
+		if (typeof condition!=='function') { na.m.log ( { error : _fncn+'invalid condition' } ); return false; };
+		if (typeof callback!=='function') { na.m.log ( { error : _fncn+'invalid callback' } ); return false; };
+		if (typeof frequency=='undefined' || frequency<50) frequency = 50; 
+		
+		var r = condition(context);
+
+		if (r) {
+		// condition()==true, we're done waiting
+			clearTimeout (na.m.settings.waitForCondition[label]);
+			delete na.m.settings.waitForCondition[label];
+			callback();
+		} else {
+		// condition()==false, more waiting
+			if (!na.m.settings.waitForCondition[label]) { // prevents double checks & activations of callback().
+				na.m.settings.waitForCondition[label] = setTimeout (function () {
+					clearTimeout (na.m.settings.waitForCondition[label]);
+					delete na.m.settings.waitForCondition[label];
+					na.m.waitForCondition (label, condition, callback, frequency, context); 
+				}, frequency);
+			} 
+		}
+		return r;
+	},
+    
+    walkArray : function (a, keyCallback, valueCallback, callKeyForValues, callbackParams, k, level, path) {
+        if (!path) path = '';
+        if (typeof a !== 'object') {
+            debugger;
+        } else {
+            for (var k in a) {
+                var 
+                v = a[k],
+                cd = {
+                    type : 'key',
+                    path : path,
+                    level : level,
+                    k : k,
+                    v : v,
+                    params : callbackParams
+                };
+                if (typeof keyCallback=='function' && (callKeyForValues || typeof v==='object')) keyCallback (cd);
+                if (typeof v==='object') {
+                    cd.type = 'value';
+                    if (typeof valueCallback=='function') valueCallback(cd);
+                    na.m.walkArray (a[k], keyCallback, valueCallback, callKeyForValues, callbackParams, k, level+1, path+'/'+k);
+                } else {
+                    cd.type = 'value';
+                    if (typeof valueCallback=='function') valueCallback(cd);
+                }
+            }
+        }
+    },
+    
+    chaseToPath : function (wm, path, create) {
+        var 
+        nodes = path.split('/');
+        
+        return na.m.chase (wm, nodes, create);
+    },
+    
+    chase : function (arr, indexes, create) {
+        var 
+        r = arr;
+        
+        for (var i=0; i<indexes.length; i++) {
+            var idx = indexes[i];
+            if (
+                typeof r === 'object'
+                && (
+                    create === true
+                    || r[idx]
+                )
+            ) {
+                if (create===true && !r[idx]) r[idx]={};
+                r = r[idx];
+            }
+        }
+        
+        return r;
+    },
+    
+	negotiateOptions : function () {
+		// na.m.negotiateOptions() can't handle functions, and I dont trust jQuery.extend
+		var r = {};
+		for (var i = 0; i < arguments.length; i++) {
+			var a = arguments[i];
+			if (typeof a=='object' && a!==null && typeof a.length=='number') r =[];
+			if (a===null || typeof a==='undefined') continue;
+			for (k in a) {
+				if (typeof a[k] == 'object') {
+					r[k] = na.m.negotiateOptions(r[k], a[k]);
+				} else {
+					r[k] = a[k];
+				}
+			}
+		}
+		return r;
+	},
+    
+    extend : function () {
+		var r = arguments[0];
+		for (var i = 1; i < arguments.length; i++) {
+			var a = arguments[i];
+			if (typeof a=='object' && a!==null && typeof a.length=='number') r =[];
+			if (a===null || typeof a==='undefined') continue;
+			for (k in a) {
+				if (typeof a[k] == 'object') {
+                    if (!r[k]) r[k] = {};
+					r[k] = na.m.extend(r[k], a[k]);
+				} else {
+					r[k] = a[k];
+				}
+			}
+		}
+		return r;
+    }
+    
+
+    
+};
+
+Date.prototype.getMonthName = function(lang) {
+	lang = lang && (lang in Date.locale) ? lang : 'en';
+	return Date.locale[lang].month_names[this.getMonth()];
+};
+
+Date.prototype.getMonthNameShort = function(lang) {
+	lang = lang && (lang in Date.locale) ? lang : 'en';
+	return Date.locale[lang].month_names_short[this.getMonth()];
+};
+
+Date.prototype.getDayName = function(lang) {
+	lang = lang && (lang in Date.locale) ? lang : 'en';
+	return Date.locale[lang].day_names[this.getDay()];
+};
+
+Date.prototype.getDayNameShort = function(lang) {
+	lang = lang && (lang in Date.locale) ? lang : 'en';
+	return Date.locale[lang].day_names_short[this.getDay()];
+};
+
+Date.locale = {
+	en: {
+		month_names: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+		month_names_short: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        day_names : ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+        day_names_short : ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+	}
+};
+
+Date.prototype.stdTimezoneOffset = function() {
+	var jan = new Date(this.getFullYear(), 0, 1);
+	var jul = new Date(this.getFullYear(), 6, 1);
+	return Math.max(jan.getTimezoneOffset(), jul.getTimezoneOffset());
+};
+
+Date.prototype.dst = function() {
+	return (this.getTimezoneOffset() < this.stdTimezoneOffset());
+};	
+
+Array.prototype.remove = function() {
+    var what, a = arguments, L = a.length, ax;
+    while (L && this.length) {
+        what = a[--L];
+        while ((ax = this.indexOf(what)) !== -1) {
+            this.splice(ax, 1);
+        }
+    }
+    return this;
+};
+
+/*Array.prototype.include = function (x) {
+    for (var i = 0; i < this.length; i++) {
+        if (this[i] === x) {
+            return true;
+        }
+    }
+    return false;
+};*/
+
+window.onerror = function (msg, url, lineno, colno, error) {
+    var err = msg+'\n'+url+'\n'+lineno+' - '+colno+'\n'+error;
+    //alert (err);
+    console.log (err);
+};
