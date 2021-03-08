@@ -339,10 +339,6 @@ export class na3D_fileBrowser {
         if (!t.ld1[level]) t.ld1[level] = { levelIdx : 0 };
         
         if (!t.initCounter) t.initCounter=0;
-        
-        if (!t.ld3) t.ld3 = {};
-        if (!t.ld3[path]) t.ld3[path] = { itemCount : 0, items : [] };
-        t.ld3[path].itemCount++;
          
         while (t.ld2[level].initItemsDoingIdx < t.ld2[level].keys.length) {
             var itd = data[ t.ld2[level].keys[ t.ld2[level].initItemsDoingIdx ] ];
@@ -363,12 +359,6 @@ export class na3D_fileBrowser {
                 
                 items[items.length] = it;
                 t.ld2[level].levelIdx++;
-
-        if (!t.ld3[path2]) t.ld3[path2] = { itemCount : 0, items : [] };
-        t.ld3[path2].itemCount++;
-
-                t.ld3[path2].items.push (it.idx);
-                
                 
                 let 
                 cd = { //call data
@@ -500,177 +490,14 @@ export class na3D_fileBrowser {
                     if (t.showLines) t.drawLines(t);
                 } );
                 
-                /*t.databaseToPosData(t, function(loadedPosData) {
+                t.databaseToPosData(t, function(loadedPosData) {
                     if (!loadedPosData) t.onresize (t); else if (t.showLines) t.drawLines(t);
-                });*/
-                t.onresize (t); 
+                });
                 
             }, 500);
         }
     }
     
-    onresize (t, levels) {
-        if (!t) t = this;
-        //debugger;
-        na.m.waitForCondition ('waiting for other onresize commands to finish',
-            function () {
-                //debugger;
-                return t.resizing === false;
-            },
-            function () {
-                t.onresize_do (t, levels);
-            }, 200
-        );
-    }
-
-    
-    onresize_do(t, levels) {
-        t.resizing = true;
-        
-        let 
-        c = {};
-        for (var path in t.ld3) {
-            var ld3 = t.ld3[path];
-            if (path!=='') {
-                for (var i=0; i<ld3.items.length; i++) {
-                    var
-                    it = t.items[ld3.items[i]];
-                    
-                    ld3.rowColumnCount = Math.floor(Math.sqrt(ld3.itemCount));
-                    var
-                    column = 0,
-                    row = 1;
-
-                    
-                    for (var j=0; j<ld3.items.length; j++) {
-                        var it2 = t.items[ld3.items[j]];
-                        if (it2.levelIdx <= it.levelIdx) {
-                            if (column >= ld3.rowColumnCount) {
-                                row++;
-                                column = 1;
-                            } else column++;
-                        } 
-                    };
-                    
-                    it.row = row;
-                    it.column = column;
-                }
-            }
-        }
-        
-        for (var i=0; i<t.items.length; i++) {
-            var
-            it = t.items[i],
-            p = t.items[it.parent],
-            ld3 = t.ld3[it.path];
-            
-            if (p && p.path && p.path!=='') {
-                var
-                ld3p = t.ld3[p.path],
-                modifierColumn = p.column < (ld3p.rowColumnCount/2) ? -1 : 1,
-                modifierRow = p.row < (ld3p.rowColumnCount/2) ? -1 : 1;
-            } else {
-                var
-                modifierColumn = 1,
-                modifierRow = 1;
-            };
-            
-            it.modifierColumn = modifierColumn;
-            it.modifierRow = modifierRow;
-            
-            if (it.model && p && p.model) {
-                it.model.position.x = p.model.position.x + (modifierColumn * (it.column-1) * 50);
-                it.model.position.y = p.model.position.y + (modifierRow * (it.row-1) * 50);
-                it.model.position.z = p.model.position.z - ((it.level+1) * 50);
-            } else if (it.model) {
-                it.model.position.x = modifierColumn * (it.column-1) * 50;
-                it.model.position.y = modifierRow * (it.row-1) * 50;
-                it.model.position.z = -1 * (it.level+1) * 50;
-            }
-        }
-        
-        setTimeout(function() {
-            t.onresize_do_overlapChecks(t);
-        }, 250);
-        
-        t.drawLines(t);
-    }
-    
-    onresize_do_overlapChecks (t) {
-        t.overlaps = [];
-        
-        for (var patha in t.ld3) {
-            if (patha!=='') {
-                var ld3a = t.ld3[patha];
-                for (var pathb in t.ld3) {
-                    if (pathb!=='' && pathb!==patha) {
-                        var ld3b = t.ld3[pathb];
-                        
-                        for (var i=0; i<ld3a.items.length; i++) {
-                            var ita = t.items[ld3a.items[i]];
-                            
-                            for (var j=0; j<ld3b.items.length; j++) {
-                                var itb = t.items[ld3b.items[j]];
-                                if (
-                                    ita.model.position.x === itb.model.position.x
-                                    && ita.model.position.y === itb.model.position.y
-                                    && ita.model.position.z === itb.model.position.z
-                                ) {
-                                    var have = false;
-                                    for (var k=0; k<t.overlaps.length; k++) {
-                                        if (
-                                            (
-                                                t.overlaps[k].patha === patha
-                                                && t.overlaps[k].pathb === pathb
-                                            )
-                                            || (
-                                                t.overlaps[k].patha === pathb
-                                                && t.overlaps[k].pathb === patha
-                                            )
-                                        ) {
-                                            have = true;
-                                            break;
-                                        }
-                                            
-                                    };
-                                    if (!have) {
-                                        t.overlaps.push ({patha : patha, pathb : pathb, conflicts : 1, z : ita.model.position.z });
-                                    } else {
-                                        t.overlaps[k].conflicts++;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        
-        var largest = {conflicts : 1, j : -1};
-        for (var j=0; j<t.overlaps.length; j++) {
-            if (t.overlaps[j].conflicts > largest.conflicts) largest = {conflicts:t.overlaps[j].conflicts, j : j};
-        }
-
-        for (var i=0; i<t.overlaps.length; i++) {
-            var 
-            o = t.overlaps[i],
-            oa = t.ld3[o.patha],
-            ob = t.ld3[o.pathb];
-            
-            if (i===largest.j) 
-            for (var j=0; j<ob.items.length; j++) {
-                var it = t.items[ ob.items[j] ];
-                it.model.position.x += it.modifierColumn * 50;
-            }
-        }
-        
-        if (t.overlaps.length > 0) {
-            setTimeout (function() {
-                t.onresize_do_overlapChecks(t);
-            }, 50);
-        } else debugger;
-    }
- 
     posDataToDatabase (t) {
         let address = function (databaseName, username, password) {
             var r = 
@@ -861,6 +688,247 @@ export class na3D_fileBrowser {
         else $('#autoRotate').removeClass('vividButtonSelected').addClass('vividButton');
     }
     
+    onresize (t, levels) {
+        if (!t) t = this;
+        //debugger;
+        na.m.waitForCondition ('waiting for other onresize commands to finish',
+            function () {
+                //debugger;
+                return t.resizing === false;
+            },
+            function () {
+                t.onresize_do (t, levels);
+            }, 200
+        );
+    }
+
+    
+    onresize_do(t, levels) {
+        var
+        bw = $(window).width(),
+        pl = null;
+        
+        if (!t) t = this;
+        
+        t.resizing = true;
+        
+        if (!levels) {
+            levels = {};
+            t.resizeDoingIdx=1;
+            t.resizeDoneCount=1;
+        }
+        
+        if (!t.firstLevelCount) {
+            t.firstLevelCount = 0;
+            for (var i=0; i<t.items.length; i++) {
+                if (t.items[i].level===1) t.firstLevelCount++;
+            }
+        }
+        
+        if (!t.resizeDoingIdx) t.resizeDoingIdx=0;
+        if (!t.resizeDoneCount) t.resizeDoneCount=0;
+        t.resizeDoneCount++;
+        /*if (t.resizeDoneCount>25) {
+            //clearTimeout (t.linedrawTimeout); // <!-- uncomment to show all the parent-child lines in one go.
+            setTimeout(function() {
+                t.resizeDoneCount = 0;
+                t.resizing = false;
+                t.onresize(t, levels);
+            }, 500);
+        } else {*/
+        while (t.resizeDoingIdx < t.items.length) {
+            //debugger;
+            if (t.resizeDoingIdx >= t.items.length) {
+                t.resizeDoingIdx = 0;
+                t.resizeDoneCount = 0;
+                t.resizing = false;
+                debugger;
+            } else {
+                var it = t.items[t.resizeDoingIdx];
+                
+                var 
+                parent = t.items[it.parent],
+                l = levels['path '+it.path],
+                height = $(t.el).height(), 
+                placingX = 'right',//Math.random()>0.5?'right':'left',
+                placingY = 'top',
+                //columnCount = Math.floor((width-(250/2)) / 250), // <-- results in jubmled view               
+                rowCount = 5,//Math.floor(((height/2)-100)/50),
+                itemsOnLevelCount = 0;
+                
+                for (var j=0; j<t.items.length; j++) {
+                    var it2 = t.items[j];
+                    if (it2.parent === it.parent && it2.level === it.level) itemsOnLevelCount++;
+                };
+                it.itemsOnLevelCount = itemsOnLevelCount;
+                
+                var
+                columnCount = Math.ceil(itemsOnLevelCount / rowCount);
+                
+                var
+                column = 0,
+                row = 1;
+
+                
+                for (var j=0; j<t.items.length; j++) {
+                    var it2 = t.items[j];
+                    if (it2.parent === it.parent && it2.levelIdx <= it.levelIdx) {
+                        if (column >= columnCount) {
+                            row++;
+                            column = 1;
+                        } else column++;
+                    } 
+                    
+                };
+                
+                if (column < columnCount/2) {
+                    placingX = 'left'
+                };
+                if (row < rowCount/2) {
+                    placingY = 'bottom'
+                };
+                
+                var           
+                l = levels['path '+it.path];
+                it.placingX = placingX;
+                it.placingY = placingY;
+                it.columnCount = columnCount;
+                it.rowCount = rowCount;
+                it.row = row;
+                it.column = column;
+                it.offsetX = 0;
+                it.offsetY = 0;
+                it.offsetZ = 0;
+
+                
+            }
+            t.resizeDoingIdx++;
+        }
+        t.resizeDoingIdx = 1;
+        while (t.resizeDoingIdx < t.items.length) {
+//             debugger;
+            if (t.resizeDoingIdx >= t.items.length) {
+                t.resizeDoingIdx = 0;
+                t.resizeDoneCount = 0;
+                t.resizing = false;
+                debugger;
+                return true;
+            } else {
+                var it = t.items[t.resizeDoingIdx];
+                
+                var 
+                parent = t.items[it.parent];
+                
+                var moreToCheck = true, checkCounter = 1, foundOverlappingItem = false, overlapParents = [];
+                while (moreToCheck) {
+                    if (checkCounter > 4) break;
+                    var 
+                    extraOffsetX = parent.column*50*checkCounter,
+                    extraOffsetY = parent.row*50*checkCounter,//50 * checkCounter,
+                    extraOffsetZ = 100 * checkCounter,
+                    placingX2 = 'right',//placingX,//t.items[it.parent].placingX,
+                    placingY2 = 'top';//placingY;//t.items[it.parent].placingY;
+                    //debugger;
+                    for (var k=0; k<t.items.length; k++) {
+                        var it2 = t.items[k];
+                        
+                        if (it.parent === it2.parent) {
+                        
+                            it2.offsetX = (
+                                parent.placingX=='right'
+                                ? parent.offsetX + ( 50 * (it2.column)) + extraOffsetX
+                                : parent.offsetX - ( 50 * (it2.column)) - extraOffsetX
+                            );
+                            it2.offsetY = (
+                                parent.placingY == 'top'
+                                ? parent.offsetY + (50*(it2.row)) + extraOffsetY
+                                : parent.offsetY - (50*(it2.row)) - extraOffsetY
+                            );
+                            it2.offsetZ = parent.offsetZ + (-1 * ((it2.level*100)+extraOffsetZ));
+                        }
+                    }
+                    //console.log (it.name+'('+it.idx+') - ('+it.offsetX+', '+it.offsetY+', '+it.offsetZ+')');
+                            
+                    foundOverlappingItem = false;
+                    for (var k=0; k<t.items.length; k++) {
+                        var itc = t.items[k];
+                        if (itc.idx === it.idx) continue;
+                        if (!foundOverlappingItem) {
+                            foundOverlappingItem = (
+                                it.offsetY === itc.offsetY
+                                && it.offsetX === itc.offsetX
+                                && it.level === itc.level
+                                && it.offsetZ === itc.offsetZ
+                            );
+                            if (foundOverlappingItem) {
+                               // debugger;
+                                break;
+                            }
+                        } else break;
+                    };
+                    if (foundOverlappingItem) moreToCheck = true; else moreToCheck = false;
+                    if (moreToCheck && Object.keys(levels).length===1) {
+                        moreToCheck = false;
+                    }
+
+                    
+                    checkCounter++;
+                }
+                
+                for (var k=0; k<t.items.length; k++) {
+                    var it2 = t.items[k];
+                    
+                    if (it.parent === it2.parent && it2.model && it2.model.position.x===0) {
+                        it2.model.position.x = it2.offsetX;
+                        it2.model.position.y = it2.offsetY;
+                        it2.model.position.z = it2.offsetZ;
+                        it2.model.position.needsUpdate = true;
+                    }
+                }
+                
+                t.resizeDoingIdx++;
+                
+                clearTimeout (t.linedrawTimeout);
+                t.linedrawTimeout = setTimeout(function() {
+                    t.drawLines (t);
+                }, 500);
+                
+                var
+                l = levels['path '+it.path];                
+                if (!l) {
+                    
+                    var pl = levels['path '+parent.path];
+                    if (!pl) {
+                        pl = {
+                            offsetY : 0,
+                            offsetX : 0,
+                            offsetZ : 0,
+                            zIndexOffset : 0,
+                            rowCount : rowCount,
+                            columnCount : columnCount
+                        }
+                    }
+                    
+                    pl.columnCount = columnCount; 
+                    pl.rowCount = rowCount;
+                    
+                    var zof = pl.zIndexOffset + 1;
+                    levels['path '+it.path] = jQuery.extend({}, pl);
+                    levels['path '+it.path].level = it.level;
+                    levels['path '+it.path].zIndexOffset = zof;
+                    levels['path '+it.path].offsetX = it.offsetX;// + 10;
+                    levels['path '+it.path].offsetY = it.offsetY;// + 10;
+                    levels['path '+it.path].offsetZ = it.offsetZ;// + 10;
+                    
+                    l = levels['path '+it.path];
+                    //debugger;
+                };
+                //if (!pl) var pl = levels['path '+parent.path];
+                
+            }
+        }
+    }
+ 
     updateTextureEncoding (t, content) {
         /*const encoding = this.state.textureEncoding === 'sRGB'
         ? sRGBEncoding
