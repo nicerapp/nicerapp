@@ -101,12 +101,12 @@ na.m = {
         if (level >= na.m.settings.debugLevel) {
             if (typeof msg=='object') {
                 msg.runtimeInMilliseconds = appRuntime;
-                if (na.m.settings.debugCategoriesVisible.include('all')) {
+                if (na.m.settings.debugCategoriesVisible.includes('all')) {
                     console.log (msg);
                 } else {
                     var writtenAlready = false;
                     for (var cat in msg.categories) {
-                        if (na.m.settings.debugCategoriesVisible.include(cat)
+                        if (na.m.settings.debugCategoriesVisible.includes(cat)
                             && !writtenAlready
                         ) {
                             console.log (msg);
@@ -333,14 +333,14 @@ Array.prototype.remove = function() {
     return this;
 };
 
-Array.prototype.includes = function (x) {
+/*Array.prototype.include = function (x) {
     for (var i = 0; i < this.length; i++) {
         if (this[i] === x) {
             return true;
         }
     }
     return false;
-};
+};*/
 
 window.onerror = function (msg, url, lineno, colno, error) {
     var err = msg+'\n'+url+'\n'+lineno+' - '+colno+'\n'+error;
