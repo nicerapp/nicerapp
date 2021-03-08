@@ -673,70 +673,100 @@ export class na3D_fileBrowser {
                 var 
                 o = t.overlaps[i],
                 oa = t.ld3[o.patha],
-                ob = t.ld3[o.pathb];
+                ob = t.ld3[o.pathb],
+                pathc = o.pathb.substr(0,o.pathb.lastIndexOf(','));
                 
-                if (!ob.modifiedColumn) ob.modifiedColumn = Math.random() < 0.5 ? 1 : -1;
-                if (!ob.modifiedRow) ob.modifiedRow = Math.random() < 0.5 ? 1 : -1;
+                //if (!ob.modifiedColumn) 
+                    ob.modifiedColumn = Math.random() < 0.5 ? 1 : -1;
+                //if (!ob.modifiedRow) 
+                    ob.modifiedRow = Math.random() < 0.5 ? 1 : -1;
+                //if (!ob.modifierColumn) 
+                    ob.modifierColumn = Math.random() < 0.5 ? 1 : -1;
+                //if (!ob.modifierRow) 
+                    ob.modifierRow = Math.random() < 0.5 ? 1 : -1;
+                    
+                /*if (pathc.match(it.path) && ) {
+                    var
+                    modifiedColumn = 1,
+                    modifiedRow = 1,
+                    modifier*/
+                
+                    
                 if (!ob.modifiedCount) ob.modifiedCount = 0;
                 
-            
+                for (var j=0; j<t.items.length; j++) {
+                    t.items[j].adjusted = 0;
+                };
+                
                 for (var j=0; j<ob.items.length; j++) {
                     var it = t.items[ ob.items[j] ];
                     
                     if (it.model) {
                         it.model.position.x += ob.modifierColumn * it.modifierColumn * 50;
                         it.model.position.y += ob.modifierRow * it.modifierRow * 50;
+                        it.adjusted++;
                     }
-                }
-                
-                for (var j=0; j<t.items.length; j++) {
-                    var it = t.items[j];
-                    var p = t.items[it.parent];
+                    for (var k=0; k<t.items.length; k++) {
+                        var 
+                        it2 = t.items[k];
+                        
+                        if (it2.parent === it.parent) {
+                            var
+                            p = t.items[it.parent],
+                            oap = t.items[oa.parent];
 
-                    if (
-                        it.model 
-                        && it.path!==o.pathb 
-                        && it.path.substr(0,o.pathb.length)==o.pathb
-                        && (it.path.replace(o.pathb+',','').match(/,/g) || []).length === 0
-                    ) {
-                        it.model.position.x += ob.modifierColumn * p.modifierColumn * 50;
-                        it.model.position.y += ob.modifierRow * p.modifierRow * 50;
+                            /*
+                            if (p && p.name=='webgl') debugger;
+                            if (p && p.name=='animals') debugger;
+                            if (p && oap && p.column < oap.column) 
+                                ob.modifierColumn = -1;
+                            else 
+                                ob.modifierColumn = 1;
+                            if (p && oap && p.row < oap.row) 
+                                ob.modifierRow = -1;
+                            else 
+                                ob.modifierRow = 1;
+                            */
+                            /*if (oap) {
+                            ob.modifierColumn = t.ld3[oap.path].modifierColumn;
+                            ob.modifierRow = t.ld3[oap.path].modifierRow;
+                            }*/
+                            
+                            if (
+                                (
+                                    it2.model 
+                                    && (
+                                        it2.path!==o.pathb 
+                                        && it2.path.substr(0,o.pathb.length)==o.pathb
+                                       // && (it2.path.replace(o.pathb+',','').match(/,/g) || []).length === 0
+                                    )
+                                    || (
+                                        pathc.match(it.path)
+                                    )
+                                )
+                                && it2.adjusted===0
+                                /*|| (
+                                    it.path!=='' && o.pathb.match(it.path)
+                                )*/
+                            ) {
+                                it2.model.position.x = it2.model.position.x + ob.modifierColumn * p.modifierColumn * 50;
+                                it2.model.position.y = it2.model.position.y + ob.modifierRow * p.modifierRow * 50;
+                                it2.adjusted++;
+                            }
+                        }
                     }
-                }
-                if (ob.modifiedCount>0) {
-                    ob.modifiedCount = 0;
-                    if (ob.modifiedColumn===1 && ob.modifiedRow===1) {
-                        ob.modifiedColumn = 0;
-                        ob.modifiedRow = 1;
-                    } else if (ob.modifiedColumn===0 && ob.modifiedRow===1) {
-                        ob.modifiedColumn = 0;
-                        ob.modifiedRow = -1;
-                    } else if (ob.modifiedColumn===0 && ob.modifiedRow===-1) {
-                        ob.modifiedColumn = -1;
-                        ob.modifiedRow = -1;
-                    } else if (ob.modifiedColumn===-1 && ob.modifiedRow===-1) {
-                        ob.modifiedColumn = -1;
-                        ob.modifiedRow = 0;
-                    } else if (ob.modifiedColumn===-1 && ob.modifiedRow===0) {
-                        ob.modifiedColumn = 0;
-                        ob.modifiedRow = 0;
-                    } else if (ob.modifiedColumn===0 && ob.modifiedRow===0) {
-                        ob.modifiedColumn = 1;
-                        ob.modifiedRow = 0;
-                    } else if (ob.modifiedColumn===1 && ob.modifiedRow===0) {
-                        ob.modifiedColumn = 1;
-                        ob.modifiedRow = 1;
-                    }
-                } else {
-                    ob.modifiedCount++;
                 }
                 
-                if (ob.lastDiffX < ob.diffX) {
-                    ob.modifiedColumn *= -1;
-                }
-                if (ob.lastDiffY < ob.diffY) {
-                    ob.modifiedRow *= -1;
-                }
+                
+                
+                if (ob.lastDiffX < ob.diffX) 
+                    ob.modifierColumn = -1 * ob.modifiedColumn;
+                else
+                    ob.modifierColumn = ob.modifiedColumn;
+                if (ob.lastDiffY < ob.diffY) 
+                    ob.modifierRow = -1 * ob.modifiedRow;
+                else
+                    ob.modifierRow = ob.modifiedRow;
             }
         }
         
