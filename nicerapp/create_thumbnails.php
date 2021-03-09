@@ -11,8 +11,8 @@ ob_start();
 foreach ($files as $idx => $original) {
     $thumb = str_replace('siteMedia', 'siteMedia.thumbs', $original);
     createDirectoryStructure (dirname($thumb));
-    if (!file_exists($thumb)) {
-        $xec = 'convert "'.$original.'" -resize 50 "'.$thumb.'"';
+    //if (!file_exists($thumb)) {
+        $xec = 'convert "'.$original.'" -resize 100 "'.$thumb.'"';
         exec ($xec, $output, $result);
         $dbg = array (
             'idx' => $idx,
@@ -26,7 +26,7 @@ foreach ($files as $idx => $original) {
         ob_end_flush();
         flush();
         ob_start();
-    }
+    //}
     //die();
 }
 ?>
