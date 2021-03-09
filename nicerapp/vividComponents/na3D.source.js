@@ -674,7 +674,6 @@ export class na3D_fileBrowser {
                 o = t.overlaps[i],
                 oa = t.ld3[o.patha],
                 ob = t.ld3[o.pathb];
-                //pathc = o.pathb.substr(0,o.pathb.lastIndexOf(','));
                 
                 //if (!ob.modifiedColumn) 
                     ob.modifiedColumn = Math.random() < 0.5 ? 1 : -1;
@@ -701,52 +700,22 @@ export class na3D_fileBrowser {
                     }
                     for (var k=0; k<t.items.length; k++) {
                         var 
-                        it2 = t.items[k];
-                        
-                        //if (it2.parent === it.parent) {
-                            var
-                            p = t.items[it2.parent],
-                            oap = t.items[oa.parent];
+                        it2 = t.items[k],
+                        p = t.items[it2.parent],
+                        oap = t.items[oa.parent];
 
-                            /*
-                            if (p && p.name=='webgl') debugger;
-                            if (p && p.name=='animals') debugger;
-                            if (p && oap && p.column < oap.column) 
-                                ob.modifierColumn = -1;
-                            else 
-                                ob.modifierColumn = 1;
-                            if (p && oap && p.row < oap.row) 
-                                ob.modifierRow = -1;
-                            else 
-                                ob.modifierRow = 1;
-                            */
-                            /*if (oap) {
-                            ob.modifierColumn = t.ld3[oap.path].modifierColumn;
-                            ob.modifierRow = t.ld3[oap.path].modifierRow;
-                            }*/
-                            
-                            if (
-                                (
-                                    it2.model 
-                                    && (
-                                        it2.path!==o.pathb 
-                                        && it2.path.substr(0,o.pathb.length)==o.pathb
-                                       // && (it2.path.replace(o.pathb+',','').match(/,/g) || []).length === 0
-                                    )
-                                    /*|| (
-                                        pathc.match(it.path)
-                                    )*/
-                                )
-                                //&& it2.adjusted===0
-                                /*|| (
-                                    it.path!=='' && o.pathb.match(it.path)
-                                )*/
-                            ) {
-                                it2.model.position.x = p.model.position.x; + ob.modifierColumn * p.modifierColumn * (it2.column-1) * 50;
-                                it2.model.position.y = p.model.position.y; + ob.modifierRow * p.modifierRow * (it2.row-1) * 50;
-                                it2.adjusted++;
-                            }
-                        //}
+                        if (
+                            it2.model 
+                            && (
+                                it2.path!==o.pathb 
+                                && it2.path.substr(0,o.pathb.length)==o.pathb
+                                // && (it2.path.replace(o.pathb+',','').match(/,/g) || []).length === 0
+                            )
+                        ) {
+                            it2.model.position.x = p.model.position.x; + ob.modifierColumn * p.modifierColumn * (it2.column-1) * 50;
+                            it2.model.position.y = p.model.position.y; + ob.modifierRow * p.modifierRow * (it2.row-1) * 50;
+                            it2.adjusted++;
+                        }
                     }
                 }
                 
