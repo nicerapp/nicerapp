@@ -365,7 +365,7 @@ export class na3D_fileBrowser {
                 t.ld2[level].levelIdx++;
 
                 if (!t.ld3[path2]) t.ld3[path2] = { itemCount : 0, items : [] };
-                t.ld3[path2].itemCount++;
+                //t.ld3[path2].itemCount++;
 
                 t.ld3[path2].items.push (it.idx);
                 
@@ -535,7 +535,7 @@ export class na3D_fileBrowser {
                     var
                     it = t.items[ld3.items[i]];
                     
-                    ld3.rowColumnCount = Math.floor(Math.sqrt(ld3.itemCount));
+                    ld3.rowColumnCount = Math.ceil(Math.sqrt(ld3.itemCount));
                     var
                     column = 0,
                     row = 1;
@@ -709,24 +709,24 @@ export class na3D_fileBrowser {
                             && (
                                 it2.path!==o.pathb 
                                 && it2.path.substr(0,o.pathb.length)==o.pathb
-                                // && (it2.path.replace(o.pathb+',','').match(/,/g) || []).length === 0
+                                && (it2.path.replace(o.pathb+',','').match(/,/g) || []).length === 0
                             )
                         ) {
-                            it2.model.position.x = p.model.position.x; + ob.modifierColumn * p.modifierColumn * (it2.column-1) * 50;
-                            it2.model.position.y = p.model.position.y; + ob.modifierRow * p.modifierRow * (it2.row-1) * 50;
+                            it2.model.position.x = p.model.position.x + ob.modifierColumn * p.modifierColumn * (it2.column-1) * 50;
+                            it2.model.position.y = p.model.position.y + ob.modifierRow * p.modifierRow * (it2.row-1) * 50;
                             it2.adjusted++;
                         }
                     }
                 }
                 
                 if (ob.lastDiffX < ob.diffX) 
-                    ob.modifierColumn = ob.modifiedColumn;
-                else
                     ob.modifierColumn = -1 * ob.modifiedColumn;
-                if (ob.lastDiffY < ob.diffY) 
-                    ob.modifierRow = ob.modifiedRow;
                 else
+                    ob.modifierColumn = ob.modifiedColumn;
+                if (ob.lastDiffY < ob.diffY) 
                     ob.modifierRow = -1 * ob.modifiedRow;
+                else
+                    ob.modifierRow = ob.modifiedRow;
             }
         }
         
@@ -890,7 +890,7 @@ export class na3D_fileBrowser {
                 var color = t.lineColors[it.parent];
                 
                 var
-                material = new THREE.LineBasicMaterial({ color: '#'+color }),
+                material = new THREE.LineBasicMaterial({ color: '#'+color, linewidth :2 }),
                 line = new THREE.Line( geometry, material );
                 t.scene.add(line);
 
