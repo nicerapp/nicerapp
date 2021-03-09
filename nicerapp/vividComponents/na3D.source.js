@@ -675,6 +675,7 @@ export class na3D_fileBrowser {
                 oa = t.ld3[o.patha],
                 ob = t.ld3[o.pathb];
                 
+                /*
                 //if (!ob.modifiedColumn) 
                     ob.modifiedColumn = Math.random() < 0.5 ? 1 : -1;
                 //if (!ob.modifiedRow) 
@@ -683,7 +684,8 @@ export class na3D_fileBrowser {
                     ob.modifierColumn = Math.random() < 0.5 ? 1 : -1;
                 //if (!ob.modifierRow) 
                     ob.modifierRow = Math.random() < 0.5 ? 1 : -1;
-               
+                */
+                
                 var
                 p1 = parseInt(o.patha.substr(o.patha.lastIndexOf(',')+1)),
                 p1 = t.items[p1],
