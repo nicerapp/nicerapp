@@ -669,7 +669,7 @@ export class na3D_fileBrowser {
 
         for (var i=0; i<t.overlaps.length; i++) {
             //if (i===mostConflicts.j) {
-            if (i===largest.j) {
+            if (i===mostConflicts.j) {
                 var 
                 o = t.overlaps[i],
                 oa = t.ld3[o.patha],
@@ -683,9 +683,15 @@ export class na3D_fileBrowser {
                     ob.modifierColumn = Math.random() < 0.5 ? 1 : -1;
                 //if (!ob.modifierRow) 
                     ob.modifierRow = Math.random() < 0.5 ? 1 : -1;
+               
+                var
+                p1 = parseInt(o.patha.substr(o.patha.lastIndexOf(',')+1)),
+                p1 = t.items[p1],
+                p2 = parseInt(o.pathb.substr(o.pathb.lastIndexOf(',')+1)),
+                p2 = t.items[p2];
+                if (p1.column < p2.column) ob.modifierColumn = -1; else ob.modifierColumn = 1;
+                if (p1.row < p2.row) ob.modifierRow = -1; else ob.modifierRow = 1;
                     
-                if (!ob.modifiedCount) ob.modifiedCount = 0;
-                
                 for (var j=0; j<t.items.length; j++) {
                     t.items[j].adjusted = 0;
                 };
@@ -719,14 +725,6 @@ export class na3D_fileBrowser {
                     }
                 }
                 
-                if (ob.lastDiffX < ob.diffX) 
-                    ob.modifierColumn = -1 * ob.modifiedColumn;
-                else
-                    ob.modifierColumn = ob.modifiedColumn;
-                if (ob.lastDiffY < ob.diffY) 
-                    ob.modifierRow = -1 * ob.modifiedRow;
-                else
-                    ob.modifierRow = ob.modifiedRow;
             }
         }
         
