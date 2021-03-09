@@ -705,7 +705,7 @@ export class na3D_fileBrowser {
                         
                         //if (it2.parent === it.parent) {
                             var
-                            p = t.items[it.parent],
+                            p = t.items[it2.parent],
                             oap = t.items[oa.parent];
 
                             /*
@@ -742,8 +742,8 @@ export class na3D_fileBrowser {
                                     it.path!=='' && o.pathb.match(it.path)
                                 )*/
                             ) {
-                                it2.model.position.x = p.model.position.x + ob.modifierColumn * p.modifierColumn * 50;
-                                it2.model.position.y = p.model.position.y + ob.modifierRow * p.modifierRow * 50;
+                                it2.model.position.x = p.model.position.x; + ob.modifierColumn * p.modifierColumn * (it2.column-1) * 50;
+                                it2.model.position.y = p.model.position.y; + ob.modifierRow * p.modifierRow * (it2.row-1) * 50;
                                 it2.adjusted++;
                             }
                         //}
