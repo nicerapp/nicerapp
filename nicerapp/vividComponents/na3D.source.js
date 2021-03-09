@@ -164,18 +164,16 @@ export class na3D_fileBrowser {
     
     animate(t) {
         requestAnimationFrame( function() { t.animate (t) } );
-        
         if (t.mouse.x!==0 || t.mouse.y!==0) {        
             t.raycaster.setFromCamera (t.mouse, t.camera);
             
-            const intersects = t.raycaster.intersectObjects (t.scene.children, true);
+            const intersects = t.raycaster.intersectObjects (t.scene.children, false);
             //if (intersects[0]) {
             if (intersects[0] && intersects[0].object.type!=='Line') 
             for (var i=0; i<1/*intersects.length <-- this just gets an endless series of hits from camera into the furthest reaches of what's visible behind the mouse pointer */; i++) {
                 var hoveredItem = intersects[i].object, done = false;
                 
                 while (hoveredItem && !done) {
-                    hoveredItem = hoveredItem.parent;
                 
                     for (var j=0; j<t.lines.length; j++) {
                         if (t.lines[j]) {
@@ -270,6 +268,7 @@ export class na3D_fileBrowser {
                         done = true;
                     }
                     
+                    hoveredItem = hoveredItem.parent;
                 }
                 
                 // show folder name for item under mouse and closest to the country
@@ -384,6 +383,71 @@ export class na3D_fileBrowser {
                 clearTimeout (t.onresizeInitTimeout);
                 clearTimeout (t.linedrawTimeout);
                 
+                var 
+                textures = [];
+                /*
+                    '/nicerapp/siteMedia/backgrounds/tiled/active/blue/4a065201509c0fc50e7341ce04cf7902--twitter-backgrounds-blue-backgrounds.jpg',
+                    '/nicerapp/siteMedia/backgrounds/tiled/active/blue/6250247-Blue-stone-seamless-texture-Stock-Photo.jpg',
+                    '/nicerapp/siteMedia/backgrounds/tiled/active/blue/abstract-seamless-crumpled-tissue-textures-2.png',
+                    '/nicerapp/siteMedia/backgrounds/tiled/active/green/363806708_7d577861f7.jpg',
+                    '/nicerapp/siteMedia/backgrounds/tiled/active/green/dgren051.jpg',
+                    '/nicerapp/siteMedia/backgrounds/tiled/active/green/leaves007.jpg'
+                ];*/
+                for (var i=0; i<6; i++) textures[i] = '/nicerapp/siteMedia/folderIcon.png';
+                
+                for (var i=0; i<6; i++) {
+                    if (itd[i] && itd[i].match(/\.png|\.jpg|\.gif/)) {
+                        var 
+                        p = t.items[it.parent],
+                        path = it.name + '/' + itd[i];
+                        while (p) {
+                            path = p.name+'/'+path;
+                            p = t.items[p.parent];
+                        }
+                        path = '/nicerapp/siteMedia.thumbs/' + path;
+                        textures[i] = path;
+                    }
+                }
+                
+                var
+                materials = [
+                    new THREE.MeshBasicMaterial({
+                        map: new THREE.TextureLoader().load(textures[0])
+                    }),
+                    new THREE.MeshBasicMaterial({
+                        map: new THREE.TextureLoader().load(textures[1])
+                    }),
+                    new THREE.MeshBasicMaterial({
+                        map: new THREE.TextureLoader().load(textures[2])
+                    }),
+                    new THREE.MeshBasicMaterial({
+                        map: new THREE.TextureLoader().load(textures[3])
+                    }),
+                    new THREE.MeshBasicMaterial({
+                        map: new THREE.TextureLoader().load(textures[4])
+                    }),
+                    new THREE.MeshBasicMaterial({
+                        map: new THREE.TextureLoader().load(textures[5])
+                    })
+                ];
+                var cube = new THREE.Mesh( new THREE.BoxGeometry( 30, 30, 30 ), materials );
+                this.scene.add( cube );
+                cube.it = it;
+                it.model = cube;
+                    console.log (items.length + ' - ' + it.name);
+                
+                    var
+                    newLevel = (
+                        Object.keys(t.ld2).length > 1
+                        ? parseInt(Object.keys(t.ld2).reduce(function(a, b){ return t.ld2[a] > t.ld2[b] ? a : b }))+1
+                        : 2
+                    );
+                    cd.level = newLevel;
+                //setTimeout (function() {
+                    //t.loading = false;
+                    cd.t.initializeItems_do (cd.t, cd.items, cd.itd, cd.it.idx, newLevel, cd.levelDepth, cd.path);
+                //}, 50);
+                /*
                 t.loading = true;
                 t.loader.load( '/nicerapp/3rd-party/3D/models/folder icon/scene.gltf', function ( gltf, cd) {
                     clearTimeout (t.onresizeInitTimeout);
@@ -410,7 +474,7 @@ export class na3D_fileBrowser {
                     console.log( 'model "folder icon" : ' + ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
                 }, function ( error ) {
                     console.error( error );
-                },  cd );
+                },  cd );*/
             } 
             t.ld2[level].initItemsDoingIdx++;
             
@@ -580,11 +644,11 @@ export class na3D_fileBrowser {
             if (it.model && p && p.model) {
                 it.model.position.x = p.model.position.x + (it.modifierColumn * (it.column-1) * 50);
                 it.model.position.y = p.model.position.y + (it.modifierRow * (it.row-1) * 50);
-                it.model.position.z = p.model.position.z - ((it.level+1) * 50);
+                it.model.position.z = p.model.position.z - ((it.level+1) * 75);
             } else if (it.model) {
                 it.model.position.x = it.modifierColumn * (it.column-1) * 50;
                 it.model.position.y = it.modifierRow * (it.row-1) * 50;
-                it.model.position.z = -1 * (it.level+1) * 50;
+                it.model.position.z = -1 * (it.level+1) * 75;
             }
         }
         

@@ -46231,7 +46231,7 @@ function ascSort( a, b ) {
 
 function intersectObject( object, raycaster, intersects, recursive ) {
 
-	if ( object.layers.test( raycaster.layers ) ) {
+	if ( object && object.layers.test( raycaster.layers ) ) {
 
 		object.raycast( raycaster, intersects );
 
@@ -46308,7 +46308,7 @@ Object.assign( Raycaster.prototype, {
 
 		for ( let i = 0, l = objects.length; i < l; i ++ ) {
 
-			intersectObject( objects[ i ], this, intersects, recursive );
+			if (objects[i]) intersectObject( objects[ i ], this, intersects, recursive );
 
 		}
 
