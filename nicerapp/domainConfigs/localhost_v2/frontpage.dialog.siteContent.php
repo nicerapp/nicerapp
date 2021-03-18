@@ -192,7 +192,7 @@
     <h2 class="contentSectionTitle2">Available Apps</h2>
     
     <h3 class="contentSectionTitle3">News</h3>
-    Some of these can be further categorized throught the menu that will load up at the top-right side of the site.<br/>
+    Some of these can be further categorized through the menu that will load up at the top-right side of the site.<br/>
     
     <ul>
         <li><a href="<?php echo $urls['newsHeadlines_englishNews'];?>">English News</a></li>
