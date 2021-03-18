@@ -12,7 +12,7 @@ class nicerAppCMS {
             '2.y.z' => 'Compatible with browsers released after 2015, but much more efficient'
         ),
         'created' => 'Sunday, 10 January 2021 11:45 CET',
-        'lastModified' => 'Sunday, 22 January 2021 14:14 CET',
+        'lastModified' => 'Thursday, 18 March 2021 12:05 CET',
         'copyright' => 'Copyright (c) 2021 by Rene A.J.M. Veerman <rene.veerman.netherlands@gmail.com>'
     );
     
