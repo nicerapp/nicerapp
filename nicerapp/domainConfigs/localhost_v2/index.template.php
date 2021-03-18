@@ -50,26 +50,27 @@ na.site.globals = {
     </div>
 
     <div id="siteVideo" class="vividDialog" style="display:flex;justify-content:center;align-items:center;text-align:center;" theme="{$theme}">
-        Coming soon
+        {$div_siteVideo}
     </div>
 
     <div id="siteVideoSearch" class="vividDialog" style="display:flex;justify-content:center;align-items:center;text-align:center;" theme="{$theme}">
-        Coming soon
+        {$div_siteVideoSearch}
     </div>
 
     
     <div id="siteComments" class="vividDialog" style="display:flex;justify-content:center;align-items:center;text-align:center;" theme="{$theme}">
-        Coming soon
+        {$div_siteComments}
     </div>
     
     <div id="siteToolbarTop" class="vdToolbar vividDialog" theme="{$theme}">
     <div class="vividDialogContent vividScrollpane">
+        {$div_siteToolbarTop}
     </div>
     </div>
 
     <div id="siteToolbarRight" class="vdToolbar vividDialog" theme="{$theme}">
     <div class="vividDialogContent vividScrollpane">
-
+        {$div_siteToolbarRight}
     </div>
     </div>
 

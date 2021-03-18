@@ -84,7 +84,7 @@ export class na3D_fileBrowser {
         el.appendChild( this.renderer.domElement );
         
         $(this.renderer.domElement).bind('mousemove', function() {
-            event.preventDefault(); 
+            //event.preventDefault(); 
             t.onMouseMove (event, t)
         });
         $(this.renderer.domElement).click (function(event) {  
@@ -100,7 +100,7 @@ export class na3D_fileBrowser {
             
         });
         $(document).on('keydown', function(event) {
-            if (t.dragndrop && t.dragndrop.obj) {
+            /*if (t.dragndrop && t.dragndrop.obj) {
                 t.zoomInterval = setInterval(function() {
                     if (event.keyCode===16 || event.keyCode===38) {
                         for (let i=0; i<t.items.length; i++) {
@@ -119,7 +119,7 @@ export class na3D_fileBrowser {
                         }
                     };
                 }, 200);
-            }
+            }*/
             if (event.keyCode===32) t.controls.autoRotate = !t.controls.autoRotate;
         });
         $(document).on('keyup', function(event) {
@@ -344,13 +344,16 @@ export class na3D_fileBrowser {
         t.ld3[path].itemCount++;
          
         while (t.ld2[level].initItemsDoingIdx < t.ld2[level].keys.length) {
-            var itd = data[ t.ld2[level].keys[ t.ld2[level].initItemsDoingIdx ] ];
+            var 
+            keyIdx = t.ld2[level].initItemsDoingIdx,
+            key = t.ld2[level].keys[ keyIdx ],
+            itd = data[key];
             if (typeof itd == 'object') {
                 let 
                 path2 = !t.items[parent]||t.items[parent].path===''?''+parent:t.items[parent].path+','+parent,
                 it = {
                     level : levelDepth,
-                    name : t.ld2[level].keys[t.ld2[level].initItemsDoingIdx],
+                    name : key,
                     idx : items.length,
                     path : path2,
                     levelIdx : t.ld2[level].levelIdx,
@@ -482,7 +485,7 @@ export class na3D_fileBrowser {
             clearTimeout (t.onresizeInitTimeout);
             t.onresizeInitTimeout = setTimeout(function() {
                 var objs = [];
-                for (var i=0; i<t.items.length; i++) if (t.items[i].model) objs[objs.length] = t.items[i].model.children[0];
+                for (var i=0; i<t.items.length; i++) if (t.items[i].model) objs[objs.length] = t.items[i].model;
                                                
                 t.controls = new OrbitControls( t.camera, t.renderer.domElement );
                 t.controls.autoRotate = true;
@@ -502,39 +505,23 @@ export class na3D_fileBrowser {
                 t.dragndrop.addEventListener( 'dragstart', function ( event ) {
                     if (t.controls) t.controls.dispose();
                                              
-                    let p = event.object.parent;
-                    while (!p.position || (p.position.x===0 && p.position.y===0 && p.position.z===0)) {
-                        p = p.parent;
-                        if (!p) { return false; }
-                    }
-                    t.dragndrop.obj = p;
-                    
+                    t.dragndrop.cube = event.object;
                     t.dragndrop.mouseX = t.mouse.layerX;
                     t.dragndrop.mouseY = t.mouse.layerY;
-                    t.mouse.z = 0;
                 } );
                 
                 t.dragndrop.addEventListener( 'drag', function (event) {
-                    let p = event.object.parent;
-                    while (!p.position || (p.position.x===0 && p.position.y===0 && p.position.z===0)) {
-                        p = p.parent;
-                        if (!p) { return false; }
-                    }
-                                             
+                    let cube = event.object;
+
                     for (let i=0; i<t.items.length; i++) {
-                        let it = t.items[i];
-                        if (it.parent === p.it.parent) {
-                            it.model.position.x -= ((t.dragndrop.mouseX - t.mouse.layerX));
-                            it.model.position.y += ((t.dragndrop.mouseY - t.mouse.layerY));
-                            it.model.position.z += t.mouse.z;
+                        let it2 = t.items[i];
+                        if (it2.parent === cube.it.parent) {
+                            //debugger;
+                            it2.model.position.x -= (t.dragndrop.mouseX - t.mouse.layerX);
+                            it2.model.position.y -= (t.dragndrop.mouseY - t.mouse.layerY);
+                            it2.model.position.z = cube.position.z;
                         }
                     }
-                    setTimeout(function() {
-                    t.dragndrop.mouseX = t.mouse.layerX;
-                    t.dragndrop.mouseY = t.mouse.layerY;
-                    t.mouse.z = 0;
-                    },10);
-                    
                     clearTimeout (t.posDataToDB);
                     t.posDataToDB = setTimeout(function() {
                         t.posDataToDatabase(t);
@@ -551,6 +538,12 @@ export class na3D_fileBrowser {
                         t.drawLines(t);
                     }
     
+                    setTimeout(function() {
+                        cube.position.x -= (t.dragndrop.mouseX - t.mouse.layerX);
+                        cube.position.y -= (t.dragndrop.mouseY - t.mouse.layerY)
+                        t.dragndrop.mouseX = t.mouse.layerX;
+                        t.dragndrop.mouseY = t.mouse.layerY;
+                    },5);
                 });
 
                 t.dragndrop.addEventListener( 'dragend', function ( event ) {

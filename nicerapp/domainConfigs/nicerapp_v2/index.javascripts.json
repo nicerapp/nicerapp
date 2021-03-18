@@ -15,7 +15,7 @@
     "/nicerapp/jsEngineeringMath/math_2D.source.js",
     "/nicerapp/jsEngineeringMath/math_3D.source.js",
     "/nicerapp/site.source.js",
-    "/nicerapp/desktop.source.js",
+    "/nicerapp/domainConfigs/nicerapp_v2/desktop.source.js",
     "/nicerapp/backgrounds.source.js",
     "/nicerapp/vividComponents/naVividComponents.source.js",
     "/nicerapp/vividComponents/naVividButton.source.js",

@@ -62,7 +62,7 @@ class nicerAppCMS {
             $javascriptFiles = $this->getFiles('js', 'javascripts');
         }
         
-        $div_siteContent = $this->getDivSiteContent();
+        //$div_siteContent = $this->getDivSiteContent();
         $div_siteMenu = $this->getSiteMenu();
         $replacements = array (
             '{$title}' => execPHP($titleFile),
@@ -70,10 +70,14 @@ class nicerAppCMS {
             '{$cssFiles}' => $cssFiles,
             '{$cssThemeFiles}' => $cssThemeFiles,
             '{$javascriptFiles}' => $javascriptFiles,
-            '{$div_siteContent}' => $div_siteContent,
             '{$div_siteMenu}' => $div_siteMenu,
             '{$theme}' => $this->cssTheme
         );
+        $content = $this->getContent();
+        foreach ($content as $divName=>$contentForDiv) {
+            $arr = array ( '{$div_'.$divName.'}' => $contentForDiv );
+            $replacements = array_merge ($replacements, $arr);
+        }
         $search = array_keys($replacements);
         $replace = array_values($replacements);
         $html = str_replace ($search, $replace, execPHP($templateFile));
@@ -144,25 +148,11 @@ class nicerAppCMS {
         return $lines;
     }
     
-    public function getDivSiteContent() {
-        if (array_key_exists('apps', $_GET)) {
-            $app = json_decode (base64_decode_url($_GET['apps']), true);
-            //var_dump ($app); 
-            //$files = getFilePathList (realpath(dirname(__FILE__)).'/apps', true, '/app.site.*.php/', array('file'), 3);
-            $folders = getFilePathList (realpath(dirname(__FILE__)).'/apps', true, '/.*/', array('dir'), 1);
-            //echo '<pre>'; var_dump ($files); die();
-            foreach ($folders as $idx => $folder) {
-                foreach ($app as $appName => $appSettings) {
-                    $filename = '/apps/'.basename($folder).'/'.$appName.'/app.siteContent.php';
-                    if (file_exists(dirname(__FILE__).$filename)) $contentFile = dirname(__FILE__).$filename;
-                }
-            }
-        } else {    
-            $contentFile = realpath(dirname(__FILE__).'/domainConfigs/'.$this->domain.'/frontpage.siteContent.php');
-        }
-
-        $content = execPHP($contentFile);
-        return $content;
+    public function getContent() {
+        $contentFetcher = realpath(dirname(__FILE__).'/../').'/ajax_get_content.php';
+        $r = execPHP ($contentFetcher);
+        $r = json_decode ($r, true);
+        return $r;
     }
     
     public function getSiteMenu() {
