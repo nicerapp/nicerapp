@@ -1,4 +1,5 @@
 <?php 
+require_once (dirname(__FILE__).'/../../../boot.php');
 $app = json_decode (base64_decode_url($_GET['apps']), true);
 
 $ip = (array_key_exists('X-Forwarded-For',apache_request_headers())?apache_request_headers()['X-Forwarded-For'] : $_SERVER['REMOTE_ADDR']);
@@ -14,11 +15,15 @@ $ip = (array_key_exists('X-Forwarded-For',apache_request_headers())?apache_reque
 
 
 ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"> 
 <div class="lds-facebook"><!-- thanks for allowing CC0 license usage : https://loading.io/css/ --><div></div><div></div><div></div></div> 
-<script type="text/javascript" src="/nicerapp/3rd-party/tinymce-5.7.1/js/tinymce/tinymce.min.js"></script>
+<!--<script type="text/javascript" src="/nicerapp/3rd-party/jQuery/jquery-3.5.1.js"></script>-->
+<script type="text/javascript" src="/nicerapp/3rd-party/tinymce-5.7.1/js/tinymce/tinymce.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         var useDarkMode = true;
+        debugger;
         tinymce.init({
             selector: 'textarea#tinymce',
             /*
@@ -99,6 +104,7 @@ $ip = (array_key_exists('X-Forwarded-For',apache_request_headers())?apache_reque
             init_instance_callback : function(editor) {
                // $(editor.editorContainer).addClass('fade-in'); 
                 $('#siteContent .lds-facebook').fadeOut('slow');
+                debugger;
             }
         });
     });
