@@ -202,13 +202,15 @@ var nas = na.site = {
         $('#siteSettings').submit();
     },
 
-    startTooltips : function(evt) {
-        $('.tooltip').each (function(idx,el) {
-            
+    startTooltips : function(evt, rootEl) {
+        if (!rootEl) rootEl = document;
+        $('.tooltip', rootEl).each (function(idx,el) {
+            var theme = $(el).attr('tooltipTheme');
+            if (!theme) theme = 'mainTooltipTheme';
             if (el.id=='btnThemeSwitch' && $.cookie('haveShownTutorial')!=='true') {
                 nas.settings.btnThemeSwitch = this;
                 var ptSettings = {
-                    className : $(el).attr('tooltipTheme'),//'mainTooltipTheme',
+                    className : theme,
                     contentAsHTML : true,
                     content : $(el).attr('title'),
                     //animation : 'grow',
@@ -234,7 +236,7 @@ var nas = na.site = {
             } else if (el.id=='btnChangeBackground' && $.cookie('haveShownTutorial')!=='true') {
                 nas.settings.btnChangeBackground = el;
                 var ptSettings = {
-                    className : $(el).attr('tooltipTheme'),//'mainTooltipTheme',
+                    className : theme,
                     contentAsHTML : true,
                     content : $(el).attr('title'),
                     animation : 'grow',
@@ -263,7 +265,7 @@ var nas = na.site = {
                 && el.id!=='btnThemeSwitch'
             ) {
                 var ptSettings = {
-                    className : $(el).attr('tooltipTheme'),//'mainTooltipTheme',
+                    className : theme,
                     contentAsHTML : true,
                     content : $(el).attr('title'),
                     alignTo : 'target',

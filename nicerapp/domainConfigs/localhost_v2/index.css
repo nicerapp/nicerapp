@@ -482,6 +482,9 @@ select, optgroup {
     height : 100%;
 }
 
+.jsTree_navBar_button {
+    width : 40px;
+}
 
 #tinymce {
     display : none;
