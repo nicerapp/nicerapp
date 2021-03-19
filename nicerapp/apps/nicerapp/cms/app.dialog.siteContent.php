@@ -96,10 +96,10 @@ $ip = (array_key_exists('X-Forwarded-For',apache_request_headers())?apache_reque
   'alignright alignjustify | bullist numlist outdent indent | ' +
   'removeformat | help',
   content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
-            /*init_instance_callback : function(editor) {
+            init_instance_callback : function(editor) {
                // $(editor.editorContainer).addClass('fade-in'); 
                 $('#siteContent .lds-facebook').fadeOut('slow');
-            }*/
+            }
         });
     });
 </script>
