@@ -2,6 +2,8 @@ html, body {
     padding : 0;
     margin : 0;
     font-family: 'Open Sans', sans-serif;
+}
+body {
     overflow : hidden;
 }
 #siteBackground {
@@ -485,11 +487,11 @@ select, optgroup {
     /*display : none;*/
 }
 
-/*.tox-tinymce {
+.tox-tinymce {
   opacity: 0;
   z-index : 1000;
   transition: opacity 1300ms;
 }
 .tox-tinymce.fade-in {
   opacity: 1;
-}*/
+}
