@@ -427,6 +427,7 @@ select, optgroup {
   height: 80px;
   left : calc(50% - 40px);
   top : calc(50% - 40px);
+  z-index : 1000000;
 }
 .lds-facebook div {
   display: inline-block;
@@ -479,3 +480,16 @@ select, optgroup {
     height : 100%;
 }
 
+
+#tinymce {
+    /*display : none;*/
+}
+
+/*.tox-tinymce {
+  opacity: 0;
+  z-index : 1000;
+  transition: opacity 1300ms;
+}
+.tox-tinymce.fade-in {
+  opacity: 1;
+}*/

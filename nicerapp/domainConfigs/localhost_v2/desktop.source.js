@@ -85,7 +85,6 @@ na.desktop = {
         }
         if (!cookies) divs[0] = '#siteContent';
         na.d.s.visibleDivs = divs;
-        debugger;
         na.d.goto (divs, true);
     },
     
@@ -427,7 +426,6 @@ na.desktop = {
                             }
                             break;
                         case 'left':
-                            debugger;
                             if (sn.element==='body') divs[divID].left = na.d.g.margin; 
                             else divs[divID].left = divs[sn.element].left + $(sn.element).outerWidth() + na.d.g.margin;
                             break;
