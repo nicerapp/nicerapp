@@ -1,6 +1,6 @@
 na.desktop = {
     globals : {
-        divs : [ '#siteDateTime', '#siteContent', '#siteVideo', '#siteVideoSearch', '#siteComments', '#siteStatusbar', '#siteToolbarRight', '#siteToolbarTop' ],
+        divs : [ '#siteDateTime', '#siteContent', '#siteVideo', '#siteVideoSearch', '#siteComments', '#siteStatusbar', '#siteToolbarLeft', '#siteToolbarRight', '#siteToolbarTop' ],
         configs : {
             'all' : [ '#siteContent', '#siteVideo', '#siteVideoSearch', '#siteStatusbar' ],
             'content' : [ '#siteContent' ],
@@ -40,9 +40,18 @@ na.desktop = {
                 left : $(window).width()+100,
                 opacity : 0.0001
             },
+            '#siteToolbarLeft' : {
+                top : $('#siteDateTime').height()+20,
+                left : -300,
+                height : $(window).height()-120,
+                width : 250,
+                opacity : 0.0001
+            },
             '#siteToolbarRight' : {
                 top : $('#siteDateTime').height()+20,
                 left : $(window).width()+100,
+                height : $(window).height()-120,
+                width : 250,
                 opacity : 0.0001
             },
             '#siteToolbarTop' : {
@@ -67,6 +76,7 @@ na.desktop = {
         for (var divIdx in na.d.g.divs) {
             if (typeof na.d.g.divs[divIdx]!=='string') continue;
             var divID = na.d.g.divs[divIdx];
+            $(divID).css(na.d.g.defaultPos[divID]);
             var cookie = $.cookie('visible_'+divID.substr(1));            
             if (cookie=='true') {
                 cookies = true;
@@ -75,6 +85,7 @@ na.desktop = {
         }
         if (!cookies) divs[0] = '#siteContent';
         na.d.s.visibleDivs = divs;
+        debugger;
         na.d.goto (divs, true);
     },
     
@@ -129,6 +140,8 @@ na.desktop = {
         }
         
         na.d.s.visibleDivs = visibleDivs;
+        
+        
         var calculate = {
             'calculate_2nd_topbar' : na.m.negotiateOptions( // TODO : clean up, reduce number of evaluations
                 (
@@ -299,16 +312,40 @@ na.desktop = {
                     }
                     : {}
                 ), (
-                    visibleDivs.includes('#siteContent')
+                    visibleDivs.includes('#siteToolbarLeft')
                     ? {
-                        '#siteContent' : {
+                        '#siteToolbarLeft' : {
                             snapTo : [
                                 { element : '#btnThemeSwitch', edge : 'bottom' },
                                 { element : 'body', edge : 'left' }
                             ],
+                            growTo : 'maxY',
+                            growToLimits : 
+                                visibleDivs.includes('#siteStatusbar')
+                                ? [
+                                    { element : '#siteStatusbar', edge : 'top' }
+                                ]
+                                : []
+                        }
+                    }
+                    : {}
+                ), (
+                    visibleDivs.includes('#siteContent')
+                    ? {
+                        '#siteContent' : {
+                            snapTo : 
+                                visibleDivs.includes('#siteToolbarLeft')
+                                ? [
+                                    { element : '#btnThemeSwitch', edge : 'bottom' },
+                                    { element : '#siteToolbarLeft', edge : 'left' }
+                                ]
+                                : [
+                                    { element : '#btnThemeSwitch', edge : 'bottom' },
+                                    { element : 'body', edge : 'left' }
+                                ],
                             growTo : 'max',
                             growToLimits : []/*,
-                            growToLimits : (
+                            growToLimits : ( //<-- gets too complicated! see [1] below here instead.
                                 visibleDivs.includes('#siteToolbarRight')
                                 ? 
                                 ? visibleDivs.includes('#siteStatusbar')
@@ -334,7 +371,7 @@ na.desktop = {
                                                 { element : '#siteComments', edge : 'left' }
                                             ]
                                             : []
-                            )*/ //<-- gets too complicated! see [1] below here instead.
+                            )*/ 
                         }
                     }
                     : {}
@@ -342,9 +379,21 @@ na.desktop = {
             ) // calculate_3rd_visible
             
         };
-        
         // [1]
-        var c = calculate['calculate_3rd_visible'];
+
+
+        var c = calculate['calculate_2nd_topbar'];
+        c.order = 
+            visibleDivs.includes('#siteDateTime')
+            ? [ '#siteDateTime', '#btnThemeSwitch', '#btnChangeBackground', '#siteMenu' ]
+            : [ '#btnThemeSwitch' ]
+            
+        c = calculate['calculate_3rd_visible'];
+        c.order = 
+            visibleDivs.includes('#siteToolbarLeft')
+            ? [ '#siteStatusbar', '#siteToolbarLeft', '#siteContent', '#siteVideo', '#siteVideoSearch', '#siteComments' ]
+            : [ '#siteStatusbar', '#siteContent', '#siteVideo', '#siteVideoSearch', '#siteComments' ];
+            
         if (c['#siteContent']) {
             var gtl = c['#siteContent'].growToLimits;
             if (visibleDivs.includes('#siteToolbarRight')) gtl.push ({ element : '#siteToolbarRight', edge : 'left' });
@@ -359,10 +408,13 @@ na.desktop = {
         var divs = {};
         for (var sectionID in calculate) {
             var section = calculate[sectionID];
-            for (var divID in section) {
+            for (var i=0; i<section.order.length; i++) {
+                var divID = section.order[i];
+                if (!section[divID]) { continue; };
                 divs[divID] = { top : 0, left : 0, width : $(divID).width(), height : $(divID).height() };
-                for (var i=0; i<section[divID].snapTo.length; i++) {
-                    var sn = section[divID].snapTo[i];
+                
+                for (var j=0; j<section[divID].snapTo.length; j++) {
+                    var sn = section[divID].snapTo[j];
                     switch (sn.edge) {
                         case 'top':
                             if (sn.element==='body') divs[divID].top = 0; else divs[divID].top = divs[sn.element].top;
@@ -375,13 +427,15 @@ na.desktop = {
                             }
                             break;
                         case 'left':
-                            if (sn.element==='body') divs[divID].left = 0; else divs[divID].left = divs[sn.element].left;
+                            debugger;
+                            if (sn.element==='body') divs[divID].left = na.d.g.margin; 
+                            else divs[divID].left = divs[sn.element].left + $(sn.element).outerWidth() + na.d.g.margin;
                             break;
                         case 'right':
                             if (sn.element=='body') {
-                                divs[divID].left = $(window).width() - $(divID).outerWidth() - na.d.g.margin;
+                                divs[divID].left = $(window).width() - $(divID).outerWidth() ;
                             } else {
-                                divs[divID].left = divs[sn.element].left + $(sn.element).outerWidth() - na.d.g.margin;
+                                divs[divID].left = divs[sn.element].left + $(sn.element).outerWidth() ;
                             }
                             break;
                     }
@@ -401,10 +455,10 @@ na.desktop = {
                         divs[divID].height = $(window).height() - divs[divID].top;
                         break;
                 }
-                
+
                 if (section[divID].growToLimits)
-                for (var i=0; i<section[divID].growToLimits.length; i++) {
-                    var gtl = section[divID].growToLimits[i];
+                for (var j=0; j<section[divID].growToLimits.length; j++) {
+                    var gtl = section[divID].growToLimits[j];
                     switch (gtl.edge) {
                         case 'left':
                             divs[divID].width -= ($(window).width() - divs[gtl.element].left);
@@ -441,6 +495,9 @@ na.desktop = {
                     case '#siteVideo':
                         divs[divID].left -= (na.d.g.margin);
                         divs[divID].top += (2 * na.d.g.margin );
+                        break;
+                    case '#siteToolbarLeft':
+                        divs[divID].height -= (2 * na.d.g.margin);
                         break;
                     case '#siteVideoSearch':
                     case '#siteToolbarRight':
@@ -537,7 +594,7 @@ na.desktop = {
                     }, 'normal');
             }
         }
-        
+
         for (var i=0; i<na.d.g.divs.length; i++) {
             var divID = na.d.g.divs[i], shown = false;
             for (var divID2 in divs) if (divID2==divID) shown = true;

@@ -68,6 +68,13 @@ na.site.globals = {
     </div>
     </div>
 
+    <div id="siteToolbarLeft" class="vdToolbar vividDialog" theme="{$theme}">
+    <div class="vividDialogContent vividScrollpane">
+        {$div_siteToolbarLeft}
+    </div>
+    </div>
+    
+    
     <div id="siteToolbarRight" class="vdToolbar vividDialog" theme="{$theme}">
     <div class="vividDialogContent vividScrollpane">
         {$div_siteToolbarRight}

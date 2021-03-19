@@ -10,7 +10,7 @@ var nas = na.site = {
             $.cookie('agreedToPolicies')!=='true'
             ? '<table style="width:100%;height:100%;"><tr><td>This site uses cookies for remembering user settings, and for analytics.<br/>'
                 + 'By using this site, you agree to such cookies getting stored on, and read from, your computer.</td><td style="width:220px;"><div class="vividButton" theme="dark" style="position:relative;color:white;" onclick="na.site.dismissCookieWarning();">Ok</div></td></table>'
-            : '<table style="width:100%;height:100%;"><tr><td>Copyright (c) 2021 by Rene A.J.M. Veerman <a href="mailto:rene.veerman.netherlands@gmail.com" style="color:green">&lt;rene.veerman.netherlands@gmail.com&gt;</a></td><td style="width:220px;"><div class="vividButton" theme="dark" style="position:relative;color:white;" onclick="na.site.dismissCopyrightMessage();">Ok</div></td></table>'
+            : '<table style="width:100%;height:100%;"><tr><td>Copyright (c) 2021 by Rene A.J.M. Veerman &lt;<a href="mailto:rv.nicer.app@gmail.com" style="color:darkgreen">rv.nicer.app@gmail.com</a>&gt;</td><td style="width:220px;"><div class="vividButton" theme="dark" style="position:relative;color:white;" onclick="na.site.dismissCopyrightMessage();">Ok</div></td></table>'
         ),
         dialogs : {},
         buttons : {},
@@ -153,17 +153,20 @@ var nas = na.site = {
             type : 'GET',
             url : '/apps_content/'+url.replace(document.location.origin,'').replace(document.location.host,'').replace('/apps/', ''),
             success : function (data, ts, xhr) {
+                var dat = JSON.parse(data), reloadMenu = false;
                 //debugger;
-                var d = JSON.parse(data);
-                if (d.siteContent) $('#siteContent .vividDialogContent').fadeOut('normal', function() {
-                    $('#siteContent .vividDialogContent').html(d.siteContent).fadeIn('normal');
-                    na.site.transformLinks($('#siteContent')[0]);
-                    na.site.reloadMenu();
-                });
-                if (d.siteToolbarRight) $('#siteContent .vividDialogContent').fadeOut('normal', function() {
-                    $('#siteToolbarRight .vividDialogContent').html(d.siteToolbarRight).fadeIn('normal');
-                    na.site.transformLinks($('#siteToolbarRight')[0]);
-                });
+                for (let divID in dat) {
+                    if (divID=='siteContent') reloadMenu = true;
+                    if (!na.d.s.visibleDivs.includes('#'+divID)) {
+                        na.d.s.visibleDivs.push('#'+divID);
+                        $.cookie('visible_'+divID, true);
+                    };
+                    $('#'+divID+' .vividDialogContent').fadeOut('normal', function () {
+                        $('#'+divID+' .vividDialogContent').html(dat[divID]).fadeIn('normal');
+                        na.site.transformLinks($('#'+divID)[0]);
+                    });
+                };
+                na.desktop.resize({ reloadMenu : reloadMenu });
             }, 
             failure : function (xhr, ajaxOptions, thrownError) {
                 debugger;
