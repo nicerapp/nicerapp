@@ -9864,14 +9864,15 @@ jQuery.ajaxPrefilter( function( s ) {
 
 
 jQuery._evalUrl = function( url, options, doc ) {
-	return jQuery.ajax( {
+    return jQuery.ajax( {
 		url: url,
 
 		// Make this explicit, since user can override this through ajaxSetup (#11264)
 		type: "GET",
 		dataType: "script",
 		cache: true,
-		async: false,
+		async: true,
+        crossDomain : true,
 		global: false,
 
 		// Only evaluate the response if it is successful (gh-4126)

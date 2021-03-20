@@ -161,7 +161,10 @@ var nas = na.site = {
             type : 'GET',
             url : '/apps_content/'+url.replace(document.location.origin,'').replace(document.location.host,'').replace('/apps/', ''),
             success : function (data, ts, xhr) {*/
-        
+        na.d.s.visibleDivs.remove('#siteToolbarTop'); $.cookie('visible_siteToolbarTop','');
+        na.d.s.visibleDivs.remove('#siteToolbarLeft'); $.cookie('visible_siteToolbarLeft','');
+        na.d.s.visibleDivs.remove('#siteToolbarRight'); $.cookie('visible_siteToolbarRight','');
+
         
                 data.text().then(function(data2) {
                     var dat = JSON.parse(data2), reloadMenu = false;
@@ -173,8 +176,8 @@ var nas = na.site = {
                             $.cookie('visible_'+divID, true);
                         };
                         $('#'+divID+' .vividDialogContent').fadeOut('normal', function () {
-                            $('#'+divID+' .vividDialogContent').fadeIn('normal');
-                            $('#'+divID+' .vividDialogContent')[0].innerHTML = dat[divID];
+                            $('#'+divID+' .vividDialogContent').html(dat[divID]).fadeIn('normal');
+                            //$('#'+divID+' .vividDialogContent')[0].innerHTML = dat[divID];
                             na.site.transformLinks($('#'+divID)[0]);
                         });
                     };

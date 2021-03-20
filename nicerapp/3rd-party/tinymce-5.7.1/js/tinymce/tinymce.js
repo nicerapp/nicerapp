@@ -20034,7 +20034,7 @@
     };
     var pluginLoadError = function (editor, url, name) {
       logError(editor, 'PluginLoadError', createLoadError('plugin', url, name));
-    };
+    };  
     var iconsLoadError = function (editor, url, name) {
       logError(editor, 'IconsLoadError', createLoadError('icons', url, name));
     };
@@ -26867,7 +26867,6 @@
       }
       editor.editorManager.add(editor);
       editor.suffix = '';
-      debugger;
       loadScripts(editor, editor.suffix);
     };
 
