@@ -1,5 +1,5 @@
 na.jsTree = {
-    onload : function() {
+    onload : async function() {
         let url = '/nicerapp/apps/nicerapp/cms/ajax_getTreeNodes.php';
         let data = await fetch(url);
         data.text().then(function(data2) {
