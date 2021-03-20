@@ -37,6 +37,10 @@ var nas = na.site = {
         var startTime = new Date();
         na.m.settings.siteStartTime = startTime.getTime();
         
+        na.d.s.visibleDivs.remove('#siteToolbarTop');
+        na.d.s.visibleDivs.remove('#siteToolbarLeft');
+        na.d.s.visibleDivs.remove('#siteToolbarRight');
+        
         if (na.m.userDevice.isPhone) {
             $('#siteDateTime').css({display:'none'});
             $('#btnThemeSwitch, #btnChangeBackground, #siteMenu').addClass('phoneView');

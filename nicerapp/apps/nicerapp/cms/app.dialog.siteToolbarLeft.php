@@ -27,6 +27,7 @@ $ip = (array_key_exists('X-Forwarded-For',apache_request_headers())?apache_reque
 <div id="jsTree"></div>
 <script type="text/javascript">
     $(document).ready(function() {
+        na.d.s.visibleDivs.push('#siteToolbarLeft'); na.site.onresize();
         na.jsTree.onload();    
     });
 </script>

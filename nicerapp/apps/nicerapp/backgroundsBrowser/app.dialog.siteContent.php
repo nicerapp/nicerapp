@@ -12,6 +12,7 @@ $app = json_decode (base64_decode_url($_GET['apps']), true);
         na.m.waitForCondition ('Now loading filesystem index',
             function () { return na.site.settings.backgroundsRecursive; }, // <-- wait for this to become non-null, non-undefined, aka filled with data fetched in /nicerapp/site.source.js:::na.site.onload() to /nicerapp/domainConfigs/SOME_NAME/ajax_backgrounds.php
             function () {
+                na.d.s.visibleDivs.push('#siteToolbarRight'); na.site.onresize();
                 // and when the data has loaded, do the following.. :
                 $('.na3D').each(function(idx,el){
                     //na.site.settings.na3D['#'+el.id] = new na3D_demo_cube (el, $(el).parent()[0]);
