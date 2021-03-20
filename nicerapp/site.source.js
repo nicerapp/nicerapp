@@ -265,14 +265,12 @@ var nas = na.site = {
                 && el.id!=='btnThemeSwitch'
             ) {
                 var ptSettings = {
-                    className : theme,
+                    theme : theme,
                     contentAsHTML : true,
-                    content : $(el).attr('title'),
-                    alignTo : 'target',
-                    alignX : 'center'
+                    content : $(el).attr('title')
                 };
                 if (na.m.userDevice.isPhone) ptSettings.showOn = 'none';
-                $(el).poshytip(ptSettings);
+                $(el).tooltipster(ptSettings);
             }
         });
         $.cookie('haveShownTutorial', 'true', na.m.cookieOptions());

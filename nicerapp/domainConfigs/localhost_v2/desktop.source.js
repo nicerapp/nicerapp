@@ -33,25 +33,27 @@ na.desktop = {
             '#siteVideoSearch' : {
                 top : $('#siteDateTime').height()+20+$('#siteVideo').height()+10,
                 left : $(window).width()+100,
+                width : !na.m.userDevice.isPhone ? 300 : $(window).width - 20,
                 opacity : 0.0001
             },
             '#siteComments' : {
                 top : $('#siteDateTime').height()+20,
                 left : $(window).width()+100,
+                width : !na.m.userDevice.isPhone ? 300 : $(window).width - 20,
                 opacity : 0.0001
             },
             '#siteToolbarLeft' : {
                 top : $('#siteDateTime').height()+20,
                 left : -300,
                 height : $(window).height()-120,
-                width : 250,
+                width : !na.m.userDevice.isPhone ? 300 : $(window).width - 20,
                 opacity : 0.0001
             },
             '#siteToolbarRight' : {
                 top : $('#siteDateTime').height()+20,
                 left : $(window).width()+100,
                 height : $(window).height()-120,
-                width : 250,
+                width : !na.m.userDevice.isPhone ? 300 : $(window).width - 20,
                 opacity : 0.0001
             },
             '#siteToolbarTop' : {
@@ -420,9 +422,9 @@ na.desktop = {
                             break;
                         case 'bottom':
                             if (sn.element==='body') {
-                                divs[divID].top = $(window).height() - $(divID).outerHeight();
+                                divs[divID].top = $(window).height() - $(divID).outerHeight() + na.d.g.margin;
                             } else {
-                                divs[divID].top = divs[sn.element].top + $(sn.element).outerHeight();
+                                divs[divID].top = divs[sn.element].top + $(sn.element).outerHeight() + na.d.g.margin;
                             }
                             break;
                         case 'left':

@@ -19,33 +19,14 @@ $ip = (array_key_exists('X-Forwarded-For',apache_request_headers())?apache_reque
 <script type="text/javascript" src="/nicerapp/3rd-party/jsTree-3.2.1/dist/jstree.js"></script> <!-- has jstree.min.js -->
 <script type="text/javascript" src="/nicerapp/apps/nicerapp/cms/na.jsTree.source.js"></script>
 <div id="jsTree_navBar">
-    <img id="jsTree_newFolder" class="jsTree_navBar_button tooltip" title="Create new sub-folder" src="/nicerapp/siteMedia/iconCreate__naFolder.png" onclick="na.jsTree.onclick_newFolder();"/>
-    <img id="jsTree_newDocument" class="jsTree_navBar_button tooltip" title="Create new document in current folder" src="/nicerapp/siteMedia/iconCreate__naDocument.png" onclick="na.jsTree.onclick_newDocument();"/>
-    <img id="jsTree_newMediaAlbum" class="jsTree_navBar_button tooltip" title="Create new media album in current folder" src="/nicerapp/siteMedia/iconCreate__naMediaAlbum.png" onclick="na.jsTree.onclick_newMediaAlbum();"/>
+    <img id="jsTree_addFolder" class="jsTree_navBar_button tooltip" title="Create new sub-folder" src="/nicerapp/siteMedia/btnAddFolder.png" onclick="na.jsTree.onclick_addFolder();"/>
+    <img id="jsTree_addDocument" class="jsTree_navBar_button tooltip" title="Create new document in current folder" src="/nicerapp/siteMedia/btnAddDocument.png" onclick="na.jsTree.onclick_addDocument();"/>
+    <img id="jsTree_addMediaAlbum" class="jsTree_navBar_button tooltip" title="Create new media album in current folder" src="/nicerapp/siteMedia/btnAddMediaFolder.png" onclick="na.jsTree.onclick_addMediaAlbum();"/>
+    <img id="jsTree_delete" class="jsTree_navBar_button tooltip" title="Delete" src="/nicerapp/siteMedia/btnTrashcan.png" onclick="na.jsTree.onclick_delete();"/>
 </div>
 <div id="jsTree"></div>
 <script type="text/javascript">
     $(document).ready(function() {
-    
-        var ac = {
-            type : 'GET',
-            url : '/nicerapp/apps/nicerapp/cms/ajax_getTreeNodes.php',
-            success : function (data, ts, xhr) {
-                $('#jsTree').css({
-                    height : $('#siteToolbarLeft .vividDialogContent').height() - $('#jsTree_navBar').height()
-                }).jstree({
-                    core : {
-                        data : JSON.parse(data)
-                    }
-                });
-                $('#siteToolbarLeft .lds-facebook').fadeOut('slow');
-                zat.startTooltips (undefined, $('#siteToolbarLeft')[0]);
-            },
-            failure : function (xhr, ajaxOptions, thrownError) {
-            }
-        };
-        $.ajax(ac);
-    
-    
+        na.jsTree.onload();    
     });
 </script>

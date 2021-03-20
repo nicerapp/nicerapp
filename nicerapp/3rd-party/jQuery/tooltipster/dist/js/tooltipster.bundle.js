@@ -4141,7 +4141,7 @@ $.tooltipster._plugin({
 				self.__instance._$tooltip
 					.css('position', '');
 			}
-			
+			finalResult.size.height = '';
 			self.__instance._$tooltip
 				.css({
 					left: finalResult.coord.left,

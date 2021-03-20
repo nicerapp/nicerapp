@@ -32,7 +32,8 @@ $cdb->login($cdbConfig['adminUsername'], $cdbConfig['adminPassword']);
 $databases = array (
     $cms->domain.'___cms_tree',
     $cms->domain.'___cms_tree__roles__guests',
-    $cms->domain.'___cms_tree__user__administrator'
+    $cms->domain.'___cms_tree__user__administrator',
+    $cms->domain.'___cms_tree__user__guest'
 );
 $data = array();
 $ret = array();

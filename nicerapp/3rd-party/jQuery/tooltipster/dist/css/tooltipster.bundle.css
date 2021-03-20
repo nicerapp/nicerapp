@@ -240,8 +240,8 @@
 /* .tooltipster-box */
 
 .tooltipster-sidetip .tooltipster-box {
-	background: #565656;
-	border: 2px solid black;
+	/*background: #565656;
+	border: 2px solid black;*/
 	border-radius: 4px;
 }
 
@@ -258,13 +258,13 @@
 }
 
 .tooltipster-sidetip.tooltipster-top .tooltipster-box {
-	margin-bottom: 8px;
+	/*margin-bottom: 8px;*/
 }
 
 /* .tooltipster-content */
 
 .tooltipster-sidetip .tooltipster-content {
-	color: white;
+	color: black;
 	line-height: 18px;
 	padding: 6px 14px;
 }

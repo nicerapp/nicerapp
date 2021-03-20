@@ -15,13 +15,17 @@ $ip = (array_key_exists('X-Forwarded-For',apache_request_headers())?apache_reque
 
 
 ?>
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"> 
 <div class="lds-facebook"><!-- thanks for allowing CC0 license usage : https://loading.io/css/ --><div></div><div></div><div></div></div> 
-<!--<script type="text/javascript" src="/nicerapp/3rd-party/jQuery/jquery-3.5.1.js"></script>-->
+<script type="text/javascript" src="/nicerapp/apps/nicerapp/cms/na.jsTree_folderView.source.js"></script>
 <script type="text/javascript" src="/nicerapp/3rd-party/tinymce-5.7.1/js/tinymce/tinymce.js"></script>
+<div id="document_navBar">
+    <label id="documentTitle_label" for="documentTitle">Document name : </label><input id="documentTitle" type="text"></input>
+</div>
+<textarea id="tinymce"></textarea>
+
 <script type="text/javascript">
     $(document).ready(function() {
+        $('#documentTitle').css({width : jQuery('#siteContent .vividDialogContent').width() - $('#documentTitle_label').width() - 26});
         var useDarkMode = true;
         tinymce.init({
             selector: 'textarea#tinymce',
@@ -72,7 +76,7 @@ $ip = (array_key_exists('X-Forwarded-For',apache_request_headers())?apache_reque
             ],
             template_cdate_format: '[Date Created (CDATE): %m/%d/%Y : %H:%M:%S]',
             template_mdate_format: '[Date Modified (MDATE): %m/%d/%Y : %H:%M:%S]',
-            height: $('#siteContent .vividDialogContent').height(),
+            height: $('#siteContent .vividDialogContent').height() - $('#document_navBar').height(),
             image_caption: true,
             quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
             noneditable_noneditable_class: 'mceNonEditable',
@@ -94,4 +98,4 @@ $ip = (array_key_exists('X-Forwarded-For',apache_request_headers())?apache_reque
         });
     });
 </script>
-<textarea id="tinymce"></textarea>
+
