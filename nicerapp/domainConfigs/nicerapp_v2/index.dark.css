@@ -72,7 +72,7 @@
 
 
 #siteStatusbar {
-    color : darkred;
+    color : white;
     background : none;
     padding-left : 10px;
     font-weight : bold;
@@ -80,7 +80,7 @@
 
 #siteStatusbar:before {
     content : "";
-    background : url('/nicerapp/siteMedia/backgrounds/tiled/active/yellow/318849091_f2d312f7a4.jpg') repeat;
+    background : url('/nicerapp/siteMedia/backgrounds/tiled/active/green/cloth 003C.png') repeat;
     opacity : 0.7;
     z-index : -1;
     position: absolute;
