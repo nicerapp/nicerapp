@@ -26866,6 +26866,8 @@
         editor.editorManager.on('BeforeUnload', editor._beforeUnload);
       }
       editor.editorManager.add(editor);
+      editor.suffix = '';
+      debugger;
       loadScripts(editor, editor.suffix);
     };
 

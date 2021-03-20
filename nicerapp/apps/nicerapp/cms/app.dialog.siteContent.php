@@ -24,11 +24,13 @@ $ip = (array_key_exists('X-Forwarded-For',apache_request_headers())?apache_reque
 <textarea id="tinymce"></textarea>
 
 <script type="text/javascript">
+//document.addEventListener('DOMContentLoaded', () => {
 //setTimeout (function() {
-    $(document).ready(function() {
+    //$(document).ready(function() {
         $('#documentTitle').css({width : jQuery('#siteContent .vividDialogContent').width() - $('#documentTitle_label').width() - 26});
         var useDarkMode = true;
         //debugger;
+        tinymce.baseURL = '/nicerapp/3rd-party/tinymce-5.7.1/js/tinymce';
         tinymce.init({
             selector: 'textarea#tinymce',
             plugins: 'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
@@ -100,7 +102,7 @@ $ip = (array_key_exists('X-Forwarded-For',apache_request_headers())?apache_reque
                 $('#siteContent .lds-facebook').fadeOut('slow');
             }
         });
-    });
+    //});
 //}, 2500);
 </script>
 
