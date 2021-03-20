@@ -152,38 +152,34 @@ var nas = na.site = {
         //});
 	},
 
-    loadContent_getAndDisplayContent : async function (url) {
+    loadContent_getAndDisplayContent : function (url) {
         
-        let url2 = '/apps_content/'+url.replace(document.location.origin,'').replace(document.location.host,'').replace('/apps/', '')
-        let data = await fetch(url2);
         let reloadMenu = false;
-        /*var ac = {
+        var ac = {
             type : 'GET',
             url : '/apps_content/'+url.replace(document.location.origin,'').replace(document.location.host,'').replace('/apps/', ''),
-            success : function (data, ts, xhr) {*/
-        na.d.s.visibleDivs.remove('#siteToolbarTop'); $.cookie('visible_siteToolbarTop','');
-        na.d.s.visibleDivs.remove('#siteToolbarLeft'); $.cookie('visible_siteToolbarLeft','');
-        na.d.s.visibleDivs.remove('#siteToolbarRight'); $.cookie('visible_siteToolbarRight','');
+            success : function (data, ts, xhr) {
+                na.d.s.visibleDivs.remove('#siteToolbarTop'); $.cookie('visible_siteToolbarTop','');
+                na.d.s.visibleDivs.remove('#siteToolbarLeft'); $.cookie('visible_siteToolbarLeft','');
+                na.d.s.visibleDivs.remove('#siteToolbarRight'); $.cookie('visible_siteToolbarRight','');
 
         
-                data.text().then(function(data2) {
-                    var dat = JSON.parse(data2), reloadMenu = false;
-                    //debugger;
-                    for (let divID in dat) {
-                        if (divID=='siteContent') reloadMenu = true;
-                        if (!na.d.s.visibleDivs.includes('#'+divID)) {
-                            na.d.s.visibleDivs.push('#'+divID);
-                            $.cookie('visible_'+divID, true);
-                        };
-                        $('#'+divID+' .vividDialogContent').fadeOut('normal', function () {
-                            $('#'+divID+' .vividDialogContent').html(dat[divID]).fadeIn('normal');
-                            //$('#'+divID+' .vividDialogContent')[0].innerHTML = dat[divID];
-                            na.site.transformLinks($('#'+divID)[0]);
-                        });
+                var dat = JSON.parse(data), reloadMenu = false;
+                //debugger;
+                for (let divID in dat) {
+                    if (divID=='siteContent') reloadMenu = true;
+                    if (!na.d.s.visibleDivs.includes('#'+divID)) {
+                        na.d.s.visibleDivs.push('#'+divID);
+                        $.cookie('visible_'+divID, true);
                     };
-                    na.desktop.resize({ reloadMenu : reloadMenu });
-                });
-            /*}, 
+                    $('#'+divID+' .vividDialogContent').fadeOut('normal', function () {
+                        $('#'+divID+' .vividDialogContent').html(dat[divID]).fadeIn('normal');
+                        //$('#'+divID+' .vividDialogContent')[0].innerHTML = dat[divID];
+                        na.site.transformLinks($('#'+divID)[0]);
+                    });
+                };
+                na.desktop.resize({ reloadMenu : reloadMenu });
+            }, 
             failure : function (xhr, ajaxOptions, thrownError) {
                 debugger;
                 alert ('na.site.loadContent() : '+thrownError);
@@ -191,7 +187,7 @@ var nas = na.site = {
         };
         ac.url = ac.url.replace('\/\/','/');
         //debugger;
-        $.ajax(ac);*/
+        $.ajax(ac);
       
         na.analytics.logMetaEvent('na.site.loadContent() : url='+url);
     },
