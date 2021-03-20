@@ -1,3 +1,6 @@
+
+Header set Content-Security-Policy "default-src https: data: 'unsafe-inline' 'unsafe-eval' blob:"
+
 #Stage 0 : initialization of rewrite engine; do not touch without a clue.
 RewriteEngine on
 RewriteBase /
