@@ -25,7 +25,7 @@ $ip = (array_key_exists('X-Forwarded-For',apache_request_headers())?apache_reque
 
 <script type="text/javascript">
 //document.addEventListener('DOMContentLoaded', () => {
-//setTimeout (function() {
+setTimeout (function() {
     //$(document).ready(function() {
         $('#documentTitle').css({width : jQuery('#siteContent .vividDialogContent').width() - $('#documentTitle_label').width() - 26});
         var useDarkMode = true;
@@ -103,6 +103,6 @@ $ip = (array_key_exists('X-Forwarded-For',apache_request_headers())?apache_reque
             }
         });
     //});
-//}, 2500);
+}, 1000);
 </script>
 
