@@ -32,14 +32,14 @@ var nas = na.site = {
     },
     
     onload : function (evt) {
+        na.d.s.visibleDivs.remove('#siteToolbarTop'); $.cookie('visible_siteToolbarTop','');
+        na.d.s.visibleDivs.remove('#siteToolbarLeft'); $.cookie('visible_siteToolbarLeft','');
+        na.d.s.visibleDivs.remove('#siteToolbarRight'); $.cookie('visible_siteToolbarRight','');
+        
         na.desktop.init();
         
         var startTime = new Date();
         na.m.settings.siteStartTime = startTime.getTime();
-        
-        na.d.s.visibleDivs.remove('#siteToolbarTop');
-        na.d.s.visibleDivs.remove('#siteToolbarLeft');
-        na.d.s.visibleDivs.remove('#siteToolbarRight');
         
         if (na.m.userDevice.isPhone) {
             $('#siteDateTime').css({display:'none'});
