@@ -173,7 +173,8 @@ var nas = na.site = {
                             $.cookie('visible_'+divID, true);
                         };
                         $('#'+divID+' .vividDialogContent').fadeOut('normal', function () {
-                            $('#'+divID+' .vividDialogContent').html(dat[divID]).fadeIn('normal');
+                            $('#'+divID+' .vividDialogContent').fadeIn('normal');
+                            $('#'+divID+' .vividDialogContent')[0].innerHTML = dat[divID];
                             na.site.transformLinks($('#'+divID)[0]);
                         });
                     };
