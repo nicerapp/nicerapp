@@ -150,6 +150,7 @@ var nas = na.site = {
 
     loadContent_getAndDisplayContent : function (url) {
         var ac = {
+            async : true,
             type : 'GET',
             url : '/apps_content/'+url.replace(document.location.origin,'').replace(document.location.host,'').replace('/apps/', ''),
             success : function (data, ts, xhr) {

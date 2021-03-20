@@ -126,8 +126,9 @@ var document = window.document;
 				}
 			}
 		}
-		doc.head.appendChild( script ).parentNode.removeChild( script );
-	}
+        
+        doc.head.appendChild( script ).parentNode.removeChild( script );
+    }
 
 
 function toType( obj ) {
@@ -9854,6 +9855,7 @@ jQuery.ajaxPrefilter( function( s ) {
 
 
 jQuery._evalUrl = function( url, options, doc ) {
+    $.holdReady( true );
 	return jQuery.ajax( {
 		url: url,
 
@@ -9861,7 +9863,7 @@ jQuery._evalUrl = function( url, options, doc ) {
 		type: "GET",
 		dataType: "script",
 		cache: true,
-		async: false,
+		async: true,
 		global: false,
 
 		// Only evaluate the response if it is successful (gh-4126)
@@ -9870,6 +9872,9 @@ jQuery._evalUrl = function( url, options, doc ) {
 		converters: {
 			"text script": function() {}
 		},
+        success : function (data, ts, xhr) {
+            $.holdReady( false );
+        },
 		dataFilter: function( response ) {
 			jQuery.globalEval( response, options, doc );
 		}

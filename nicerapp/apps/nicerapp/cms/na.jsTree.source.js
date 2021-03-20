@@ -85,6 +85,24 @@ na.jsTree = {
         na.jsTree.onresize();
     },
     
+    refresh : function () {
+        $('#siteToolbarLeft .lds-facebook').fadeIn('slow');
+        var ac = {
+            type : 'GET',
+            url : '/nicerapp/apps/nicerapp/cms/ajax_getTreeNodes.php',
+            success : function (data, ts, xhr) {
+                let dat = JSON.parse(data);
+                $('#jsTree').jstree(true).settings.core.data = dat;
+                $('#jsTree').jstree(true).refresh();
+                $('#siteToolbarLeft .lds-facebook').stop(true,true).fadeOut('slow');
+            },
+            failure : function (xhr, ajaxOptions, thrownError) {
+                debugger;
+            }
+        };
+        $.ajax(ac);
+    },
+    
     onresize : function() {
         if (na.m.userDevice.isPhone) {
             na.jsTree.settings.activeDialog='#siteToolbarLeft';
@@ -93,15 +111,51 @@ na.jsTree = {
         na.desktop.resize();
     },
     
-    onclick_newFolder : function() {
-        alert ('new folder');
+    onclick_addFolder : function() {
+        var 
+        tree = $('#jsTree').jstree(true),
+        sel = tree.getSelected()[0],
+        ac = {
+            type : 'POST',
+            url : '/nicerapp/apps/nicerapp/cms/ajax_addNode.php',
+            data : {
+                database : sel.database,
+                parent : sel.id,
+                type : 'naFolder'
+            },
+            success : function (data, ts, xhr) {
+                debugger;
+            },
+            failure : function (xhr, ajaxOptions, thrownError) {
+                debugger;
+            }
+        };
+        $.ajax(ac);
     },
     
-    onclick_newDocument : function() {
-        alert ('new document');
+    onclick_addDocument : function() {
+        var 
+        tree = $('#jsTree').jstree(true),
+        sel = tree.get_node(tree.get_selected()[0]),
+        ac = {
+            type : 'POST',
+            url : '/nicerapp/apps/nicerapp/cms/ajax_addNode.php',
+            data : {
+                database : sel.original.database,
+                parent : sel.original.id,
+                type : 'naDocument'
+            },
+            success : function (data, ts, xhr) {
+                na.jsTree.refresh();
+            },
+            failure : function (xhr, ajaxOptions, thrownError) {
+                debugger;
+            }
+        };
+        $.ajax(ac);
     },
     
-    onclick_newMediaAlbum : function() {
+    onclick_addMediaAlbum : function() {
         alert ('new media album');
     },
     

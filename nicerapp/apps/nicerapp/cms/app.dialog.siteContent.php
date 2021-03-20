@@ -24,9 +24,11 @@ $ip = (array_key_exists('X-Forwarded-For',apache_request_headers())?apache_reque
 <textarea id="tinymce"></textarea>
 
 <script type="text/javascript">
+setTimeout (function() {
     $(document).ready(function() {
         $('#documentTitle').css({width : jQuery('#siteContent .vividDialogContent').width() - $('#documentTitle_label').width() - 26});
         var useDarkMode = true;
+        //debugger;
         tinymce.init({
             selector: 'textarea#tinymce',
             plugins: 'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
@@ -97,5 +99,6 @@ $ip = (array_key_exists('X-Forwarded-For',apache_request_headers())?apache_reque
             }
         });
     });
+}, 2500);
 </script>
 
