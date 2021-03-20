@@ -1,10 +1,13 @@
 na.jsTree = {
     onload : function() {
-        var ac = {
+        let url = '/nicerapp/apps/nicerapp/cms/ajax_getTreeNodes.php';
+        let data = await fetch(url);
+        data.text().then(function(data2) {
+        /*var ac = {
             type : 'GET',
             url : '/nicerapp/apps/nicerapp/cms/ajax_getTreeNodes.php',
-            success : function (data, ts, xhr) {
-                let dat = JSON.parse(data);
+            success : function (data, ts, xhr) {*/
+                let dat = JSON.parse(data2);
                 $('#jsTree').css({
                     height : $('#siteToolbarLeft .vividDialogContent').height() - $('#jsTree_navBar').height()
                 }).jstree({
@@ -73,16 +76,15 @@ na.jsTree = {
                 });
                 
                 $('#siteToolbarLeft .lds-facebook').fadeOut('slow');
-                
-                //na.site.startTooltips (undefined, $('#siteToolbarLeft')[0]);
-            },
+/*            },
             failure : function (xhr, ajaxOptions, thrownError) {
                 debugger;
             }
         };
-        $.ajax(ac);
+        $.ajax(ac);*/
         $(window).resize(na.jsTree.onresize)
         na.jsTree.onresize();
+        });
     },
     
     refresh : function () {

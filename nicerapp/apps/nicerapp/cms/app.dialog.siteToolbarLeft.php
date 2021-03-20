@@ -31,5 +31,5 @@ $ip = (array_key_exists('X-Forwarded-For',apache_request_headers())?apache_reque
         na.d.s.visibleDivs.push('#siteToolbarLeft'); na.site.onresize();
         na.jsTree.onload();    
     //});
-    }, 1000);
+    }, 250);
 </script>

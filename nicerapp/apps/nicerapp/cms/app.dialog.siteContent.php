@@ -103,6 +103,6 @@ setTimeout (function() {
             }
         });
     //});
-}, 1000);
+}, 250);
 </script>
 
