@@ -9871,7 +9871,7 @@ jQuery._evalUrl = function( url, options, doc ) {
 		type: "GET",
 		dataType: "script",
 		cache: true,
-		async: true,
+		async: false,
 		global: false,
 
 		// Only evaluate the response if it is successful (gh-4126)
