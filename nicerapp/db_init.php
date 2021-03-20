@@ -99,7 +99,7 @@ try {
 echo 'Created database '.$cms->domain.'___three_d_positions<br/>';
 
 $dbName = $cms->domain.'___cms_tree';
-$cdb->deleteDatabase ($dbName);
+try { $cdb->deleteDatabase ($dbName); } catch (Exception $e) { };
 $cdb->setDatabase($dbName, true);
 try { 
     $call = $cdb->setSecurity ($security);

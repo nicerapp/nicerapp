@@ -24,7 +24,7 @@ $ip = (array_key_exists('X-Forwarded-For',apache_request_headers())?apache_reque
 <textarea id="tinymce"></textarea>
 
 <script type="text/javascript">
-setTimeout (function() {
+//setTimeout (function() {
     $(document).ready(function() {
         $('#documentTitle').css({width : jQuery('#siteContent .vividDialogContent').width() - $('#documentTitle_label').width() - 26});
         var useDarkMode = true;
@@ -86,6 +86,8 @@ setTimeout (function() {
             contextmenu: 'link image imagetools table',
             skin: 'oxide-dark-transparent', //useDarkMode ? 'oxide-dark' : 'oxide',
             //content_css: useDarkMode ? 'dark' : 'default',
+            theme : 'silver',
+            theme_url : '/nicerapp/3rd-party/tinymce-5.7.1/js/tinymce/themes/silver/theme.js',
             content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
             
             content_css: [
@@ -99,6 +101,6 @@ setTimeout (function() {
             }
         });
     });
-}, 2500);
+//}, 2500);
 </script>
 
