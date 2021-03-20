@@ -20076,7 +20076,7 @@
     };
     var transformToUrls = function (editor, cssLinks) {
       var skinUrl = editor.editorManager.baseURL + '/skins/content';
-      var suffix = editor.editorManager.suffix;
+      var suffix = '';//editor.editorManager.suffix;
       var contentCssFile = 'content' + suffix + '.css';
       var inline = editor.inline === true;
       return map(cssLinks, function (url) {
