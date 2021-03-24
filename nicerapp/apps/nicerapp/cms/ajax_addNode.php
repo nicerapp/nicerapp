@@ -2,9 +2,9 @@
 require_once (dirname(__FILE__).'/../../../boot.php');
 require_once (dirname(__FILE__).'/../../../3rd-party/sag/src/Sag.php');
 require_once (dirname(__FILE__).'/../../../Sag-support-functions.php');
-ini_set('display_errors', 1);
+/*ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+error_reporting(E_ALL);*/
 
 $ip = (array_key_exists('X-Forwarded-For',apache_request_headers())?apache_request_headers()['X-Forwarded-For'] : $_SERVER['REMOTE_ADDR']);
 /*if (
@@ -52,7 +52,7 @@ if (
 
 if ($_POST['type'] == 'naFolder') {
     $text = 'New Folder';
-    $state = '{"opened":true}';
+    $state = array ("opened" => true);
 }
 if ($_POST['type'] == 'naDocument') {
     $text = 'New Document';
@@ -88,6 +88,7 @@ $id = cdb_randomString(10);
 $recordToAdd = array (
     '_id' => $id,
     'id' => $id,
+    'database' => $_POST['database'],
     'parent' => $_POST['parent'],
     'type' => $_POST['type'],
     'text' =>  $textFinal,

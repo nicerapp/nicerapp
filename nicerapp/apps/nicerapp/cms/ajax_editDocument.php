@@ -1,6 +1,7 @@
-<?php 
+<?php
 require_once (dirname(__FILE__).'/../../../boot.php');
 require_once (dirname(__FILE__).'/../../../3rd-party/sag/src/Sag.php');
+require_once (dirname(__FILE__).'/../../../Sag-support-functions.php');
 /*ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);*/
@@ -29,23 +30,16 @@ $cdb->setHTTPAdapter($cdbConfig['httpAdapter']);
 $cdb->useSSL($cdbConfig['useSSL']);
 $cdb->login($cdbConfig['adminUsername'], $cdbConfig['adminPassword']);
 
-$databases = array (
-    $cms->domain.'___cms_tree',
-    $cms->domain.'___cms_tree__role__guests',
-    $cms->domain.'___cms_tree__user__administrator',
-    $cms->domain.'___cms_tree__user__guest'
+$cdb->setDatabase($_POST['database'],false);
+$doc = array (
+    'database' => $_POST['database'],
+    '_id' => $_POST['id'],
+    'id' => $_POST['id'],
+    'document' => $_POST['document']
 );
-$data = array();
-$ret = array();
-foreach ($databases as $idx=>$dbName) {
-    $cdb->setDatabase ($dbName, false);
-    $docs = $cdb->getAllDocs();
-    $data = $docs->body->rows;
-    foreach ($data as $idx2=>$recordSummary) {
-        $record = $cdb->get($recordSummary->id);
-        $ret = array_merge ($ret, array(json_decode(json_encode($record->body),true)));
-    }
-}
+try { $call = $cdb->get ($_POST['id']); $doc['_rev'] = $call->body->_rev; } catch (Exception $e) { };
 
-echo json_encode($ret, JSON_PRETTY_PRINT);
+try { $call = $cdb->post($doc); } catch (Exception $e) { cdb_error (500, $e, 'Could not add record'); die(); };
+
+echo 'Success'; // echo json_encode($recordToAdd); <-- not needed, js will refresh the entire tree (accounting for multiple users working on the same tree at the same time)
 ?>

@@ -16,12 +16,13 @@ $ip = (array_key_exists('X-Forwarded-For',apache_request_headers())?apache_reque
 
 ?>
 <div class="lds-facebook"><!-- thanks for allowing CC0 license usage : https://loading.io/css/ --><div></div><div></div><div></div></div> 
-<script type="text/javascript" src="/nicerapp/apps/nicerapp/cms/na.jsTree_folderView.source.js"></script>
+<script type="text/javascript" src="/nicerapp/apps/nicerapp/cms/na.blog.source.js?c=<?php echo date('Ymd_His',filemtime(dirname(__FILE__).'/na.blog.source.js'));?>"></script>
 <script type="text/javascript" src="/nicerapp/3rd-party/tinymce-5.7.1/js/tinymce/tinymce.js"></script>
 <div id="document_navBar">
-    <label id="documentTitle_label" for="documentTitle">Document name : </label><input id="documentTitle" type="text"></input>
+    <label id="documentTitle_label" for="documentTitle">Document name : </label>
+    <input id="documentTitle" type="text" onchange="na.jsTree.onchange_documentTitle(event);"></input>
 </div>
-<textarea id="tinymce"></textarea>
+<textarea id="tinymce" onchange="na.blog.saveEditorContent();"></textarea>
 
 <script type="text/javascript">
 //document.addEventListener('DOMContentLoaded', () => {
@@ -34,6 +35,7 @@ setTimeout (function() {
         tinymce.init({
             selector: 'textarea#tinymce',
             plugins: 'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
+            resize : true,
             imagetools_cors_hosts: ['picsum.photos'],
             menubar: false,//'file edit view insert format tools table help',
             toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl',

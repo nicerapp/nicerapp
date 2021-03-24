@@ -87,7 +87,7 @@ na.desktop = {
         }
         if (!cookies) divs[0] = '#siteContent';
         na.d.s.visibleDivs = divs;
-        na.d.goto (divs, true);
+        na.d.goto (divs);
     },
     
     isVisible : function (id) {
@@ -123,11 +123,11 @@ na.desktop = {
         return r;
     },
     
-    resize : function () {
-        na.d.goto(na.d.s.visibleDivs);
+    resize : function (callback) {
+        na.d.goto(na.d.s.visibleDivs,callback);
     },
     
-    goto : function (visibleDivs, pageInit) {
+    goto : function (visibleDivs, callback) {
         
         if (
             $.cookie('agreedToPolicies')!=='true'
@@ -271,6 +271,7 @@ na.desktop = {
                 ), (
                     visibleDivs.includes('#siteContent')
                     && visibleDivs.includes('#siteComments')
+                    && !visibleDivs.includes('#siteToolbarLeft')
                     && !visibleDivs.includes('#siteToolbarRight')
                     && !visibleDivs.includes('#siteToolbarTop')
                     ? {
@@ -422,7 +423,7 @@ na.desktop = {
                             break;
                         case 'bottom':
                             if (sn.element==='body') {
-                                divs[divID].top = $(window).height() - $(divID).outerHeight() + na.d.g.margin;
+                                divs[divID].top = $(window).height() - $(divID).outerHeight();
                             } else {
                                 divs[divID].top = divs[sn.element].top + $(sn.element).outerHeight() + na.d.g.margin;
                             }
@@ -555,14 +556,14 @@ na.desktop = {
                             el.camera.updateProjectionMatrix();
                             el.renderer.setSize  ($(el.p).width(), $(el.p).height());
                         }
-                        
+                        if (typeof callback=='function') callback(this);             
                     } else $(divID).stop(true,true).animate ({
                         top : divs[divID].top,
                         left : divs[divID].left,
                         width : divs[divID].width,
                         height : divs[divID].height,
                         opacity : 1
-                    }, 'normal', function () {
+                    }, 'normal', 'swing', function () {
                         for (var id in na.site.settings.na3D) {
                             var el = na.site.settings.na3D[id];
                             $('canvas', el.p)
@@ -573,6 +574,7 @@ na.desktop = {
                             el.camera.updateProjectionMatrix();
                             el.renderer.setSize  ($(el.p).width(), $(el.p).height());
                         }
+                        if (typeof callback=='function') callback(this);
                     });
                     
                 else if (na.m.userDevice.isPhone) {
@@ -591,7 +593,7 @@ na.desktop = {
                         width : divs[divID].width,
                         height : divs[divID].height,
                         opacity : 1
-                    }, 'normal');
+                    }, 'normal', 'swing', callback);
             }
         }
 

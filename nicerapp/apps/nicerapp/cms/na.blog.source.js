@@ -1,13 +1,12 @@
-na.jsTree = {
+na.blog = {
+    settings : {},
+    
     onload : async function() {
-        let url = '/nicerapp/apps/nicerapp/cms/ajax_getTreeNodes.php';
-        let data = await fetch(url);
-        data.text().then(function(data2) {
-        /*var ac = {
+        var ac = {
             type : 'GET',
             url : '/nicerapp/apps/nicerapp/cms/ajax_getTreeNodes.php',
-            success : function (data, ts, xhr) {*/
-                let dat = JSON.parse(data2);
+            success : function (data, ts, xhr) {
+                let dat = JSON.parse(data);
                 $('#jsTree').css({
                     height : $('#siteToolbarLeft .vividDialogContent').height() - $('#jsTree_navBar').height()
                 }).jstree({
@@ -69,22 +68,30 @@ na.jsTree = {
                 }).on('ready.jstree', function (e, data) {
                   
                 }).on('changed.jstree', function (e, data) {
+                    if (na.blog.settings.selectedRecord) na.blog.saveEditorContent(na.blog.settings.selectedRecord);
                     for (var i=0; i<data.selected.length; i++) {
                         var d = data.selected[i], rec = data.instance.get_node(d);
-                        na.jsTree.buttonsEnableDisable (rec);
+                        na.blog.treeButtonsEnableDisable (rec);
+                        $('#documentTitle').val(rec.original.text);
+                        if (rec.original.type=='naDocument') {
+                            na.blog.loadEditorContent(rec);
+                            na.blog.settings.selectedRecord = rec;
+                        } else {
+                            delete na.blog.settings.selectedRecord;
+                        }
+
                     };
                 });
                 
                 $('#siteToolbarLeft .lds-facebook').fadeOut('slow');
-/*            },
+            },
             failure : function (xhr, ajaxOptions, thrownError) {
                 debugger;
             }
         };
-        $.ajax(ac);*/
-        $(window).resize(na.jsTree.onresize)
-        na.jsTree.onresize();
-        });
+        $.ajax(ac);
+        $(window).resize(na.blog.onresize)
+        na.blog.onresize();
     },
     
     refresh : function () {
@@ -105,28 +112,110 @@ na.jsTree = {
         $.ajax(ac);
     },
     
+    loadEditorContent : function (rec) {
+        ac = {
+            type : 'POST',
+            url : '/nicerapp/apps/nicerapp/cms/ajax_loadDocument.php',
+            data : {
+                database : rec.original.database.replace('tree','documents'),
+                id : rec.original.id
+            },
+            success : function (data, ts, xhr) {
+                tinymce.get('tinymce').setContent(data);
+            },
+            failure : function (xhr, ajaxOptions, thrownError) {
+                debugger;
+            }
+        };
+        $.ajax(ac);
+    },
+    
+    saveEditorContent : function (rec) {
+        var 
+        ac = {
+            type : 'POST',
+            url : '/nicerapp/apps/nicerapp/cms/ajax_editDocument.php',
+            data : {
+                database : rec.original.database.replace('tree','documents'),
+                id : rec.original.id,
+                document : tinymce.get('tinymce').getContent()
+            },
+            success : function (data, ts, xhr) {
+                //na.blog.refresh();
+            },
+            failure : function (xhr, ajaxOptions, thrownError) {
+                debugger;
+            }
+        };
+        $.ajax(ac);
+        
+    },
+    
     onresize : function() {
         if (na.m.userDevice.isPhone) {
-            na.jsTree.settings.activeDialog='#siteToolbarLeft';
+            na.blog.settings.activeDialog='#siteToolbarLeft';
             na.d.s.visibleDivs.remove('#siteContent');
         }
-        na.desktop.resize();
+        na.desktop.resize(function (t) {
+            if (!t) t = this;
+            if (t.id=='siteContent') {
+                $('#documentTitle').css({
+                    width : jQuery('#siteContent .vividDialogContent').width() - $('#documentTitle_label').width() - 26
+                });
+                var editorHeight = $('#siteContent .vividDialogContent').height() - $('#documentTitle').height();
+                $('#jsTree').css({ height : $('#siteToolbarLeft .vividDialogContent').height() - $('#jsTree_navBar').height() - 20 });
+                var mce_bars_height = 0;
+                $('.tox-toolbar-overlord, .tox-statusbar').each(function() { mce_bars_height += $(this).height(); });
+                $('.tox-tinymce').css ({
+                    width : '100%',
+                    height : editorHeight - $('.tox-statusbar').height()
+                });
+                $('#tinymce_ifr').css ({
+                    width : '100%',
+                    height : editorHeight - mce_bars_height
+                });
+            }
+        });
+        
+        
+    },
+    
+    onchange_documentTitle : function () {
+        var 
+        tree = $('#jsTree').jstree(true),
+        sel = tree.get_node(tree.get_selected()[0]),
+        ac = {
+            type : 'POST',
+            url : '/nicerapp/apps/nicerapp/cms/ajax_changeNodeText.php',
+            data : {
+                database : sel.original.database,
+                id : sel.original.id,
+                text : $('#documentTitle').val()
+            },
+            success : function (data, ts, xhr) {
+                na.blog.refresh();
+            },
+            failure : function (xhr, ajaxOptions, thrownError) {
+                debugger;
+            }
+        };
+        $.ajax(ac);
     },
     
     onclick_addFolder : function() {
         var 
         tree = $('#jsTree').jstree(true),
-        sel = tree.getSelected()[0],
+        sel = tree.get_node(tree.get_selected()[0]),
         ac = {
             type : 'POST',
             url : '/nicerapp/apps/nicerapp/cms/ajax_addNode.php',
             data : {
-                database : sel.database,
-                parent : sel.id,
+                database : sel.original.database,
+                parent : sel.original.id,
                 type : 'naFolder'
             },
             success : function (data, ts, xhr) {
-                debugger;
+                na.blog.refresh();
             },
             failure : function (xhr, ajaxOptions, thrownError) {
                 debugger;
@@ -148,7 +237,7 @@ na.jsTree = {
                 type : 'naDocument'
             },
             success : function (data, ts, xhr) {
-                na.jsTree.refresh();
+                na.blog.refresh();
             },
             failure : function (xhr, ajaxOptions, thrownError) {
                 debugger;
@@ -161,7 +250,7 @@ na.jsTree = {
         alert ('new media album');
     },
     
-    buttonsEnableDisable : function(rec) {
+    treeButtonsEnableDisable : function(rec) {
         $('.jsTree_navBar_button').removeClass('disabled');
         switch (rec.original.type) {
             case 'naFolder':

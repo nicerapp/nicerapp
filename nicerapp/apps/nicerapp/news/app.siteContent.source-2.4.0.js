@@ -625,7 +625,7 @@ na.apps.loaded.newsApp = {
         //$('#siteContent__content').css ({ top : 0 });
         $('#siteContent__header').animate({opacity:1},700);
         $('#newsApp_title').html (urlp[0].replace(/__/g, ' ').replace(/_/g, ' '));
-        $('#newsApp_content .newsApp__item__outer').animate({opacity:1},'normal');
+        $('#newsApp_content .newsApp__item__outer').css({opacity:1});
 
         if (s.loaderIcon) {
             $(s.loaderIcon).fadeOut('slow', function() {
@@ -951,7 +951,7 @@ na.apps.loaded.newsApp = {
                                 }; in displayNews_loop() now */
                                 //debugger;
                                 if (!itEl || !itEl.className || itEl.className.indexOf('newsApp__item__outer')===-1 || !itEl.id.match(/newsApp__item__\d+.*/)) debugger;
-                                $(itEl).animate({opacity:1}, 500);
+                                $(itEl).css({opacity:1});
                             } 
 
                             if (!removed && state=='testing') {

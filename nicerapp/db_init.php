@@ -153,9 +153,11 @@ $do = false; try { $doc = $cdb->get('baa'); } catch (Exception $e) { $do = true;
 $data = '{ "database" : "cms_tree", "_id" : "baa", "id" : "baa", "parent" : "#", "text" : "Users", "state" : { "opened" : true }, "type" : "naSystemFolder" }';
 if ($do) try { $cdb->post($data); } catch (Exception $e) { echo '<pre>'.json_encode(json_decode($data),JSON_PRETTY_PRINT).'</pre>'; echo $e->getMessage(); echo '<br/>'; };
 
+echo 'Created database '.$dbName.'<br/>';
 
 
-$dbName = $cms->domain.'___cms_tree__roles__guests';
+
+$dbName = $cms->domain.'___cms_tree__role__guests';
 try { $cdb->deleteDatabase ($dbName); } catch (Exception $e) { };
 $cdb->setDatabase($dbName, true);
 try { 
@@ -223,5 +225,35 @@ $data = '{ "database" : "'.$dbName.'", "_id" : "dbb", "id" : "dbb", "parent" : "
 if ($do) try { $cdb->post($data); } catch (Exception $e) { echo '<pre>'.json_encode(json_decode($data),JSON_PRETTY_PRINT).'</pre>'; echo $e->getMessage(); echo '<br/>'; };
 
 
+echo 'Created database '.$dbName.'<br/>';
+
+$dbName = $cms->domain.'___cms_documents__user__administrator';
+try { $cdb->deleteDatabase ($dbName); } catch (Exception $e) { };
+$cdb->setDatabase($dbName, true);
+try { 
+    $call = $cdb->setSecurity ($security);
+} catch (Exception $e) {
+    echo '<pre style="color:red">'; var_dump ($e); echo '</pre>'; die();
+}
+echo 'Created database '.$dbName.'<br/>';
+
+$dbName = $cms->domain.'___cms_documents__user__guest';
+try { $cdb->deleteDatabase ($dbName); } catch (Exception $e) { };
+$cdb->setDatabase($dbName, true);
+try { 
+    $call = $cdb->setSecurity ($security);
+} catch (Exception $e) {
+    echo '<pre style="color:red">'; var_dump ($e); echo '</pre>'; die();
+}
+echo 'Created database '.$dbName.'<br/>';
+
+$dbName = $cms->domain.'___cms_documents__role__guests';
+try { $cdb->deleteDatabase ($dbName); } catch (Exception $e) { };
+$cdb->setDatabase($dbName, true);
+try { 
+    $call = $cdb->setSecurity ($security);
+} catch (Exception $e) {
+    echo '<pre style="color:red">'; var_dump ($e); echo '</pre>'; die();
+}
 echo 'Created database '.$dbName.'<br/>';
 ?>

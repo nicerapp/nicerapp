@@ -178,7 +178,7 @@ var nas = na.site = {
                         na.site.transformLinks($('#'+divID)[0]);
                     });
                 };
-                na.desktop.resize({ reloadMenu : reloadMenu });
+                na.desktop.resize();
             }, 
             failure : function (xhr, ajaxOptions, thrownError) {
                 debugger;
