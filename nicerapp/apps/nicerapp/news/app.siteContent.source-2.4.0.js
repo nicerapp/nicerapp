@@ -88,6 +88,8 @@ na.apps.loaded.newsApp = {
                         
                         na.apps.loaded.newsApp.settings.current.db = {};
                         
+                        $('#siteContent').css({background:'',border:''});
+                        
                         /*
                         c.oldContentOpacity = $('#siteContent__CSS3').css('opacity');
                         c.oldContentBorder = $('#siteContent__dialog').css('border');
