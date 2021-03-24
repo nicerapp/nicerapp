@@ -31,6 +31,8 @@ var mp3site = {
 
         mp3site.setupDragNDrop();
 		$('.vividDialog_dialog, #playlist_wrapper, #infoWindow_mp3desc, #infoWindow_comments, #mp3s, #player').css({opacity:0.0001});
+        $('#siteContent').css({background:'rgba(0,0,0,0)',border:'1px solid rgba(0,0,0,0)'});
+                        
 
         $(window).resize(function() {
             setTimeout(mp3site.onWindowResize,1000);
