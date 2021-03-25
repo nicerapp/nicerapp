@@ -689,6 +689,7 @@ na.apps.loaded.newsApp = {
                     if (els2[j].innerHTML.indexOf(it.t)!==-1) found = true;
                 }
             }
+            console.log ('displayNews_loop() (3)', its, key, it);
         };
         //itEl = $('#newsApp__item__'+it.idx)[0];
         
