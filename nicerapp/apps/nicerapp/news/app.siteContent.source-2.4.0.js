@@ -675,6 +675,14 @@ na.apps.loaded.newsApp = {
 
         console.log ('displayNews_loop() (2) : state='+state);
         
+            var
+            key = Math.floor(Math.random() * its.length),
+            it = its[key];
+                var els2 = $('#newsApp_content .newsApp__item__outer');
+                for (var j=0; j<els2.length; j++) {
+                    if (els2[j].innerHTML.indexOf(it.t)!==-1) found = true;
+                }
+        /*
         while (it===null) {
             var
             key = Math.floor(Math.random() * its.length),
@@ -690,7 +698,7 @@ na.apps.loaded.newsApp = {
                 }
             }
             console.log ('displayNews_loop() (3)', its, key, it);
-        };
+        };*/
         //itEl = $('#newsApp__item__'+it.idx)[0];
         
                 
@@ -1016,7 +1024,7 @@ na.apps.loaded.newsApp = {
                                     }
                                 }, 1 * 1000);
                             }*/                                
-                        }, (state=='testing'?10:10), itEl, removed, state);
+                        }, (state=='testing'?100:100), itEl, removed, state);
                         
                         if (full) {
                             na1.countDown();
