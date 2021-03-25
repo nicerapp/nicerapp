@@ -363,7 +363,7 @@ na.apps.loaded.newsApp = {
         ow = ($('#siteContent')[0].offsetWidth)-20,
         oh = $('#siteContent')[0].offsetHeight;
         
-        g.buffer = Math.round( ( ow / 440 ) * 5 );
+        g.buffer = Math.round( ( ow / 440 ) * (oh/400) );
         
         
         na.m.walkArray (db, undefined, na1.displayNews_getDisplayCounts, false, params);
@@ -655,6 +655,11 @@ na.apps.loaded.newsApp = {
         highest = 10;
         
         ks = ks.sort(function(a,b){ b - a });
+        
+        var
+        unread = dc[ks[0]];
+        if (unread < g.buffer) na1.loadNews_read_loop();
+        
         c.displayCounts = '';
         for (k in ks) {
             if (c.displayCounts!=='') c.displayCounts +=', ';
