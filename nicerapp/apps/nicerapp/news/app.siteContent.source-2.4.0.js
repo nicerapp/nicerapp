@@ -620,7 +620,7 @@ na.apps.loaded.newsApp = {
         na1 = na.apps.loaded.newsApp, g = na1.globals, s = na1.settings, c = s.current, db = c.db,
         urlp = na1.getURLparameters(location.href),
         container = $('#newsApp_content'),
-        getToTry = g.buffer * 10;
+        getToTry = g.buffer * 4;
         
         console.log ('displayNews_loop() : state='+state);
         
