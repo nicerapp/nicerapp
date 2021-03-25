@@ -1100,7 +1100,7 @@ na.apps.loaded.newsApp = {
             ? 15
             : 30
         ),
-        countDown = 10 + Math.round(l * 2.2);
+        countDown = 20;//10 + Math.round(l * 2.2);
         
         c.onScreen = l;
         
