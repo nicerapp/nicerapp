@@ -40,10 +40,10 @@ $app = json_decode (base64_decode_url($_GET['apps']), true);
                         <img id="newsApp_searchbar__enterQuery" title="search the entire news database (up to 14 days into the past)" src="/nicerapp/siteMedia/na.question-mark.svg.png" style="display:none;height:2em;vertical-align:middle" onclick="na.apps.loaded.newsApp.onSearch(event)"/>
                         <img id="newsApp_searchbar__abandonQuery" title="abandon the current search query and display the very latest news again" src="/nicerapp/siteMedia/na.reset.png" style="display:none;height:2em;vertical-align:middle" onclick="na.apps.loaded.newsApp.clearSearch(event)"/>
                         </td>
-                        <!--<td style="width:20px;">&nbsp;</td>
+                        <td style="width:20px;">&nbsp;</td>
                         <td style="text-align:left"><span id="newsApp_info" style="font-family:'Architects Daughter';font-size:120%;font-weight:bold;text-align:left;display:none;">This app will load up older news-items whenever needed</span></td>
                         <td><span id="newsApp_debug" class="newsApp_header" style="font-weight:bold;"></span></td>
-                        <td style="text-align:right"><span id="newsApp_timer" class="newsApp_header" style="display:none;font-weight:bold;"></span></td>-->
+                        <td style="text-align:right"><span id="newsApp_timer" class="newsApp_header" style="display:none;font-weight:bold;"></span></td>
                         <td style="width:70px;" id="newsApp_header_buttons">
                         <img id="newsApp_search" src="/nicerapp/apps/nicerapp/news/btnSearch.png" style="vertical-align:middle;height:2em" onclick="na.apps.loaded.newsApp.viewSearchbar()" title="Search for specific news" alt="Search for specific news"/>
                         <img id="newsApp_lock" class="btn" src="/nicerapp/apps/nicerapp/news/btnLock_off.png" onclick="na.apps.loaded.newsApp.toggleLock();" style="vertical-align:middle;height:2em;display:none;z-index:9999999999999;" title="[SPACE] pauses" alt="SPACE key pauses"/>
