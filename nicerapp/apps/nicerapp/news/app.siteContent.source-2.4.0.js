@@ -622,6 +622,8 @@ na.apps.loaded.newsApp = {
         container = $('#newsApp_content'),
         getToTry = g.buffer * 10;
         
+        console.log ('displayNews_loop() : state='+state);
+        
         //$('#siteContent__content').css ({ top : 0 });
         $('#siteContent__header').animate({opacity:1},700);
         $('#newsApp_title').html (urlp[0].replace(/__/g, ' ').replace(/_/g, ' '));
