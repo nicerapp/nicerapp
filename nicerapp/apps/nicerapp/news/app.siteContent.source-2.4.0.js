@@ -647,7 +647,7 @@ na.apps.loaded.newsApp = {
             di : di
         };
         
-        na.m.walkArray (db, undefined, na1.displayNews_getDisplayCounts, false, params);
+        //na.m.walkArray (db, undefined, na1.displayNews_getDisplayCounts, false, params);
         
         var
         ks = Object.keys(dc),
