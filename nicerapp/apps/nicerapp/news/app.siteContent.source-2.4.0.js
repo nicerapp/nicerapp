@@ -669,9 +669,11 @@ na.apps.loaded.newsApp = {
         found = false,
         it = null;
         
-        var l = 0;
+        /*var l = 0;
         while (di[l].length==0) l++;
-        its = di[l];
+        its = di[l];*/
+        var x = db.items;
+        debugger;
         
         while (it===null) {
             var
