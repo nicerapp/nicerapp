@@ -673,7 +673,7 @@ na.apps.loaded.newsApp = {
         while (di[l].length==0) l++;
         its = di[l];
 
-        console.log ('displayNews_loop() (2) : state='+state);
+        console.log ('displayNews_loop() (2) : state='+state, its);
         
             var
             key = Math.floor(Math.random() * its.length),
