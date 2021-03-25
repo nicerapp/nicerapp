@@ -647,7 +647,7 @@ na.apps.loaded.newsApp = {
             di : di
         };
         
-        //na.m.walkArray (db, undefined, na1.displayNews_getDisplayCounts, false, params);
+        na.m.walkArray (db, undefined, na1.displayNews_getDisplayCounts, false, params);
         
         var
         ks = Object.keys(dc),
@@ -669,11 +669,11 @@ na.apps.loaded.newsApp = {
         found = false,
         it = null;
         
-        /*var l = 0;
+        var l = 0;
         while (di[l].length==0) l++;
-        its = di[l];*/
-        var x = db.items;
-        debugger;
+        its = di[l];
+
+        console.log ('displayNews_loop() (2) : state='+state);
         
         while (it===null) {
             var
