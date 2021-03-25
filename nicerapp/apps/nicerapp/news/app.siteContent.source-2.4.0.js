@@ -377,7 +377,7 @@ na.apps.loaded.newsApp = {
         unread = dc[ks[0]];
         
         // get older news items when needed
-       // debugger;
+        debugger;
         if (c.firstRun) {
             c.firstRun = false;
             na1.loadNews_get_forDateTimeRange (c.dtCurrent, c.dtEnd, settings);
