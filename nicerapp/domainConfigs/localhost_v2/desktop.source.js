@@ -2,6 +2,7 @@ na.desktop = {
     globals : {
         divs : [ '#siteDateTime', '#siteContent', '#siteVideo', '#siteVideoSearch', '#siteComments', '#siteStatusbar', '#siteToolbarLeft', '#siteToolbarRight', '#siteToolbarTop' ],
         configs : {
+            'background' : [ ],
             'all' : [ '#siteContent', '#siteVideo', '#siteVideoSearch', '#siteStatusbar' ],
             'content' : [ '#siteContent' ],
             'contentMusicAndMusicSearch' : [ '#siteContent', '#siteVideo', '#siteVideoSearch' ],
