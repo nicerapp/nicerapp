@@ -1,5 +1,5 @@
 na.blog = {
-    settings : { current : {} },
+    settings : {},
     
     onload : async function() {
         var ac = {
@@ -7,7 +7,6 @@ na.blog = {
             url : '/nicerapp/apps/nicerapp/cms/ajax_getTreeNodes.php',
             success : function (data, ts, xhr) {
                 let dat = JSON.parse(data);
-                na.blog.settings.current.db = dat;
                 $('#jsTree').css({
                     height : $('#siteToolbarLeft .vividDialogContent').height() - $('#jsTree_navBar').height()
                 }).jstree({
@@ -327,68 +326,5 @@ na.blog = {
                 $('#jsTree_newDocument').addClass('disabled');
                 break;
         }
-    },
-    
-    tinymce_link_list : function (success) {
-        var me = na.blog, s = me.settings, c = s.current, rel = jQuery(s.hid)[0];
-        var x = c.db;
-        var r = [
-            /*
-            { title : 'abc', menu : [
-                { title : 'xyz' : value : 'url/to/page.html' }
-            ]},
-            { title : 'abd', menu : [] }
-            */
-        ];
-        
-        for (var i=0; i<c.db.length; i++) {
-            var it = c.db[i];
-            if (it.type=='naDocument') {
-                // find the parents
-                var 
-                j = i,
-                it2 = c.db[j],
-                title = it2.title,
-                parentsLabel = it2.text,
-                parentsURL = it2.text; // or it2.title
-                
-                while (it2.parent!=='#') {
-                    for (var k=0; k<c.db.length; k++) {
-                        var it3 = c.db[k];
-                        if (it3.id && it3.id===it2.parent) {
-                            parentsLabel = it3.text + '/' + parentsLabel;
-                            parentsURL = it3.text + '/' + parentsURL;
-                            break;
-                        }
-                    }
-                    
-                    if (it3.parent==='#') {
-                        var userOrGroupVal = it2.text;
-                    }
-                    it2 = it3;
-                    if (it2.parent==='#') {
-                        if (it2.text==='Users') var userOrGroup = 'user';
-                        if (it2.text==='Groups') var userOrGroup = 'group';
-                    }
-                }
-                
-                var v = { // ---> the URL part of a final URL that lists as http://yoursite.com/apps/BASE64JSON-URL                    
-                    cmsText : { // nicerapp app name
-                        database : it.database,
-                        id : it.id
-                    }
-                };
-                
-                var y = { 
-                    title : parentsLabel, 
-                    value : '/apps/'+na.m.base64_encode_url( JSON.stringify(v) ) 
-                };
-                //debugger;
-                r.push (y);
-            }
-        };
-
-        //debugger;
-        success(r);
     }
 }
