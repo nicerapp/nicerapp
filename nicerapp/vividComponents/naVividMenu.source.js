@@ -98,12 +98,16 @@ class naVividMenu {
                     }
                 });
                 
+                $(it.b.el).css({display:'flex'});
+                
                 var 
                 parent = t.items[it.parent],
                 l = levels['path '+it.path],
                 placing = 'right',
                 right = (bw - jQuery(it.b.el).offset().left /* - ($(it.b.el).width() * 0.7)*/ - (parent ? parent.offsetX : $(it.b.el).width())),
                 left = jQuery(it.b.el).offset().left + (parent ? parent.offsetX : $(it.b.el).width());
+                
+                //debugger;
                 
                 if (left > right) placing = 'left';
                 if (placing=='left') var width = left; else var width = right;
@@ -129,7 +133,6 @@ class naVividMenu {
                 };
                 //rowCount++;
                 //rowCount++;
-                
                 var
                 column = 0,
                 columnIdx = 1;
@@ -180,7 +183,7 @@ class naVividMenu {
                 );
                 
                 if (!l) {
-                    if (!parent) {
+                    if (!parent || !levels['path '+parent.path]) {
                         pl = {
                             offsetX : 0,
                             offsetY : 0,
@@ -200,7 +203,6 @@ class naVividMenu {
                 it.zIndex = (100 * 1000) + l.zIndexOffset;
 
                 $(it.b.el).css({
-                    display : 'none',
                     left : it.offsetX,
                     top : it.offsetY,
                     zIndex : it.zIndex,
