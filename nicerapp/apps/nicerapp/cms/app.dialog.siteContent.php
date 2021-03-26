@@ -19,6 +19,10 @@ $ip = (array_key_exists('X-Forwarded-For',apache_request_headers())?apache_reque
 <script type="text/javascript" src="/nicerapp/apps/nicerapp/cms/na.blog.source.js?c=<?php echo date('Ymd_His',filemtime(dirname(__FILE__).'/na.blog.source.js'));?>"></script>
 <script type="text/javascript" src="/nicerapp/3rd-party/tinymce-5.7.1/js/tinymce/tinymce.js"></script>
 <div id="document_navBar">
+    <img id="btnInsertLink" class="navBar_button" src="/nicerapp/siteMedia/btnInsertLink.png"/>
+    <img id="btnInsertMedia" class="navBar_button" src="/nicerapp/siteMedia/btnInsertMedia.png"/>
+    <img id="btnInsertPageBackground" class="navBar_button" src="/nicerapp/siteMedia/btnInsertPageBackground.png"/>
+    <img id="btnPublish" class="navBar_button" src="/nicerapp/siteMedia/iconPublish.png"/>
     <label id="documentTitle_label" for="documentTitle">Document name : </label>
     <input id="documentTitle" type="text" onchange="na.jsTree.onchange_documentTitle(event);"></input>
 </div>
@@ -28,7 +32,6 @@ $ip = (array_key_exists('X-Forwarded-For',apache_request_headers())?apache_reque
 //document.addEventListener('DOMContentLoaded', () => {
 setTimeout (function() {
     //$(document).ready(function() {
-        $('#documentTitle').css({width : jQuery('#siteContent .vividDialogContent').width() - $('#documentTitle_label').width() - 26});
         var useDarkMode = true;
         //debugger;
         tinymce.baseURL = '/nicerapp/3rd-party/tinymce-5.7.1/js/tinymce';
@@ -102,6 +105,7 @@ setTimeout (function() {
             init_instance_callback : function(editor) {
                 $(editor.editorContainer).addClass('fade-in'); 
                 $('#siteContent .lds-facebook').fadeOut('slow');
+                na.blog.onresize();
             }
         });
     //});

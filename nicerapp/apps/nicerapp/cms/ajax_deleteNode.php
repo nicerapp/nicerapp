@@ -31,7 +31,14 @@ $cdb->useSSL($cdbConfig['useSSL']);
 $cdb->login($cdbConfig['adminUsername'], $cdbConfig['adminPassword']);
 
 $cdb->setDatabase($_POST['database'],false);
-try { $call = $cdb->get ($_POST['id']); } catch (Exception $e) { die(); };
+$doc = array (
+    'database' => $_POST['database'],
+    '_id' => $_POST['id'],
+    'id' => $_POST['id']
+);
+try { $call = $cdb->get ($_POST['id']); } catch (Exception $e) { cdb_error (404, $e, 'Could not find record'); die(); };
 
-echo $call->body->document;
+try { $call = $cdb->delete($call->body->_id, $call->body->_rev); } catch (Exception $e) { cdb_error (500, $e, 'Could not delete record'); die(); };
+
+echo 'Success'; // echo json_encode($recordToAdd); <-- not needed, js will refresh the entire tree (accounting for multiple users working on the same tree at the same time)
 ?>

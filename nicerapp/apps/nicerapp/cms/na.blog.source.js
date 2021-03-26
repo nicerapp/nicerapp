@@ -158,11 +158,16 @@ na.blog = {
         }
         na.desktop.resize(function (t) {
             if (!t) t = this;
+            let w = 0;
+            $('.navBar_button', $('#document_navBar')[0]).each(function(idx,el){
+                w += $(el).width();
+            });
+            w+= $('#documentTitle_label').width();
             if (t.id=='siteContent') {
                 $('#documentTitle').css({
-                    width : jQuery('#siteContent .vividDialogContent').width() - $('#documentTitle_label').width() - 26
+                    width : jQuery('#siteContent .vividDialogContent').width() - w - 50
                 });
-                var editorHeight = $('#siteContent .vividDialogContent').height() - $('#documentTitle').height();
+                var editorHeight = $('#siteContent .vividDialogContent').height() - $('#document_navBar').height();
                 $('#jsTree').css({ height : $('#siteToolbarLeft .vividDialogContent').height() - $('#jsTree_navBar').height() - 20 });
                 var mce_bars_height = 0;
                 $('.tox-toolbar-overlord, .tox-statusbar').each(function() { mce_bars_height += $(this).height(); });
@@ -248,6 +253,27 @@ na.blog = {
     
     onclick_addMediaAlbum : function() {
         alert ('new media album');
+    },
+    
+    onclick_delete : function () {
+        var 
+        tree = $('#jsTree').jstree(true),
+        sel = tree.get_node(tree.get_selected()[0]),
+        ac = {
+            type : 'POST',
+            url : '/nicerapp/apps/nicerapp/cms/ajax_deleteNode.php',
+            data : {
+                database : sel.original.database,
+                id : sel.original.id,
+            },
+            success : function (data, ts, xhr) {
+                na.blog.refresh();
+            },
+            failure : function (xhr, ajaxOptions, thrownError) {
+                debugger;
+            }
+        };
+        $.ajax(ac);
     },
     
     treeButtonsEnableDisable : function(rec) {

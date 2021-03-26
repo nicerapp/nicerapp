@@ -522,7 +522,15 @@ select, optgroup {
     100% { filter : grayscale(0%); border : 2px solid rgba(0,0,0,0); opacity : 1 }
 }
 
-
+#document_navBar {
+    display : flex;
+    padding : 0;
+    margin : 5px;
+    align-items : center;
+}
+.navBar_button {
+    width : 50px;
+}
 #documentTitle {
     margin : 4px;
     background : rgba(255,255,255,0.4);
