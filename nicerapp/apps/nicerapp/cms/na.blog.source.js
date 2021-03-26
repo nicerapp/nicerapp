@@ -112,7 +112,7 @@ na.blog = {
         $.ajax(ac);
     },
     
-    loadEditorContent : function (rec) {
+    loadEditorContent : function (rec, callback) {
         ac = {
             type : 'POST',
             url : '/nicerapp/apps/nicerapp/cms/ajax_loadDocument.php',
@@ -121,7 +121,16 @@ na.blog = {
                 id : rec.original.id
             },
             success : function (data, ts, xhr) {
-                tinymce.get('tinymce').setContent(data);
+                na.m.waitForCondition ('tinymce ready',
+                    function () {
+                        return tinymce.ready
+                    },
+                    function () {
+                        tinymce.get('tinymce').setContent(data);
+                        if (typeof callback=='function') callback(rec);
+                    },
+                    100
+                );
             },
             failure : function (xhr, ajaxOptions, thrownError) {
                 debugger;
@@ -130,7 +139,7 @@ na.blog = {
         $.ajax(ac);
     },
     
-    saveEditorContent : function (rec) {
+    saveEditorContent : function (rec, callback) {
         var 
         ac = {
             type : 'POST',
@@ -141,7 +150,7 @@ na.blog = {
                 document : tinymce.get('tinymce').getContent()
             },
             success : function (data, ts, xhr) {
-                //na.blog.refresh();
+                if (typeof callback=='function') callback(rec);
             },
             failure : function (xhr, ajaxOptions, thrownError) {
                 debugger;
@@ -274,6 +283,22 @@ na.blog = {
             }
         };
         $.ajax(ac);
+    },
+    
+    onclick_publish : function () {
+        var
+        tree = $('#jsTree').jstree(true),
+        sel = tree.get_node(tree.get_selected()[0]),
+        arr = {
+            cmsText : {
+                database : sel.original.database,
+                id : sel.original.id
+            }
+        },
+        url = na.m.base64_encode_url (JSON.stringify(arr));
+        na.blog.saveEditorContent(sel, function() {
+            na.site.loadContent(url);
+        });
     },
     
     treeButtonsEnableDisable : function(rec) {

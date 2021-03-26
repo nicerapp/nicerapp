@@ -37,10 +37,10 @@ class nicerAppCMS {
 
         if (array_key_exists('apps', $_GET)) {
             $app = json_decode (base64_decode_url($_GET['apps']), true);
-            //var_dump ($app); 
+            //var_dump ($app); die();
             //$files = getFilePathList (realpath(dirname(__FILE__)).'/apps', true, '/app.site.*.php/', array('file'), 3);
             $folders = getFilePathList (realpath(dirname(__FILE__)).'/apps', true, '/.*/', array('dir'), 1);
-            //echo '<pre>'; var_dump ($files); die();
+            //echo '<pre>'; var_dump ($folders); die();
             foreach ($folders as $idx => $folder) {
                 foreach ($app as $appName => $appSettings) {
                     $filename = '/apps/'.basename($folder).'/'.$appName.'/app.title.site.php';

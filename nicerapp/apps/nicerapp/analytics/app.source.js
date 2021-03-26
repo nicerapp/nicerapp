@@ -232,11 +232,89 @@ na.analytics = {
 	},
     
     logEvent : function (evt) {
-        na.analytics.pouchdb.logEvent (evt);
+        //na.analytics.pouchdb.logEvent (evt);
+        var
+        s = na.analytics.settings,
+        un = na.a.settings.username,
+        unl = un.toLowerCase(),
+        pw = na.a.settings.password,
+        myip = na.site.globals.myip.replace(/_/g,'.'),
+        datetime = new Date(),
+        datetimeStr = na.analytics.dt2str (datetime),
+        dateStr = na.analytics.date2str (datetime),
+        doc = {
+            _id : 'dt_'+datetime.getTime(),
+            jsSessionID : s.jsSessionID,
+            datetime : datetime.getTime(),
+            datetimeStr : datetimeStr,
+            date : dateStr,
+            tzOffset : datetime.getTimezoneOffset(),
+            userAgent : navigator.userAgent,
+            username : un,
+            ip : myip,
+            htmlID : (
+                evt.target
+                ? typeof evt.target.id=='string' && evt.target.id !== ''
+                    ? 'id='+evt.target.id
+                    : typeof evt.target.href=='string' && evt.target.href !== ''
+                        ? 'a href='+evt.target.href
+                        : typeof evt.target.innerHTML=='string' && evt.target.innerHTML !== ''
+                            ? 'innerHTML='+evt.target.innerHTML
+                            : evt.srcElement 
+                                ? typeof evt.srcElement.id=='string' && evt.srcElement.id !== ''
+                                    ? 'id='+evt.srcElement.id
+                                    : typeof evt.srcElement.href=='string' && evt.srcElement.href !== ''
+                                        ? 'a href='+evt.srcElement.href
+                                        : typeof evt.srcElement.innerHTML=='string' && evt.srcElement.innerHTML!==''
+                                            ? 'innerHTML='+evt.srcElement.innerHTML
+                                            : 'ERROR : Could not detect target element for HTML event = '+JSON.stringify (evt)
+                                : 'ERROR : Could not detect target element for HTML event = '+JSON.stringify (evt)
+                : 'ERROR : Could not detect target element for HTML event = '+JSON.stringify (evt)
+            ),
+            eventType : evt.type,
+            msg : '[EVENT]'
+        },
+        ac = {
+            type : 'POST',
+            url : '/nicerapp/logEvent.php',
+            data : {
+                doc : doc
+            }
+        };
+        $.ajax(ac);
     },
     
     logMetaEvent : function (msg) {
-        na.analytics.pouchdb.logMetaEvent (msg);
+        //na.analytics.pouchdb.logMetaEvent (msg);
+        var 
+        s = na.analytics.settings,
+        un = na.a.settings.username,
+        unl = un.toLowerCase(),
+        pw = na.a.settings.password,
+        myip = na.site.globals.myip.replace(/_/g,'.'),
+        datetime = new Date(),
+        datetimeStr = na.analytics.dt2str (datetime),
+        dateStr = na.analytics.date2str (datetime),
+        doc = {
+            _id : 'dt_'+datetime.getTime(),
+            jsSessionID : s.jsSessionID,
+            datetime : datetime.getTime(),
+            datetimeStr : datetimeStr,
+            date : dateStr,
+            tzOffset : datetime.getTimezoneOffset(),
+            username : un,
+            userAgent : navigator.userAgent,
+            ip : myip,
+            htmlID : '[NULL]',
+            eventType : '[META]',
+            msg : msg
+        },
+        ac = {
+            type : 'POST',
+            url : '/nicerapp/logEvent.php',
+            data : { doc : doc }
+        };
+        $.ajax(ac);
     },
     
     view : {

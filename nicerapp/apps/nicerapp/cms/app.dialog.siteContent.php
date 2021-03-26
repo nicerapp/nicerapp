@@ -22,7 +22,7 @@ $ip = (array_key_exists('X-Forwarded-For',apache_request_headers())?apache_reque
     <img id="btnInsertLink" class="navBar_button" src="/nicerapp/siteMedia/btnInsertLink.png"/>
     <img id="btnInsertMedia" class="navBar_button" src="/nicerapp/siteMedia/btnInsertMedia.png"/>
     <img id="btnInsertPageBackground" class="navBar_button" src="/nicerapp/siteMedia/btnInsertPageBackground.png"/>
-    <img id="btnPublish" class="navBar_button" src="/nicerapp/siteMedia/iconPublish.png"/>
+    <img id="btnPublish" class="navBar_button" src="/nicerapp/siteMedia/iconPublish.png" onclick="na.blog.onclick_publish(event);"/>
     <label id="documentTitle_label" for="documentTitle">Document name : </label>
     <input id="documentTitle" type="text" onchange="na.jsTree.onchange_documentTitle(event);"></input>
 </div>
@@ -34,6 +34,7 @@ setTimeout (function() {
     //$(document).ready(function() {
         var useDarkMode = true;
         //debugger;
+        tinymce.ready = false;
         tinymce.baseURL = '/nicerapp/3rd-party/tinymce-5.7.1/js/tinymce';
         tinymce.init({
             selector: 'textarea#tinymce',
@@ -105,6 +106,7 @@ setTimeout (function() {
             init_instance_callback : function(editor) {
                 $(editor.editorContainer).addClass('fade-in'); 
                 $('#siteContent .lds-facebook').fadeOut('slow');
+                tinymce.ready = true;   
                 na.blog.onresize();
             }
         });

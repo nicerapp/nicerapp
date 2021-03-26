@@ -1,7 +1,7 @@
 <?php
-require_once (dirname(__FILE__).'/../../../boot.php');
-require_once (dirname(__FILE__).'/../../../3rd-party/sag/src/Sag.php');
-require_once (dirname(__FILE__).'/../../../Sag-support-functions.php');
+require_once (dirname(__FILE__).'/boot.php');
+require_once (dirname(__FILE__).'/3rd-party/sag/src/Sag.php');
+require_once (dirname(__FILE__).'/Sag-support-functions.php');
 /*ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);*/
@@ -22,7 +22,7 @@ global $cms;
 $cms = new nicerAppCMS();
 $cms->init();
 
-$couchdbConfigFilepath = realpath(dirname(__FILE__).'/../../../').'/domainConfigs/'.$cms->domain.'/couchdb.json';
+$couchdbConfigFilepath = realpath(dirname(__FILE__)).'/domainConfigs/'.$cms->domain.'/couchdb.json';
 $cdbConfig = json_decode(file_get_contents($couchdbConfigFilepath), true);
 
 $cdb = new Sag($cdbConfig['domain'], $cdbConfig['port']);
@@ -30,9 +30,9 @@ $cdb->setHTTPAdapter($cdbConfig['httpAdapter']);
 $cdb->useSSL($cdbConfig['useSSL']);
 $cdb->login($cdbConfig['adminUsername'], $cdbConfig['adminPassword']);
 
-$cdb->setDatabase($_POST['database'],false);
-try { $call = $cdb->get ($_POST['id']); } catch (Exception $e) { die(); };
+$cdb->setDatabase($cdbConfig['domain'].'___analytics',false);
+$doc = $_POST['doc'];
+try { $call = $cdb->post($doc); } catch (Exception $e) { cdb_error (500, $e, 'Could not add record'); die(); };
 
-//echo '<pre>'; echo json_encode($call->body); echo '</pre>';
-echo $call->body->document;
+echo 'Success'; // echo json_encode($recordToAdd); <-- not needed, js will refresh the entire tree (accounting for multiple users working on the same tree at the same time)
 ?>

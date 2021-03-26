@@ -1,6 +1,15 @@
 <?php
     global $cms;
     //echo '<pre>';var_dump ($_SERVER);
+    
+$ip = (array_key_exists('X-Forwarded-For',apache_request_headers())?apache_request_headers()['X-Forwarded-For'] : $_SERVER['REMOTE_ADDR']);
+$cdbDetails = true;
+if (
+    $ip !== '::1'
+    && $ip !== '127.0.0.1'
+    && $ip !== '80.101.238.137'
+) $cdbDetails = false;
+    
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -18,10 +27,11 @@
     $couchdbSettingsStr = json_encode($couchdbSettings, JSON_PRETTY_PRINT);
     $couchdbSettingsStr = str_replace("\n    ", "\n\t\t", $couchdbSettingsStr);
     $couchdbSettingsStr = str_replace("}", "\t}", $couchdbSettingsStr);    
+    
 ?>
 <script type="text/javascript">
 na.site.globals = {
-    couchdb : <?php echo $couchdbSettingsStr?>,
+    db : <?php echo $cdbDetails ? $couchdbSettingsStr : 'null'?>,
     referer : '<?php echo (array_key_exists('HTTP_REFERER',$_SERVER)?$_SERVER['HTTP_REFERER']:'');?>',
     myip : '<?php echo str_replace('.','_',(array_key_exists('X-Forwarded-For',apache_request_headers())?apache_request_headers()['X-Forwarded-For'] : $_SERVER['REMOTE_ADDR']))?>',
     domain : '{$domain}'
