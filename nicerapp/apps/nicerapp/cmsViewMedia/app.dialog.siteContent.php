@@ -95,7 +95,7 @@ foreach ($files as $idx => $file) {
 	<div id="naPhotoAlbum__control__zoomPercentage" class="naPhotoAlbum_control_element" style="position:absolute;top:0em;"></div>
 </div>
 <script type="text/javascript">
-    //$(document).ready(function() {
+    $(document).ready(function() {
         na.photoAlbum.onload();
-    //});
+    });
 </script>
