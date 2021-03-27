@@ -2,7 +2,7 @@
 <head>
     <link type="text/css" rel="StyleSheet" href="/nicerapp/domainConfigs/localhost_v2/index.css?c=20210327_101723">
     <link type="text/css" rel="StyleSheet" href="/nicerapp/domainConfigs/localhost_v2/index.dark.css?c=20210327_100418">
-    <script type="text/javascript" src="/nicerapp/vividComponents/photoAlbum/3.0.0/photoAlbum-3.0.0.source.js?c=<?php echo date('Ymd_His', filemtime(dirname(__FILE__).'/../vividComponents/photoAlbum/3.0.0/photoAlbum-3.0.0.source.js'));?>"></script>
+    <script type="text/javascript" src="/nicerapp/vividComponents/photoAlbum/4.0.0/photoAlbum-4.0.0.source.js?c=<?php echo date('Ymd_His', filemtime(dirname(__FILE__).'/../vividComponents/photoAlbum/4.0.0/photoAlbum-4.0.0.source.js'));?>"></script>
 </head>
 <body style="overflow:hidden">
 <div class="vividScrollpane" style="width:100%;height:98%;">
