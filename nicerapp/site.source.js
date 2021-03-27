@@ -662,10 +662,40 @@ na.m = {
 			}
 		}
 		return r;
-    }
+    },
     
-
+    changedDateTime_current : function () {
+        var 
+        d = new Date(),
+        r = d.getFullYear() 
+            + ('0' + d.getMonth()+1).slice(-2)
+            + ('0' + d.getDate()).slice(-2)
+            + ('0' + d.getHours()).slice(-2)
+            + ('0' + d.getMinutes()).slice(-2)
+            + ('0' + d.getSeconds()).slice(-2);
+        return r;
+    },
     
+	hookScrollwheel : function (el, handler, useCapture, add) {
+		if (add) {
+            if (el.addEventListener) {
+				var r = el.addEventListener ('DOMMouseScroll', handler, true);
+				var r = el.addEventListener ('mousewheel', handler, true);
+				var r = el.addEventListener ('wheel', handler, true);
+			} else {
+				el.onmousewheel = handler;
+			}
+		} else {
+			if (el.removeEventListener) {
+				//el.removeEventListener ('scroll', handler, true);
+				el.removeEventListener ('DOMMouseScroll', handler, true);
+				el.removeEventListener ('mousewheel', handler, true);
+				el.removeEventListener ('wheel', handler, true);
+			} else {
+				el.onmousewheel = null;
+			}
+		}
+	}    
 };
 
 Date.prototype.getMonthName = function(lang) {

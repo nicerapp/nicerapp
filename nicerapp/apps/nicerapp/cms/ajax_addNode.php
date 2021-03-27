@@ -38,6 +38,7 @@ try { $parent = $cdb->get($_POST['parent']); } catch (Exception $e) {
 
 if (
     $parent->body->type !== 'naFolder'
+    && $parent->body->type !== 'naMediaFolder'
 ) {
     cdb_error (403, null, 'parent record is not of the correct type ("naFolder")'); die();
 }
@@ -51,16 +52,16 @@ if (
 }
 
 if ($_POST['type'] == 'naFolder') {
-    $text = 'New Folder';
+    $text = array_key_exists('label',$_POST)?$_POST['label']:'New';
     $state = array ("opened" => true);
 }
 if ($_POST['type'] == 'naDocument') {
-    $text = 'New Document';
+    $text = array_key_exists('label',$_POST)?$_POST['label']:'New';
     $state = '';
 }
 if ($_POST['type'] == 'naMediaFolder') {
-    $text = 'New Document';
-    $state = '';
+    $text = array_key_exists('label',$_POST)?$_POST['label']:'New';
+    $state = array ("opened" => true);
 }
 
 //$children = $cdb->find (...)

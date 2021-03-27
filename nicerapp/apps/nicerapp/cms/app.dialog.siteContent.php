@@ -18,10 +18,21 @@ $ip = (array_key_exists('X-Forwarded-For',apache_request_headers())?apache_reque
 <div class="lds-facebook"><!-- thanks for allowing CC0 license usage : https://loading.io/css/ --><div></div><div></div><div></div></div> 
 <script type="text/javascript" src="/nicerapp/apps/nicerapp/cms/na.folderView.source.js?c=<?php echo date('Ymd_His',filemtime(dirname(__FILE__).'/na.folderView.source.js'));?>"></script>
 <script type="text/javascript" src="/nicerapp/apps/nicerapp/cms/na.blog.source.js?c=<?php echo date('Ymd_His',filemtime(dirname(__FILE__).'/na.blog.source.js'));?>"></script>
+<script type="text/javascript" src="/nicerapp/vividComponents/photoAlbum/3.0.0/photoAlbum-3.0.0.source.js?c=<?php echo date('Ymd_His', filemtime(dirname(__FILE__).'/../vividComponents/photoAlbum/3.0.0/photoAlbum-3.0.0.source.js'));?>"></script>
+
 <script type="text/javascript" src="/nicerapp/3rd-party/tinymce-5.7.1/js/tinymce/tinymce.js"></script>
 <div id="folder"></div>
+<div id="upload">
+    <div id="mediaFolder_navBar" class="navBar">
+        <img id="btnUpload" class="navBar_button" src="/nicerapp/siteMedia/btnInsertMedia2.png" onclick="na.blog.onclick_btnUpload(event);"/>
+        <img id="btnViewMedia" class="navBar_button" src="/nicerapp/siteMedia/btnViewMedia.png" onclick="na.blog.onclick_btnViewMedia(event);"/>
+        <label id="mediaFolderTitle_label" for="mediaFolderTitle">name : </label>
+        <input id="mediaFolderTitle" type="text" onchange="na.jsTree.onchange_mediaFolderTitle(event);"></input>
+    </div>
+    <iframe id="jQueryFileUpload" class="jQueryFileUpload" src="" style="overflow:hidden;width:100%;height:100%" allowtransparency="true"></iframe>
+</div>
 <div id="document">
-    <div id="document_navBar">
+    <div id="document_navBar" class="navBar">
         <img id="btnInsertLink" class="navBar_button" src="/nicerapp/siteMedia/btnInsertLink.png" onclick="tinymce.activeEditor.execCommand('mceLink');"/>
         <img id="btnInsertMedia" class="navBar_button" src="/nicerapp/siteMedia/btnInsertMedia.png"/>
         <img id="btnInsertPageBackground" class="navBar_button" src="/nicerapp/siteMedia/btnInsertPageBackground.png"/>

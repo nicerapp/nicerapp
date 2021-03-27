@@ -522,7 +522,7 @@ select, optgroup {
     100% { filter : grayscale(0%); border : 2px solid rgba(0,0,0,0); opacity : 1 }
 }
 
-#document_navBar {
+.navBar {
     display : flex;
     padding : 0;
     margin : 5px;
@@ -548,3 +548,41 @@ select, optgroup {
   opacity: 1;
 }
 
+.mediaThumb {
+    cursor : pointer;
+}
+
+.helper {
+    display : inline-block;
+    vertical-align : middle;
+}
+#viewMedia {
+    display: flex;
+    z-index : 3000;
+    padding : 0;
+    margin : auto;
+}
+#btnPrevious {
+    width : 75px;
+    position : absolute;
+    z-index : 3100;
+    left : 10px;
+    top : calc(50% - 32px);
+    cursor : pointer;
+}
+#btnNext {
+    width : 75px;
+    position : absolute;
+    z-index : 3100;
+    right : 10px;
+    top : calc(50% - 32px);
+    cursor : pointer;
+}
+#btnSetBackground {
+    width : 75px;
+    position : absolute;
+    z-index : 3100;
+    top : 10px;
+    left : calc(50% - 32px);
+    cursor : pointer;
+}

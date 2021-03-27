@@ -1,0 +1,18 @@
+.saPhotoAlbum_thumbnail {
+	z-index : 20000000;
+	vertical-align : middle;
+	text-align:center;
+}
+.saPhotoAlbum_control__background {
+	z-index : 19000000;
+}
+.saPhotoAlbum_control_element {
+	z-index : 20000000;
+}
+.saPhotoAlbum_control div {
+	padding : 5px;
+}
+
+#saPhotoAlbum_template {
+	display : none;
+}
