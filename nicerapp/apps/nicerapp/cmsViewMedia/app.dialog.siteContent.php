@@ -82,7 +82,8 @@ foreach ($files as $idx => $file) {
 //echo '<pre>'.json_encode($files,JSON_PRETTY_PRINT).'</pre>';
 ?>
 <script type="text/javascript" src="/nicerapp/vividComponents/photoAlbum/4.0.0/photoAlbum-4.0.0.source.js?c=<?php echo date('Ymd_His',filemtime(dirname(__FILE__).'/photoAlbum-4.0.0.source.js'));?>"></script>
-<span class="helper"></span><img id="viewMedia" src="<?php echo $targetURL.$fn;?>"/>
+<span class="helper"></span>
+    <img id="viewMedia" src="<?php echo $targetURL.$fn;?>"/>
 <img id="btnSetBackground" src="/nicerapp/siteMedia/btnBackground.png" onclick="na.backgrounds.next ('#siteBackground', $.cookie('siteBackground_search'), '<?php echo $targetURL.$fn;?>');"/>
 <img id="btnPrevious" src="/nicerapp/siteMedia/btnPrevious.png" onclick="na.site.loadContent('<?php echo $prevJSON?>');"/>
 <img id="btnNext" src="/nicerapp/siteMedia/btnNext.png" onclick="na.site.loadContent('<?php echo $nextJSON?>');"/>
@@ -95,7 +96,16 @@ foreach ($files as $idx => $file) {
 	<div id="naPhotoAlbum__control__zoomPercentage" class="naPhotoAlbum_control_element" style="position:absolute;top:0em;"></div>
 </div>
 <script type="text/javascript">
-    $(document).ready(function() {
-        na.photoAlbum.onload();
-    });
+    //$(document).ready(function() {
+    na.m.waitForCondition ('image load',
+        function () {
+            var
+            nw = $('#viewMedia')[0].naturalWidth;
+            return nw > 0;
+        },
+        function () {
+            na.photoAlbum.onload();
+        },
+        100
+    );
 </script>
