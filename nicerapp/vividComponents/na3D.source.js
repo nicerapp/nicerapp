@@ -724,9 +724,13 @@ export class na3D_fileBrowser {
             }
         }
         
-        var mostConflicts = {conflicts : 1, j : -1}, largest = null, smallest = null;
+        var mostOverlappingItems = { overlappingItems_count : 0, j : -1 }, mostConflicts = {conflicts : 1, j : -1}, largest = null, smallest = null;
         for (var j=0; j<t.overlaps.length; j++) {
+            if (t.overlaps[j].overlappingItems_count > mostOverlappingItems.overlappingItems_count)
+                mostOverlappingItems = { overlappingItems_count : t.overlaps[j].overlappingItems_count, j : j};
+            
             if (t.overlaps[j].conflicts > mostConflicts.conflicts) mostConflicts = {conflicts:t.overlaps[j].conflicts, j : j};
+            
             if (
                 !largest 
                 || (
@@ -739,6 +743,7 @@ export class na3D_fileBrowser {
                 itemCountB : t.ld3[t.overlaps[j].pathb].itemCount, 
                 j : j 
             };
+            
             if (
                 !smallest 
                 || (
@@ -776,7 +781,7 @@ export class na3D_fileBrowser {
                 
         for (var i=0; i<t.overlaps.length; i++) {
             //if (i===mostConflicts.j) {
-            if (i===mostConflicts.j) {
+            if (i===mostOverlappingItems.j) {
                 var 
                 o = t.overlaps[i],
                 oa = t.ld3[o.patha],
