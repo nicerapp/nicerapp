@@ -606,7 +606,7 @@ export class na3D_fileBrowser {
                     
                     ld3.rowColumnCount = Math.ceil(Math.sqrt(ld3.itemCount));
                     var
-                    column = 0,
+                    column = 1,
                     row = 1;
 
                     
@@ -693,7 +693,7 @@ export class na3D_fileBrowser {
         
         for (var i=0; i<t.items.length; i++) {
             var
-            offsetXY = 300,
+            offsetXY = 250,
             it = t.items[i],
             p = t.items[it.parent],
             ld3 = t.ld3[it.path];
@@ -726,28 +726,30 @@ export class na3D_fileBrowser {
                         ? -1 * ((p.maxColumnIta.maxRow / 2) - p.row) * offsetXY *    (((it.level*100)/maxLevel)/100)
                         : (p.row - (p.maxRowIta.maxRow / 2)) * offsetXY *    (((it.level*100)/maxLevel)/100)
                 );*/
-                if (p.name=='tiled') debugger;
+                //if (p.name=='tiled') debugger;
                 var
+                leftRight = p.column > Math.floor(p.maxColumnIta.maxColumn / 2) ? 1 : -1,
+                upDown = p.row > Math.floor(p.maxRowIta.maxRow / 2) ? 1 : -1,
                 itc = (
                     ((p.maxColumnIta.maxColumn / 2) - p.column) === 0
-                    ? -1 * p.column * offsetXY
+                    ? 0//leftRight * p.column * offsetXY
                     : p.column <= p.maxColumnIta.maxColumn / 2 
                         ? ((p.maxColumnIta.maxColumn / 2) - p.column) === 0
-                            ?  p.column * offsetXY
-                            : ((p.maxColumnIta.maxColumn / 2) - p.column) * offsetXY 
+                            ?  leftRight * p.column * offsetXY
+                            : leftRight *  ((p.maxColumnIta.maxColumn / 2) - p.column) * offsetXY 
                         : (p.column - (p.maxColumnIta.maxColumn / 2)) === 0
-                            ? -1 * p.column * offsetXY
-                            : -1 * (p.column - (p.maxColumnIta.maxColumn / 2)) * offsetXY 
+                            ?  p.column * offsetXY
+                            : leftRight * (p.column - (p.maxColumnIta.maxColumn / 2)) * offsetXY 
                 ),
                 itr = (
                     (p.maxRowIta.maxRow / 2) - p.row === 0
-                    ? -1 * p.row * offsetXY
+                    ? 0//upDown * p.row * offsetXY
                     : p.row <= p.maxRowIta.maxRow / 2 
                         ? ((p.maxColumnIta.maxRow / 2) - p.row) === 0
                             ? p.row * offsetXY
                             : ((p.maxColumnIta.maxRow / 2) - p.row) * offsetXY 
                         : (p.row - (p.maxRowIta.maxRow / 2)) === 0
-                            ? -1 * p.row * offsetXY
+                            ?  p.row * offsetXY
                             : (p.row - (p.maxRowIta.maxRow / 2)) * offsetXY 
                 );
             } else { var mc = 0, mr = 0; };
@@ -790,6 +792,8 @@ export class na3D_fileBrowser {
                 it.model.position.z = p.model.position.z - ((it.level+1) * offsetXY);
                 
                 var x = it.data.it;
+                //if (p.name=='space stars night sky darkmode') debugger;
+                if (p.name=='animals') debugger;
             }
         }
         
