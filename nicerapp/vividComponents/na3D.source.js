@@ -886,8 +886,8 @@ export class na3D_fileBrowser {
                 commonParentIt.assignments.push (dat);
                 commonParentIt.assignments.push (dat);
                 
-                p1it.randomYoffset = ox.modifierRow * Math.random() * 100;
-                p1it.randomXoffset = ox.modifierColumn * Math.random() * 100;
+                p1it.randomYoffset = ox.modifierRow * (ox.modifierRow===-1?commonParentIt.assignmentRowMin:commonParentIt.assignmentRowAdd) *  Math.random() * 100;
+                p1it.randomXoffset = ox.modifierColumn * (ox.modifierColumn===-1?commonParentIt.assignmentColumnMin:commonParentIt.assignmentColumnAdd) * Math.random() * 100;
                                 
                 for (var j=0; j<oa.items.length; j++) {
                     var it = t.items[ oa.items[j] ];
