@@ -715,7 +715,7 @@ export class na3D_fileBrowser {
             
             if (p) {
                 var
-                leftRight = p.column > Math.ceil(maxc / 2) ? 1 : -1,
+                leftRight = 1,//p.column > Math.ceil(maxc / 2) ? 1 : -1,
                 upDown = p.row > Math.floor(p.maxRowIta.maxRow / 2) ? 1 : -1,
                 maxc = p.maxColumnIta.maxColumn,//p.level > 0 ? p.maxColumnIta.maxColumn : (p.maxColumnIta.maxColumn+1),
                 itc = (
