@@ -783,7 +783,7 @@ export class na3D_fileBrowser {
                 //if (p.name=='space stars night sky darkmode') debugger;
                 //if (p.name=='sunrise sunset') debugger;
             }else if (it.model) {
-                it.model.position.x = (it.column-1) * 50;
+                it.model.position.x = (it.column+1) * 50;
                 it.model.position.y = (it.row-1) * 50;
                 it.model.position.z = -1 * (it.level+1) * 75;
             }
