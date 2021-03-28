@@ -394,8 +394,13 @@ na.desktop = {
         c = calculate['calculate_3rd_visible'];
         c.order = 
             visibleDivs.includes('#siteToolbarLeft')
-            ? [ '#siteStatusbar', '#siteToolbarLeft', '#siteContent', '#siteVideo', '#siteVideoSearch', '#siteComments' ]
-            : [ '#siteStatusbar', '#siteContent', '#siteVideo', '#siteVideoSearch', '#siteComments' ];
+            && visibleDivs.includes('#siteToolbarRight')
+            ? [ '#siteStatusbar', '#siteToolbarLeft', '#siteToolbarRight', '#siteContent', '#siteVideo', '#siteVideoSearch', '#siteComments' ]
+            : visibleDivs.includes('#siteToolbarLeft')
+                ? [ '#siteStatusbar', '#siteToolbarLeft', '#siteContent', '#siteVideo', '#siteVideoSearch', '#siteComments' ]
+                : visibleDivs.includes('#siteToolbarRight')
+                    ? [ '#siteStatusbar', '#siteToolbarRight', '#siteContent', '#siteVideo', '#siteVideoSearch', '#siteComments' ]
+                    : [ '#siteStatusbar', '#siteContent', '#siteVideo', '#siteVideoSearch', '#siteComments' ];
             
         if (c['#siteContent']) {
             var gtl = c['#siteContent'].growToLimits;
