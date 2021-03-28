@@ -721,7 +721,7 @@ export class na3D_fileBrowser {
                 itc = (
                     ((maxc / 2) - p.column) === 0
                     ? p.column * offsetXY
-                    : p.column <= (p.maxColumnIta.maxColumn + 1) / 2 
+                    : p.column <= (p.maxColumnIta.maxColumn) / 2 
                         ? ((maxc / 2) - p.column) === 0
                             ?  leftRight * p.column * offsetXY
                             : leftRight *  ((maxc / 2) - p.column) * offsetXY 
