@@ -400,6 +400,7 @@ export class na3D_fileBrowser {
                 
                 for (var i=0; i<6; i++) {
                     var p = null;
+                    console.log (itd[''+i]);
                     if (itd[''+i] && itd[''+i].match(/.*\.png|.*\.jpg|.*\.gif/)) {
                         var 
                         p = t.items[it.parent],
