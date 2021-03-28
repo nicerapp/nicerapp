@@ -699,7 +699,7 @@ export class na3D_fileBrowser {
                                             
                                     };
                                     if (!have) {
-                                        t.overlaps.push ({patha : patha, pathb : pathb, conflicts : 1, diffX : ita.model.position.x - itb.model.position.x, diffY : ita.model.position.y - itb.model.position.y, diffZ : ita.model.position.z - itb.model.position.z });
+                                        t.overlaps.push ({overlappingItems_count : 0, patha : patha, pathb : pathb, conflicts : 1, diffX : ita.model.position.x - itb.model.position.x, diffY : ita.model.position.y - itb.model.position.y, diffZ : ita.model.position.z - itb.model.position.z });
                                         var o = t.overlaps[t.overlaps.length-1];
                                         o.lastDiffX = o.diffX;
                                         o.lastDiffY = o.diffY;
@@ -715,6 +715,7 @@ export class na3D_fileBrowser {
                                         if (diffY > o.diffY) {o.lastDiffY = o.diffY; o.diffY = diffY;};
                                         if (diffZ > o.diffZ) {o.lastDiffZ = o.diffZ; o.diffZ = diffZ;};
                                     }
+                                    t.overlaps[k].overlappingItems_count++;
                                 }
                             }
                         }
