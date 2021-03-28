@@ -784,8 +784,8 @@ export class na3D_fileBrowser {
                 p1it = t.items[p1],
                 p2 = parseInt(o.pathb.substr(o.pathb.lastIndexOf(',')+1)),
                 p2it = t.items[p2];
-                if (p1it.column < p2it.column) ox.modifierColumn = -1; else ox.modifierColumn = 1;
-                if (p1it.row < p2it.row) ox.modifierRow = -1; else ox.modifierRow = 1;
+                if (p1it.column < p2it.column) ox.modifierColumn = 1; else ox.modifierColumn = -1;
+                if (p1it.row < p2it.row) ox.modifierRow = 1; else ox.modifierRow = -1;
 
                 //if (Math.random() < 0.5) ob.modifierColumn = Math.random() < 0.5 ? -1 : 1;
                 //if (Math.random() < 0.5) ob.modifierRow = Math.random() < 0.5 ? -1 : 1;
