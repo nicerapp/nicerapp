@@ -890,8 +890,11 @@ export class na3D_fileBrowser {
                     var it = t.items[ oa.items[j] ];
                     
                     if (it.model) {
-                        it.model.position.x = (commonParentIt.model?commonParentIt.model.position.x:0) + (200 * ox.modifierColumn * (ox.modifierColumn===-1?it.adjustedModXmin:it.adjustedModXadd)) + it.modifierColumn * 50;
-                        it.model.position.y = (commonParentIt.model?commonParentIt.model.position.y:0) + (200 * ox.modifierRow * (ox.modifierRow===-1?it.adjustedModYmin:it.adjustedModYadd)) + it.modifierRow * 50;
+                        //it.model.position.x = (commonParentIt.model?commonParentIt.model.position.x:0) + (200 * ox.modifierColumn * (ox.modifierColumn===-1?it.adjustedModXmin:it.adjustedModXadd)) + it.modifierColumn * 50;
+                        it.model.position.x = (p1it.model?p1it.model.position.x:0) + (200 * ox.modifierColumn * (ox.modifierColumn===-1?it.adjustedModXmin:it.adjustedModXadd)) + it.modifierColumn * 50;
+                        
+                        //it.model.position.y = (commonParentIt.model?commonParentIt.model.position.y:0) + (200 * ox.modifierRow * (ox.modifierRow===-1?it.adjustedModYmin:it.adjustedModYadd)) + it.modifierRow * 50;
+                        it.model.position.y = (p1it.model?p1it.model.position.y:0) + (200 * ox.modifierRow * (ox.modifierRow===-1?it.adjustedModYmin:it.adjustedModYadd)) + it.modifierRow * 50;
                         if (ox.modifiedColumn===1) {
                             it.adjustedModXadd++;
                         } else {
