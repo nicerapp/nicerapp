@@ -800,7 +800,7 @@ export class na3D_fileBrowser {
         setTimeout(function() {
             //t.onresize_do_overlapChecks2(t, callback);
         }, 50);
-        
+        if (typeof callback=='function') callback(t);
         t.drawLines(t);
     }
     
