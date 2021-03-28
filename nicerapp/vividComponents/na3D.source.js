@@ -920,7 +920,6 @@ export class na3D_fileBrowser {
                             it.adjustedModYmin++;
                         }
                     }
-                    /*
                     for (var k=0; k<t.items.length; k++) {
                         var 
                         it2 = t.items[k],
@@ -939,7 +938,7 @@ export class na3D_fileBrowser {
                             it2.model.position.y = p.model.position.y + (100  * ox.modifierRow) + p.modifierRow * (it2.row-1) * 50;
                             it2.adjusted++;
                         }
-                    }*/
+                    }
                 }
                 debugger;
             }
