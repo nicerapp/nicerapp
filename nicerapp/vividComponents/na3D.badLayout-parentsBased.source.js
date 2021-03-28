@@ -329,7 +329,6 @@ export class na3D_fileBrowser {
     }
 
     initializeItems_do (t, items, data, parent, level, levelDepth, path) {
-        if (data.model) return false;
         if (!t.ld2[level]) t.ld2[level] = { parent : parent, initItemsDoingIdx : 0, path : path };
         if (!t.ld2[level].keys) t.ld2[level].keys = Object.keys(data);
         if (t.ld2[level].initItemsDoingIdx >= t.ld2[level].keys.length) return false;
@@ -349,12 +348,10 @@ export class na3D_fileBrowser {
             keyIdx = t.ld2[level].initItemsDoingIdx,
             key = t.ld2[level].keys[ keyIdx ],
             itd = data[key];
-            if (key!=='it')
-            if (typeof itd == 'object' && itd!==null) {
+            if (typeof itd == 'object') {
                 let 
                 path2 = !t.items[parent]||t.items[parent].path===''?''+parent:t.items[parent].path+','+parent,
                 it = {
-                    data : itd,
                     level : levelDepth,
                     name : key,
                     idx : items.length,
@@ -365,8 +362,6 @@ export class na3D_fileBrowser {
                     offsetX : 0,
                     offsetZ : 0
                 };
-                
-                itd.it = it;
                 
                 items[items.length] = it;
                 t.ld2[level].levelIdx++;
@@ -626,78 +621,11 @@ export class na3D_fileBrowser {
             }
         }
         
-        var
-        its = $.extend( [], t.items ),
-        its2 = [],
-        compare = function (a, b) { 
-            return a.parent-b.parent;
-        },
-        compare1 = function (a, b) {
-            if (a.it && b.it) {
-                return a.it.level-b.it.level;
-            } else return 0;
-        };
-        
-        its.sort (compare);
-        
-        
-        var 
-        x = t.data, // x[a][b][c].it
-        maxLevel = 0;
-        
-        for (var i=0; i<its.length; i++) {
-            if (maxLevel < its[i].level) maxLevel = its[i].level;
-            for (var j=0; j<its.length; j++) {
-                if (its[i].parent === its[j].parent) {
-                    var
-                    ita = {
-                        level : its[i].level,
-                        maxColumn : Math.max( its[i].column, its[j].column ),
-                        maxRow : Math.max( its[i].row, its[j].row )
-                    };
-                    if (ita.maxColumn === its[i].column) ita.maxColumnIt = its[i]; else ita.maxColumnIt = its[j];
-                    if (ita.maxRow === its[i].row) ita.maxRowIt = its[i]; else ita.maxRowIt = its[j];
-                    its[i].maxColumnIta = ita;
-                    its[i].maxRowIta = ita;
-                    its[j].maxColumnIta = ita;
-                    its[j].maxRowIta = ita;
-                    
-                    its2.push (ita);
-                }
-            }
-        }
-        var
-        compare2 = function (a,b) {
-            var x = b.maxColumn - a.maxColumn;
-            if (x === 0) return b.maxRow - a.maxRow; else return x;
-        },
-        its3 = its2.sort (compare2);
-        
-        
-        debugger;
-        /*
-        for (var i=0; i<its.length; i++) {
-            var
-            it = $.extend([],t.items[i])
-            it2 = [];
-            
-            for (var j=0; j<t.items.length; j++) {
-                var
-                it2 = t.items[j],
-                ;
-            }            
-                
-            it.columnCount
-            
-        }*/
-        
         for (var i=0; i<t.items.length; i++) {
             var
-            offsetXY = 200,
             it = t.items[i],
             p = t.items[it.parent],
             ld3 = t.ld3[it.path];
-
             
             if (p && p.path && p.path!=='') {
                 var
@@ -713,229 +641,22 @@ export class na3D_fileBrowser {
                 it.modifierRow = ld3.modifierRow;//it.row < ld3.rowColumnCount/2 ? 1 : -1;
             };
             
-            if (p) {
-                /*
-                var
-                mc = (
-                    p.column <= p.maxColumnIta.maxColumn / 2 
-                        ? -1 * ((p.maxColumnIta.maxColumn / 2) - p.column) * offsetXY *    (((it.level*100)/maxLevel)/100)
-                        : (p.column - (p.maxColumnIta.maxColumn / 2)) * offsetXY *    (((it.level*100)/maxLevel)/100)
-                ),
-                mr = (
-                    p.row <= p.maxRowIta.maxRow / 2 
-                        ? -1 * ((p.maxColumnIta.maxRow / 2) - p.row) * offsetXY *    (((it.level*100)/maxLevel)/100)
-                        : (p.row - (p.maxRowIta.maxRow / 2)) * offsetXY *    (((it.level*100)/maxLevel)/100)
-                );*/
-                if (p.name=='tiled') debugger;
-                var
-                itc = (
-                    ((p.maxColumnIta.maxColumn / 2) - p.column) === 0
-                    ? -1 * p.column * offsetXY
-                    : p.column <= p.maxColumnIta.maxColumn / 2 
-                        ? ((p.maxColumnIta.maxColumn / 2) - p.column) === 0
-                            ?  p.column * offsetXY
-                            : ((p.maxColumnIta.maxColumn / 2) - p.column) * offsetXY 
-                        : (p.column - (p.maxColumnIta.maxColumn / 2)) === 0
-                            ? -1 * p.column * offsetXY
-                            : -1 * (p.column - (p.maxColumnIta.maxColumn / 2)) * offsetXY 
-                ),
-                itr = (
-                    (p.maxRowIta.maxRow / 2) - p.row === 0
-                    ? -1 * p.row * offsetXY
-                    : p.row <= p.maxRowIta.maxRow / 2 
-                        ? ((p.maxColumnIta.maxRow / 2) - p.row) === 0
-                            ? p.row * offsetXY
-                            : ((p.maxColumnIta.maxRow / 2) - p.row) * offsetXY 
-                        : (p.row - (p.maxRowIta.maxRow / 2)) === 0
-                            ? -1 * p.row * offsetXY
-                            : (p.row - (p.maxRowIta.maxRow / 2)) * offsetXY 
-                );
-            } else { var mc = 0, mr = 0; };
-            
-            /*
-            var
-            ic = (
-                ((it.maxColumnIta.maxColumn / 2) - it.column) === 0
-                ? -1 * it.column * offsetXY
-                : it.column <= it.maxColumnIta.maxColumn / 2 
-                    ? -1 * ((it.maxColumnIta.maxColumn / 2) - p.column) * offsetXY 
-                    : (it.column - (it.maxColumnIta.maxColumn / 2)) === 0
-                        ? -1 * (it.column * offsetXY)
-                        : (it.column - (it.maxColumnIta.maxColumn / 2)) * offsetXY 
-            ),
-            ir = (
-                (it.maxRowIta.maxRow / 2) - it.row === 0
-                ? -1 * it.row * offsetXY
-                : it.row <= it.maxRowIta.maxRow / 2 
-                    ? -1 * ((it.maxColumnIta.maxRow / 2) - p.row) * offsetXY 
-                    : (it.row - (p.maxRowIta.maxRow / 2)) === 0
-                        ? -1 * (it.row * offsetXY)
-                        : (it.row - (p.maxRowIta.maxRow / 2)) * offsetXY 
-            );*/
-            
-            
-            /*if (it.model && p && p.model) {
-                it.model.position.x = /*p.model.position.x + * /mc + ((p.column-1)*100) + (it.modifierColumn * (it.column-1) * 50);
-                it.model.position.y = /*p.model.position.y + * /mr + ((p.row-1)*100) + (it.modifierRow * (it.row-1) * 50);
-                it.model.position.z = /*p.model.position.z - * /((it.level+1) * 75);
+            if (it.model && p && p.model) {
+                it.model.position.x = p.model.position.x + (it.modifierColumn * (it.column-1) * 50);
+                it.model.position.y = p.model.position.y + (it.modifierRow * (it.row-1) * 50);
+                it.model.position.z = p.model.position.z - ((it.level+1) * 75);
             } else if (it.model) {
                 it.model.position.x = it.modifierColumn * (it.column-1) * 50;
                 it.model.position.y = it.modifierRow * (it.row-1) * 50;
                 it.model.position.z = -1 * (it.level+1) * 75;
-            }*/
-            
-            if (it.model && p && p.model) {
-                it.model.position.x = p.model.position.x + itc /*+ ic /*+ ((p.column-1)*100) */+ ((it.column-1) * 50);
-                it.model.position.y = p.model.position.y + itr /*+ ir /*+ ((p.row-1)*100) */+ ((it.row-1) * 50);
-                it.model.position.z = p.model.position.z - ((it.level+1) * offsetXY);
-                
-                var x = it.data.it;
             }
         }
         
         setTimeout(function() {
-            //t.onresize_do_overlapChecks2(t, callback);
+            t.onresize_do_overlapChecks(t, callback);
         }, 50);
         
         t.drawLines(t);
-    }
-    
-    onresize_do_overlapChecks2 (t, callback) {
-        t.overlaps = [];
-        
-        for (var patha in t.ld3) {
-            if (patha!=='') {
-                var ld3a = t.ld3[patha];
-                for (var pathb in t.ld3) {
-                    if (pathb!=='' && pathb!==patha) {
-                        var ld3b = t.ld3[pathb];
-                        
-                        for (var i=0; i<ld3a.items.length; i++) {
-                            var ita = t.items[ld3a.items[i]];
-                            
-                            for (var j=0; j<ld3b.items.length; j++) {
-                                var itb = t.items[ld3b.items[j]];
-                                
-                                if (
-                                    ita.model && itb.model
-                                    && ita.model.position.x === itb.model.position.x
-                                    && ita.model.position.y === itb.model.position.y
-                                    && ita.model.position.z === itb.model.position.z
-                                ) {
-                                    var have = false;
-                                    for (var k=0; k<t.overlaps.length; k++) {
-                                        if (
-                                            (
-                                                t.overlaps[k].patha === patha
-                                                && t.overlaps[k].pathb === pathb
-                                            )
-                                            || (
-                                                t.overlaps[k].patha === pathb
-                                                && t.overlaps[k].pathb === patha
-                                            )
-                                        ) {
-                                            have = true;
-                                            break;
-                                        }
-                                            
-                                    };
-                                    if (!have) {
-                                        t.overlaps.push ({overlappingItems_count : 0, patha : patha, pathb : pathb, conflicts : 1, diffX : ita.model.position.x - itb.model.position.x, diffY : ita.model.position.y - itb.model.position.y, diffZ : ita.model.position.z - itb.model.position.z });
-                                        var o = t.overlaps[t.overlaps.length-1];
-                                        o.lastDiffX = o.diffX;
-                                        o.lastDiffY = o.diffY;
-                                        o.lastDiffZ = o.diffZ;
-                                    } else {
-                                        var 
-                                        o = t.overlaps[k],
-                                        diffX = ita.model.position.x - itb.model.position.x,
-                                        diffY = ita.model.position.y - itb.model.position.y,
-                                        diffZ = ita.model.position.z - itb.model.position.z;
-                                        o.conflicts++;
-                                        if (diffX > o.diffX) {o.lastDiffX = o.diffX; o.diffX = diffX;};
-                                        if (diffY > o.diffY) {o.lastDiffY = o.diffY; o.diffY = diffY;};
-                                        if (diffZ > o.diffZ) {o.lastDiffZ = o.diffZ; o.diffZ = diffZ;};
-                                    }
-                                    t.overlaps[k].overlappingItems_count++;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        
-        var 
-        leastOverlappingItems = { overlappingItems_count : 200, j : -1 }, 
-        mostOverlappingItems = { overlappingItems_count : 0, j : -1 }, 
-        mostConflicts = {conflicts : 1, j : -1}, 
-        largest = null, 
-        smallest = null;
-        
-        for (var j=0; j<t.overlaps.length; j++) {
-            if (t.overlaps[j].overlappingItems_count > mostOverlappingItems.overlappingItems_count)
-                mostOverlappingItems = { overlappingItems_count : t.overlaps[j].overlappingItems_count, j : j};
-
-            if (t.overlaps[j].overlappingItems_count < leastOverlappingItems.overlappingItems_count)
-                leastOverlappingItems = { overlappingItems_count : t.overlaps[j].overlappingItems_count, j : j};
-            
-            if (t.overlaps[j].conflicts > mostConflicts.conflicts) mostConflicts = {conflicts:t.overlaps[j].conflicts, j : j};
-            
-            if (
-                !largest 
-                || (
-                    t.ld3[t.overlaps[j].patha].itemCountA > largest.itemCountA 
-                    && t.ld3[t.overlaps[j].pathb].itemCountB > largest.itemCountB
-                )
-            ) largest = { 
-                pathb : t.overlaps[j].pathb, 
-                itemCountA : t.ld3[t.overlaps[j].patha].itemCount, 
-                itemCountB : t.ld3[t.overlaps[j].pathb].itemCount, 
-                j : j 
-            };
-            
-            if (
-                !smallest 
-                || (
-                    t.ld3[t.overlaps[j].patha].itemCountA < smallest.itemCountA 
-                    && t.ld3[t.overlaps[j].pathb].itemCountB < smallest.itemCountB
-                )
-            ) smallest = { 
-                pathb : t.overlaps[j].pathb, 
-                itemCountA : t.ld3[t.overlaps[j].patha].itemCount, 
-                itemCountB : t.ld3[t.overlaps[j].pathb].itemCount, 
-                j : j 
-            };
-                
-        }
-        
-        // this for loop can be commented out for speed optimization, it's only here for debugging purposes
-        for (var i=0; i<t.overlaps.length; i++) {
-            var o = t.overlaps[i];
-            o.itemsa = [];
-            o.itemsb = [];
-            for (var j=0; j<t.items.length; j++) {
-                var it = t.items[j];
-                if (it.path === o.patha) { o.itemsa.push(it); o.parenta = t.items[it.parent]; }
-                if (it.path === o.pathb) { o.itemsb.push(it); o.parentb = t.items[it.parent]; }
-            }
-        };
-        
-        for (var j=0; j<t.items.length; j++) {
-            t.items[j].adjustedModXmin = 0;
-            t.items[j].adjustedModXadd = 0;
-            t.items[j].adjustedModYmin = 0;
-            t.items[j].adjustedModYadd = 0;
-            t.items[j].assignments = [];
-        };
-
-        
-        for (var i=0; i<t.overlaps.length; i++) {
-            //if (i===mostConflicts.j) {
-            if (i===largest.j) {
-                
-            }
-        }        
     }
     
     onresize_do_overlapChecks (t, callback) {
