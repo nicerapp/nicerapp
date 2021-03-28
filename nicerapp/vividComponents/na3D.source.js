@@ -804,8 +804,8 @@ export class na3D_fileBrowser {
                 p2 = parseInt(o.pathb.substr(o.pathb.lastIndexOf(',')+1)),
                 p2it = t.items[p2];
                 
-                if (p1it.column < p2it.column) ox.modifierColumn = 1; else ox.modifierColumn = -1;
-                if (p1it.row < p2it.row) ox.modifierRow = 1; else ox.modifierRow = -1;
+                if (p1it.column < p2it.column) ox.modifierColumn = -1; else ox.modifierColumn = 1;
+                if (p1it.row < p2it.row) ox.modifierRow = -1; else ox.modifierRow = 1;
 
                 /*if (!p1it.assignments) p1it.assignments = [];
                 if (!p2it.assignments) p2it.assignments = [];*/
@@ -861,6 +861,7 @@ export class na3D_fileBrowser {
                 }*/
                 
             //debugger;
+            /*
                 if (commonParentIt.assignmentColumnMin > 0 || commonParentIt.assignmentColumnAdd > 0) {
                     ox.modifierColumn = commonParentIt.assignmentColumnMin < commonParentIt.assignmentColumnAdd ? 1 : -1;
                 }
