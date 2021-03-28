@@ -475,7 +475,18 @@ select, optgroup {
   }
 }
 
-
+/*
+ * 3D File Manager features
+ */
+#threedfm_buttons {
+    display : flex;
+    flex-direction : column;
+    align-items : center;
+    margin : auto;
+}
+#threedfm_buttons .vividButton, #threedfm_buttons .vividButtonSelected {
+    margin : 5px;
+}
 
 /*
  * blogging features 
