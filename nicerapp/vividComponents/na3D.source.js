@@ -886,8 +886,8 @@ export class na3D_fileBrowser {
                 commonParentIt.assignments.push (dat);
                 commonParentIt.assignments.push (dat);
                 
-                p1it.randomYoffset = ox.modifierRow * Math.random() * 300;
-                p1it.randomXoffset = ox.modifierColumn * Math.random() * 300;
+                p1it.randomYoffset = ox.modifierRow * Math.random() * 100;
+                p1it.randomXoffset = ox.modifierColumn * Math.random() * 100;
                                 
                 for (var j=0; j<oa.items.length; j++) {
                     var it = t.items[ oa.items[j] ];
@@ -899,13 +899,13 @@ export class na3D_fileBrowser {
                         it.model.position.x = 
                             (p1it.model?p1it.model.position.x:0) 
                             + (200 * ox.modifierColumn * (ox.modifierColumn===-1?it.adjustedModXmin:it.adjustedModXadd)) 
-                            + (commonParentIt.modifierColumn * it.column * 50)
+                            + (ox.modifierColumn * it.column * 50)
                             + p1it.randomXoffset;
                         //it.model.position.y = (commonParentIt.model?commonParentIt.model.position.y:0) + (200 * ox.modifierRow * (ox.modifierRow===-1?it.adjustedModYmin:it.adjustedModYadd)) + it.modifierRow * 50;
                         it.model.position.y = 
                             (p1it.model?p1it.model.position.y:0) 
                             + (200 * ox.modifierRow * (ox.modifierRow===-1?it.adjustedModYmin:it.adjustedModYadd)) 
-                            + (commonParentIt.modifierRow * it.row * 50)
+                            + (ox.modifierRow * it.row * 50)
                             + p1it.randomYoffset;
                         //debugger;
                         
