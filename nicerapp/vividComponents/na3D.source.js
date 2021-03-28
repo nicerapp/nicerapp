@@ -803,7 +803,7 @@ export class na3D_fileBrowser {
                 p1it.assignmentColumnAdd = 0;
                 p1it.assignmentRowMin = 0;
                 p1it.assignmentRowAdd = 0;
-                for (var j=0; j<p2it.assignments; j++) {
+                for (var j=0; j<p1it.assignments; j++) {
                     if (p1it.assignments[j].modifierColumn===-1) {
                         p1it.assignmentColumnMin++;
                     } else {
