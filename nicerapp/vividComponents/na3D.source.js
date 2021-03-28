@@ -695,7 +695,7 @@ export class na3D_fileBrowser {
             var
             offsetXY = 200,
             it = t.items[i],
-            p = t.items[it.parent],
+            p = t.items[it.parent];/*,
             ld3 = t.ld3[it.path];
 
             
@@ -711,7 +711,7 @@ export class na3D_fileBrowser {
                 if (!ld3.modifierRow) ld3.modifierRow = Math.random() < 0.5 ? -1 : 1;
                 it.modifierColumn = ld3.modifierColumn,//it.column < ld3.rowColumnCount/2 ? 1 : -1,
                 it.modifierRow = ld3.modifierRow;//it.row < ld3.rowColumnCount/2 ? 1 : -1;
-            };
+            };*/
             
             if (p) {
                 var
@@ -741,39 +741,7 @@ export class na3D_fileBrowser {
                             : upDown * (p.row - (p.maxRowIta.maxRow / 2)) * offsetXY 
                 );
             } else { var mc = 0, mr = 0; };
-            
-            /*
-            var
-            ic = (
-                ((it.maxColumnIta.maxColumn / 2) - it.column) === 0
-                ? -1 * it.column * offsetXY
-                : it.column <= it.maxColumnIta.maxColumn / 2 
-                    ? -1 * ((it.maxColumnIta.maxColumn / 2) - p.column) * offsetXY 
-                    : (it.column - (it.maxColumnIta.maxColumn / 2)) === 0
-                        ? -1 * (it.column * offsetXY)
-                        : (it.column - (it.maxColumnIta.maxColumn / 2)) * offsetXY 
-            ),
-            ir = (
-                (it.maxRowIta.maxRow / 2) - it.row === 0
-                ? -1 * it.row * offsetXY
-                : it.row <= it.maxRowIta.maxRow / 2 
-                    ? -1 * ((it.maxColumnIta.maxRow / 2) - p.row) * offsetXY 
-                    : (it.row - (p.maxRowIta.maxRow / 2)) === 0
-                        ? -1 * (it.row * offsetXY)
-                        : (it.row - (p.maxRowIta.maxRow / 2)) * offsetXY 
-            );*/
-            
-            
-            /*if (it.model && p && p.model) {
-                it.model.position.x = /*p.model.position.x + * /mc + ((p.column-1)*100) + (it.modifierColumn * (it.column-1) * 50);
-                it.model.position.y = /*p.model.position.y + * /mr + ((p.row-1)*100) + (it.modifierRow * (it.row-1) * 50);
-                it.model.position.z = /*p.model.position.z - * /((it.level+1) * 75);
-            } else if (it.model) {
-                it.model.position.x = it.modifierColumn * (it.column-1) * 50;
-                it.model.position.y = it.modifierRow * (it.row-1) * 50;
-                it.model.position.z = -1 * (it.level+1) * 75;
-            }*/
-            
+        
             if (it.model && p && p.model) {
                 it.model.position.x = p.model.position.x + itc /*+ ic /*+ ((p.column-1)*100) */+ ((it.column-1) * 50);
                 it.model.position.y = p.model.position.y + itr /*+ ir /*+ ((p.row-1)*100) */+ ((it.row-1) * 50);
@@ -791,11 +759,12 @@ export class na3D_fileBrowser {
                 if (p && (p.name=='portrait')) debugger;
         }
         
+        t.drawLines(t);
+
         setTimeout(function() {
             //t.onresize_do_overlapChecks2(t, callback);
+            if (typeof callback=='function') callback(t);
         }, 50);
-        if (typeof callback=='function') callback(t);
-        t.drawLines(t);
     }
     
     onresize_do_overlapChecks2 (t, callback) {
