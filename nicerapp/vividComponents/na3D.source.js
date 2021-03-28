@@ -755,6 +755,8 @@ export class na3D_fileBrowser {
                 p2 = t.items[p2];
                 if (p1.column < p2.column) ob.modifierColumn = -1; else ob.modifierColumn = 1;
                 if (p1.row < p2.row) ob.modifierRow = -1; else ob.modifierRow = 1;
+                if (Math.random() < 0.25) ob.modifiedColumn = Math.random() < 0.5 ? -1 : 1;
+                if (Math.random() < 0.25) ob.modifiedRow = Math.random() < 0.5 ? -1 : 1;
                     
                 for (var j=0; j<t.items.length; j++) {
                     t.items[j].adjusted = 0;
@@ -764,8 +766,8 @@ export class na3D_fileBrowser {
                     var it = t.items[ ob.items[j] ];
                     
                     if (it.model) {
-                        it.model.position.x += (100 * ob.modifierColumn * it.adjusted) + it.modifierColumn * 50;
-                        it.model.position.y += (100 * ob.modifierRow * it.adjusted) + it.modifierRow * 50;
+                        it.model.position.x += (50 * ob.modifierColumn * it.adjusted) + it.modifierColumn * 50;
+                        it.model.position.y += (50 * ob.modifierRow * it.adjusted) + it.modifierRow * 50;
                         it.adjusted++;
                     }
                     for (var k=0; k<t.items.length; k++) {
@@ -782,8 +784,8 @@ export class na3D_fileBrowser {
                                 && (it2.path.replace(o.pathb+',','').match(/,/g) || []).length === 0
                             )
                         ) {
-                            it2.model.position.x = p.model.position.x + (100 * it2.adjusted * ob.modifierColumn) + p.modifierColumn * (it2.column-1) * 50;
-                            it2.model.position.y = p.model.position.y + (100 * it2.adjusted * ob.modifierRow) + p.modifierRow * (it2.row-1) * 50;
+                            it2.model.position.x = p.model.position.x + (100  * ob.modifierColumn) + p.modifierColumn * (it2.column-1) * 50;
+                            it2.model.position.y = p.model.position.y + (100  * ob.modifierRow) + p.modifierRow * (it2.row-1) * 50;
                             it2.adjusted++;
                         }
                     }
