@@ -411,6 +411,16 @@ export class na3D_fileBrowser {
                         }
                         path = '/nicerapp/siteMedia.thumbs/' + path;
                         if (path.match('wWw.TechTools.NET')) debugger;
+                        
+                        var 
+                        x = path,
+                        y = path.replace('/nicerapp/siteMedia.thumbs/backgrounds/landscape/',''),
+                        p1 = y.indexOf('/');
+                        if (path.match('landscape') && p1===-1) debugger;
+                        
+                        
+                        
+                        
                         textures[i] = path;//.replace(/ /g, '%20');
                         //debugger;
                     }
