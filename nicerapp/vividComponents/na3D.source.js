@@ -190,7 +190,7 @@ export class na3D_fileBrowser {
                     // build a line towards parent
                     if (hoveredItem && hoveredItem.it && !done) {
                         let p = hoveredItem.it.model.position;
-                        t.hoverOverName = '('+it.column+':'+it.row+') ('+p.x+', '+p.y+', '+p.z + ') : ' + hoveredItem.it.name;
+                        t.hoverOverName = '('+hoveredItem.it.column+':'+hoveredItem.it.row+') ('+p.x+', '+p.y+', '+p.z + ') : ' + hoveredItem.it.name;
                         //t.hoverOverName = hoveredItem.it.name;
                         
                         var 

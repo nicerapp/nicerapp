@@ -38,7 +38,7 @@ import { OrbitControls } from '/nicerapp/3rd-party/3D/libs/three.js/examples/jsm
 import { RGBELoader } from '/nicerapp/3rd-party/3D/libs/three.js/examples/jsm/loaders/RGBELoader.js';
 import { DragControls } from '/nicerapp/3rd-party/3D/libs/three.js/examples/jsm/controls/DragControls.js';
     
-    import { na3D_fileBrowser, na3D_demo_models, na3D_demo_cube } from '/nicerapp/vividComponents/na3D.source.js';
+    import { na3D_fileBrowser, na3D_demo_models, na3D_demo_cube } from '/nicerapp/vividComponents/na3D.source.js?c=<?php echo date('Ymd_His',filemtime(dirname(__FILE__).'/../../../vividComponents/na3D.source.js'));?>';
     //$(document).ready(function() {
         na.m.waitForCondition ('Now loading filesystem index',
             function () { return na.site.settings.backgroundsRecursive && typeof THREE !== 'undefined'; }, // <-- wait for this to become non-null, non-undefined, aka filled with data fetched in /nicerapp/site.source.js:::na.site.onload() to /nicerapp/domainConfigs/SOME_NAME/ajax_backgrounds.php
