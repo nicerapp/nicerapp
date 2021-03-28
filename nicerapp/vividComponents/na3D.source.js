@@ -886,9 +886,13 @@ export class na3D_fileBrowser {
                 commonParentIt.assignments.push (dat);
                 commonParentIt.assignments.push (dat);
                 
+                p1it.randomYoffset = commonParentIt.modifierRow * Math.random() * 300;
+                p1it.randomXoffset = commonParentIt.modifierColumn * Math.random() * 300;
                                 
                 for (var j=0; j<oa.items.length; j++) {
                     var it = t.items[ oa.items[j] ];
+                    
+                    
                     
                     if (it.model) {
                         //it.model.position.x = (commonParentIt.model?commonParentIt.model.position.x:0) + (200 * ox.modifierColumn * (ox.modifierColumn===-1?it.adjustedModXmin:it.adjustedModXadd)) + it.modifierColumn * 50;
@@ -896,13 +900,13 @@ export class na3D_fileBrowser {
                             (p1it.model?p1it.model.position.x:0) 
                             + (200 * ox.modifierColumn * (ox.modifierColumn===-1?it.adjustedModXmin:it.adjustedModXadd)) 
                             + (commonParentIt.modifierColumn * it.column * 50)
-                            + (commonParentIt.modifierColumn * Math.random() * 300);
+                            + p1it.randomXoffset;
                         //it.model.position.y = (commonParentIt.model?commonParentIt.model.position.y:0) + (200 * ox.modifierRow * (ox.modifierRow===-1?it.adjustedModYmin:it.adjustedModYadd)) + it.modifierRow * 50;
                         it.model.position.y = 
                             (p1it.model?p1it.model.position.y:0) 
                             + (200 * ox.modifierRow * (ox.modifierRow===-1?it.adjustedModYmin:it.adjustedModYadd)) 
                             + (commonParentIt.modifierRow * it.row * 50)
-                            + (commonParentIt.modifierRow * Math.random() * 300);
+                            + p1it.randomYoffset;
                         //debugger;
                         
                         if (ox.modifiedColumn===1) {
