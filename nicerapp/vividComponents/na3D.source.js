@@ -530,7 +530,7 @@ export class na3D_fileBrowser {
                         if (it2.parent === cube.it.parent) {
                             //debugger;
                             it2.model.position.x = it2.model.position.dragStartX - (t.dragndrop.mouseX - t.mouse.layerX);
-                            it2.model.position.y = it2.model.position.dragStartY - (t.dragndrop.mouseY - t.mouse.layerY);
+                            it2.model.position.y = it2.model.position.dragStartY + (t.dragndrop.mouseY - t.mouse.layerY);
                             it2.model.position.z = cube.position.z;
                         }
                     }
