@@ -12,8 +12,6 @@ $app = json_decode (base64_decode_url($_GET['apps']), true);
         na.m.waitForCondition ('Now loading filesystem index',
             function () { return na.site.settings.backgroundsRecursive; }, // <-- wait for this to become non-null, non-undefined, aka filled with data fetched in /nicerapp/site.source.js:::na.site.onload() to /nicerapp/domainConfigs/SOME_NAME/ajax_backgrounds.php
             function () {
-                //na.d.s.visibleDivs.push('#siteToolbarRight'); na.site.onresize();
-                debugger;
                 na.desktop.setConfig ('contentAndToolbarRight');
                     
                 // and when the data has loaded, do the following.. :
@@ -34,10 +32,12 @@ $app = json_decode (base64_decode_url($_GET['apps']), true);
                     + '<p>Double click a mouse button to toggle automatic rotation of the data.</p>'
                     + '<p>Triple click a mouse button to reverse direction for automatic rotation of the data.</p>'
                     + '<p>Use the mouse wheel to zoom in or out.</p>'
+                    + '<div id="threedfm_buttons">'
                     + '<div id="newColors" class="vividButton" theme="dark" style="position:relative;" onclick="for (var id in na.site.settings.na3D) { var td = na.site.settings.na3D[id]; td.useNewColors(); }">New Colors</div>'
                     + '<div id="newArrangement" class="vividButton" theme="dark" style="position:relative;" onclick="for (var id in na.site.settings.na3D) { var td = na.site.settings.na3D[id]; td.useNewArrangement(); }">New Arrangement</div>'
                     + '<div id="autoRotate" class="vividButtonSelected" theme="dark" style="position:relative;" onclick="for (var id in na.site.settings.na3D) { var td = na.site.settings.na3D[id]; td.toggleAutoRotate(); }">Auto-rotate</div>'
-                    +'<div id="showLines" class="vividButtonSelected" theme="dark" style="position:relative;" onclick="for (var id in na.site.settings.na3D) { var td = na.site.settings.na3D[id]; td.toggleShowLines(); }">Show Lines</div>';
+                    +'<div id="showLines" class="vividButtonSelected" theme="dark" style="position:relative;" onclick="for (var id in na.site.settings.na3D) { var td = na.site.settings.na3D[id]; td.toggleShowLines(); }">Show Lines</div>'
+                    +'</div>';
                 
                 $('#siteToolbarRight .vividDialogContent').html (html);
                 na.site.settings.buttons['#newColors'] = new naVividButton ($('#newColors')[0]);
