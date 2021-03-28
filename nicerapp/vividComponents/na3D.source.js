@@ -715,9 +715,9 @@ export class na3D_fileBrowser {
             
             if (p) {
                 var
-                leftRight = 1,//p.column > Math.ceil(maxc / 2) ? 1 : -1,
-                upDown = p.row > Math.floor(p.maxRowIta.maxRow / 2) ? 1 : -1,
                 maxc = p.maxColumnIta.maxColumn,//p.level > 0 ? p.maxColumnIta.maxColumn : (p.maxColumnIta.maxColumn+1),
+                leftRight = p.column > Math.floor(maxc / 2) ? 1 : -1,
+                upDown = p.row > Math.floor(p.maxRowIta.maxRow / 2) ? 1 : -1,
                 itc = (
                     ((maxc / 2) - p.column) === 0
                     ? leftRight * p.column * offsetXY
