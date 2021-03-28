@@ -400,8 +400,6 @@ export class na3D_fileBrowser {
                 
                 for (var i=0; i<6; i++) {
                     var p = null;
-                    if (it.name=='landscape') debugger;
-                    console.log (it.name + ' :: ' + itd[i]);
                     if (itd[''+i] && itd[''+i].match(/.*\.png|.*\.jpg|.*\.gif/)) {
                         var 
                         p = t.items[it.parent],
@@ -411,19 +409,7 @@ export class na3D_fileBrowser {
                             p = t.items[p.parent];
                         }
                         path = '/nicerapp/siteMedia.thumbs/' + path;
-                        if (path.match('wWw.TechTools.NET')) debugger;
-                        
-                        var 
-                        x = path,
-                        y = path.replace('/nicerapp/siteMedia.thumbs/backgrounds/landscape/',''),
-                        p1 = y.indexOf('/');
-                        if (path.match('landscape') && p1===-1) debugger;
-                        
-                        
-                        
-                        
-                        textures[i] = path;//.replace(/ /g, '%20');
-                        //debugger;
+                        textures[i] = path;
                     }
                 }
                 
