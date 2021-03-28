@@ -167,12 +167,12 @@ export class na3D_fileBrowser {
         if (t.mouse.x!==0 || t.mouse.y!==0) {        
             t.raycaster.setFromCamera (t.mouse, t.camera);
             
-            const intersects = t.raycaster.intersectObjects (t.scene.children, false);
+            const intersects = t.raycaster.intersectObjects (t.scene.children, true);
+            //debugger;
             //if (intersects[0]) {
             if (intersects[0] && intersects[0].object.type!=='Line') 
             for (var i=0; i<1/*intersects.length <-- this just gets an endless series of hits from camera into the furthest reaches of what's visible behind the mouse pointer */; i++) {
                 var hoveredItem = intersects[i].object, done = false;
-                
                 while (hoveredItem && !done) {
                 
                     for (var j=0; j<t.lines.length; j++) {
@@ -408,10 +408,10 @@ export class na3D_fileBrowser {
                             p = t.items[p.parent];
                         }
                         path = '/nicerapp/siteMedia.thumbs/' + path;
-                        textures[i] = path;
+                        textures[i] = path;//.replace(/ /g, '%20');
+                        //debugger;
                     }
                 }
-                
                 var
                 materials = [
                     new THREE.MeshBasicMaterial({
@@ -724,51 +724,94 @@ export class na3D_fileBrowser {
         var mostConflicts = {conflicts : 1, j : -1}, largest = null, smallest = null;
         for (var j=0; j<t.overlaps.length; j++) {
             if (t.overlaps[j].conflicts > mostConflicts.conflicts) mostConflicts = {conflicts:t.overlaps[j].conflicts, j : j};
-            if (!largest || t.ld3[t.overlaps[j].pathb].itemCount > largest.itemCount) largest = { pathb : t.overlaps[j].pathb, itemCount : t.ld3[t.overlaps[j].pathb].itemCount, j : j };
-            if (!smallest || t.ld3[t.overlaps[j].pathb].itemCount < smallest.itemCount) smallest = { pathb : t.overlaps[j].pathb, itemCount : t.ld3[t.overlaps[j].pathb].itemCount, j : j };
+            if (
+                !largest 
+                || (
+                    t.ld3[t.overlaps[j].patha].itemCountA > largest.itemCountA 
+                    && t.ld3[t.overlaps[j].pathb].itemCountB > largest.itemCountB
+                )
+            ) largest = { 
+                pathb : t.overlaps[j].pathb, 
+                itemCountA : t.ld3[t.overlaps[j].patha].itemCount, 
+                itemCountB : t.ld3[t.overlaps[j].pathb].itemCount, 
+                j : j 
+            };
+            if (
+                !smallest 
+                || (
+                    t.ld3[t.overlaps[j].patha].itemCountA < smallest.itemCountA 
+                    && t.ld3[t.overlaps[j].pathb].itemCountB < smallest.itemCountB
+                )
+            ) smallest = { 
+                pathb : t.overlaps[j].pathb, 
+                itemCountA : t.ld3[t.overlaps[j].patha].itemCount, 
+                itemCountB : t.ld3[t.overlaps[j].pathb].itemCount, 
+                j : j 
+            };
                 
         }
+        
+        // this for loop can be commented out for speed optimization, it's only here for debugging purposes
+        for (var i=0; i<t.overlaps.length; i++) {
+            var o = t.overlaps[i];
+            o.itemsa = [];
+            o.itemsb = [];
+            for (var j=0; j<t.items.length; j++) {
+                var it = t.items[j];
+                if (it.path === o.patha) { o.itemsa.push(it); o.parenta = t.items[it.parent]; }
+                if (it.path === o.pathb) { o.itemsb.push(it); o.parentb = t.items[it.parent]; }
+            }
+        };
 
+        for (var j=0; j<t.items.length; j++) {
+            t.items[j].adjustedModXmin = 0;
+            t.items[j].adjustedModXadd = 0;
+            t.items[j].adjustedModYmin = 0;
+            t.items[j].adjustedModYadd = 0;
+        };
+                
         for (var i=0; i<t.overlaps.length; i++) {
             //if (i===mostConflicts.j) {
             if (i===mostConflicts.j) {
                 var 
                 o = t.overlaps[i],
                 oa = t.ld3[o.patha],
-                ob = t.ld3[o.pathb];
-                
-                /*
-                //if (!ob.modifiedColumn) 
-                    ob.modifiedColumn = Math.random() < 0.5 ? 1 : -1;
-                //if (!ob.modifiedRow) 
-                    ob.modifiedRow = Math.random() < 0.5 ? 1 : -1;
-                //if (!ob.modifierColumn) 
-                    ob.modifierColumn = Math.random() < 0.5 ? 1 : -1;
-                //if (!ob.modifierRow) 
-                    ob.modifierRow = Math.random() < 0.5 ? 1 : -1;
-                */
-                
-                var
+                ob = t.ld3[o.pathb],
+                ox = Math.random() < 0.5 ? oa : ob,
                 p1 = parseInt(o.patha.substr(o.patha.lastIndexOf(',')+1)),
-                p1 = t.items[p1],
+                p1it = t.items[p1],
                 p2 = parseInt(o.pathb.substr(o.pathb.lastIndexOf(',')+1)),
-                p2 = t.items[p2];
-                if (p1.column < p2.column) ob.modifierColumn = -1; else ob.modifierColumn = 1;
-                if (p1.row < p2.row) ob.modifierRow = -1; else ob.modifierRow = 1;
-                if (Math.random() < 0.25) ob.modifiedColumn = Math.random() < 0.5 ? -1 : 1;
-                if (Math.random() < 0.25) ob.modifiedRow = Math.random() < 0.5 ? -1 : 1;
-                    
-                for (var j=0; j<t.items.length; j++) {
-                    t.items[j].adjusted = 0;
-                };
+                p2it = t.items[p2];
+                if (p1it.column < p2it.column) ox.modifierColumn = -1; else ox.modifierColumn = 1;
+                if (p1it.row < p2it.row) ox.modifierRow = -1; else ox.modifierRow = 1;
+
+                //if (Math.random() < 0.5) ob.modifierColumn = Math.random() < 0.5 ? -1 : 1;
+                //if (Math.random() < 0.5) ob.modifierRow = Math.random() < 0.5 ? -1 : 1;
+                if (Math.random() < 0.5) {
+                    ox.modifierColumn = p1it.column < p2it.column ? p1it.modifierColumn : p2it.modifierColumn;
+                    ox.modifierRow = p1it.row < p2it.row ? p1it.modifiedRow : p2it.modifierRow;
+                }
+                /*ob.modifierColumn = Math.random() < 0.5 ? -1 : 1;
+                ob.modifierRow = Math.random() < 0.5 ? -1 : 1;*/
                 
+            debugger;
+                                
                 for (var j=0; j<ob.items.length; j++) {
                     var it = t.items[ ob.items[j] ];
                     
                     if (it.model) {
-                        it.model.position.x += (50 * ob.modifierColumn * it.adjusted) + it.modifierColumn * 50;
-                        it.model.position.y += (50 * ob.modifierRow * it.adjusted) + it.modifierRow * 50;
-                        it.adjusted++;
+                        it.model.position.x += (200 * ox.modifierColumn * (ox.modifierColumn===-1?it.adjustedModXmin:it.adjustedModXadd)) + it.modifierColumn * 50;
+                        it.model.position.y += (200 * ox.modifierRow * (ox.modifierRow===-1?it.adjustedModYmin:it.adjustedModYadd)) + it.modifierRow * 50;
+                        if (ox.modifiedColumn===1) {
+                            it.adjustedModXadd++;
+                        } else {
+                            it.adjustedModXmin++;
+                        }
+                        if (ox.modifiedRow===1) {
+                            it.adjustedModYmax++;
+                        } else {
+                            it.adjustedModYmin++;
+                        }
                     }
                     for (var k=0; k<t.items.length; k++) {
                         var 
@@ -784,8 +827,8 @@ export class na3D_fileBrowser {
                                 && (it2.path.replace(o.pathb+',','').match(/,/g) || []).length === 0
                             )
                         ) {
-                            it2.model.position.x = p.model.position.x + (100  * ob.modifierColumn) + p.modifierColumn * (it2.column-1) * 50;
-                            it2.model.position.y = p.model.position.y + (100  * ob.modifierRow) + p.modifierRow * (it2.row-1) * 50;
+                            it2.model.position.x = p.model.position.x + (100  * ox.modifierColumn) + p.modifierColumn * (it2.column-1) * 50;
+                            it2.model.position.y = p.model.position.y + (100  * ox.modifierRow) + p.modifierRow * (it2.row-1) * 50;
                             it2.adjusted++;
                         }
                     }

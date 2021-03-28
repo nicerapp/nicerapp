@@ -9,6 +9,12 @@ $files = getFilePathList ($root, true, '/.*\.gif|\.jpg|\.png/', array('file'));
 ob_start();
 
 foreach ($files as $idx => $original) {
+    if (strpos($original,' ')!==false) {
+        $o2 = str_replace (' ', '_', $original);
+        $xec = 'mv "'.$original.'" "'.$o2.'"';
+        exec ($xec, $output, $result);
+        $original = $o2;
+    }
     $thumb = str_replace('siteMedia', 'siteMedia.thumbs', $original);
     createDirectoryStructure (dirname($thumb));
     if (!file_exists($thumb)) {
