@@ -789,8 +789,14 @@ export class na3D_fileBrowser {
                 ox = Math.random() < 0.5 ? oa : ob,
                 p1 = parseInt(o.patha.substr(o.patha.lastIndexOf(',')+1)),
                 p1it = t.items[p1],
+                p1a = o.patha.replace(','+p1,''),
+                p1aa = parseInt(p1a.substr(p1a.lastIndexOf(',')+1)),
+                p1aait = t.items[p1aa],
                 p2 = parseInt(o.pathb.substr(o.pathb.lastIndexOf(',')+1)),
-                p2it = t.items[p2];
+                p2it = t.items[p2],
+                p2a = o.pathb.replace(','+p2,'');
+                p2aa = parseInt(p2a.substr(p2a.lastIndexOf(',')+1)),
+                p2aait = t.items[p2aa];                
                 
                 if (p1it.column < p2it.column) ox.modifierColumn = 1; else ox.modifierColumn = -1;
                 if (p1it.row < p2it.row) ox.modifierRow = 1; else ox.modifierRow = -1;
