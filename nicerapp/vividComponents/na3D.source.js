@@ -890,8 +890,8 @@ export class na3D_fileBrowser {
                     var it = t.items[ oa.items[j] ];
                     
                     if (it.model) {
-                        it.model.position.x += (200 * ox.modifierColumn * (ox.modifierColumn===-1?it.adjustedModXmin:it.adjustedModXadd)) + it.modifierColumn * 50;
-                        it.model.position.y += (200 * ox.modifierRow * (ox.modifierRow===-1?it.adjustedModYmin:it.adjustedModYadd)) + it.modifierRow * 50;
+                        it.model.position.x = commonParent.it.model.position.x + (200 * ox.modifierColumn * (ox.modifierColumn===-1?it.adjustedModXmin:it.adjustedModXadd)) + it.modifierColumn * 50;
+                        it.model.position.y = commonParent.it.model.position.y + (200 * ox.modifierRow * (ox.modifierRow===-1?it.adjustedModYmin:it.adjustedModYadd)) + it.modifierRow * 50;
                         if (ox.modifiedColumn===1) {
                             it.adjustedModXadd++;
                         } else {
@@ -903,6 +903,7 @@ export class na3D_fileBrowser {
                             it.adjustedModYmin++;
                         }
                     }
+                    /*
                     for (var k=0; k<t.items.length; k++) {
                         var 
                         it2 = t.items[k],
@@ -921,7 +922,7 @@ export class na3D_fileBrowser {
                             it2.model.position.y = p.model.position.y + (100  * ox.modifierRow) + p.modifierRow * (it2.row-1) * 50;
                             it2.adjusted++;
                         }
-                    }
+                    }*/
                 }
                 
             }
