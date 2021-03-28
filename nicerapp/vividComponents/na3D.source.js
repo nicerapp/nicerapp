@@ -770,6 +770,7 @@ export class na3D_fileBrowser {
             t.items[j].adjustedModXadd = 0;
             t.items[j].adjustedModYmin = 0;
             t.items[j].adjustedModYadd = 0;
+            t.items[j].assignments = [];
         };
                 
         for (var i=0; i<t.overlaps.length; i++) {
@@ -784,9 +785,60 @@ export class na3D_fileBrowser {
                 p1it = t.items[p1],
                 p2 = parseInt(o.pathb.substr(o.pathb.lastIndexOf(',')+1)),
                 p2it = t.items[p2];
+                
                 if (p1it.column < p2it.column) ox.modifierColumn = 1; else ox.modifierColumn = -1;
                 if (p1it.row < p2it.row) ox.modifierRow = 1; else ox.modifierRow = -1;
 
+                /*if (!p1it.assignments) p1it.assignments = [];
+                if (!p2it.assignments) p2it.assignments = [];*/
+                
+                var dat = {
+                    modifierColumn : ox.modifierColumn,
+                    modifierRow : ox.modifierRow
+                };
+                p1it.assignments.push (dat);
+                p2it.assignments.push (dat);
+                
+                p1it.assignmentColumnMin = 0;
+                p1it.assignmentColumnAdd = 0;
+                p1it.assignmentRowMin = 0;
+                p1it.assignmentRowAdd = 0;
+                for (var j=0; j<p2it.assignments; j++) {
+                    if (p1it.assignments[j].modifierColumn===-1) {
+                        p1it.assignmentColumnMin++;
+                    } else {
+                        p1it.assignmentColumnAdd++;
+                    }
+                    if (p1it.assignments[j].modifierRow===-1) {
+                        p1it.assignmentRowMin++;
+                    } else {
+                        p1it.assignmentRowAdd++;
+                    }
+                }
+                p2it.assignmentColumnMin = 0;
+                p2it.assignmentColumnAdd = 0;
+                p2it.assignmentRowMin = 0;
+                p2it.assignmentRowAdd = 0;
+                for (var j=0; j<p2it.assignments; j++) {
+                    if (p2it.assignments[j].modifierColumn===-1) {
+                        p2it.assignmentColumnMin++;
+                    } else {
+                        p2it.assignmentColumnAdd++;
+                    }
+                    if (p2it.assignments[j].modifierRow===-1) {
+                        p2it.assignmentRowMin++;
+                    } else {
+                        p2it.assignmentRowAdd++;
+                    }
+                }
+                
+                if (p1it.assignmentColumnMin > 0 || p1it.assignmentColumnAdd > 0) {
+                    ox.modifierColumn = p1it.assignmentColumnMin < p1it.assignmentColumnAdd ? -1 : 1;
+                }
+                if (p1it.assignmentRowMin > 0 || p1it.assignmentRowAdd > 0) {
+                    ox.modifierRow = p1it.assignmentRowMin < p1it.assignmentRowAdd ? -1 : 1;
+                }
+                
                 //if (Math.random() < 0.5) ob.modifierColumn = Math.random() < 0.5 ? -1 : 1;
                 //if (Math.random() < 0.5) ob.modifierRow = Math.random() < 0.5 ? -1 : 1;
                 /*
