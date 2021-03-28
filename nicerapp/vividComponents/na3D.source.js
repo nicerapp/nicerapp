@@ -764,8 +764,8 @@ export class na3D_fileBrowser {
                     var it = t.items[ ob.items[j] ];
                     
                     if (it.model) {
-                        it.model.position.x += (100 * ob.modifierColumn) + it.modifierColumn * 50;
-                        it.model.position.y += (100 * ob.modifierRow) + it.modifierRow * 50;
+                        it.model.position.x += (100 * ob.modifierColumn * it.adjusted) + it.modifierColumn * 50;
+                        it.model.position.y += (100 * ob.modifierRow * it.adjusted) + it.modifierRow * 50;
                         it.adjusted++;
                     }
                     for (var k=0; k<t.items.length; k++) {
@@ -782,8 +782,8 @@ export class na3D_fileBrowser {
                                 && (it2.path.replace(o.pathb+',','').match(/,/g) || []).length === 0
                             )
                         ) {
-                            it2.model.position.x = p.model.position.x + (100 * ob.modifierColumn) + p.modifierColumn * (it2.column-1) * 50;
-                            it2.model.position.y = p.model.position.y + (100 * ob.modifierRow) + p.modifierRow * (it2.row-1) * 50;
+                            it2.model.position.x = p.model.position.x + (100 * it2.adjusted * ob.modifierColumn) + p.modifierColumn * (it2.column-1) * 50;
+                            it2.model.position.y = p.model.position.y + (100 * it2.adjusted * ob.modifierRow) + p.modifierRow * (it2.row-1) * 50;
                             it2.adjusted++;
                         }
                     }
