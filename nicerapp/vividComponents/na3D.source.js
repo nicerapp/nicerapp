@@ -412,7 +412,7 @@ export class na3D_fileBrowser {
                         //debugger;
                     }
                 }
-                if (p.name=='landscape') debugger;
+                if (p && p.name=='landscape') debugger;
                 
                 var
                 materials = [
