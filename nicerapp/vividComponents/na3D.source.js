@@ -412,7 +412,7 @@ export class na3D_fileBrowser {
                         //debugger;
                     }
                 }
-                if (path.match('landscape')) debugger;
+                if (path=='/nicerapp/siteMedia.thumbs/backgrounds/landscape') debugger;
                 
                 var
                 materials = [
