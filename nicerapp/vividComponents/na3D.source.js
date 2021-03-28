@@ -409,7 +409,7 @@ export class na3D_fileBrowser {
                             p = t.items[p.parent];
                         }
                         path = '/nicerapp/siteMedia.thumbs/' + path;
-                        if (path.match('wWw.TechTools.NET  -  001.jpg')) debugger;
+                        if (path.match('wWw.TechTools.NET')) debugger;
                         textures[i] = path;//.replace(/ /g, '%20');
                         //debugger;
                     }
