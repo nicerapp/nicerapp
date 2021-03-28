@@ -833,10 +833,10 @@ export class na3D_fileBrowser {
                 }
                 
                 if (p1it.assignmentColumnMin > 0 || p1it.assignmentColumnAdd > 0) {
-                    ox.modifierColumn = p1it.assignmentColumnMin < p1it.assignmentColumnAdd ? -1 : 1;
+                    ox.modifierColumn = p1it.assignmentColumnMin < p1it.assignmentColumnAdd ? 1 : -1;
                 }
                 if (p1it.assignmentRowMin > 0 || p1it.assignmentRowAdd > 0) {
-                    ox.modifierRow = p1it.assignmentRowMin < p1it.assignmentRowAdd ? -1 : 1;
+                    ox.modifierRow = p1it.assignmentRowMin < p1it.assignmentRowAdd ? 1 : -1;
                 }
                 
                 //if (Math.random() < 0.5) ob.modifierColumn = Math.random() < 0.5 ? -1 : 1;
