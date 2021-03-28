@@ -870,12 +870,13 @@ export class na3D_fileBrowser {
                 
                 //if (Math.random() < 0.5) ob.modifierColumn = Math.random() < 0.5 ? -1 : 1;
                 //if (Math.random() < 0.5) ob.modifierRow = Math.random() < 0.5 ? -1 : 1;
+                /*
                 if (Math.random() < 0.75) {
                     //ox.modifierColumn = p1it.column < p2it.column ? p1it.modifierColumn : p2it.modifierColumn;
                     //ox.modifierRow = p1it.row < p2it.row ? p1it.modifiedRow : p2it.modifierRow;
                     ox.modifierColumn = Math.random() < 0.5 ? -1 : 1;
                     ox.modifierRow = Math.random() < 0.5 ? -1 : 1;
-                }
+                }*/
                 
                 
                 var dat = {
