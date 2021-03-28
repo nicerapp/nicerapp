@@ -30,7 +30,7 @@ $cdb->setHTTPAdapter($cdbConfig['httpAdapter']);
 $cdb->useSSL($cdbConfig['useSSL']);
 $cdb->login($cdbConfig['adminUsername'], $cdbConfig['adminPassword']);
 
-$cdb->setDatabase($cdbConfig['domain'].'___analytics',false);
+$cdb->setDatabase($cms->domain.'___analytics',false);
 $doc = $_POST['doc'];
 try { $call = $cdb->post($doc); } catch (Exception $e) { cdb_error (500, $e, 'Could not add record'); die(); };
 
