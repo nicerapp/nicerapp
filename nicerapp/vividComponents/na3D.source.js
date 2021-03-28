@@ -399,6 +399,7 @@ export class na3D_fileBrowser {
                 for (var i=0; i<6; i++) textures[i] = '/nicerapp/siteMedia/folderIcon.png';
                 
                 for (var i=0; i<6; i++) {
+                    var p = null;
                     if (itd[''+i] && itd[''+i].match(/\.png|\.jpg|\.gif/)) {
                         var 
                         p = t.items[it.parent],
@@ -412,7 +413,7 @@ export class na3D_fileBrowser {
                         //debugger;
                     }
                 }
-                if (path=='/nicerapp/siteMedia.thumbs/backgrounds/landscape') debugger;
+                if (!p) debugger;
                 
                 var
                 materials = [
