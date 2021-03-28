@@ -791,7 +791,7 @@ export class na3D_fileBrowser {
                 p1it = t.items[p1],
                 p1a = o.patha.replace(','+p1,''),
                 commonParent = parseInt(p1a.substr(p1a.lastIndexOf(',')+1)),
-                commonParentIt = t.items[p1aa],
+                commonParentIt = t.items[commonParent],
                 p2 = parseInt(o.pathb.substr(o.pathb.lastIndexOf(',')+1)),
                 p2it = t.items[p2];
                 
