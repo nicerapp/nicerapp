@@ -7,10 +7,41 @@ $app = json_decode (base64_decode_url($_GET['apps']), true);
 <div id="site3D_label" class="vividDialog vividScrollpane" theme="{$theme}"></div>
 <script type="text/javascript" src="/nicerapp/3rd-party/3D/libs/three.js/build/three.js"></script>
 <script type="module">
+import {
+  AmbientLight,
+  AnimationMixer,
+  AxesHelper,
+  Box3,
+  Cache,
+  CubeTextureLoader,
+  DirectionalLight,
+  GridHelper,
+  HemisphereLight,
+  LinearEncoding,
+  LoaderUtils,
+  LoadingManager,
+  PMREMGenerator,
+  PerspectiveCamera,
+  RGBFormat,
+  Scene,
+  SkeletonHelper,
+  UnsignedByteType,
+  Vector3,
+  WebGLRenderer,
+  sRGBEncoding,
+} from '/nicerapp/3rd-party/3D/libs/three.js/build/three.module.js';
+import Stats from '/nicerapp/3rd-party/3D/libs/three.js/examples/jsm/libs/stats.module.js';
+import { GLTFLoader } from '/nicerapp/3rd-party/3D/libs/three.js/examples/jsm/loaders/GLTFLoader.js';
+import { KTX2Loader } from '/nicerapp/3rd-party/3D/libs/three.js/examples/jsm/loaders/KTX2Loader.js';
+import { DRACOLoader } from '/nicerapp/3rd-party/3D/libs/three.js/examples/jsm/loaders/DRACOLoader.js';
+import { OrbitControls } from '/nicerapp/3rd-party/3D/libs/three.js/examples/jsm/controls/OrbitControls-noPreventDefault.js';
+import { RGBELoader } from '/nicerapp/3rd-party/3D/libs/three.js/examples/jsm/loaders/RGBELoader.js';
+import { DragControls } from '/nicerapp/3rd-party/3D/libs/three.js/examples/jsm/controls/DragControls.js';
+    
     import { na3D_fileBrowser, na3D_demo_models, na3D_demo_cube } from '/nicerapp/vividComponents/na3D.source.js';
     $(document).ready(function() {
         na.m.waitForCondition ('Now loading filesystem index',
-            function () { return na.site.settings.backgroundsRecursive; }, // <-- wait for this to become non-null, non-undefined, aka filled with data fetched in /nicerapp/site.source.js:::na.site.onload() to /nicerapp/domainConfigs/SOME_NAME/ajax_backgrounds.php
+            function () { return na.site.settings.backgroundsRecursive && THREE; }, // <-- wait for this to become non-null, non-undefined, aka filled with data fetched in /nicerapp/site.source.js:::na.site.onload() to /nicerapp/domainConfigs/SOME_NAME/ajax_backgrounds.php
             function () {
                 na.desktop.setConfig ('contentAndToolbarRight');
                     
