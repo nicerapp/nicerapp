@@ -790,7 +790,7 @@ export class na3D_fileBrowser {
                 
         for (var i=0; i<t.overlaps.length; i++) {
             //if (i===mostConflicts.j) {
-            if (i===leastOverlappingItems.j) {
+            if (i===largest.j) {
                 var 
                 o = t.overlaps[i],
                 oa = t.ld3[o.patha],
