@@ -798,13 +798,6 @@ export class na3D_fileBrowser {
                 /*if (!p1it.assignments) p1it.assignments = [];
                 if (!p2it.assignments) p2it.assignments = [];*/
                 
-                var dat = {
-                    modifierColumn : ox.modifierColumn,
-                    modifierRow : ox.modifierRow
-                };
-                p1it.assignments.push (dat);
-                p2it.assignments.push (dat);
-                
                 p1it.assignmentColumnMin = 0;
                 p1it.assignmentColumnAdd = 0;
                 p1it.assignmentRowMin = 0;
@@ -845,6 +838,13 @@ export class na3D_fileBrowser {
                 if (p1it.assignmentRowMin > 0 || p1it.assignmentRowAdd > 0) {
                     ox.modifierRow = p1it.assignmentRowMin < p1it.assignmentRowAdd ? 1 : -1;
                 }
+                
+                var dat = {
+                    modifierColumn : ox.modifierColumn,
+                    modifierRow : ox.modifierRow
+                };
+                p1it.assignments.push (dat);
+                p2it.assignments.push (dat);
                 
                 //if (Math.random() < 0.5) ob.modifierColumn = Math.random() < 0.5 ? -1 : 1;
                 //if (Math.random() < 0.5) ob.modifierRow = Math.random() < 0.5 ? -1 : 1;
