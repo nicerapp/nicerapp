@@ -412,6 +412,8 @@ export class na3D_fileBrowser {
                         //debugger;
                     }
                 }
+                if (p.name=='landscape') debugger;
+                
                 var
                 materials = [
                     new THREE.MeshBasicMaterial({
