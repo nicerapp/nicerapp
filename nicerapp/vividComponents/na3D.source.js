@@ -868,22 +868,22 @@ export class na3D_fileBrowser {
                     ox.modifierRow = commonParentIt.assignmentRowMin < commonParentIt.assignmentRowAdd ? 1 : -1;
                 }
                 
+                //if (Math.random() < 0.5) ob.modifierColumn = Math.random() < 0.5 ? -1 : 1;
+                //if (Math.random() < 0.5) ob.modifierRow = Math.random() < 0.5 ? -1 : 1;
+                if (Math.random() < 0.5) {
+                    //ox.modifierColumn = p1it.column < p2it.column ? p1it.modifierColumn : p2it.modifierColumn;
+                    //ox.modifierRow = p1it.row < p2it.row ? p1it.modifiedRow : p2it.modifierRow;
+                    ox.modifierColumn = Math.random() < 0.5 ? -1 : 1;
+                    ox.modifierRow = Math.random() < 0.5 ? -1 : 1;
+                }
+                
+                
                 var dat = {
                     modifierColumn : ox.modifierColumn,
                     modifierRow : ox.modifierRow
                 };
                 commonParentIt.assignments.push (dat);
                 commonParentIt.assignments.push (dat);
-                
-                //if (Math.random() < 0.5) ob.modifierColumn = Math.random() < 0.5 ? -1 : 1;
-                //if (Math.random() < 0.5) ob.modifierRow = Math.random() < 0.5 ? -1 : 1;
-                /*
-                if (Math.random() < 0.5) {
-                    ox.modifierColumn = p1it.column < p2it.column ? p1it.modifierColumn : p2it.modifierColumn;
-                    ox.modifierRow = p1it.row < p2it.row ? p1it.modifiedRow : p2it.modifierRow;
-                }*/
-                /*ob.modifierColumn = Math.random() < 0.5 ? -1 : 1;
-                ob.modifierRow = Math.random() < 0.5 ? -1 : 1;*/
                 
                                 
                 for (var j=0; j<ob.items.length; j++) {
