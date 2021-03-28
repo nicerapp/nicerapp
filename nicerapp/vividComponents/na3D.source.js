@@ -606,7 +606,7 @@ export class na3D_fileBrowser {
                     
                     ld3.rowColumnCount = Math.ceil(Math.sqrt(ld3.itemCount));
                     var
-                    column = 1,
+                    column = 0,
                     row = 1;
 
                     
@@ -693,7 +693,7 @@ export class na3D_fileBrowser {
         
         for (var i=0; i<t.items.length; i++) {
             var
-            offsetXY = 250,
+            offsetXY = 200,
             it = t.items[i],
             p = t.items[it.parent],
             ld3 = t.ld3[it.path];
@@ -714,43 +714,31 @@ export class na3D_fileBrowser {
             };
             
             if (p) {
-                /*
                 var
-                mc = (
-                    p.column <= p.maxColumnIta.maxColumn / 2 
-                        ? -1 * ((p.maxColumnIta.maxColumn / 2) - p.column) * offsetXY *    (((it.level*100)/maxLevel)/100)
-                        : (p.column - (p.maxColumnIta.maxColumn / 2)) * offsetXY *    (((it.level*100)/maxLevel)/100)
-                ),
-                mr = (
-                    p.row <= p.maxRowIta.maxRow / 2 
-                        ? -1 * ((p.maxColumnIta.maxRow / 2) - p.row) * offsetXY *    (((it.level*100)/maxLevel)/100)
-                        : (p.row - (p.maxRowIta.maxRow / 2)) * offsetXY *    (((it.level*100)/maxLevel)/100)
-                );*/
-                //if (p.name=='tiled') debugger;
-                var
-                leftRight = p.column > Math.floor(p.maxColumnIta.maxColumn / 2) ? 1 : -1,
+                leftRight = p.column > Math.ceil(maxc / 2) ? 1 : -1,
                 upDown = p.row > Math.floor(p.maxRowIta.maxRow / 2) ? 1 : -1,
+                maxc = p.maxColumnIta.maxColumn,//p.level > 0 ? p.maxColumnIta.maxColumn : (p.maxColumnIta.maxColumn+1),
                 itc = (
-                    ((p.maxColumnIta.maxColumn / 2) - p.column) === 0
-                    ? 0//leftRight * p.column * offsetXY
-                    : p.column <= p.maxColumnIta.maxColumn / 2 
-                        ? ((p.maxColumnIta.maxColumn / 2) - p.column) === 0
+                    ((maxc / 2) - p.column) === 0
+                    ? p.column * offsetXY
+                    : p.column <= (p.maxColumnIta.maxColumn + 1) / 2 
+                        ? ((maxc / 2) - p.column) === 0
                             ?  leftRight * p.column * offsetXY
-                            : leftRight *  ((p.maxColumnIta.maxColumn / 2) - p.column) * offsetXY 
-                        : (p.column - (p.maxColumnIta.maxColumn / 2)) === 0
-                            ?  p.column * offsetXY
-                            : leftRight * (p.column - (p.maxColumnIta.maxColumn / 2)) * offsetXY 
+                            : leftRight *  ((maxc / 2) - p.column) * offsetXY 
+                        : (p.column - (maxc / 2)) === 0
+                            ?  leftRight * p.column * offsetXY
+                            : leftRight * (p.column - (maxc / 2)) * offsetXY 
                 ),
                 itr = (
                     (p.maxRowIta.maxRow / 2) - p.row === 0
-                    ? 0//upDown * p.row * offsetXY
+                    ? upDown * p.row * offsetXY
                     : p.row <= p.maxRowIta.maxRow / 2 
                         ? ((p.maxColumnIta.maxRow / 2) - p.row) === 0
-                            ? p.row * offsetXY
-                            : ((p.maxColumnIta.maxRow / 2) - p.row) * offsetXY 
+                            ? upDown * p.row * offsetXY
+                            : upDown * ((p.maxColumnIta.maxRow / 2) - p.row) * offsetXY 
                         : (p.row - (p.maxRowIta.maxRow / 2)) === 0
                             ?  p.row * offsetXY
-                            : (p.row - (p.maxRowIta.maxRow / 2)) * offsetXY 
+                            : upDown * (p.row - (p.maxRowIta.maxRow / 2)) * offsetXY 
                 );
             } else { var mc = 0, mr = 0; };
             
@@ -789,12 +777,17 @@ export class na3D_fileBrowser {
             if (it.model && p && p.model) {
                 it.model.position.x = p.model.position.x + itc /*+ ic /*+ ((p.column-1)*100) */+ ((it.column-1) * 50);
                 it.model.position.y = p.model.position.y + itr /*+ ir /*+ ((p.row-1)*100) */+ ((it.row-1) * 50);
-                it.model.position.z = p.model.position.z - ((it.level+1) * offsetXY);
+                it.model.position.z = p.model.position.z - ((it.level+1) * offsetXY * 2);
                 
                 var x = it.data.it;
                 //if (p.name=='space stars night sky darkmode') debugger;
-                if (p.name=='animals') debugger;
+                //if (p.name=='sunrise sunset') debugger;
+            }else if (it.model) {
+                it.model.position.x = (it.column-1) * 50;
+                it.model.position.y = (it.row-1) * 50;
+                it.model.position.z = -1 * (it.level+1) * 75;
             }
+                if (p && (p.name=='tiled'||p.name=='iframe')) debugger;
         }
         
         setTimeout(function() {
