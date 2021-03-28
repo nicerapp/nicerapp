@@ -886,8 +886,8 @@ export class na3D_fileBrowser {
                 commonParentIt.assignments.push (dat);
                 
                                 
-                for (var j=0; j<ob.items.length; j++) {
-                    var it = t.items[ ob.items[j] ];
+                for (var j=0; j<oa.items.length; j++) {
+                    var it = t.items[ oa.items[j] ];
                     
                     if (it.model) {
                         it.model.position.x += (200 * ox.modifierColumn * (ox.modifierColumn===-1?it.adjustedModXmin:it.adjustedModXadd)) + it.modifierColumn * 50;
