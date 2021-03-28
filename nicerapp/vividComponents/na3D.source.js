@@ -832,6 +832,7 @@ export class na3D_fileBrowser {
                     }
                 }
                 
+            debugger;
                 if (p1it.assignmentColumnMin > 0 || p1it.assignmentColumnAdd > 0) {
                     ox.modifierColumn = p1it.assignmentColumnMin < p1it.assignmentColumnAdd ? 1 : -1;
                 }
@@ -849,7 +850,6 @@ export class na3D_fileBrowser {
                 /*ob.modifierColumn = Math.random() < 0.5 ? -1 : 1;
                 ob.modifierRow = Math.random() < 0.5 ? -1 : 1;*/
                 
-            debugger;
                                 
                 for (var j=0; j<ob.items.length; j++) {
                     var it = t.items[ ob.items[j] ];
