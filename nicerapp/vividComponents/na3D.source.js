@@ -787,7 +787,8 @@ export class na3D_fileBrowser {
                 it.model.position.y = (it.row-1) * 50;
                 it.model.position.z = -1 * (it.level+1) * 75;
             }
-                if (p && (p.name=='tiled'||p.name=='iframe')) debugger;
+                //if (p && (p.name=='tiled'||p.name=='iframe')) debugger;
+                if (p && (p.name=='portrait')) debugger;
         }
         
         setTimeout(function() {
