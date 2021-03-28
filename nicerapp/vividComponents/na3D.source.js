@@ -508,6 +508,18 @@ export class na3D_fileBrowser {
                     t.dragndrop.cube = event.object;
                     t.dragndrop.mouseX = t.mouse.layerX;
                     t.dragndrop.mouseY = t.mouse.layerY;
+                    
+                    let cube = event.object;
+
+                    for (let i=0; i<t.items.length; i++) {
+                        let it2 = t.items[i];
+                        if (it2.parent === cube.it.parent) {
+                            //debugger;
+                            it2.model.position.dragStartX = it2.model.position.x;
+                            it2.model.position.dragStartY = it2.model.position.y;
+                            it2.model.position.dragStartZ = it2.model.position.z;
+                        }
+                    }                    
                 } );
                 
                 t.dragndrop.addEventListener( 'drag', function (event) {
@@ -517,8 +529,8 @@ export class na3D_fileBrowser {
                         let it2 = t.items[i];
                         if (it2.parent === cube.it.parent) {
                             //debugger;
-                            it2.model.position.x -= (t.dragndrop.mouseX - t.mouse.layerX);
-                            it2.model.position.y -= (t.dragndrop.mouseY - t.mouse.layerY);
+                            it2.model.position.x = it2.model.position.dragStartX - (t.dragndrop.mouseX - t.mouse.layerX);
+                            it2.model.position.y = it2.model.position.dragStartY - (t.dragndrop.mouseY - t.mouse.layerY);
                             it2.model.position.z = cube.position.z;
                         }
                     }
@@ -537,13 +549,6 @@ export class na3D_fileBrowser {
                         t.permaLines = [];
                         t.drawLines(t);
                     }
-    
-                    setTimeout(function() {
-                        cube.position.x -= (t.dragndrop.mouseX - t.mouse.layerX);
-                        cube.position.y -= (t.dragndrop.mouseY - t.mouse.layerY)
-                        t.dragndrop.mouseX = t.mouse.layerX;
-                        t.dragndrop.mouseY = t.mouse.layerY;
-                    },5);
                 });
 
                 t.dragndrop.addEventListener( 'dragend', function ( event ) {
