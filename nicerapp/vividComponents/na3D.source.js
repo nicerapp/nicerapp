@@ -693,7 +693,7 @@ export class na3D_fileBrowser {
         
         for (var i=0; i<t.items.length; i++) {
             var
-            offsetXY = 200,
+            offsetXY = 400,
             it = t.items[i],
             p = t.items[it.parent];/*,
             ld3 = t.ld3[it.path];
@@ -745,7 +745,7 @@ export class na3D_fileBrowser {
             if (it.model && p && p.model) {
                 it.model.position.x = p.model.position.x + itc /*+ ic /*+ ((p.column-1)*100) */+ ((it.column-1) * 50);
                 it.model.position.y = p.model.position.y + itr /*+ ir /*+ ((p.row-1)*100) */+ ((it.row-1) * 50);
-                it.model.position.z = p.model.position.z - ((it.level+1) * offsetXY * 2);
+                it.model.position.z = p.model.position.z - ((it.level+1) * offsetXY );
                 
                 var x = it.data.it;
                 //if (p.name=='space stars night sky darkmode') debugger;
