@@ -693,7 +693,7 @@ export class na3D_fileBrowser {
         
         for (var i=0; i<t.items.length; i++) {
             var
-            offsetXY = 300,
+            offsetXY = 200,
             it = t.items[i],
             p = t.items[it.parent];/*,
             ld3 = t.ld3[it.path];
