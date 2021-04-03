@@ -192,7 +192,7 @@ export class na3D_fileBrowser {
                         let p = hoveredItem.it.model.position;
                         t.hoverOverName = '('+hoveredItem.it.column+':'+hoveredItem.it.row+') ('+p.x+', '+p.y+', '+p.z + ') : ' + hoveredItem.it.name;
                         //t.hoverOverName = hoveredItem.it.name;
-                    debugger;    
+                    //debugger;    
                         var 
                         it = hoveredItem.it,
                         parent = t.items[it.parent],
@@ -279,7 +279,7 @@ export class na3D_fileBrowser {
             } else {
                 if (intersects[0] && intersects[0].object && intersects[0].object.parent && intersects[0].object.parent.parent) {
                     var model = intersects[0].object.parent.parent.parent.parent.parent.parent;
-                    //model.rotation.z += 0.02; //TODO : auto revert back to model.rotation.z = 0;
+                    model.rotation.z += 0.02; //TODO : auto revert back to model.rotation.z = 0;
                 }
             }
         }
@@ -670,7 +670,7 @@ export class na3D_fileBrowser {
         
         for (var i=0; i<t.items.length; i++) {
             var
-            offsetXY = 150,
+            offsetXY = 200,
             it = t.items[i],
             p = t.items[it.parent];
             
@@ -753,16 +753,18 @@ export class na3D_fileBrowser {
             //if (p && p.name=='tiled') debugger;
             
             if (it.model && p && p.model) {
-                it.model.position.x = 
+                it.model.position.x = Math.round(
                     p.model.position.x 
                     + pitc 
                     /*+ ic /*+ ((p.column-1)*100) */
-                    + ( ( p.leftRight * (it.column-1) * 50));
-                it.model.position.y = 
+                    + ( ( p.leftRight * (it.column-1) * 50))
+                );
+                it.model.position.y = Math.round(
                     p.model.position.y 
                     + pitr 
                     /*+ ir /*+ ((p.row-1)*100) */
-                    + ( (p.upDown *  (it.row-1) * 50));
+                    + ( (p.upDown *  (it.row-1) * 50))
+                );
                 it.model.position.z = p.model.position.z - ((it.level+1) * 100 );
                 
                 var x = it.data.it;
@@ -775,7 +777,7 @@ export class na3D_fileBrowser {
             }
                 //if (p && (p.name=='tiled'||p.name=='iframe')) debugger;
                 //if (p && (p.name=='landscape' || p.name=='scenery'||p.name=='animals')) debugger;
-                if (p && p.name=='space stars night sky darkmode') debugger;
+                //if (p && p.name=='space stars night sky darkmode') debugger;
         }
         
         t.drawLines(t);
@@ -789,7 +791,7 @@ export class na3D_fileBrowser {
 
     onresize_do_overlapChecks2 (t, callback) {
         t.overlaps = [];
-        
+       
         for (var patha in t.ld3) {
             if (patha!=='') {
                 var ld3a = t.ld3[patha];
@@ -962,8 +964,8 @@ export class na3D_fileBrowser {
                 a.newPos.overlaps[0] 
                 && b.newPos.overlaps[0]
                 && x[0].newPos.overlaps[0]
-                && a.newPos.overlaps[0].patha == x[0].newPos.overlaps[0].patha
-                && b.newPos.overlaps[0].pathb == x[0].newPos.overlaps[0].pathb
+               // && a.newPos.overlaps[0].patha == x[0].newPos.overlaps[0].patha
+              //  && b.newPos.overlaps[0].pathb == x[0].newPos.overlaps[0].pathb
             ) return a.newPos.overlaps[0].overlappingItems_count - b.newPos.overlaps[0].overlappingItems_count;
             else return 0;
         },
