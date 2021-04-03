@@ -192,7 +192,7 @@ export class na3D_fileBrowser {
                         let p = hoveredItem.it.model.position;
                         t.hoverOverName = '('+hoveredItem.it.column+':'+hoveredItem.it.row+') ('+p.x+', '+p.y+', '+p.z + ') : ' + hoveredItem.it.name;
                         //t.hoverOverName = hoveredItem.it.name;
-                        
+                    debugger;    
                         var 
                         it = hoveredItem.it,
                         parent = t.items[it.parent],
@@ -360,10 +360,7 @@ export class na3D_fileBrowser {
                     idx : items.length,
                     path : path2,
                     levelIdx : t.ld2[level].levelIdx,
-                    parent : parent,
-                    offsetY : 0,
-                    offsetX : 0,
-                    offsetZ : 0
+                    parent : parent
                 };
                 
                 itd.it = it;
@@ -569,9 +566,10 @@ export class na3D_fileBrowser {
                     if (t.showLines) t.drawLines(t);
                 } );
                 
-                t.databaseToPosData(t, function(loadedPosData) {
+                /*t.databaseToPosData(t, function(loadedPosData) {
                     if (!loadedPosData) t.onresize (t); else if (t.showLines) t.drawLines(t);
-                });
+                });*/
+                t.onresize(t);
                 
             }, 2000);
         }
@@ -581,20 +579,16 @@ export class na3D_fileBrowser {
         if (!t) t = this;
         //debugger;
         na.m.waitForCondition ('waiting for other onresize commands to finish',
-            function () {
-                //debugger;
-                return t.resizing === false;
-            },
-            function () {
-                t.onresize_do (t, levels);
-            }, 200
+            function () { return t.resizing === false; },
+            function () { t.onresize_do (t, levels); }, 
+            200
         );
     }
 
     
     onresize_do(t, callback) {
         t.resizing = true;
-        
+
         let 
         c = {};
         for (var path in t.ld3) {
@@ -644,7 +638,7 @@ export class na3D_fileBrowser {
         var 
         x = t.data, // x[a][b][c].it
         maxLevel = 0;
-        
+
         for (var i=0; i<its.length; i++) {
             if (maxLevel < its[i].level) maxLevel = its[i].level;
             for (var j=0; j<its.length; j++) {
@@ -674,77 +668,101 @@ export class na3D_fileBrowser {
         its3 = its2.sort (compare2);
         
         
-        debugger;
-        /*
-        for (var i=0; i<its.length; i++) {
-            var
-            it = $.extend([],t.items[i])
-            it2 = [];
-            
-            for (var j=0; j<t.items.length; j++) {
-                var
-                it2 = t.items[j],
-                ;
-            }            
-                
-            it.columnCount
-            
-        }*/
-        
         for (var i=0; i<t.items.length; i++) {
             var
-            offsetXY = 200,
+            offsetXY = 300,
             it = t.items[i],
-            p = t.items[it.parent];/*,
-            ld3 = t.ld3[it.path];
-
+            p = t.items[it.parent];
             
-            if (p && p.path && p.path!=='') {
+            if (p && p.parent && t.items[p.parent]) {
                 var
-                ld3p = t.ld3[p.path];
-                if (!ld3p.modifierColumn) ld3p.modifierColumn = Math.random() < 0.5 ? -1 : 1;
-                if (!ld3p.modifierRow) ld3p.modifierRow = Math.random() < 0.5 ? -1 : 1;
-                it.modifierColumn = ld3p.modifierColumn,//p.column < (ld3p.rowColumnCount/2) ? 1 : -1,
-                it.modifierRow = ld3p.modifierRow;//p.row < (ld3p.rowColumnCount/2) ? 1 : -1;
+                it2 = t.items[p.parent],
+                ppLeftRight = it2.leftRight,
+                ppUpDown = it2.upDown;                
             } else {
-                if (!ld3.modifierColumn) ld3.modifierColumn = Math.random() < 0.5 ? -1 : 1;
-                if (!ld3.modifierRow) ld3.modifierRow = Math.random() < 0.5 ? -1 : 1;
-                it.modifierColumn = ld3.modifierColumn,//it.column < ld3.rowColumnCount/2 ? 1 : -1,
-                it.modifierRow = ld3.modifierRow;//it.row < ld3.rowColumnCount/2 ? 1 : -1;
-            };*/
+                var
+                it2 = null,
+                ppLeftRight = 1,
+                ppUpDown = 1;
+            };
             
             if (p) {
+                
                 var
-                maxc = p.maxColumnIta.maxColumn,//p.level > 0 ? p.maxColumnIta.maxColumn : (p.maxColumnIta.maxColumn+1),
-                leftRight = p.column > Math.floor(maxc / 2) ? 1 : -1,
-                upDown = p.row > Math.floor(p.maxRowIta.maxRow / 2) ? 1 : -1,
-                itc = (
-                    ((maxc / 2) - p.column) === 0
-                    ? leftRight * p.column * offsetXY
-                    : p.column <= (p.maxColumnIta.maxColumn) / 2 
-                        ? ((maxc / 2) - p.column) === 0
-                            ?  leftRight * p.column * offsetXY
-                            : leftRight *  ((maxc / 2) - p.column) * offsetXY 
-                        : (p.column - (maxc / 2)) === 0
-                            ?  leftRight * p.column * offsetXY
-                            : leftRight * (p.column - (maxc / 2)) * offsetXY 
+                pmaxc = p.maxColumnIta.maxColumn,//p.level > 0 ? p.maxColumnIta.maxColumn : (p.maxColumnIta.maxColumn+1),
+                pmaxr = p.maxRowIta.maxRow,
+                pLeftRight = p.column > Math.floor(pmaxc / 2) ?  ppLeftRight * 1 : ppLeftRight * -1,
+                pUpDown = p.row > Math.floor(p.maxRowIta.maxRow / 2) ? ppUpDown * 1 :  ppUpDown * -1,
+                pModifierC = (
+                    p.level > 1
+                    ? pLeftRight
+                    : it2 
+                        ? p.model.position.x > it2.model.position.x ? 1 : -1
+                        : 1
                 ),
+                pitcp = (
+                      pModifierC * -1 * ((pmaxc / 2) - p.column)
+                ),
+                pitcPercentage = (pitcp*1.00) / pmaxc,
+                pModifierR = (
+                    p.level > 1
+                    ? pUpDown
+                    : it2 
+                        ? p.model.position.y > it2.model.position.y ? 1 : -1
+                        : 1
+                ),
+                pitrp = (
+                      pModifierR * -1 * ((pmaxr / 2) - p.row)
+                ),
+                pitrPercentage = (pitrp*1.00) / pmaxr,
+                pitc = offsetXY * pitcPercentage * p.maxColumnIta.maxColumn,
+                pitr = offsetXY * pitrPercentage * p.maxRowIta.maxRow;
+                
+                it.pitcp = pitcp;
+                it.pitrp = pitrp;
+                it.parentColumOffset = pitc;
+                it.parentRowOffset = pitr;
+                it.parentColumOffsetPercentage = pitcPercentage;
+                it.parentRowOffsetPercentage = pitrPercentage;
+                it.parentLeftRight = pLeftRight;
+                it.parentUpDown = pUpDown;
+                
+                var
+                itmaxc = it.maxColumnIta.maxColumn,
+                itmaxr = it.maxRowIta.maxRow,
+                itLeftRight = it.column > Math.floor(itmaxc / 2) ? 1 : -1,
+                itUpDown = it.row > Math.floor(itmaxr / 2) ? 1 : -1,
+                itc = (
+                    itLeftRight * ((itmaxc / 2) - it.column)
+                ),
+                itcPercentage = (itc*1.00) / itmaxc,
                 itr = (
-                    (p.maxRowIta.maxRow / 2) - p.row === 0
-                    ? upDown * p.row * offsetXY
-                    : p.row <= p.maxRowIta.maxRow / 2 
-                        ? ((p.maxColumnIta.maxRow / 2) - p.row) === 0
-                            ? upDown * p.row * offsetXY
-                            : upDown * ((p.maxColumnIta.maxRow / 2) - p.row) * offsetXY 
-                        : (p.row - (p.maxRowIta.maxRow / 2)) === 0
-                            ?  p.row * offsetXY
-                            : upDown * (p.row - (p.maxRowIta.maxRow / 2)) * offsetXY 
-                );
+                    itUpDown * ((itmaxr / 2) - it.row)
+                ),
+                itrPercentage = (itr*1.00) / itmaxr,
+                itco = 50 * itcPercentage * it.maxColumnIta.maxColumn,
+                itro = 50 * itrPercentage * it.maxRowIta.maxRow;
+                
+                it.columnOffsetValue = itc;
+                it.rowOffsetValue = itr;
+                it.leftRight = itLeftRight;
+                it.upDown = itUpDown;                
+                
             } else { var mc = 0, mr = 0; };
         
+            //if (p && p.name=='tiled') debugger;
+            
             if (it.model && p && p.model) {
-                it.model.position.x = p.model.position.x + itc /*+ ic /*+ ((p.column-1)*100) */+ ((it.column-1) * 50);
-                it.model.position.y = p.model.position.y + itr /*+ ir /*+ ((p.row-1)*100) */+ ((it.row-1) * 50);
+                it.model.position.x = 
+                    p.model.position.x 
+                    + pitc 
+                    /*+ ic /*+ ((p.column-1)*100) */
+                    + ( ( p.leftRight * (it.column-1) * 50));
+                it.model.position.y = 
+                    p.model.position.y 
+                    + pitr 
+                    /*+ ir /*+ ((p.row-1)*100) */
+                    + ( (p.upDown *  (it.row-1) * 50));
                 it.model.position.z = p.model.position.z - ((it.level+1) * offsetXY );
                 
                 var x = it.data.it;
@@ -756,17 +774,19 @@ export class na3D_fileBrowser {
                 it.model.position.z = -1 * (it.level+1) * 75;
             }
                 //if (p && (p.name=='tiled'||p.name=='iframe')) debugger;
-                if (p && (p.name=='portrait')) debugger;
+                //if (p && (p.name=='landscape' || p.name=='scenery'||p.name=='animals')) debugger;
+                if (p && p.name=='space stars night sky darkmode') debugger;
         }
         
         t.drawLines(t);
 
         setTimeout(function() {
-            //t.onresize_do_overlapChecks2(t, callback);
-            if (typeof callback=='function') callback(t);
+            t.onresize_do_overlapChecks2(t, callback);
+            //if (typeof callback=='function') callback(t);
         }, 50);
     }
     
+
     onresize_do_overlapChecks2 (t, callback) {
         t.overlaps = [];
         
@@ -807,21 +827,12 @@ export class na3D_fileBrowser {
                                             
                                     };
                                     if (!have) {
-                                        t.overlaps.push ({overlappingItems_count : 0, patha : patha, pathb : pathb, conflicts : 1, diffX : ita.model.position.x - itb.model.position.x, diffY : ita.model.position.y - itb.model.position.y, diffZ : ita.model.position.z - itb.model.position.z });
+                                        t.overlaps.push ({overlappingItems_count : 0, patha : patha, pathb : pathb, conflicts : 1});
                                         var o = t.overlaps[t.overlaps.length-1];
-                                        o.lastDiffX = o.diffX;
-                                        o.lastDiffY = o.diffY;
-                                        o.lastDiffZ = o.diffZ;
                                     } else {
                                         var 
-                                        o = t.overlaps[k],
-                                        diffX = ita.model.position.x - itb.model.position.x,
-                                        diffY = ita.model.position.y - itb.model.position.y,
-                                        diffZ = ita.model.position.z - itb.model.position.z;
+                                        o = t.overlaps[k];
                                         o.conflicts++;
-                                        if (diffX > o.diffX) {o.lastDiffX = o.diffX; o.diffX = diffX;};
-                                        if (diffY > o.diffY) {o.lastDiffY = o.diffY; o.diffY = diffY;};
-                                        if (diffZ > o.diffZ) {o.lastDiffZ = o.diffZ; o.diffZ = diffZ;};
                                     }
                                     t.overlaps[k].overlappingItems_count++;
                                 }
@@ -896,14 +907,161 @@ export class na3D_fileBrowser {
             t.items[j].assignments = [];
         };
 
-        
         for (var i=0; i<t.overlaps.length; i++) {
             //if (i===mostConflicts.j) {
             if (i===largest.j) {
+                var 
+                x = mostOverlappingItems,
+                overlapFixes = [ 'top', 'topright', 'middleright', 'bottomright', 'bottom', 'bottomleft', 'middleleft', 'topleft'],
+                overlapFixData = [],
+                overlapFix = null;
                 
+                for (var j=0; j<overlapFixes.length; j++) {
+                    var 
+                    ofs = overlapFixes[j], 
+                    d = { quadrant : ofs };
+                    
+                    if (ofs.match('top')) d.upDown = 1; else if (ofs.match('bottom')) d.upDown = -1; else d.upDown = 0;
+                    if (ofs.match('left')) d.leftRight = -1; else if (ofs.match('right')) d.leftRight = 1; else d.leftRight = 0;
+                    
+                    d.newPos = t.onresize_testCalculateOverlaps (t, t.overlaps[i].patha, t.overlaps[i].pathb, d);
+                    overlapFixData.push (d);
+                }
+                
+                overlapFix = t.onresize_calculateBestOverlapFix (t, overlapFixData);
+                t.onresize_applyBestOverlapFix (t, overlapFix);
+                debugger;
             }
-        }        
+        }   
+        if (t.overlaps.length > 0) {
+            setTimeout (function() {
+                t.onresize_do_overlapChecks2(t, callback);
+            }, 10);
+        } else if (typeof callback=='function') callback(t);        
     }
+    
+    onresize_applyBestOverlapFix (t, overlapFix) {
+        var fix = overlapFix[0];
+        for (var i=0; i<fix.itemsa.length; i++) {
+            var ita = t.items[fix.itemsa[i].idx];
+            if (ita.model) {
+                ita.model.position.x = fix.itemsa[i].x;
+                ita.model.position.y = fix.itemsa[i].y;
+                ita.model.position.z = fix.itemsa[i].z;
+            }
+        }
+    }
+    
+    onresize_calculateBestOverlapFix (t, overlapFixData) {
+        var 
+        compare = function (a,b) { return a.newPos.overlaps.length - b.newPos.overlaps.length; },
+        x = overlapFixData.sort(compare);
+        var
+        compare2 = function (a,b) {
+            if (
+                a.newPos.overlaps[0] 
+                && b.newPos.overlaps[0]
+                && x[0].newPos.overlaps[0]
+                && a.newPos.overlaps[0].patha == x[0].newPos.overlaps[0].patha
+                && b.newPos.overlaps[0].pathb == x[0].newPos.overlaps[0].pathb
+            ) return a.newPos.overlaps[0].overlappingItems_count - b.newPos.overlaps[0].overlappingItems_count;
+            else return 0;
+        },
+        y = x.sort(compare2);
+        
+        return y;
+    }
+    
+    onresize_testCalculateOverlaps (t, patha, pathb, ofd4quadrant) {
+        var r = {
+            overlaps : []
+        };
+        ofd4quadrant.itemsa = [];
+        ofd4quadrant.itemsb = [];
+        
+        
+        var ld3a = t.ld3[patha];
+        var ld3b = t.ld3[pathb];
+        for (var i=0; i<ld3a.items.length; i++) {
+            var ita = t.items[ld3a.items[i]];
+            if (!ita.model) continue;
+            ofd4quadrant.itemsa.push($.extend({},ita.model.position));
+            var ita1 = ofd4quadrant.itemsa[ofd4quadrant.itemsa.length-1];
+            ita1.idx = ita.idx;
+            
+            ita1.x += ofd4quadrant.leftRight * 50;
+            ita1.y += ofd4quadrant.upDown * 50;
+
+            for (var j=0; j<ld3b.items.length; j++) {
+                var itb = t.items[ld3b.items[j]];
+                if (!itb.model) continue;
+                if (i===0) {
+                    ofd4quadrant.itemsb.push($.extend({},itb.model.position));
+                    var itb1 = ofd4quadrant.itemsb[ofd4quadrant.itemsb.length-1];
+                    itb1.idx = itb.idx;
+                } else {
+                    var itb1 = null;
+                    for (var k=0; k<ofd4quadrant.itemsb.length; k++) {
+                        if (
+                            itb.model.position.x === ofd4quadrant.itemsb[k].x
+                            && itb.model.position.y === ofd4quadrant.itemsb[k].y
+                            && itb.model.position.z === ofd4quadrant.itemsb[k].z
+                        ) itb1 = ofd4quadrant.itemsb[k];
+                    }
+                }
+                
+                if (
+                    ita1.x === itb1.x
+                    && ita1.y === itb1.y
+                    && ita1.z === itb1.z
+                ) {
+                    var have = false;
+                    for (var k=0; k<r.overlaps.length; k++) {
+                        if (
+                            (
+                                r.overlaps[k].patha === patha
+                                && r.overlaps[k].pathb === pathb
+                            )
+                            || (
+                                r.overlaps[k].patha === pathb
+                                && r.overlaps[k].pathb === patha
+                            )
+                        ) {
+                            have = true;
+                            break;
+                        }
+                            
+                    };
+                    if (!have) {
+                        r.overlaps.push ({overlappingItems_count : 0, patha : patha, pathb : pathb, conflicts : 1 });
+                        var o = r.overlaps[t.overlaps.length-1];
+                    } else {
+                        var 
+                        o = r.overlaps[k];
+                        o.conflicts++;
+                    }
+                    r.overlaps[k].overlappingItems_count++;
+                }
+            }
+        }
+        
+        r.leastOverlappingItems = { overlappingItems_count : 200, j : -1 }, 
+        r.mostOverlappingItems = { overlappingItems_count : 0, j : -1 }, 
+        r.mostConflicts = {conflicts : 1, j : -1};
+        
+        for (var j=0; j<r.overlaps.length; j++) {
+            if (r.overlaps[j].overlappingItems_count > r.mostOverlappingItems.overlappingItems_count)
+                r.mostOverlappingItems = { overlappingItems_count : r.overlaps[j].overlappingItems_count, j : j};
+
+            if (r.overlaps[j].overlappingItems_count < r.leastOverlappingItems.overlappingItems_count)
+                r.leastOverlappingItems = { overlappingItems_count : r.overlaps[j].overlappingItems_count, j : j};
+            
+            if (r.overlaps[j].conflicts > r.mostConflicts.conflicts) r.mostConflicts = {conflicts:r.overlaps[j].conflicts, j : j};
+        }
+        
+        return r;
+    }
+    
     
     onresize_do_overlapChecks (t, callback) {
         t.overlaps = [];
@@ -923,9 +1081,11 @@ export class na3D_fileBrowser {
                                 
                                 if (
                                     ita.model && itb.model
-                                    && ita.model.position.x === itb.model.position.x
-                                    && ita.model.position.y === itb.model.position.y
-                                    && ita.model.position.z === itb.model.position.z
+                                    && (
+                                        ita.model.position.x === itb.model.position.x
+                                        && ita.model.position.y === itb.model.position.y
+                                        && ita.model.position.z === itb.model.position.z
+                                    )
                                 ) {
                                     var have = false;
                                     for (var k=0; k<t.overlaps.length; k++) {
