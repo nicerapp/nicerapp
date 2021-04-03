@@ -31,7 +31,7 @@ $cdb->useSSL($cdbConfig['useSSL']);
 $cdb->login($cdbConfig['adminUsername'], $cdbConfig['adminPassword']);
 
 $cdb->setDatabase($cms->domain.'___analytics',false);
-$doc = $_POST['doc'];
+$doc = json_decode($_POST['doc'], true);
 try { $call = $cdb->post($doc); } catch (Exception $e) { cdb_error (500, $e, 'Could not add record'); die(); };
 
 echo 'Success'; // echo json_encode($recordToAdd); <-- not needed, js will refresh the entire tree (accounting for multiple users working on the same tree at the same time)

@@ -278,7 +278,7 @@ na.analytics = {
             type : 'POST',
             url : '/nicerapp/logEvent.php',
             data : {
-                doc : doc
+                doc : JSON.stringify(doc)
             }
         };
         $.ajax(ac);
@@ -312,7 +312,7 @@ na.analytics = {
         ac = {
             type : 'POST',
             url : '/nicerapp/logEvent.php',
-            data : { doc : doc }
+            data : { doc : JSON.stringify(doc) }
         };
         $.ajax(ac);
     },
