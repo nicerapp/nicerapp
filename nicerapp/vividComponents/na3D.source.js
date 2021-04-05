@@ -670,7 +670,7 @@ export class na3D_fileBrowser {
         
         for (var i=0; i<t.items.length; i++) {
             var
-            offsetXY = 200,
+            offsetXY = 100,
             it = t.items[i],
             p = t.items[it.parent];
             
@@ -765,7 +765,7 @@ export class na3D_fileBrowser {
                     /*+ ir /*+ ((p.row-1)*100) */
                     + ( (p.upDown *  (it.row-1) * 50))
                 );
-                it.model.position.z = p.model.position.z - ((it.level+1) * 100 );
+                it.model.position.z = -1 * ((it.level+1) * 250 );
                 
                 var x = it.data.it;
                 //if (p.name=='space stars night sky darkmode') debugger;
@@ -773,7 +773,7 @@ export class na3D_fileBrowser {
             }else if (it.model) {
                 it.model.position.x = (it.column+1) * 50;
                 it.model.position.y = (it.row-1) * 50;
-                it.model.position.z = -1 * (it.level+1) * 100;
+                it.model.position.z = -1 * (it.level+1) * 250;
             }
                 //if (p && (p.name=='tiled'||p.name=='iframe')) debugger;
                 //if (p && (p.name=='landscape' || p.name=='scenery'||p.name=='animals')) debugger;

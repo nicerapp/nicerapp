@@ -179,14 +179,14 @@ na.blog = {
                                 });
                                 var editorHeight = $('#siteContent .vividDialogContent').height() - $('#document_navBar').height();
                                 $('#jsTree').css({ height : $('#siteToolbarLeft .vividDialogContent').height() - $('#jsTree_navBar').height() - 20 });
-                                var mce_bars_height = 0;
-                                $('.tox-toolbar-overlord, .tox-statusbar').each(function() { mce_bars_height += $(this).height(); });
-                                $('.tox-tinymce').css ({
-                                    width : '100%',
-                                    height : editorHeight - $('.tox-statusbar').height()
+                                var mce_bars_height = 20;
+                                $('.mce-toolbar-grp, .mce-statusbar').each(function() { mce_bars_height += $(this).height(); });
+                                $('.mce-tinymce').css ({
+                                    width : '99%',
+                                    height : editorHeight - $('.mce-statusbar').height()
                                 });
                                 $('#tinymce_ifr').css ({
-                                    width : '100%',
+                                    width : '99%',
                                     height : editorHeight - mce_bars_height
                                 });
                                 $('#document').css({display:d});
@@ -404,6 +404,23 @@ na.blog = {
         na.blog.saveEditorContent(sel, function() {
             na.site.loadContent(url);
         });
+    },
+    
+    onclick_insertMedia : function () {
+        var
+        tmce = tinymce.get('tinymce');
+        
+        tmce.windowManager.open({
+            title : 'Insert Photo Album',
+            url : '/nicerapp/vividComponents/photoAlbum/4.0.0/index.all.php',
+            width : 570,
+            height: 700
+        });
+    },
+    
+    insertMediaFolder : function (relPath) {
+        tinymce.activeEditor.execCommand ('mceInsertContent', false, ':{"mediaFolder":"'+relPath+'"}:');
+        tinymce.activeEditor.windowManager.close();
     },
     
     onclick_btnUpload : function (evt) {

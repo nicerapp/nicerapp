@@ -380,6 +380,7 @@ another example:
 
 ) {
 	//if (stripos($path, $pathStart)!==false) {
+		//echo '<pre style="color:cyan;">'; var_dump ($path); echo '</pre>'; die();
 		$path = realpath($path);
 		$result = array();
 		//if (!in_array("file",$fileTypesFilter)) $fileTypesFilter[count($fileTypesFilter)]="file";

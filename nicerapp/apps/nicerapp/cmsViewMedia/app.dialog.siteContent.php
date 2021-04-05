@@ -17,7 +17,7 @@ $ip = (array_key_exists('X-Forwarded-For',apache_request_headers())?apache_reque
 
 ?>
 <!--<div class="lds-facebook"><!-- thanks for allowing CC0 license usage : https://loading.io/css/ -- ><div></div><div></div><div></div></div> -->
-<!--<pre><?php echo json_encode($app, JSON_PRETTY_PRINT);?></pre>-->
+<!--<pre><?php //echo json_encode($app, JSON_PRETTY_PRINT);?></pre>-->
 
 <?php
 global $cms;
@@ -40,8 +40,8 @@ try { $call = $cdb->get ($app['cmsText']['id']); } catch (Exception $e) { echo $
 echo $call->body->document;
 */
 
-$baseURL = '/nicerapp/siteData/';
-$baseDir = $root.'/nicerapp/siteData/';
+$baseURL = '/nicerapp/siteData/'.$cms->domain.'/';
+$baseDir = $root.'/nicerapp/siteData/'.$cms->domain.'/';
 $targetDir = $baseDir.$app['cmsViewMedia']['basePath'].'/';
 $targetURL = $baseURL.$app['cmsViewMedia']['basePath'].'/';
 $fn = $app['cmsViewMedia']['filename'];

@@ -10,8 +10,12 @@
     $root = realpath(dirname(__FILE__).'/../../../../');
     require_once ($root.'/nicerapp/boot.php');
     
-    $baseURL = '/nicerapp/siteData/';
-    $baseDir = $root.'/nicerapp/siteData/';
+    global $cms;
+    $cms = new nicerAppCMS();
+    $cms->init();
+    
+    $baseURL = '/nicerapp/siteData/'.$cms->domain.'/';
+    $baseDir = $root.'/nicerapp/siteData/'.$cms->domain.'/';
     $targetDir = $baseDir.$_GET['basePath'];
     $thumbDir = $targetDir.'/thumbs';
     
