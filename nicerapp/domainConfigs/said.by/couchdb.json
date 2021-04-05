@@ -1,0 +1,11 @@
+{
+    "http" : "https://",
+    "domain" : "nicer.app",
+    "port" : "6984",
+    "useSSL" : true,
+    "httpAdapter" : "HTTP_CURL",
+    "username" : "Guest",
+    "password" : "Guest",
+    "adminUsername" : "admin",
+    "adminPassword" : "texas.t33"
+}

@@ -1,0 +1,230 @@
+html, body {
+    padding : 0;
+    margin : 0;
+    font-family: 'Open Sans', sans-serif;
+    overflow : hidden;
+}
+#siteBackground {
+    position:absolute;
+}
+#siteBackground img {
+    display : none;
+    position : absolute;
+}
+img.bg_first {
+    z-index : 10;
+}
+img.bg_last {
+    z-index : 11;
+}
+
+#siteContent {
+    top : calc(1vh + 4rem);
+    left : 1vw;
+    width : calc(98vw - 6px);
+    height : calc(97vh - 4rem - 6px);
+    border-radius : 20px;
+}
+.vividDialogContent {
+    overflow : auto;
+    display : block;
+    margin : 10px;
+    width : calc(98vw - 15px);
+    height: calc(100vh - 120px);
+    z-index : 1100; 
+}
+.vividDialogContent table, .vividDialogContent td {
+    z-index : 1101;
+}
+
+
+.vividButton, .vividMenu, .vividDialog {
+    position : absolute;
+    display : flex;
+    font-size : 1rem;
+    z-index : 1000;
+}
+.vividButton, .vividButtonSelected {
+    display : flex;
+    justify-content : center;
+    align-items : center;
+    text-align : center;
+    width : 200px;
+    height : 1rem;
+    font-size : 1rem;
+    font-weight : bold;
+}
+.vividButton.level1, .vividButtonSelected.level1 {
+    margin-top : 5px;
+}
+
+#siteDateTime {
+    top : 1vh;
+    left : 1vw;
+    width : 230px;
+    height : 2rem;
+    font-size : 1rem;
+    font-weight : bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius : 10px;
+}
+
+#btnThemeSwitch {
+    position : absolute;
+    top : -200px; /*calc(1vh - 3px);*/
+    left : calc(1vw + 245px);
+    width : 40px;
+    z-index : 1100;
+    border : 3px ridge lime;
+    border-radius : 10px;
+    box-shadow : 7px 7px 5px rgba(0,0,0,0.7), inset -2px -2px 2px rgba(0,0,0,0.8), inset 2px 2px 2px rgba(0,0,0,0.8);
+}
+#btnThemeSwitch.phoneView {
+    left : calc(1vw + 6px);
+}
+#btnThemeSwitch.started {
+    animation : anim_btnThemeSwitch_started 2s;
+    animation-iteration-count : 1;
+    animation-fill-mode : forwards;
+}
+@keyframes anim_btnThemeSwitch_started {
+    100% {
+        top : calc(1vh - 3px);
+    }
+}
+
+#btnChangeBackground {
+    position : absolute;
+    top : -200px; /*calc(1vh - 3px);*/
+    left : calc(1vw + 300px);
+    width : 40px;
+    background : rgba(255,255,255,0.5);
+    z-index : 1100;
+    border : 3px ridge lime;
+    border-radius : 10px;
+    box-shadow : 7px 7px 5px rgba(0,0,0,0.7), inset -2px -2px 2px rgba(0,0,0,0.8), inset 2px 2px 2px rgba(0,0,0,0.8);
+}
+#btnChangeBackground.phoneView {
+    left : calc(99vw - 50px);
+}
+#btnChangeBackground.started {
+    animation : anim_btnChangeBackground_started 2s;
+    animation-iteration-count : 1;
+    animation-fill-mode : forwards;
+}
+@keyframes anim_btnChangeBackground_started {
+    100% {
+        top : calc(1vh - 3px);
+    }
+}
+
+
+#siteMenu {
+    top : 1vh;
+    left : calc(2vw + 340px);
+    width : 5vw;
+    height : 1.5rem;
+}
+#siteMenu.phoneView {
+    left : calc(50vw - 100px);
+}
+
+select, optgroup {
+    font-size : 2rem;
+}
+
+.selfHealerMsg {
+    font-weight : bold;
+}
+.selfHealerDbg {
+    color : rgba(150,150,150,1);
+}
+.selfHealerResult {
+    color : rgba(150,150,255,1);
+}
+.selfHealerFailed {
+    color : rgba(255,150,150,1);
+}
+.selfHealerWarning {
+    color : rgba(235,161,52,1);
+}
+
+
+.mainTooltipTheme .tooltipster-box {
+    width : 120%;
+    border-radius : 7px;
+    border : 1px solid yellow;
+    box-shadow : 2px 2px 1px rgba(0,0,0,0.7), 0px 0px 7px rgba(50,255,50,0.7);
+    /*background : url('/nicerapp/siteMedia/backgrounds/tiled/active/grey/seamless_texture_of_ice.jpg') repeat;*/
+    background : rgba(255,255,255,0.7);
+    opacity : 1;
+    z-index : 765;
+    color : black;
+}
+.mainTooltipTheme .tooltipster-content {
+    color : black;
+    font-family : Architects Daughter;
+    font-size : 20px;
+    font-weight : bold;
+    padding : 8px 10px;
+   /* animation : mainTooltipThemeAnim 2s infinite;*/
+    border-radius : 7px;
+}
+
+.mainTooltipTheme.tooltipster-sidetip .tooltipster-arrow-background {
+	/*border: 10px solid transparent;*/
+}
+
+.mainTooltipTheme.tooltipster-sidetip.tooltipster-bottom .tooltipster-arrow-background {
+	border-bottom-color: white;
+    /*animation : mainTooltipThemeAnim2a 2s infinite;*/
+	left: 0;
+	top: 3px;
+}
+
+.mainTooltipTheme.tooltipster-sidetip.tooltipster-left .tooltipster-arrow-background {
+	border-left-color: white;
+    /*animation : mainTooltipThemeAnim2b 2s infinite;*/
+	left: -3px;
+	top: 0;
+}
+
+.mainTooltipTheme.tooltipster-sidetip.tooltipster-right .tooltipster-arrow-background {
+	border-right-color: white;
+    /*animation : mainTooltipThemeAnim2c 2s infinite;*/
+	left: 3px;
+	top: 0;
+}
+
+.mainTooltipTheme.tooltipster-sidetip.tooltipster-top .tooltipster-arrow-background {
+	border-top-color: white;
+    /*animation : mainTooltipThemeAnim2d 2s infinite;*/
+	left: 0;
+	top: -3px;
+}
+
+/* .tooltipster-arrow-border */
+
+.mainTooltipTheme.tooltipster-sidetip .tooltipster-arrow-border {
+	/*border: 10px solid transparent;*/
+	left: 0;
+	top: 0;
+}
+
+.mainTooltipTheme.tooltipster-sidetip.tooltipster-bottom .tooltipster-arrow-border {
+	border-bottom-color: yellow;
+}
+
+.mainTooltipTheme.tooltipster-sidetip.tooltipster-left .tooltipster-arrow-border {
+	border-left-color: yellow;
+}
+
+.mainTooltipTheme.tooltipster-sidetip.tooltipster-right .tooltipster-arrow-border {
+	border-right-color: yellow;
+}
+
+.mainTooltipTheme.tooltipster-sidetip.tooltipster-top .tooltipster-arrow-border {
+	border-top-color: yellow;
+}
