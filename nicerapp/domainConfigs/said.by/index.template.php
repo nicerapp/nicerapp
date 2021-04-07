@@ -38,7 +38,7 @@ na.site.globals = {
     <meta name="theme-color" content="#ffffff">
     <title>{$title}</title>
 </head>
-<body onload="nas.onload(event);">
+<body onload="na.site.onload(event);">
     <div id="siteBackground"> 
         <div id="siteBackground_bg"></div>
         <img class="bg_first" alt=""/>
@@ -90,6 +90,7 @@ na.site.globals = {
     
     <div id="siteDateTime" class="vividDialog" theme="{$theme}"></div>
     
+    <!--
     <img id="btnThemeSwitch" src="/nicerapp/siteMedia/btnThemeSwitch_icon.png" class="tooltip" title="Switch between light and dark theme" alt="Switch between light and dark theme" tooltipTheme="mainTooltipTheme" onclick="nas.themeSwitch()"/>
     <form id="siteSettings" action="/" method="POST" style="display:none;">
         <select id="siteTheme" name="siteTheme" form="siteSettings" onchange="this.form.submit()">
@@ -99,6 +100,8 @@ na.site.globals = {
             </optgroup>
         </select>
     </form>    
+    -->
+    <img id="btnLoginLogout" src="/nicerapp/siteMedia/btnLogin.png" class="tooltip" title="Log in" alt="Log in" tooltipTheme="mainTooltipTheme" onclick="na.site.login()"/>
     
     <img id="btnChangeBackground" src="/nicerapp/siteMedia/btnBackground.png" class="tooltip" title="Choose a random background" alt="Choose a random background" tooltipTheme="mainTooltipTheme" onclick="nas.changeBackground()"/>
     
