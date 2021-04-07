@@ -148,7 +148,7 @@ img.bg_last {
     border-radius : 10px;
 }
 
-#btnThemeSwitch {
+#btnLoginLogout {
     position : absolute;
     top : calc(1vh - 3px);
     left : calc(1vw + 245px);
@@ -158,7 +158,7 @@ img.bg_last {
     border-radius : 10px;
     box-shadow : 4px 4px 2px rgba(0,0,0,0.7), inset -2px -2px 2px rgba(0,0,0,0.8), inset 2px 2px 2px rgba(0,0,0,0.8);
 }
-#btnThemeSwitch.phoneView {
+#btnLoginLogout.phoneView {
     left : calc(1vw + 6px);
 }
 
