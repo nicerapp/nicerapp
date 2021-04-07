@@ -79,11 +79,12 @@ if (!$got) {
     echo 'Already have a Guest user record.<br/>';
 }
 
-$security = '{ "admins": { "names": [], "roles": ["guests"] }, "members": { "names": [], "roles": ["guests"] } }';
+$security_admin = '{ "admins": { "names": ["Administrator"], "roles": [] }, "members": { "names": [], "roles": ["guests"] } }';
+$security_guest = '{ "admins": { "names": [], "roles": ["guests"] }, "members": { "names": [], "roles": ["guests"] } }';
 
 $cdb->setDatabase($cms->domain.'___analytics',true);
 try { 
-    $call = $cdb->setSecurity ($security);
+    $call = $cdb->setSecurity ($security_guest);
 } catch (Exception $e) {
     echo '<pre style="color:red">'; var_dump ($e); echo '</pre>'; die();
 }
@@ -92,17 +93,17 @@ echo 'Created database '.$cms->domain.'___analytics<br/>';
 
 $cdb->setDatabase($cms->domain.'___three_d_positions',true);
 try { 
-    $call = $cdb->setSecurity ($security);
+    $call = $cdb->setSecurity ($security_guest);
 } catch (Exception $e) {
     echo '<pre style="color:red">'; var_dump ($e); echo '</pre>'; die();
 }
 echo 'Created database '.$cms->domain.'___three_d_positions<br/>';
 
-$dbName = $cms->domain.'___cms_tree';
+$dbName = str_replace('.','_',$cms->domain).'___cms_tree';
 try { $cdb->deleteDatabase ($dbName); } catch (Exception $e) { };
 $cdb->setDatabase($dbName, true);
 try { 
-    $call = $cdb->setSecurity ($security);
+    $call = $cdb->setSecurity ($security_admin);
 } catch (Exception $e) {
     echo '<pre style="color:red">'; var_dump ($e); echo '</pre>'; die();
 }
@@ -157,11 +158,11 @@ echo 'Created database '.$dbName.'<br/>';
 
 
 
-$dbName = $cms->domain.'___cms_tree__role__guests';
+$dbName = str_replace('.','_',$cms->domain).'___cms_tree__role__guests';
 try { $cdb->deleteDatabase ($dbName); } catch (Exception $e) { };
 $cdb->setDatabase($dbName, true);
 try { 
-    $call = $cdb->setSecurity ($security);
+    $call = $cdb->setSecurity ($security_guest);
 } catch (Exception $e) {
     echo '<pre style="color:red">'; var_dump ($e); echo '</pre>'; die();
 }
@@ -180,11 +181,11 @@ if ($do) try { $cdb->post($data); } catch (Exception $e) { echo '<pre>'.json_enc
 
 echo 'Created database '.$dbName.'<br/>';
 
-$dbName = $cms->domain.'___cms_tree__user__administrator';
+$dbName = str_replace('.','_',$cms->domain).'___cms_tree__user__administrator';
 try { $cdb->deleteDatabase ($dbName); } catch (Exception $e) { };
 $cdb->setDatabase($dbName, true);
 try { 
-    $call = $cdb->setSecurity ($security);
+    $call = $cdb->setSecurity ($security_admin);
 } catch (Exception $e) {
     echo '<pre style="color:red">'; var_dump ($e); echo '</pre>'; die();
 }
@@ -203,11 +204,11 @@ if ($do) try { $cdb->post($data); } catch (Exception $e) { echo '<pre>'.json_enc
 
 echo 'Created database '.$dbName.'<br/>';
 
-$dbName = $cms->domain.'___cms_tree__user__guest';
+$dbName = str_replace('.','_',$cms->domain).'___cms_tree__user__guest';
 try { $cdb->deleteDatabase ($dbName); } catch (Exception $e) { };
 $cdb->setDatabase($dbName, true);
 try { 
-    $call = $cdb->setSecurity ($security);
+    $call = $cdb->setSecurity ($security_guest);
 } catch (Exception $e) {
     echo '<pre style="color:red">'; var_dump ($e); echo '</pre>'; die();
 }
@@ -227,31 +228,31 @@ if ($do) try { $cdb->post($data); } catch (Exception $e) { echo '<pre>'.json_enc
 
 echo 'Created database '.$dbName.'<br/>';
 
-$dbName = $cms->domain.'___cms_documents__user__administrator';
+$dbName = str_replace('.','_',$cms->domain).'___cms_documents__user__administrator';
 try { $cdb->deleteDatabase ($dbName); } catch (Exception $e) { };
 $cdb->setDatabase($dbName, true);
 try { 
-    $call = $cdb->setSecurity ($security);
+    $call = $cdb->setSecurity ($security_admin);
 } catch (Exception $e) {
     echo '<pre style="color:red">'; var_dump ($e); echo '</pre>'; die();
 }
 echo 'Created database '.$dbName.'<br/>';
 
-$dbName = $cms->domain.'___cms_documents__user__guest';
+$dbName = str_replace('.','_',$cms->domain).'___cms_documents__user__guest';
 try { $cdb->deleteDatabase ($dbName); } catch (Exception $e) { };
 $cdb->setDatabase($dbName, true);
 try { 
-    $call = $cdb->setSecurity ($security);
+    $call = $cdb->setSecurity ($security_guest);
 } catch (Exception $e) {
     echo '<pre style="color:red">'; var_dump ($e); echo '</pre>'; die();
 }
 echo 'Created database '.$dbName.'<br/>';
 
-$dbName = $cms->domain.'___cms_documents__role__guests';
+$dbName = str_replace('.','_',$cms->domain).'___cms_documents__role__guests';
 try { $cdb->deleteDatabase ($dbName); } catch (Exception $e) { };
 $cdb->setDatabase($dbName, true);
 try { 
-    $call = $cdb->setSecurity ($security);
+    $call = $cdb->setSecurity ($security_guest);
 } catch (Exception $e) {
     echo '<pre style="color:red">'; var_dump ($e); echo '</pre>'; die();
 }
