@@ -28,6 +28,6 @@ global $cms;
 $cms = new nicerAppCMS();
 $cms->init();
 
-$file = realpath(dirname(__FILE__).'/../../../').'/domainConfigs/'.$cms->domain.'/app.'.$_GET['id'].'.dialog.siteContent.php';
+$file = realpath(dirname(__FILE__).'/../../../').'/domainConfigs/'.$cms->domain.'/app.'.$app['diskText']['id'].'.dialog.siteContent.php';
 echo execPHP($file);
 ?>
