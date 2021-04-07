@@ -43,7 +43,7 @@ var nas = na.site = {
         
         if (na.m.userDevice.isPhone) {
             $('#siteDateTime').css({display:'none'});
-            $('#btnThemeSwitch, #btnChangeBackground, #siteMenu').addClass('phoneView');
+            $('#btnLoginLogout, #btnChangeBackground, #siteMenu').addClass('phoneView');
         } else {
             na.d.s.visibleDivs.push('#siteDateTime');
         }
@@ -219,8 +219,8 @@ var nas = na.site = {
         $('.tooltip', rootEl).each (function(idx,el) {
             var theme = $(el).attr('tooltipTheme');
             if (!theme) theme = 'mainTooltipTheme';
-            if (el.id=='btnThemeSwitch' && $.cookie('haveShownTutorial')!=='true') {
-                nas.settings.btnThemeSwitch = this;
+            if (el.id=='btnLoginLogout' && $.cookie('haveShownTutorial')!=='true') {
+                nas.settings.btnLoginLogout = this;
                 var ptSettings = {
                     className : theme,
                     contentAsHTML : true,
@@ -239,9 +239,9 @@ var nas = na.site = {
                 $(this).poshytip('hide');
                 $(this).addClass('started');
                 setTimeout (function() {
-                    $(nas.settings.btnThemeSwitch).poshytip('show');
+                    $(nas.settings.btnLoginLogout).poshytip('show');
                     setTimeout(function() {
-                        $(nas.settings.btnThemeSwitch).poshytip('hide');
+                        $(nas.settings.btnLoginLogout).poshytip('hide');
                     }, 2500);
                 }, 2770);
                 
@@ -274,7 +274,7 @@ var nas = na.site = {
                 }, 7270);
             } else if (
                 el.id!=='btnChangeBackground'
-                && el.id!=='btnThemeSwitch'
+                && el.id!=='btnLoginLogout'
             ) {
                 var ptSettings = {
                     theme : theme,
