@@ -82,7 +82,7 @@ if (!$got) {
 $security_admin = '{ "admins": { "names": ["Administrator"], "roles": [] }, "members": { "names": [], "roles": ["guests"] } }';
 $security_guest = '{ "admins": { "names": [], "roles": ["guests"] }, "members": { "names": [], "roles": ["guests"] } }';
 
-$cdb->setDatabase($cms->domain.'___analytics',true);
+$cdb->setDatabase(str_replace('.','_',$cms->domain).'___analytics',true);
 try { 
     $call = $cdb->setSecurity ($security_guest);
 } catch (Exception $e) {
@@ -91,7 +91,7 @@ try {
 echo 'Created database '.$cms->domain.'___analytics<br/>';
 
 
-$cdb->setDatabase($cms->domain.'___three_d_positions',true);
+$cdb->setDatabase(str_replace('.','_',$cms->domain).'___three_d_positions',true);
 try { 
     $call = $cdb->setSecurity ($security_guest);
 } catch (Exception $e) {
