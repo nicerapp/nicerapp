@@ -82,22 +82,24 @@ if (!$got) {
 $security_admin = '{ "admins": { "names": ["Administrator"], "roles": [] }, "members": { "names": [], "roles": ["guests"] } }';
 $security_guest = '{ "admins": { "names": [], "roles": ["guests"] }, "members": { "names": [], "roles": ["guests"] } }';
 
-$cdb->setDatabase(str_replace('.','_',$cms->domain).'___analytics',true);
+$dbName = str_replace('.','_',$cms->domain).'___analytics';
+$cdb->setDatabase($dbName,true);
 try { 
     $call = $cdb->setSecurity ($security_guest);
 } catch (Exception $e) {
     echo '<pre style="color:red">'; var_dump ($e); echo '</pre>'; die();
 }
-echo 'Created database '.$cms->domain.'___analytics<br/>';
+echo 'Created database '.$dbName.'<br/>';
 
 
-$cdb->setDatabase(str_replace('.','_',$cms->domain).'___three_d_positions',true);
+$dbName = str_replace('.','_',$cms->domain).'___three_d_positions';
+$cdb->setDatabase($dbName,true);
 try { 
     $call = $cdb->setSecurity ($security_guest);
 } catch (Exception $e) {
     echo '<pre style="color:red">'; var_dump ($e); echo '</pre>'; die();
 }
-echo 'Created database '.$cms->domain.'___three_d_positions<br/>';
+echo 'Created database '.$dbName.'<br/>';
 
 $dbName = str_replace('.','_',$cms->domain).'___cms_tree';
 try { $cdb->deleteDatabase ($dbName); } catch (Exception $e) { };
