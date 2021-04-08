@@ -74,7 +74,7 @@ try {
 
 $rec1_id = cdb_randomString(20);
 $do = false; try { $doc = $cdb->get($rec1_id); } catch (Exception $e) { $do = true; };
-$data = '{ "database" : "'.$dbName.'", "_id" : "'.$rec1_id.'", "id" : "'.$rec1_id.'", "parent" : "baa", "text" : "Guest", "state" : { "opened" : true }, "type" : "naUserRootFolder" }';
+$data = '{ "database" : "'.$dbName.'", "_id" : "'.$rec1_id.'", "id" : "'.$rec1_id.'", "parent" : "baa", "text" : "'.$_POST['loginName'].'", "state" : { "opened" : true }, "type" : "naUserRootFolder" }';
 if ($do) try { $cdb->post($data); } catch (Exception $e) { if ($debug) { echo '<pre>'.json_encode(json_decode($data),JSON_PRETTY_PRINT).'</pre>'; echo $e->getMessage(); echo '<br/>'; }};
 
 $rec2_id = cdb_randomString(20);

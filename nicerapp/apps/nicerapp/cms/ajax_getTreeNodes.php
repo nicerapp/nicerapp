@@ -15,7 +15,7 @@ $ip = (array_key_exists('X-Forwarded-For',apache_request_headers())?apache_reque
     echo '403 - Access forbidden.';
     die();
 }*/
-
+session_start();
 
 global $cms;
 $cms = new nicerAppCMS();
@@ -27,13 +27,21 @@ $cdbConfig = json_decode(file_get_contents($couchdbConfigFilepath), true);
 $cdb = new Sag($cdbConfig['domain'], $cdbConfig['port']);
 $cdb->setHTTPAdapter($cdbConfig['httpAdapter']);
 $cdb->useSSL($cdbConfig['useSSL']);
-$cdb->login($cdbConfig['adminUsername'], $cdbConfig['adminPassword']);
+$cdb->login($_SESSION['cdb_loginName'], $_SESSION['cdb_pw']);
+
+$username = $_SESSION['cdb_loginName'];
+$username = str_replace(' ', '__', $username);
+$username = str_replace('.', '_', $username);
+
+$cdb_domain = $cms->domain;
+$cdb_domain = str_replace('.','_',$cdb_domain);
 
 $databases = array (
-    $cms->domain.'___cms_tree',
-    $cms->domain.'___cms_tree__role__guests',
-    $cms->domain.'___cms_tree__user__administrator',
-    $cms->domain.'___cms_tree__user__guest'
+    $cdb_domain.'___cms_tree',
+    $cdb_domain.'___cms_tree__role___guests',
+    $cdb_domain.'___cms_tree__user___'.$username
+    //$cms->domain.'___cms_tree__user__administrator',
+    //$cms->domain.'___cms_tree__user__guest'
 );
 $data = array();
 $ret = array();

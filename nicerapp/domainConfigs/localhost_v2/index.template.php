@@ -127,6 +127,7 @@ na.site.globals = {
                 <label for="srf_pw2">Repeat password</label>
                 <input id="srf_pw2" name="srf_pw2" type="password"/><br/>
             </form>
+            <p id="siteRegistrationError"></p>
             <br/>
             <button id="btnSrfSubmit" type="button" class="button" theme="{$theme}" onclick="na.site.register();"><span>Register! <img src="/nicerapp/3rd-party/tinymce-4/plugins/naEmoticons/img/happy.gif"/></span></div>
         </div>

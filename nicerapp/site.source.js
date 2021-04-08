@@ -394,34 +394,45 @@ var nas = na.site = {
     },
     
     register : function () {
-        var ac = {
-            type : 'POST',
-            url : '/nicerapp/ajax_register.php',
-            data : {
-                loginName : $('#siteRegistration #srf_loginName').val(),
-                email : $('#siteRegistration #srf_email').val(),
-                pw : $('#siteRegistration #srf_pw1').val()
-            },
-            success : function (data, ts, xhr) {
-                debugger;
-            },
-            failure : function (xhr, ajaxOptions, thrownError) {
-                debugger;
-            }
-        };
-        $.ajax(ac);
+        var
+        pw1 = $('#siteRegistration #srf_pw1').val(),
+        pw2 = $('#siteRegistration #srf_pw2').val();
+        
+        if (pw1 !== pw2) {
+            $('#siteRegistrationError').html('Passwords do not match.').fadeIn('normal');
+        } else {
+            $('#siteRegistrationError').fadeOut('normal');
+            var ac = {
+                type : 'POST',
+                url : '/nicerapp/ajax_register.php',
+                data : {
+                    loginName : $('#siteRegistration #srf_loginName').val(),
+                    email : $('#siteRegistration #srf_email').val(),
+                    pw : $('#siteRegistration #srf_pw1').val()
+                },
+                success : function (data, ts, xhr) {
+                    $('#slf_loginName').val ($('#srf_loginName').val());
+                    $('#slf_pw').val ($('#srf_pw1').val());
+                    na.site.login();
+                },
+                failure : function (xhr, ajaxOptions, thrownError) {
+                    debugger;
+                }
+            };
+            $.ajax(ac);
+        }
     },
     
     login : function () {
-        debugger;
         var ac = {
             type : 'POST',
-            url : document.location.origin+'/nicerapp/ajax_login.php',
+            url : '/nicerapp/ajax_login.php',
             data : {
                 loginName : $('#siteLogin #slf_loginName').val(),
                 pw : $('#siteLogin #slf_pw').val()
             },
             success : function (data, ts, xhr) {
+                $('#siteRegistration').fadeOut('normal');
                 if (data=='Success') {
                     $('#siteLogin').fadeOut('normal', 'swing', function () {
                         $('#siteLoginSuccessful').fadeIn('normal', 'swing', function () {

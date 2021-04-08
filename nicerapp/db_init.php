@@ -79,6 +79,19 @@ if (!$got) {
     echo 'Already have a Guest user record.<br/>';
 }
 
+
+$dbs = $cdb->getAllDatabases();
+foreach ($dbs->body as $idx => $dbName) {
+    if (
+        (strpos($dbName,'tree__user')!==false)
+        || (strpos($dbName,'documents__user')!==false)
+    ) {
+        $do = true;
+        try { $db = $cdb->deleteDatabase($dbName); } catch (Exception $e) { if ($debug) { echo $e->getMessage(); echo '<br/>'; $do = false; die(); }}
+    }
+}
+
+
 $security_admin = '{ "admins": { "names": ["Administrator"], "roles": [] }, "members": { "names": [], "roles": ["guests"] } }';
 $security_guest = '{ "admins": { "names": [], "roles": ["guests"] }, "members": { "names": [], "roles": ["guests"] } }';
 
@@ -160,7 +173,7 @@ echo 'Created database '.$dbName.'<br/>';
 
 
 
-$dbName = str_replace('.','_',$cms->domain).'___cms_tree__role__guests';
+$dbName = str_replace('.','_',$cms->domain).'___cms_tree__role___guests';
 try { $cdb->deleteDatabase ($dbName); } catch (Exception $e) { };
 $cdb->setDatabase($dbName, true);
 try { 
@@ -174,7 +187,7 @@ $data = '{ "database" : "'.$dbName.'", "_id" : "cab", "id" : "cab", "parent" : "
 if ($do) try { $cdb->post($data); } catch (Exception $e) { echo '<pre>'.json_encode(json_decode($data),JSON_PRETTY_PRINT).'</pre>'; echo $e->getMessage(); echo '<br/>'; };
 
 $do = false; try { $doc = $cdb->get('cba'); } catch (Exception $e) { $do = true; };
-$data = '{ "database" : "'.$dbName.'", "_id" : "cba", "id" : "cba", "parent" : "cab", "text" : "Blog", "state" : { "opened" : true, "selected" : true }, "type" : "naFolder" }';
+$data = '{ "database" : "'.$dbName.'", "_id" : "cba", "id" : "cba", "parent" : "cab", "text" : "Blog", "state" : { "opened" : true }, "type" : "naFolder" }';
 if ($do) try { $cdb->post($data); } catch (Exception $e) { echo '<pre>'.json_encode(json_decode($data),JSON_PRETTY_PRINT).'</pre>'; echo $e->getMessage(); echo '<br/>'; };
 
 $do = false; try { $doc = $cdb->get('cbb'); } catch (Exception $e) { $do = true; };
@@ -183,8 +196,10 @@ if ($do) try { $cdb->post($data); } catch (Exception $e) { echo '<pre>'.json_enc
 
 echo 'Created database '.$dbName.'<br/>';
 
-$dbName = str_replace('.','_',$cms->domain).'___cms_tree__user__administrator';
+$dbName = str_replace('.','_',$cms->domain).'___cms_tree__user___administrator';
 try { $cdb->deleteDatabase ($dbName); } catch (Exception $e) { };
+$dbName2 = str_replace('.','_',$cms->domain).'___cms_tree__user__administrator';
+try { $cdb->deleteDatabase ($dbName2); } catch (Exception $e) { };
 $cdb->setDatabase($dbName, true);
 try { 
     $call = $cdb->setSecurity ($security_admin);
@@ -197,7 +212,7 @@ $data = '{ "database" : "'.$dbName.'", "_id" : "bab", "id" : "bab", "parent" : "
 if ($do) try { $cdb->post($data); } catch (Exception $e) { echo '<pre>'.json_encode(json_decode($data),JSON_PRETTY_PRINT).'</pre>'; echo $e->getMessage(); echo '<br/>'; };
 
 $do = false; try { $doc = $cdb->get('bba'); } catch (Exception $e) { $do = true; };
-$data = '{ "database" : "'.$dbName.'", "_id" : "bba", "id" : "bba", "parent" : "bab", "text" : "Blog", "state" : { "opened" : true, "selected" : true }, "type" : "naFolder" }';
+$data = '{ "database" : "'.$dbName.'", "_id" : "bba", "id" : "bba", "parent" : "bab", "text" : "Blog", "state" : { "opened" : true }, "type" : "naFolder" }';
 if ($do) try { $cdb->post($data); } catch (Exception $e) { echo '<pre>'.json_encode(json_decode($data),JSON_PRETTY_PRINT).'</pre>'; echo $e->getMessage(); echo '<br/>'; };
 
 $do = false; try { $doc = $cdb->get('bbb'); } catch (Exception $e) { $do = true; };
@@ -206,8 +221,10 @@ if ($do) try { $cdb->post($data); } catch (Exception $e) { echo '<pre>'.json_enc
 
 echo 'Created database '.$dbName.'<br/>';
 
-$dbName = str_replace('.','_',$cms->domain).'___cms_tree__user__guest';
+$dbName = str_replace('.','_',$cms->domain).'___cms_tree__user___guest';
 try { $cdb->deleteDatabase ($dbName); } catch (Exception $e) { };
+$dbName2 = str_replace('.','_',$cms->domain).'___cms_tree__user__guest';
+try { $cdb->deleteDatabase ($dbName2); } catch (Exception $e) { };
 $cdb->setDatabase($dbName, true);
 try { 
     $call = $cdb->setSecurity ($security_guest);
@@ -220,7 +237,7 @@ $data = '{ "database" : "'.$dbName.'", "_id" : "dab", "id" : "dab", "parent" : "
 if ($do) try { $cdb->post($data); } catch (Exception $e) { echo '<pre>'.json_encode(json_decode($data),JSON_PRETTY_PRINT).'</pre>'; echo $e->getMessage(); echo '<br/>'; };
 
 $do = false; try { $doc = $cdb->get('dba'); } catch (Exception $e) { $do = true; };
-$data = '{ "database" : "'.$dbName.'", "_id" : "dba", "id" : "dba", "parent" : "dab", "text" : "Blog", "state" : { "opened" : true, "selected" : true }, "type" : "naFolder" }';
+$data = '{ "database" : "'.$dbName.'", "_id" : "dba", "id" : "dba", "parent" : "dab", "text" : "Blog", "state" : { "opened" : true }, "type" : "naFolder" }';
 if ($do) try { $cdb->post($data); } catch (Exception $e) { echo '<pre>'.json_encode(json_decode($data),JSON_PRETTY_PRINT).'</pre>'; echo $e->getMessage(); echo '<br/>'; };
 
 $do = false; try { $doc = $cdb->get('dbb'); } catch (Exception $e) { $do = true; };
@@ -230,8 +247,10 @@ if ($do) try { $cdb->post($data); } catch (Exception $e) { echo '<pre>'.json_enc
 
 echo 'Created database '.$dbName.'<br/>';
 
-$dbName = str_replace('.','_',$cms->domain).'___cms_documents__user__administrator';
+$dbName = str_replace('.','_',$cms->domain).'___cms_documents__user___administrator';
 try { $cdb->deleteDatabase ($dbName); } catch (Exception $e) { };
+$dbName2 = str_replace('.','_',$cms->domain).'___cms_documents__user__administrator';
+try { $cdb->deleteDatabase ($dbName2); } catch (Exception $e) { };
 $cdb->setDatabase($dbName, true);
 try { 
     $call = $cdb->setSecurity ($security_admin);
@@ -240,8 +259,10 @@ try {
 }
 echo 'Created database '.$dbName.'<br/>';
 
-$dbName = str_replace('.','_',$cms->domain).'___cms_documents__user__guest';
+$dbName = str_replace('.','_',$cms->domain).'___cms_documents__user___guest';
 try { $cdb->deleteDatabase ($dbName); } catch (Exception $e) { };
+$dbName2 = str_replace('.','_',$cms->domain).'___cms_documents__user__guest';
+try { $cdb->deleteDatabase ($dbName2); } catch (Exception $e) { };
 $cdb->setDatabase($dbName, true);
 try { 
     $call = $cdb->setSecurity ($security_guest);
@@ -250,8 +271,10 @@ try {
 }
 echo 'Created database '.$dbName.'<br/>';
 
-$dbName = str_replace('.','_',$cms->domain).'___cms_documents__role__guests';
+$dbName = str_replace('.','_',$cms->domain).'___cms_documents__role___guests';
 try { $cdb->deleteDatabase ($dbName); } catch (Exception $e) { };
+$dbName2 = str_replace('.','_',$cms->domain).'___cms_documents__role__guests';
+try { $cdb->deleteDatabase ($dbName2); } catch (Exception $e) { };
 $cdb->setDatabase($dbName, true);
 try { 
     $call = $cdb->setSecurity ($security_guest);
