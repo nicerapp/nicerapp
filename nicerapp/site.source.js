@@ -272,10 +272,10 @@ var nas = na.site = {
                         $(el).poshytip('hide');
                     }, 2500);
                 }, 7270);
-            } else if (
+            } else /*if (
                 el.id!=='btnChangeBackground'
                 && el.id!=='btnLoginLogout'
-            ) {
+            ) */{
                 var ptSettings = {
                     theme : theme,
                     contentAsHTML : true,
