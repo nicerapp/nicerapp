@@ -155,16 +155,22 @@ na.desktop = {
                                 { element : 'body', edge : 'left' }
                             ]
                         },
-                        '#btnThemeSwitch' : {
+                        '#btnOptions' : {
                             snapTo : [
                                 { element : 'body', edge : 'top' },
                                 { element : '#siteDateTime', edge : 'right' }
                             ]
                         },
+                        '#btnLoginLogout' : {
+                            snapTo : [
+                                { element : 'body', edge : 'top' },
+                                { element : '#btnOptions', edge : 'right' }
+                            ]
+                        },
                         '#btnChangeBackground' : {
                             snapTo : [
                                 { element : 'body', edge : 'top' },
-                                { element : '#btnThemeSwitch', edge : 'right' }
+                                { element : '#btnLoginLogout', edge : 'right' }
                             ]
                         },
                         '#siteMenu' : {
@@ -175,7 +181,7 @@ na.desktop = {
                         }
                     }
                     : {
-                        '#btnThemeSwitch' : {
+                        '#btnLoginLogout' : {
                             snapTo : [
                                 { element : 'body', edge : 'top' },
                                 { element : 'body', edge : 'left' }
@@ -205,7 +211,7 @@ na.desktop = {
                     ? {
                         '#siteVideo' : {
                             snapTo : [
-                                { element : '#btnThemeSwitch', edge : 'bottom' },
+                                { element : '#btnLoginLogout', edge : 'bottom' },
                                 { element : 'body', edge : 'right' }
                             ]
                         },
@@ -231,7 +237,7 @@ na.desktop = {
                     ? {
                         '#siteVideo' : {
                             snapTo : [
-                                { element : '#btnThemeSwitch', edge : 'bottom' },
+                                { element : '#btnLoginLogout', edge : 'bottom' },
                                 { element : 'body', edge : 'right' }
                             ]
                         },
@@ -257,7 +263,7 @@ na.desktop = {
                     ? {
                         '#siteComments' : {
                             snapTo : [
-                                { element : '#btnThemeSwitch', edge : 'bottom' },
+                                { element : '#btnLoginLogout', edge : 'bottom' },
                                 { element : 'body', edge : 'right' }
                             ],
                             growTo : 'maxY',
@@ -278,7 +284,7 @@ na.desktop = {
                     ? {
                         '#siteContent' : {
                             snapTo : [
-                                { element : '#btnThemeSwitch', edge : 'bottom' },
+                                { element : '#btnLoginLogout', edge : 'bottom' },
                                 { element : 'body', edge : 'left' }
                             ],
                             growTo : 'max',
@@ -300,7 +306,7 @@ na.desktop = {
                     ? {
                         '#siteToolbarRight' : {
                             snapTo : [
-                                {element : '#btnThemeSwitch', edge : 'bottom' },
+                                {element : '#btnLoginLogout', edge : 'bottom' },
                                 {element : 'body', edge:'right'}
                             ],
                             growTo : 'maxY',
@@ -319,7 +325,7 @@ na.desktop = {
                     ? {
                         '#siteToolbarLeft' : {
                             snapTo : [
-                                { element : '#btnThemeSwitch', edge : 'bottom' },
+                                { element : '#btnLoginLogout', edge : 'bottom' },
                                 { element : 'body', edge : 'left' }
                             ],
                             growTo : 'maxY',
@@ -339,11 +345,11 @@ na.desktop = {
                             snapTo : 
                                 visibleDivs.includes('#siteToolbarLeft')
                                 ? [
-                                    { element : '#btnThemeSwitch', edge : 'bottom' },
+                                    { element : '#btnLoginLogout', edge : 'bottom' },
                                     { element : '#siteToolbarLeft', edge : 'left' }
                                 ]
                                 : [
-                                    { element : '#btnThemeSwitch', edge : 'bottom' },
+                                    { element : '#btnLoginLogout', edge : 'bottom' },
                                     { element : 'body', edge : 'left' }
                                 ],
                             growTo : 'max',
@@ -388,8 +394,8 @@ na.desktop = {
         var c = calculate['calculate_2nd_topbar'];
         c.order = 
             visibleDivs.includes('#siteDateTime')
-            ? [ '#siteDateTime', '#btnThemeSwitch', '#btnChangeBackground', '#siteMenu' ]
-            : [ '#btnThemeSwitch' ]
+            ? [ '#siteDateTime', '#btnOptions', '#btnLoginLogout', '#btnChangeBackground', '#siteMenu' ]
+            : [ '#btnOptions' ]
             
         c = calculate['calculate_3rd_visible'];
         c.order = 
@@ -420,7 +426,7 @@ na.desktop = {
                 var divID = section.order[i];
                 if (!section[divID]) { continue; };
                 divs[divID] = { top : 0, left : 0, width : $(divID).width(), height : $(divID).height() };
-                
+            
                 for (var j=0; j<section[divID].snapTo.length; j++) {
                     var sn = section[divID].snapTo[j];
                     switch (sn.edge) {
@@ -478,7 +484,8 @@ na.desktop = {
                 
                 switch (divID) {
                     case '#siteDateTime':
-                    case '#btnThemeSwitch':
+                    case '#btnOptions':
+                    case '#btnLoginLogout':
                     case '#btnChangeBackground':
                     case '#siteMenu':
                         divs[divID].top += na.d.g.margin;

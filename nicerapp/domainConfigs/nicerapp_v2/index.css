@@ -148,7 +148,7 @@ img.bg_last {
     border-radius : 10px;
 }
 
-#btnThemeSwitch {
+#btnLoginLogout {
     position : absolute;
     top : calc(1vh - 3px);
     left : calc(1vw + 245px);
@@ -158,7 +158,7 @@ img.bg_last {
     border-radius : 10px;
     box-shadow : 4px 4px 2px rgba(0,0,0,0.7), inset -2px -2px 2px rgba(0,0,0,0.8), inset 2px 2px 2px rgba(0,0,0,0.8);
 }
-#btnThemeSwitch.phoneView {
+#btnLoginLogout.phoneView {
     left : calc(1vw + 6px);
 }
 
@@ -191,13 +191,12 @@ img.bg_last {
 #siteRegistration {
     display : none;
     position : absolute;
-    width : 300px;
-    height : 250px;
+    width : 400px;
+    height : auto;
     left : calc(50% - 150px);
     top : calc(50% - 125px);
     padding : 15px;
     z-index : 2000;
-    justify-content : center;
 }
 #siteRegistration::before { 
     content : '';
@@ -211,24 +210,141 @@ img.bg_last {
     width : 100%;
     height : 100%;
 }
+#siteRegistration input {
+    width : calc(100% - 178px);
+    border-radius : 8px;
+    background : rgba(255,255,255,0.7);
+    font-size : 1.1rem;
+    margin : 4px;
+    outline : 0;
+}
+
 #siteRegistrationContainer {
     position : relative;
     height : auto;
-    text-align : center;
     display : flex;
     flex-direction : column;
-    align-items : center;
 }
 #btnSrfSubmit {
     position : relative;
 }
-#btnSrfSubmit img {
-    height : 1rem;
+.button img {
+    height : 1.5rem;
+}
+label {
+    display : inline-block;
+    width : 150px;
+    font-weight : bold;
+    font-size : 1.1rem;
 }
 
 #siteLogin {
     display : none;
+    position : absolute;
+    width : 400px;
+    height : auto;
+    left : calc(50% - 150px);
+    top : calc(50% - 125px);
+    padding : 15px;
+    z-index : 2000;
+    justify-content : center;
 }
+#siteLogin input {
+    width : calc(100% - 178px);
+    background : rgba(255,255,255,0.7);
+    border-radius : 8px;
+    font-size : 1.1rem;
+    outline : 0;
+    margin : 4px;
+}
+#siteLogin::before { 
+    content : '';
+    background : url('/nicerapp/siteMedia/backgrounds/tiled/active/green/409537396_fa312a886d.jpg') repeat;
+    opacity : 0.7;
+    position:absolute;
+    z-index:-1;
+    border-radius : 15px;
+    top : 0;
+    left : 0;
+    width : 100%;
+    height : 100%;
+}
+#siteLoginContainer {
+    position : relative;
+    height : auto;
+    display : flex;
+    flex-direction : column;
+    align-items : center;
+}
+#btnLogin {
+    position : relative;
+}
+
+.buttonHolder {
+    display: inline-block;
+    position:relative;
+    text-align : center;
+    vertical-align : middle;
+    margin-top : 0.5rem;
+    z-index : 1000;
+}
+.button {
+ 	cursor: pointer;
+	position: relative;
+	padding: 1rem 1rem;
+    margin : 0.5rem;
+	border-radius: 1rem;
+	line-height: 2rem;
+	font-size: 1.5rem;
+	font-weight: 555;
+	border: 1px solid #012880;
+	background-image: linear-gradient(-180deg, #00FF00 0%, #00AA00 100%);
+	box-shadow: 1rem 1rem 1.25rem 0 rgba(0,0,0,0.50),
+							0 -0.25rem 1.5rem rgba(0, 80, 0, 1) inset,
+							0 0.75rem 0.5rem rgba(255,255,255, 0.4) inset,
+							0 0.25rem 0.5rem 0 rgba(0, 80, 0, 1) inset;    
+}
+.button span {
+	color: transparent;
+	background-image: linear-gradient(0deg, rgba(0,0,77,1) 25%, navy 100%);
+	-webkit-background-clip: text;
+	background-clip: text;
+	filter: drop-shadow(0 2px 2px hsla(290, 100%, 20%, 1));
+}
+.button::after {
+	content: "";
+	display: block;
+	height: 0.25rem;
+	position: absolute;
+	bottom: 0.75rem;
+	left: 50%;
+	transform: translateX(-50%);
+	width: calc(100% - 2rem);
+	background: #fff;
+	border-radius: 100%;
+	
+	filter: blur(1px);
+	opacity: 0.5;
+	background-image: linear-gradient(-270deg, rgba(255,255,255,0.00) 0%, #FFFFFF 20%, #FFFFFF 80%, rgba(255,255,255,0.00) 100%);
+}
+.button:hover::after {
+    animation : anim_buttonWhiteLines 1s infinite;
+}
+@keyframes anim_buttonWhiteLines {
+    0% {
+        opacity : 0.35;
+        filter : blur(2px);
+    }
+    50% {
+        opacity : 0.7;
+        filter : blur(0px);
+    }
+    100% {
+        opacity : 0.35;
+        filter : blur(2px);
+    }
+}
+
 
 #site3D_backgroundsBrowser, #site3D_demo_cube, #site3D_demo_models {
     position : absolute;

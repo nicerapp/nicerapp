@@ -408,7 +408,7 @@ var mp3site = {
         
             //setTimeout (function() {
 			$('.vividDialog, .vividScrollpane, .vividDialog_dialog, .vsp_container, #heading_wrapper, #siteIntroText, #mp3s, #player, #player_table, #playlist_wrapper, #infoWindow_help, #comments')
-				.not ('#siteRegistration, #siteDateTime, #infoWindow_info, #infoWindow_tools, #infoWindow_tools, #infoWindow_info')
+				.not ('#siteLogin, #siteRegistration, #siteDateTime, #infoWindow_info, #infoWindow_tools, #infoWindow_tools, #infoWindow_info')
 				.css ({visibility:'visible',display:'block',opacity:1});
             //}, 1000);
         }

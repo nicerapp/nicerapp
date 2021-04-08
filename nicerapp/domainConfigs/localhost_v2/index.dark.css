@@ -229,7 +229,6 @@ a:visited {
     z-index : 1;
     pointer-events : none;
 }
-
 .vividButton[theme="dark"] a, .vividButtonSelected[theme="dark"] a {
   color : white;
   text-decoration : none;
@@ -286,3 +285,5 @@ a:visited {
     background-image: -ms-linear-gradient(bottom, rgba(0,100,0,0.4) 25%, rgba(40,255,40,0.8) 81%);
     background-image: linear-gradient(bottom, rgba(0,100,0,0.4) 25%, rgba(40,255,40,0.8) 81%);
 }
+
+

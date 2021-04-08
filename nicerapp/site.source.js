@@ -379,6 +379,74 @@ var nas = na.site = {
                 na.site.setStatusMsg (na.site.settings.defaultStatusMsg);
             }, 2500);
         });
+    },
+    
+    displayLogin : function () {
+        $('#siteRegistration').fadeOut('fast', 'swing', function () {
+            $('#siteLogin').fadeIn('fast');
+        });
+    },
+    
+    newAccount : function () {
+        $('#siteLogin').fadeOut('fast', 'swing', function () {
+            $('#siteRegistration').fadeIn('fast');
+        });
+    },
+    
+    register : function () {
+        var ac = {
+            type : 'POST',
+            url : '/nicerapp/ajax_register.php',
+            data : {
+                loginName : $('#siteRegistration #srf_loginName').val(),
+                email : $('#siteRegistration #srf_email').val(),
+                pw : $('#siteRegistration #srf_pw1').val()
+            },
+            success : function (data, ts, xhr) {
+                debugger;
+            },
+            failure : function (xhr, ajaxOptions, thrownError) {
+                debugger;
+            }
+        };
+        $.ajax(ac);
+    },
+    
+    login : function () {
+        debugger;
+        var ac = {
+            type : 'POST',
+            url : document.location.origin+'/nicerapp/ajax_login.php',
+            data : {
+                loginName : $('#siteLogin #slf_loginName').val(),
+                pw : $('#siteLogin #slf_pw').val()
+            },
+            success : function (data, ts, xhr) {
+                if (data=='Success') {
+                    $('#siteLogin').fadeOut('normal', 'swing', function () {
+                        $('#siteLoginSuccessful').fadeIn('normal', 'swing', function () {
+                            setTimeout (function() {
+                                $('#siteLoginSuccessful').fadeOut('normal');
+                            }, 2 * 1000);
+                        });
+                    });
+                } else {
+                    $('#siteLogin').fadeOut('normal', 'swing', function () {
+                        $('#siteFailed').fadeIn('normal', 'swing', function () {
+                            setTimeout (function() {
+                                $('#siteFailed').fadeOut('normal', 'swing', function () {
+                                    $('#siteLogin').fadeIn('normal');
+                                });
+                            }, 2 * 1000);
+                        });
+                    });
+                }
+            },
+            failure : function (xhr, ajaxOptions, thrownError) {
+                debugger;
+            }
+        };
+        $.ajax(ac);
     }
 }
 nas.s = nas.settings;

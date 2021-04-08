@@ -112,25 +112,38 @@ na.site.globals = {
     <div id="siteRegistration" class="vividDialog vividScrollpane" theme="{$theme}">
         <div id="siteRegistrationContainer">
             <form id="siteRegistrationForm" name="siteRegistrationForm" action="/register.php" method="POST">
-                <label for="srf_loginName">Name</label><br/>
-                <input id="srf_loginName" name="srf_loginName" type="text"/><br/>
+                <label for="loginName">Name</label>
+                <input id="loginName" name="loginName" type="text"/><br/>
                 
-                <label for="srf_email" class="tooltip" tooltipTheme="mainTooltipTheme" title="We'll be sending you a confirmation link to this address">E-mail</label><br/>
-                <input id="srf_email" name="srf_email" type="text" class="tooltip" tooltipTheme="mainTooltipTheme" title="We'll be sending you a confirmation link to this address"/><br/>
+                <label for="email" class="tooltip" tooltipTheme="mainTooltipTheme" title="We'll be sending you a confirmation link to this address">E-mail</label>
+                <input id="email" name="email" type="text" class="tooltip" tooltipTheme="mainTooltipTheme" title="We'll be sending you a confirmation link to this address"/><br/>
                 
-                <label for="srf_pw1">Password</label><br/>
-                <input id="srf_pw1" name="srf_pw1" type="password"/><br/>
+                <label for="pw1">Password</label>
+                <input id="pw1" name="pw1" type="password"/><br/>
                 
-                <label for="srf_pw2">Repeat password</label><br/>
-                <input id="srf_pw2" name="srf_pw2" type="password"/><br/>
+                <label for="pw2">Repeat password</label>
+                <input id="pw2" name="pw2" type="password"/><br/>
             </form>
             <br/>
-            <div id="btnSrfSubmit" class="vividButton" theme="{$theme}">Register! <img src="/nicerapp/3rd-party/tinymce-4/plugins/naEmoticons/img/happy.gif"/></div>
+            <button id="btnSrfSubmit" type="button" class="button" theme="{$theme}"><span>Register! <img src="/nicerapp/3rd-party/tinymce-4/plugins/naEmoticons/img/happy.gif"/></span></div>
         </div>
         
     </div>
 
     <div id="siteLogin" class="vividDialog vividScrollpane" theme="{$theme}">
+        <div id="siteLoginContainer">
+            <form id="siteLoginForm" name="siteLoginForm" action="/login.php" method="POST">
+                <label for="loginName">Name</label>
+                <input id="loginName" name="loginName" type="text"/><br/>
+
+                <label for="pw1">Password</label>
+                <input id="pw1" name="pw1" type="password"/><br/>
+            </form>
+            <div class="buttonHolder">
+                <button id="btnNewAccount" type="button" class="button" theme="{$theme}" onclick="na.site.newAccount();"><span>New account</span></button>
+                <button id="btnLogin" type="button" class="button" theme="{$theme}"><span>Log in</span></button>
+            </div>
+        </div>
     </div>
 
     
