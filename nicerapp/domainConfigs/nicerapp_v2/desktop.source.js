@@ -155,10 +155,16 @@ na.desktop = {
                                 { element : 'body', edge : 'left' }
                             ]
                         },
-                        '#btnLoginLogout' : {
+                        '#btnOptions' : {
                             snapTo : [
                                 { element : 'body', edge : 'top' },
                                 { element : '#siteDateTime', edge : 'right' }
+                            ]
+                        },
+                        '#btnLoginLogout' : {
+                            snapTo : [
+                                { element : 'body', edge : 'top' },
+                                { element : '#btnOptions', edge : 'right' }
                             ]
                         },
                         '#btnChangeBackground' : {
@@ -388,8 +394,8 @@ na.desktop = {
         var c = calculate['calculate_2nd_topbar'];
         c.order = 
             visibleDivs.includes('#siteDateTime')
-            ? [ '#siteDateTime', '#btnLoginLogout', '#btnChangeBackground', '#siteMenu' ]
-            : [ '#btnLoginLogout' ]
+            ? [ '#siteDateTime', '#btnOptions', '#btnLoginLogout', '#btnChangeBackground', '#siteMenu' ]
+            : [ '#btnOptions' ]
             
         c = calculate['calculate_3rd_visible'];
         c.order = 
@@ -420,7 +426,7 @@ na.desktop = {
                 var divID = section.order[i];
                 if (!section[divID]) { continue; };
                 divs[divID] = { top : 0, left : 0, width : $(divID).width(), height : $(divID).height() };
-                
+            
                 for (var j=0; j<section[divID].snapTo.length; j++) {
                     var sn = section[divID].snapTo[j];
                     switch (sn.edge) {
@@ -478,6 +484,7 @@ na.desktop = {
                 
                 switch (divID) {
                     case '#siteDateTime':
+                    case '#btnOptions':
                     case '#btnLoginLogout':
                     case '#btnChangeBackground':
                     case '#siteMenu':
