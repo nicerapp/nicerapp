@@ -118,8 +118,10 @@ na.site.globals = {
                 <label for="srf_loginName">Name</label>
                 <input id="srf_loginName" name="srf_loginName" type="text"/><br/>
                 
-                <label for="srf_email" class="tooltip" tooltipTheme="mainTooltipTheme" title="We'll be sending you a confirmation link to this address">E-mail</label>
-                <input id="srf_email" name="srf_email" type="text" class="tooltip" tooltipTheme="mainTooltipTheme" title="We'll be sending you a confirmation link to this address"/><br/>
+                <!--<label for="srf_email" class="tooltip" tooltipTheme="mainTooltipTheme" title="We'll be sending you a confirmation link to this address">E-mail</label>
+                <input id="srf_email" name="srf_email" type="text" class="tooltip" tooltipTheme="mainTooltipTheme" title="We'll be sending you a confirmation link to this address"/><br/>-->
+                <label for="srf_email">E-mail</label>
+                <input id="srf_email" name="srf_email" type="text"/><br/>
                 
                 <label for="srf_pw1">Password</label>
                 <input id="srf_pw1" name="srf_pw1" type="password"/><br/>
