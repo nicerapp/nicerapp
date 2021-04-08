@@ -175,6 +175,7 @@
     
     <p>said.by is a blogging platform that allows for tiled, photo, and even video backgrounds to your content.</p>
     
-    <p>For now, "guest mode" allows access to all of the <a href="<?php echo $urls['cms'];?>">blogging features</a>.</p>
+    <p>You can <a href="javascript:na.site.newAccount();">register</a> or <a href="javascript:na.site.displayLogin();">login</a> to access the <a href="<?php echo $urls['cms'];?>">blogging features</a>.</p>
     
-    <p><a href="<?php echo $urls['text_privacyPolicy'];?>">Privacy policy</a>, <a href="<?php echo $urls['text_termsOfUse'];?>">terms of use</a>.</p>
+    <p><a href="<?php echo $urls['text_privacyPolicy'];?>">Privacy policy</a></p>
+    <p><a href="<?php echo $urls['text_termsOfUse'];?>">Terms of use</a>.</p>
