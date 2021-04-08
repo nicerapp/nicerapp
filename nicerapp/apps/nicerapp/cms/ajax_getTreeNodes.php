@@ -46,7 +46,7 @@ $databases = array (
 $data = array();
 $ret = array();
 foreach ($databases as $idx=>$dbName) {
-    $cdb->setDatabase ($dbName, false);
+    try { $cdb->setDatabase ($dbName, false); } catch (Exception $e) { echo $e->getMessage(); };
     $docs = $cdb->getAllDocs();
     $data = $docs->body->rows;
     foreach ($data as $idx2=>$recordSummary) {
