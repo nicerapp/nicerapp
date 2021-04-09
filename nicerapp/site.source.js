@@ -443,9 +443,9 @@ var nas = na.site = {
                     });
                 } else {
                     $('#siteLogin').fadeOut('normal', 'swing', function () {
-                        $('#siteFailed').fadeIn('normal', 'swing', function () {
+                        $('#siteLoginFailed').fadeIn('normal', 'swing', function () {
                             setTimeout (function() {
-                                $('#siteFailed').fadeOut('normal', 'swing', function () {
+                                $('#siteLoginFailed').fadeOut('normal', 'swing', function () {
                                     $('#siteLogin').fadeIn('normal');
                                 });
                             }, 2 * 1000);

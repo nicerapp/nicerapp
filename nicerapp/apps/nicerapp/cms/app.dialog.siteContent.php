@@ -20,7 +20,7 @@ $ip = (array_key_exists('X-Forwarded-For',apache_request_headers())?apache_reque
 <script type="text/javascript" src="/nicerapp/apps/nicerapp/cms/na.blog.source.js?c=<?php echo date('Ymd_His',filemtime(dirname(__FILE__).'/na.blog.source.js'));?>"></script>
 <script type="text/javascript" src="/nicerapp/vividComponents/photoAlbum/4.0.0/photoAlbum-4.0.0.source.js?c=<?php echo date('Ymd_His',filemtime(dirname(__FILE__).'/photoAlbum-4.0.0.source.js'));?>"></script>
 
-<script type="text/javascript" src="/nicerapp/3rd-party/tinymce-4.8.0/js/tinymce/tinymce.min.js"></script>
+<script type="text/javascript" src="/nicerapp/3rd-party/tinymce-4.9.11/js/tinymce/tinymce.min.js"></script>
 <div id="folder"></div>
 <div id="upload">
     <div id="mediaFolder_navBar" class="navBar">
@@ -47,9 +47,9 @@ $ip = (array_key_exists('X-Forwarded-For',apache_request_headers())?apache_reque
     setTimeout (function() {
         //$(document).ready(function() {
             var useDarkMode = true;
-            //debugger;
             tinymce.ready = false;
-            tinymce.baseURL = '/nicerapp/3rd-party/tinymce-4.8.0/js/tinymce';
+            tinymce.baseURL = '/nicerapp/3rd-party/tinymce-4.9.11/js/tinymce';
+            tinymce.suffix = '.min';
             tinymce.init({
                 selector: 'textarea#tinymce',
                 plugins: [
@@ -84,7 +84,7 @@ $ip = (array_key_exists('X-Forwarded-For',apache_request_headers())?apache_reque
                     na.blog.onresize();
                 }
             });
-        //});
-    }, 250);
+       // });
+    }, 500);
     </script>
 </div>
