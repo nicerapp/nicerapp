@@ -222,6 +222,7 @@ na.blog = {
             url : '/nicerapp/apps/nicerapp/cms/ajax_getTreeNodes.php',
             success : function (data, ts, xhr) {
                 let dat = JSON.parse(data);
+                na.blog.settings.current.db = dat;
                 $('#jsTree').jstree(true).settings.core.data = dat;
                 $('#jsTree').jstree(true).refresh();
                 $('#siteToolbarLeft .lds-facebook').stop(true,true).fadeOut('slow');
@@ -481,7 +482,7 @@ na.blog = {
         }
     },
     
-    tinymce_link_list : function (success) {
+    tinymce_link_list : function () {
         var me = na.blog, s = me.settings, c = s.current, rel = jQuery(s.hid)[0];
         var x = c.db;
         var r = [
@@ -541,7 +542,7 @@ na.blog = {
         };
 
         //debugger;
-        success(r);
+        return r;
     },
     
     currentNode_createPath : function (event, path) {
