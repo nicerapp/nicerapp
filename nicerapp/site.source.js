@@ -504,6 +504,10 @@ na.m = {
         };
     },
     
+    randomString : function () {
+        return Math.random().toString(36).substr(2, 20);
+    },
+    
 	secondsToTime : function (secs) {
 		//thx 
 		// http://codeaid.net/javascript/convert-seconds-to-hours-minutes-and-seconds-%28javascript%29

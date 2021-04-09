@@ -9,7 +9,7 @@ na.blog = {
                 let dat = JSON.parse(data);
                 na.blog.settings.current.db = dat;
                 $.jstree.defaults.core.error = function (a,b,c,d) {
-                    debugger;
+                    //debugger;
                 };
                 $('#jsTree').css({
                     height : $('#siteToolbarLeft .vividDialogContent').height() - $('#jsTree_navBar').height()
@@ -482,7 +482,7 @@ na.blog = {
         }
     },
     
-    tinymce_link_list : function () {
+    tinymce_link_list : function (success) {
         var me = na.blog, s = me.settings, c = s.current, rel = jQuery(s.hid)[0];
         var x = c.db;
         var r = [
@@ -542,7 +542,7 @@ na.blog = {
         };
 
         //debugger;
-        return r;
+        success(r);
     },
     
     currentNode_createPath : function (event, path) {
@@ -582,6 +582,7 @@ na.blog = {
                 n2 = tree.get_node(cur.id),
                 n = {
                     database : n2.original.database,
+                    id : na.m.randomString(),
                     type : 'naMediaFolder',
                     text : folderName,
                     title : folderName,
@@ -594,6 +595,7 @@ na.blog = {
                     url : '/nicerapp/apps/nicerapp/cms/ajax_addNode.php',
                     data : {
                         database : n2.original.database,
+                        id : r,
                         parent : cur.id,
                         label : folderName,
                         type : 'naMediaFolder'

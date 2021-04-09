@@ -2,9 +2,12 @@
 require_once (dirname(__FILE__).'/../../../boot.php');
 require_once (dirname(__FILE__).'/../../../3rd-party/sag/src/Sag.php');
 require_once (dirname(__FILE__).'/../../../Sag-support-functions.php');
-/*ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);*/
+$debug = false;
+if ($debug) {
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+}
 
 $ip = (array_key_exists('X-Forwarded-For',apache_request_headers())?apache_request_headers()['X-Forwarded-For'] : $_SERVER['REMOTE_ADDR']);
 /*if (
@@ -30,17 +33,19 @@ $cdb->setHTTPAdapter($cdbConfig['httpAdapter']);
 $cdb->useSSL($cdbConfig['useSSL']);
 $cdb->login($cdbConfig['adminUsername'], $cdbConfig['adminPassword']);
 
+$dbName = str_replace ('.', '_', $_POST['database']);
+
 // create users
-$cdb->setDatabase($_POST['database'],false);
+$cdb->setDatabase($dbName,false);
 try { $parent = $cdb->get($_POST['parent']); } catch (Exception $e) { 
-    cdb_error (404, $e, 'could not find record with id='.$_POST['parent'].' in database '.$_POST['database']); die();
+    if ($debug) cdb_error (404, $e, 'could not find record with id='.$_POST['parent'].' in database '.$_POST['database']); die();
 };
 
 if (
     $parent->body->type !== 'naFolder'
     && $parent->body->type !== 'naMediaFolder'
 ) {
-    cdb_error (403, null, 'parent record is not of the correct type ("naFolder")'); die();
+    if ($debug) cdb_error (403, null, 'parent record is not of the correct type ("naFolder" or "naMediaFolder")'); die();
 }
 
 if (
@@ -48,7 +53,7 @@ if (
     && $_POST['type'] !== 'naDocument'
     && $_POST['type'] !== 'naMediaFolder'
 ) {
-    cdb_error (403, null, 'record to be added is not of the correct type ("naFolder" or "naDocument" or "naMediaFolder")'); die();
+    if ($debug) cdb_error (403, null, 'record to be added is not of the correct type ("naFolder" or "naDocument" or "naMediaFolder")'); die();
 }
 
 if ($_POST['type'] == 'naFolder') {
@@ -85,7 +90,7 @@ while ($found) {
         }
     }
 }
-$id = cdb_randomString(10);
+$id = array_key_exists('id',$_POST) ? $_POST['id'] : cdb_randomString(10);
 $recordToAdd = array (
     '_id' => $id,
     'id' => $id,
@@ -97,7 +102,7 @@ $recordToAdd = array (
 );
 
 try { $call = $cdb->post($recordToAdd); } catch (Exception $e) {
-    cdb_error (500, $e, 'Could not add record'); die();
+    if ($debug) cdb_error (500, $e, 'Could not add record'); die();
 }
 
 echo 'Success'; // echo json_encode($recordToAdd); <-- not needed, js will refresh the entire tree (accounting for multiple users working on the same tree at the same time)
