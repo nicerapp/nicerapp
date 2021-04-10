@@ -105,5 +105,10 @@ try { $call = $cdb->post($recordToAdd); } catch (Exception $e) {
     if ($debug) cdb_error (500, $e, 'Could not add record'); die();
 }
 
-echo 'Success'; // echo json_encode($recordToAdd); <-- not needed, js will refresh the entire tree (accounting for multiple users working on the same tree at the same time)
+$dbg = array (
+    'success' => true,
+    'msg' => 'Record added',
+    'recordAdded' => $recordToAdd
+);
+echo json_encode($dbg);
 ?>

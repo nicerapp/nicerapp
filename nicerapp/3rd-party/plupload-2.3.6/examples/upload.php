@@ -38,14 +38,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 // Uncomment this one to fake upload time
 // usleep(5000);
 
+global $cms;
+$cms = new nicerAppCMS();
+$cms->init();
+
+
 // Settings
 $relPath = $_POST['relativePath'];
 //echo $relDir; die();
 //$relPath = preg_replace($relDir, '/\/.*/', '');
-$targetDir = realpath(dirname(__FILE__).'/../../..').'/siteData/'.$_GET['basePath'];
+$targetDir = realpath(dirname(__FILE__).'/../../..').'/siteData/'.$cms->domain.'/'.$_GET['basePath'];
 //echo $targetDir; die();
-createDirectoryStructure ($targetDir.DIRECTORY_SEPARATOR.$relPath);
-createDirectoryStructure ($targetDir.DIRECTORY_SEPARATOR.$relPath.DIRECTORY_SEPARATOR.'thumbs');
+createDirectoryStructure ($targetDir.DIRECTORY_SEPARATOR.$relPath, 'rene', 'www-data', 0777);
+createDirectoryStructure ($targetDir.DIRECTORY_SEPARATOR.$relPath.DIRECTORY_SEPARATOR.'thumbs', 'rene', 'www-data', 0777);
 //$targetDir = 'uploads';
 $cleanupTargetDir = true; // Remove old files
 $maxFileAge = 5 * 3600; // Temp file age in seconds
@@ -132,6 +137,28 @@ if (!$chunks || $chunk == $chunks - 1) {
 	$exec = 'convert "'.$filePath.'" -resize 200x100 "'.$thumbPath.'"';
 	$output = array(); $result = -1;
 	exec ($exec, $output, $result);
+
+	/*
+	$exec = 'sudo chown rene:www-data "'.$filePath.'"';
+	$output = array(); $result = -1;
+	exec ($exec, $output, $result);
+	//$dbg = array ('e'=>$exec,'o'=>$output,'r'=>$result); var_dump ($dbg); echo '<br/>'.PHP_EOL;
+	
+	$exec = 'sudo chown rene:www-data "'.$thumbPath.'"';
+	$output = array(); $result = -1;
+	exec ($exec, $output, $result);
+	//$dbg = array ('e'=>$exec,'o'=>$output,'r'=>$result); var_dump ($dbg); echo '<br/>'.PHP_EOL;
+	
+	$exec = 'sudo chmod 777 "'.$filePath.'"';
+	$output = array(); $result = -1;
+	exec ($exec, $output, $result);
+	//$dbg = array ('e'=>$exec,'o'=>$output,'r'=>$result); var_dump ($dbg); echo '<br/>'.PHP_EOL;
+	
+	$exec = 'sudo chmod 777 "'.$thumbPath.'"';
+	$output = array(); $result = -1;
+	exec ($exec, $output, $result);
+	//$dbg = array ('e'=>$exec,'o'=>$output,'r'=>$result); var_dump ($dbg); echo '<br/>'.PHP_EOL;
+	*/
 }
 
 // Return Success JSON-RPC response

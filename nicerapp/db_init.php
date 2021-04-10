@@ -282,4 +282,15 @@ try {
     echo '<pre style="color:red">'; var_dump ($e); echo '</pre>'; die();
 }
 echo 'Created database '.$dbName.'<br/>';
+
+
+$xec = 'rm -rf "'.realpath(dirname(__FILE__)).'/siteData/'.$cms->domain.'/*"';
+exec ($xec, $output, $result);
+$dbg = array (
+    'xec' => $xec,
+    'output' => $output,
+    'result' => $result
+);
+echo '<pre>'.json_encode($dbg,JSON_PRETTY_PRINT).'</pre><br/>';
+
 ?>

@@ -215,7 +215,7 @@ na.blog = {
         });
     },
     
-    refresh : function () {
+    refresh : function (callback) {
         $('#siteToolbarLeft .lds-facebook').fadeIn('slow');
         var ac = {
             type : 'GET',
@@ -226,6 +226,9 @@ na.blog = {
                 $('#jsTree').jstree(true).settings.core.data = dat;
                 $('#jsTree').jstree(true).refresh();
                 $('#siteToolbarLeft .lds-facebook').stop(true,true).fadeOut('slow');
+                setTimeout (function () {
+                    if (typeof callback=='function') callback (dat);
+                }, 500);
             },
             failure : function (xhr, ajaxOptions, thrownError) {
                 debugger;
@@ -361,7 +364,18 @@ na.blog = {
                 type : 'naMediaFolder'
             },
             success : function (data, ts, xhr) {
-                na.blog.refresh();
+                var 
+                me = na.blog, s = me.settings, c = s.current,
+                dat = JSON.parse(data);
+                na.blog.refresh(function(nodes) {
+                    for (var i=0; i<c.db.length; i++) {
+                        if (c.db[i].text === dat.recordAdded.text) {
+                            $('#jsTree').jstree('deselect_all');
+                            $('#jsTree').jstree('select_node', c.db[i].id);
+                        }
+                    }
+                    na.blog.onclick_btnUpload();
+                });
             },
             failure : function (xhr, ajaxOptions, thrownError) {
                 debugger;
@@ -374,12 +388,15 @@ na.blog = {
         var 
         tree = $('#jsTree').jstree(true),
         sel = tree.get_node(tree.get_selected()[0]),
+        rec = na.blog.settings.current.selectedTreeNode,
+        path = na.blog.currentPath(rec),
         ac = {
             type : 'POST',
             url : '/nicerapp/apps/nicerapp/cms/ajax_deleteNode.php',
             data : {
                 database : sel.original.database,
                 id : sel.original.id,
+                currPath : path
             },
             success : function (data, ts, xhr) {
                 na.blog.refresh();
@@ -617,6 +634,22 @@ na.blog = {
         }
         
         return true;
-    }
+    },
     
+    mediaUploadComplete : function (up, files) {
+        na.blog.refresh(function(nodes) {
+            var 
+            me = na.blog, s = me.settings, c = s.current,
+            id = files[0].relativePath.split('/')[1];
+            
+            for (var i=0; i<c.db.length; i++) {
+                var it = c.db[i];
+                if (it.text === id) {
+                    $('#jsTree').jstree('deselect_all');
+                    $('#jsTree').jstree('select_node', it.id);
+                };
+            };
+            na.blog.onclick_btnViewMedia();
+        });
+    }
 }

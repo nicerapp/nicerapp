@@ -100,6 +100,10 @@ $(function() {
                         relativePath: map[file.name].shift()
                     });
                 }
+            },
+            
+            UploadComplete : function (up, files) {
+                window.top.na.blog.mediaUploadComplete (up, files);
             }
         }		
 	});

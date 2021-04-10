@@ -53,7 +53,7 @@ function base64_decode_url($string) {
     return base64_decode(str_replace(['-','_'], ['+','/'], $string));
 }
 
-function createDirectoryStructure ($filepath) {
+function createDirectoryStructure ($filepath, $ownerUser=null, $ownerGroup=null, $filePerms=null) {
 $fncn = "createDirectoryStructure";
 /*	Creates a directory structure. 
     Returns a boolean success value. False usually indicates illegal characters in the directories.
@@ -68,20 +68,33 @@ $fncn = "createDirectoryStructure";
     if (($filepath[1]!=':') && ($filepath[0]!='/')) trigger_error ("$fncn: $filepath is not from the root. results would be unstable. gimme a filepath with / as first character.", E_USER_ERROR);
 
     $directories = explode ("/", $filepath);
+    //var_dump ($directories);
     $result = true;
 
     for ($i = count($directories); $i>0; $i--) {
         $pathToTest = implode ("/", array_slice($directories,0,$i+1));
         if (file_exists($pathToTest)) break;
     }
+    
+    $dbg = array (
+        'ptt' => $pathToTest,
+        'i' => $i,
+        'dirs' => $directories
+    );
+    //var_dump ($dbg);
 
-    if ( (($i+1) < count($directories)) ) {
-        for ($j = $i+1; $j < (count($directories)-1); $j++) {
+    if ( (($i-2) < count($directories)) ) {
+        for ($j = $i-2; $j < (count($directories)-1); $j++) {
             $pathToCreate = implode ("/", array_slice($directories,0,$j+1));
+            //var_dump ($pathToCreate);
             if (file_exists($pathToCreate)) {
                 $result = true;
             } else {
-                $result=mkdir($pathToCreate,0777);
+                $result=mkdir($pathToCreate,!is_null($filePerms)?$filePerms:0777);
+                if (is_string($ownerUser)) $x = chown ($pathToCreate, $ownerUser);
+                if (is_string($ownerGroup)) $y = chgrp ($pathToCreate, $ownerGroup);
+                $dbg = array ('ptc'=>$pathToCreate,'x'=>$x,'y'=>$y);
+                //echo json_encode($dbg,JSON_PRETTY_PRINT);
 //				chown ($pathToCreate, 'Webserver');
             }
             if (!$result) {
