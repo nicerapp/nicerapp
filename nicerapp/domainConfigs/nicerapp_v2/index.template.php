@@ -9,7 +9,7 @@
 {$cssFiles}
 {$cssThemeFiles}
 {$javascriptFiles}
-    <script type="module" src="/nicerapp/vividComponents/na3D.source.js"></script>
+    <!--<script type="module" src="/nicerapp/vividComponents/na3D.source.js"></script>-->
 
 <?php 
     $couchdbSettings = json_decode(file_get_contents(dirname(__FILE__).'/couchdb.json'), true);

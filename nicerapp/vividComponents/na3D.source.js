@@ -932,7 +932,7 @@ export class na3D_fileBrowser {
                 
                 overlapFix = t.onresize_calculateBestOverlapFix (t, overlapFixData);
                 t.onresize_applyBestOverlapFix (t, overlapFix);
-                debugger;
+                //debugger;
             }
         }   
         if (t.overlaps.length > 0) {

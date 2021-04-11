@@ -162,7 +162,7 @@ var nas = na.site = {
         let 
         reloadMenu = false,
         url2 = url.replace(document.location.origin,'').replace(document.location.host,'').replace('/apps/', ''),
-        app = JSON.parse(na.m.base64_decode_url(url2)),
+        app = url2!=='/'?JSON.parse(na.m.base64_decode_url(url2)):{},
         loadContent_do = function () {
             let
             ac = {
