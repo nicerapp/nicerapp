@@ -140,10 +140,10 @@ na.site.globals = {
         <div id="siteLoginContainer">
             <form id="siteLoginForm" name="siteLoginForm" action="/login.php" method="POST" autocomplete="on">
                 <label for="slf_loginName">Name</label>
-                <input id="slf_loginName" name="slf_loginName" type="text"/><br/>
+                <input id="slf_loginName" name="slf_loginName" type="text" required placeholder="User Name" autocomplete="username"/><br/>
 
                 <label for="slf_pw">Password</label>
-                <input id="slf_pw" name="slf_pw" type="password"/><br/>
+                <input id="slf_pw" name="slf_pw" type="password" required autocomplete="current-password"/><br/>
                 
                 <input type="submit" style="opacity:0.0001"/>
             </form>

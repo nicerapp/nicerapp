@@ -101,7 +101,7 @@ foreach ($files as $idx => $file) {
         function () {
             var
             nw = $('#viewMedia')[0].naturalWidth;
-            return nw > 0;
+            return nw > 0 && na.site.settings.desktopReady;
         },
         function () {
             na.photoAlbum.onload();

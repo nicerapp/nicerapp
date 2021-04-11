@@ -69,6 +69,12 @@ var nas = na.site = {
         
         if ($.cookie('agreedToPolicies')!=='true') $.cookie('showStatusbar', 'true', na.m.cookieOptions());
         na.site.setStatusMsg(na.site.settings.defaultStatusMsg); // calls na.desktop.resize() as well
+        
+        if (typeof $.cookie('loginName')=='string') {
+            $('#slf_loginName').val($.cookie('loginName'));
+            $('#slf_pw').val($.cookie('pw'));
+            na.site.login();
+        }
 
         $(window).resize (function() {
             $('#siteBackground img, #siteBackground div').css({
@@ -200,7 +206,7 @@ var nas = na.site = {
             if (na.account.settings.username==='Guest') {
                 na.site.settings.postLoginSuccess = login_do;
                 na.site.displayLogin();
-            }
+            } else login_do();
         };   
     },
     
@@ -343,7 +349,9 @@ var nas = na.site = {
             jQuery('#headerSiteDiv div').css ({ height : 10, width : 320 });
         }; 
         
-        na.desktop.resize();
+        na.desktop.resize(function() {
+            na.site.settings.desktopReady = true;
+        });
     },
     
     reloadMenu : function() {
@@ -448,6 +456,8 @@ var nas = na.site = {
                 if (data=='Success') {
                     na.account.settings.username = $('#slf_loginName').val();
                     na.account.settings.pw = $('#slf_pw').val();
+                    $.cookie('loginName', $('#slf_loginName').val());
+                    $.cookie('pw', $('#slf_pw').val());
                     $('#siteLogin').fadeOut('normal', 'swing', function () {
                         $('#siteLoginSuccessful').fadeIn('normal', 'swing', function () {
                             setTimeout (function() {
