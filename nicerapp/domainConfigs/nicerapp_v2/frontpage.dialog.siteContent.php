@@ -146,6 +146,9 @@
             )
         ),
         'cms' => array (
+            'meta' => array (
+                'mustBeLoggedIn' => true
+            ),
             'cms' => array (
                 'page' => 'index'
             )

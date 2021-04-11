@@ -138,12 +138,14 @@ na.site.globals = {
 
     <div id="siteLogin" class="vividDialog vividScrollpane" theme="{$theme}">
         <div id="siteLoginContainer">
-            <form id="siteLoginForm" name="siteLoginForm" action="/login.php" method="POST">
+            <form id="siteLoginForm" name="siteLoginForm" action="/login.php" method="POST" autocomplete="on">
                 <label for="slf_loginName">Name</label>
                 <input id="slf_loginName" name="slf_loginName" type="text"/><br/>
 
                 <label for="slf_pw">Password</label>
                 <input id="slf_pw" name="slf_pw" type="password"/><br/>
+                
+                <input type="submit" style="opacity:0.0001"/>
             </form>
             <div class="buttonHolder">
                 <button id="btnNewAccount" type="button" class="button" theme="{$theme}" onclick="na.site.newAccount();"><span>New account</span></button>
