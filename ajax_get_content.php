@@ -21,6 +21,7 @@ require_once (dirname(__FILE__).'/nicerapp/boot.php');
                     //$arr = array ( $dialogID => $filepath );
                     $ret = array_merge ($ret, $arr);
                 }
+                //var_dump ($ret); die();
                 //echo '<pre style="color:green;">'; echo json_encode($ret, JSON_PRETTY_PRINT); echo '</pre>'."\r\n";
                 //echo '<pre>'; echo json_encode($files, JSON_PRETTY_PRINT); echo '</pre>'."\r\n";
                 echo json_encode($ret);
