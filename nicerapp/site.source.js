@@ -153,43 +153,55 @@ var nas = na.site = {
 	},
 
     loadContent_getAndDisplayContent : function (url) {
-        
-        let reloadMenu = false;
-        var ac = {
-            type : 'GET',
-            url : '/apps_content/'+url.replace(document.location.origin,'').replace(document.location.host,'').replace('/apps/', ''),
-            success : function (data, ts, xhr) {
-                na.d.s.visibleDivs.remove('#siteToolbarTop'); $.cookie('visible_siteToolbarTop','');
-                na.d.s.visibleDivs.remove('#siteToolbarLeft'); $.cookie('visible_siteToolbarLeft','');
-                na.d.s.visibleDivs.remove('#siteToolbarRight'); $.cookie('visible_siteToolbarRight','');
+        let 
+        reloadMenu = false,
+        url2 = url.replace(document.location.origin,'').replace(document.location.host,'').replace('/apps/', ''),
+        app = JSON.parse(na.m.base64_decode_url(url2)),
+        login_do = function () {
+            let
+            ac = {
+                type : 'GET',
+                url : '/apps_content/'+url2,
+                success : function (data, ts, xhr) {
+                    na.d.s.visibleDivs.remove('#siteToolbarTop'); $.cookie('visible_siteToolbarTop','');
+                    na.d.s.visibleDivs.remove('#siteToolbarLeft'); $.cookie('visible_siteToolbarLeft','');
+                    na.d.s.visibleDivs.remove('#siteToolbarRight'); $.cookie('visible_siteToolbarRight','');
 
-        
-                var dat = JSON.parse(data), reloadMenu = false;
-                //debugger;
-                for (let divID in dat) {
-                    if (divID=='siteContent') reloadMenu = true;
-                    if (!na.d.s.visibleDivs.includes('#'+divID)) {
-                        na.d.s.visibleDivs.push('#'+divID);
-                        $.cookie('visible_'+divID, true);
+            
+                    var dat = JSON.parse(data), reloadMenu = false;
+                    //debugger;
+                    for (let divID in dat) {
+                        if (divID=='siteContent') reloadMenu = true;
+                        if (!na.d.s.visibleDivs.includes('#'+divID)) {
+                            na.d.s.visibleDivs.push('#'+divID);
+                            $.cookie('visible_'+divID, true);
+                        };
+                        $('#'+divID+' .vividDialogContent').fadeOut('normal', function () {
+                            $('#'+divID+' .vividDialogContent').html(dat[divID]).fadeIn('normal');
+                            //$('#'+divID+' .vividDialogContent')[0].innerHTML = dat[divID];
+                            na.site.transformLinks($('#'+divID)[0]);
+                        });
                     };
-                    $('#'+divID+' .vividDialogContent').fadeOut('normal', function () {
-                        $('#'+divID+' .vividDialogContent').html(dat[divID]).fadeIn('normal');
-                        //$('#'+divID+' .vividDialogContent')[0].innerHTML = dat[divID];
-                        na.site.transformLinks($('#'+divID)[0]);
-                    });
-                };
-                na.desktop.resize();
-            }, 
-            failure : function (xhr, ajaxOptions, thrownError) {
-                debugger;
-                alert ('na.site.loadContent() : '+thrownError);
-            }
+                    na.desktop.resize();
+                }, 
+                failure : function (xhr, ajaxOptions, thrownError) {
+                    debugger;
+                    alert ('na.site.loadContent() : '+thrownError);
+                }
+            };
+            ac.url = ac.url.replace('\/\/','/');
+            //debugger;
+            $.ajax(ac);
+            na.analytics.logMetaEvent('na.site.loadContent() : url='+url);
         };
-        ac.url = ac.url.replace('\/\/','/');
         //debugger;
-        $.ajax(ac);
-      
-        na.analytics.logMetaEvent('na.site.loadContent() : url='+url);
+        
+        if (app.meta && app.meta.mustBeLoggedIn) {
+            if (na.account.settings.username==='Guest') {
+                na.site.settings.postLoginSuccess = login_do;
+                na.site.displayLogin();
+            }
+        };   
     },
     
     updateDateTime : function() {
@@ -434,14 +446,22 @@ var nas = na.site = {
             success : function (data, ts, xhr) {
                 $('#siteRegistration').fadeOut('normal');
                 if (data=='Success') {
+                    na.account.settings.username = $('#slf_loginName').val();
+                    na.account.settings.pw = $('#slf_pw').val();
                     $('#siteLogin').fadeOut('normal', 'swing', function () {
                         $('#siteLoginSuccessful').fadeIn('normal', 'swing', function () {
                             setTimeout (function() {
                                 $('#siteLoginSuccessful').fadeOut('normal');
+                                if (typeof na.site.settings.postLoginSuccess=='function') {
+                                    na.site.settings.postLoginSuccess (na.account.settings.username, na.account.settings.pw);
+                                    delete na.site.settings.postLoginSuccess;
+                                }
                             }, 2 * 1000);
                         });
                     });
                 } else {
+                    na.account.settings.username = 'Guest';
+                    na.account.settings.pw = 'Guest';
                     $('#siteLogin').fadeOut('normal', 'swing', function () {
                         $('#siteLoginFailed').fadeIn('normal', 'swing', function () {
                             setTimeout (function() {
