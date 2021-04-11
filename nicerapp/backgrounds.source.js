@@ -54,7 +54,7 @@ na.backgrounds = {
                 width: jQuery(window).width(),
                 height: jQuery(window).height(),
                 background : 'url("'+url+'") repeat'
-            });
+            }).fadeIn('normal');
             
         } else if (url.match('youtube')) {
             $(bgf).add(bgl).fadeOut('fast');
