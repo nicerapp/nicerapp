@@ -269,6 +269,7 @@ label {
     top : calc(50% - 125px);
     padding : 15px;
     z-index : 2000;
+    text-align : center;
     justify-content : center;
 }
 #siteLogin input {
@@ -368,7 +369,9 @@ label {
     }
 }
 
-
+#siteLoginSuccessful img {
+    vertical-align : middle
+}
 #siteLoginSuccessful {
     display : none;
     position : absolute;
@@ -378,6 +381,10 @@ label {
     top : calc(50% - 125px);
     padding : 15px;
     z-index : 2000;
+    color : white;
+    font-weight : bold;
+    text-align : center;
+    vertical-align : middle;
     justify-content : center;
 }
 #siteLoginSuccessful::before { 
@@ -402,6 +409,10 @@ label {
     top : calc(50% - 125px);
     padding : 15px;
     z-index : 2000;
+    color : white;
+    vertical-align : middle;
+    font-weight : bold;
+    text-align : center;
     justify-content : center;
 }
 #siteLoginFailed::before { 
