@@ -57,6 +57,7 @@ na.backgrounds = {
                 background : 'url("'+url+'") repeat'
             }).fadeIn('normal', 'swing', function () {
                 $(bgDiv).css ({
+                    display : 'block',
                     width: jQuery(window).width(),
                     height: jQuery(window).height(),
                     background : 'url("'+url+'") repeat'
