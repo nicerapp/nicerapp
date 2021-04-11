@@ -41,6 +41,7 @@ na.site.globals = {
 <body onload="na.site.onload(event);">
     <div id="siteBackground"> 
         <div id="siteBackground_bg"></div>
+        <div id="siteBackground_bg2"></div>
         <img class="bg_first" alt=""/>
         <img class="bg_last" alt=""/>
     </div>

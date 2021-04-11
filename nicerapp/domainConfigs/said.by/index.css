@@ -27,6 +27,14 @@ img.bg_last {
     position : relative;
     z-index : 8;
 }
+#siteBackground_bg {
+    display : none;
+    z-index : 211;
+}
+#siteBackground_bg2 {
+    display : none;
+    z-index : 212;
+}
 
 #siteContent {
     top : calc(1vh + 4rem);

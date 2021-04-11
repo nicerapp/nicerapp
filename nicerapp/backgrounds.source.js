@@ -46,15 +46,25 @@ na.backgrounds = {
         var
         bgf = $(div+' img.bg_first')[0],
         bgl = $(div+' img.bg_last')[0],
-        bgDiv = $(div+'_bg')[0];
+        bgDiv = $(div+'_bg')[0],
+        bgDiv2 = $(div+'_bg2')[0];
         
         if (url.match('tiled')) {
             $(bgf).add(bgl).fadeOut('fast');
-            $(bgDiv).css ({
+            $(bgDiv2).css ({
                 width: jQuery(window).width(),
                 height: jQuery(window).height(),
                 background : 'url("'+url+'") repeat'
-            }).fadeIn('normal');
+            }).fadeIn('normal', 'swing', function () {
+                $(bgDiv).css ({
+                    width: jQuery(window).width(),
+                    height: jQuery(window).height(),
+                    background : 'url("'+url+'") repeat'
+                });
+                setTimeout(function(){
+                    $(bgDiv2).css ({display:'none'});
+                }, 50);
+            });
             
         } else if (url.match('youtube')) {
             $(bgf).add(bgl).fadeOut('fast');
