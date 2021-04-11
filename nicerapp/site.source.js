@@ -163,7 +163,7 @@ var nas = na.site = {
         reloadMenu = false,
         url2 = url.replace(document.location.origin,'').replace(document.location.host,'').replace('/apps/', ''),
         app = JSON.parse(na.m.base64_decode_url(url2)),
-        login_do = function () {
+        loadContent_do = function () {
             let
             ac = {
                 type : 'GET',
@@ -204,10 +204,10 @@ var nas = na.site = {
         
         if (app.meta && app.meta.mustBeLoggedIn) {
             if (na.account.settings.username==='Guest') {
-                na.site.settings.postLoginSuccess = login_do;
+                na.site.settings.postLoginSuccess = loadContent_do;
                 na.site.displayLogin();
-            } else login_do();
-        };   
+            } else loadContent_do();
+        } else loadContent_do();
     },
     
     updateDateTime : function() {
