@@ -103,13 +103,130 @@ na.site.globals = {
     </form>    
     -->
     <!--<img id="btnOptions" src="/nicerapp/siteMedia/btnOptions.png" class="tooltip" title="Options" alt="Options" tooltipTheme="mainTooltipTheme" onclick="na.site.onclick_btnOptions()"/>-->
-    <div id="btnOptions" class="cssVividButton" style="width:50px;height:50px;" onclick="na.site.onclick_btnOptions()"><img src="/nicerapp/siteMedia/btnCssVividButton.png"/><img src="/nicerapp/siteMedia/btnOptions2.png"/></div>
+    <div id="btnOptions" class="svgVividButton" style="width:50px;height:50px;" onclick="na.site.onclick_btnOptions()">
+        <img src="/nicerapp/siteMedia/btnCssVividButton.png"/><img src="/nicerapp/siteMedia/btnOptions2.png"/>
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 50 50" id="anim_btnOptions">
+            <defs>
+                <radialGradient id="radGrad_btnOptions_in"  fx="50%" fy="50%" r="100%">
+                    <stop offset="0%" stop-color ="#777" />
+                    <stop offset="50%" stop-color ="#050" />
+                    <stop offset="100%" stop-color ="#0F0" />
+                </radialGradient>
+                <radialGradient id="radGrad_btnOptions_out"  fx="50%" fy="50%" r="100%">
+                    <stop offset="0%" stop-color ="#777" />
+                    <stop offset="50%" stop-color ="#050" />
+                    <stop offset="100%" stop-color ="#0F0" />
+                </radialGradient>
+            </defs> 
+            <g id="gr1" > 
+                <rect id="rect_options" fill="url(#radGrad_btnOptions_in)" x="5%" y="5%" width="95%" height="95%" rx="10%"/> 
+            </g>  
+            <animate id="anim_btnOptions_in" class="svgVividButton_animate"
+                xlink:href="#radGrad_btnOptions_in"
+                attributeName="r"
+                dur="2s" 
+                begin="indefinite"
+                values="50%;100%;50%;"
+                repeatCount="indefinite"
+                restart="always" 
+                fill="freeze"
+            />
+            <animate id="anim_btnOptions_out" class="svgVividButton_animate_out"
+                xlink:href="#radGrad_btnOptions_out"
+                attributeName="r"
+                dur="2s" 
+                begin="indefinite"
+                values="50%;100%"
+                repeatCount="1"
+                restart="always" 
+                fill="freeze"
+            />
+        </svg>    
+    </div>
 
     <!--<img id="btnLoginLogout" src="/nicerapp/siteMedia/btnLogin.png" class="tooltip" title="Log in" alt="Log in" tooltipTheme="mainTooltipTheme" onclick="na.site.displayLogin()"/>-->
-    <div id="btnLoginLogout" class="cssVividButton" style="width:50px;height:50px;" onclick="na.site.displayLogin()"><img src="/nicerapp/siteMedia/btnCssVividButton.png"/><img src="/nicerapp/siteMedia/btnLogin2.png"/></div>
+    <div id="btnLoginLogout" class="svgVividButton" style="width:50px;height:50px;" onclick="na.site.displayLogin()">
+        <img src="/nicerapp/siteMedia/btnCssVividButton.png"/><img src="/nicerapp/siteMedia/btnLogin2.png"/>
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 50 50" id="anim_btnLoginLogout">
+            <defs>
+                <radialGradient id="radGrad_btnLoginLogout_in"  fx="50%" fy="50%" r="100%">
+                    <stop offset="0%" stop-color ="#777" />
+                    <stop offset="50%" stop-color ="#050" />
+                    <stop offset="100%" stop-color ="#0F0" />
+                </radialGradient>
+                <radialGradient id="radGrad_btnLoginLogout_out"  fx="50%" fy="50%" r="100%">
+                    <stop offset="0%" stop-color ="#777" />
+                    <stop offset="50%" stop-color ="#050" />
+                    <stop offset="100%" stop-color ="#0F0" />
+                </radialGradient>
+            </defs> 
+            <g id="gr1" > 
+                <rect id="rect_loginLogout" fill="url(#radGrad_btnLoginLogout_in)" x="5%" y="5%" width="95%" height="95%" rx="10%"/> 
+            </g>  
+            <animate id="anim_btnLoginLogout_in" class="svgVividButton_animate"
+                xlink:href="#radGrad_btnLoginLogout_in"
+                attributeName="r"
+                dur="2s" 
+                begin="indefinite"
+                values="50%;100%;50%;"
+                repeatCount="indefinite"
+                restart="always" 
+                fill="freeze"
+            />
+            <animate id="anim_btnLoginLogout_out" class="svgVividButton_animate_out"
+                xlink:href="#radGrad_btnLoginLogout_out"
+                attributeName="r"
+                dur="2s" 
+                begin="indefinite"
+                values="50%;100%"
+                repeatCount="1"
+                restart="always" 
+                fill="freeze"
+            />
+        </svg>    
+    </div>
     
     <!--<img id="btnChangeBackground" src="/nicerapp/siteMedia/btnBackground.png" class="tooltip" title="Choose a random background" alt="Choose a random background" tooltipTheme="mainTooltipTheme" onclick="nas.changeBackground()"/>-->
-    <div id="btnChangeBackground" class="cssVividButton" style="width:50px;height:50px;" onclick="na.site.changeBackground()"><img src="/nicerapp/siteMedia/btnCssVividButton.png"/><img src="/nicerapp/siteMedia/btnBackground.png"/></div>
+    <div id="btnChangeBackground" class="svgVividButton" style="width:50px;height:50px;" onclick="na.site.changeBackground()">
+        <img src="/nicerapp/siteMedia/btnCssVividButton.png"/><img src="/nicerapp/siteMedia/btnBackground.png"/>
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 50 50" id="anim_btnChangeBackground">
+            <defs>
+                <radialGradient id="radGrad_btnChangeBackground_in"  fx="50%" fy="50%" r="100%">
+                    <stop offset="0%" stop-color ="#777" />
+                    <stop offset="50%" stop-color ="#050" />
+                    <stop offset="100%" stop-color ="#0F0" />
+                </radialGradient>
+                <radialGradient id="radGrad_btnChangeBackground_out"  fx="50%" fy="50%" r="100%">
+                    <stop offset="0%" stop-color ="#777" />
+                    <stop offset="50%" stop-color ="#050" />
+                    <stop offset="100%" stop-color ="#0F0" />
+                </radialGradient>
+            </defs> 
+            <g id="gr1" > 
+                <rect id="rect_changeBackground" fill="url(#radGrad_btnChangeBackground_in)" x="5%" y="5%" width="95%" height="95%" rx="10%"/> 
+            </g>  
+            <animate id="anim_btnChangeBackground_in" class="svgVividButton_animate"
+                xlink:href="#radGrad_btnChangeBackground_in"
+                attributeName="r"
+                dur="2s" 
+                begin="indefinite"
+                values="50%;100%;50%;"
+                repeatCount="indefinite"
+                restart="always" 
+                fill="freeze"
+            />
+            <animate id="anim_btnChangeBackground_out" class="svgVividButton_animate_out"
+                xlink:href="#radGrad_btnChangeBackground_out"
+                attributeName="r"
+                dur="2s" 
+                begin="indefinite"
+                values="50%;100%"
+                repeatCount="1"
+                restart="always" 
+                fill="freeze"
+            />
+        </svg>    
+    </div>
 
     
     <div id="siteMenu" class="vividMenu" theme="{$theme}">

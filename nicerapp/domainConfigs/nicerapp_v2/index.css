@@ -152,11 +152,6 @@ img.bg_last {
     position : absolute;
     top : calc(1vh - 3px);
     left : calc(1vw + 245px);
-    width : 40px;
-    z-index : 1100;
-    border : 3px ridge lime;
-    border-radius : 10px;
-    box-shadow : 4px 4px 2px rgba(0,0,0,0.7), inset -2px -2px 2px rgba(0,0,0,0.8), inset 2px 2px 2px rgba(0,0,0,0.8);
 }
 #btnOptions.phoneView {
     left : calc(1vw + 6px);
@@ -166,11 +161,6 @@ img.bg_last {
     position : absolute;
     top : calc(1vh - 3px);
     left : calc(1vw + 285px);
-    width : 40px;
-    z-index : 1100;
-    border : 3px ridge lime;
-    border-radius : 10px;
-    box-shadow : 4px 4px 2px rgba(0,0,0,0.7), inset -2px -2px 2px rgba(0,0,0,0.8), inset 2px 2px 2px rgba(0,0,0,0.8);
 }
 #btnLoginLogout.phoneView {
     left : calc(1vw + 6px);
@@ -180,14 +170,22 @@ img.bg_last {
     position : absolute;
     top : calc(1vh - 3px);
     left : calc(1vw + 340px);
-    width : 40px;
-    background : rgba(255,255,255,0.5);
-    z-index : 1100;
-    border : 3px ridge lime;
-    border-radius : 10px;
-    box-shadow : 4px 4px 2px rgba(0,0,0,0.7), inset -2px -2px 2px rgba(0,0,0,0.8), inset 2px 2px 2px rgba(0,0,0,0.8);
+    nobox-shadow : 4px 4px 2px rgba(0,0,0,0.7), inset -2px -2px 2px rgba(0,0,0,0.8), inset 2px 2px 2px rgba(0,0,0,0.8);
 }
-#btnChangeBackground.phoneView {
+.svgVividButton {
+    width : 50px;
+    height : 50px;
+    z-index : 1100;
+    border-radius : 10px;
+}
+.svgVividButton img {
+    position : absolute;
+    top : 3px;
+    left : 3px;
+    width : 44px;
+    height : 44px;
+}
+.svgVividButton.phoneView {
     left : calc(99vw - 50px);
 }
 
