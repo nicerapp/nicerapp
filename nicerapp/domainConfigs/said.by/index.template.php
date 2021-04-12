@@ -102,11 +102,14 @@ na.site.globals = {
         </select>
     </form>    
     -->
-    <img id="btnOptions" src="/nicerapp/siteMedia/btnOptions.png" class="tooltip" title="Options" alt="Options" tooltipTheme="mainTooltipTheme" onclick="na.site.onclick_btnOptions()"/>
+    <!--<img id="btnOptions" src="/nicerapp/siteMedia/btnOptions.png" class="tooltip" title="Options" alt="Options" tooltipTheme="mainTooltipTheme" onclick="na.site.onclick_btnOptions()"/>-->
+    <div id="btnOptions" class="cssVividButton" style="width:50px;height:50px;" onclick="na.site.onclick_btnOptions()"><img src="/nicerapp/siteMedia/btnCssVividButton.png"/><img src="/nicerapp/siteMedia/btnOptions2.png"/></div>
 
-    <img id="btnLoginLogout" src="/nicerapp/siteMedia/btnLogin.png" class="tooltip" title="Log in" alt="Log in" tooltipTheme="mainTooltipTheme" onclick="na.site.displayLogin()"/>
+    <!--<img id="btnLoginLogout" src="/nicerapp/siteMedia/btnLogin.png" class="tooltip" title="Log in" alt="Log in" tooltipTheme="mainTooltipTheme" onclick="na.site.displayLogin()"/>-->
+    <div id="btnLoginLogout" class="cssVividButton" style="width:50px;height:50px;" onclick="na.site.displayLogin()"><img src="/nicerapp/siteMedia/btnCssVividButton.png"/><img src="/nicerapp/siteMedia/btnLogin2.png"/></div>
     
-    <img id="btnChangeBackground" src="/nicerapp/siteMedia/btnBackground.png" class="tooltip" title="Choose a random background" alt="Choose a random background" tooltipTheme="mainTooltipTheme" onclick="nas.changeBackground()"/>
+    <!--<img id="btnChangeBackground" src="/nicerapp/siteMedia/btnBackground.png" class="tooltip" title="Choose a random background" alt="Choose a random background" tooltipTheme="mainTooltipTheme" onclick="nas.changeBackground()"/>-->
+    <div id="btnChangeBackground" class="cssVividButton" style="width:50px;height:50px;" onclick="na.site.changeBackground()"><img src="/nicerapp/siteMedia/btnCssVividButton.png"/><img src="/nicerapp/siteMedia/btnBackground.png"/></div>
 
     
     <div id="siteMenu" class="vividMenu" theme="{$theme}">

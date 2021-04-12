@@ -67,6 +67,17 @@ var nas = na.site = {
             na.site.settings.dialogs['#'+el.id] = new naVividDialog(el);
         });
         
+        $('.svgVividButton').hover(function() {
+            $('rect', this).attr('fill','url(#'+$('.svgVividButton_animate', this)[0].id.replace('anim_','radGrad_')+')');
+            $('.svgVividButton_animate_out', this)[0].endElement();
+            $('.svgVividButton_animate', this)[0].beginElement();
+        }, function () {
+            var x = $('rect',this), y1 = $('.svgVividButton_animate_out', this), y2 = $('.svgVividButton_animate', this);
+            $('rect', this).attr('fill','url(#'+$('.svgVividButton_animate_out', this)[0].id.replace('anim_','radGrad_')+')');
+            $('.svgVividButton_animate_out', this)[0].beginElement();
+            $('.svgVividButton_animate', this)[0].endElement();
+        });
+        
         if ($.cookie('agreedToPolicies')!=='true') $.cookie('showStatusbar', 'true', na.m.cookieOptions());
         na.site.setStatusMsg(na.site.settings.defaultStatusMsg); // calls na.desktop.resize() as well
         
