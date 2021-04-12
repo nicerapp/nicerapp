@@ -81,7 +81,7 @@ foreach ($files as $idx => $file) {
 
 //echo '<pre>'.json_encode($files,JSON_PRETTY_PRINT).'</pre>';
 ?>
-<script type="text/javascript" src="/nicerapp/vividComponents/photoAlbum/4.0.0/photoAlbum-4.0.0.source.js?c=<?php echo date('Ymd_His',filemtime(dirname(__FILE__).'/photoAlbum-4.0.0.source.js'));?>"></script>
+<script type="text/javascript" src="/nicerapp/userInterface/photoAlbum/4.0.0/photoAlbum-4.0.0.source.js?c=<?php echo date('Ymd_His',filemtime(dirname(__FILE__).'/photoAlbum-4.0.0.source.js'));?>"></script>
 <span class="helper"></span>
     <img id="viewMedia" src="<?php echo $targetURL.$fn;?>"/>
 <img id="btnSetBackground" class="tooltip" tooltipTheme="mainTooltipTheme" title="Set as site background" src="/nicerapp/siteMedia/btnBackground.png" onclick="na.backgrounds.next ('#siteBackground', $.cookie('siteBackground_search'), '<?php echo $targetURL.$fn;?>');"/>

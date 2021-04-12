@@ -68,6 +68,7 @@ na.backgrounds = {
             });
             
         } else if (url.match('youtube')) {
+            $(bgDiv).add(bgDiv2).css({display:'none'});
             $(bgf).add(bgl).fadeOut('fast');
             
             

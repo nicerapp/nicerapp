@@ -18,7 +18,7 @@ $ip = (array_key_exists('X-Forwarded-For',apache_request_headers())?apache_reque
 <div class="lds-facebook"><!-- thanks for allowing CC0 license usage : https://loading.io/css/ --><div></div><div></div><div></div></div> 
 <script type="text/javascript" src="/nicerapp/apps/nicerapp/cms/na.folderView.source.js?c=<?php echo date('Ymd_His',filemtime(dirname(__FILE__).'/na.folderView.source.js'));?>"></script>
 <script type="text/javascript" src="/nicerapp/apps/nicerapp/cms/na.blog.source.js?c=<?php echo date('Ymd_His',filemtime(dirname(__FILE__).'/na.blog.source.js'));?>"></script>
-<script type="text/javascript" src="/nicerapp/vividComponents/photoAlbum/4.0.0/photoAlbum-4.0.0.source.js?c=<?php echo date('Ymd_His',filemtime(dirname(__FILE__).'/photoAlbum-4.0.0.source.js'));?>"></script>
+<script type="text/javascript" src="/nicerapp/userInterface/photoAlbum/4.0.0/photoAlbum-4.0.0.source.js?c=<?php echo date('Ymd_His',filemtime(dirname(__FILE__).'/photoAlbum-4.0.0.source.js'));?>"></script>
 
 <script type="text/javascript" src="/nicerapp/3rd-party/tinymce-4.9.11/js/tinymce/tinymce.min.js"></script>
 <div id="folder"></div>

@@ -9,7 +9,7 @@
 {$cssFiles}
 {$cssThemeFiles}
 {$javascriptFiles}
-    <!--<script type="module" src="/nicerapp/vividComponents/na3D.source.js"></script>-->
+    <!--<script type="module" src="/nicerapp/userInterface/na3D.source.js"></script>-->
 
 <?php 
     $couchdbSettings = json_decode(file_get_contents(dirname(__FILE__).'/couchdb.json'), true);
@@ -41,6 +41,7 @@ na.site.globals = {
 <body onload="na.site.onload(event);">
     <div id="siteBackground"> 
         <div id="siteBackground_bg"></div>
+        <div id="siteBackground_bg2"></div>
         <img class="bg_first" alt=""/>
         <img class="bg_last" alt=""/>
     </div>
