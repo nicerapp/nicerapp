@@ -174,7 +174,7 @@ img.bg_last {
 }
 .svgVividButton {
     width : 50px;
-    background-image : radial-gradient(circle closest-side, #000, #777);
+    height : 50px;
     z-index : 1100;
     border-radius : 10px;
 }
