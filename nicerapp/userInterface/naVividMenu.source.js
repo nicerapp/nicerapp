@@ -2,7 +2,8 @@ class naVividMenu {
     constructor(el, callback) {
         var t = this;
         t.el = el;
-        if (na.m.userDevice.isPhone) $(t.el).css({ width : $(window).width()-(3*60)-5 });
+        t.displayedOnSmallPhone = (na.m.userDevice.isPhone && $(window).width() < 220 + 180 + 15);
+        if (t.displayedOnSmallPhone) $(t.el).css({ width : $(window).width()-(3*60)-5 });
         t.t = $(el).attr('theme');
         t.items = [];
         t.initItems();
@@ -21,7 +22,7 @@ class naVividMenu {
                 path : ''
             };
             var it = t.items[idx];
-            if (na.m.userDevice.isPhone && $(window).width() < 220 + 180 + 15) $(it.b.el).css({ width : $(window).width()-(3*60)-15 });
+            if (t.displayedOnSmallPhone) $(it.b.el).css({ width : $(window).width()-(3*60)-15 });
             if (it.level===1) $(it.b.el).addClass('level1');            
             li.it = it;            
             $('#'+it.b.el.id/*+'::before'*/).bind('mouseover', function() {
