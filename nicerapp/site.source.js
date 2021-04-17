@@ -361,7 +361,9 @@ var nas = na.site = {
             || (typeof settings=='object' && settings.reloadMenu===true)
         ) na.site.reloadMenu(function () {
             na.desktop.resize(function() {
-                $('#btnOptions, #btnLoginLogout, #btnChangeBackground').css({display:'block'});
+                if (na.m.userDevice.isPhone) $('#btnOptions, #btnLoginLogout, #btnChangeBackground').css({opacity:1})
+                else $('#btnOptions, #btnLoginLogout, #btnChangeBackground').animate({opacity:1},'normal');
+                
                 na.site.settings.desktopReady = true;
             });
         });
@@ -400,6 +402,9 @@ var nas = na.site = {
     },
     
     reloadMenu : function(callback) {
+        
+        na.desktop.resize();
+        
         var 
         na_js__menuItemWidth = 200,
         ac = {

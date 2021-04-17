@@ -663,22 +663,26 @@ na.desktop = {
                     });
                     
                 else if (na.m.userDevice.isPhone) {
-                        $(divID).css ({
+                        var props = {
                             top : divs[divID].top,
                             left : divs[divID].left,
                             width : divs[divID].width,
                             height : divs[divID].height,
-                            display : 'flex',
-                            opacity : 1
-                        }); 
+                            display : 'flex'
+                        };
+                        if (divID.substr(0,4)!=='#btn') props.opacity = 1;
+                        $(divID).css (props); 
                     } 
-                    else $(divID).stop(true,true).animate ({
-                        top : divs[divID].top,
-                        left : divs[divID].left,
-                        width : divs[divID].width,
-                        height : divs[divID].height,
-                        opacity : 1
-                    }, 'normal', 'swing', callback);
+                    else {
+                        var props = {
+                            top : divs[divID].top,
+                            left : divs[divID].left,
+                            width : divs[divID].width,
+                            height : divs[divID].height
+                        };
+                        if (divID.substr(0,4)!=='#btn') props.opacity = 1;
+                        $(divID).stop(true,true).animate (props, 'normal', 'swing', callback);
+                    }
             }
         }
 
