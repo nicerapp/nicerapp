@@ -89,7 +89,16 @@ var nas = na.site = {
         $('.vividDialog').each(function(idx,el){
             na.site.settings.dialogs['#'+el.id] = new naVividDialog(el);
         });
-        if (na.m.userDevice.isPhone) $('.vdSettings').css({opacity : 0.3});
+        if (na.m.userDevice.isPhone) {
+            $('.vdSettings img, .vdSettings input').on('click touchstart', function() {
+                var t = this;
+                $(t).parent('.vdSettings').stop(true,true).animate({opacity : 1},'normal');
+                clearTimeout(t.timeout);
+                t.timeout = setTimeout(function() {
+                    $(t).parent('.vdSettings').animate({opacity:0.0001}, 'normal');
+                }, 4000);
+            });
+        }
         
         if ($.cookie('agreedToPolicies')!=='true') $.cookie('showStatusbar', 'true', na.m.cookieOptions());
         na.site.setStatusMsg(na.site.settings.defaultStatusMsg); // calls na.desktop.resize() as well
@@ -566,7 +575,10 @@ var nas = na.site = {
             data : acData,
             success : function (data, ts, xhr) {
                 var dat = JSON.parse(data);
+                $('.vividDialog').css(dat.dialogs['.vividDialog']);
+                $('.vividDialog .vdBackground').css(dat.dialogs['.vividDialog .vdBackground']);
                 for (var dID in dat.dialogs) {
+                    if (dID=='.vividDialog' || dID=='.vividDialog .vdBackground') continue;
                     var dit = dat.dialogs[dID];
                     $(dID).css (dit);
                     if (dit.background) {
