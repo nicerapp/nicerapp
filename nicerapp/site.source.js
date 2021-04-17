@@ -400,13 +400,15 @@ var nas = na.site = {
     },
     
     reloadMenu : function(callback) {
-        var ac = {
+        var 
+        na_js__menuItemWidth = 200,
+        ac = {
             type : 'POST',
             url : '/nicerapp/domainConfigs/'+na.site.globals.domain+'/mainmenu.php',
             data : {
                 na_js__screenWidth : $(window).width(),
                 na_js__menuSpace : $(window).width() - $('#siteMenu').offset().left,
-                na_js__menuItemWidth : 200,
+                na_js__menuItemWidth : na_js__menuItemWidth,
                 na_js__hasContentMenu : true
             },
             success : function (data, ts, xhr) {
@@ -420,9 +422,14 @@ var nas = na.site = {
                 $('#siteMenu')[0].innerHTML = menu.substr(0,p1) + contentMenu + menu.substr(p1+mlp.length);
                 //alert ($('li', $('#siteMenu')).length + ' menu items');
                 
-                nas.s.menus['#siteMenu'] = new naVividMenu($('#siteMenu')[0]);
+                nas.s.menus['#siteMenu'] = new naVividMenu($('#siteMenu')[0], function() {
+                    var topLevelItemCount = 0;
+                    $('#siteMenu .vividButton.level1').each (function() { topLevelItemCount++ });
+                    $('#siteMenu').css({ width : topLevelItemCount * na_js__menuItemWidth})
+                    if (typeof callback=='function') callback($('#siteMenu')[0]);
+                });
                 
-                if (typeof callback=='function') callback($('#siteMenu')[0]);
+                
                 
             },
             failure : function (xhr, ajaxOptions, thrownError) {
