@@ -21,7 +21,7 @@ class naVividMenu {
                 path : ''
             };
             var it = t.items[idx];
-            if (na.m.userDevice.isPhone) $(it.b.el).css({ width : $(window).width()-(3*60)-15 });
+            if (na.m.userDevice.isPhone && $(window).width() < 220 + 180 + 15) $(it.b.el).css({ width : $(window).width()-(3*60)-15 });
             if (it.level===1) $(it.b.el).addClass('level1');            
             li.it = it;            
             $('#'+it.b.el.id/*+'::before'*/).bind('mouseover', function() {
