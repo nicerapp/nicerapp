@@ -370,7 +370,7 @@ var nas = na.site = {
         if ($(window).width() < 1000) {
             jQuery('#siteContent, #siteStatusbar').css ({ fontSize : '70%' });
             jQuery('#siteStatusbar').css({height:'5.5rem'});
-            jQuery('#siteStatusbar .vividButton').css({width : 50});
+            jQuery('#siteStatusbar .vividButton').css({width : 40});
             jQuery('#siteStatusbar td:nth-child(2)').css({width:55});
             jQuery('#tableFor_saCompanyLogo').css ({ width : 80, height : 80 });
             jQuery('#divFor_saCompanyLogo').css ({ width : 70, height : 70, marginLeft : 0 });
