@@ -575,8 +575,10 @@ var nas = na.site = {
             data : acData,
             success : function (data, ts, xhr) {
                 var dat = JSON.parse(data);
-                $('.vividDialog').css(dat.dialogs['.vividDialog']);
-                $('.vividDialog .vdBackground').css(dat.dialogs['.vividDialog .vdBackground']);
+                if (dat.dialogs && dat.dialogs['.vividDialog']) {
+                    $('.vividDialog').css(dat.dialogs['.vividDialog']);
+                    $('.vividDialog .vdBackground').css(dat.dialogs['.vividDialog .vdBackground']);
+                }
                 for (var dID in dat.dialogs) {
                     if (dID=='.vividDialog' || dID=='.vividDialog .vdBackground') continue;
                     var dit = dat.dialogs[dID];
