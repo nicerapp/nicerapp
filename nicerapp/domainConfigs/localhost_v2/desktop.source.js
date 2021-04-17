@@ -670,7 +670,7 @@ na.desktop = {
                             height : divs[divID].height,
                             display : 'flex'
                         };
-                        if (divID.substr(0,4)!=='#btn') props.opacity = 1;
+                        if (divID.substr(0,4)!=='#btn' || !na.m.userDevice.isPhone) props.opacity = 1;
                         $(divID).css (props); 
                     } 
                     else {
@@ -680,7 +680,7 @@ na.desktop = {
                             width : divs[divID].width,
                             height : divs[divID].height
                         };
-                        if (divID.substr(0,4)!=='#btn') props.opacity = 1;
+                        if (divID.substr(0,4)!=='#btn' || !na.m.userDevice.isPhone) props.opacity = 1;
                         $(divID).stop(true,true).animate (props, 'normal', 'swing', callback);
                     }
             }
