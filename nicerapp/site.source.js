@@ -35,6 +35,29 @@ var nas = na.site = {
         na.d.s.visibleDivs.remove('#siteToolbarTop'); $.cookie('visible_siteToolbarTop','');
         na.d.s.visibleDivs.remove('#siteToolbarLeft'); $.cookie('visible_siteToolbarLeft','');
         na.d.s.visibleDivs.remove('#siteToolbarRight'); $.cookie('visible_siteToolbarRight','');
+
+        if (na.m.userDevice.isPhone) {
+            //debugger;
+            $('#siteLoginSuccessful, #siteLoginFailed, #siteRegistration, #siteLogin').css ({ width : $(window).width() - 75, left : 20 });
+        }
+        
+        document.addEventListener('gesturestart', function(e) {
+            e.preventDefault();
+            // special hack to prevent zoom-to-tabs gesture in safari
+            document.body.style.zoom = 0.99;
+        });
+
+        document.addEventListener('gesturechange', function(e) {
+            e.preventDefault();
+            // special hack to prevent zoom-to-tabs gesture in safari
+            document.body.style.zoom = 0.99;
+        });
+
+        document.addEventListener('gestureend', function(e) {
+            e.preventDefault();
+            // special hack to prevent zoom-to-tabs gesture in safari
+            document.body.style.zoom = 0.99;
+        });        
         
         na.desktop.init();
         
@@ -43,11 +66,11 @@ var nas = na.site = {
         
         if (na.m.userDevice.isPhone) {
             $('#siteDateTime').css({display:'none'});
-            $('#btnLoginLogout, #btnChangeBackground, #siteMenu').addClass('phoneView');
+            //$('#btnLoginLogout, #btnChangeBackground, #siteMenu').addClass('phoneView');
         } else {
             na.d.s.visibleDivs.push('#siteDateTime');
         }
-
+        
         if (!$.cookie('siteBackground_url') || $.cookie('siteBackground_url')==='') {
         //if (true) {
             $.cookie('siteBackground_search', 'landscape', na.m.cookieOptions());
@@ -59,24 +82,14 @@ var nas = na.site = {
         $('#siteContent .vividDialogContent').animate({opacity:1},'slow').focus();
         if ($('.vividDialogContent').css('display')==='none') $('.vividDialogContent').css({display:'block'});
         
-        $('.vividButton').each(function(idx,el){
+        $('.vividButton, .vividButton_icon').each(function(idx,el){
             na.site.settings.buttons['#'+el.id] = new naVividButton(el);
         });
         
         $('.vividDialog').each(function(idx,el){
             na.site.settings.dialogs['#'+el.id] = new naVividDialog(el);
         });
-        
-        $('.svgVividButton').hover(function() {
-            $('rect', this).attr('fill','url(#'+$('.svgVividButton_animate', this)[0].id.replace('anim_','radGrad_')+')');
-            $('.svgVividButton_animate_out', this)[0].endElement();
-            $('.svgVividButton_animate', this)[0].beginElement();
-        }, function () {
-            var x = $('rect',this), y1 = $('.svgVividButton_animate_out', this), y2 = $('.svgVividButton_animate', this);
-            $('rect', this).attr('fill','url(#'+$('.svgVividButton_animate_out', this)[0].id.replace('anim_','radGrad_')+')');
-            $('.svgVividButton_animate_out', this)[0].beginElement();
-            $('.svgVividButton_animate', this)[0].endElement();
-        });
+        if (na.m.userDevice.isPhone) $('.vdSettings').css({opacity : 0.3});
         
         if ($.cookie('agreedToPolicies')!=='true') $.cookie('showStatusbar', 'true', na.m.cookieOptions());
         na.site.setStatusMsg(na.site.settings.defaultStatusMsg); // calls na.desktop.resize() as well
@@ -84,7 +97,15 @@ var nas = na.site = {
         if (typeof $.cookie('loginName')=='string') {
             $('#slf_loginName').val($.cookie('loginName'));
             $('#slf_pw').val($.cookie('pw'));
-            na.site.login();
+            na.site.login(function (loginWasSuccessful) {
+                na.site.loadTheme(function() {
+                    na.site.onresize({reloadMenu:true})
+                });
+            });
+        } else {
+            na.site.loadTheme(function() {
+                na.site.onresize({reloadMenu:true})
+            });
         }
 
         $(window).resize (function() {
@@ -95,10 +116,10 @@ var nas = na.site = {
         
             if (na.site.settings.timeoutWindowResize) clearTimeout(nas.s.timeoutWindowResize);
             na.site.settings.timeoutWindowResize = setTimeout (function() {
-                nas.onresize();
+                na.site.onresize({reloadMenu:true});
             }, 250);
         });
-        na.site.onresize();
+        
         $('#siteContent').css({display:'block'});
         
         var ac = {
@@ -230,7 +251,7 @@ var nas = na.site = {
 			+ ' ' + na.m.padNumber(d.getHours(), 2, '0') + ':' + na.m.padNumber(d.getMinutes(), 2, '0')
 			+ ':' + na.m.padNumber(d.getSeconds(), 2, '0'); // + '.' + na.m.padNumber(d.getMilliseconds(), 3, 0);
 			
-        jQuery('#siteDateTime').html(r);
+        jQuery('#siteDateTime .vividDialogContent').html(r);
     },
     
     themeSwitch : function () {
@@ -318,17 +339,25 @@ var nas = na.site = {
     },
     
     onresize : function(settings) {
-        if (
-            !settings
-            || (typeof settings=='object' && settings.reloadMenu===true)
-        ) na.site.reloadMenu();
-        
         $('#siteBackground img, #siteBackground div, #siteBackground iframe').css({
             width : $(window).width(),
             height : $(window).height()
         });
         //$('#siteBackground img.bg_first').fadeIn(2000);
         
+        na.site.onresize_doContent(settings);
+        
+        if (
+            !settings
+            || (typeof settings=='object' && settings.reloadMenu===true)
+        ) na.site.reloadMenu(function () {
+            na.desktop.resize(function() {
+                $('#btnOptions, #btnLoginLogout, #btnChangeBackground').css({display:'block'});
+                na.site.settings.desktopReady = true;
+            });
+        });
+    },
+    onresize_doContent : function (settings) {
         if ($(window).width() < 1000) {
             jQuery('#siteContent, #siteStatusbar').css ({ fontSize : '70%' });
             jQuery('#siteStatusbar').css({height:'5.5rem'});
@@ -359,13 +388,9 @@ var nas = na.site = {
             jQuery('#headerSiteDiv').css ({ height : 200, width : 320 });
             jQuery('#headerSiteDiv div').css ({ height : 10, width : 320 });
         }; 
-        
-        na.desktop.resize(function() {
-            na.site.settings.desktopReady = true;
-        });
     },
     
-    reloadMenu : function() {
+    reloadMenu : function(callback) {
         var ac = {
             type : 'POST',
             url : '/nicerapp/domainConfigs/'+na.site.globals.domain+'/mainmenu.php',
@@ -387,6 +412,9 @@ var nas = na.site = {
                 //alert ($('li', $('#siteMenu')).length + ' menu items');
                 
                 nas.s.menus['#siteMenu'] = new naVividMenu($('#siteMenu')[0]);
+                
+                if (typeof callback=='function') callback($('#siteMenu')[0]);
+                
             },
             failure : function (xhr, ajaxOptions, thrownError) {
                 debugger;
@@ -404,6 +432,7 @@ var nas = na.site = {
             $('#siteStatusbar .vividDialogContent').html(msg).css({display:'block',margin:0}).animate({opacity:1},'slow');
             
             na.site.onresize({reloadMenu : false});
+            //na.site.onresize_doContent(settings);
             
             if (msg !== na.site.settings.defaultStatusMsg)
             setTimeout (function () {
@@ -454,7 +483,7 @@ var nas = na.site = {
         }
     },
     
-    login : function () {
+    login : function (callback) {
         var ac = {
             type : 'POST',
             url : '/nicerapp/ajax_login.php',
@@ -466,11 +495,12 @@ var nas = na.site = {
                 $('#siteRegistration').fadeOut('normal');
                 if (data=='Success') {
                     na.account.settings.username = $('#slf_loginName').val();
-                    na.account.settings.pw = $('#slf_pw').val();
+                    na.account.settings.password = $('#slf_pw').val();
                     $.cookie('loginName', $('#slf_loginName').val());
                     $.cookie('pw', $('#slf_pw').val());
+                    if (typeof callback=='function') callback(true);
                     $('#siteLogin').fadeOut('normal', 'swing', function () {
-                        $('#siteLoginSuccessful').fadeIn('normal', 'swing', function () {
+                        $('#siteLoginSuccessful').html('Logged in as '+na.account.settings.username+' <img src="/nicerapp/3rd-party/tinymce-4/plugins/naEmoticons/img/happy.gif"/>').fadeIn('normal', 'swing', function () {
                             setTimeout (function() {
                                 $('#siteLoginSuccessful').fadeOut('normal');
                                 if (typeof na.site.settings.postLoginSuccess=='function') {
@@ -482,7 +512,8 @@ var nas = na.site = {
                     });
                 } else {
                     na.account.settings.username = 'Guest';
-                    na.account.settings.pw = 'Guest';
+                    na.account.settings.password = 'Guest';
+                    if (typeof callback=='function') callback(false);
                     $('#siteLogin').fadeOut('normal', 'swing', function () {
                         $('#siteLoginFailed').fadeIn('normal', 'swing', function () {
                             setTimeout (function() {
@@ -498,6 +529,63 @@ var nas = na.site = {
                 debugger;
             }
         };
+        $.ajax(ac);
+    },
+    
+    loadTheme : function (callback) {
+        var 
+        acData = {
+            username : na.account.settings.username,
+            pw : na.account.settings.password,
+            url : '[default]'            
+        };
+        /*
+        if (!acData.dialogs) acData['dialogs'] = {};
+        for (var i=0; i<na.desktop.globals.divs.length; i++) {
+            var 
+            dID = na.desktop.globals.divs[i],
+            dIDbg = dID+' .vdBackground',
+            d = na.site.settings.dialogs[dID],            
+            dData = {};
+            
+            dData[dID] = d.fetchTheme(d, dID);
+            dData[dIDbg] = d.fetchTheme(d, dIDbg);
+            
+            acData['dialogs'] = na.m.negotiateOptions (
+                acData['dialogs'],
+                dData
+            );
+        }
+        acData['dialogs'] = JSON.stringify (acData['dialogs']);
+        */
+        
+        var
+        ac = {
+            type : 'POST',
+            url : '/nicerapp/ajax_get_vdsettings.php',
+            data : acData,
+            success : function (data, ts, xhr) {
+                var dat = JSON.parse(data);
+                for (var dID in dat.dialogs) {
+                    var dit = dat.dialogs[dID];
+                    $(dID).css (dit);
+                    if (dit.background) {
+                        var 
+                        del = $(dID)[0],
+                        rgbaRegEx = /rgba\(\d{1,3}\,\s+\d{1,3}\,\s+\d{1,3}\,\s+([\d.]+)\).*/,
+                        test = rgbaRegEx.test(dit.background),
+                        ditbgOpacity = test ? dit.background.match(rgbaRegEx)[1] : dit.opacity;
+                        $('.sliderOpacityRange', del).attr('value', ditbgOpacity*100);
+                                                 
+                    }
+                };
+                if (typeof callback=='function') callback(true);
+                //debugger;
+            },
+            failure : function (xhr, ajaxOptions, thrownError) {
+                debugger;   
+            }
+        };        
         $.ajax(ac);
     }
 }

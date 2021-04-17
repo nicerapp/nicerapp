@@ -8,7 +8,9 @@
                                     <canvas id="saCompanyLogo" width="200" height="200" onclick="event.data={element:'saCompanyLogo'}; na.logo.settings.stage.removeAllChildren(); na.logo.init_do_createLogo('saCompanyLogo','countryOfOriginColors');"></canvas><!-- this version can not actually be resized yet. hardcoded values in the drawing functions. -->
                                     <script type="text/javascript">
                                         $(document).ready(function() {
-                                            startLogo('saCompanyLogo', 'countryOfOriginColors');
+                                            setTimeout(function() {
+                                                startLogo('saCompanyLogo', 'countryOfOriginColors');
+                                            }, 5000);
                                         });
                                     </script> 
                                     

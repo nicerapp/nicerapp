@@ -1,11 +1,12 @@
 class naVividMenu {
-    constructor(el) {
+    constructor(el, callback) {
         var t = this;
         t.el = el;
+        if (na.m.userDevice.isPhone) $(t.el).css({ width : $(window).width()-(3*60)-5 });
         t.t = $(el).attr('theme');
         t.items = [];
         t.initItems();
-        t.onresize();
+        t.onresize(t, {}, callback);
         t.updateItemStates();
     }
     
@@ -20,6 +21,7 @@ class naVividMenu {
                 path : ''
             };
             var it = t.items[idx];
+            if (na.m.userDevice.isPhone) $(it.b.el).css({ width : $(window).width()-(3*60)-15 });
             if (it.level===1) $(it.b.el).addClass('level1');            
             li.it = it;            
             $('#'+it.b.el.id/*+'::before'*/).bind('mouseover', function() {
@@ -67,7 +69,7 @@ class naVividMenu {
         });
     }
     
-    onresize(t, levels) {
+    onresize(t, levels, callback) {
         var
         bw = $(window).width(),
         pl = null;
@@ -81,12 +83,13 @@ class naVividMenu {
         if (t.resizeDoneCount>25) {
             setTimeout(function() {
                 t.resizeDoneCount = 0;
-                t.onresize(t, levels);
+                t.onresize(t, levels, callback);
             }, 200);
         } else {
             if (t.resizeDoingIdx>=t.items.length) {
                 t.resizeDoingIdx = 0;
                 t.resizeDoneCount = 0;
+                if (typeof callback=='function') callback(t);
             } else {
                 var it = t.items[t.resizeDoingIdx];
                 it.label = $(it.b.el).children('a').html();
@@ -212,7 +215,7 @@ class naVividMenu {
                 //$(it.b.el).fitText();
                 
                 t.resizeDoingIdx++;
-                setTimeout (function(){t.onresize(t, levels)}, 10);
+                setTimeout (function(){t.onresize(t, levels, callback)}, 10);
             }
         }
         //debugger;

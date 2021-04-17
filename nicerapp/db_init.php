@@ -2,9 +2,13 @@
 <?php 
 require_once (dirname(__FILE__).'/boot.php');
 require_once (dirname(__FILE__).'/3rd-party/sag/src/Sag.php');
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+require_once (dirname(__FILE__).'/Sag-support-functions.php');
+$debug = true; 
+if ($debug) {
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+}
 
 $ip = (array_key_exists('X-Forwarded-For',apache_request_headers())?apache_request_headers()['X-Forwarded-For'] : $_SERVER['REMOTE_ADDR']);
 if (
@@ -17,6 +21,9 @@ if (
     die();
 }
 
+
+$security_admin = '{ "admins": { "names": ["Administrator"], "roles": [] }, "members": { "names": [], "roles": [] } }';
+$security_guest = '{ "admins": { "names": [], "roles": ["guests"] }, "members": { "names": [], "roles": ["guests"] } }';
 
 global $cms;
 $cms = new nicerAppCMS();
@@ -90,10 +97,6 @@ foreach ($dbs->body as $idx => $dbName) {
         try { $db = $cdb->deleteDatabase($dbName); } catch (Exception $e) { if ($debug) { echo $e->getMessage(); echo '<br/>'; $do = false; die(); }}
     }
 }
-
-
-$security_admin = '{ "admins": { "names": ["Administrator"], "roles": [] }, "members": { "names": [], "roles": ["guests"] } }';
-$security_guest = '{ "admins": { "names": [], "roles": ["guests"] }, "members": { "names": [], "roles": ["guests"] } }';
 
 $dbName = str_replace('.','_',$cms->domain).'___analytics';
 $cdb->setDatabase($dbName,true);
@@ -255,9 +258,9 @@ $cdb->setDatabase($dbName, true);
 try { 
     $call = $cdb->setSecurity ($security_admin);
 } catch (Exception $e) {
-    echo '<pre style="color:red">'; var_dump ($e); echo '</pre>'; die();
+    if ($debug) { echo '<pre style="color:red">'; var_dump ($e); echo '</pre>'; die(); }
 }
-echo 'Created database '.$dbName.'<br/>';
+if ($debug) echo 'Created database '.$dbName.'<br/>';
 
 $dbName = str_replace('.','_',$cms->domain).'___cms_documents__user___guest';
 try { $cdb->deleteDatabase ($dbName); } catch (Exception $e) { };
@@ -267,9 +270,9 @@ $cdb->setDatabase($dbName, true);
 try { 
     $call = $cdb->setSecurity ($security_guest);
 } catch (Exception $e) {
-    echo '<pre style="color:red">'; var_dump ($e); echo '</pre>'; die();
+    if ($debug) { echo '<pre style="color:red">'; var_dump ($e); echo '</pre>'; die(); }
 }
-echo 'Created database '.$dbName.'<br/>';
+if ($debug) echo 'Created database '.$dbName.'<br/>';
 
 $dbName = str_replace('.','_',$cms->domain).'___cms_documents__role___guests';
 try { $cdb->deleteDatabase ($dbName); } catch (Exception $e) { };
@@ -279,10 +282,9 @@ $cdb->setDatabase($dbName, true);
 try { 
     $call = $cdb->setSecurity ($security_guest);
 } catch (Exception $e) {
-    echo '<pre style="color:red">'; var_dump ($e); echo '</pre>'; die();
+    if ($debug) { echo '<pre style="color:red">'; var_dump ($e); echo '</pre>'; die(); }
 }
-echo 'Created database '.$dbName.'<br/>';
-
+if ($debug) echo 'Created database '.$dbName.'<br/>';
 
 $xec = 'rm -rf "'.realpath(dirname(__FILE__)).'/siteData/'.$cms->domain.'/*"';
 exec ($xec, $output, $result);
@@ -291,6 +293,84 @@ $dbg = array (
     'output' => $output,
     'result' => $result
 );
-echo '<pre>'.json_encode($dbg,JSON_PRETTY_PRINT).'</pre><br/>';
+if ($debug) echo '<pre>'.json_encode($dbg,JSON_PRETTY_PRINT).'</pre><br/>';
+
+
+$dbName = str_replace('.','_',$cms->domain).'___cms_vdsettings__role___guests';
+try { $cdb->deleteDatabase ($dbName); } catch (Exception $e) { };
+$cdb->setDatabase($dbName, true);
+try { 
+    $call = $cdb->setSecurity ($security_guest);
+} catch (Exception $e) {
+    if ($debug) { echo '<pre style="color:red">'; var_dump ($e); echo '</pre>'; die(); }
+}
+if ($debug) echo 'Created database '.$dbName.'<br/>';
+
+
+$dbName = str_replace('.','_',$cms->domain).'___cms_vdsettings__user___guest';
+try { $cdb->deleteDatabase ($dbName); } catch (Exception $e) { };
+$cdb->setDatabase($dbName, true);
+try { 
+    $call = $cdb->setSecurity ($security_guest);
+} catch (Exception $e) {
+    if ($debug) { echo '<pre style="color:red">'; var_dump ($e); echo '</pre>'; die(); }
+}
+
+$rec = array(
+    'url' => '[default]',
+    '_id' => cdb_randomString(20),
+    'dialogs' => array (
+        '.vividDialog' => array (
+            'color' => 'white',
+            'boxShadow' => '7px 7px 5px rgba(0,0,0,0.7), inset -2px -2px 2px rgba(0,0,0,0.8), inset 2px 2px 2px rgba(0,0,0,0.8)',
+            'borderRadius' => '15px',
+            'border' => '3px ridge lime'
+        ),
+        '.vividDialog .vdBackground' => array (
+            'background' => 'rgba(0,0,0,0.5)',
+            'borderRadius' => '15px'
+        ),
+        '#siteDateTime' => array (
+            'border' => '3px ridge lime',
+            'background' => 'rgba(0,0,0,0.7)',
+            'color' => 'white'
+        ),
+        '#siteContent' => array (
+            'borderRadius' => '15px'
+        ),
+        '#siteVideo .vdBackground' => array (
+            'background' => 'url("/nicerapp/siteMedia/backgrounds/tiled/active/red/318801228_12f7b6a8a2.jpg") repeat',
+            'borderRadius' => '15px',
+            'opacity' => 0.7
+        ),
+        '#siteVideoSearch .vdBackground' => array (
+            'background' => 'url("/nicerapp/siteMedia/backgrounds/tiled/active/red/318801228_12f7b6a8a2.jpg") repeat',
+            'borderRadius' => '15px',
+            'opacity' => 0.7
+        ),
+        '#siteComments .vdBackground' => array (
+            'background' => 'url("/nicerapp/siteMedia/backgrounds/tiled/active/blue/seamless-texture-blue-watercolor.jpg") repeat',
+            'borderRadius' => '15px',
+            'opacity' => 0.7
+        ),
+        '#siteToolbarRight .vdBackground' => array (
+            'background' => 'url("/nicerapp/siteMedia/backgrounds/tiled/active/blue/seamless-texture-blue-watercolor.jpg") repeat',
+            'borderRadius' => '15px',
+            'opacity' => 0.7
+        ),
+        '#siteStatusbar .vdBackground' => array (
+            'background' => 'url("/nicerapp/siteMedia/backgrounds/tiled/active/green/cloth 003C.png") repeat',
+            'borderRadius' => '15px',
+            'opacity' => 0.7
+        )
+    )
+);
+try {
+    $cdb->post($rec);
+} catch (Exception $e) {
+    if ($debug) { echo '<pre style="color:red">'; var_dump ($e); echo '</pre>'; die(); }
+}
+
+echo 'Created and populated database '.$dbName.'<br/>'.PHP_EOL;
 
 ?>

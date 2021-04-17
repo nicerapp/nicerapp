@@ -5,7 +5,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="HandheldFriendly" content="true" />
 {$cssFiles}
 {$cssThemeFiles}
 {$javascriptFiles}
@@ -45,187 +46,73 @@ na.site.globals = {
         <img class="bg_first" alt=""/>
         <img class="bg_last" alt=""/>
     </div>
-    <div id="siteContent" class="vividDialog" theme="{$theme}">
+    <div id="siteContent" class="vividDialog">
     <div class="vividDialogContent vividScrollpane">
 {$div_siteContent}    
     </div>
     </div>
 
-    <div id="siteVideo" class="vividDialog" style="display:flex;justify-content:center;align-items:center;text-align:center;" theme="{$theme}">
+    <div id="siteVideo" class="vividDialog" style="display:flex;justify-content:center;align-items:center;text-align:center;">
         {$div_siteVideo}
     </div>
 
-    <div id="siteVideoSearch" class="vividDialog" style="display:flex;justify-content:center;align-items:center;text-align:center;" theme="{$theme}">
+    <div id="siteVideoSearch" class="vividDialog" style="display:flex;justify-content:center;align-items:center;text-align:center;">
         {$div_siteVideoSearch}
     </div>
 
     
-    <div id="siteComments" class="vividDialog" style="display:flex;justify-content:center;align-items:center;text-align:center;" theme="{$theme}">
+    <div id="siteComments" class="vividDialog" style="display:flex;justify-content:center;align-items:center;text-align:center;">
         {$div_siteComments}
     </div>
     
-    <div id="siteToolbarTop" class="vdToolbar vividDialog" theme="{$theme}">
+    <div id="siteToolbarTop" class="vdToolbar vividDialog">
     <div class="vividDialogContent vividScrollpane">
         {$div_siteToolbarTop}
     </div>
     </div>
 
-    <div id="siteToolbarLeft" class="vdToolbar vividDialog" theme="{$theme}">
+    <div id="siteToolbarLeft" class="vdToolbar vividDialog">
     <div class="vividDialogContent vividScrollpane">
         {$div_siteToolbarLeft}
     </div>
     </div>
     
+    <div id="siteToolbarDialogSettings" class="vdToolbar vividDialog">
+    <div class="vividDialogContent vividScrollpane">
+        to be filled in
+    </div>
+    </div>
     
-    <div id="siteToolbarRight" class="vdToolbar vividDialog" theme="{$theme}">
+    <div id="siteToolbarRight" class="vdToolbar vividDialog">
     <div class="vividDialogContent vividScrollpane">
         {$div_siteToolbarRight}
     </div>
     </div>
 
     
-    <div id="siteStatusbar" class="vividDialog" theme="{$theme}">
-    <div class="vividDialogContent vividScrollpane">
-    </div>
-    </div>
+    <div id="siteStatusbar" class="vividDialog"><div class="vividDialogContent vividScrollpane"></div></div>
     
-    <div id="siteDateTime" class="vividDialog" theme="{$theme}"></div>
+    <div id="siteDateTime" class="vividDialog"><div class="vividDialogContent vividScrollpane"></div></div>
     
-    <!--
-    <img id="btnThemeSwitch" src="/nicerapp/siteMedia/btnThemeSwitch_icon.png" class="tooltip" title="Switch between light and dark theme" alt="Switch between light and dark theme" tooltipTheme="mainTooltipTheme" onclick="nas.themeSwitch()"/>
-    <form id="siteSettings" action="/" method="POST" style="display:none;">
-        <select id="siteTheme" name="siteTheme" form="siteSettings" onchange="this.form.submit()">
-            <optgroup>
-            <option value="dark" <?php echo $cms->cssTheme === 'dark' ? 'selected' : '';?>>Dark</option>
-            <option value="light" <?php echo $cms->cssTheme === 'light' ? 'selected' : '';?>>Light</option>
-            </optgroup>
-        </select>
-    </form>    
-    -->
-    <!--<img id="btnOptions" src="/nicerapp/siteMedia/btnOptions.png" class="tooltip" title="Options" alt="Options" tooltipTheme="mainTooltipTheme" onclick="na.site.onclick_btnOptions()"/>-->
-    <div id="btnOptions" class="svgVividButton" style="width:50px;height:50px;" onclick="na.site.onclick_btnOptions()">
-        <img src="/nicerapp/siteMedia/btnCssVividButton.png"/><img src="/nicerapp/siteMedia/btnOptions2.png"/>
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 50 50" id="anim_btnOptions">
-            <defs>
-                <radialGradient id="radGrad_btnOptions_in"  fx="50%" fy="50%" r="100%">
-                    <stop offset="0%" stop-color ="#777" />
-                    <stop offset="50%" stop-color ="#050" />
-                    <stop offset="100%" stop-color ="#0F0" />
-                </radialGradient>
-                <radialGradient id="radGrad_btnOptions_out"  fx="50%" fy="50%" r="100%">
-                    <stop offset="0%" stop-color ="#777" />
-                    <stop offset="50%" stop-color ="#050" />
-                    <stop offset="100%" stop-color ="#0F0" />
-                </radialGradient>
-            </defs> 
-            <g id="gr1" > 
-                <rect id="rect_options" fill="url(#radGrad_btnOptions_in)" x="5%" y="5%" width="95%" height="95%" rx="10%"/> 
-            </g>  
-            <animate id="anim_btnOptions_in" class="svgVividButton_animate"
-                xlink:href="#radGrad_btnOptions_in"
-                attributeName="r"
-                dur="2s" 
-                begin="indefinite"
-                values="50%;100%;50%;"
-                repeatCount="indefinite"
-                restart="always" 
-                fill="freeze"
-            />
-            <animate id="anim_btnOptions_out" class="svgVividButton_animate_out"
-                xlink:href="#radGrad_btnOptions_out"
-                attributeName="r"
-                dur="2s" 
-                begin="indefinite"
-                values="50%;100%"
-                repeatCount="1"
-                restart="always" 
-                fill="freeze"
-            />
-        </svg>    
+    <div id="btnOptions" class="vividButton_icon" style="width:50px;height:50px;" onclick="na.site.onclick_btnOptions()">
+        <div class="cvbBorderCSS"></div>
+        <img class="cvbImgBorder" src="/nicerapp/siteMedia/btnCssVividButton_outerBorder.png"/>
+        <img class="cvbImgTile" src="/nicerapp/siteMedia/btnCssVividButton.png"/>
+        <img class="cvbImgButton" src="/nicerapp/siteMedia/btnOptions2.png"/>
     </div>
 
-    <!--<img id="btnLoginLogout" src="/nicerapp/siteMedia/btnLogin.png" class="tooltip" title="Log in" alt="Log in" tooltipTheme="mainTooltipTheme" onclick="na.site.displayLogin()"/>-->
-    <div id="btnLoginLogout" class="svgVividButton" style="width:50px;height:50px;" onclick="na.site.displayLogin()">
-        <img src="/nicerapp/siteMedia/btnCssVividButton.png"/><img src="/nicerapp/siteMedia/btnLogin2.png"/>
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 50 50" id="anim_btnLoginLogout">
-            <defs>
-                <radialGradient id="radGrad_btnLoginLogout_in"  fx="50%" fy="50%" r="100%">
-                    <stop offset="0%" stop-color ="#777" />
-                    <stop offset="50%" stop-color ="#050" />
-                    <stop offset="100%" stop-color ="#0F0" />
-                </radialGradient>
-                <radialGradient id="radGrad_btnLoginLogout_out"  fx="50%" fy="50%" r="100%">
-                    <stop offset="0%" stop-color ="#777" />
-                    <stop offset="50%" stop-color ="#050" />
-                    <stop offset="100%" stop-color ="#0F0" />
-                </radialGradient>
-            </defs> 
-            <g id="gr1" > 
-                <rect id="rect_loginLogout" fill="url(#radGrad_btnLoginLogout_in)" x="5%" y="5%" width="95%" height="95%" rx="10%"/> 
-            </g>  
-            <animate id="anim_btnLoginLogout_in" class="svgVividButton_animate"
-                xlink:href="#radGrad_btnLoginLogout_in"
-                attributeName="r"
-                dur="2s" 
-                begin="indefinite"
-                values="50%;100%;50%;"
-                repeatCount="indefinite"
-                restart="always" 
-                fill="freeze"
-            />
-            <animate id="anim_btnLoginLogout_out" class="svgVividButton_animate_out"
-                xlink:href="#radGrad_btnLoginLogout_out"
-                attributeName="r"
-                dur="2s" 
-                begin="indefinite"
-                values="50%;100%"
-                repeatCount="1"
-                restart="always" 
-                fill="freeze"
-            />
-        </svg>    
+    <div id="btnLoginLogout" class="vividButton_icon" style="width:50px;height:50px;" onclick="na.site.displayLogin()">
+        <div class="cvbBorderCSS"></div>
+        <img class="cvbImgBorder" src="/nicerapp/siteMedia/btnCssVividButton_outerBorder.png"/>
+        <img class="cvbImgTile" src="/nicerapp/siteMedia/btnCssVividButton.png"/>
+        <img class="cvbImgButton" src="/nicerapp/siteMedia/btnLogin2.png"/>
     </div>
     
-    <!--<img id="btnChangeBackground" src="/nicerapp/siteMedia/btnBackground.png" class="tooltip" title="Choose a random background" alt="Choose a random background" tooltipTheme="mainTooltipTheme" onclick="nas.changeBackground()"/>-->
-    <div id="btnChangeBackground" class="svgVividButton" style="width:50px;height:50px;" onclick="na.site.changeBackground()">
-        <img src="/nicerapp/siteMedia/btnCssVividButton.png"/><img src="/nicerapp/siteMedia/btnBackground.png"/>
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 50 50" id="anim_btnChangeBackground">
-            <defs>
-                <radialGradient id="radGrad_btnChangeBackground_in"  fx="50%" fy="50%" r="100%">
-                    <stop offset="0%" stop-color ="#777" />
-                    <stop offset="50%" stop-color ="#050" />
-                    <stop offset="100%" stop-color ="#0F0" />
-                </radialGradient>
-                <radialGradient id="radGrad_btnChangeBackground_out"  fx="50%" fy="50%" r="100%">
-                    <stop offset="0%" stop-color ="#777" />
-                    <stop offset="50%" stop-color ="#050" />
-                    <stop offset="100%" stop-color ="#0F0" />
-                </radialGradient>
-            </defs> 
-            <g id="gr1" > 
-                <rect id="rect_changeBackground" fill="url(#radGrad_btnChangeBackground_in)" x="5%" y="5%" width="95%" height="95%" rx="10%"/> 
-            </g>  
-            <animate id="anim_btnChangeBackground_in" class="svgVividButton_animate"
-                xlink:href="#radGrad_btnChangeBackground_in"
-                attributeName="r"
-                dur="2s" 
-                begin="indefinite"
-                values="50%;100%;50%;"
-                repeatCount="indefinite"
-                restart="always" 
-                fill="freeze"
-            />
-            <animate id="anim_btnChangeBackground_out" class="svgVividButton_animate_out"
-                xlink:href="#radGrad_btnChangeBackground_out"
-                attributeName="r"
-                dur="2s" 
-                begin="indefinite"
-                values="50%;100%"
-                repeatCount="1"
-                restart="always" 
-                fill="freeze"
-            />
-        </svg>    
+    <div id="btnChangeBackground" class="vividButton_icon" onclick="na.site.changeBackground()">
+        <div class="cvbBorderCSS"></div>
+        <img class="cvbImgBorder" src="/nicerapp/siteMedia/btnCssVividButton_outerBorder.png"/>
+        <img class="cvbImgTile" src="/nicerapp/siteMedia/btnCssVividButton.png"/>
+        <img class="cvbImgButton" src="/nicerapp/siteMedia/btnBackground.png"/>
     </div>
 
     
@@ -233,7 +120,7 @@ na.site.globals = {
 {$div_siteMenu}
     </div>
     
-    <div id="siteRegistration" class="vividDialog vividScrollpane" theme="{$theme}">
+    <div id="siteRegistration" class="vividDialogPopup vividScrollpane">
         <div id="siteRegistrationContainer">
             <form id="siteRegistrationForm" name="siteRegistrationForm" action="/register.php" method="POST">
                 <label for="srf_loginName">Name</label>
@@ -252,12 +139,12 @@ na.site.globals = {
             </form>
             <p id="siteRegistrationError"></p>
             <br/>
-            <button id="btnSrfSubmit" type="button" class="button" theme="{$theme}" onclick="na.site.register();"><span>Register! <img src="/nicerapp/3rd-party/tinymce-4/plugins/naEmoticons/img/happy.gif"/></span></div>
+            <button id="btnSrfSubmit" type="button" class="button" onclick="na.site.register();"><span>Register! <img src="/nicerapp/3rd-party/tinymce-4/plugins/naEmoticons/img/happy.gif"/></span></div>
         </div>
         
     </div>
 
-    <div id="siteLogin" class="vividDialog vividScrollpane" theme="{$theme}">
+    <div id="siteLogin" class="vividDialogPopup vividScrollpane">
         <div id="siteLoginContainer">
             <form id="siteLoginForm" name="siteLoginForm" action="/login.php" method="POST" autocomplete="on">
                 <label for="slf_loginName">Name</label>
@@ -269,15 +156,15 @@ na.site.globals = {
                 <input type="submit" style="opacity:0.0001"/>
             </form>
             <div class="buttonHolder">
-                <button id="btnNewAccount" type="button" class="button" theme="{$theme}" onclick="na.site.newAccount();"><span>New account</span></button>
-                <button id="btnLogin" type="button" class="button" theme="{$theme}" onclick="na.site.login();"><span>Log in</span></button>
+                <button id="btnNewAccount" type="button" class="button" onclick="na.site.newAccount();"><span>New account</span></button>
+                <button id="btnLogin" type="button" class="button" onclick="na.site.login();"><span>Log in</span></button>
             </div>
         </div>
     </div>
 
-    <div id="siteLoginSuccessful" class="vividDialog vividScrollpane">Login Successful! <img src="/nicerapp/3rd-party/tinymce-4/plugins/naEmoticons/img/happy.gif"/></div>
+    <div id="siteLoginSuccessful" class="vividDialogPopup vividScrollpane">Login Successful! <img src="/nicerapp/3rd-party/tinymce-4/plugins/naEmoticons/img/happy.gif"/></div>
     
-    <div id="siteLoginFailed" class="vividDialog vividScrollpane">Login failed..</div>
+    <div id="siteLoginFailed" class="vividDialogPopup vividScrollpane">Login failed..</div>
     
     <!-- see fonts.google.com -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans|ABeeZee|Aclonica|Acme|Actor|Advent+Pro|Akronim|Alex+Brush|Architects+Daughter|Archivo+Black|Baloo|Bebas+Neue|Caveat|Chewy|Cookie|Cormorant|Courgette|Covered+By+Your+Grace|Dancing+Script|El+Messiri|Exo|Exo+2|Galada|Gloria+Hallelujah|Great+Vibes|Handlee|Indie+Flower|Kalam|Kaushan+Script|Khula|Knewave|Krona+One|Lacquer|Lemonada|Lusitana|M+PLUS+1p|Marck+Script|Merienda+One|Modak|Montserrat|Montserrat+Alternates|Mr+Dafoe|Nanum+Pen+Script|Noto+Serif+JP|Odibee+Sans|Oleo+Script|Orbitron|PT+Sans|Parisienne|Pathway+Gothic+One|Permanent+Marker|Playball|Pridi|Quattrocento+Sans|Rock+Salt|Sacramento|Saira+Condensed|Saira+Extra+Condensed|Saira+Semi+Condensed|Satisfy|Shadows+Into+Light|Shadows+Into+Light+Two|Sigmar+One|Signika+Negative|Slabo+27px|Source+Code+Pro|Special+Elite|Spectral|Spinnaker|Sriracha|Unica+One|Acme|Lato:300,300i,400,400i|Montserrat|Mukta+Malar|Ubuntu|Indie+Flower|Raleway|Pacifico|Fjalla+One|Work+Sans|Gloria+Hallelujah&display=swap" rel="stylesheet" onload="$(document).ready(function(){na.site.startTooltips(event);});">

@@ -38,6 +38,8 @@ $username = $_POST['loginName'];
 $username = str_replace(' ', '__', $username);
 $username = str_replace('.', '_', $username);
 
+$security_user = '{ "admins": { "names": ["'.$username.'"], "roles": [] }, "members": { "names": ["'.$username.'"], "roles": [] } }';
+
 $uid = 'org.couchdb.user:'.$username;
 $got = true;
 $cdb->setDatabase('_users',false);
@@ -61,7 +63,6 @@ if (!$got) {
 } else {
     if ($debug) echo 'Already have this user record.<br/>';
 }
-$security_user = '{ "admins": { "names": ["'.$username.'"], "roles": [] }, "members": { "names": ["'.$username.'"], "roles": [] } }';
 
 $dbName = $cdbDomain.'___cms_tree__user___'.$username;
 try { $cdb->deleteDatabase ($dbName); } catch (Exception $e) { };
@@ -88,7 +89,7 @@ $data = '{ "database" : "'.$dbName.'", "_id" : "'.$rec3_id.'", "id" : "'.$rec3_i
 if ($do) try { $cdb->post($data); } catch (Exception $e) { if ($debug) { echo '<pre>'.json_encode(json_decode($data),JSON_PRETTY_PRINT).'</pre>'; echo $e->getMessage(); echo '<br/>'; }};
 
 
-echo 'Created database '.$dbName.'<br/>';
+echo 'Created database '.$dbName.'<br/>'.PHP_EOL;
 
 $dbName = $cdbDomain.'___cms_documents__user___'.$username;
 try { $cdb->deleteDatabase ($dbName); } catch (Exception $e) { };
@@ -98,6 +99,71 @@ try {
 } catch (Exception $e) {
     if ($debug) { echo '<pre style="color:red">'; var_dump ($e); echo '</pre>'; die(); }
 }
-echo 'Created database '.$dbName.'<br/>';
+echo 'Created database '.$dbName.'<br/>'.PHP_EOL;
 
+$dbName = $cdbDomain.'___cms_vdsettings__user___'.$username;
+try { $cdb->deleteDatabase ($dbName); } catch (Exception $e) { };
+$cdb->setDatabase($dbName, true);
+try { 
+    $call = $cdb->setSecurity ($security_user);
+} catch (Exception $e) {
+    if ($debug) { echo '<pre style="color:red">'; var_dump ($e); echo '</pre>'; die(); }
+}
+
+$rec = array(
+    'url' => '[default]',
+    '_id' => cdb_randomString(20),
+    'dialogs' => array (
+        '.vividDialog' => array (
+            'color' => 'white',
+            'boxShadow' => '7px 7px 5px rgba(0,0,0,0.7), inset -2px -2px 2px rgba(0,0,0,0.8), inset 2px 2px 2px rgba(0,0,0,0.8)',
+            'borderRadius' => '15px',
+            'border' => '3px ridge lime'
+        ),
+        '.vividDialog .vdBackground' => array (
+            'background' => 'rgba(0,0,0,0.5)',
+            'borderRadius' => '15px'
+        ),
+        '#siteDateTime' => array (
+            'border' => '3px ridge lime',
+            'background' => 'rgba(0,0,0,0.7)',
+            'color' => 'white'
+        ),
+        '#siteContent' => array (
+            'borderRadius' => '15px'
+        ),
+        '#siteVideo .vdBackground' => array (
+            'background' => 'url("/nicerapp/siteMedia/backgrounds/tiled/active/red/318801228_12f7b6a8a2.jpg") repeat',
+            'borderRadius' => '15px',
+            'opacity' => 0.7
+        ),
+        '#siteVideoSearch .vdBackground' => array (
+            'background' => 'url("/nicerapp/siteMedia/backgrounds/tiled/active/red/318801228_12f7b6a8a2.jpg") repeat',
+            'borderRadius' => '15px',
+            'opacity' => 0.7
+        ),
+        '#siteComments .vdBackground' => array (
+            'background' => 'url("/nicerapp/siteMedia/backgrounds/tiled/active/blue/seamless-texture-blue-watercolor.jpg") repeat',
+            'borderRadius' => '15px',
+            'opacity' => 0.7
+        ),
+        '#siteToolbarRight .vdBackground' => array (
+            'background' => 'url("/nicerapp/siteMedia/backgrounds/tiled/active/blue/seamless-texture-blue-watercolor.jpg") repeat',
+            'borderRadius' => '15px',
+            'opacity' => 0.7
+        ),
+        '#siteStatusbar .vdBackground' => array (
+            'background' => 'url("/nicerapp/siteMedia/backgrounds/tiled/active/green/cloth 003C.png") repeat',
+            'borderRadius' => '15px',
+            'opacity' => 0.7
+        )
+    )
+);
+try {
+    $cdb->post($rec);
+} catch (Exception $e) {
+    if ($debug) { echo '<pre style="color:red">'; var_dump ($e); echo '</pre>'; die(); }
+}
+
+echo 'Created and populated database '.$dbName.'<br/>'.PHP_EOL;
 ?>
