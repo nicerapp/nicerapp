@@ -170,17 +170,17 @@ img.bg_last {
 
 #btnOptions {
     position : absolute;
-    display : none;
+    opacity : 0.0001;
 }
 
 #btnLoginLogout {
     position : absolute;
-    display : none;
+    opacity : 0.0001;
 }
 
 #btnChangeBackground {
     position : absolute;
-    display : none;
+    opacity : 0.0001;
 }
 .vividButton_icon {
     z-index : 1100;
