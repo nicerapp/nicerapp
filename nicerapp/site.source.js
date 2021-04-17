@@ -406,7 +406,7 @@ var nas = na.site = {
         na.desktop.resize();
         
         var 
-        na_js__menuItemWidth = 200,
+        na_js__menuItemWidth = na.m.userDevice.isPhone ? $(window).width()-(3*60)-15 : 220,
         ac = {
             type : 'POST',
             url : '/nicerapp/domainConfigs/'+na.site.globals.domain+'/mainmenu.php',
@@ -430,7 +430,7 @@ var nas = na.site = {
                 nas.s.menus['#siteMenu'] = new naVividMenu($('#siteMenu')[0], function() {
                     var topLevelItemCount = 0;
                     $('#siteMenu .vividButton.level1').each (function() { topLevelItemCount++ });
-                    $('#siteMenu').css({ width : topLevelItemCount * na_js__menuItemWidth})
+                    $('#siteMenu').css({ width : (topLevelItemCount * na_js__menuItemWidth) + 10})
                     if (typeof callback=='function') callback($('#siteMenu')[0]);
                 });
                 
