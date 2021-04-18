@@ -14,7 +14,6 @@
     "/nicerapp/jsEngineeringMath/physics_waves.source.js",
     "/nicerapp/jsEngineeringMath/math_2D.source.js",
     "/nicerapp/jsEngineeringMath/math_3D.source.js",
-    "/nicerapp/site.source.js",
     "/nicerapp/domainConfigs/localhost_v2/desktop.source.js",
     "/nicerapp/backgrounds.source.js",
     "/nicerapp/userInterface/naVividComponents.source.js",
@@ -24,5 +23,6 @@
     "/nicerapp/userInterface/naColorGradients-1.0.0.source.js",
     "/nicerapp/userInterface/naVividText-1.1.0.source.js",
     "/nicerapp/canvasLogo-2.1.0.source.js",
-    "/nicerapp/apps/nicerapp/analytics/app.source.js"
+    "/nicerapp/apps/nicerapp/analytics/app.source.js",
+    "/nicerapp/site.source.js"
 ]

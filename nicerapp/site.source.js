@@ -117,8 +117,12 @@ var nas = na.site = {
                 });
             });
         } else {
-            na.site.loadTheme(function() {
-                na.site.onresize({reloadMenu:true})
+            $('#slf_loginName').val(na.account.settings.username);
+            $('#slf_pw').val(na.account.settings.password);
+            na.site.login(function (loginWasSuccessful) {
+                na.site.loadTheme(function() {
+                    na.site.onresize({reloadMenu:true})
+                });
             });
         }
 
