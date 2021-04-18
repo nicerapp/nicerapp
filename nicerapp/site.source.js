@@ -390,6 +390,23 @@ var nas = na.site = {
             jQuery('.td_spacer').css ({ height : 100 });
             jQuery('#headerSiteDiv').css ({ height : 70, width : 80 });
             jQuery('#headerSiteDiv div').css ({ height : 0, width : 80 });
+        } else if ($(window).width() < na.site.globals.smallDeviceWidth) {
+            jQuery('#siteContent, #siteStatusbar').css ({ fontSize : '100%' });
+            jQuery('#siteStatusbar').css({height:'4.5rem'});
+            jQuery('#siteStatusbar .vividButton').css({width : 100});
+            jQuery('#siteStatusbar td:nth-child(2)').css({width:105});
+            jQuery('#mainCSS').html('.vividMenu_item td { font-size : 80%; }; #siteStatus td { font-weight : bold };');
+            jQuery('#tableFor_saCompanyLogo').css ({ width : 200, height : 200 });
+            jQuery('#divFor_saCompanyLogo').css ({ width : 200, height : 200, marginLeft : 40 });
+            jQuery('#datetime').css({marginLeft:40,marginTop:20});
+            jQuery('#saCompanyLogo').attr('width',200).attr('height',200);
+            jQuery('#headerSite h1').css ({ fontSize : navigator.userAgent.match('Chrome')?'220%':'140%', paddingLeft : 20 });
+            jQuery('#headerSite h2').css ({ fontSize : '100%', paddingLeft : 20 });
+            jQuery('#headerSite, #headerSite h3').css ({ fontSize : '100%', paddingLeft : 20 });
+            
+            jQuery('.td_spacer').css ({ height : 100 });
+            jQuery('#headerSiteDiv').css ({ height : 200, width : 320 });
+            jQuery('#headerSiteDiv div').css ({ height : 10, width : 320 });
         } else {
             jQuery('#siteContent, #siteStatusbar').css ({ fontSize : '100%' });
             jQuery('#siteStatusbar').css({height:'4.5rem'});
