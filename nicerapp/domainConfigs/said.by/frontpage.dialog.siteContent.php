@@ -11,7 +11,7 @@
                                             if ($(window).width() < na.site.globals.reallySmallDeviceWidth) {
                                                 $('#tableFor_saCompanyLogo').css({display:'none'});
                                                 $('#divFor_said_by_logo').css({width:70,height:70});
-                                                $('#tableFor_saCompanyLogo').css({width:80});
+                                                $('#tableFor_said_by_logo').css({width:80});
                                             } else {
                                                 setTimeout (function() {
                                                     startLogo('saCompanyLogo', 'countryOfOriginColors');
@@ -91,7 +91,7 @@
                 </td>
                 <td class="td_spacer" style="width:5px;height:310px;">&nbsp;</td>
                 <td>
-                    <table id="tableFor_saCompanyLogo" border="0" style="width:300px;">
+                    <table id="tableFor_said_by_logo" border="0" style="width:300px;">
                         <tr>
                             <td>
                                 <div id="divFor_said_by_logo" style="margin-left:40px;width:200px;height:200px;background:rgba(0,0,0,0.7);border-radius:10px;border:solid rgba(0,0,0,0.8);padding:5px;box-shadow:4px 4px 2px rgba(0,0,0,0.7);">
