@@ -13,11 +13,11 @@ class naVividDialog {
         
         var html = 
             '<div class="vdSettings">'
-                +'<img class="btnSettings" src="/nicerapp/siteMedia/btnPickColor.png" onclick="var d = na.site.settings.dialogs[\'#'+this.el.id+'\']; d.displaySettingsDialog(d)"/>'
-                +'<input type="range" min="1" max="100" value="50" class="sliderOpacityRange">'
+                +'<img class="btnSettings" src="/nicerapp/siteMedia/btnPickColor.png" onclick="na.site.settings.activeDivs = [\'#siteToolbarDialogSettings\']; var d = na.site.settings.dialogs[\'#'+this.el.id+'\']; d.displaySettingsDialog(d)"/>'
+                +'<input type="range" min="1" max="100" value="50" class="sliderOpacityRange"/>'
             +'</div>'
             +'<div class="vdBackground"></div>';
-        $(t.el).prepend(html);
+        if (t.el.id!=='#siteToolbarDialogSettings' && !$('.vdSettings',t.el)[0]) $(t.el).prepend(html);
         
         $('.vdSettings', t.el).hover (function() {
             $(this).stop(true,true).animate({opacity:1},'slow');

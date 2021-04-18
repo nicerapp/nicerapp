@@ -6,7 +6,8 @@ var nas = na.site = {
     },
     
     globals : {
-        smallDeviceWidth : 1000
+        smallDeviceWidth : 1000,
+        reallySmallDeviceWidth : 500
     },
     
     settings : {
@@ -383,8 +384,8 @@ var nas = na.site = {
             jQuery('#saCompanyLogo').attr('width',70).attr('height',70);
             jQuery('#headerSite, #headerSite h1, #headerSite h2, #headerSite h3').css ({ fontSize : '84%', paddingLeft : 0 });
             jQuery('.td_spacer').css ({ height : 100 });
-            jQuery('#headerSiteDiv').css ({ height : 70, width : 120 });
-            jQuery('#headerSiteDiv div').css ({ height : 0, width : 120 });
+            jQuery('#headerSiteDiv').css ({ height : 70, width : 80 });
+            jQuery('#headerSiteDiv div').css ({ height : 0, width : 80 });
         } else {
             jQuery('#siteContent, #siteStatusbar').css ({ fontSize : '100%' });
             jQuery('#siteStatusbar').css({height:'4.5rem'});

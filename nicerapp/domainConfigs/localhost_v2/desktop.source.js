@@ -34,34 +34,34 @@ na.desktop = {
             '#siteVideoSearch' : {
                 top : $('#siteDateTime').height()+20+$('#siteVideo').height()+10,
                 left : $(window).width()+100,
-                width : !na.m.userDevice.isPhone ? 300 : $(window).width - 20,
+                width : !na.m.userDevice.isPhone ? 300 : $(window).width - 50,
                 opacity : 0.0001
             },
             '#siteComments' : {
                 top : $('#siteDateTime').height()+20,
                 left : $(window).width()+100,
-                width : !na.m.userDevice.isPhone ? 300 : $(window).width - 20,
+                width : !na.m.userDevice.isPhone ? 300 : $(window).width - 50,
                 opacity : 0.0001
             },
             '#siteToolbarDialogSettings' : {
                 top : $('#siteDateTime').height()+20,
                 left : -420,
                 height : $(window).height()-120,
-                width : !na.m.userDevice.isPhone ? 400 : $(window).width - 20,
+                width : !na.m.userDevice.isPhone ? 440 : $(window).width - 50,
                 opacity : 0.0001
             },
             '#siteToolbarLeft' : {
                 top : $('#siteDateTime').height()+20,
                 left : -420,
                 height : $(window).height()-120,
-                width : !na.m.userDevice.isPhone ? 400 : $(window).width - 20,
+                width : !na.m.userDevice.isPhone ? 400 : $(window).width - 50,
                 opacity : 0.0001
             },
             '#siteToolbarRight' : {
                 top : $('#siteDateTime').height()+20,
                 left : $(window).width()+100,
                 height : $(window).height()-120,
-                width : !na.m.userDevice.isPhone ? 300 : $(window).width - 20,
+                width : !na.m.userDevice.isPhone ? 300 : $(window).width - 50,
                 opacity : 0.0001
             },
             '#siteToolbarTop' : {
@@ -146,6 +146,14 @@ na.desktop = {
         
         if (!na.m.userDevice.isPhone && !visibleDivs.includes('#siteDateTime')) {
             visibleDivs.push('#siteDateTime');
+        }
+        
+        if ($(window).width() < na.site.globals.reallySmallDeviceWidth) {
+            if (na.site.settings.activeDivs && na.site.settings.activeDivs.length) visibleDivs = na.site.settings.activeDivs;
+            if ($.cookie('showStatusbar') && !visibleDivs.includes('#siteStatusbar')) visibleDivs.push('#siteStatusbar');
+            if (!visibleDivs.includes('#btnOptions')) visibleDivs.push('#btnOptions');
+            if (!visibleDivs.includes('#btnLoginLogout')) visibleDivs.push('#btnLoginLogout');
+            if (!visibleDivs.includes('#btnChangeBackground')) visibleDivs.push('#btnChangeBackground');
         }
         
         na.d.s.visibleDivs = visibleDivs;
@@ -429,8 +437,7 @@ na.desktop = {
             if (visibleDivs.includes('#siteStatusbar')) gtl.push ({ element : '#siteStatusbar', edge : 'top' });
         }
         
-        
-        //debugger;
+        debugger;
         var divs = {};
         for (var sectionID in calculate) {
             var section = calculate[sectionID];
@@ -478,8 +485,11 @@ na.desktop = {
                         divs[divID].height = $(divID).height();
                         break;
                     case 'maxY':
-                        divs[divID].width = $(divID).width();
-                        divs[divID].height = $(window).height() - divs[divID].top;
+                        if ($(window).width() < na.site.globals.reallySmallDeviceWidth)
+                            divs[divID].width = $(window).width() - (3 * na.d.g.margin)
+                        else 
+                            divs[divID].width = $(divID).width();
+                        divs[divID].height = $(window).height() - divs[divID].top - (2 * na.d.g.margin);
                         break;
                 }
 
