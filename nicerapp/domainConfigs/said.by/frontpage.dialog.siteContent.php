@@ -11,6 +11,7 @@
                                             if ($(window).width() < na.site.globals.reallySmallDeviceWidth) {
                                                 $('#tableFor_saCompanyLogo').css({display:'none'});
                                                 $('#divFor_said_by_logo').css({width:70,height:70});
+                                                $('#tableFor_saCompanyLogo').css({width:80});
                                             } else {
                                                 setTimeout (function() {
                                                     startLogo('saCompanyLogo', 'countryOfOriginColors');
