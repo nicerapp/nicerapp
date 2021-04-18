@@ -4,7 +4,7 @@ var mp3site = {
 		copyright : 'Copyrighted (c) 2011-2021 by Rene AJM Veerman - rene.veerman.netherlands@gmail.com',
 		license : 'http://nicer.app/LICENSE.txt',
 		version : '3.1.0',
-		firstReleased : '2011',
+		firstReleased : '2011',   
 		lastUpdated : '2020-02-04(Thursday) 18:20 Amsterdam.NL timezone',
 		knownBugs : {
 			1 : "None atm, I think. Please report any bugs you find.."
@@ -18,7 +18,8 @@ var mp3site = {
 		paused : false,
 		stopped : true,
 		repeating : false,
-		masterLeftOffset : null
+		masterLeftOffset : null,
+		dialogs : {}
 	},
 	language : {
 		siteTitle : "DJ FireSnake's mixes"
@@ -30,9 +31,11 @@ var mp3site = {
         if (mp3site.settings.loaded) return false; else mp3site.settings.loaded = true;
 
         mp3site.setupDragNDrop();
-		$('.vividDialog_dialog, #playlist_wrapper, #infoWindow_mp3desc, #infoWindow_comments, #mp3s, #player').css({opacity:0.0001});
-        $('#siteContent').css({background:'rgba(0,0,0,0)',border:'1px solid rgba(0,0,0,0)',boxShadow:'0px 0px 1px 1px rgba(0,0,0,0)'});
+		//$('.vividDialog_dialog, #playlist_wrapper, #infoWindow_mp3desc, #infoWindow_comments, #mp3s, #player').css({opacity:0.0001});
                         
+        na.site.loadTheme(function () {
+            $('#siteContent', window.top.document).css({background:'rgba(0,0,0,0)',border:'1px solid rgba(0,0,0,0)',boxShadow:'0px 0px 1px 1px rgba(0,0,0,0)'});
+        });
 
         $(window).resize(function() {
             clearTimeout(mp3site.settings.timeoutResize);
@@ -367,6 +370,8 @@ var mp3site = {
 		sc_scrollpane = $('#siteContent', window.top.document.body),
 		sc_scrollpaneContainer = $('#siteContent', window.top.document.body),
 		sc_siteContent = $('#siteContent', window.top.document.body);
+        
+        $('#siteContent > .vdBackground', window.top.document).fadeOut('normal');
 
 		if (typeof mp3site.settings.masterLeftOffset == 'number') {
 			var masterLeftOffset = mp3site.settings.masterLeftOffset;
