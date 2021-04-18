@@ -27,13 +27,22 @@ img.bg_last {
     position : relative;
     z-index : 8;
 }
-#siteBackground_bg {
-    display : none;
-    z-index : 211;
+
+.vividInfoDialog {
+    position : absolute;
+    z-index : 1000;
 }
-#siteBackground_bg2 {
-    display : none;
-    z-index : 212;
+
+.vdBackground {
+    position : absolute;
+    width : 100%;
+    height : 100%;
+    z-index : -1;
+}
+
+.vividDialogPopup {
+    border : 3px ridge lime;
+    border-radius : 15px;
 }
 
 #siteContent {
@@ -45,8 +54,8 @@ img.bg_last {
     /*top : 48vh;
     left : 48vw;
     width : 4vw;
-    height : 4vh;*/
-    border-radius : 20px;
+    height : 4vh;
+    border-radius : 20px;*/
 }
 .vividDialogContent {
     overflow : auto;
@@ -147,7 +156,7 @@ img.bg_last {
     top : -5rem;
     left : 10px;
     width : 230px;
-    height : 2rem;
+    height : 2.8rem;
     font-size : 1rem;
     font-weight : bold;
     display: flex;
@@ -155,48 +164,97 @@ img.bg_last {
     align-items: center;
     border-radius : 10px;
 }
+#siteDateTime .vdBackground {
+    border-radius : 10px;
+}
 
 #btnOptions {
     position : absolute;
-    top : calc(1vh - 3px);
-    left : calc(1vw + 245px);
-    width : 40px;
-    z-index : 1100;
-    border : 3px ridge lime;
-    border-radius : 10px;
-    box-shadow : 4px 4px 2px rgba(0,0,0,0.7), inset -2px -2px 2px rgba(0,0,0,0.8), inset 2px 2px 2px rgba(0,0,0,0.8);
-}
-#btnOptions.phoneView {
-    left : calc(1vw + 6px);
+    opacity : 0.0001;
 }
 
 #btnLoginLogout {
     position : absolute;
-    top : calc(1vh - 3px);
-    left : calc(1vw + 285px);
-    width : 40px;
-    z-index : 1100;
-    border : 3px ridge lime;
-    border-radius : 10px;
-    box-shadow : 4px 4px 2px rgba(0,0,0,0.7), inset -2px -2px 2px rgba(0,0,0,0.8), inset 2px 2px 2px rgba(0,0,0,0.8);
-}
-#btnLoginLogout.phoneView {
-    left : calc(1vw + 6px);
+    opacity : 0.0001;
 }
 
 #btnChangeBackground {
     position : absolute;
-    top : calc(1vh - 3px);
-    left : calc(1vw + 340px);
-    width : 40px;
-    background : rgba(255,255,255,0.5);
-    z-index : 1100;
-    border : 3px ridge lime;
-    border-radius : 10px;
-    box-shadow : 4px 4px 2px rgba(0,0,0,0.7), inset -2px -2px 2px rgba(0,0,0,0.8), inset 2px 2px 2px rgba(0,0,0,0.8);
+    opacity : 0.0001;
 }
-#btnChangeBackground.phoneView {
-    left : calc(99vw - 50px);
+.vividButton_icon {
+    z-index : 1100;
+    width : 50px;
+    height : 50px;
+    border-radius : 8px;
+    
+}
+.vividButton_icon img {
+    position : absolute;
+    top : 0px;
+    left : 0px;
+    width : 50px;
+    height : 50px;
+}
+.cvbBorderCSS {
+    position : absolute;
+    top : 0px;
+    left : 0px;
+    width : 50px;
+    height : 50px;
+    z-index : 2002;
+    border-radius : 8px;
+    /*background-image : radial-gradient(circle 45px at center, rgba(0,255,0,1), rgba(0,0,0,0));*/
+    box-shadow : 2px 2px 2px 2px rgba(0,0,0,0.7);
+}
+.cvbImgBorder { z-index : 2001; }
+.cvbImgTile { z-index : 2010; }
+.cvbImgButton { z-index : 2015; }
+    
+.vdSettings {
+    position : absolute;
+    top : -15px;
+    left : 15px;
+    width : 200px;
+    height : 50px;
+    opacity : 0.0001;
+}
+.vdSettings img {
+    position : absolute;
+    top : 0px;
+    left : 0px;
+    width : 50px;
+    z-index : 5000;
+}
+.sliderOpacityRange {
+    position : absolute;
+    top : -2px;
+    left : 55px;
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    width: calc(100% - 55px); /* Full-width */
+    height: 25px; /* Specified height */
+    background: rgba(0,0,0,0.95); /* Grey background */
+    z-index : 5000;
+    border : 2px ridge rgba(100,100,100,0.7);
+    border-radius : 8px;
+    outline: none; /* Remove outline */
+    opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+}
+.sliderOpacityRange:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+.sliderOpacityRange::-moz-range-thumb {
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: #4CAF50; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+
+#siteToolbarDialogSettings .navbar img {
+    width : 50px;
 }
 
 
@@ -207,7 +265,7 @@ img.bg_last {
     height : 1.5rem;
 }
 #siteMenu.phoneView {
-    left : calc(50vw - 100px);
+    left : calc(1vw + 50px);
 }
 
 #siteRegistration {
@@ -220,7 +278,7 @@ img.bg_last {
     padding : 15px;
     z-index : 2000;
 }
-#siteRegistration::before { 
+#siteRegistration:before { 
     content : '';
     background : url('/nicerapp/siteMedia/backgrounds/tiled/active/blue/seamless-texture-blue-watercolor.jpg') repeat;
     opacity : 0.7;
@@ -260,6 +318,14 @@ label {
     font-size : 1.1rem;
 }
 
+#siteRegistrationError {
+    display : none;
+    border-radius : 8px;
+    padding : 5px;
+    background : white;
+    color : red;
+}
+
 #siteLogin {
     display : none;
     position : absolute;
@@ -269,6 +335,7 @@ label {
     top : calc(50% - 125px);
     padding : 15px;
     z-index : 2000;
+    text-align : center;
     justify-content : center;
 }
 #siteLogin input {
@@ -279,7 +346,7 @@ label {
     outline : 0;
     margin : 4px;
 }
-#siteLogin::before { 
+#siteLogin:before { 
     content : '';
     background : url('/nicerapp/siteMedia/backgrounds/tiled/active/green/409537396_fa312a886d.jpg') repeat;
     opacity : 0.7;
@@ -368,7 +435,9 @@ label {
     }
 }
 
-
+#siteLoginSuccessful img {
+    vertical-align : middle
+}
 #siteLoginSuccessful {
     display : none;
     position : absolute;
@@ -378,6 +447,10 @@ label {
     top : calc(50% - 125px);
     padding : 15px;
     z-index : 2000;
+    color : white;
+    font-weight : bold;
+    text-align : center;
+    vertical-align : middle;
     justify-content : center;
 }
 #siteLoginSuccessful::before { 
@@ -402,6 +475,10 @@ label {
     top : calc(50% - 125px);
     padding : 15px;
     z-index : 2000;
+    color : white;
+    vertical-align : middle;
+    font-weight : bold;
+    text-align : center;
     justify-content : center;
 }
 #siteLoginFailed::before { 

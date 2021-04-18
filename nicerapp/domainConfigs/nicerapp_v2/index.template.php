@@ -21,12 +21,12 @@
     $couchdbSettingsStr = str_replace("}", "\t}", $couchdbSettingsStr);    
 ?>
 <script type="text/javascript">
-na.site.globals = {
+na.site.globals = $.extend(na.site.globals, {
     couchdb : <?php echo $couchdbSettingsStr?>,
     referer : '<?php echo (array_key_exists('HTTP_REFERER',$_SERVER)?$_SERVER['HTTP_REFERER']:'');?>',
     myip : '<?php echo str_replace('.','_',(array_key_exists('X-Forwarded-For',apache_request_headers())?apache_request_headers()['X-Forwarded-For'] : $_SERVER['REMOTE_ADDR']))?>',
     domain : '{$domain}'
-};
+});
 </script>
     <link rel="apple-touch-icon" sizes="180x180" href="/nicerapp/favicon.said.by/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/nicerapp/favicon.said.by/favicon-32x32.png">
@@ -77,18 +77,33 @@ na.site.globals = {
     </div>
     </div>
     
-    <div id="siteToolbarDialogSettings" class="vdToolbar vividDialog">
-    <div class="vividDialogContent vividScrollpane">
-        to be filled in
-    </div>
-    </div>
-    
     <div id="siteToolbarRight" class="vdToolbar vividDialog">
     <div class="vividDialogContent vividScrollpane">
         {$div_siteToolbarRight}
     </div>
     </div>
 
+    <div id="siteToolbarDialogSettings" class="vdToolbar vividDialog">
+    <div class="vividDialogContent vividScrollpane">
+        <div class="navbar">
+            <!--<img src="/nicerapp/siteMedia/btnSettingsBorder.png"/>-->
+            <div id="btnViewResult" class="vividButton_icon tooltip" title="View result" alt="View result" style="position:relative;width:50px;height:50px;" onclick="if (!na.desktop.settings.visibleDivs.includes('#siteContent')) na.desktop.settings.visibleDivs.push('#siteContent'); na.site.settings.activeDivs=['#siteContent']; na.desktop.resize();">
+                <div class="cvbBorderCSS"></div>
+                <img class="cvbImgBorder" src="/nicerapp/siteMedia/btnCssVividButton_outerBorder.png"/>
+                <img class="cvbImgTile" src="/nicerapp/siteMedia/btnCssVividButton.png"/>
+                <img class="cvbImgButton" src="/nicerapp/siteMedia/btnZoomIncrease.png"/>
+            </div>
+        </div>
+        <!--<label for="sliderOpacity">Opacity :</label><input class="slider" id="sliderOpacity" type="range" min="1" max="100" value="50"/><br/>-->
+        <input id="colorpicker">
+        <script type="text/javascript">
+            setTimeout(function() {
+                $('#colorpicker').spectrum ({color:'#000', type: "flat"});
+                if ($(window).width() < na.site.globals.reallySmallDeviceWidth) $('.sp-container').css({width:$(window).width()-35});
+            }, 1000);
+        </script>
+    </div>
+    </div>
     
     <div id="siteStatusbar" class="vividDialog"><div class="vividDialogContent vividScrollpane"></div></div>
     
