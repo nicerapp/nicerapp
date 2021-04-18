@@ -10,7 +10,7 @@
                                         $(document).ready(function() {
                                             if ($(window).width() < na.site.globals.reallySmallDeviceWidth) {
                                                 $('#tableFor_saCompanyLogo').css({display:'none'});
-                                                $('#divFor_said_by_logo').css({width:70,height:70});
+                                                $('#divFor_said_by_logo').css({width:70,height:70, marginLeft : 0});
                                                 $('#tableFor_said_by_logo').css({width:80});
                                             } else {
                                                 setTimeout (function() {
