@@ -437,7 +437,7 @@ na.desktop = {
             if (visibleDivs.includes('#siteStatusbar')) gtl.push ({ element : '#siteStatusbar', edge : 'top' });
         }
         
-        debugger;
+        //debugger;
         var divs = {};
         for (var sectionID in calculate) {
             var section = calculate[sectionID];
