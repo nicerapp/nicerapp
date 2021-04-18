@@ -397,7 +397,7 @@ var nas = na.site = {
             jQuery('#siteStatusbar td:nth-child(2)').css({width:105});
             jQuery('#mainCSS').html('.vividMenu_item td { font-size : 80%; }; #siteStatus td { font-weight : bold };');
             jQuery('#tableFor_saCompanyLogo').css ({ width : 200, height : 200 });
-            jQuery('#divFor_saCompanyLogo').css ({ width : 200, height : 200, marginLeft : 40 });
+            jQuery('#divFor_saCompanyLogo').css ({ width : 200, height : 200});
             jQuery('#datetime').css({marginLeft:40,marginTop:20});
             jQuery('#saCompanyLogo').attr('width',200).attr('height',200);
             jQuery('#headerSite h1').css ({ fontSize : navigator.userAgent.match('Chrome')?'220%':'140%', paddingLeft : 20 });
@@ -414,7 +414,7 @@ var nas = na.site = {
             jQuery('#siteStatusbar td:nth-child(2)').css({width:225});
             jQuery('#mainCSS').html('.vividMenu_item td { font-size : 80%; }; #siteStatus td { font-weight : bold };');
             jQuery('#tableFor_saCompanyLogo').css ({ width : 200, height : 200 });
-            jQuery('#divFor_saCompanyLogo').css ({ width : 200, height : 200, marginLeft : 40 });
+            jQuery('#divFor_saCompanyLogo').css ({ width : 200, height : 200 });
             jQuery('#datetime').css({marginLeft:40,marginTop:20});
             jQuery('#saCompanyLogo').attr('width',200).attr('height',200);
             jQuery('#headerSite h1').css ({ fontSize : navigator.userAgent.match('Chrome')?'220%':'140%', paddingLeft : 20 });
