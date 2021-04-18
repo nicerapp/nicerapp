@@ -64,7 +64,7 @@ if (!$got) {
     if ($debug) echo 'Already have this user record.<br/>';
 }
 
-$dbName = $cdbDomain.'___cms_tree__user___'.$username;
+$dbName = $cdbDomain.'___cms_tree__user___'.strtolower($username);
 try { $cdb->deleteDatabase ($dbName); } catch (Exception $e) { };
 $cdb->setDatabase($dbName, true);
 try { 
@@ -91,7 +91,7 @@ if ($do) try { $cdb->post($data); } catch (Exception $e) { if ($debug) { echo '<
 
 echo 'Created database '.$dbName.'<br/>'.PHP_EOL;
 
-$dbName = $cdbDomain.'___cms_documents__user___'.$username;
+$dbName = $cdbDomain.'___cms_documents__user___'.strtolower($username);
 try { $cdb->deleteDatabase ($dbName); } catch (Exception $e) { };
 $cdb->setDatabase($dbName, true);
 try { 
@@ -101,7 +101,7 @@ try {
 }
 echo 'Created database '.$dbName.'<br/>'.PHP_EOL;
 
-$dbName = $cdbDomain.'___cms_vdsettings__user___'.$username;
+$dbName = $cdbDomain.'___cms_vdsettings__user___'.strtolower($username);
 try { $cdb->deleteDatabase ($dbName); } catch (Exception $e) { };
 $cdb->setDatabase($dbName, true);
 try { 
