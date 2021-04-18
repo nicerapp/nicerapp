@@ -8,7 +8,7 @@
                                     <canvas id="saCompanyLogo" width="200" height="200" onclick="event.data={element:'saCompanyLogo'}; na.logo.settings.stage.removeAllChildren(); na.logo.init_do_createLogo('saCompanyLogo','countryOfOriginColors');"></canvas><!-- this version can not actually be resized yet. hardcoded values in the drawing functions. -->
                                     <script type="text/javascript">
                                         $(document).ready(function() {
-                                            if ($(window).width() < na.site.globals.smallDeviceWidth) {
+                                            if ($(window).width() < na.site.globals.reallySmallDeviceWidth) {
                                                 $('#tableFor_saCompanyLogo').css({display:'none'});
                                                 $('#divFor_said_by_logo').css({width:70,height:70, marginLeft : 0});
                                                 $('#tableFor_said_by_logo').css({width:80});

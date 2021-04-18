@@ -378,7 +378,7 @@ var nas = na.site = {
         });
     },
     onresize_doContent : function (settings) {
-        if ($(window).width() < na.site.globals.smallDeviceWidth) {
+        if ($(window).width() < na.site.globals.reallySmallDeviceWidth) {
             jQuery('#siteContent, #siteStatusbar').css ({ fontSize : '70%' });
             jQuery('#siteStatusbar').css({height:'5.5rem'});
             jQuery('#siteStatusbar .vividButton').css({width : 40});
