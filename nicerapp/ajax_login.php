@@ -52,7 +52,8 @@ try {
     $rows = $cdb->getAllDocs()->body->rows;
     $callOK = is_array($rows) && count($rows) >= 1;
 } catch (Exception $e) {
-    echo 'Failed 2';
+    echo 'Failed 2'.PHP_EOL;
+var_dump ($e);
     die();
 }
 //var_dump ($cdb->getAllDocs());
