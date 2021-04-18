@@ -9,10 +9,13 @@
                                     <script type="text/javascript">
                                         $(document).ready(function() {
                                             if ($(window).width() < na.site.globals.reallySmallDeviceWidth) {
+                                                setTimeout (function() {
                                                 $('#tableFor_saCompanyLogo').css({display:'none'});
                                                 $('#divFor_said_by_logo').css({width:70,height:70, marginLeft : 0});
                                                 $('#tableFor_said_by_logo').css({width:80});
+                                                }, 1000);
                                             } else if ($(window).width() < na.site.globals.smallDeviceWidth) {
+                                                setTimeout (function() {
                                                 $('#tableFor_saCompanyLogo, divFor_saCompanyLogo').css({width : 70, height : 70});
                                                 $('#saCompanyLogo').attr('width',70).attr('height',70);
                                                 $('#divFor_said_by_logo').css({width:70,height:70, marginLeft : 0});
@@ -20,6 +23,7 @@
                                                 $('#headerSite, #headerSite h1, #headerSite h2, #headerSite h3').css ({ fontSize : '84%', paddingLeft : 0 });
                                                 $('#headerSiteDiv').css ({ height : 70, width : 80 });
                                                 $('#headerSiteDiv div').css ({ height : 0, width : 80 });
+                                                }, 1000);
                                             } else {
                                                 setTimeout (function() {
                                                     startLogo('saCompanyLogo', 'countryOfOriginColors');
