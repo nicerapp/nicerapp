@@ -34,7 +34,7 @@ $cdb->useSSL($cdbConfig['useSSL']);
 try {
     $cdb->login($_POST['loginName'], $_POST['pw']);
 } catch (Exception $e) {
-    echo 'Failed 1';
+    echo 'Failed';
     die();
 }
 
@@ -42,18 +42,18 @@ try {
 
 // create users
 $username = $_POST['loginName'];
-$username = str_replace(' ', '__', $username);
+$username = str_replace(' ', '__', strtolower($username));
 $username = str_replace('.', '_', $username);
 
 $dbName = $cdbDomain.'___cms_tree__user___'.$username;
 $cdb->setDatabase($dbName, false);
 try {
-    var_dump ($cdb->getAllDocs());
+    //var_dump ($cdb->getAllDocs());
     $rows = $cdb->getAllDocs()->body->rows;
     $callOK = is_array($rows) && count($rows) >= 1;
 } catch (Exception $e) {
-    echo 'Failed 2'.PHP_EOL;
-var_dump ($e);
+    echo 'Failed';
+    //var_dump ($e);
     die();
 }
 //var_dump ($cdb->getAllDocs());
@@ -63,6 +63,6 @@ if ($callOK) {
     $_SESSION['cdb_pw'] = $_POST['pw'];
     echo 'Success';
 } else {
-    echo 'Failed 3';
+    echo 'Failed';
 }
 ?>
