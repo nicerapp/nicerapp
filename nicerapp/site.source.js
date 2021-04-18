@@ -14,7 +14,7 @@ var nas = na.site = {
         defaultStatusMsg : (
             $.cookie('agreedToPolicies')!=='true'
             ? '<table style="width:100%;height:100%;"><tr><td>This site uses cookies for remembering user settings, and for analytics.<br/>'
-                + 'By using this site, you agree to such cookies getting stored on, and read from, your computer.</td><td style="width:220px;"><div class="vividButton" theme="dark" style="position:relative;color:white;" onclick="na.site.dismissCookieWarning();">Ok</div></td></table>'
+                + 'By using this site, you agree to such cookies getting stored on, and read from, your computer.</td><td style="width:105px;"><div class="vividButton" theme="dark" style="position:relative;color:white;width:100px;" onclick="na.site.dismissCookieWarning();">Ok</div></td></table>'
             : '<table style="width:100%;height:100%;"><tr><td>Copyright (c) 2021 by Rene A.J.M. Veerman &lt;<a href="mailto:rv.nicer.app@gmail.com" style="color:darkgreen">rv.nicer.app@gmail.com</a>&gt;</td><td style="width:220px;"><div class="vividButton" theme="dark" style="position:relative;color:white;" onclick="na.site.dismissCopyrightMessage();">Ok</div></td></table>'
         ),
         dialogs : {},
