@@ -412,7 +412,9 @@ var nas = na.site = {
     
     reloadMenu : function(callback) {
         
-        na.desktop.resize();
+        na.desktop.resize(function () {
+            na.site.settings.desktopReady = true;
+        });
         
         var 
         na_js__menuItemWidth = (na.m.userDevice.isPhone && $(window).width() < 220 + 180 + 15) ? $(window).width()-(3*60)-15 : 220,
