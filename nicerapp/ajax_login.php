@@ -48,6 +48,7 @@ $username = str_replace('.', '_', $username);
 $dbName = $cdbDomain.'___cms_tree__user___'.$username;
 $cdb->setDatabase($dbName, false);
 try {
+    var_dump ($cdb->getAllDocs());
     $rows = $cdb->getAllDocs()->body->rows;
     $callOK = is_array($rows) && count($rows) >= 1;
 } catch (Exception $e) {
