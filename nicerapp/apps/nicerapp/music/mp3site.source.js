@@ -35,9 +35,10 @@ var mp3site = {
                         
 
         $(window).resize(function() {
-            setTimeout(mp3site.onWindowResize,1000);
+            clearTimeout(mp3site.settings.timeoutResize);
+            mp3site.settings.timeoutResize = setTimeout(mp3site.onWindowResize,1000);
         });
-        mp3site.onWindowResize();
+        setTimeout (mp3site.onWindowResize, 1500);
 	},
 	
 	queueMP3 : function (id, file) {

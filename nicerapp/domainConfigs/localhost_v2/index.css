@@ -253,6 +253,11 @@ img.bg_last {
   cursor: pointer; /* Cursor on hover */
 }
 
+#siteToolbarDialogSettings .navbar img {
+    width : 50px;
+}
+
+
 #siteMenu {
     top : 1vh;
     left : calc(2vw + 340px);

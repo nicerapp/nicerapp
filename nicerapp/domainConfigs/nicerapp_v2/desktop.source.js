@@ -154,7 +154,7 @@ na.desktop = {
         var calculate = {
             'calculate_visible' : na.m.negotiateOptions( // TODO : clean up, reduce number of evaluations
                 (
-                    visibleDivs.includes('#siteDateTime')
+                    !na.m.userDevice.isPhone || $(window).width() > na.site.globals.smallDeviceWidth
                     ? {
                         '#siteDateTime' : {
                             snapTo : [
@@ -302,32 +302,6 @@ na.desktop = {
                     }
                     : {}
                 ), (
-                    visibleDivs.includes('#siteContent')
-                    && visibleDivs.includes('#siteComments')
-                    && !visibleDivs.includes('#siteToolbarLeft')
-                    && !visibleDivs.includes('#siteToolbarRight')
-                    && !visibleDivs.includes('#siteToolbarTop')
-                    ? {
-                        '#siteContent' : {
-                            snapTo : [
-                                { element : '#btnOptions', edge : 'bottom' },
-                                { element : 'body', edge : 'left' }
-                            ],
-                            growTo : 'max',
-                            growToLimits : (
-                                visibleDivs.includes('#siteStatusbar')
-                                ? [
-                                    { element : '#siteComments', edge : 'left' },
-                                    { element : '#siteStatusbar', edge : 'top' }
-                                ]
-                                : [
-                                    { element : '#siteComments', edge : 'left' }
-                                ]
-                            )
-                        }
-                    }
-                    : {}
-                ), (
                     visibleDivs.includes('#siteToolbarRight')
                     ? {
                         '#siteToolbarRight' : {
@@ -408,59 +382,27 @@ na.desktop = {
                         '#siteContent' : {
                             snapTo : 
                                 visibleDivs.includes('#siteToolbarLeft')
-                                && !visibleDivs.includes('#siteToolbarDialogSettings')
                                 ? [
                                     { element : '#btnOptions', edge : 'bottom' },
-                                    { element : '#siteToolbarLeft', edge : 'left' }
+                                    { element : '#siteToolbarLeft', edge : 'right' }
                                 ]
-                                : !visibleDivs.includes('#siteToolbarLeft')
-                                    && visibleDivs.includes('#siteToolbarDialogSettings')
+                                : visibleDivs.includes('#siteToolbarDialogSettings')
                                     ? [
                                         { element : '#btnOptions', edge : 'bottom' },
-                                        { element : '#siteToolbarDialogSettings', edge : 'left' }
+                                        { element : '#siteToolbarDialogSettings', edge : 'right' }
                                     ]
                                     : [
                                         { element : '#btnOptions', edge : 'bottom' },
                                         { element : 'body', edge : 'left' }
                                     ],
                             growTo : 'max',
-                            growToLimits : []/*,
-                            growToLimits : ( //<-- gets too complicated! see [1] below here instead.
-                                visibleDivs.includes('#siteToolbarRight')
-                                ? 
-                                ? visibleDivs.includes('#siteStatusbar')
-                                    ? visibleDivs.includes('#siteVideo')
-                                        ? [ 
-                                            { element : '#siteStatusbar', edge : 'top' },
-                                            { element : '#siteVideo', edge : 'left' }
-                                        ]
-                                        : visibleDivs.includes('#siteComments')
-                                            ? [
-                                                { element : '#siteStatusbar', edge : 'top' },
-                                                { element : '#siteComments', edge : 'left' }
-                                            ]
-                                            : [
-                                                { element : '#siteStatusbar', edge : 'top' }
-                                            ]
-                                    : visibleDivs.includes('#siteVideo')
-                                        ? [
-                                            { element : '#siteVideo', edge : 'left' }
-                                        ]
-                                        : visibleDivs.includes('#siteComments')
-                                            ? [
-                                                { element : '#siteComments', edge : 'left' }
-                                            ]
-                                            : []
-                            )*/ 
+                            growToLimits : []
                         }
                     }
                     : {}
                 )
-            ) // calculate_3rd_visible
-            
+            ) // calculate_visible
         };
-        // [1]
-
 
         var c = calculate['calculate_visible'];
         c.order = 
@@ -488,7 +430,7 @@ na.desktop = {
         }
         
         
-        //debugger;
+        debugger;
         var divs = {};
         for (var sectionID in calculate) {
             var section = calculate[sectionID];

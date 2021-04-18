@@ -71,7 +71,7 @@ $htmlTitleMeta = file_get_contents ($setPath.'/index.title_meta.html');
 		});
 	</script>
 
-	<div id="mp3s" class="vividDialog vividScrollpane" theme="transparent" style="visibility:hidden;position:absolute;text-align:center;width:230px; color:yellow;font-weight:bold">
+	<div id="mp3s" class="vividDialog_mp3s vividScrollpane" theme="transparent" style="visibility:hidden;position:absolute;text-align:center;width:230px; color:yellow;font-weight:bold">
 <?php
 			$filez = array();
 			foreach ($files as $idx=>$file) {

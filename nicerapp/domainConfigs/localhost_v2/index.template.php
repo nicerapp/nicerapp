@@ -77,18 +77,19 @@ na.site.globals = {
     </div>
     </div>
     
-    <div id="siteToolbarDialogSettings" class="vdToolbar vividDialog">
-    <div class="vividDialogContent vividScrollpane">
-        to be filled in
-    </div>
-    </div>
-    
     <div id="siteToolbarRight" class="vdToolbar vividDialog">
     <div class="vividDialogContent vividScrollpane">
         {$div_siteToolbarRight}
     </div>
     </div>
 
+    <div id="siteToolbarDialogSettings" class="vdToolbar vividDialog">
+    <div class="vividDialogContent vividScrollpane">
+        <div class="navbar">
+            <img src="/nicerapp/siteMedia/btnSettingsBorder.png"/>
+        </div>
+    </div>
+    </div>
     
     <div id="siteStatusbar" class="vividDialog"><div class="vividDialogContent vividScrollpane"></div></div>
     

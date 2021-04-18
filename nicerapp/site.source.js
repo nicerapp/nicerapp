@@ -5,6 +5,10 @@ var nas = na.site = {
         copyright : '<table style="width:100%;height:100%;"><tr><td>Copyright (c) 2021 by Rene A.J.M. Veerman <a href="mailto:rv.nicer.app@gmail.com" style="color:green">&lt;rv.nicer.app@gmail.com&gt;</a></td><td style="width:220px;"><div class="vividButton" theme="dark" style="position:relative;color:white;" onclick="na.site.dismissCopyrightMessage();">Ok</div></td></table>' // actually (c) 2002-2021 if you count in all the previous major versions of this nicerapp platform (it also had other names in previous versions, but 'nicerapp' will be it's final name).
     },
     
+    globals : {
+        smallDeviceWidth : 1000
+    },
+    
     settings : {
         defaultStatusMsg : (
             $.cookie('agreedToPolicies')!=='true'
@@ -369,7 +373,7 @@ var nas = na.site = {
         });
     },
     onresize_doContent : function (settings) {
-        if ($(window).width() < 1000) {
+        if ($(window).width() < na.site.globals.smallDeviceWidth) {
             jQuery('#siteContent, #siteStatusbar').css ({ fontSize : '70%' });
             jQuery('#siteStatusbar').css({height:'5.5rem'});
             jQuery('#siteStatusbar .vividButton').css({width : 40});
