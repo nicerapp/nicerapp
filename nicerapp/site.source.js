@@ -84,8 +84,8 @@ var nas = na.site = {
         //if (typeof $.cookie('siteBackground_search')==='string' && $.cookie('siteBackground_search')!=='')
         na.backgrounds.next ('#siteBackground', $.cookie('siteBackground_search'), $.cookie('siteBackground_url'));
         
-        $('#siteContent .vividDialogContent').animate({opacity:1},'slow').focus();
-        $('.vividDialogContent').css({display:'block'});
+        //$('#siteContent .vividDialogContent').animate({opacity:1},'slow').focus();
+        $('.vividDialogContent').css({opacity:1,display:'block'});
         
         $('.vividButton, .vividButton_icon').each(function(idx,el){
             na.site.settings.buttons['#'+el.id] = new naVividButton(el);
