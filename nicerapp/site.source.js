@@ -85,7 +85,7 @@ var nas = na.site = {
         na.backgrounds.next ('#siteBackground', $.cookie('siteBackground_search'), $.cookie('siteBackground_url'));
         
         $('#siteContent .vividDialogContent').animate({opacity:1},'slow').focus();
-        if ($('.vividDialogContent').css('display')==='none') $('.vividDialogContent').css({display:'block'});
+        $('.vividDialogContent').css({display:'block'});
         
         $('.vividButton, .vividButton_icon').each(function(idx,el){
             na.site.settings.buttons['#'+el.id] = new naVividButton(el);
