@@ -71,7 +71,8 @@ class nicerAppCMS {
             '{$cssThemeFiles}' => $cssThemeFiles,
             '{$javascriptFiles}' => $javascriptFiles,
             '{$div_siteMenu}' => $div_siteMenu,
-            '{$theme}' => $this->cssTheme
+            '{$theme}' => $this->cssTheme,
+            '{$viewport}' => $this->getMetaTags_viewport()
         );
         $content = $this->getContent();
         foreach ($content as $divName=>$contentForDiv) {
@@ -160,6 +161,68 @@ class nicerAppCMS {
         $content = execPHP($contentFile);
         return $content;
     }
+    
+    public function getMetaTags_viewport () {
+    
+        //return '<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">';    
+    
+    
+        // the 'safe option' for nicerapp plus android5 / iPad6 / iPhone6 / iPhone6-plus (and beyond perhaps)
+        $r = '';
+        // potential alternatives : 
+        // 1a - shows potential coz it might be used to allow a user to zoom into a nicerapp page on a smartphone:
+            // $r = '<meta name=viewport content="width=device-width, initial-scale=1, user-scalable=yes">';
+        // 1b - perhaps a good industry standard : 
+            // $r = '<meta name="viewport" content="width=device-width">';
+
+        // for android 5 and iPad6 and iPhone6 and iPhone6-plus and beyond
+        //var_dump ($_SERVER['HTTP_USER_AGENT']); die();
+        if (array_key_exists('HTTP_USER_AGENT', $_SERVER)) {
+                if (
+                    strpos($_SERVER['HTTP_USER_AGENT'], 'Android')!==false 
+                ) {
+                    $r = '<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">';
+                    
+                } else if (
+                    strpos($_SERVER['HTTP_USER_AGENT'], 'iPad3C1')!==false
+                    || strpos($_SERVER['HTTP_USER_AGENT'], 'iPad3C2')!==false
+                    || strpos($_SERVER['HTTP_USER_AGENT'], 'iPad4C1')!==false
+                    || strpos($_SERVER['HTTP_USER_AGENT'], 'iPad4C2')!==false
+                ) { // iPads without retina display
+                    $r = '<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=yes">';
+                
+                } else if (
+                    strpos($_SERVER['HTTP_USER_AGENT'], 'iPad3C3')!==false
+                    || strpos($_SERVER['HTTP_USER_AGENT'], 'iPad3C3')!==false
+                    || strpos($_SERVER['HTTP_USER_AGENT'], 'iPad4C4')!==false
+                    || strpos($_SERVER['HTTP_USER_AGENT'], 'iPad4C5')!==false
+                
+                ) { // iPads with retina displays
+                    $r = '<meta name="viewport" content="width=device-width, initial-scale=2, maximum-scale=2, user-scalable=yes">';
+                
+                } else if (
+                    strpos($_SERVER['HTTP_USER_AGENT'], 'iPhone OS 8_')!==false // iPhone 6 + iPad (May 2015)
+                ) {
+                    $r = '<meta name="viewport" content="width=device-width, initial-scale=1.2, maximum-scale=1.05, user-scalable=yes">';
+                    
+                } else if (
+                    $_SERVER['HTTP_USER_AGENT']=='Mozilla/5.0 (iPhone; CPU iPhone OS 10_3 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) CriOS/56.0.2924.75 Mobile/14E5239e Safari/602.1' // iPhone 7 and iPhone 7 Plus
+                ) {
+                    $r = '<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">';
+                } else if (
+                    $_SERVER['HTTP_USER_AGENT'] == 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) CriOS/56.0.2924.75 Mobile/14E5239e Safari/602.1' // iPhone 8 Plus
+                ) {
+                    $r = '<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">';
+                } else if (
+                    $_SERVER['HTTP_USER_AGENT']=='Mozilla/5.0 (iPhone; CPU iPhone OS 10_3 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) CriOS/56.0.2924.75 Mobile/14E5239e Safari/602.1' // iPhone X and iPhoneX Plus
+                ) {
+                    $r = '<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">';                
+                }
+        }  
+
+        return $r;
+    }
+  
 }
 
 ?>

@@ -9,6 +9,7 @@ if ($debug) {
     error_reporting(E_ALL);
 }
 
+$date = new DateTime();
 $ip = (array_key_exists('X-Forwarded-For',apache_request_headers())?apache_request_headers()['X-Forwarded-For'] : $_SERVER['REMOTE_ADDR']);
 /*if (
     $ip !== '::1'
@@ -51,12 +52,28 @@ $username = str_replace('.', '_', $username);
 $dbName = $cdbDomain.'___cms_vdsettings__user___'.strtolower($username);
 $cdb->setDatabase($dbName, false);
 
-$call = $cdb->get($_POST['_id']);
+
+$findCommand = array (
+    'selector' => array(
+        'url' => $_POST['url']
+    ),
+    'fields' => array(
+        '_id', '_rev'
+    )
+);
+$call = $cdb->find ($findCommand);
+//var_dump ($call); die();
+
+if (!$call->headers->_HTTP->status===200) { 
+    $id = cdb_getRandomString(20); 
+} else {
+    $id = $call->body->docs[0]->_id;
+}
+
+$call = $cdb->get($id);
 //echo json_encode($call, JSON_PRETTY_PRINT).'<br/>'.PHP_EOL; die();
 $rec = (array)$call->body;
-$url = $_POST['url'];
 $rec2 = array (
-    'url' => $url,
     'dialogs' => json_decode($_POST['dialogs'], true)                
 );
 $rec = array_merge ($rec, $rec2);

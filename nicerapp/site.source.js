@@ -126,7 +126,8 @@ var nas = na.site = {
             });
         }
 
-        $(window).resize (function() {
+        
+        window.onresize  = function(evt) {
             $('#siteBackground img, #siteBackground div').css({
                 width : $(window).width(),
                 height : $(window).height()
@@ -136,7 +137,85 @@ var nas = na.site = {
             na.site.settings.timeoutWindowResize = setTimeout (function() {
                 na.site.onresize({reloadMenu:true});
             }, 250);
+        };
+        /* browser support for pinching is still very sketchy 
+        document.addEventListener('touchmove', function (e) {
+            na.site.onresize ({ reloadMenu : true });
+        }, false);
+        window.addEventListener('gesturechange', function(e) {
+            na.site.settings.current.scale = e.scale;
+            na.site.onresize({ reloadMenu : true });
+            if (e.scale < 1.0) {
+                // User moved fingers closer together
+            } else if (e.scale > 1.0) {
+                // User moved fingers further apart
+            }
+        }, false);
+        window.visualViewport.addEventListener('scroll',function() {
+            //alert (2);
+            na.site.onresize ({ reloadMenu : true });
         });
+        
+        window.visualViewport.addEventListener('resize',function() {
+            na.site.onresize ({ reloadMenu : true });
+        });
+        window.needsResize_interval = setInterval (function (evt) {
+            if (!evt) return false;
+            alert (evt.scale);
+            debugger;
+            var c = na.site.settings.current, w = $(window).width();
+            if (!c.lastWidth) { 
+                c.lastWidth = w;
+            } else if (c.lastWidth !== w) { 
+                c.lastWidth = w;
+                na.site.onresize ({ reloadMenu : true });
+            }
+        }, 200);
+        na.site.settings.current.hammer = new Hammer($('body')[0]);
+        na.site.settings.current.hammer.ontransform = function (ev) {
+            na.site.settings.current.scale = ev.scale;
+            na.site.onresize ({ reloadMenu : true });
+        };
+        window.addEventListener('deviceorientation', function() {
+            na.site.onresize({ reloadMenu : true });
+        });
+        window.addEventListener("devicemotion", function() {
+            na.site.onresize({ reloadMenu : true });
+        }, true);
+        window.addEventListener('gesturechange', function(e) {
+            na.site.settings.current.scale = e.scale;
+            na.site.onresize({ reloadMenu : true });
+            if (e.scale < 1.0) {
+                // User moved fingers closer together
+            } else if (e.scale > 1.0) {
+                // User moved fingers further apart
+            }
+        }, false);
+        window.addEventListener('gestureend', function(e) {
+            na.site.settings.current.scale = e.scale;
+            na.site.onresize({ reloadMenu : true });
+            if (e.scale < 1.0) {
+                // User moved fingers closer together
+            } else if (e.scale > 1.0) {
+                // User moved fingers further apart
+            }
+        }, false);
+        document.addEventListener('touchmove', function (e) {
+            na.site.onresize ({ reloadMenu : true });
+        }, false);
+        window.visualViewport.addEventListener("resize", function() {
+            na.site.onresize({ reloadMenu : true });
+        });*/
+        /*
+        $('body').hammer().on('pinchin', '.vividDialog', function() { na.site.onresize ({ reloadMenu : true }) });
+        $('body').hammer().on('pinchout', '.vividDialog', function() { na.site.onresize ({ reloadMenu : true }) });
+        na.site.settings.zingtouch = new ZingTouch.Region(document.body);
+        na.site.settings.zingtouch.bind ($('#siteContent')[0], 'distance', function (e) {
+            alert (JSON.stringify(e));
+            na.site.onresize({ reloadMenu : true });
+        });
+        */
+        
         
         $('#siteContent').css({display:'block'});
         
@@ -362,6 +441,16 @@ var nas = na.site = {
             height : $(window).height()
         });
         //$('#siteBackground img.bg_first').fadeIn(2000);
+
+        // fix attempts (all failed) for [apple bug 1] orientation change bug on iphone 6
+        jQuery('body')[0].scrollLeft = 0;//	jQuery('body')[0].style.position = 'relative';
+        jQuery('body')[0].scrollTop = 0;//	jQuery('body')[0].style.position = 'relative';
+        
+        jQuery('html')[0].scrollLeft = 0;
+        jQuery('html')[0].scrollTop = 0;
+        jQuery('html')[0].style.display = 'none';
+        jQuery('html')[0].style.display = 'block';
+        
         
         na.site.onresize_doContent(settings);
         
@@ -611,7 +700,7 @@ var nas = na.site = {
         var
         ac = {
             type : 'POST',
-            url : '/nicerapp/ajax_get_vdsettings.php',
+            url : '/nicerapp/ajax_get_vividDialog_settings.php',
             data : acData,
             success : function (data, ts, xhr) {
                 var dat = JSON.parse(data);
@@ -630,7 +719,6 @@ var nas = na.site = {
                         test = rgbaRegEx.test(dit.background),
                         ditbgOpacity = test ? dit.background.match(rgbaRegEx)[1] : dit.opacity;
                         $('.sliderOpacityRange', del).attr('value', ditbgOpacity*100);
-                                                 
                     }
                 };
                 if (typeof callback=='function') callback(true);
@@ -641,6 +729,59 @@ var nas = na.site = {
             }
         };        
         $.ajax(ac);
+    },
+    
+    saveTheme : function (callback) {
+        var 
+        themeData = {
+            username : na.account.settings.username,
+            pw : na.account.settings.password,
+            url : '[default]',
+            dialogs : {}
+        };
+        
+        for (var i=0; i<na.desktop.globals.divs.length; i++) {
+            var selector = na.desktop.globals.divs[i];
+            themeData.dialogs = $.extend (themeData.dialogs, na.site.fetchTheme (selector));
+        }
+        
+        themeData.dialogs = JSON.stringify(themeData.dialogs);
+        
+        var
+        ac2 = {
+            type : 'POST',
+            url : '/nicerapp/ajax_set_vividDialog_settings.php',
+            data : themeData,
+            success : function (data, ts, xhr) {
+                if (typeof callback=='function') callback (themeData, data);
+            },
+            failure : function (xhr, ajaxOptions, thrownError) {
+                debugger;
+            }
+        };
+        $.ajax(ac2);
+    },
+    
+    fetchTheme (selector) {
+        var ret = {};
+        ret[selector] = {
+            border : $(selector).css('border'),
+            borderRadius : $(selector).css('borderRadius'),
+            boxShadow : $(selector).css('boxShadow'),
+            color : $(selector).css('color'),
+            fontFamily : $(selector).css('fontFamily'),
+            textShadow : $(selector+' .vividDialogContent').css('textShadow')
+        };
+        ret[selector+' .vdBackground'] = {
+            opacity : $(selector+' .vdBackground').css('opacity'),
+            background : $(selector+' .vdBackground').css('background'),
+            borderRadius : $(selector).css('borderRadius')
+        };
+        /*
+        ret[selector+' .vividDialogContent'] = {
+            textShadow : $(selector+' .vividDialogContent').css('textShadow')
+        };*/
+        return ret;
     }
 }
 nas.s = nas.settings;
@@ -677,6 +818,21 @@ na.m = {
         str2 = str2.replace ('-', '+');
         str2 = str2.replace ('_', '/');
         return atob(str2);
+    },
+    
+    addJS : function (text, s_URL, funcToRun, runOnLoad) {
+        var D                                   = document;
+        var scriptNode                          = D.createElement ('script');
+        if (runOnLoad) {
+            scriptNode.addEventListener ("load", runOnLoad, false);
+        }
+        scriptNode.type                         = "text/javascript";
+        if (text)       scriptNode.textContent  = text;
+        if (s_URL)      scriptNode.src          = s_URL;
+        if (funcToRun)  scriptNode.textContent  = '(' + funcToRun.toString() + ')()';
+
+        var targ = D.getElementsByTagName ('head')[0] || D.body || D.documentElement;
+        targ.appendChild (scriptNode);
     },
     
     cookieOptions : function () {

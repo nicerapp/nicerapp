@@ -52,14 +52,14 @@ na.backgrounds = {
         if (url.match('tiled')) {
             $(bgf).add(bgl).fadeOut('fast');
             $(bgDiv2).css ({
-                width: jQuery(window).width(),
-                height: jQuery(window).height(),
+                width: jQuery(window).width() * na.site.settings.current.scale,
+                height: jQuery(window).height() * na.site.settings.current.scale,
                 background : 'url("'+url+'") repeat'
             }).fadeIn('normal', 'swing', function () {
                 $(bgDiv).css ({
                     display : 'block',
-                    width: jQuery(window).width(),
-                    height: jQuery(window).height(),
+                    width: jQuery(window).width() * na.site.settings.current.scale,
+                    height: jQuery(window).height() * na.site.settings.current.scale,
                     background : 'url("'+url+'") repeat'
                 });
                 setTimeout(function(){
@@ -92,8 +92,8 @@ na.backgrounds = {
 
                     jQuery(bgDiv).tubeplayer('destroy');
                     jQuery(bgDiv).fadeIn(1500).tubeplayer({
-                        width: jQuery(window).width(),
-                        height: jQuery(window).height(),
+                        width: jQuery(window).width() * na.site.settings.current.scale,
+                        height: jQuery(window).height() * na.site.settings.current.scale,
                         initialVideo : vidID,
                         autoPlay : true,
                         showControls: true,
@@ -113,10 +113,9 @@ na.backgrounds = {
                     // how i really want and kinda need a --ignoreAspectRatioAndFillWindow setting on the (jquery) youtube player..
                     jQuery(window).resize (function () {
                         jQuery(bgDiv).css ({ paddingBottom : '0.1%'});
-                        debugger;
                         jQuery(bgDiv).tubeplayer({
-                            width: jQuery(window).width(),
-                            height: jQuery(window).height()
+                            width: jQuery(window).width() * na.site.settings.current.scale,
+                            height: jQuery(window).height() * na.site.settings.current.scale
                         });
                     });
                     //debugger;

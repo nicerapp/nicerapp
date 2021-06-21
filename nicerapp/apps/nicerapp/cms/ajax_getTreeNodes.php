@@ -30,7 +30,7 @@ $cdb->useSSL($cdbConfig['useSSL']);
 $cdb->login($_SESSION['cdb_loginName'], $_SESSION['cdb_pw']);
 
 $username = $_SESSION['cdb_loginName'];
-$username = str_replace(' ', '__', $username);
+$username = str_replace(' ', '__', strtolower($username));
 $username = str_replace('.', '_', $username);
 
 $cdb_domain = $cms->domain;

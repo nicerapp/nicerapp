@@ -7732,8 +7732,11 @@ jQuery.speed = function( speed, easing, fn ) {
 	opt.old = opt.complete;
 
 	opt.complete = function() {
+        
 		if ( isFunction( opt.old ) ) {
-			opt.old.call( this );
+            // BUG 001
+            //debugger;
+            opt.old ( this ); // opt.old.call doesnt pass the right parameters into the callback
 		}
 
 		if ( opt.queue ) {

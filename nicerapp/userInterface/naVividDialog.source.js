@@ -10,10 +10,11 @@ class naVividDialog {
             t.el = el;
         };
         t.t = $(this.el).attr('theme');
+        t.settings = { current : {} };
         
         var html = 
             '<div class="vdSettings">'
-                +'<img class="btnSettings" src="/nicerapp/siteMedia/btnPickColor.png" onclick="na.site.settings.activeDivs = [\'#siteToolbarDialogSettings\']; var d = na.site.settings.dialogs[\'#'+this.el.id+'\']; d.displaySettingsDialog(d)"/>'
+                +'<img class="btnSettings" src="/nicerapp/siteMedia/btnPickColor.png" onclick="na.site.settings.activeDivs = [\'#siteToolbarDialogSettings\']; var d = na.site.settings.dialogs[\'#'+this.el.id+'\']; d.displaySettingsDialog(d, \''+t.el.id+'\')"/>'
                 +'<input type="range" min="1" max="100" value="50" class="sliderOpacityRange"/>'
             +'</div>'
             +'<div class="vdBackground"></div>';
@@ -30,75 +31,40 @@ class naVividDialog {
             
             clearTimeout (t.timeoutOpacityChange);
             t.timeoutOpacityChange = setTimeout(function() {
-                t.changeOpacity (t, t2.value);
+                na.site.saveTheme();
             }, 1000);
             
             $(t.el).css ({ background : 'rgba(0,0,0,'+(t2.value/100)+')' });
         };
     };
     
-    displaySettingsDialog (t) {
-        if (!na.desktop.settings.visibleDivs.includes('#siteToolbarDialogSettings')) na.desktop.settings.visibleDivs.push('#siteToolbarDialogSettings');
-        na.desktop.resize();
+    displaySettingsDialog (t, dialogID) {
+        na.site.settings.dialogs['#siteToolbarDialogSettings'].settings.current.dialogID = dialogID;
+        var html = 
+            '<div class="vdSettingsScripts">'
+            +'<link rel="stylesheet" href="/nicerapp/3rd-party/jsTree-3.2.1/dist/themes/default/style.css" onload="var d = na.site.settings.dialogs[\'#siteToolbarDialogSettings\']; d.displaySettingsDialog_scriptLoaded(d);"/> <!-- has style.min.css -->'
+            //+'<script type="text/javascript" src="/nicerapp/3rd-party/jsTree-3.2.1/dist/jstree.min.js?c='+na.m.changedDateTime_current()+'" onload="var d = na.site.settings.dialogs[\'#siteToolbarDialogSettings\'];  d.displaySettingsDialog_scriptLoaded(d);"></script> <!-- has jstree.min.js -->'
+            +'</div>';
+        if ($('.vdSettingsScripts', t.el).length<1) {
+            $(t.el).prepend(html);
+            var d = na.site.settings.dialogs['#siteToolbarDialogSettings'];
+            na.m.addJS (null, "/nicerapp/3rd-party/jQuery/spectrum/dist/spectrum.min.js?c="+na.m.changedDateTime_current(), null, function () { d.displaySettingsDialog_scriptLoaded(d); });
+            na.m.addJS (null, "/nicerapp/3rd-party/jsTree-3.2.1/dist/jstree.min.js?c="+na.m.changedDateTime_current(), null, function () { d.displaySettingsDialog_scriptLoaded(d); });
+            na.m.addJS (null, "/nicerapp/dialogSettings.js?c="+na.m.changedDateTime_current(), null, function () { d.displaySettingsDialog_scriptLoaded(d); });
+            
+        }
     }
     
-    changeOpacity (t, percentage) {
-        //$(t.el).css ({ background : 'rgba(0,0,0,'+(percentage/100)+')' });
-        var 
-        selector = '#'+t.el.id+' .vdBackground',
-        acData = {
-            username : na.account.settings.username,
-            pw : na.account.settings.password,
-            url : '[default]'            
-        };
-        if (!acData.dialogs) acData['dialogs'] = {};
-        acData['dialogs'][selector] = t.fetchTheme (t, selector);
-        
-        acData['dialogs'] = JSON.stringify (acData['dialogs']);
-        
-        var
-        ac = {
-            type : 'POST',
-            url : '/nicerapp/ajax_get_vdsettings.php',
-            data : acData,
-            success : function (data, ts, xhr) {
-                acData['dialogs'] = JSON.parse(acData['dialogs']);
-                
-                var
-                themeData = $.extend({}, acData);
-                themeData = na.m.negotiateOptions (themeData, JSON.parse(data));
-                if (!themeData.dialogs) themeData['dialogs'] = {};
-                themeData['dialogs'][selector] = t.fetchTheme (t, selector);
-                themeData['dialogs'] = JSON.stringify(themeData['dialogs']);
-                
-                var
-                ac2 = {
-                    type : 'POST',
-                    url : '/nicerapp/ajax_set_vdsettings.php',
-                    data : themeData,
-                    success : function (data, ts, xhr) {
-                        
-                    },
-                    failure : function (xhr, ajaxOptions, thrownError) {
-                        debugger;
-                    }
-                };
-                $.ajax(ac2);
-            },
-            failure : function (xhr, ajaxOptions, thrownError) {
-                debugger;
-            }
-        };
-        $.ajax(ac);
-                
-    };
+    displaySettingsDialog_scriptLoaded (t) {
+        if (!t.scriptLoadedCount) t.scriptLoadedCount = 1; else t.scriptLoadedCount++;
+        if (t.scriptLoadedCount==4) t.displaySettingsDialog_displayDialog(t);
+    }
     
-    fetchTheme (t, selector) {
-        var ret = {};
-        ret.background = $(selector).css('background');
-        ret.border = $(selector).css('border');
-        ret.opacity = $(selector).css('opacity');
-        return ret;
-    };
-    
+    displaySettingsDialog_displayDialog (t) {
+        if (!na.desktop.settings.visibleDivs.includes('#siteToolbarDialogSettings')) na.desktop.settings.visibleDivs.push('#siteToolbarDialogSettings');
+        na.desktop.resize(function(el) {
+            //debugger;
+            if (el && el.id=='siteToolbarDialogSettings') na.dialogSettings.onload(t.settings.current.dialogID);
+        });
+    }
 }
