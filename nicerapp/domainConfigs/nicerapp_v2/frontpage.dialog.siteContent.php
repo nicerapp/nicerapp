@@ -200,6 +200,8 @@
     
 
     <h2 class="contentSectionTitle2">Available Apps</h2>
+
+    <a href="<?php echo $urls['cms'];?>"><h3>Blogging features</h3></a>
     
     <h3 class="contentSectionTitle3">News</h3>
     Some of these can be further categorized through the menu that will load up at the top-right side of the site.<br/>
@@ -221,6 +223,3 @@
     <a href="<?php echo $urls['3Dcube'];?>"><h3>3D demo : cube</h3></a>
     <a href="<?php echo $urls['3Dmodels'];?>"><h3>3D demo : loading of models (slow to start up)</h3></a>
     <a href="<?php echo $urls['backgroundsBrowser'];?>"><h3>3D file manager</h3></a>
-    
-    <h2 class="contentSectionTitle2">In development</h2>
-    <a href="<?php echo $urls['cms'];?>"><h3>Blogging features</h3></a>
