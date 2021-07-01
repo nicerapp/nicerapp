@@ -199,12 +199,14 @@ na.site.globals = $.extend(na.site.globals, {
         </div>
         <input id="colorpicker" class="dialogSettingsComponent dialogSettings_colorPicker" style="position:absolute;top:110px;"></input>
         <div id="dialogSettings_jsTree" class="dialogSettingsComponent" style="position:absolute;top:110px;display:none;"></div>
-        <label id="label_dialogSettings_photoOpacity" class="labelDialogSettings" for="dialogSettings_photoOpacity">Opacity :</label>
-        <input id="dialogSettings_photoOpacity" type="range" min="1" max="100" value="50" class="dialogSettingsComponent sliderOpacityRangeDialogSettings" style="top:110px;"/>
-        <div class="flexBreak"></div>
-        <label id="label_dialogSettings_photoScale" class="labelDialogSettings" for="dialogSettings_photoScale">Scale :</label>
-        <input id="dialogSettings_photoScale" type="range" min="25" max="200" value="100" class="dialogSettingsComponent sliderOpacityRangeDialogSettings" style="top:140px;"/>
-        <div class="flexBreak"></div>
+        <div class="dialogSettingsComponent">
+            <label id="label_dialogSettings_photoOpacity" class="labelDialogSettings" for="dialogSettings_photoOpacity">Opacity :</label>
+            <input id="dialogSettings_photoOpacity" type="range" min="1" max="100" value="50" class="dialogSettingsComponent sliderOpacityRangeDialogSettings" style="top:110px;"/>
+            <div class="flexBreak"></div>
+            <label id="label_dialogSettings_photoScale" class="labelDialogSettings" for="dialogSettings_photoScale">Scale :</label>
+            <input id="dialogSettings_photoScale" type="range" min="25" max="200" value="100" class="dialogSettingsComponent sliderOpacityRangeDialogSettings" style="top:140px;"/>
+            <div class="flexBreak"></div>
+        </div>
         <iframe id="dialogSettings_photoAlbum" class="dialogSettingsComponent" style="position:absolute;top:175px;display:none;border:0px"></iframe>
         <div id="textSettings" class="dialogSettingsComponent" style="position:absolute;top:110px;display:none;">
             <label id="labelTextFontFamily" class="textSettingsLabel" for="textFontFamily">Font :</label>
