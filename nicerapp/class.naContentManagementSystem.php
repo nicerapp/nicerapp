@@ -312,13 +312,15 @@ class nicerAppCMS {
         $username = str_replace(' ', '__', $username);
         $username = str_replace('.', '_', $username);
         
+        $pw = array_key_exists('pw', $_COOKIE) ? $_COOKIE['pw'] : $cdbConfig['password'];
+        
         try {
             //$cdb->login($cdbConfig['username'], $cdbConfig['password']);
-            $cdb->login($username, $_COOKIE['pw']);
+            $cdb->login($username, $pw);
         } catch (Exception $e) {
-            if ($debug) { echo 'status : Failed : Login failed (username : '.$username.', password : '.$_COOKIE['pw'].').<br/>'.PHP_EOL; die(); }
+            if ($debug) { echo 'status : Failed : Login failed (username : '.$username.', password : '.$pw.').<br/>'.PHP_EOL; die(); }
         }
-        if ($debug) { echo 'info : Login succesful (username : '.$username.', password : '.$_COOKIE['pw'].').<br/>'.PHP_EOL;  }
+        if ($debug) { echo 'info : Login succesful (username : '.$username.', password : '.$pw.').<br/>'.PHP_EOL;  }
         
         
         $dbName = $cdbDomain.'___cms_vdsettings';
