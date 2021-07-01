@@ -308,7 +308,7 @@ class nicerAppCMS {
         $cdb->setHTTPAdapter($cdbConfig['httpAdapter']);
         $cdb->useSSL($cdbConfig['useSSL']);
         
-        $username = $_COOKIE['loginName'];
+        $username = array_key_exists('loginName',$_COOKIE) ? $_COOKIE['loginName'] : $cdbConfig['username'];
         $username = str_replace(' ', '__', $username);
         $username = str_replace('.', '_', $username);
         
