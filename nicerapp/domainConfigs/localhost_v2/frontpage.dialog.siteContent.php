@@ -223,5 +223,3 @@
     <a href="<?php echo $urls['3Dcube'];?>"><h3>3D demo : cube</h3></a>
     <a href="<?php echo $urls['3Dmodels'];?>"><h3>3D demo : loading of models (slow to start up)</h3></a>
     <a href="<?php echo $urls['backgroundsBrowser'];?>"><h3>3D file manager</h3></a>
-    
-    <h2 class="contentSectionTitle2">In development</h2>
