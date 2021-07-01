@@ -138,7 +138,7 @@ na.ds = na.dialogSettings = {
                     na.ds.settings.current.selectedImage = el;
                 }
             });
-        }, 500);
+        }, 1000);
         
 
         var s = JSON.parse( $('#specificity').find('option:selected')[0].value );
