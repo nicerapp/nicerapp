@@ -104,7 +104,7 @@ na.ds = na.dialogSettings = {
                 setTimeout(function() {
                     var 
                     bg = $('.vdBackground', $('#'+na.ds.settings.current.forDialogID)[0]),
-                    rgbaRegEx = /rgba\(\d{1,3}\,\s+\d{1,3}\,\s+\d{1,3}\,\s+([\d.]+)\).*/,
+                    rgbaRegEx = /rgba\(\d{1,3}\,\s*\d{1,3}\,\s*\d{1,3}\,\s*([\d.]+)\).*/,
                     test = rgbaRegEx.test($(bg).css('background')),
                     c = test ? $(bg).css('background') : '#000';
                     
@@ -223,6 +223,10 @@ na.ds = na.dialogSettings = {
             $('#borderSettings').css({display:'flex'});
             $('.boxSettingsLabel').css({width:$('.boxSettingsLabel').width()+10});
             $('#boxShadow').css({width:$('#borderSettings').width() - $('#labelBoxShadow').width() - 20 });
+            $('.boxShadow').css({
+                border:$('#borderWidth').val()+'px '+$('#borderType').val()+' lime',
+                borderRadius:parseInt($('#borderRadius').val())
+            });
             $('#borderType').css({width:$('#borderSettings').width() - $('#labelBorderType').width() - 20 });
             $('#borderWidth').css({width:$('#borderSettings').width() - $('#labelBorderWidth').width() - 20 });
             $('#borderRadius').css({width:$('#borderSettings').width() - $('#labelBorderRadius').width() - 20 });
@@ -245,13 +249,12 @@ na.ds = na.dialogSettings = {
         newBorder = $('#borderWidth').val() + 'px ' + $('#borderType').val() + ' ' + color,
         newBorderRadius = parseInt($('#borderRadius').val());
         
-        $(bg).css({ border : newBorder, borderRadius : newBorderRadius });        
+        $(bg).css({ border : newBorder, borderRadius : newBorderRadius });
+        $('.boxShadow').css({ border : newBorder, borderRadius : newBorderRadius });
         if (na.ds.settings.current.fireSaveTheme) na.site.saveTheme();
     },
     
     boxSettingsSelected : function (event) {
-        $('.boxShadow').css({border : '1px solid white'});
-        $(event.currentTarget).css({ border : '1px solid lime' });
         na.ds.settings.current.boxSettings = event.currentTarget;
         
         var bs = $(event.currentTarget).css('boxShadow');
@@ -261,6 +264,11 @@ na.ds = na.dialogSettings = {
         rex = bs.match(re1),
         sliders = rex[2].split(' ');
         
+        sliders[0] = parseInt(sliders[0].replace('px',''));
+        sliders[1] = parseInt(sliders[1].replace('px',''));
+        sliders[2] = parseInt(sliders[2].replace('px',''));
+        sliders[3] = parseInt(sliders[3].replace('px',''));
+
         $('#boxShadowColorpicker').spectrum('set', rex[1]);
         
         $('#boxShadowXoffset').val(sliders[0]);
@@ -270,10 +278,17 @@ na.ds = na.dialogSettings = {
     },
     
     boxSettingsChanged : function (color) {
-        if (color) $(na.ds.settings.current.boxSettings)[0].boxShadowColor = color; else color = $(na.ds.settings.current.boxSettings)[0].boxShadowColor;
+        if (color) $(na.ds.settings.current.boxSettings)[0].boxShadowColor = color; 
+        else {
+            color = $(na.ds.settings.current.boxSettings).css('boxShadow');
+            if (color.match('#')) color = color.match(/#.*\s/)[0];
+            if (color.match('rgba')) color = color.match(/rgba\(.*\)/)[0];
+            else if (color.match('rgb')) color = color.match(/rgb\(.*\)/)[0];
+        };
+        
         var
         newBoxSetting = 
-            $('#boxShadowInset')[0].checked ? 'inset ' : ''
+            ( $('#boxShadowInset')[0].checked ? 'inset ' : '' )
             + $('#boxShadowXoffset').val() + 'px '
             + $('#boxShadowYoffset').val() + 'px '
             + $('#boxShadowSpreadRadius').val() + 'px '
@@ -319,13 +334,12 @@ na.ds = na.dialogSettings = {
             var idx2 = parseInt(el.id.replace('boxShadow_',''));
             if (idx2 > last) last = idx2;
         });
-        var html = '<div id="boxShadow_'+(last+1)+'" class="boxShadow" onclick="na.ds.boxSettingsSelected(event)" style="border:1px solid white;background:rgba(200,200,200,1);box-shadow:2px 2px 2px 2px rgba(0,0,0,0.5);border-radius:10px;margin:5px;padding:5px;">ABC XYZ</div>';
+        var html = '<div id="boxShadow_'+(last+1)+'" class="boxShadow" onclick="na.ds.boxSettingsSelected(event)" style="border:'+$('#borderWidth').val()+'px solid '+na.ds.settings.current.borderColor+';background:rgba(200,200,200,1);box-shadow:2px 2px 2px 2px rgba(0,0,0,0.5);border-radius:'+parseInt($('#borderRadius').val())+'px;margin:5px;padding:5px;">ABC XYZ</div>';
         $('#boxShadow').append(html);
-        /*
-        var 
-        el = $('#boxShadow_'+(last+1))[0],
-        evt = { currentTarget : el };
-        na.ds.selectTextShadow(evt);*/
+        $('#boxShadowXoffset').val(2);
+        $('#boxShadowYoffset').val(2);
+        $('#boxShadowSpreadRadius').val(2);
+        $('#boxShadowBlurRadius').val(2);
     },
     
     

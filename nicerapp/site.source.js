@@ -744,7 +744,7 @@ var nas = na.site = {
                     if (dit.background && dID == '#'+na.ds.settings.current.forDialogID+' .vdBackground') {
                         var 
                         del = $(dID)[0],
-                        rgbaRegEx = /rgba\(\d{1,3}\,\s+\d{1,3}\,\s+\d{1,3}\,\s+([\d.]+)\).*/,
+                        rgbaRegEx = /rgba\(\d{1,3}\,\s*\d{1,3}\,\s*\d{1,3}\,\s*([\d.]+)\).*/,
                         test = rgbaRegEx.test(dit.background),
                         ditbgOpacity = test ? dit.background.match(rgbaRegEx)[1] : dit.opacity;
                         $('.sliderOpacityRange', del).attr('value', ditbgOpacity*100);
