@@ -253,8 +253,73 @@ img.bg_last {
   cursor: pointer; /* Cursor on hover */
 }
 
-#siteToolbarDialogSettings .navbar img {
+.sliderOpacityRangeDialogSettings {
+    position : absolute;
+    top : 65px;
+    left : 5px;
+    display : none;
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    width: calc(100% - 15px); /* Full-width */
+    height: 25px; /* Specified height */
+    background: rgba(0,0,0,0.95); /* Grey background */
+    z-index : 5000;
+    border : 2px ridge rgba(100,100,100,0.7);
+    border-radius : 8px;
+    outline: none; /* Remove outline */
+    opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+}
+.sliderOpacityRangeDialogSettings:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+.sliderOpacityRangeDialogSettings::-moz-range-thumb {
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: #4CAF50; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+
+.sliderOpacityRangeBorderSettings {
+    position : relative;
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    height: 25px; /* Specified height */
+    background: rgba(0,0,0,0.95); /* Grey background */
+    z-index : 5000;
+    border : 2px ridge rgba(100,100,100,0.7);
+    border-radius : 8px;
+    outline: none; /* Remove outline */
+    opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+}
+.sliderOpacityRangeBorderSettings:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+.sliderOpacityRangeBorderSettings::-moz-range-thumb {
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: #4CAF50; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+
+#siteToolbarDialogSettings .navbar img, #textShadow img, #boxShadow img {
     width : 50px;
+}
+#borderSettings {
+    position : absolute;
+    display : none;
+    flex-wrap : wrap;
+    justify-content : center;
+    align-items : center;
+    top : 70px;
+    width : calc(100% - 10px);
+}
+.flexBreak {
+    flex-basis : 100%;
+    height : 0;
 }
 
 
@@ -546,7 +611,7 @@ label {
 }
 
 select, optgroup {
-    font-size : 2rem;
+    font-size : 1.25rem;
 }
 
 .contentSectionTitle {
@@ -799,15 +864,23 @@ select, optgroup {
     100% { filter : grayscale(0%); border : 2px solid rgba(0,0,0,0); opacity : 1 }
 }
 
-.navBar {
-    display : flex;
+.navbar {
+    display : block;
     padding : 0;
     margin : 5px;
     align-items : center;
+    width : 100%;
+    height : 60px;
 }
 .navBar_button {
     width : 50px;
 }
+.dialogSettingsComponent {
+    display : none;
+}
+
+
+
 #documentTitle {
     margin : 4px;
     background : rgba(255,255,255,0.4);

@@ -45,9 +45,9 @@ na.desktop = {
             },
             '#siteToolbarDialogSettings' : {
                 top : $('#siteDateTime').height()+20,
-                left : -420,
+                left : -480,
                 height : $(window).height()-120,
-                width : !na.m.userDevice.isPhone ? 440 : $(window).width - 50,
+                width : !na.m.userDevice.isPhone ? 470 : $(window).width - 50,
                 opacity : 0.0001
             },
             '#siteToolbarLeft' : {
@@ -594,7 +594,7 @@ na.desktop = {
                             el.renderer.setSize  ($(el.p).width(), $(el.p).height());
                         }
                         if (typeof callback=='function') callback(this);             
-                    } else $(divID).stop(true,true).animate ({
+                    } else $(divID).stop(true,true,false).animate ({
                         top : divs[divID].top,
                         left : divs[divID].left,
                         width : divs[divID].width,
@@ -624,6 +624,7 @@ na.desktop = {
                         };
                         if (divID.substr(0,4)!=='#btn' || !na.m.userDevice.isPhone) props.opacity = 1;
                         $(divID).css (props); 
+                        if (typeof callback=='function') callback($(divID)[0]);
                     } 
                     else {
                         var props = {
@@ -633,7 +634,7 @@ na.desktop = {
                             height : divs[divID].height
                         };
                         if (divID.substr(0,4)!=='#btn' || !na.m.userDevice.isPhone) props.opacity = 1;
-                        $(divID).stop(true,true).animate (props, 'normal', 'swing', callback);
+                        $(divID).stop(true,true,false).animate (props, 'normal', 'swing', callback);
                     }
             }
         }
@@ -641,7 +642,7 @@ na.desktop = {
         for (var i=0; i<na.d.g.divs.length; i++) {
             var divID = na.d.g.divs[i], shown = false;
             for (var divID2 in divs) if (divID2==divID) shown = true;
-            if (!shown) $(divID).stop(true,true).animate(na.d.g.defaultPos[divID],'slow');
+            if (!shown) $(divID).stop(true,true,false).animate(na.d.g.defaultPos[divID],'slow');
         }
     } // goto()
 };
