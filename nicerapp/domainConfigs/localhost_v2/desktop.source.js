@@ -573,7 +573,7 @@ na.desktop = {
                 } else var params = undefined;
                 
             
-                if (divID=='#siteContent') 
+                if (divID=='#siteContent') {
                     if (na.m.userDevice.isPhone) {
                         $(divID).css ({
                             top : divs[divID].top,
@@ -592,29 +592,31 @@ na.desktop = {
                             el.camera.aspect = $(el.p).width() / $(el.p).height();
                             el.camera.updateProjectionMatrix();
                             el.renderer.setSize  ($(el.p).width(), $(el.p).height());
-                        }
-                        if (typeof callback=='function') callback(this);             
-                    } else $(divID).stop(true,true,false).animate ({
-                        top : divs[divID].top,
-                        left : divs[divID].left,
-                        width : divs[divID].width,
-                        height : divs[divID].height,
-                        opacity : 1
-                    }, 'normal', 'swing', function () {
-                        for (var id in na.site.settings.na3D) {
-                            var el = na.site.settings.na3D[id];
-                            $('canvas', el.p)
-                                .css ({ width : $(el.p).width(), height : $(el.p).height() })
-                                .attr('width', $(el.p).width())
-                                .attr('height', $(el.p).height());
-                            el.camera.aspect = $(el.p).width() / $(el.p).height();
-                            el.camera.updateProjectionMatrix();
-                            el.renderer.setSize  ($(el.p).width(), $(el.p).height());
-                        }
-                        if (typeof callback=='function') callback(this);
-                    });
-                    
-                else if (na.m.userDevice.isPhone) {
+                        };
+                        if (typeof callback=='function') callback($(divID)[0]);             
+                    } else {
+                        var divID2 = divID;
+                        $(divID).stop(true,true,false).animate ({
+                            top : divs[divID].top,
+                            left : divs[divID].left,
+                            width : divs[divID].width,
+                            height : divs[divID].height,
+                            opacity : 1
+                        }, 'normal', 'swing', function () {
+                            for (var id in na.site.settings.na3D) {
+                                var el = na.site.settings.na3D[id];
+                                $('canvas', el.p)
+                                    .css ({ width : $(el.p).width(), height : $(el.p).height() })
+                                    .attr('width', $(el.p).width())
+                                    .attr('height', $(el.p).height());
+                                el.camera.aspect = $(el.p).width() / $(el.p).height();
+                                el.camera.updateProjectionMatrix();
+                                el.renderer.setSize  ($(el.p).width(), $(el.p).height());
+                            };
+                            if (typeof callback=='function') callback($(divID2)[0]);
+                        });
+                    }
+                } else if (na.m.userDevice.isPhone) {
                         var props = {
                             top : divs[divID].top,
                             left : divs[divID].left,
@@ -636,9 +638,10 @@ na.desktop = {
                         if (divID.substr(0,4)!=='#btn' || !na.m.userDevice.isPhone) props.opacity = 1;
                         $(divID).stop(true,true,false).animate (props, 'normal', 'swing', callback);
                     }
-            }
+                }
         }
 
+        // HIDE all <div> that needs to be hidden
         for (var i=0; i<na.d.g.divs.length; i++) {
             var divID = na.d.g.divs[i], shown = false;
             for (var divID2 in divs) if (divID2==divID) shown = true;

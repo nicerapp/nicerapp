@@ -26,5 +26,6 @@
     "/nicerapp/userInterface/naColorGradients-1.0.0.source.js",
     "/nicerapp/userInterface/naVividText-1.1.0.source.js",
     "/nicerapp/canvasLogo-2.1.0.source.js",
-    "/nicerapp/apps/nicerapp/analytics/app.source.js"
+    "/nicerapp/apps/nicerapp/analytics/app.source.js",
+    "/nicerapp/apps/nicerapp/cms/na.blog.source.js"
 ]

@@ -200,7 +200,7 @@ na.site.globals = $.extend(na.site.globals, {
         <input id="colorpicker" class="dialogSettingsComponent dialogSettings_colorPicker" style="position:absolute;top:110px;"></input>
         <div id="dialogSettings_jsTree" class="dialogSettingsComponent" style="position:absolute;top:110px;display:none;"></div>
         <input id="dialogSettings_photoOpacity" type="range" min="1" max="100" value="50" class="dialogSettingsComponent sliderOpacityRangeDialogSettings"/>
-        <iframe id="dialogSettings_photoAlbum" class="dialogSettingsComponent" style="position:absolute;top:95px;display:none;border:0px"></iframe>
+        <iframe id="dialogSettings_photoAlbum" class="dialogSettingsComponent" style="position:absolute;top:145px;display:none;border:0px"></iframe>
         <div id="textSettings" class="dialogSettingsComponent" style="position:absolute;top:110px;display:none;">
             <label id="labelTextFontFamily" class="textSettingsLabel" for="textFontFamily">Font :</label>
             <select id="textFontFamily" onchange="na.ds.textSettingsSelected_updateDialog()">

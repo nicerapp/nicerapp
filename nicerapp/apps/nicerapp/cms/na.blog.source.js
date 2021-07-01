@@ -155,7 +155,7 @@ na.blog = {
         if (na.m.userDevice.isPhone) {
             na.blog.settings.activeDialog='#siteToolbarLeft';
             na.d.s.visibleDivs.remove('#siteContent');
-        }
+        };
         na.desktop.resize(function (t) {
             if (!t) t = this;
             if (t.id=='siteContent') {

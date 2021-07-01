@@ -163,6 +163,9 @@ na.ds = na.dialogSettings = {
             height : 
                 $('#siteToolbarDialogSettings .vividDialogContent').height() 
                 - $('#dialogSettings_photoAlbum').offset().top
+                - $('.navbar').height()
+                - $('#specificitySettings').height()
+                - 25
         }).css({display:display});
     },
     
@@ -296,6 +299,7 @@ na.ds = na.dialogSettings = {
             + $('#boxShadowBlurRadius').val() + 'px '
             + color;
         $(na.ds.settings.current.boxSettings).css ({ boxShadow : newBoxSetting });
+        $('#'+na.ds.settings.current.forDialogID).css ({ boxShadow : newBoxSetting });
     },
     
     boxSettingsChanged_shadowColor : function (color) {
@@ -326,7 +330,7 @@ na.ds = na.dialogSettings = {
         na.ds.settings.current.selectedImage = el;
         var bg = $('.vdBackground', $('#'+na.ds.settings.current.forDialogID)[0]);
         $(bg).css({ background : 'url("'+el.src+'") repeat', opacity : parseInt($('#dialogSettings_photoOpacity').val())/100 });
-        if (na.ds.settings.current.fireSaveTheme) na.site.saveTheme();
+        /*if (na.ds.settings.current.fireSaveTheme) */na.site.saveTheme();
     },
     
     addBoxShadow : function () {
@@ -409,7 +413,7 @@ na.ds = na.dialogSettings = {
         });
         $(el).css({ fontFamily : newFontFamily });
         $(el).css({ textShadow : newTextShadow });
-        if (na.ds.settings.current.fireSaveTheme) na.site.saveTheme();
+        /*if (na.ds.settings.current.fireSaveTheme) */na.site.saveTheme();
     },
     
     textSettingsSelected_textColor : function (color) {

@@ -20,7 +20,10 @@ var nas = na.site = {
         dialogs : {},
         buttons : {},
         menus : {},
-        na3D : {}
+        na3D : {},
+        current : {
+            scale : 1
+        }
     },
     
     dismissCookieWarning : function () {

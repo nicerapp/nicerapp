@@ -28,10 +28,11 @@ $cdb = new Sag($cdbConfig['domain'], $cdbConfig['port']);
 $cdb->setHTTPAdapter($cdbConfig['httpAdapter']);
 $cdb->useSSL($cdbConfig['useSSL']);
 
-$username = $_SESSION['cdb_loginName'];
+$username = array_key_exists('cdb_loginName',$_SESSION) ? $_SESSION['cdb_loginName'] : $cdbConfig['username'];
 $username = str_replace(' ', '__', $username);
 $username = str_replace('.', '_', $username);
-$cdb->login($username, $_SESSION['cdb_pw']);
+$pw = array_key_exists('pw',$_SESSION) ? $_SESSION['pw'] : $cdbConfig['password'];
+$cdb->login($username, $pw);
 
 $cdb_domain = $cms->domain;
 $cdb_domain = str_replace('.','_',$cdb_domain);
