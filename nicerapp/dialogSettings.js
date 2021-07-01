@@ -337,7 +337,7 @@ na.ds = na.dialogSettings = {
         na.ds.onclick($('#btnSelectBackgroundImage')[0]);
         $('.dialogSettingsComponent').not('#dialogSettings_photoAlbum, #dialogSettings_photoAlbum_specs').fadeOut('normal');
         $('.dialogSettings_colorPicker').next().fadeOut('normal');
-        $('#dialogSettings_photoAlbum, #dialogSettings_photoOpacity, #dialogSettings_photoScale').fadeIn('normal');
+        $('#dialogSettings_photoAlbum, #dialogSettings_photoOpacity, #dialogSettings_photoAlbum_specs').fadeIn('normal');
         $('#dialogSettings_photoOpacity').css({
             width:$('#siteToolbarDialogSettings').width() - $('#label_dialogSettings_photoOpacity').width() - 40,
             left : $('#label_dialogSettings_photoOpacity').width() + 10
