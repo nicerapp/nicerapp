@@ -72,7 +72,8 @@ na.ds = na.dialogSettings = {
                     ]
                 }).on('changed.jstree', function (e, data) {
                     if (
-                        na.blog
+                        rec
+                        && na.blog
                         && na.ds.settings.current.selectedTreeNode
                         && na.ds.settings.current.selectedTreeNode.type=='naDocument'
                     ) na.blog.saveEditorContent(na.blog.settings.current.selectedTreeNode);
