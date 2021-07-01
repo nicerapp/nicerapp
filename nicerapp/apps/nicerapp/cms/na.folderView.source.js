@@ -181,9 +181,12 @@ na.blog = {
     onclick_publish : function () {
         var
         tree = $('#jsTree').jstree(true),
-        sel = tree.get_node(tree.get_selected()[0]),
+        sel = tree.get_node(tree.get_selected()[0]);
+        debugger;
+        var
         arr = {
             cmsText : {
+                //loginName : 
                 database : sel.original.database,
                 id : sel.original.id
             }

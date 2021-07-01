@@ -611,7 +611,7 @@ label {
 }
 
 select, optgroup {
-    font-size : 2rem;
+    font-size : 1.25rem;
 }
 
 .contentSectionTitle {
@@ -864,15 +864,23 @@ select, optgroup {
     100% { filter : grayscale(0%); border : 2px solid rgba(0,0,0,0); opacity : 1 }
 }
 
-.navBar {
-    display : flex;
+.navbar {
+    display : block;
     padding : 0;
     margin : 5px;
     align-items : center;
+    width : 100%;
+    height : 60px;
 }
 .navBar_button {
     width : 50px;
 }
+.dialogSettingsComponent {
+    display : none;
+}
+
+
+
 #documentTitle {
     margin : 4px;
     background : rgba(255,255,255,0.4);

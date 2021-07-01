@@ -54,7 +54,8 @@ if ($debug && false) {
     die(); 
 }
 
-$dbName = $cdbDomain.'___cms_vdsettings__user___'.strtolower($username);
+//$dbName = $cdbDomain.'___cms_vdsettings__user___'.strtolower($username);
+$dbName = $cdbDomain.'___cms_vdsettings';
 $cdb->setDatabase($dbName, false);
 try {
     $call = $cdb->getAllDocs();
@@ -114,6 +115,10 @@ if ($callOK) {
         ),
         'fields' => array( '_id' )
     );
+    if (array_key_exists('role',$_POST) && !is_null($_POST['role'])) $findCommand['selector']['role'] = $_POST['role'];
+    if (array_key_exists('user',$_POST) && !is_null($_POST['user'])) $findCommand['selector']['user'] = $_POST['user'];
+    
+    
     $call = $cdb->find ($findCommand);
     if ($debug) {
         echo 'info : $findCommand='; var_dump ($findCommand); echo '.<br/>'.PHP_EOL;
@@ -130,6 +135,7 @@ if ($callOK) {
             die();
         }
     }
+    /*
     if (!$hasRecord) {
         $rec = array (
             '_id' => cdb_randomString(20),
@@ -149,7 +155,7 @@ if ($callOK) {
             }
         }
         echo json_encode($rec, JSON_PRETTY_PRINT);
-    }
+    }*/
     
     if ($debug) echo 'status : Success';
 } else {

@@ -27,11 +27,11 @@ $cdbConfig = json_decode(file_get_contents($couchdbConfigFilepath), true);
 $cdb = new Sag($cdbConfig['domain'], $cdbConfig['port']);
 $cdb->setHTTPAdapter($cdbConfig['httpAdapter']);
 $cdb->useSSL($cdbConfig['useSSL']);
-$cdb->login($_SESSION['cdb_loginName'], $_SESSION['cdb_pw']);
 
 $username = $_SESSION['cdb_loginName'];
-$username = str_replace(' ', '__', strtolower($username));
+$username = str_replace(' ', '__', $username);
 $username = str_replace('.', '_', $username);
+$cdb->login($username, $_SESSION['cdb_pw']);
 
 $cdb_domain = $cms->domain;
 $cdb_domain = str_replace('.','_',$cdb_domain);
@@ -39,7 +39,7 @@ $cdb_domain = str_replace('.','_',$cdb_domain);
 $databases = array (
     $cdb_domain.'___cms_tree',
     $cdb_domain.'___cms_tree__role___guests',
-    $cdb_domain.'___cms_tree__user___'.$username
+    $cdb_domain.'___cms_tree__user___'.strtolower($username)
     //$cms->domain.'___cms_tree__user__administrator',
     //$cms->domain.'___cms_tree__user__guest'
 );

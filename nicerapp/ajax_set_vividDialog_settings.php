@@ -35,13 +35,6 @@ if ($debug) { echo 'info : '.__FILE__.' : $debug = true.<br/>'.PHP_EOL;  }
 $cdb = new Sag($cdbConfig['domain'], $cdbConfig['port']);
 $cdb->setHTTPAdapter($cdbConfig['httpAdapter']);
 $cdb->useSSL($cdbConfig['useSSL']);
-try {
-    $cdb->login($_POST['username'], $_POST['pw']);
-} catch (Exception $e) {
-    if ($debug) { echo 'status : Failed : Login failed (username : '.$_POST['username'].', password : '.$_POST['pw'].').<br/>'.PHP_EOL; die(); }
-}
-if ($debug) { echo 'info : Login succesful (username : '.$_POST['username'].', password : '.$_POST['pw'].').<br/>'.PHP_EOL;  }
-
 
 
 // create users
@@ -49,7 +42,17 @@ $username = $_POST['username'];
 $username = str_replace(' ', '__', $username);
 $username = str_replace('.', '_', $username);
 
-$dbName = $cdbDomain.'___cms_vdsettings__user___'.strtolower($username);
+try {
+    $cdb->login($username, $_POST['pw']);
+} catch (Exception $e) {
+    if ($debug) { echo 'status : Failed : Login failed (username : '.$username.', password : '.$_POST['pw'].').<br/>'.PHP_EOL; die(); }
+}
+if ($debug) { echo 'info : Login succesful (username : '.$username.', password : '.$_POST['pw'].').<br/>'.PHP_EOL;  }
+
+
+
+//$dbName = $cdbDomain.'___cms_vdsettings__user___'.strtolower($username);
+$dbName = $cdbDomain.'___cms_vdsettings';
 $cdb->setDatabase($dbName, false);
 
 
@@ -61,6 +64,9 @@ $findCommand = array (
         '_id', '_rev'
     )
 );
+if (array_key_exists('role',$_POST) && !is_null($_POST['role'])) $findCommand['selector']['role'] = $_POST['role'];
+if (array_key_exists('user',$_POST) && !is_null($_POST['user'])) $findCommand['selector']['user'] = $_POST['user'];
+
 $call = $cdb->find ($findCommand);
 //var_dump ($call); die();
 
@@ -76,6 +82,10 @@ $rec = (array)$call->body;
 $rec2 = array (
     'dialogs' => json_decode($_POST['dialogs'], true)                
 );
+if (array_key_exists('url',$_POST) && !is_null($_POST['url'])) $rec2['url'] = $_POST['url'];
+if (array_key_exists('role',$_POST) && !is_null($_POST['role'])) $rec2['role'] = $_POST['role'];
+if (array_key_exists('user',$_POST) && !is_null($_POST['user'])) $rec2['user'] = $_POST['user'];
+
 $rec = array_merge ($rec, $rec2);
 //var_dump ($rec); die();
 try {

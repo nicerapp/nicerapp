@@ -31,29 +31,30 @@ $cdbConfig = json_decode(file_get_contents($couchdbConfigFilepath), true);
 $cdb = new Sag($cdbConfig['domain'], $cdbConfig['port']);
 $cdb->setHTTPAdapter($cdbConfig['httpAdapter']);
 $cdb->useSSL($cdbConfig['useSSL']);
-try {
-    $cdb->login($_POST['loginName'], $_POST['pw']);
-} catch (Exception $e) {
-    echo 'Failed';
-    die();
-}
-
 
 
 // create users
 $username = $_POST['loginName'];
-$username = str_replace(' ', '__', strtolower($username));
+$username = str_replace(' ', '__', $username);
 $username = str_replace('.', '_', $username);
 
-$dbName = $cdbDomain.'___cms_tree__user___'.$username;
+try {
+    $cdb->login($username, $_POST['pw']);
+} catch (Exception $e) {
+    echo 'Failed'.PHP_EOL;
+    die();
+}
+
+$dbName = $cdbDomain.'___cms_tree__user___'.strtolower($username);
+//var_dump ($dbName); var_dump($_POST);
 $cdb->setDatabase($dbName, false);
 try {
     //var_dump ($cdb->getAllDocs());
     $rows = $cdb->getAllDocs()->body->rows;
     $callOK = is_array($rows) && count($rows) >= 1;
 } catch (Exception $e) {
-    echo 'Failed';
-    //var_dump ($e);
+    echo 'Failed'.PHP_EOL;
+    var_dump ($e);
     die();
 }
 //var_dump ($cdb->getAllDocs());

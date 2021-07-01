@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />-->
+<!--<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />-->
 <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
 {$viewport}
 <meta name="HandheldFriendly" content="true" />
@@ -27,9 +27,12 @@ na.site.globals = $.extend(na.site.globals, {
     couchdb : <?php echo $couchdbSettingsStr?>,
     referer : '<?php echo (array_key_exists('HTTP_REFERER',$_SERVER)?$_SERVER['HTTP_REFERER']:'');?>',
     myip : '<?php echo str_replace('.','_',(array_key_exists('X-Forwarded-For',apache_request_headers())?apache_request_headers()['X-Forwarded-For'] : $_SERVER['REMOTE_ADDR']))?>',
-    domain : '{$domain}'
+    domain : '{$domain}',
+    app : {$app}
 });
 </script>
+{$pageSpecificCSS}
+
     <link rel="apple-touch-icon" sizes="180x180" href="/nicerapp/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/nicerapp/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/nicerapp/favicon/favicon-16x16.png">
@@ -126,9 +129,16 @@ na.site.globals = $.extend(na.site.globals, {
                 <img class="cvbImgButton" src="/nicerapp/siteMedia/btnSettingsText.png"/>
             </div>
         </div>
-        <div id="borderSettings" class="dialogSettingsComponent">
-            <input id="borderColorpicker" class="dialogSettingsComponent" style="position:absolute;top:70px;"></input>
-            <div class="flexBreak"></div>
+        <div class="flexBreak"></div>
+        <div id="specificitySettings" class="dialogSettingsComponent_alwaysVisible">
+            <label id="labelSpecificity" for="specificity" class="specificityLabel">Specificity</label>
+            <select id="specificity" onchange="na.ds.specificitySelected(event)">
+            </select>
+        </div>
+        <div class="flexBreak"></div>
+        <div id="borderSettings" class="dialogSettingsComponent" style="top:128px;">
+            <input id="borderColorpicker" class="dialogSettingsComponent" style="position:absolute;top:110px;"></input>
+            <div class="flexBreak" style="height:5px;"></div>
             
             <label id="labelBorderType" for="borderType" class="boxSettingsLabel">Type :</label>
             <select id="borderType" onchange="na.ds.borderSettingsSelected()">
@@ -163,6 +173,7 @@ na.site.globals = $.extend(na.site.globals, {
             
             <label id="labelBoxShadowInset" class="boxSettingsLabel" for="boxShadowInset">Box shadow inset :</label>
             <input id="boxShadowInset" type="checkbox" onchange="na.ds.boxSettingsChanged();"/>
+            <span id="boxShadowInsetClear">&nbsp;</span>
             <div class="flexBreak"></div>
             
             <label id="labelBoxShadowXoffset" class="boxSettingsLabel" for="boxShadowXoffset">Box shadow horizontal offset :</label>
@@ -186,11 +197,11 @@ na.site.globals = $.extend(na.site.globals, {
             <div class="flexBreak"></div>
             
         </div>
-        <input id="colorpicker" class="dialogSettingsComponent" style="position:absolute;top:70px;"></input>
-        <div id="dialogSettings_jsTree" class="dialogSettingsComponent" style="position:absolute;top:70px;display:none;"></div>
+        <input id="colorpicker" class="dialogSettingsComponent dialogSettings_colorPicker" style="position:absolute;top:110px;"></input>
+        <div id="dialogSettings_jsTree" class="dialogSettingsComponent" style="position:absolute;top:110px;display:none;"></div>
         <input id="dialogSettings_photoOpacity" type="range" min="1" max="100" value="50" class="dialogSettingsComponent sliderOpacityRangeDialogSettings"/>
         <iframe id="dialogSettings_photoAlbum" class="dialogSettingsComponent" style="position:absolute;top:95px;display:none;border:0px"></iframe>
-        <div id="textSettings" class="dialogSettingsComponent" style="position:absolute;top:70px;display:none;">
+        <div id="textSettings" class="dialogSettingsComponent" style="position:absolute;top:110px;display:none;">
             <label id="labelTextFontFamily" class="textSettingsLabel" for="textFontFamily">Font :</label>
             <select id="textFontFamily" onchange="na.ds.textSettingsSelected_updateDialog()">
                 <option value="ABeeZee">ABeeZee</option>

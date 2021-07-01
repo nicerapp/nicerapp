@@ -64,6 +64,8 @@ var nas = na.site = {
             document.body.style.zoom = 0.99;
         });        
         
+        na.site.setSpecificity();
+        
         na.desktop.init();
         
         var startTime = new Date();
@@ -112,17 +114,17 @@ var nas = na.site = {
             $('#slf_loginName').val($.cookie('loginName'));
             $('#slf_pw').val($.cookie('pw'));
             na.site.login(function (loginWasSuccessful) {
-                na.site.loadTheme(function() {
+                //na.site.loadTheme(function() {
                     na.site.onresize({reloadMenu:true})
-                });
+                //});
             });
         } else {
             $('#slf_loginName').val(na.account.settings.username);
             $('#slf_pw').val(na.account.settings.password);
             na.site.login(function (loginWasSuccessful) {
-                na.site.loadTheme(function() {
+                //na.site.loadTheme(function() {
                     na.site.onresize({reloadMenu:true})
-                });
+                //});
             });
         }
 
@@ -259,6 +261,17 @@ var nas = na.site = {
 		History.Adapter.bind(window,'statechange', na.site.stateChange); // use HTML5 History API if available:
     },
     
+    setSpecificity : function() {
+        $('#specificity')[0].innerHTML = '';
+        for (var i=0; i<na.site.globals.selectors.length; i++) {
+            var optEl = document.createElement('option');
+            optEl.value = JSON.stringify(na.site.globals.selectors[i]);
+            optEl.innerHTML = na.site.globals.selectorNames[i];
+            if (na.site.globals.selectorName === na.site.globals.selectorNames[i]) $(optEl).attr('selected','selected');
+            $('#specificity')[0].appendChild(optEl);
+        }        
+    },
+    
     transformLinks : function (rootElement) {
         $('a', rootElement).not('noPushState').each(function(idx, el){
             let x = el.href, y = el.target;
@@ -301,6 +314,18 @@ var nas = na.site = {
                     na.d.s.visibleDivs.remove('#siteToolbarTop'); $.cookie('visible_siteToolbarTop','');
                     na.d.s.visibleDivs.remove('#siteToolbarLeft'); $.cookie('visible_siteToolbarLeft','');
                     na.d.s.visibleDivs.remove('#siteToolbarRight'); $.cookie('visible_siteToolbarRight','');
+                    
+                    var ac2 = {
+                        type : 'GET',
+                        url : '/nicerapp/ajax_get_pageSpecificSettings.php',
+                        success : function (data, ts, xhr) {
+                            $('#cssPageSpecific, #jsPageSpecific').remove();
+                            $('head').append(data);
+                        },
+                        failure : function (xhr, ajaxOptions, thrownError) {
+                        }
+                    };
+                    $.ajax(ac2);
 
             
                     var dat = JSON.parse(data), reloadMenu = false;
@@ -672,10 +697,13 @@ var nas = na.site = {
     
     loadTheme : function (callback) {
         var 
+        s = na.ds.settings.current.specificity,
         acData = {
             username : na.account.settings.username,
             pw : na.account.settings.password,
-            url : '[default]'            
+            url : s.url,
+            role : s.role,
+            user : s.user            
         };
         /*
         if (!acData.dialogs) acData['dialogs'] = {};
@@ -703,6 +731,7 @@ var nas = na.site = {
             url : '/nicerapp/ajax_get_vividDialog_settings.php',
             data : acData,
             success : function (data, ts, xhr) {
+                if (data==='') return false;
                 var dat = JSON.parse(data);
                 if (dat.dialogs && dat.dialogs['.vividDialog']) {
                     $('.vividDialog').css(dat.dialogs['.vividDialog']);
@@ -712,13 +741,20 @@ var nas = na.site = {
                     if (dID=='.vividDialog' || dID=='.vividDialog .vdBackground') continue;
                     var dit = dat.dialogs[dID];
                     $(dID).css (dit);
-                    if (dit.background) {
+                    if (dit.background && dID == '#'+na.ds.settings.current.forDialogID+' .vdBackground') {
                         var 
                         del = $(dID)[0],
                         rgbaRegEx = /rgba\(\d{1,3}\,\s+\d{1,3}\,\s+\d{1,3}\,\s+([\d.]+)\).*/,
                         test = rgbaRegEx.test(dit.background),
                         ditbgOpacity = test ? dit.background.match(rgbaRegEx)[1] : dit.opacity;
                         $('.sliderOpacityRange', del).attr('value', ditbgOpacity*100);
+                        if (test) $('#colorpicker').spectrum ({color:dit.background, type:'flat', change : function (color) {
+                            var bg = $('.vdBackground', $('#'+na.ds.settings.current.forDialogID)[0]);
+                            $(bg).css({ background : color, opacity : 1 });
+                            na.ds.settings.current.fireSaveTheme = true;
+                            na.site.saveTheme();                        
+                        }});
+
                     }
                 };
                 if (typeof callback=='function') callback(true);
@@ -733,12 +769,15 @@ var nas = na.site = {
     
     saveTheme : function (callback) {
         var 
+        s = na.ds.settings.current.specificity,
         themeData = {
             username : na.account.settings.username,
             pw : na.account.settings.password,
-            url : '[default]',
+            url : s.url,
             dialogs : {}
         };
+        if (s.role) themeData.role = s.role;
+        if (s.user) themeData.user = s.user;
         
         for (var i=0; i<na.desktop.globals.divs.length; i++) {
             var selector = na.desktop.globals.divs[i];

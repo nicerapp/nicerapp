@@ -94,7 +94,11 @@ foreach ($dbs->body as $idx => $dbName) {
         || (strpos($dbName,'documents__user')!==false)
     ) {
         $do = true;
-        try { $db = $cdb->deleteDatabase($dbName); } catch (Exception $e) { if ($debug) { echo $e->getMessage(); echo '<br/>'; $do = false; die(); }}
+        try { 
+            $db = $cdb->deleteDatabase($dbName); echo 'Deleted database '.$dbName.'<br/>'.PHP_EOL; 
+        } catch (Exception $e) { 
+            if ($debug) { echo $e->getMessage(); echo '<br/>'; $do = false; die(); }
+        }
     }
 }
 
@@ -296,7 +300,7 @@ $dbg = array (
 if ($debug) echo '<pre>'.json_encode($dbg,JSON_PRETTY_PRINT).'</pre><br/>';
 
 
-$dbName = str_replace('.','_',$cms->domain).'___cms_vdsettings__role___guests';
+/*$dbName = str_replace('.','_',$cms->domain).'___cms_vdsettings__role___guests';
 try { $cdb->deleteDatabase ($dbName); } catch (Exception $e) { };
 $cdb->setDatabase($dbName, true);
 try { 
@@ -305,9 +309,11 @@ try {
     if ($debug) { echo '<pre style="color:red">'; var_dump ($e); echo '</pre>'; die(); }
 }
 if ($debug) echo 'Created database '.$dbName.'<br/>';
+*/
 
 
-$dbName = str_replace('.','_',$cms->domain).'___cms_vdsettings__user___guest';
+//$dbName = str_replace('.','_',$cms->domain).'___cms_vdsettings__user___guest';
+$dbName = str_replace('.','_',$cms->domain).'___cms_vdsettings';
 try { $cdb->deleteDatabase ($dbName); } catch (Exception $e) { };
 $cdb->setDatabase($dbName, true);
 try { 
@@ -317,8 +323,9 @@ try {
 }
 
 $rec = array(
-    'url' => '[default]',
     '_id' => cdb_randomString(20),
+    'url' => '[default]',
+    'role' => 'Guests',
     'dialogs' => array (
         '.vividDialog' => array (
             'color' => 'white',
@@ -336,6 +343,10 @@ $rec = array(
             'color' => 'white'
         ),
         '#siteContent' => array (
+            'borderRadius' => '15px'
+        ),
+        '#siteContent .vdBackground' => array (
+            'background' => 'rgba(0,0,0,0.5)',
             'borderRadius' => '15px'
         ),
         '#siteVideo .vdBackground' => array (

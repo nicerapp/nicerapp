@@ -412,13 +412,27 @@ na.blog = {
         var
         tree = $('#jsTree').jstree(true),
         sel = tree.get_node(tree.get_selected()[0]),
+        role = undefined,
+        user = undefined;
+        
+        for (var i=0; i<sel.parents.length; i++) {
+            var p = tree.get_node(sel.parents[i]);
+            if (p.type == 'naUserRootFolder') user = p.text;
+            if (p.type == 'naGroupRootFolder') role = p.text;
+        }
+        var
         arr = {
             cmsText : {
                 database : sel.original.database,
                 id : sel.original.id
             }
-        },
+        };
+        if (user) arr.cmsText.user = user;
+        if (role) arr.cmsText.role = role;
+        
+        var
         url = na.m.base64_encode_url (JSON.stringify(arr));
+        
         na.blog.saveEditorContent(sel, function() {
             na.site.loadContent(url);
         });

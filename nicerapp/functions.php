@@ -53,6 +53,37 @@ function base64_decode_url($string) {
     return base64_decode(str_replace(['-','_'], ['+','/'], $string));
 }
 
+function css_array_to_css($rules, $indent = 0) {
+    $css = '';
+    $prefix = str_repeat('  ', $indent);
+
+    foreach ($rules as $key => $value) {
+        if (is_array($value)) {
+            $selector = $key;
+            $properties = $value;
+
+            $css .= $prefix . "$selector {\n";
+            $css .= $prefix . css_array_to_css($properties, $indent + 1);
+            $css .= $prefix . "}\n";
+        } else {
+            $property = $key;
+            $selector2 = '';
+            for ($i=0; $i<strlen($property); $i++) {
+                $c = substr($property, $i, 1);
+                if ($c === strtolower($c)) {
+                    $selector2 .= $c;
+                } else {
+                    $selector2 .= '-'.strtolower($c);
+                }
+            }
+            $property = $selector2;
+            $css .= $prefix . "$property: $value;\n";
+        }
+    }
+
+    return $css;
+}
+
 function createDirectoryStructure ($filepath, $ownerUser=null, $ownerGroup=null, $filePerms=null) {
 $fncn = "createDirectoryStructure";
 /*	Creates a directory structure. 

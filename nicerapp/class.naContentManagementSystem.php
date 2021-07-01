@@ -1,6 +1,7 @@
 <?php 
 require_once(dirname(__FILE__).'/functions.php');
 require_once(dirname(__FILE__).'/selfHealer/class.selfHealer.php');
+require_once(dirname(__FILE__).'/3rd-party/sag/src/Sag.php');
 
 class nicerAppCMS {
     public $version = '2.0.0';
@@ -20,6 +21,7 @@ class nicerAppCMS {
     public $basePath;
     public $cssTheme = 'dark';
     public $selfHealer;
+    public $app;
     
     public function init () {
         $this->basePath = realpath(dirname(__FILE__).'/..');
@@ -37,6 +39,7 @@ class nicerAppCMS {
 
         if (array_key_exists('apps', $_GET)) {
             $app = json_decode (base64_decode_url($_GET['apps']), true);
+            $this->app = $app;
             //var_dump ($app); die();
             //$files = getFilePathList (realpath(dirname(__FILE__)).'/apps', true, '/app.site.*.php/', array('file'), 3);
             $folders = getFilePathList (realpath(dirname(__FILE__)).'/apps', true, '/.*/', array('dir'), 1);
@@ -65,10 +68,12 @@ class nicerAppCMS {
         //$div_siteContent = $this->getDivSiteContent();
         $div_siteMenu = $this->getSiteMenu();
         $replacements = array (
+            '{$app}' => json_encode($app, JSON_PRETTY_PRINT),
             '{$title}' => execPHP($titleFile),
             '{$domain}' => $this->domain,
             '{$cssFiles}' => $cssFiles,
             '{$cssThemeFiles}' => $cssThemeFiles,
+            '{$pageSpecificCSS}' => $this->getPageCSS(),
             '{$javascriptFiles}' => $javascriptFiles,
             '{$div_siteMenu}' => $div_siteMenu,
             '{$theme}' => $this->cssTheme,
@@ -162,7 +167,7 @@ class nicerAppCMS {
         return $content;
     }
     
-    public function getMetaTags_viewport () {
+    public function getMetaTags_viewport() {
     
         //return '<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">';    
     
@@ -221,6 +226,127 @@ class nicerAppCMS {
         }  
 
         return $r;
+    }
+    
+    public function getPageCSS() {
+        if (is_array($_GET) && array_key_exists('apps',$_GET) && is_string($_GET['apps'])) {
+            $url = '/apps/'.$_GET['apps'];
+        } else {
+            $url = '/';
+        }
+        $selectors = array (
+            0 => array (
+                'url' => '[default]',
+                'role' => 'Guests'
+            ),
+            1 => array (
+                'url' => $url,
+                'role' => 'Guests'
+            )
+        );
+        $selectorNames = array ( 
+            0 => 'site role Guests',
+            1 => 'page role Guests'
+        );
+        
+        //var_dump ($this->app); die();
+        
+        if (
+            is_array($_COOKIE) && array_key_exists('loginName', $_COOKIE) && is_string($_COOKIE['loginName'])
+            && array_key_exists('cmsText', $this->app) 
+            && array_key_exists('user', $this->app['cmsText'])
+            && $this->app['cmsText']['user'] == $_COOKIE['loginName']
+        ) {
+            $selectors[] = array (
+                'url' => '[default]',
+                'user' => $_COOKIE['loginName']
+            );
+            $selectorNames[] = 'site user '.$_COOKIE['loginName'];
+            $selectors[] = array (
+                'url' => $url,
+                'user' => $_COOKIE['loginName']
+            );
+            $selectorNames[] = 'page user '.$_COOKIE['loginName'];
+        };
+        
+        
+        $selectors2 = array_reverse($selectors, true);
+        $selectorNames2 = array_reverse($selectorNames, true);
+        
+        foreach ($selectors2 as $idx => $selector) {
+            $css = $this->getPageCSS_specific($selector);
+            if ($css!==false) {
+                $r = '<style id="cssPageSpecific">'.PHP_EOL;
+                $r .= css_array_to_css($css).PHP_EOL;
+                $r .= '</style>'.PHP_EOL;
+                $r .= '<script id="jsPageSpecific" type="text/javascript">'.PHP_EOL;
+                $r .= 'na.site.globals = $.extend(na.site.globals, {'.PHP_EOL;
+                $r .= "\tselectorName : '".$selectorNames[$idx]."',".PHP_EOL;
+                $r .= "\tselectorNames : ".json_encode($selectorNames).",".PHP_EOL;
+                $r .= "\tselectors : ".json_encode($selectors).",".PHP_EOL;
+                $r .= "\tapp : ".json_encode($this->app).PHP_EOL;
+                $r .= '});'.PHP_EOL;
+                $r .= 'setTimeout(function() {'.PHP_EOL;
+                $r .= "\tna.site.setSpecificity();".PHP_EOL;
+                $r .= "\tna.ds.onload(na.ds.settings.current.forDialogID);".PHP_EOL;
+                $r .= '}, 500);'.PHP_EOL;
+                $r .= '</script>'.PHP_EOL;
+                return $r;
+            }
+        };
+    }
+    
+    public function getPageCSS_specific($selector) {
+        $debug = false;
+        if ($debug) echo '<pre>';
+        
+        $cdbDomain = str_replace('.','_',$this->domain);
+        $couchdbConfigFilepath = realpath(dirname(__FILE__)).'/domainConfigs/'.$this->domain.'/couchdb.json';
+        $cdbConfig = json_decode(file_get_contents($couchdbConfigFilepath), true);
+
+        $cdb = new Sag($cdbConfig['domain'], $cdbConfig['port']);
+        $cdb->setHTTPAdapter($cdbConfig['httpAdapter']);
+        $cdb->useSSL($cdbConfig['useSSL']);
+        
+        $username = $_COOKIE['loginName'];
+        $username = str_replace(' ', '__', $username);
+        $username = str_replace('.', '_', $username);
+        
+        try {
+            //$cdb->login($cdbConfig['username'], $cdbConfig['password']);
+            $cdb->login($username, $_COOKIE['pw']);
+        } catch (Exception $e) {
+            if ($debug) { echo 'status : Failed : Login failed (username : '.$username.', password : '.$_COOKIE['pw'].').<br/>'.PHP_EOL; die(); }
+        }
+        if ($debug) { echo 'info : Login succesful (username : '.$username.', password : '.$_COOKIE['pw'].').<br/>'.PHP_EOL;  }
+        
+        
+        $dbName = $cdbDomain.'___cms_vdsettings';
+        try {
+            $cdb->setDatabase($dbName, false);
+        } catch (Exception $e) {
+            if ($debug) { echo 'status : Failed : could not open database '.$dbName.'<br/>'.PHP_EOL; die(); }
+        }
+        
+        $findCommand = array (
+            'selector' => $selector,
+            'fields' => array( '_id', 'user', 'role', 'url', 'dialogs' )
+        );
+        $call = $cdb->find ($findCommand);
+        if ($debug) {
+            echo 'info : $findCommand='; var_dump ($findCommand); echo '.<br/>'.PHP_EOL;
+            echo 'info : $call='; var_dump ($call); echo '.<br/>'.PHP_EOL;
+            //die();
+        }
+        
+        $hasRecord = false;
+        if ($call->headers->_HTTP->status==='200') {
+            foreach ($call->body->docs as $idx => $d) {
+                $hasRecord = true;
+                return json_decode(json_encode($d->dialogs),true);
+            }
+        }
+        return false;        
     }
   
 }

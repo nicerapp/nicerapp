@@ -2,7 +2,7 @@
 require_once (dirname(__FILE__).'/boot.php');
 require_once (dirname(__FILE__).'/3rd-party/sag/src/Sag.php');
 require_once (dirname(__FILE__).'/Sag-support-functions.php');
-$debug = false;
+$debug = true;
 if ($debug) {
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
@@ -61,7 +61,7 @@ if (!$got) {
         if ($debug) echo '<pre style="color:red">'; var_dump ($e); echo '</pre>';
     }
 } else {
-    if ($debug) echo 'Already have this user record.<br/>';
+    if ($debug) echo 'Already have this user record.<br/>'.PHP_EOL;
 }
 
 $dbName = $cdbDomain.'___cms_tree__user___'.strtolower($username);
@@ -72,6 +72,7 @@ try {
 } catch (Exception $e) {
     if ($debug) { echo '<pre style="color:red">'; var_dump ($e); echo '</pre>'; die(); }
 }
+if ($debug) echo '<pre style="color:green">'; var_dump($call); echo '</pre>'.PHP_EOL; 
 
 $rec1_id = cdb_randomString(20);
 $do = false; try { $doc = $cdb->get($rec1_id); } catch (Exception $e) { $do = true; };
@@ -101,17 +102,20 @@ try {
 }
 echo 'Created database '.$dbName.'<br/>'.PHP_EOL;
 
-$dbName = $cdbDomain.'___cms_vdsettings__user___'.strtolower($username);
-try { $cdb->deleteDatabase ($dbName); } catch (Exception $e) { };
+//$dbName = $cdbDomain.'___cms_vdsettings__user___'.strtolower($username);
+$dbName = $cdbDomain.'___cms_vdsettings';
+//try { $cdb->deleteDatabase ($dbName); } catch (Exception $e) { };
 $cdb->setDatabase($dbName, true);
+/*
 try { 
     $call = $cdb->setSecurity ($security_user);
 } catch (Exception $e) {
     if ($debug) { echo '<pre style="color:red">'; var_dump ($e); echo '</pre>'; die(); }
-}
+}*/
 
 $rec = array(
     'url' => '[default]',
+    'user' => $_POST['loginName'],
     '_id' => cdb_randomString(20),
     'dialogs' => array (
         '.vividDialog' => array (
@@ -130,6 +134,10 @@ $rec = array(
             'color' => 'white'
         ),
         '#siteContent' => array (
+            'borderRadius' => '15px'
+        ),
+        '#siteContent .vdBackground' => array (
+            'background' => 'rgba(0,0,0,0.5)',
             'borderRadius' => '15px'
         ),
         '#siteVideo .vdBackground' => array (

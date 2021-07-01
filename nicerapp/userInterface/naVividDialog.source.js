@@ -48,16 +48,16 @@ class naVividDialog {
         if ($('.vdSettingsScripts', t.el).length<1) {
             $(t.el).prepend(html);
             var d = na.site.settings.dialogs['#siteToolbarDialogSettings'];
-            na.m.addJS (null, "/nicerapp/3rd-party/jQuery/spectrum/dist/spectrum.min.js?c="+na.m.changedDateTime_current(), null, function () { d.displaySettingsDialog_scriptLoaded(d); });
-            na.m.addJS (null, "/nicerapp/3rd-party/jsTree-3.2.1/dist/jstree.min.js?c="+na.m.changedDateTime_current(), null, function () { d.displaySettingsDialog_scriptLoaded(d); });
-            na.m.addJS (null, "/nicerapp/dialogSettings.js?c="+na.m.changedDateTime_current(), null, function () { d.displaySettingsDialog_scriptLoaded(d); });
+            //na.m.addJS (null, "/nicerapp/3rd-party/jQuery/spectrum/dist/spectrum.min.js?c="+na.m.changedDateTime_current(), null, function () { d.displaySettingsDialog_scriptLoaded(d); });
+            //na.m.addJS (null, "/nicerapp/3rd-party/jsTree-3.2.1/dist/jstree.min.js?c="+na.m.changedDateTime_current(), null, function () { d.displaySettingsDialog_scriptLoaded(d); });
+            //na.m.addJS (null, "/nicerapp/dialogSettings.js?c="+na.m.changedDateTime_current(), null, function () { d.displaySettingsDialog_scriptLoaded(d); });
             
         }
     }
     
     displaySettingsDialog_scriptLoaded (t) {
         if (!t.scriptLoadedCount) t.scriptLoadedCount = 1; else t.scriptLoadedCount++;
-        if (t.scriptLoadedCount==4) t.displaySettingsDialog_displayDialog(t);
+        if (t.scriptLoadedCount==1) t.displaySettingsDialog_displayDialog(t);
     }
     
     displaySettingsDialog_displayDialog (t) {
