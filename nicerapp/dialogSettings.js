@@ -345,7 +345,7 @@ na.ds = na.dialogSettings = {
         $('#dialogSettings_photoScale').css({
             width:$('#siteToolbarDialogSettings').width() - $('#label_dialogSettings_photoScale').width() - 40,
             left : $('#label_dialogSettings_photoScale').width() + 10
-        }).val(na.ds.settings.current.scale);
+        }).val(na.ds.settings.current.scale).fadeIn('normal');
             
     },
     
