@@ -204,7 +204,7 @@ na.site.globals = $.extend(na.site.globals, {
             <input id="dialogSettings_photoOpacity" type="range" min="1" max="100" value="50" class="dialogSettingsComponent sliderOpacityRangeDialogSettings"/>
             <div class="flexBreak"></div>
             <label id="label_dialogSettings_photoScale" class="labelDialogSettings" for="dialogSettings_photoScale">Scale :</label>
-            <input id="dialogSettings_photoScale" type="range" min="25" max="200" value="100" class="dialogSettingsComponent sliderOpacityRangeDialogSettings"/>
+            <input id="dialogSettings_photoScale" type="range" min="25" max="200" value="100" class="dialogSettingsComponent sliderOpacityRangeDialogSettings" style="top:30px;"/>
             <div class="flexBreak"></div>
         </div>
         <iframe id="dialogSettings_photoAlbum" class="dialogSettingsComponent" style="position:absolute;top:175px;display:none;border:0px"></iframe>
