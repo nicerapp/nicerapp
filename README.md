@@ -2,7 +2,9 @@
 this is a revolutionary and constantly evolving, well-maintained repository of HTML, CSS, JS and PHP code with which you can build websites that use a tiled image, photo or youtube video as site background for information and apps that are put over that background in a semi-transparent way.
 
 # Installation
-nicerapp can be run on both windows and linux and macOS systems, all it requires is a webserver that can serve up PHP scripts. this can be done on linux systems from the **terminal** window as such :
+nicerapp can be run on both windows and linux and macOS systems, all it requires is a webserver that can serve up PHP scripts. 
+on windows, the https://wampserver.com/en LAMP stack is well-suited, 
+and it can also be done on linux systems from the **terminal** window, as such :
 ( if you have no linux system yet, know that a core-i5 with a modest amount of RAM and SSD space runs the latest version just fine, and i recommend to install https://ubuntu.com or kubuntu in case you want semi-transparent windows in your OS )
 
 > apt update
