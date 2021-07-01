@@ -1,8 +1,8 @@
 {
-    "http" : "http://",
-    "domain" : "localhost",
-    "port" : "5984",
-    "useSSL" : false,
+    "http" : "https://",
+    "domain" : "nicer.app",
+    "port" : "6984",
+    "useSSL" : true,
     "httpAdapter" : "HTTP_CURL",
     "username" : "Guest",
     "password" : "Guest",
