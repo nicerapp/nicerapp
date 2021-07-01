@@ -82,7 +82,6 @@ na.ds = na.dialogSettings = {
                         var d = data.selected[i], rec = data.instance.get_node(d);
                         $('#documentTitle').val(rec.original.text);
                         na.ds.settings.current.selectedTreeNode = rec;
-                        debugger;
                         if (rec.original.type=='naDocument') {
                             na.site.settings.buttons['#btnSelectBackgroundImage'].disable();
                         } else if (rec.original.type=='naMediaFolder') {
