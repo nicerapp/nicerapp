@@ -32,7 +32,7 @@ $username = array_key_exists('cdb_loginName',$_SESSION) ? $_SESSION['cdb_loginNa
 var_dump ($username);
 $username = str_replace(' ', '__', $username);
 $username = str_replace('.', '_', $username);
-$pw = array_key_exists('pw',$_SESSION) ? $_SESSION['pw'] : $cdbConfig['password'];
+$pw = array_key_exists('cdb_pw',$_SESSION) ? $_SESSION['cdb_pw'] : $cdbConfig['password'];
 $cdb->login($username, $pw);
 
 $cdb_domain = $cms->domain;
