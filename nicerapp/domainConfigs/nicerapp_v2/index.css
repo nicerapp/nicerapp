@@ -255,7 +255,6 @@ img.bg_last {
 
 .sliderOpacityRangeDialogSettings {
     position : absolute;
-    top : 110px;
     left : 5px;
     display : none;
     -webkit-appearance: none;  /* Override default CSS styles */
