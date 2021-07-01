@@ -199,7 +199,7 @@ na.site.globals = $.extend(na.site.globals, {
         </div>
         <input id="colorpicker" class="dialogSettingsComponent dialogSettings_colorPicker" style="position:absolute;top:110px;"></input>
         <div id="dialogSettings_jsTree" class="dialogSettingsComponent" style="position:absolute;top:110px;display:none;"></div>
-        <div id="dialogSettings_photoAlbum_specs" class="dialogSettingsComponent" style="position:absolute;top:135px;display:none;">
+        <div id="dialogSettings_photoAlbum_specs" class="dialogSettingsComponent" style="position:absolute;top:110px;display:none;">
             <label id="label_dialogSettings_photoOpacity" class="labelDialogSettings" for="dialogSettings_photoOpacity">Opacity :</label>
             <input id="dialogSettings_photoOpacity" type="range" min="1" max="100" value="50" class="sliderOpacityRangeDialogSettings"/>
             <div class="flexBreak"></div>
