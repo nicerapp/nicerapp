@@ -335,7 +335,7 @@ na.ds = na.dialogSettings = {
     
     selectBackground_image : function () {
         na.ds.onclick($('#btnSelectBackgroundImage')[0]);
-        $('.dialogSettingsComponent').not('#dialogSettings_photoAlbum, #dialogSettings_photoOpacity').fadeOut('normal');
+        $('.dialogSettingsComponent').not('#dialogSettings_photoAlbum, #dialogSettings_photoAlbum_specs').fadeOut('normal');
         $('.dialogSettings_colorPicker').next().fadeOut('normal');
         $('#dialogSettings_photoAlbum, #dialogSettings_photoOpacity, #dialogSettings_photoScale').fadeIn('normal');
         $('#dialogSettings_photoOpacity').css({
