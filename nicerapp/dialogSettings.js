@@ -133,6 +133,7 @@ na.ds = na.dialogSettings = {
         na.ds.settings.current.boxSettings = $('#boxShadow_0')[0];
         setTimeout (function() {
             $('.mediaThumb', $('#dialogSettings_photoAlbum')[0].contentWindow.document).each(function(idx,el) {
+                debugger;
                 if ($('#'+forDialogID+' .vdBackground').css('background').match(el.src)) {
                     na.ds.settings.current.scale = $('#'+forDialogID+' .vdBackground').css('backgroundSize').match(/\d+/)[0];
                     na.ds.settings.current.selectedImage = el;
