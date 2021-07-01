@@ -6,17 +6,25 @@ nicerapp can be run on both windows and linux and macOS systems, all it requires
 ( if you have no linux system yet, know that a core-i5 with a modest amount of RAM and SSD space runs the latest version just fine, and i recommend to install https://ubuntu.com or kubuntu in case you want semi-transparent windows in your OS )
 
 > apt update
+> 
 > apt upgrade
+> 
 > apt dist-upgrade
+> 
 > apt install apache2 php libapache2-mod-php php7.4-mbstring php-imap curl git imagemagick npm letsencrypt
+> 
 > a2enmod headers rewrite
 
 > curl -L https://couchdb.apache.org/repo/bintray-pubkey.asc | sudo apt-key add -
+> 
 > echo "deb https://apache.bintray.com/couchdb-deb bionic main" | sudo tee -a /etc/apt/sources.list
 
 > apt update 
+> 
 > apt install couchdb
+> 
 > npm install -g add-cors-to-couchdb
+> 
 > add-cors-to-couchdb -u admin -p YOURADMINPASSWORDFORCOUCHDB
 
 # installing the nicerapp source files
