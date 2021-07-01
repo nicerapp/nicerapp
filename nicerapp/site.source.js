@@ -748,12 +748,14 @@ var nas = na.site = {
                         test = rgbaRegEx.test(dit.background),
                         ditbgOpacity = test ? dit.background.match(rgbaRegEx)[1] : dit.opacity;
                         $('.sliderOpacityRange', del).attr('value', ditbgOpacity*100);
-                        if (test) $('#colorpicker').spectrum ({color:dit.background, type:'flat', change : function (color) {
-                            var bg = $('.vdBackground', $('#'+na.ds.settings.current.forDialogID)[0]);
-                            $(bg).css({ background : color, opacity : 1 });
-                            na.ds.settings.current.fireSaveTheme = true;
-                            na.site.saveTheme();                        
-                        }});
+                        if (test && na.ds.settings.current.selectedButtonID == 'btnSelectBackgroundColor') {
+                            $('#colorpicker').spectrum ({color:dit.background, type:'flat', change : function (color) {
+                                var bg = $('.vdBackground', $('#'+na.ds.settings.current.forDialogID)[0]);
+                                $(bg).css({ background : color, opacity : 1 });
+                                na.ds.settings.current.fireSaveTheme = true;
+                                na.site.saveTheme();                        
+                            }});
+                        }
 
                     }
                 };

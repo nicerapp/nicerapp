@@ -175,6 +175,7 @@ na.ds = na.dialogSettings = {
         
         var b = na.site.settings.buttons['#'+el.id];
         b.select();
+        $('#'+el.id).click(event);
         na.ds.settings.current.selectedButtonID = el.id;
     },
     
@@ -304,7 +305,7 @@ na.ds = na.dialogSettings = {
     selectBackground_color : function () {
         na.ds.onclick($('#btnSelectBackgroundColor')[0]);
         $('.dialogSettingsComponent').not('.sp-container').fadeOut('normal');
-        $('.sp-container').css({top:8,opacity:1});
+        $('.sp-container').fadeIn('normal').css({top:8,opacity:1});
     },
 
     selectBackground_folder : function () {
