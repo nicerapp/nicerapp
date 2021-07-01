@@ -803,7 +803,10 @@ var nas = na.site = {
                 debugger;
             }
         };
-        $.ajax(ac2);
+        clearTimeout (na.site.settings.current.saveThemeTimeout);
+        na.site.settings.current.saveThemeTimeout = setTimeout(function() {
+            $.ajax(ac2);
+        }, 750);
     },
     
     fetchTheme (selector) {

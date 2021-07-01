@@ -130,6 +130,15 @@ na.ds = na.dialogSettings = {
         na.ds.settings.current.textShadowColor = 'black';
         na.ds.settings.current.selectedTextShadow = $('#textShadow_0')[0];
         na.ds.settings.current.boxSettings = $('#boxShadow_0')[0];
+        setTimeout (function() {
+            $('.mediaThumb', $('#dialogSettings_photoAlbum')[0].contentWindow.document).each(function(idx,el) {
+                if ($('#'+forDialogID+' .vdBackground').css('background').match(el.src)) {
+                    na.ds.settings.current.scale = $('#'+forDialogID+' .vdBackground').css('backgroundSize').match(/\d+/)[0];
+                    na.ds.settings.current.selectedImage = el;
+                }
+            });
+        }, 500);
+        
 
         var s = JSON.parse( $('#specificity').find('option:selected')[0].value );
         na.ds.settings.current.specificity = s;
@@ -157,6 +166,10 @@ na.ds = na.dialogSettings = {
         $('#dialogSettings_photoOpacity')[0].oninput = function () {
             if (na.ds.settings.current.selectedImage) na.ds.imageSelected(na.ds.settings.current.selectedImage);
         };
+        $('#dialogSettings_photoScale')[0].oninput = function () {
+            na.ds.settings.current.scale = parseInt($('#dialogSettings_photoScale').val());
+            if (na.ds.settings.current.selectedImage) na.ds.imageSelected(na.ds.settings.current.selectedImage);
+        };
         $('#dialogSettings_photoAlbum').css({
             display : 'block',
             width : $('#siteToolbarDialogSettings .vividDialogContent').width(),
@@ -165,7 +178,7 @@ na.ds = na.dialogSettings = {
                 - $('#dialogSettings_photoAlbum').offset().top
                 - $('.navbar').height()
                 - $('#specificitySettings').height()
-                - 25
+                - 70
         }).css({display:display});
     },
     
@@ -323,13 +336,22 @@ na.ds = na.dialogSettings = {
         na.ds.onclick($('#btnSelectBackgroundImage')[0]);
         $('.dialogSettingsComponent').not('#dialogSettings_photoAlbum, #dialogSettings_photoOpacity').fadeOut('normal');
         $('.dialogSettings_colorPicker').next().fadeOut('normal');
-        $('#dialogSettings_photoAlbum, #dialogSettings_photoOpacity').fadeIn('normal');
+        $('#dialogSettings_photoAlbum, #dialogSettings_photoOpacity, #dialogSettings_photoScale').fadeIn('normal');
+        $('#dialogSettings_photoOpacity').css({
+            width:$('#siteToolbarDialogSettings').width() - $('#label_dialogSettings_photoOpacity').width() - 40,
+            left : $('#label_dialogSettings_photoOpacity').width() + 10
+        });
+        $('#dialogSettings_photoScale').css({
+            width:$('#siteToolbarDialogSettings').width() - $('#label_dialogSettings_photoScale').width() - 40,
+            left : $('#label_dialogSettings_photoScale').width() + 10
+        }).val(na.ds.settings.current.scale);
+            
     },
     
     imageSelected : function (el) {
         na.ds.settings.current.selectedImage = el;
         var bg = $('.vdBackground', $('#'+na.ds.settings.current.forDialogID)[0]);
-        $(bg).css({ background : 'url("'+el.src+'") repeat', opacity : parseInt($('#dialogSettings_photoOpacity').val())/100 });
+        $(bg).css({ background : 'url("'+el.src+'") repeat', opacity : parseInt($('#dialogSettings_photoOpacity').val())/100, backgroundSize : na.ds.settings.current.scale+'% '+na.ds.settings.current.scale+'%' });
         /*if (na.ds.settings.current.fireSaveTheme) */na.site.saveTheme();
     },
     
