@@ -164,13 +164,13 @@ na.ds = na.dialogSettings = {
         $('.vividScrollpane div img', doc).css({width:100,height:100}).each(function(idx,el){
             el.onclick = function () { na.ds.imageSelected(el); };
         });
-        $('#dialogSettings_photoOpacity')[0].oninput = function () {
+        /*$('#dialogSettings_photoOpacity')[0].oninput = function () {
             if (na.ds.settings.current.selectedImage) na.ds.imageSelected(na.ds.settings.current.selectedImage);
         };
         $('#dialogSettings_photoScale')[0].oninput = function () {
             na.ds.settings.current.scale = parseInt($('#dialogSettings_photoScale').val());
             if (na.ds.settings.current.selectedImage) na.ds.imageSelected(na.ds.settings.current.selectedImage);
-        };
+        };*/
         $('#dialogSettings_photoAlbum').css({
             display : 'block',
             width : $('#siteToolbarDialogSettings .vividDialogContent').width(),
