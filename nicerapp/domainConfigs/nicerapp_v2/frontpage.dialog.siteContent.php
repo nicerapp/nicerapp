@@ -195,7 +195,7 @@
     <div>
     Nicerapp embraces the latest web technologies to provide beautiful new views to your data and files.<br/>
     It is also licensed to be completely free, under the <a href="https://opensource.org/licenses/MIT" target="MIT_LICENSE">MIT License</a>.<br/>
-    Full sources are available at <a href="https://github.com/nicerapp/nicerapp_v2" target="naGithub">https://github.com/nicerapp/nicerapp_v2</a>.
+    Full sources are available at <a href="https://github.com/nicerapp/nicerapp_v2" target="naGithub">https://github.com/nicerapp/nicerapp_v2</a>.<br/>
     Documentation is available at <a href="https://github.com/nicerapp/nicerapp_v2#readme" target="naDocs">https://github.com/nicerapp/nicerapp_v2#readme</a>.
     </div>
     
