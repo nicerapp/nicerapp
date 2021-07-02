@@ -264,6 +264,12 @@ na.apps.loaded.newsApp = {
         if (evt.key==' ') na.apps.loaded.newsApp.toggleLock();
     },
     
+    viewSearchbar : function (evt) {
+        $('#td_newsApp_searchbar').css({width:$('#td_newsApp_info').width()}).fadeIn('normal');
+        $('#td_newsApp_searchbar_spacer').css({display:'block'});
+        $('#td_newsApp_info').css({display:'none'});
+    },
+    
     onSearch : function (evt) {
         var 
         na1 = na.apps.loaded.newsApp, g = na1.globals, s = na1.settings, c = s.current, db = c.db,
@@ -319,10 +325,10 @@ na.apps.loaded.newsApp = {
         na1 = na.apps.loaded.newsApp, g = na1.globals, s = na1.settings, c = s.current, db = c.db,
         lock = $('#newsApp_lock')[0];
         if (lock.src.match('_on')) {
-            lock.src = na.site.globals.urls.app + '/nicerapp/apps/nicerapp/news/appContent/newsApp/2.0.0/btnLock_off.png';
+            lock.src = '/nicerapp/apps/nicerapp/news/btnLock_off.png';
             c.locked = false;            
         } else {
-            lock.src = na.site.globals.urls.app + '/nicerapp/apps/nicerapp/news/appContent/newsApp/2.0.0/btnLock_on.png';
+            lock.src = '/nicerapp/apps/nicerapp/news/btnLock_on.png';
             c.locked = true;            
         }
         
@@ -458,7 +464,7 @@ na.apps.loaded.newsApp = {
 //alert ('POST LOAD : '+url);
                 
                 $('.loader, .loaderAfter').remove(); 
-                $('#newsApp_searchbar__enterQuery, #newsApp_searchbar__abandonQuery, #newsApp_info, #newsApp_timer').css({display:'block'});
+                $('#newsApp_info, #newsApp_timer').css({display:'block'});
                 $('#newsApp_title, #newsApp_searchbar, #newsApp_header_buttons').css({display:'table-cell'});
                 $('#siteContent .vividDialogContent').css ({
                     display : 'block',

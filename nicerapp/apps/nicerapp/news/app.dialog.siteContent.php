@@ -34,18 +34,21 @@ $app = json_decode (base64_decode_url($_GET['apps']), true);
                         <td id="td_newsApp_title" style="width:1%;white-space:nowrap;margin:5px;vertical-align:middle;">
                         <h1 id="newsApp_title" class="newsApp_header" style="font-family:'Architects Daughter';display:none;padding:0px;margin:0px;vertical-align:middle;"><?php echo $pageTitle;?></h1> 
                         </td>
-                        <!--<td style="width:20px;">&nbsp;</td>-->
+                        <td id="td_newsApp_searchbar_spacer" style="width:20px;display:none;">&nbsp;</td>
                         <td id="td_newsApp_searchbar" style="vertical-align:middle;display:none;">
-                        <input id="newsApp_searchbar" style="display:none; font-family:'Architects Daughter';background:rgba(255,255,255,1); border-radius:7px; border : 1px solid black;vertical-align:middle" onchange="na.apps.loaded.newsApp.onSearch(event)"/>
-                        <img id="newsApp_searchbar__enterQuery" title="search the entire news database (up to 14 days into the past)" src="/nicerapp/siteMedia/na.question-mark.svg.png" style="display:none;height:2em;vertical-align:middle" onclick="na.apps.loaded.newsApp.onSearch(event)"/>
-                        <img id="newsApp_searchbar__abandonQuery" title="abandon the current search query and display the very latest news again" src="/nicerapp/siteMedia/na.reset.png" style="display:none;height:2em;vertical-align:middle" onclick="na.apps.loaded.newsApp.clearSearch(event)"/>
+                            <label for="newsApp_searchbar" id="label_newsApp_searchbar" class="label_newsApp" style="width:80px;">Search :</label>
+                            <input id="newsApp_searchbar" style="display:none; font-family:'Architects Daughter';background:rgba(255,255,255,1); border-radius:7px; border : 1px solid black;vertical-align:middle" onchange="na.apps.loaded.newsApp.onSearch(event)"/>
+                            <img id="newsApp_searchbar__enterQuery" title="search the entire news database (up to 14 days into the past)" src="/nicerapp/siteMedia/na.question-mark.svg.png" style="height:30px;vertical-align:middle" onclick="na.apps.loaded.newsApp.onSearch(event)"/>
+                            <img id="newsApp_searchbar__abandonQuery" title="abandon the current search query and display the very latest news again" src="/nicerapp/siteMedia/na.reset.png" style="height:30px;vertical-align:middle" onclick="na.apps.loaded.newsApp.clearSearch(event)"/>
                         </td>
                         <td style="width:20px;">&nbsp;</td>
-                        <td style="text-align:left"><span id="newsApp_info" style="font-family:'Architects Daughter';font-size:120%;font-weight:bold;text-align:left;display:none;">This app will load up older news-items whenever needed</span></td>
+                        <td id="td_newsApp_info" style="text-align:left">
+                            <span id="newsApp_info" style="font-family:'Architects Daughter';font-size:120%;font-weight:bold;text-align:left;display:none;">This app will load up older news-items whenever needed</span>
+                        </td>
                         <td><span id="newsApp_debug" class="newsApp_header" style="font-weight:bold;"></span></td>
                         <td style="text-align:right"><span id="newsApp_timer" class="newsApp_header" style="display:none;font-weight:bold;"></span></td>
-                        <td style="width:70px;" id="newsApp_header_buttons">
-                        <img id="newsApp_search" src="/nicerapp/apps/nicerapp/news/btnSearch.png" style="vertical-align:middle;height:2em" onclick="na.apps.loaded.newsApp.viewSearchbar()" title="Search for specific news" alt="Search for specific news"/>
+                        <td style="width:120px;" id="newsApp_header_buttons">
+                        <img id="newsApp_search" src="/nicerapp/apps/nicerapp/news/btnSearch.png" style="vertical-align:middle;height:2em" onclick="na.apps.loaded.newsApp.viewSearchbar(event)" title="Search for specific news" alt="Search for specific news"/>
                         <img id="newsApp_lock" class="btn" src="/nicerapp/apps/nicerapp/news/btnLock_off.png" onclick="na.apps.loaded.newsApp.toggleLock();" style="vertical-align:middle;height:2em;display:none;z-index:9999999999999;" title="[SPACE] pauses" alt="SPACE key pauses"/>
                         <img id="newsApp_next" class="btn" src="/nicerapp/apps/nicerapp/news/btnNext.png" onclick="na.apps.loaded.newsApp.gotoNextPage();" style="vertical-align:middle;height:2em;display:none;z-index:9999999999999;" title="[ALT] goes to next page" alt="ALT key goes to next page"/>
                         </td>
