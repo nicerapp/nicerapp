@@ -265,9 +265,13 @@ na.apps.loaded.newsApp = {
     },
     
     viewSearchbar : function (evt) {
-        $('#td_newsApp_searchbar').css({width:$('#td_newsApp_info').width()}).fadeIn('normal');
-        $('#td_newsApp_searchbar_spacer').css({display:'block'});
-        $('#td_newsApp_info').css({display:'none'});
+        if ($('#td_newsApp_searchbar_spacer').css('display')=='block') {
+            na.apps.loaded.newsApp.clearSearch(evt);
+        } else {
+            $('#td_newsApp_searchbar').css({width:$('#td_newsApp_info').width()}).fadeIn('normal');
+            $('#td_newsApp_searchbar_spacer').css({display:'block'});
+            $('#td_newsApp_info').css({display:'none'});
+        }
     },
     
     onSearch : function (evt) {
