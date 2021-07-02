@@ -7,6 +7,8 @@ on windows, the https://wampserver.com/en LAMP stack is well-suited,
 and it can also be done on linux systems from the **terminal** window, as such :
 ( if you have no linux system yet, know that a core-i5 with a modest amount of RAM and SSD space runs the latest version just fine, and i recommend to install https://ubuntu.com or kubuntu in case you want semi-transparent windows in your OS )
 
+> sudo su -
+> 
 > apt update
 > 
 > apt upgrade
