@@ -323,7 +323,7 @@ var mp3site = {
                 
 			},
 			stop : function (evt, ui) {
-                mp3site.reorderPlaylist();
+                setTimeout(mp3site.reorderPlaylist, 500);
 			}
 		});
 		$('#playlist').droppable ({
@@ -366,6 +366,13 @@ var mp3site = {
     
     reorderPlaylist : function () {
         $('.mp3', $('#playlist')[0]).each(function(idx,el){
+            let 
+            x = $(el).attr('onclick').toString().replace(new RegExp(el.id),'playlist_'+idx),
+            x1 = x.replace('javascript:','').trim();
+            //debugger;
+            
+            //el.onclick = function (evt) { eval (x1); };
+            $(el).attr('onclick','javascript:'+x1);
             el.id = 'playlist_'+idx;
         });
     },
