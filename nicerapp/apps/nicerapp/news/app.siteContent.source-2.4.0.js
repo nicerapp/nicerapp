@@ -1479,7 +1479,7 @@ na.apps.loaded.newsApp = {
         $('#newsApp_content_shadow, #newsApp_content').css({
             height : oh - $('#siteContent__header').height(),
             width : ow,
-            top : 50
+            top : 0
         });
     }
     
