@@ -131,7 +131,7 @@ var mp3site = {
                 if (this.id==id) var state = 'selected'; else var state='normal';
             });
             $('#mp3descText').fadeOut(400).html (html).fadeIn(1000, function () { 
-                
+                setTimeout(na.site.loadTheme, 250);
             });
             
             
