@@ -61,14 +61,16 @@ $htmlTitleMeta = file_get_contents ($setPath.'/index.title_meta.html');
 	<div id="horizontalMover__containmentBox1" style="display:none;position:absolute;height:16px;top:2px;border-radius:4px;background:black;opacity:0.0"></div>
 	<div id="horizontalMover" class="draggable ui-widget-content" style="display:none;position:absolute;top:4px;height:10px;width:730px;border-radius:4px;background:navy;border : 1px solid white;opacity:0.7"></div>
 	<script type="text/javascript">
-		jQuery('#horizontalMover').draggable ({
-			containment : '#horizontalMover__containmentBox1',
-			axis : 'x',
-			drag : function () {
-				mp3site.settings.masterLeftOffset = jQuery('#horizontalMover')[0].offsetLeft;
-				mp3site.onWindowResize();
-			}
-		});
+        setTimeout(function() {
+            jQuery('#horizontalMover').draggable ({
+                containment : '#horizontalMover__containmentBox1',
+                axis : 'x',
+                drag : function () {
+                    mp3site.settings.masterLeftOffset = jQuery('#horizontalMover')[0].offsetLeft;
+                    mp3site.onWindowResize();
+                }
+            });
+        }, 1250);
 	</script>
 
 	<div id="mp3s" class="vividDialog_mp3s vividScrollpane" theme="transparent" style="visibility:hidden;position:absolute;text-align:center;width:230px; color:yellow;font-weight:bold">
