@@ -480,7 +480,7 @@ na.ds = na.dialogSettings = {
     textSettingsSelected : function () {
         var
         el = $('#'+na.ds.settings.current.forDialogID),
-        el2 = $('#'+na.ds.settings.current.forDialogID+' .vividDialogContent'),
+        el2 = $('#'+na.ds.settings.current.forDialogID+' .vividDialogContent, #'+na.ds.settings.current.forDialogID+' td'),
         newTextShadow = 
             $('#textShadowXoffset').val()+'px '
             +$('#textShadowYoffset').val()+'px '
@@ -494,7 +494,7 @@ na.ds = na.dialogSettings = {
     textSettingsSelected_updateDialog : function () {
         var
         el = $('#'+na.ds.settings.current.forDialogID),
-        el2 = $('#'+na.ds.settings.current.forDialogID+' .vividDialogContent'),
+        el2 = $('#'+na.ds.settings.current.forDialogID+' .vividDialogContent, #'+na.ds.settings.current.forDialogID+' td'),
         newFontFamily = $('#textFontFamily').val(),//.replace(/ /g, '+'),
         newTextShadow = '';
         
@@ -502,16 +502,18 @@ na.ds = na.dialogSettings = {
             if (newTextShadow!=='') newTextShadow+=', ';
             newTextShadow = $(el).css('textShadow');
         });
-        $(el).css({ fontFamily : newFontFamily });
-        $(el).css({ textShadow : newTextShadow });
+        $(el).add(el2).css({ fontFamily : newFontFamily });
+        $(el).add(el2).css({ textShadow : newTextShadow });
         /*if (na.ds.settings.current.fireSaveTheme) */na.site.saveTheme();
     },
     
     textSettingsSelected_textColor : function (color) {
         if (color) na.ds.settings.current.textColor = color; else color = na.ds.settings.current.textColor;
         var
-        el = $('#'+na.ds.settings.current.forDialogID);
-        $(el).css ({ color : color });
+        el = $('#'+na.ds.settings.current.forDialogID),
+        el2 = $('#'+na.ds.settings.current.forDialogID+' .vividDialogContent'),
+        el3 = $('#'+na.ds.settings.current.forDialogID+ 'td');
+        $(el).add(el2).add(el3).css ({ color : color });
         /*if (na.ds.settings.current.fireSaveTheme) */na.site.saveTheme();
     },
     

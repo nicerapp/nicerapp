@@ -839,10 +839,9 @@ var nas = na.site = {
             background : $(selector+' .vdBackground').css('background'),
             borderRadius : $(selector).css('borderRadius')
         };
-        /*
-        ret[selector+' .vividDialogContent'] = {
-            textShadow : $(selector+' .vividDialogContent').css('textShadow')
-        };*/
+        ret[selector+' td'] = {
+            textShadow : $(selector+' td').css('textShadow')
+        };
         return ret;
     }
 }
