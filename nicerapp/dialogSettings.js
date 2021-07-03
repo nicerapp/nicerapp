@@ -331,11 +331,7 @@ na.ds = na.dialogSettings = {
         $('#borderWidth').val(parseInt(bw));
         $('#borderRadius').val(parseInt($(event.currentTarget).css('borderRadius')));
         
-        /*
-        debugger;
-        $('.boxShadow').css ({
-            border : $('#borderWidth').val()+'px '+$('#borderType').val()+' '+$('#borderColorpicker').val()
-        });*/
+        /*if (na.ds.settings.current.fireSaveTheme) */na.site.saveTheme();
     },
     
     boxSettingsChanged : function (color) {
@@ -494,7 +490,7 @@ na.ds = na.dialogSettings = {
         var
         el = $('#'+na.ds.settings.current.forDialogID);
         $(el).css ({ color : color });
-        if (na.ds.settings.current.fireSaveTheme) na.site.saveTheme();
+        /*if (na.ds.settings.current.fireSaveTheme) */na.site.saveTheme();
     },
     
     textSettingsSelected_textShadowColor : function (color) {
