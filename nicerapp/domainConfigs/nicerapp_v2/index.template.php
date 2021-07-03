@@ -98,8 +98,8 @@ na.site.globals = $.extend(na.site.globals, {
             <!--<img src="/nicerapp/siteMedia/btnSettingsBorder.png"/>-->
             <div id="btnViewResult" class="vividButton_icon tooltip" title="View result" alt="View result" style="position:absolute;width:50px;height:50px;" onclick="if (!$(this).is('.disabled')) { if (!na.desktop.settings.visibleDivs.includes('#siteContent'))  na.desktop.settings.visibleDivs.push('#siteContent'); na.desktop.settings.visibleDivs.remove('#siteToolbarDialogSettings'); na.site.settings.activeDivs=['#siteContent']; na.desktop.resize();}">
                 <div class="cvbBorderCSS"></div>
-                <img class="cvbImgBorder" src="/nicerapp/siteMedia/btnCssVividButton_outerBorder.png"/>
-                <img class="cvbImgTile" src="/nicerapp/siteMedia/btnCssVividButton.png"/>
+                <!--<img class="cvbImgBorder" src="/nicerapp/siteMedia/btnCssVividButton_outerBorder.png"/>
+                <img class="cvbImgTile" src="/nicerapp/siteMedia/btnCssVividButton.png"/>-->
                 <img class="cvbImgButton" src="/nicerapp/siteMedia/btnBack.png"/>
             </div>
             <div id="btnSelectBorderSettings" class="vividButton_icon tooltip" title="Select border settings" alt="Select border settings" style="position:absolute;left:65px;width:50px;height:50px;" onclick="if (!$(this).is('.disabled')) na.dialogSettings.selectBorderSettings()">
@@ -295,6 +295,10 @@ na.site.globals = $.extend(na.site.globals, {
                 <option value="Work Sans">Work Sans</option>
             </select>
             <div class="flexBreak"></div>
+
+            <label id="labelTextSize" class="textSettingsLabel" for="textSize">Text size :</label>
+            <input id="textSize" type="range" min="5" max="40" value="12" class="sliderOpacityRangeBorderSettings" onchange="na.ds.textSettingsSelected();"/>
+            <div class="flexBreak" style="height:8px;"></div>
 
             <label id="labelFontFamily" class="textSettingsLabel" for="fontFamily">Font color :</label>
             <input id="textColorpicker" class="dialogSettingsComponent" style="position:absolute;top:95px;"></input>
