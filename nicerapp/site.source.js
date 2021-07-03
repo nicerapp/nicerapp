@@ -272,7 +272,10 @@ var nas = na.site = {
             optEl.innerHTML = na.site.globals.selectorNames[i];
             if (na.site.globals.selectorName === na.site.globals.selectorNames[i]) $(optEl).attr('selected','selected');
             $('#specificity')[0].appendChild(optEl);
-        }        
+        };
+        var s = JSON.parse( $('#specificity').find('option:selected')[0].value );
+        debugger;
+        na.ds.settings.current.specificity = s;
     },
     
     transformLinks : function (rootElement) {
@@ -318,21 +321,6 @@ var nas = na.site = {
                     na.d.s.visibleDivs.remove('#siteToolbarLeft'); $.cookie('visible_siteToolbarLeft','');
                     na.d.s.visibleDivs.remove('#siteToolbarRight'); $.cookie('visible_siteToolbarRight','');
                     
-                    var ac2 = {
-                        type : 'GET',
-                        url : '/nicerapp/ajax_get_pageSpecificSettings.php',
-                        success : function (data, ts, xhr) {
-                            $('#cssPageSpecific, #jsPageSpecific').remove();
-                            $('head').append(data);
-                        },
-                        failure : function (xhr, ajaxOptions, thrownError) {
-                        }
-                    };
-                    setTimeout (function() { 
-                        na.site.loadTheme();
-                        $.ajax(ac2);
-                    }, 250);
-
             
                     var dat = JSON.parse(data), reloadMenu = false;
                     //debugger;
@@ -343,12 +331,38 @@ var nas = na.site = {
                             $.cookie('visible_'+divID, true);
                         };
                         $('#'+divID+' .vividDialogContent').fadeOut('normal', function () {
-                            $('#'+divID+' .vividDialogContent').html(dat[divID]).fadeIn('normal');
+                            var vdc = $('#'+divID+' .vividDialogContent');
+                            vdc.html(dat[divID]).fadeIn('normal');
+                            
+                            $('.vividDialog', vdc[0]).each(function(idx,el){
+                                na.site.settings.dialogs['#'+el.id] = new naVividDialog(el);
+                            });
                             //$('#'+divID+' .vividDialogContent')[0].innerHTML = dat[divID];
                             na.site.transformLinks($('#'+divID)[0]);
                         });
                     };
                     na.desktop.resize();
+
+                    var ac2 = {
+                        type : 'GET',
+                        url : '/nicerapp/ajax_get_pageSpecificSettings.php',
+                        data : {
+                            apps : url2
+                        },
+                        success : function (data, ts, xhr) {
+                            $('#cssPageSpecific, #jsPageSpecific').remove();
+                            $('head').append(data);
+                            debugger;
+                            setTimeout(na.site.loadTheme, 250);
+                        },
+                        failure : function (xhr, ajaxOptions, thrownError) {
+                        }
+                    };
+                    setTimeout (function() { 
+                        $.ajax(ac2);
+                    }, 250);
+
+                    
                 }, 
                 failure : function (xhr, ajaxOptions, thrownError) {
                     debugger;
@@ -702,6 +716,7 @@ var nas = na.site = {
     },
     
     loadTheme : function (callback) {
+        debugger;
         var 
         s = na.ds.settings.current.specificity,
         acData = {

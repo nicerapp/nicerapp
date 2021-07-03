@@ -29,6 +29,7 @@ var mp3site = {
         na.analytics.logMetaEvent ('startApp : musicPlayer');
 
         if (mp3site.settings.loaded) return false; else mp3site.settings.loaded = true;
+        debugger;
 
         mp3site.setupDragNDrop();
 		//$('.vividDialog_dialog, #playlist_wrapper, #infoWindow_mp3desc, #infoWindow_comments, #mp3s, #player').css({opacity:0.0001});
@@ -38,11 +39,6 @@ var mp3site = {
             $('#siteContent', window.top.document).css({background:'rgba(0,0,0,0)',border:'1px solid rgba(0,0,0,0)',boxShadow:'0px 0px 1px 1px rgba(0,0,0,0)'});
         });*/
         
-        na.desktop.globals.divs.push ('#mp3s');
-        na.desktop.globals.divs.push ('#player');
-        na.desktop.globals.divs.push ('#playlist_wrapper');
-        na.desktop.globals.divs.push ('#infoWindow_mp3desc');
-
         $(window).resize(function() {
             clearTimeout(mp3site.settings.timeoutResize);
             mp3site.settings.timeoutResize = setTimeout(mp3site.onWindowResize,1000);

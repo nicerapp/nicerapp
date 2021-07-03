@@ -48,10 +48,6 @@ $htmlTitleMeta = file_get_contents ($setPath.'/index.title_meta.html');
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>    
 	<script type="text/javascript" src="/nicerapp/apps/nicerapp/music/mp3site.source.js?changed=<?php echo date('Ymd-His', filectime(dirname(__FILE__).'/mp3site.source.js'));?>"></script>
 
-<script style="text/javascript">
-    var naLocationBarInfo = <?php echo json_encode(getLocationBarInfo()); ?>;
-</script>
-
 	<div id="horizontalMover__containmentBox2" style="display:none;position:absolute;height:20px;border-radius:8px;background:black;opacity:0.2"></div>
 	<div id="horizontalMover__containmentBox1" style="display:none;position:absolute;height:16px;top:2px;border-radius:4px;background:black;opacity:0.0"></div>
 	<div id="horizontalMover" class="draggable ui-widget-content" style="display:none;position:absolute;top:4px;height:10px;width:730px;border-radius:4px;background:navy;border : 1px solid white;opacity:0.7"></div>
@@ -65,7 +61,13 @@ $htmlTitleMeta = file_get_contents ($setPath.'/index.title_meta.html');
                     mp3site.onWindowResize();
                 }
             });
-        }, 1250);
+            var naLocationBarInfo = <?php echo json_encode(getLocationBarInfo()); ?>;
+            na.desktop.globals.divs.push ('#mp3s');
+            na.desktop.globals.divs.push ('#player');
+            na.desktop.globals.divs.push ('#playlist_wrapper');
+            na.desktop.globals.divs.push ('#infoWindow_mp3desc');
+            debugger;
+        }, 100);
 	</script>
 
 	<div id="mp3s" class="vividDialog_mp3s vividScrollpane" theme="transparent" style="visibility:hidden;position:absolute;text-align:center;width:230px; color:yellow;font-weight:bold">

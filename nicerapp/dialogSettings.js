@@ -246,7 +246,9 @@ na.ds = na.dialogSettings = {
     specificitySelected : function (event) {
         var s = JSON.parse( $(event.currentTarget).find('option:selected')[0].value );
         na.ds.settings.current.specificity = s;
+        debugger;
         na.site.loadTheme (function () {
+            debugger;
             var btn = $('#'+na.ds.settings.current.selectedButtonID)[0];
             na.ds.onclick(btn, false);
         });
