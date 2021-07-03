@@ -1101,7 +1101,8 @@ na.apps.loaded.newsApp = {
                     it.de && it.de.match (searchQueryRegExp) 
                 ) || (
                     it.t && it.t.match(searchQueryRegExp)
-                ) {
+                ) 
+            ) {
                 return true;
             } else {
                 it.displayCount++;
