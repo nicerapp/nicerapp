@@ -96,11 +96,11 @@ na.site.globals = $.extend(na.site.globals, {
     <div class="vividDialogContent vividScrollpane">
         <div class="navbar">
             <!--<img src="/nicerapp/siteMedia/btnSettingsBorder.png"/>-->
-            <div id="btnViewResult" class="vividButton_icon tooltip" title="View result" alt="View result" style="position:absolute;width:50px;height:50px;" onclick="if (!$(this).is('.disabled')) { if (!na.desktop.settings.visibleDivs.includes('#siteContent')) na.desktop.settings.visibleDivs.push('#siteContent'); na.site.settings.activeDivs=['#siteContent']; na.desktop.resize();}">
+            <div id="btnViewResult" class="vividButton_icon tooltip" title="View result" alt="View result" style="position:absolute;width:50px;height:50px;" onclick="if (!$(this).is('.disabled')) { if (!na.desktop.settings.visibleDivs.includes('#siteContent'))  na.desktop.settings.visibleDivs.push('#siteContent'); na.desktop.settings.visibleDivs.remove('#siteToolbarDialogSettings'); na.site.settings.activeDivs=['#siteContent']; na.desktop.resize();}">
                 <div class="cvbBorderCSS"></div>
                 <img class="cvbImgBorder" src="/nicerapp/siteMedia/btnCssVividButton_outerBorder.png"/>
                 <img class="cvbImgTile" src="/nicerapp/siteMedia/btnCssVividButton.png"/>
-                <img class="cvbImgButton" src="/nicerapp/siteMedia/btnZoomIncrease.png"/>
+                <img class="cvbImgButton" src="/nicerapp/siteMedia/btnBack.png"/>
             </div>
             <div id="btnSelectBorderSettings" class="vividButton_icon tooltip" title="Select border settings" alt="Select border settings" style="position:absolute;left:65px;width:50px;height:50px;" onclick="if (!$(this).is('.disabled')) na.dialogSettings.selectBorderSettings()">
                 <div class="cvbBorderCSS"></div>
