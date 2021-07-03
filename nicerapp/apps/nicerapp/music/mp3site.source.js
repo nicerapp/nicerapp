@@ -104,6 +104,7 @@ var mp3site = {
 				if (typeof json!=='object') json = eval ('('+json+') ');
                 if (json.description) {
                     var html = '';
+                    html += '<div style="height:15px;">&nbsp;</div>';
                     html += '<table>';
                     html += '<tr><td colspan="2" style="text-align:center"><a href="' + mp3site.globals.url + '/download_mp3.php?file='+file+'">download</a></td></tr>';
                     html += '<tr><td><span class="mp3_info_label mp3_title_label">title</span></td><td><span class="mp3_title">'+json.title+'</span></td></tr>';
