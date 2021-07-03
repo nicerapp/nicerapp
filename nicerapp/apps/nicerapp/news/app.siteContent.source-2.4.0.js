@@ -88,6 +88,10 @@ na.apps.loaded.newsApp = {
                         
                         na.apps.loaded.newsApp.settings.current.db = {};
                         
+                        $(window).resize(function() {
+                            setTimeout(na.apps.loaded.newsApp.onresize, 750);
+                        });
+                        
                         /*
                         c.oldContentOpacity = $('#siteContent__CSS3').css('opacity');
                         c.oldContentBorder = $('#siteContent__dialog').css('border');
@@ -162,9 +166,9 @@ na.apps.loaded.newsApp = {
                     clearInterval (c.newItemsInterval);
                     clearInterval (c.intervalMailLogCountdown);
                     na.vcc.settings['siteContent'].hasAnimatedScrollpane = s.hasAnimatedScrollpane;
-        na.vcc.settings['siteContent'].canAutoHeight = s.canAutoHeight;
-        na.vcc.settings['siteContent'].canResize = s.canResize;
-        na.vcc.settings['siteContent'].containsIframe = s.containsIframe;
+                    na.vcc.settings['siteContent'].canAutoHeight = s.canAutoHeight;
+                    na.vcc.settings['siteContent'].canResize = s.canResize;
+                    na.vcc.settings['siteContent'].containsIframe = s.containsIframe;
 
                     if (typeof settings=='undefined') settings = {};
                     c.settings = settings;
@@ -201,7 +205,8 @@ na.apps.loaded.newsApp = {
 				onresize : function (settings) {
 					// TODO : what's settings.isManualResize ???
 					//if ($('#appGame').css('display')=='none') $('#appGame').fadeIn('slow');
-					na.apps.loaded.newsApp.onresize();
+                    //debugger;
+					//na.apps.loaded.newsApp.onresize();
 				}
 			}
 		},
