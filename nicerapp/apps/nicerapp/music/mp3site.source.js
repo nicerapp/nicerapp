@@ -89,6 +89,7 @@ var mp3site = {
 			url : '/nicerapp/apps/nicerapp/music/music/'+naLocationBarInfo['apps']['music']['set']+'/' + file + '.json',
             error: function(l0_jqXHR, l0_textStatus, l0_errorThrown) {
 				var html = '';
+                html += '<div style="height:15px;">&nbsp;</div>';
                 html += '<table>';
 				html += '<tr><td colspan="2" style="text-align:center"><a href="' + mp3site.globals.url + '/download_mp3.php?file='+file+'">download</a></td></tr>';
 				html += '<tr><td><span class="mp3_info_label mp3_title_label">title</span></td><td><span class="mp3_title">'+file+'</span></td></tr>';
