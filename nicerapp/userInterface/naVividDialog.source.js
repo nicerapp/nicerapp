@@ -15,7 +15,7 @@ class naVividDialog {
         var html = 
             '<div class="vdSettings">'
                 +'<img class="btnSettings" src="/nicerapp/siteMedia/btnPickColor.png" onclick="na.site.settings.activeDivs = [\'#siteToolbarDialogSettings\']; var d = na.site.settings.dialogs[\'#'+this.el.id+'\']; d.displaySettingsDialog(d, \''+t.el.id+'\')"/>'
-                +'<input type="range" min="1" max="100" value="50" class="sliderOpacityRange"/>'
+                +'<input type="range" min="1" max="100" value="50" class="sliderOpacityRange" onchange="na.ds.opacityChange(event);"/>'
             +'</div>'
             +'<div class="vdBackground"></div>';
         if (t.el.id!=='#siteToolbarDialogSettings' && !$('.vdSettings',t.el)[0]) $(t.el).prepend(html);
@@ -25,17 +25,6 @@ class naVividDialog {
         }, function() {
             $(this).stop(true,true).animate({opacity:0.0001},'slow');
         });
-        
-        $('.vdSettings input', t.el)[0].oninput = function () {
-            var t2 = this;
-            
-            clearTimeout (t.timeoutOpacityChange);
-            t.timeoutOpacityChange = setTimeout(function() {
-                na.site.saveTheme();
-            }, 1000);
-            
-            $(t.el).css ({ background : 'rgba(0,0,0,'+(t2.value/100)+')' });
-        };
     };
     
     displaySettingsDialog (t, dialogID) {
