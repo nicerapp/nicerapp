@@ -832,6 +832,7 @@ var nas = na.site = {
             boxShadow : $(selector).css('boxShadow'),
             color : $(selector).css('color'),
             fontSize : $(selector).css('fontSize'),
+            fontWeight : $(selector).css('fontWeight'),
             fontFamily : $(selector).css('fontFamily'),
             textShadow : $(selector+' .vividDialogContent').css('textShadow')
         };
@@ -842,6 +843,7 @@ var nas = na.site = {
         };
         ret[selector+' td'] = {
             fontSize : $(selector+' td').css('fontSize'),
+            fontWeight : $(selector+' td').css('fontWeight'),
             fontFamily : $(selector+' td').css('fontFamily'),
             textShadow : $(selector+' td').css('textShadow')
         };

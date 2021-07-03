@@ -449,7 +449,28 @@ na.ds = na.dialogSettings = {
         $('#textSettings').fadeIn('normal', 'swing', function () {
             $('.textSettingsLabel').css({width:$('.textSettingsLabel').width()+10});
             $('#textFontFamily').css({width:$('#textSettings').width() - $('#labelTextFontFamily').width() - 20 });
+            var
+            el = $('#'+na.ds.settings.current.forDialogID),
+            el2 = $('#'+na.ds.settings.current.forDialogID+' .vividDialogContent'),
+            el3 = $('#'+na.ds.settings.current.forDialogID+' td'),
+            el_ts = $(el).css('fontSize'),
+            el2_ts = $(el2).css('fontSize'),
+            el3_ts = $(el3).css('fontSize'),
+            el_fw = $(el).css('fontWeight'),
+            el2_fw = $(el2).css('fontWeight'),
+            el3_fw = $(el3).css('fontWeight');
+            
+            debugger;
+            if (typeof el3_ts=='string' && el3_ts!=='') $('#textSize').val(parseInt(el3_ts));
+            if (typeof el2_ts=='string' && el2_ts!=='') $('#textSize').val(parseInt(el2_ts));
+            if (typeof el_ts=='string' && el_ts!=='') $('#textSize').val(parseInt(el_ts));
+                                  
+            if (typeof el3_fw=='string' && el3_fw!=='') $('#textWeight').val(parseInt(el3_fw)/100);
+            if (typeof el2_fw=='string' && el2_fw!=='') $('#textWeight').val(parseInt(el2_fw)/100);
+            if (typeof el_fw=='string' && el_fw!=='') $('#textWeight').val(parseInt(el_fw)/100);
+            
             $('#textSize').css({width:$('#textSettings').width() - $('#labelTextSize').width() - 40 });
+            $('#textWeight').css({width:$('#textSettings').width() - $('#labelTextWeight').width() - 40 });
             $('#textShadowXoffset').css({width:$('#textSettings').width() - $('#labelTextShadowXoffset').width() - 40 });
             $('#textShadowYoffset').css({width:$('#textSettings').width() - $('#labelTextShadowYoffset').width() - 40 });
             $('#textShadowBlurRadius').css({width:$('#textSettings').width() - $('#labelTextShadowBlurRadius').width() - 40 });
@@ -484,7 +505,8 @@ na.ds = na.dialogSettings = {
     textSettingsSelected : function () {
         var
         el = $('#'+na.ds.settings.current.forDialogID),
-        el2 = $('#'+na.ds.settings.current.forDialogID+' .vividDialogContent, #'+na.ds.settings.current.forDialogID+' td'),
+        el2 = $('#'+na.ds.settings.current.forDialogID+' .vividDialogContent'),
+        el3 = $('#'+na.ds.settings.current.forDialogID+' td'),
         newTextShadow = 
             $('#textShadowXoffset').val()+'px '
             +$('#textShadowYoffset').val()+'px '
@@ -500,14 +522,17 @@ na.ds = na.dialogSettings = {
         el = $('#'+na.ds.settings.current.forDialogID),
         el2 = $('#'+na.ds.settings.current.forDialogID+' .vividDialogContent, #'+na.ds.settings.current.forDialogID+' td'),
         newFontSize = $('#textSize').val(),
+        newFontWeight = $('#textWeight').val() * 100,
         newFontFamily = $('#textFontFamily').val(),//.replace(/ /g, '+'),
         newTextShadow = '';
         
-        $('.textShadow').css({ fontSize : newFontSize+'px', fontFamily : newFontFamily }).each(function(idx,el) {
-            if (newTextShadow!=='') newTextShadow+=', ';
-            newTextShadow = $(el).css('textShadow');
-        });
-        $(el).add(el2).css({ fontSize : newFontSize+'px', fontFamily : newFontFamily });
+        $('.textShadow')
+            .css({ fontWeight : newFontWeight, fontSize : newFontSize+'px', fontFamily : newFontFamily })
+            .each(function(idx,el) {
+                if (newTextShadow!=='') newTextShadow+=', ';
+                newTextShadow = $(el).css('textShadow');
+            });
+        $(el).add(el2).css({ fontWeight : newFontWeight, fontSize : newFontSize+'px', fontFamily : newFontFamily });
         $(el).add(el2).css({ textShadow : newTextShadow });
         /*if (na.ds.settings.current.fireSaveTheme) */na.site.saveTheme();
     },
