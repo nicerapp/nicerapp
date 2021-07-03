@@ -296,6 +296,10 @@ na.site.globals = $.extend(na.site.globals, {
             </select>
             <div class="flexBreak"></div>
 
+            <label id="labelTextSize" class="textSettingsLabel" for="textSize">Text size :</label>
+            <input id="textSize" type="range" min="5" max="40" value="12" class="sliderOpacityRangeBorderSettings" onchange="na.ds.textSettingsSelected();"/>
+            <div class="flexBreak" style="height:8px;"></div>
+
             <label id="labelFontFamily" class="textSettingsLabel" for="fontFamily">Font color :</label>
             <input id="textColorpicker" class="dialogSettingsComponent" style="position:absolute;top:95px;"></input>
             <div class="flexBreak"></div>

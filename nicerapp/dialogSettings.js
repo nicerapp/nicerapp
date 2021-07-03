@@ -449,6 +449,7 @@ na.ds = na.dialogSettings = {
         $('#textSettings').fadeIn('normal', 'swing', function () {
             $('.textSettingsLabel').css({width:$('.textSettingsLabel').width()+10});
             $('#textFontFamily').css({width:$('#textSettings').width() - $('#labelTextFontFamily').width() - 20 });
+            $('#textSize').css({width:$('#textSettings').width() - $('#labelTextSize').width() - 40 });
             $('#textShadowXoffset').css({width:$('#textSettings').width() - $('#labelTextShadowXoffset').width() - 40 });
             $('#textShadowYoffset').css({width:$('#textSettings').width() - $('#labelTextShadowYoffset').width() - 40 });
             $('#textShadowBlurRadius').css({width:$('#textSettings').width() - $('#labelTextShadowBlurRadius').width() - 40 });
@@ -498,14 +499,15 @@ na.ds = na.dialogSettings = {
         var
         el = $('#'+na.ds.settings.current.forDialogID),
         el2 = $('#'+na.ds.settings.current.forDialogID+' .vividDialogContent, #'+na.ds.settings.current.forDialogID+' td'),
+        newFontSize = $('#textSize').val(),
         newFontFamily = $('#textFontFamily').val(),//.replace(/ /g, '+'),
         newTextShadow = '';
         
-        $('.textShadow').css({ fontFamily : newFontFamily }).each(function(idx,el) {
+        $('.textShadow').css({ fontSize : newFontSize+'px', fontFamily : newFontFamily }).each(function(idx,el) {
             if (newTextShadow!=='') newTextShadow+=', ';
             newTextShadow = $(el).css('textShadow');
         });
-        $(el).add(el2).css({ fontFamily : newFontFamily });
+        $(el).add(el2).css({ fontSize : newFontSize+'px', fontFamily : newFontFamily });
         $(el).add(el2).css({ textShadow : newTextShadow });
         /*if (na.ds.settings.current.fireSaveTheme) */na.site.saveTheme();
     },

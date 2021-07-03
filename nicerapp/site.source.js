@@ -831,6 +831,7 @@ var nas = na.site = {
             borderRadius : $(selector).css('borderRadius'),
             boxShadow : $(selector).css('boxShadow'),
             color : $(selector).css('color'),
+            fontSize : $(selector).css('fontSize'),
             fontFamily : $(selector).css('fontFamily'),
             textShadow : $(selector+' .vividDialogContent').css('textShadow')
         };
