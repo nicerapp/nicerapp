@@ -70,6 +70,8 @@ var mp3site = {
 	},
 	
 	selectMP3 : function (id, file, firstRun) {
+        clearInterval (mp3site.settings.timeDisplayInterval);        
+        
 		mp3site.settings.activeID = id;
 		
         mp3site.settings.playingIndex = false;
@@ -144,7 +146,7 @@ var mp3site = {
                     $('#audioTag')[0].src = mp3;
                     $('#audioTag')[0].play();
                     mp3site.settings.stopped = false;
-                    mp3site.setTimeDisplayInterval();
+                    setTimeout(mp3site.setTimeDisplayInterval,2000);
                 }
             //}, 100);
         });
@@ -152,7 +154,8 @@ var mp3site = {
     },
     
     setTimeDisplayInterval : function () {
-        if (!mp3site.settings.timeDisplayInterval) 
+        clearInterval (mp3site.settings.timeDisplayInterval);
+        //if (!mp3site.settings.timeDisplayInterval) 
             mp3site.settings.timeDisplayInterval = setInterval (function() {
                 var 
                 length = $('#audioTag')[0].duration, // in seconds
@@ -320,7 +323,7 @@ var mp3site = {
                 
 			},
 			stop : function (evt, ui) {
-                
+                mp3site.reorderPlaylist();
 			}
 		});
 		$('#playlist').droppable ({
@@ -352,12 +355,21 @@ var mp3site = {
                     }
                 });
                 
+                mp3site.reorderPlaylist();
+                
                 if (mp3site.settings.stopped) mp3site.selectMP3 (newID, $(dragged).attr('file'), false);
                 mp3site.onWindowResize();
 				mp3site.playlistCount++;
 			}
 		});
 	},
+    
+    reorderPlaylist : function () {
+        $('.mp3', $('#playlist')[0]).each(function(idx,el){
+            el.id = 'playlist_'+idx;
+        });
+    },
+    
 	playlistCount : 0,
 
 	onWindowResize : function () {
