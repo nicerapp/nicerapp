@@ -1476,6 +1476,8 @@ na.apps.loaded.newsApp = {
             height : $('#siteContent__header table').height()
         });
         
+        $('#siteContent__content').css ({ top : 40 });
+        
         $('#newsApp_content_shadow, #newsApp_content').css({
             height : oh - $('#siteContent__header').height(),
             width : ow,
