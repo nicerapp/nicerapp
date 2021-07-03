@@ -1071,6 +1071,7 @@ na.apps.loaded.newsApp = {
             searchQueryRegx = '',
             searchQueryParts = input.val().split(' ');
             for (var idx in searchQueryParts) {
+                if (typeof searchQueryParts[idx]!=='string') continue;
                 var 
                 searchQueryPart = searchQueryParts[idx];
                 
