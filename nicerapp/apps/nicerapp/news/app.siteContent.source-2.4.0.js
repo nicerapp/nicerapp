@@ -1096,7 +1096,12 @@ na.apps.loaded.newsApp = {
         
         //if (it.de.indexOf('hina')!==-1 || it.t.indexOf('hina')!==-1) debugger;
         if (searchQueryRegx!==null) {
-            if (it.de.match (searchQueryRegExp) || it.t.match(searchQueryRegExp)) {
+            if (
+                (
+                    it.de && it.de.match (searchQueryRegExp) 
+                ) || (
+                    it.t && it.t.match(searchQueryRegExp)
+                ) {
                 return true;
             } else {
                 it.displayCount++;
