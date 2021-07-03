@@ -330,8 +330,6 @@ na.ds = na.dialogSettings = {
         
         $('#borderWidth').val(parseInt(bw));
         $('#borderRadius').val(parseInt($(event.currentTarget).css('borderRadius')));
-        
-        /*if (na.ds.settings.current.fireSaveTheme) */na.site.saveTheme();
     },
     
     boxSettingsChanged : function (color) {
@@ -351,7 +349,6 @@ na.ds = na.dialogSettings = {
             + $('#boxShadowSpreadRadius').val() + 'px '
             + $('#boxShadowBlurRadius').val() + 'px '
             + color;
-        debugger;
         $(na.ds.settings.current.boxSettings).css ({ boxShadow : newBoxSetting });
         
         newBoxSetting = '';
@@ -360,6 +357,7 @@ na.ds = na.dialogSettings = {
             newBoxSetting += $(el).css('boxShadow');
         });
         $('#'+na.ds.settings.current.forDialogID).css ({ boxShadow : newBoxSetting });
+        /*if (na.ds.settings.current.fireSaveTheme) */na.site.saveTheme();
     },
     
     boxSettingsChanged_shadowColor : function (color) {
