@@ -52,6 +52,7 @@ $htmlTitleMeta = file_get_contents ($setPath.'/index.title_meta.html');
 	<div id="horizontalMover__containmentBox1" style="display:none;position:absolute;height:16px;top:2px;border-radius:4px;background:black;opacity:0.0"></div>
 	<div id="horizontalMover" class="draggable ui-widget-content" style="display:none;position:absolute;top:4px;height:10px;width:730px;border-radius:4px;background:navy;border : 1px solid white;opacity:0.7"></div>
 	<script type="text/javascript">
+        var naLocationBarInfo = <?php echo json_encode(getLocationBarInfo()); ?>;
         setTimeout(function() {
             jQuery('#horizontalMover').draggable ({
                 containment : '#horizontalMover__containmentBox1',
@@ -61,7 +62,6 @@ $htmlTitleMeta = file_get_contents ($setPath.'/index.title_meta.html');
                     mp3site.onWindowResize();
                 }
             });
-            var naLocationBarInfo = <?php echo json_encode(getLocationBarInfo()); ?>;
             na.desktop.globals.divs.push ('#mp3s');
             na.desktop.globals.divs.push ('#player');
             na.desktop.globals.divs.push ('#playlist_wrapper');
