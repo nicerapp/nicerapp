@@ -841,6 +841,8 @@ var nas = na.site = {
             borderRadius : $(selector).css('borderRadius')
         };
         ret[selector+' td'] = {
+            fontSize : $(selector+' td').css('fontSize'),
+            fontFamily : $(selector+' td').css('fontFamily'),
             textShadow : $(selector+' td').css('textShadow')
         };
         return ret;
