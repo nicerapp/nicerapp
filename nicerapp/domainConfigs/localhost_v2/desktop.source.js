@@ -86,7 +86,7 @@ na.desktop = {
         for (var divIdx in na.d.g.divs) {
             if (typeof na.d.g.divs[divIdx]!=='string') continue;
             var divID = na.d.g.divs[divIdx];
-            $(divID).css(na.d.g.defaultPos[divID]);
+            if (na.d.g.defaultPos[divID]) $(divID).css(na.d.g.defaultPos[divID]);
             var cookie = $.cookie('visible_'+divID.substr(1));            
             if (cookie=='true') {
                 cookies = true;

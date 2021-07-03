@@ -246,9 +246,7 @@ na.ds = na.dialogSettings = {
     specificitySelected : function (event) {
         var s = JSON.parse( $(event.currentTarget).find('option:selected')[0].value );
         na.ds.settings.current.specificity = s;
-        debugger;
         na.site.loadTheme (function () {
-            debugger;
             var btn = $('#'+na.ds.settings.current.selectedButtonID)[0];
             na.ds.onclick(btn, false);
         });
@@ -292,24 +290,29 @@ na.ds = na.dialogSettings = {
         $(bg).css({ border : newBorder, borderRadius : newBorderRadius });
         $('#'+na.ds.settings.current.forDialogID+' .vdBackground').css({borderRadius : newBorderRadius});
         $('.boxShadow').css({ border : newBorder, borderRadius : newBorderRadius });
+        debugger;
         /*if (na.ds.settings.current.fireSaveTheme) */na.site.saveTheme();
     },
     
     boxSettingsSelected : function (event) {
         if (event.currentTarget.id!==na.ds.settings.current.forDialogID) na.ds.settings.current.boxSettings = event.currentTarget;
         
-        var bs = $(event.currentTarget).css('boxShadow');
+        var 
+        bs = $(event.currentTarget).css('boxShadow'),
+        b = $(event.currentTarget).css('border');
+        
         if (bs == 'none') {
             var
             sliders = [ 2, 2, 2, 2 ];
             $('#boxShadowColorpicker').spectrum('set', 'rgba(0,0,0,0.7)');
             $('#boxShadowInset')[0].checked = false;
+            na.ds.settings.current.borderColor = $('#borderColorpicker').val();
         } else {
-            debugger;
             if (bs.match('inset')) $('#boxShadowInset')[0].checked = true; else $('#boxShadowInset')[0].checked = false;
             var 
             re1 = /(?:((?:#\w{3,6})|(?:hsla?|rgba?)\((?:(?:\d+%?),?\s*){2,3}(?:\d*\.\d*%?)?\)))\s((?:-?\d+(?:px)?\s*){3,4})/,
             rex = bs.match(re1),
+            rex2 = b.match(re1),
             sliders = rex[2].split(' ');
             
             sliders[0] = parseInt(sliders[0].replace('px',''));
@@ -318,6 +321,7 @@ na.ds = na.dialogSettings = {
             sliders[3] = parseInt(sliders[3].replace('px',''));
             
             $('#boxShadowColorpicker').spectrum('set', rex[1]);
+            na.ds.settings.current.borderColor = rex2[1];
             na.ds.boxSettingsChanged (rex[1]);
         };
         
@@ -325,6 +329,17 @@ na.ds = na.dialogSettings = {
         $('#boxShadowYoffset').val(sliders[1]);
         $('#boxShadowSpreadRadius').val(sliders[2]);
         $('#boxShadowBlurRadius').val(sliders[3]);
+        
+        $('.boxShadow').remove();
+        if (bs !== 'none' && bs.match(',')) {
+            var bss = bs.split(', rgb');
+            for (var i=0; i<bss.length; i++) {
+                if (i>0) bss[i] = 'rgb'+bss[i];
+                debugger;
+                var html = '<div id="boxShadow_'+i+'" class="boxShadow" style="background:rgb(200,200,200);box-shadow:'+bss[i]+';border:'+$('#borderWidth').val()+'px solid '+na.ds.settings.current.borderColor+';border-radius:'+parseInt($(event.currentTarget).css('borderRadius'))+'px;margin:5px;padding:5px;" onclick="na.ds.boxSettingsSelected(event);">ABC XYZ</div>';
+                $('#boxShadow').append (html);
+            }
+        };
         
         var
         b = $(event.currentTarget).css('border'),
@@ -366,6 +381,30 @@ na.ds = na.dialogSettings = {
         na.ds.boxSettingsChanged(color);
     },
     
+    addBoxShadow : function () {
+        var last = 0;
+        $('.boxShadow').each(function(idx,el) {
+            var idx2 = parseInt(el.id.replace('boxShadow_',''));
+            if (idx2 > last) last = idx2;
+        });
+        var html = '<div id="boxShadow_'+(last+1)+'" class="boxShadow" onclick="na.ds.boxSettingsSelected(event)" style="border:'+$('#borderWidth').val()+'px solid '+na.ds.settings.current.borderColor+';background:rgba(200,200,200,1);box-shadow:2px 2px 2px 2px rgba(0,0,0,0.5);border-radius:'+parseInt($('#borderRadius').val())+'px;margin:5px;padding:5px;">ABC XYZ</div>';
+        $('#boxShadow').append(html);
+        
+        na.ds.settings.current.boxSettings = $('#boxShadow_'+(last+1))[0];
+        $('#boxShadowXoffset').val(2);
+        $('#boxShadowYoffset').val(2);
+        $('#boxShadowSpreadRadius').val(2);
+        $('#boxShadowBlurRadius').val(2);
+    },
+    
+    deleteBoxShadow : function(evt) {
+        $(na.ds.settings.current.boxSettings).remove();
+        na.ds.settings.current.boxSettings = $('#boxShadow_0')[0];
+        na.ds.boxSettingsChanged();
+    },
+    
+    
+    
     selectBackground_color : function () {
         na.ds.onclick($('#btnSelectBackgroundColor')[0]);
         $('.dialogSettingsComponent').not('.sp-container').fadeOut('normal');
@@ -401,21 +440,6 @@ na.ds = na.dialogSettings = {
         $(bg).css({ background : 'url("'+el.src+'") repeat', opacity : parseInt($('#dialogSettings_photoOpacity').val())/100, backgroundSize : na.ds.settings.current.scale+'% '+na.ds.settings.current.scale+'%' });
         /*if (na.ds.settings.current.fireSaveTheme) */na.site.saveTheme();
     },
-    
-    addBoxShadow : function () {
-        var last = 0;
-        $('.boxShadow').each(function(idx,el) {
-            var idx2 = parseInt(el.id.replace('boxShadow_',''));
-            if (idx2 > last) last = idx2;
-        });
-        var html = '<div id="boxShadow_'+(last+1)+'" class="boxShadow" onclick="na.ds.boxSettingsSelected(event)" style="border:'+$('#borderWidth').val()+'px solid '+na.ds.settings.current.borderColor+';background:rgba(200,200,200,1);box-shadow:2px 2px 2px 2px rgba(0,0,0,0.5);border-radius:'+parseInt($('#borderRadius').val())+'px;margin:5px;padding:5px;">ABC XYZ</div>';
-        $('#boxShadow').append(html);
-        $('#boxShadowXoffset').val(2);
-        $('#boxShadowYoffset').val(2);
-        $('#boxShadowSpreadRadius').val(2);
-        $('#boxShadowBlurRadius').val(2);
-    },
-    
     
     selectTextSettings : function () {
         na.ds.onclick($('#btnSelectTextSettings')[0]);

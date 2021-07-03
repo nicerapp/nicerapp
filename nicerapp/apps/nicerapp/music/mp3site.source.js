@@ -29,7 +29,6 @@ var mp3site = {
         na.analytics.logMetaEvent ('startApp : musicPlayer');
 
         if (mp3site.settings.loaded) return false; else mp3site.settings.loaded = true;
-        debugger;
 
         mp3site.setupDragNDrop();
 		//$('.vividDialog_dialog, #playlist_wrapper, #infoWindow_mp3desc, #infoWindow_comments, #mp3s, #player').css({opacity:0.0001});

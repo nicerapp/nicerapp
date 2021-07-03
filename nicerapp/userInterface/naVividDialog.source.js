@@ -20,8 +20,6 @@ class naVividDialog {
             +'<div class="vdBackground"></div>';
         if (t.el.id!=='#siteToolbarDialogSettings' && !$('.vdSettings',t.el)[0]) $(t.el).prepend(html);
         
-        debugger;
-        
         $('.vdSettings', t.el).hover (function() {
             $(this).stop(true,true).animate({opacity:1},'slow');
         }, function() {

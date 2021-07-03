@@ -66,7 +66,6 @@ $htmlTitleMeta = file_get_contents ($setPath.'/index.title_meta.html');
             na.desktop.globals.divs.push ('#player');
             na.desktop.globals.divs.push ('#playlist_wrapper');
             na.desktop.globals.divs.push ('#infoWindow_mp3desc');
-            debugger;
         }, 100);
 	</script>
 

@@ -274,7 +274,6 @@ var nas = na.site = {
             $('#specificity')[0].appendChild(optEl);
         };
         var s = JSON.parse( $('#specificity').find('option:selected')[0].value );
-        debugger;
         na.ds.settings.current.specificity = s;
     },
     
@@ -352,7 +351,6 @@ var nas = na.site = {
                         success : function (data, ts, xhr) {
                             $('#cssPageSpecific, #jsPageSpecific').remove();
                             $('head').append(data);
-                            debugger;
                             setTimeout(na.site.loadTheme, 250);
                         },
                         failure : function (xhr, ajaxOptions, thrownError) {
@@ -716,7 +714,6 @@ var nas = na.site = {
     },
     
     loadTheme : function (callback) {
-        debugger;
         var 
         s = na.ds.settings.current.specificity,
         acData = {
@@ -802,27 +799,27 @@ var nas = na.site = {
         if (s.role) themeData.role = s.role;
         if (s.user) themeData.user = s.user;
         
-        for (var i=0; i<na.desktop.globals.divs.length; i++) {
-            var selector = na.desktop.globals.divs[i];
-            themeData.dialogs = $.extend (themeData.dialogs, na.site.fetchTheme (selector));
-        }
-        
-        themeData.dialogs = JSON.stringify(themeData.dialogs);
-        
-        var
-        ac2 = {
-            type : 'POST',
-            url : '/nicerapp/ajax_set_vividDialog_settings.php',
-            data : themeData,
-            success : function (data, ts, xhr) {
-                if (typeof callback=='function') callback (themeData, data);
-            },
-            failure : function (xhr, ajaxOptions, thrownError) {
-                debugger;
-            }
-        };
         clearTimeout (na.site.settings.current.saveThemeTimeout);
         na.site.settings.current.saveThemeTimeout = setTimeout(function() {
+            for (var i=0; i<na.desktop.globals.divs.length; i++) {
+                var selector = na.desktop.globals.divs[i];
+                themeData.dialogs = $.extend (themeData.dialogs, na.site.fetchTheme (selector));
+            }
+            
+            themeData.dialogs = JSON.stringify(themeData.dialogs);
+            
+            var
+            ac2 = {
+                type : 'POST',
+                url : '/nicerapp/ajax_set_vividDialog_settings.php',
+                data : themeData,
+                success : function (data, ts, xhr) {
+                    if (typeof callback=='function') callback (themeData, data);
+                },
+                failure : function (xhr, ajaxOptions, thrownError) {
+                    debugger;
+                }
+            };
             $.ajax(ac2);
         }, 750);
     },
