@@ -29,7 +29,6 @@ $cdb->setHTTPAdapter($cdbConfig['httpAdapter']);
 $cdb->useSSL($cdbConfig['useSSL']);
 
 $username = array_key_exists('cdb_loginName',$_SESSION) ? $_SESSION['cdb_loginName'] : $cdbConfig['username'];
-var_dump ($username);
 $username = str_replace(' ', '__', $username);
 $username = str_replace('.', '_', $username);
 $pw = array_key_exists('cdb_pw',$_SESSION) ? $_SESSION['cdb_pw'] : $cdbConfig['password'];
