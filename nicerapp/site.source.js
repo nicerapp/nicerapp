@@ -328,7 +328,10 @@ var nas = na.site = {
                         failure : function (xhr, ajaxOptions, thrownError) {
                         }
                     };
-                    $.ajax(ac2);
+                    setTimeout (function() { 
+                        na.site.loadTheme();
+                        $.ajax(ac2);
+                    }, 250);
 
             
                     var dat = JSON.parse(data), reloadMenu = false;
@@ -752,12 +755,12 @@ var nas = na.site = {
                         ditbgOpacity = test ? dit.background.match(rgbaRegEx)[1] : dit.opacity;
                         $('.sliderOpacityRange', del).attr('value', ditbgOpacity*100);
                         if (test && na.ds.settings.current.selectedButtonID == 'btnSelectBackgroundColor') {
-                            $('#colorpicker').spectrum ({color:dit.background, type:'flat', change : function (color) {
+                            $('#colorpicker').css({display:'block'}).spectrum ({color:dit.background, type:'flat', change : function (color) {
                                 var bg = $('.vdBackground', $('#'+na.ds.settings.current.forDialogID)[0]);
                                 $(bg).css({ background : color, opacity : 1 });
                                 na.ds.settings.current.fireSaveTheme = true;
                                 na.site.saveTheme();                        
-                            }});
+                            }}).css({display:'none'});
                         }
 
                     }

@@ -32,10 +32,16 @@ var mp3site = {
 
         mp3site.setupDragNDrop();
 		//$('.vividDialog_dialog, #playlist_wrapper, #infoWindow_mp3desc, #infoWindow_comments, #mp3s, #player').css({opacity:0.0001});
-                        
+            
+        /*
         na.site.loadTheme(function () {
             $('#siteContent', window.top.document).css({background:'rgba(0,0,0,0)',border:'1px solid rgba(0,0,0,0)',boxShadow:'0px 0px 1px 1px rgba(0,0,0,0)'});
-        });
+        });*/
+        
+        na.desktop.globals.divs.push ('#mp3s');
+        na.desktop.globals.divs.push ('#player');
+        na.desktop.globals.divs.push ('#playlist_wrapper');
+        na.desktop.globals.divs.push ('#infoWindow_mp3desc');
 
         $(window).resize(function() {
             clearTimeout(mp3site.settings.timeoutResize);
@@ -52,8 +58,7 @@ var mp3site = {
 		npi.setAttribute ('file', file);
 		npi.id = 'playlist_' + pc;
         npi.file = file;
-        debugger;
-		//npi.style.padding = '2px';
+        //npi.style.padding = '2px';
         //npi.style.height = '25px';
 		npi.className = 'mp3 vividButton';
         $(npi).attr('theme','dark');
@@ -371,7 +376,7 @@ var mp3site = {
 		sc_scrollpaneContainer = $('#siteContent', window.top.document.body),
 		sc_siteContent = $('#siteContent', window.top.document.body);
         
-        $('#siteContent > .vdBackground', window.top.document).fadeOut('normal');
+        //$('#siteContent > .vdBackground', window.top.document).fadeOut('normal');
 
 		if (typeof mp3site.settings.masterLeftOffset == 'number') {
 			var masterLeftOffset = mp3site.settings.masterLeftOffset;

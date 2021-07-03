@@ -5426,7 +5426,13 @@ jQuery.event = {
 					event.handleObj = handleObj;
 					event.data = handleObj.data;
 
-					ret = ( ( jQuery.event.special[ handleObj.origType ] || {} ).handle || handleObj.handler ).apply( matched.elem, args );
+                    try {
+                        ret = ( ( jQuery.event.special[ handleObj.origType ] || {} ).handle || handleObj.handler )
+                            .apply( matched.elem, args );
+                    } catch (err) {
+                        var evt = { currentTarget : matched.elem };
+                        $(event.target).click (evt);
+                    }
                     //ret = handleObj.handler.apply( matched.elem, args );
 
 					if ( ret !== undefined ) {

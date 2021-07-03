@@ -45,13 +45,16 @@ class naVividDialog {
             +'<link rel="stylesheet" href="/nicerapp/3rd-party/jsTree-3.2.1/dist/themes/default/style.css" onload="var d = na.site.settings.dialogs[\'#siteToolbarDialogSettings\']; d.displaySettingsDialog_scriptLoaded(d);"/> <!-- has style.min.css -->'
             //+'<script type="text/javascript" src="/nicerapp/3rd-party/jsTree-3.2.1/dist/jstree.min.js?c='+na.m.changedDateTime_current()+'" onload="var d = na.site.settings.dialogs[\'#siteToolbarDialogSettings\'];  d.displaySettingsDialog_scriptLoaded(d);"></script> <!-- has jstree.min.js -->'
             +'</div>';
-        if ($('.vdSettingsScripts', t.el).length<1) {
+        if ($('.vdSettingsScripts').length<1) {
             $(t.el).prepend(html);
             var d = na.site.settings.dialogs['#siteToolbarDialogSettings'];
             //na.m.addJS (null, "/nicerapp/3rd-party/jQuery/spectrum/dist/spectrum.min.js?c="+na.m.changedDateTime_current(), null, function () { d.displaySettingsDialog_scriptLoaded(d); });
             //na.m.addJS (null, "/nicerapp/3rd-party/jsTree-3.2.1/dist/jstree.min.js?c="+na.m.changedDateTime_current(), null, function () { d.displaySettingsDialog_scriptLoaded(d); });
             //na.m.addJS (null, "/nicerapp/dialogSettings.js?c="+na.m.changedDateTime_current(), null, function () { d.displaySettingsDialog_scriptLoaded(d); });
             
+        } else {
+            t.settings.current.dialogID = t.el.id;
+            t.displaySettingsDialog_displayDialog(t);
         }
     }
     
@@ -63,7 +66,6 @@ class naVividDialog {
     displaySettingsDialog_displayDialog (t) {
         if (!na.desktop.settings.visibleDivs.includes('#siteToolbarDialogSettings')) na.desktop.settings.visibleDivs.push('#siteToolbarDialogSettings');
         na.desktop.resize(function(el) {
-            //debugger;
             if (el && el.id=='siteToolbarDialogSettings') na.dialogSettings.onload(t.settings.current.dialogID);
         });
     }

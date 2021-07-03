@@ -289,7 +289,7 @@ class nicerAppCMS {
                 $r .= 'setTimeout(function() {'.PHP_EOL;
                 $r .= "\tna.site.setSpecificity();".PHP_EOL;
                 $r .= "\tna.ds.onload(na.ds.settings.current.forDialogID);".PHP_EOL;
-                $r .= '}, 500);'.PHP_EOL;
+                $r .= '}, 250);'.PHP_EOL;
                 $r .= '</script>'.PHP_EOL;
                 return $r;
             }
