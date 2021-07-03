@@ -290,7 +290,6 @@ na.ds = na.dialogSettings = {
         $(bg).css({ border : newBorder, borderRadius : newBorderRadius });
         $('#'+na.ds.settings.current.forDialogID+' .vdBackground').css({borderRadius : newBorderRadius});
         $('.boxShadow').css({ border : newBorder, borderRadius : newBorderRadius });
-        debugger;
         /*if (na.ds.settings.current.fireSaveTheme) */na.site.saveTheme();
     },
     
@@ -335,7 +334,6 @@ na.ds = na.dialogSettings = {
             var bss = bs.split(', rgb');
             for (var i=0; i<bss.length; i++) {
                 if (i>0) bss[i] = 'rgb'+bss[i];
-                debugger;
                 var html = '<div id="boxShadow_'+i+'" class="boxShadow" style="background:rgb(200,200,200);box-shadow:'+bss[i]+';border:'+$('#borderWidth').val()+'px solid '+na.ds.settings.current.borderColor+';border-radius:'+parseInt($(event.currentTarget).css('borderRadius'))+'px;margin:5px;padding:5px;" onclick="na.ds.boxSettingsSelected(event);">ABC XYZ</div>';
                 $('#boxShadow').append (html);
             }

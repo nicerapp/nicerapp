@@ -66,7 +66,7 @@ $htmlTitleMeta = file_get_contents ($setPath.'/index.title_meta.html');
             na.desktop.globals.divs.push ('#player');
             na.desktop.globals.divs.push ('#playlist_wrapper');
             na.desktop.globals.divs.push ('#infoWindow_mp3desc');
-        }, 100);
+        }, 250);
 	</script>
 
 	<div id="mp3s" class="vividDialog_mp3s vividScrollpane" theme="transparent" style="visibility:hidden;position:absolute;text-align:center;width:230px; color:yellow;font-weight:bold">
