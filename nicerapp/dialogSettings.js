@@ -437,22 +437,25 @@ na.ds = na.dialogSettings = {
     
     opacityChange : function (evt) {
         var 
-        bg = $(evt.currentTarget).parents('.vividDialog'),
-        bg1 = $(bg).css('background'),
+        bg = $(evt.currentTarget).parents('.vividDialog')[0],
         rgbaRegEx = /rgba\((\d{1,3})\,\s*(\d{1,3})\,\s*(\d{1,3})\,\s*([\d.]+)\)(.*)/,
         rgbRegEx = /rgb\((\d{1,3})\,\s*(\d{1,3})\,\s*(\d{1,3})\)(.*)/,
         opacity = $(evt.currentTarget).val()/100;
         
-        if (bg && bg.children('.vdBackground')[0]) bg = bg.children('.vdBackground');
+        if (bg && $(bg).children('.vdBackground')[0]) bg = $(bg).children('.vdBackground');
         
-        if (typeof bg1=='string' && bg1!=='') {
+        var bg1 = $(bg).css('background');        
+        
+        if (typeof bg1=='string' && bg1!=='' && !bg1.match('url')) {
             var bg2 = '', bg2a = bg1.match(rgbaRegEx), bg2b = bg1.match(rgbRegEx);
+            debugger;
             if (bg2a) {
                 $(bg).css({ background : 'rgba('+bg2a[1]+', '+bg2a[2]+', '+bg2a[3]+', '+opacity+')'+bg2a[5] });
             } else {
                 $(bg).css({ background : 'rgba('+bg2b[1]+', '+bg2b[2]+', '+bg2b[3]+', '+opacity+')'+bg2b[4] });
             }
         } else { 
+            debugger;
             $(bg).css({ opacity : opacity });
         }
         /*if (na.ds.settings.current.fireSaveTheme) */na.site.saveTheme();

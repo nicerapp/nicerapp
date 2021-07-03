@@ -96,9 +96,12 @@ var nas = na.site = {
             na.site.settings.buttons['#'+el.id] = new naVividButton(el);
         });
         
-        $('.vividDialog').each(function(idx,el){
-            na.site.settings.dialogs['#'+el.id] = new naVividDialog(el);
-        });
+        //setTimeout(function() {
+            $('.vividDialog').each(function(idx,el){
+                na.site.settings.dialogs['#'+el.id] = new naVividDialog(el);
+            });
+        // 1500);
+        
         if (na.m.userDevice.isPhone) {
             $('.vdSettings img, .vdSettings input').on('click touchstart', function() {
                 var t = this;
@@ -742,7 +745,6 @@ var nas = na.site = {
         }
         acData['dialogs'] = JSON.stringify (acData['dialogs']);
         */
-        
         var
         ac = {
             type : 'POST',
