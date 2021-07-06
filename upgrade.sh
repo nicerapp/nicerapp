@@ -16,5 +16,7 @@ git reset --hard origin/main
 #git reset --hard origin/main
 #cd ../../..
 
+./updateSaidBy.sh
+
 # start the apps (selfHealer only for now)
 ./restart.sh

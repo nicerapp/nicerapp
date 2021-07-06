@@ -70,6 +70,8 @@ var mp3site = {
 	},
 	
 	selectMP3 : function (id, file, firstRun) {
+        if (mp3site.settings.ignoreClick) { mp3site.settings.ignoreClick = false; return false; }
+        
         clearInterval (mp3site.settings.timeDisplayInterval);        
         
 		mp3site.settings.activeID = id;
@@ -302,64 +304,106 @@ var mp3site = {
         $('#audioTag')[0].volume = evt.offsetX / widthVolumeBar;
         $('.jp-volume-bar-value').css ({ width : evt.offsetX });
     },
-	
-	setupDragNDrop : function () {
-		var mp3s = $('.mp3');
-		$('.mp3').draggable ({
-			containment : 'window',
-            connectToSortable : '#playlist',
-			helper : function (evt, ui) {
-                if (this.id===mp3site.settings.resortedItem) return false;
-                var div = document.createElement('div');
-                $(this).clone(true,true).appendTo(div).css({zIndex:1100, color:'yellow'});
-                $(document.body).append(div);
-                //debugger;
-                return div;
-			}
-		});
-		$('#playlist').sortable({
+    
+    mp3drag : {
+        containment : 'window',
+        connectToSortable : '#playlist',
+        helper : function (evt, ui) {
+            if (this.id===mp3site.settings.resortedItem) return false;
+            var div = document.createElement('div');
+            $(this).clone(true,true).appendTo(div).css({zIndex:1100, color:'yellow'});
+            $(document.body).append(div);
+            //debugger;
+            return div;
+        }
+    },
+    
+    mp3sortable : {
+            //items : '> div',
+            //tolerance : 'pointer',
 			revert : true,
 			start : function (evt, ui) {
-                
+                var x = evt.originalEvent.originalEvent.path[0];
+                //if (x.id.match('playlist')) mp3site.settings.ignoreDrop = true;
+                if (evt.detail===1) mp3site.settings.ignoreClick = true;
 			},
 			stop : function (evt, ui) {
                 setTimeout(mp3site.reorderPlaylist, 500);
-			}
-		});
+			},
+            update : function (evt, ui) {
+                mp3site.reorderPlaylist();
+            }
+    },
+    
+	setupDragNDrop : function () {
+		var mp3s = $('.mp3');
+		mp3s.draggable (mp3site.mp3drag);
+		$('#playlist').sortable(mp3site.mp3sortable);
 		$('#playlist').droppable ({
 			drop : function (evt, ui) {
-                var pl = $('#playlist')[0];
-				var dragged = ui.draggable[0].children[0];//).clone(true,true)[0];
-                var pc = mp3site.playlistCount;
-                if (!ui.helper[0].children[0]) return false;
-            
+                /*if (mp3site.settings.ignoreDrop) {
+                    mp3site.settings.ignoreDrop = false;
+                    return false;
+                };*/
                 var 
-                oldID = ui.helper[0].children[0].id,
-                original = $('#'+oldID),
-                newID = 'playlist_'+pc;
+                pl = $('#playlist')[0];
+                //div = $(ui.draggable[0].children[0]),
+                div = $(ui.helper);
                 
-                if (oldID.match('playlist_')) return false;
-                $(dragged).attr('id', newID);
-                $(dragged).attr('class', 'mp3 vividButton ui-draggable ui-draggable-handle');
-                $(dragged).css({height : 30});
-                $(dragged).attr('file', original.attr('file'));
-                dragged.file = original.attr('file');
-                dragged.oldID = oldID;
-                $(dragged).attr('onclick',''+original[0].onclick.toString().replace("'"+oldID+"'", "'"+newID+"'").replace('function onclick(event) {', '').replace('\n}','').replace (new RegExp(oldID), dragged.id));
                 
-                $(dragged).draggable({
-                    containment : '#playlist',
-                    connectToSortable : '#playlist',
-                    helper : function (evt, ui) {
-                        mp3site.settings.resortedItem = dragged.oldID;
-                    }
-                });
+                //$(div).draggable('destroy');
+                //setTimeout (function () {
+                    //dragged = div.clone(true,true)[0],
+                    dragged = ui.helper[0].children[0];//.clone()
+                    pc = mp3site.playlistCount;
+                    debugger;
+                    
+                    if (!ui.helper[0].children[0]) return false;
                 
-                mp3site.reorderPlaylist();
-                
-                if (mp3site.settings.stopped) mp3site.selectMP3 (newID, $(dragged).attr('file'), false);
-                mp3site.onWindowResize();
-				mp3site.playlistCount++;
+                    var 
+                    oldID = ui.helper[0].children[0].id,
+                    original = $('#'+oldID),
+                    newID = 'playlist_'+pc;
+                    
+                    if (oldID.match('playlist_')) return false;
+                    $(dragged).attr('id', newID);
+                    dragged.evt = evt;
+                    var x = evt.originalEvent.originalEvent.path;
+                    x.splice(0,1);
+                    //x[0].id = x[0].id.replace(new RegExp(oldID), newID);
+                    //x[0] = $('#'+x[0].id.replace(new RegExp(oldID), newID))[0];
+                    //debugger;
+                    $(dragged).attr('class', 'mp3 vividButton ui-draggable ui-draggable-handle');
+                    $(dragged).css({height : 30});
+                    $(dragged).attr('file', original.attr('file'));
+                    dragged.file = original.attr('file');
+                    dragged.oldID = oldID;
+                    $(dragged).attr('onclick',''+original[0].onclick.toString().replace("'"+oldID+"'", "'"+newID+"'").replace('function onclick(event) {', '').replace('\n}','').replace (new RegExp(oldID), dragged.id));
+                    //jQuery(dragged).html(jQuery('td', dragged)[0].innerHTML);
+
+                    
+                    //debugger;
+                    /*
+                    var x = $(dragged).detach();
+                    $('#playlist').append(x);
+                    $(ui.helper).remove();*/
+                    
+                    //$('#playlist').sortable('destroy').sortable(mp3site.mp3sortable);
+                    $(dragged).draggable({
+                        containment : '#playlist',
+                        connectToSortable : '#playlist',
+                        helper : function (evt, ui) {
+                            mp3site.settings.resortedItem = dragged.oldID;
+                        }
+                    });
+                    //$(div).draggable (mp3site.mp3drag);
+                    
+                    //mp3site.reorderPlaylist();
+                    
+                    if (mp3site.settings.stopped) mp3site.selectMP3 (newID, $(dragged).attr('file'), false);
+                    mp3site.onWindowResize();
+                    mp3site.playlistCount++;
+                //}, 200);
 			}
 		});
 	},

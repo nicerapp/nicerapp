@@ -15657,7 +15657,8 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 
 		//If we are using droppables, inform the manager about the drop
 		if ( $.ui.ddmanager && !this.options.dropBehaviour ) {
-			$.ui.ddmanager.drop( this, event );
+			//CAUSED PROBLEMS IN .../nicerapp/apps/nicerapp/music/mp3site.source.js! 
+            //$.ui.ddmanager.drop( this, event );
 		}
 
 		if ( this.options.revert ) {
