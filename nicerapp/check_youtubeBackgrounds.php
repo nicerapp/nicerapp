@@ -1,6 +1,17 @@
 <?php
 require_once (dirname(__FILE__).'/boot.php');
 
+$ip = (array_key_exists('X-Forwarded-For',apache_request_headers())?apache_request_headers()['X-Forwarded-For'] : $_SERVER['REMOTE_ADDR']);
+if (
+    $ip !== '::1'
+    && $ip !== '127.0.0.1'
+    && $ip !== '80.101.238.137'
+) {
+    header('HTTP/1.0 403 Forbidden');
+    echo '403 - Access forbidden.';
+    die();
+}
+
 $root = realpath(dirname(__FILE__).'/siteMedia/backgrounds/iframe/youtube');
 $sidelinedRoot = realpath(dirname(__FILE__).'/siteMedia/backgrounds.offline');
 $files = getFilePathList ($root, true, '/.*/', array('file'));
