@@ -212,9 +212,9 @@
     <h2 class="contentSectionTitle2">Available Apps</h2>
 
     <!--<a href="<?php echo $urls['cms'];?>"><h3>Blogging features</h3></a>.<br/>-->
-    <a href="http://said.by" target="saidBy"><h3>Blogging features (on https://said.by)</h3></a>
+    <a href="https://said.by" target="saidBy"><h3>Blogging features (on https://said.by)</h3></a>
     
-    <a href="http://said.by" target="saidBy"><h3>URL redirection (on https://zoned.at)</h3></a>
+    <a href="https://zoned.at" target="zonedAt"><h3>URL redirection (on https://zoned.at)</h3></a>
     
     <a href="<?php echo $urls['music'];?>"><h3>Music</h3></a>
 

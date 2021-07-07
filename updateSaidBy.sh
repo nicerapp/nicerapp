@@ -49,7 +49,7 @@ cp /home/rene/data1/htdocs/nicerapp_v2/nicerapp/jsEngineeringMath/* /home/rene/d
 chown -R rene:www-data /home/rene/data1/htdocs/said.by/nicerapp/jsEngineeringMath/*
 chmod -R 755 /home/rene/data1/htdocs/said.by/nicerapp/jsEngineeringMath/*
 
-cp /home/rene/data1/htdocs/nicerapp_v2/nicerapp/selfHealer/* /home/rene/data1/htdocs/said.by/nicerapp/selfHealer/
+cp -Rf /home/rene/data1/htdocs/nicerapp_v2/nicerapp/selfHealer/* /home/rene/data1/htdocs/said.by/nicerapp/selfHealer/
 chown -R rene:www-data /home/rene/data1/htdocs/said.by/nicerapp/selfHealer/*
 chmod -R 755 /home/rene/data1/htdocs/said.by/nicerapp/selfHealer/*
 
