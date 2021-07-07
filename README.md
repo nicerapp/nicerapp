@@ -107,7 +107,7 @@ copy the following into /etc/apache2/sites-available/001.localhost.conf
 	# However, you must set it for any further virtual host explicitly.
 	ServerName localhost
 
-	ServerAdmin rene.veerman.netherlands@gmail.com
+	ServerAdmin rv.nicer.app@gmail.com
 	DocumentRoot /home/rene/data1/htdocs/localhost
 
 	# Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
@@ -136,6 +136,7 @@ copy the following into /etc/apache2/sites-available/001.localhost.conf
 after that, you can enable the site with :
 
 >sudo a2ensite 001-localhost.conf
+>	
 >sudo service apache2 restart
 
 and launch your web-browser to http://localhost
