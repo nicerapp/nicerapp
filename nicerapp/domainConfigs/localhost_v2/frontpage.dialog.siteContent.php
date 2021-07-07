@@ -211,12 +211,6 @@
 
     
     
-    <h2 class="contentSectionTitle2" >Under development (but currently stalled)</h2>
-    
-    <a href="<?php echo $urls['backgroundsBrowser'];?>"><h3>3D file manager</h3></a>
-    
-    
-    
     <h3 class="contentSectionTitle3">News</h3>
     Some of these can be further categorized through the menu that will load up at the top-right side of the site.<br/>
     
@@ -230,6 +224,14 @@
     </ul>
     
     <a href="<?php echo $urls['tarot'];?>"><h3>Tarot game</h3></a>
+
+    
+    
+    <h2 class="contentSectionTitle2" >Under development (but currently stalled)</h2>
+    
+    <a href="<?php echo $urls['backgroundsBrowser'];?>"><h3>3D file manager</h3></a>
+    
+    
     
     
     <h2 class="contentSectionTitle2" >Demos</h2>
