@@ -1,0 +1,13 @@
+<Files .htaccess>
+order deny,allow
+deny from all
+</Files>
+<Files fwa.dbSettings.*>
+order deny,allow
+deny from all
+</Files>
+
+RewriteEngine on
+RewriteBase /music/Dj-Incarnated-Preceptor/
+RewriteRule play/(.*)$ index.php [L]
+
