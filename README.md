@@ -1,7 +1,7 @@
 # NicerApp
 this is a revolutionary and constantly evolving, well-maintained repository of HTML, CSS, JS and PHP code with which you can build websites that use a tiled image, photo or youtube video as site background for information and apps that are put over that background in a semi-transparent way.
 
-# Installation
+# Installation - overview
 Nicerapp can be run on windows, linux and macOS systems, possibly even on smartphones,
 and all it requires is a webserver that can serve up PHP scripts,
 and the **couchdb database server[0]** which works with **JSON data**.
@@ -14,15 +14,25 @@ However, it can be augmented with a **SQL server** like mysql or postgresql[1] *
 
 The default database for nicerapp is couchdb. I find it more flexible and a lot easier to use than SQL data.
 
-One guiding principle of developing web-apps with nicerapp is that we shield our database servers from the outside world as much as possible.
-This means all requests for data by the browsers go via the **browser's jQuery.com** (.../nicerapp_v2/nicerapp/3rd-party/jQuery) **AJAX** (asynchronous javascript and XML) code to PHP scripts that are all specific to the requested functionality, and from there forth and back to the actual database server (from **PHP**, which does all of the error checking and **reports back only FAILED or SUCCESS (or the requested data)** in non-debug-mode **to the browser**).
-
 The couchdb server software and it's instructions can be found on https://couchdb.apache.org
 
-On windows, the https://wampserver.com/en WAMP stack (windows, apache, mysql, php) is well-suited, 
-and it can also be done on **linux systems[2]** from the **terminal** OS-level app, as such :
+Regardless of what mix-up of database servers that you use for your site, 
+one guiding principle of developing web-apps with nicerapp is that we shield our database servers from the outside world as much as possible.
 
-[2] if you have no linux system yet, know that a core-i5 with a modest amount of RAM and SSD space runs the latest version just fine, and i recommend to install https://ubuntu.com or kubuntu in case you want semi-transparent windows in your OS
+This means all requests for data by the browsers go via the **browser's jQuery.com** (.../nicerapp_v2/nicerapp/3rd-party/jQuery) **AJAX** (asynchronous javascript and XML) code **to PHP scripts** that are all specific to the requested functionality, **and from there to the actual database server** and back to PHP and finally to the **browser**, which in non-debug mode **gets back only FAILED or SUCCESS (or the requested data)**.
+All error handling, database sanity, and cleanliness code is in the PHP scripts and the PHP libraries[2] used to access the database.
+
+[2] 
+couchdb : https://github.com/nicerapp/sag
+
+SQL : https://adodb.org
+
+# Installation 
+
+On windows, the https://wampserver.com/en WAMP stack (windows, apache, mysql, php) is well-suited, 
+and it can also be done on **linux systems[3]** from the **terminal** OS-level app, as such :
+
+[3] if you have no linux system yet, know that a core-i5 with a modest amount of RAM and SSD space runs the latest version just fine, and i recommend to install https://ubuntu.com or kubuntu in case you want semi-transparent windows in your OS
 
 
 
@@ -34,7 +44,7 @@ and it can also be done on **linux systems[2]** from the **terminal** OS-level a
 > 
 > apt dist-upgrade
 > 
-> apt install apache2 php libapache2-mod-php php7.4-mbstring php-imap curl git imagemagick npm
+> apt install apache2 php libapache2-mod-php php7.4-mbstring php-imap curl git imagemagick npm net-tools
 > 
 > a2enmod headers rewrite
 
@@ -54,13 +64,14 @@ source /etc/os-release
 > add-cors-to-couchdb -u admin -p YOURADMINPASSWORDFORCOUCHDB
 
 # installing the nicerapp source files
-make a folder equivalent to /home/rene/data1/htdocs/nicerapp_v2 
-    meaning : use your own ubuntu username and possibly the name of your 
-    domain (internet site) instead of localhost. 
-    localhost is usually used for development setups, 
-    and should ideally be run on a different machine than 
-    your live server that hosts your domain.
+Make a folder equivalent to /home/rene/data1/htdocs/nicerapp_v2 
 
+Meaning : use your own ubuntu username and possibly the name of your 
+domain (internet site) instead of localhost. 
+
+localhost is usually used for development setups, 
+and should ideally be run on a different machine than 
+your live server that hosts your domain to the outside world.
 
 put the nicerapp source files in that folder :
 
@@ -81,7 +92,7 @@ put the nicerapp source files in that folder :
 
 copy the following into /etc/apache2/sites-available/001.localhost.conf 
 (everything between the /---- lines)
-(be sure to modify ServerAdmin and DocumentRoot in both places (mid-way through the text and at the bottom in <Directory>))
+(be sure to modify ServerAdmin and DocumentRoot in both places (mid-way through the text and at the bottom))
 (this particular server is running on the unencrypted port 80, port 443 is the encrypted SSL port but it requires more configuration effort, see the manuals for **letsencrypt** and **certbot** and the example further down on this page you're reading now)
 
 ````
@@ -96,7 +107,7 @@ copy the following into /etc/apache2/sites-available/001.localhost.conf
 	# However, you must set it for any further virtual host explicitly.
 	ServerName localhost
 
-	ServerAdmin rene.veerman.netherlands@gmail.com
+	ServerAdmin rv.nicer.app@gmail.com
 	DocumentRoot /home/rene/data1/htdocs/localhost
 
 	# Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
@@ -125,6 +136,7 @@ copy the following into /etc/apache2/sites-available/001.localhost.conf
 after that, you can enable the site with :
 
 >sudo a2ensite 001-localhost.conf
+>	
 >sudo service apache2 restart
 
 and launch your web-browser to http://localhost
@@ -146,7 +158,7 @@ We need it to serve database connections over SSL connections, and to be able to
 
 Next : put the following code snippet as a template in **/etc/nginx/sites-available/00-default-ssl.conf**
 After that : 
-> ln -s /etc/nginx/sites-available/na-default-ssl.conf /etc/nginx/sites-enabled/na-default-ssl.conf
+> sudo ln -s /etc/nginx/sites-available/na-default-ssl.conf /etc/nginx/sites-enabled/na-default-ssl.conf
 	
 ````
 #
@@ -310,7 +322,23 @@ server {
 **don't forget : you need to tell apache to run on the right ports, 
 which are 444, 447 and 448 in this example case, 
 and those ports should NOT be forwarded from your modem / ADSL router / fiber internet connection device to your LAN. 
-port 80 should be disabled in **all** /etc/apache2/sites-available/*.* entries**
+port 80 should be disabled in all files in /etc/apache2/sites-available/, by modifying the line(s) containing 'VirtualHost'**
+
+**edit /etc/apache2/ports.conf** to become the following, but be sure to change 192.168.178.77 your server's LAN IP address, which can be found with the 'ifconfig' terminal app :
+````
+<IfModule ssl_module>
+        Listen 192.168.178.77:444
+        Listen 192.168.178.77:447
+        Listen 192.168.178.77:448
+</IfModule>
+
+<IfModule mod_gnutls.c>
+        Listen 192.168.178.77:444
+        Listen 192.168.178.77:447
+        Listen 192.168.178.77:448
+</IfModule>
+````
+
 	
 i'll provide an example apache2 config file for https://zoned.at (a URL shortener service that i run)
 the following is in /etc/apache2/sites-available/001-zoned.at.conf
@@ -373,6 +401,12 @@ This is free and fairly simple.
 You can choose between **certbot** or **letsencrypt**.
 You can find tutorials on how to use them via google searches for either 'certbox example' or 'letsencrypt example'.
 
+After that, the only remaining step is to restart all the server software :
+> sudo service couchdb restart
+> 
+> sudo service apache2 restart
+> 
+> sudo service nginx restart
 	
 # Modifying the HTML for a nicerapp site
 This is done by modifying .../nicerapp/domainConfigs/YOUR_DOMAIN_NAME/index.template.php
