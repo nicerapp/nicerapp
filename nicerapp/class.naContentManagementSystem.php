@@ -32,6 +32,7 @@ class nicerAppCMS {
         $p1 = realpath(dirname(__FILE__).'/../..');
         $p2 = realpath(dirname(__FILE__).'/..');
         $this->domain = str_replace($p1.'/','', $p2);
+        $this->domainName = $this->domain; // i do recommend you use only this variant : domainName.
     }
     
     public function getSite() {

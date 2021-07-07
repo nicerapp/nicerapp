@@ -90,8 +90,11 @@ if (!$got) {
 $dbs = $cdb->getAllDatabases();
 foreach ($dbs->body as $idx => $dbName) {
     if (
-        (strpos($dbName,'tree__user')!==false)
-        || (strpos($dbName,'documents__user')!==false)
+        strpos($dbName,$cms->domainName)!==false
+        && (
+            (strpos($dbName,'tree__user')!==false)
+            || (strpos($dbName,'documents__user')!==false)
+        )
     ) {
         $do = true;
         try { 

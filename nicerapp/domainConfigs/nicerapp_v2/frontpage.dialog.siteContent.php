@@ -202,7 +202,8 @@
 
     <h2 class="contentSectionTitle2">Available Apps</h2>
 
-    <a href="<?php echo $urls['cms'];?>"><h3>Blogging features</h3></a>
+    <!--<a href="<?php echo $urls['cms'];?>"><h3>Blogging features</h3></a>.<br/>-->
+    <a href="http://said.by" target="saidBy"><h3>Blogging features (on https://said.by)</h3></a>.<br/>
     
     <h3 class="contentSectionTitle3">News</h3>
     Some of these can be further categorized through the menu that will load up at the top-right side of the site.<br/>

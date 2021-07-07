@@ -16,7 +16,9 @@ git reset --hard origin/main
 #git reset --hard origin/main
 #cd ../../..
 
+echo "now updating /home/rene/data1/htdocs/said.by"
 ./updateSaidBy.sh
+echo "DONE updating /home/rene/data1/htdocs/said.by"
 
 # start the apps (selfHealer only for now)
 ./restart.sh
