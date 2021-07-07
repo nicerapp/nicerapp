@@ -6,7 +6,7 @@ Nicerapp can be run on windows, linux and macOS systems, possibly even on smartp
 and all it requires is a webserver that can serve up PHP scripts,
 and the **couchdb database server[0]** which works with **JSON data**.
 
-However, it can be augmented with a **SQL server** like mysql[1] **which puts data in tables, rows and columns**.
+However, it can be augmented with a **SQL server** like mysql or postgresql[1] **which puts data in tables, rows and columns**.
 
 [0] see https://docs.couchdb.org/en/stable/install/index.html
 
