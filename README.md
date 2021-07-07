@@ -14,18 +14,25 @@ However, it can be augmented with a **SQL server** like mysql or postgresql[1] *
 
 The default database for nicerapp is couchdb. I find it more flexible and a lot easier to use than SQL data.
 
-One guiding principle of developing web-apps with nicerapp is that we shield our database servers from the outside world as much as possible.
-This means all requests for data by the browsers go via the **browser's jQuery.com** (.../nicerapp_v2/nicerapp/3rd-party/jQuery) **AJAX** (asynchronous javascript and XML) code **to PHP scripts** that are all specific to the requested functionality, **and from there to the actual database server** and back to PHP and finally to the **browser**, which in non-debug mode **gets back only FAILED or SUCCESS (or the requested data)**.
-All error handling, database sanity, and cleanliness code is in the PHP scripts and the PHP libraries used to access the database.
-
 The couchdb server software and it's instructions can be found on https://couchdb.apache.org
+
+Regardless of what mix-up of database servers that you use for your site, 
+one guiding principle of developing web-apps with nicerapp is that we shield our database servers from the outside world as much as possible.
+
+This means all requests for data by the browsers go via the **browser's jQuery.com** (.../nicerapp_v2/nicerapp/3rd-party/jQuery) **AJAX** (asynchronous javascript and XML) code **to PHP scripts** that are all specific to the requested functionality, **and from there to the actual database server** and back to PHP and finally to the **browser**, which in non-debug mode **gets back only FAILED or SUCCESS (or the requested data)**.
+All error handling, database sanity, and cleanliness code is in the PHP scripts and the PHP libraries[2] used to access the database.
+
+[2] 
+couchdb : https://github.com/nicerapp/sag
+
+SQL : https://adodb.org
 
 # Installation 
 
 On windows, the https://wampserver.com/en WAMP stack (windows, apache, mysql, php) is well-suited, 
-and it can also be done on **linux systems[2]** from the **terminal** OS-level app, as such :
+and it can also be done on **linux systems[3]** from the **terminal** OS-level app, as such :
 
-[2] if you have no linux system yet, know that a core-i5 with a modest amount of RAM and SSD space runs the latest version just fine, and i recommend to install https://ubuntu.com or kubuntu in case you want semi-transparent windows in your OS
+[3] if you have no linux system yet, know that a core-i5 with a modest amount of RAM and SSD space runs the latest version just fine, and i recommend to install https://ubuntu.com or kubuntu in case you want semi-transparent windows in your OS
 
 
 
