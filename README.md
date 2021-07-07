@@ -16,8 +16,9 @@ This means all requests for data by the browsers go via the **browser's jQuery.c
 The couchdb server software and it's instructions can be found on https://couchdb.apache.org
 
 On windows, the https://wampserver.com/en WAMP stack (windows, apache, mysql, php) is well-suited, 
-and it can also be done on linux systems from the **terminal** window, as such :
-( if you have no linux system yet, know that a core-i5 with a modest amount of RAM and SSD space runs the latest version just fine, and i recommend to install https://ubuntu.com or kubuntu in case you want semi-transparent windows in your OS )
+and it can also be done on **linux systems[2]** from the **terminal** OS-level app, as such :
+
+[2] if you have no linux system yet, know that a core-i5 with a modest amount of RAM and SSD space runs the latest version just fine, and i recommend to install https://ubuntu.com or kubuntu in case you want semi-transparent windows in your OS
 
 
 
