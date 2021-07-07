@@ -531,7 +531,7 @@ var nas = na.site = {
             if (na.site.settings.current.fontSize_siteContent) {
                 $('#siteContent').css ({ fontSize : na.site.settings.current.fontSize_siteContent });
                 $('#siteStatusbar').css ({ fontSize : na.site.settings.current.fontSize_siteStatusbar });
-            }
+            };
             $('#siteStatusbar').css({height:'4.5rem'});
             $('#siteStatusbar .vividButton').css({width : 100});
             $('#siteStatusbar td:nth-child(2)').css({width:105});
@@ -548,7 +548,10 @@ var nas = na.site = {
             $('#headerSiteDiv').css ({ height : 200, width : 320 });
             $('#headerSiteDiv div').css ({ height : 10, width : 320 });
         } else {
-            $('#siteContent, #siteStatusbar').css ({ fontSize : '100%' });
+            if (na.site.settings.current.fontSize_siteContent) {
+                $('#siteContent').css ({ fontSize : na.site.settings.current.fontSize_siteContent });
+                $('#siteStatusbar').css ({ fontSize : na.site.settings.current.fontSize_siteStatusbar });
+            };
             $('#siteStatusbar').css({height:'4.5rem'});
             $('#siteStatusbar .vividButton').css({width : 220});
             $('#siteStatusbar td:nth-child(2)').css({width:225});
