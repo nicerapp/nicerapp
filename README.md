@@ -158,7 +158,7 @@ We need it to serve database connections over SSL connections, and to be able to
 
 Next : put the following code snippet as a template in **/etc/nginx/sites-available/00-default-ssl.conf**
 After that : 
-> ln -s /etc/nginx/sites-available/na-default-ssl.conf /etc/nginx/sites-enabled/na-default-ssl.conf
+> sudo ln -s /etc/nginx/sites-available/na-default-ssl.conf /etc/nginx/sites-enabled/na-default-ssl.conf
 	
 ````
 #
@@ -385,6 +385,12 @@ This is free and fairly simple.
 You can choose between **certbot** or **letsencrypt**.
 You can find tutorials on how to use them via google searches for either 'certbox example' or 'letsencrypt example'.
 
+After that, the only remaining step is to restart all the server software :
+> sudo service couchdb restart
+> 
+> sudo service apache2 restart
+> 
+> sudo service nginx restart
 	
 # Modifying the HTML for a nicerapp site
 This is done by modifying .../nicerapp/domainConfigs/YOUR_DOMAIN_NAME/index.template.php
