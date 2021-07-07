@@ -322,7 +322,7 @@ server {
 **don't forget : you need to tell apache to run on the right ports, 
 which are 444, 447 and 448 in this example case, 
 and those ports should NOT be forwarded from your modem / ADSL router / fiber internet connection device to your LAN. 
-port 80 should be disabled in all /etc/apache2/sites-available/*.* entries**
+port 80 should be disabled in all files in /etc/apache2/sites-available/, by modifying the line(s) containing 'VirtualHost'**
 
 **edit /etc/apache2/ports.conf** to become the following, but be sure to change 192.168.178.77 your server's LAN IP address, which can be found with the 'ifconfig' terminal app :
 ````
