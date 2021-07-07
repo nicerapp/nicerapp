@@ -1,7 +1,7 @@
 # NicerApp
 this is a revolutionary and constantly evolving, well-maintained repository of HTML, CSS, JS and PHP code with which you can build websites that use a tiled image, photo or youtube video as site background for information and apps that are put over that background in a semi-transparent way.
 
-# Installation
+# Installation - overview
 Nicerapp can be run on windows, linux and macOS systems, possibly even on smartphones,
 and all it requires is a webserver that can serve up PHP scripts,
 and the **couchdb database server[0]** which works with **JSON data**.
@@ -19,6 +19,8 @@ This means all requests for data by the browsers go via the **browser's jQuery.c
 All error handling, database sanity, and cleanliness code is in the PHP scripts and the PHP libraries used to access the database.
 
 The couchdb server software and it's instructions can be found on https://couchdb.apache.org
+
+# Installation 
 
 On windows, the https://wampserver.com/en WAMP stack (windows, apache, mysql, php) is well-suited, 
 and it can also be done on **linux systems[2]** from the **terminal** OS-level app, as such :
