@@ -4,12 +4,14 @@ this is a revolutionary and constantly evolving, well-maintained repository of H
 # Installation
 Nicerapp can be run on windows, linux and macOS systems, possibly even on smartphones,
 and all it requires is a webserver that can serve up PHP scripts,
-and the couchdb database server (works with JSON data), 
-which can be augmented with a SQL server like mysql[1] (works with tables and rows and columns of data).
+and the **couchdb database server** which works with **JSON data**, 
+which can be augmented with a **SQL server** like mysql[1] **which puts data in tables, rows and columns**.
 [1] see https://adodb.org
 
+The default database for nicerapp is couchdb. I find it more flexible and a lot easier to use than SQL data.
+
 One guiding principle of developing web-apps with nicerapp is that we shield our database servers from the outside world as much as possible.
-This means all requests for data by the browsers go via the **browser's jQuery.com** (.../nicerapp_v2/nicerapp/3rd-party/jQuery) **AJAX** (asynchronous javascript and XML) code to PHP scripts that are all specific to the requested functionality, and then on to the actual database server (from **PHP**, which does all of the error checking and **reports back only FAILED or SUCCESS** in non-debug-mode **to the browser**).
+This means all requests for data by the browsers go via the **browser's jQuery.com** (.../nicerapp_v2/nicerapp/3rd-party/jQuery) **AJAX** (asynchronous javascript and XML) code to PHP scripts that are all specific to the requested functionality, and from there forth and back to the actual database server (from **PHP**, which does all of the error checking and **reports back only FAILED or SUCCESS (or the requested data)** in non-debug-mode **to the browser**).
 
 The couchdb server software and it's instructions can be found on https://couchdb.apache.org
 
@@ -27,7 +29,7 @@ and it can also be done on linux systems from the **terminal** window, as such :
 > 
 > apt dist-upgrade
 > 
-> apt install apache2 php libapache2-mod-php php7.4-mbstring php-imap curl git imagemagick npm letsencrypt
+> apt install apache2 php libapache2-mod-php php7.4-mbstring php-imap curl git imagemagick npm
 > 
 > a2enmod headers rewrite
 
@@ -44,7 +46,7 @@ and it can also be done on linux systems from the **terminal** window, as such :
 > add-cors-to-couchdb -u admin -p YOURADMINPASSWORDFORCOUCHDB
 
 # installing the nicerapp source files
-make a folder equivalent to /home/rene/data1/htdocs/localhost 
+make a folder equivalent to /home/rene/data1/htdocs/nicerapp_v2 
     meaning : use your own ubuntu username and possibly the name of your 
     domain (internet site) instead of localhost. 
     localhost is usually used for development setups, 
