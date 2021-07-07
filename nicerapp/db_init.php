@@ -328,7 +328,7 @@ try {
 $rec = array(
     '_id' => cdb_randomString(20),
     'url' => '[default]',
-    'role' => 'Guests',
+    //'role' => 'Guests',
     'dialogs' => array (
         '.vividDialog' => array (
             'color' => 'white',

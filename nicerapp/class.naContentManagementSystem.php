@@ -237,17 +237,26 @@ class nicerAppCMS {
         }
         $selectors = array (
             0 => array (
+                'url' => '[default]'
+            ),
+            1 => array (
+                'url' => $url
+            ),
+        
+            2 => array (
                 'url' => '[default]',
                 'role' => 'Guests'
             ),
-            1 => array (
+            3 => array (
                 'url' => $url,
                 'role' => 'Guests'
             )
         );
         $selectorNames = array ( 
-            0 => 'site role Guests',
-            1 => 'page role Guests'
+            0 => 'site',
+            1 => 'page',
+            2 => 'site role Guests',
+            3 => 'page role Guests'
         );
         
         //var_dump ($this->app); die();
