@@ -204,8 +204,8 @@
     <p>
     2021/7/7 :<br/>
     Nicer.app and Said.by are currently in an "admin party" state, whereby Guest visitors get to change all the default cosmetic settings.<br/>
-    In just a little while, I will modify it so that one can change only the defaults for their own pages on a nicerapp site, 
-    and end-users will still be able to override these settings, if the owner of the page allows that.
+    In just a little while, I will modify it so that one can change only the defaults for their own pages on a nicerapp site, <br/>
+    but end-users will still be able to override these settings if the owner of the page allows that.
     </p>
     
 
