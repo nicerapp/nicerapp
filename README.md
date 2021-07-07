@@ -3,7 +3,7 @@ this is a revolutionary and constantly evolving, well-maintained repository of H
 
 # Installation
 nicerapp can be run on both windows and linux and macOS systems, all it requires is a webserver that can serve up PHP scripts. 
-on windows, the https://wampserver.com/en LAMP stack is well-suited, 
+on windows, the https://wampserver.com/en WAMP stack (windows, apache, mysql, php) is well-suited, 
 and it can also be done on linux systems from the **terminal** window, as such :
 ( if you have no linux system yet, know that a core-i5 with a modest amount of RAM and SSD space runs the latest version just fine, and i recommend to install https://ubuntu.com or kubuntu in case you want semi-transparent windows in your OS )
 
