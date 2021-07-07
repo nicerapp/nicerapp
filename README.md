@@ -92,7 +92,7 @@ put the nicerapp source files in that folder :
 
 copy the following into /etc/apache2/sites-available/001.localhost.conf 
 (everything between the /---- lines)
-(be sure to modify ServerAdmin and DocumentRoot in both places (mid-way through the text and at the bottom in <Directory>))
+(be sure to modify ServerAdmin and DocumentRoot in both places (mid-way through the text and at the bottom))
 (this particular server is running on the unencrypted port 80, port 443 is the encrypted SSL port but it requires more configuration effort, see the manuals for **letsencrypt** and **certbot** and the example further down on this page you're reading now)
 
 ````
