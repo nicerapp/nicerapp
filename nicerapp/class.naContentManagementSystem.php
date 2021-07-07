@@ -109,7 +109,7 @@ class nicerAppCMS {
         $newest = strtotime ('1970-01-01');
         foreach ($files as $idx => $file) {
             $file = str_replace ('{$domain}', $this->domain, $file);
-            $c .= file_get_contents($this->basePath.$file);
+            $c .= file_get_contents($this->basePath.$file).PHP_EOL.PHP_EOL;
             $fdt = filectime($this->basePath.'/'.$file);
             if ($fdt > $newest) $newest = $fdt;
         };
