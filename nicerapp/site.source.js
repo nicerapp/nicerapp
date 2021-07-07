@@ -394,7 +394,7 @@ var nas = na.site = {
 			+ ' ' + na.m.padNumber(d.getHours(), 2, '0') + ':' + na.m.padNumber(d.getMinutes(), 2, '0')
 			+ ':' + na.m.padNumber(d.getSeconds(), 2, '0'); // + '.' + na.m.padNumber(d.getMilliseconds(), 3, 0);
 			
-        jQuery('#siteDateTime .vividDialogContent').html(r);
+        $('#siteDateTime .vividDialogContent').html(r);
     },
     
     themeSwitch : function () {
@@ -489,13 +489,13 @@ var nas = na.site = {
         //$('#siteBackground img.bg_first').fadeIn(2000);
 
         // fix attempts (all failed) for [apple bug 1] orientation change bug on iphone 6
-        jQuery('body')[0].scrollLeft = 0;//	jQuery('body')[0].style.position = 'relative';
-        jQuery('body')[0].scrollTop = 0;//	jQuery('body')[0].style.position = 'relative';
+        $('body')[0].scrollLeft = 0;//	$('body')[0].style.position = 'relative';
+        $('body')[0].scrollTop = 0;//	$('body')[0].style.position = 'relative';
         
-        jQuery('html')[0].scrollLeft = 0;
-        jQuery('html')[0].scrollTop = 0;
-        jQuery('html')[0].style.display = 'none';
-        jQuery('html')[0].style.display = 'block';
+        $('html')[0].scrollLeft = 0;
+        $('html')[0].scrollTop = 0;
+        $('html')[0].style.display = 'none';
+        $('html')[0].style.display = 'block';
         
         
         na.site.onresize_doContent(settings);
@@ -514,51 +514,56 @@ var nas = na.site = {
     },
     onresize_doContent : function (settings) {
         if ($(window).width() < na.site.globals.reallySmallDeviceWidth) {
-            jQuery('#siteContent, #siteStatusbar').css ({ fontSize : '70%' });
-            jQuery('#siteStatusbar').css({height:'5.5rem'});
-            jQuery('#siteStatusbar .vividButton').css({width : 40});
-            jQuery('#siteStatusbar td:nth-child(2)').css({width:55});
-            jQuery('#tableFor_saCompanyLogo').css ({ width : 80, height : 80 });
-            jQuery('#divFor_saCompanyLogo').css ({ width : 70, height : 70, marginLeft : 0 });
-            jQuery('#saCompanyLogo').attr('width',70).attr('height',70);
-            jQuery('#headerSite, #headerSite h1, #headerSite h2, #headerSite h3').css ({ fontSize : '84%', paddingLeft : 0 });
-            jQuery('.td_spacer').css ({ height : 100 });
-            jQuery('#headerSiteDiv').css ({ height : 70, width : 80 });
-            jQuery('#headerSiteDiv div').css ({ height : 0, width : 80 });
+            na.site.settings.current.fontSize_siteContent = $('#siteContent').css('fontSize');
+            na.site.settings.current.fontSize_siteStatusbar = $('#siteStatusbar').css('fontSize');
+            $('#siteContent, #siteStatusbar').css ({ fontSize : '70%' });
+            $('#siteStatusbar').css({height:'5.5rem'});
+            $('#siteStatusbar .vividButton').css({width : 40});
+            $('#siteStatusbar td:nth-child(2)').css({width:55});
+            $('#tableFor_saCompanyLogo').css ({ width : 80, height : 80 });
+            $('#divFor_saCompanyLogo').css ({ width : 70, height : 70, marginLeft : 0 });
+            $('#saCompanyLogo').attr('width',70).attr('height',70);
+            $('#headerSite, #headerSite h1, #headerSite h2, #headerSite h3').css ({ fontSize : '84%', paddingLeft : 0 });
+            $('.td_spacer').css ({ height : 100 });
+            $('#headerSiteDiv').css ({ height : 70, width : 80 });
+            $('#headerSiteDiv div').css ({ height : 0, width : 80 });
         } else if ($(window).width() < na.site.globals.smallDeviceWidth) {
-            jQuery('#siteContent, #siteStatusbar').css ({ fontSize : '100%' });
-            jQuery('#siteStatusbar').css({height:'4.5rem'});
-            jQuery('#siteStatusbar .vividButton').css({width : 100});
-            jQuery('#siteStatusbar td:nth-child(2)').css({width:105});
-            jQuery('#mainCSS').html('.vividMenu_item td { font-size : 80%; }; #siteStatus td { font-weight : bold };');
-            jQuery('#tableFor_saCompanyLogo').css ({ width : 200, height : 200 });
-            jQuery('#divFor_saCompanyLogo').css ({ width : 200, height : 200});
-            jQuery('#datetime').css({marginLeft:40,marginTop:20});
-            jQuery('#saCompanyLogo').attr('width',200).attr('height',200);
-            jQuery('#headerSite h1').css ({ fontSize : navigator.userAgent.match('Chrome')?'220%':'140%', paddingLeft : 20 });
-            jQuery('#headerSite h2').css ({ fontSize : '100%', paddingLeft : 20 });
-            jQuery('#headerSite, #headerSite h3').css ({ fontSize : '100%', paddingLeft : 20 });
+            if (na.site.settings.current.fontSize_siteContent) {
+                $('#siteContent').css ({ fontSize : na.site.settings.current.fontSize_siteContent });
+                $('#siteStatusbar').css ({ fontSize : na.site.settings.current.fontSize_siteStatusbar });
+            }
+            $('#siteStatusbar').css({height:'4.5rem'});
+            $('#siteStatusbar .vividButton').css({width : 100});
+            $('#siteStatusbar td:nth-child(2)').css({width:105});
+            $('#mainCSS').html('.vividMenu_item td { font-size : 80%; }; #siteStatus td { font-weight : bold };');
+            $('#tableFor_saCompanyLogo').css ({ width : 200, height : 200 });
+            $('#divFor_saCompanyLogo').css ({ width : 200, height : 200});
+            $('#datetime').css({marginLeft:40,marginTop:20});
+            $('#saCompanyLogo').attr('width',200).attr('height',200);
+            $('#headerSite h1').css ({ fontSize : navigator.userAgent.match('Chrome')?'220%':'140%', paddingLeft : 20 });
+            $('#headerSite h2').css ({ fontSize : '100%', paddingLeft : 20 });
+            $('#headerSite, #headerSite h3').css ({ fontSize : '100%', paddingLeft : 20 });
             
-            jQuery('.td_spacer').css ({ height : 100 });
-            jQuery('#headerSiteDiv').css ({ height : 200, width : 320 });
-            jQuery('#headerSiteDiv div').css ({ height : 10, width : 320 });
+            $('.td_spacer').css ({ height : 100 });
+            $('#headerSiteDiv').css ({ height : 200, width : 320 });
+            $('#headerSiteDiv div').css ({ height : 10, width : 320 });
         } else {
-            jQuery('#siteContent, #siteStatusbar').css ({ fontSize : '100%' });
-            jQuery('#siteStatusbar').css({height:'4.5rem'});
-            jQuery('#siteStatusbar .vividButton').css({width : 220});
-            jQuery('#siteStatusbar td:nth-child(2)').css({width:225});
-            jQuery('#mainCSS').html('.vividMenu_item td { font-size : 80%; }; #siteStatus td { font-weight : bold };');
-            jQuery('#tableFor_saCompanyLogo').css ({ width : 200, height : 200 });
-            jQuery('#divFor_saCompanyLogo').css ({ width : 200, height : 200 });
-            jQuery('#datetime').css({marginLeft:40,marginTop:20});
-            jQuery('#saCompanyLogo').attr('width',200).attr('height',200);
-            jQuery('#headerSite h1').css ({ fontSize : navigator.userAgent.match('Chrome')?'220%':'140%', paddingLeft : 20 });
-            jQuery('#headerSite h2').css ({ fontSize : '100%', paddingLeft : 20 });
-            jQuery('#headerSite, #headerSite h3').css ({ fontSize : '100%', paddingLeft : 20 });
+            $('#siteContent, #siteStatusbar').css ({ fontSize : '100%' });
+            $('#siteStatusbar').css({height:'4.5rem'});
+            $('#siteStatusbar .vividButton').css({width : 220});
+            $('#siteStatusbar td:nth-child(2)').css({width:225});
+            $('#mainCSS').html('.vividMenu_item td { font-size : 80%; }; #siteStatus td { font-weight : bold };');
+            $('#tableFor_saCompanyLogo').css ({ width : 200, height : 200 });
+            $('#divFor_saCompanyLogo').css ({ width : 200, height : 200 });
+            $('#datetime').css({marginLeft:40,marginTop:20});
+            $('#saCompanyLogo').attr('width',200).attr('height',200);
+            $('#headerSite h1').css ({ fontSize : navigator.userAgent.match('Chrome')?'220%':'140%', paddingLeft : 20 });
+            $('#headerSite h2').css ({ fontSize : '100%', paddingLeft : 20 });
+            $('#headerSite, #headerSite h3').css ({ fontSize : '100%', paddingLeft : 20 });
             
-            jQuery('.td_spacer').css ({ height : 100 });
-            jQuery('#headerSiteDiv').css ({ height : 200, width : 320 });
-            jQuery('#headerSiteDiv div').css ({ height : 10, width : 320 });
+            $('.td_spacer').css ({ height : 100 });
+            $('#headerSiteDiv').css ({ height : 200, width : 320 });
+            $('#headerSiteDiv div').css ({ height : 10, width : 320 });
         }; 
     },
     
@@ -580,7 +585,7 @@ var nas = na.site = {
                 na_js__hasContentMenu : true
             },
             success : function (data, ts, xhr) {
-                jQuery('#siteMenu').html(data);
+                $('#siteMenu').html(data);
                 
                 var 
                 mlp = '<li class="contentMenu"><a href="-contentMenu-">-contentMenu-</a></li>',
@@ -1119,7 +1124,7 @@ na.m = {
     },
     
 	negotiateOptions : function () {
-		// na.m.negotiateOptions() can't handle functions, and I dont trust jQuery.extend
+		// na.m.negotiateOptions() can't handle functions, and I dont trust $.extend
 		var r = {};
 		for (var i = 0; i < arguments.length; i++) {
 			var a = arguments[i];
