@@ -22,6 +22,11 @@ chmod -R 755 /home/rene/data1/htdocs/said.by/nicerapp/apps/nicerapp/analytics/*
 cp /home/rene/data1/htdocs/nicerapp_v2/nicerapp/domainConfigs/* /home/rene/data1/htdocs/said.by/nicerapp/domainConfigs/
 chown -R rene:www-data /home/rene/data1/htdocs/said.by/nicerapp/domainConfigs/*
 chmod -R 755 /home/rene/data1/htdocs/said.by/nicerapp/domainConfigs/*
+touch /home/rene/data1/htdocs/said.by/nicerapp/domainConfigs/said.by/index.combined.js
+touch /home/rene/data1/htdocs/said.by/nicerapp/domainConfigs/said.by/index.combined.cssTheme.dark.css
+touch /home/rene/data1/htdocs/said.by/nicerapp/domainConfigs/said.by/index.combined.cssTheme.light.css
+touch /home/rene/data1/htdocs/said.by/nicerapp/domainConfigs/said.by/index.combined.css
+chmod 777 /home/rene/data1/htdocs/said.by/nicerapp/domainConfigs/said.by/index.combined.*
 
 cp /home/rene/data1/htdocs/nicerapp_v2/nicerapp/userInterface/* /home/rene/data1/htdocs/said.by/nicerapp/userInterface/
 chown -R rene:www-data /home/rene/data1/htdocs/said.by/nicerapp/userInterface/*
