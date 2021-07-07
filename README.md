@@ -44,7 +44,7 @@ and it can also be done on **linux systems[3]** from the **terminal** OS-level a
 > 
 > apt dist-upgrade
 > 
-> apt install apache2 php libapache2-mod-php php7.4-mbstring php-imap curl git imagemagick npm
+> apt install apache2 php libapache2-mod-php php7.4-mbstring php-imap curl git imagemagick npm net-tools
 > 
 > a2enmod headers rewrite
 
@@ -322,7 +322,23 @@ server {
 **don't forget : you need to tell apache to run on the right ports, 
 which are 444, 447 and 448 in this example case, 
 and those ports should NOT be forwarded from your modem / ADSL router / fiber internet connection device to your LAN. 
-port 80 should be disabled in **all** /etc/apache2/sites-available/*.* entries**
+port 80 should be disabled in all /etc/apache2/sites-available/*.* entries**
+
+**edit /etc/apache2/ports.conf** to become the following, but be sure to change 192.168.178.77 your server's LAN IP address, which can be found with the 'ifconfig' terminal app :
+````
+<IfModule ssl_module>
+        Listen 192.168.178.77:444
+        Listen 192.168.178.77:447
+        Listen 192.168.178.77:448
+</IfModule>
+
+<IfModule mod_gnutls.c>
+        Listen 192.168.178.77:444
+        Listen 192.168.178.77:447
+        Listen 192.168.178.77:448
+</IfModule>
+````
+
 	
 i'll provide an example apache2 config file for https://zoned.at (a URL shortener service that i run)
 the following is in /etc/apache2/sites-available/001-zoned.at.conf
