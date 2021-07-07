@@ -124,7 +124,7 @@ in JavaScript, it's done with the always available **na.m.base64_encode_url()** 
 
 # Questions, bug-reports, feature-requests?
 
-you can post these to rene.veerman.netherlands@gmail.com, and i will try to respond within 72 hours, even on weekends.
+you can post these to rv.nicer.app@gmail.com, and i will try to respond within 72 hours, even on weekends.
 
 if you need a quick solution towards getting yourself a collection of background images, you can look for 'wallpaper' on https://rarbg.to and use a torrent client (like transmission on ubuntu, or utorrent on windows) to download them.
 
