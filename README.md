@@ -64,13 +64,14 @@ source /etc/os-release
 > add-cors-to-couchdb -u admin -p YOURADMINPASSWORDFORCOUCHDB
 
 # installing the nicerapp source files
-make a folder equivalent to /home/rene/data1/htdocs/nicerapp_v2 
-    meaning : use your own ubuntu username and possibly the name of your 
-    domain (internet site) instead of localhost. 
-    localhost is usually used for development setups, 
-    and should ideally be run on a different machine than 
-    your live server that hosts your domain.
+Make a folder equivalent to /home/rene/data1/htdocs/nicerapp_v2 
 
+Meaning : use your own ubuntu username and possibly the name of your 
+domain (internet site) instead of localhost. 
+
+localhost is usually used for development setups, 
+and should ideally be run on a different machine than 
+your live server that hosts your domain to the outside world.
 
 put the nicerapp source files in that folder :
 
