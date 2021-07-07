@@ -15,7 +15,7 @@ However, it can be augmented with a **SQL server** like mysql or postgresql[1] *
 The default database for nicerapp is couchdb. I find it more flexible and a lot easier to use than SQL data.
 
 One guiding principle of developing web-apps with nicerapp is that we shield our database servers from the outside world as much as possible.
-This means all requests for data by the browsers go via the **browser's jQuery.com** (.../nicerapp_v2/nicerapp/3rd-party/jQuery) **AJAX** (asynchronous javascript and XML) code **to PHP scripts** that are all specific to the requested functionality, **and from there to the actual database server** and back to PHP and finally to the browser, which in non-debug mode **gets back only FAILED or SUCCESS (or the requested data)**.
+This means all requests for data by the browsers go via the **browser's jQuery.com** (.../nicerapp_v2/nicerapp/3rd-party/jQuery) **AJAX** (asynchronous javascript and XML) code **to PHP scripts** that are all specific to the requested functionality, **and from there to the actual database server** and back to PHP and finally to the **browser**, which in non-debug mode **gets back only FAILED or SUCCESS (or the requested data)**.
 All error handling, database sanity, and cleanliness code is in the PHP scripts and the PHP libraries used to access the database.
 
 The couchdb server software and it's instructions can be found on https://couchdb.apache.org
