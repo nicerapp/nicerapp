@@ -207,6 +207,16 @@
     
     <a href="http://said.by" target="saidBy"><h3>URL redirection (on https://zoned.at)</h3></a>
     
+    <a href="<?php echo $urls['music'];?>"><h3>Music</h3></a>
+
+    
+    
+    <h2 class="contentSectionTitle2" >Under development (but currently stalled)</h2>
+    
+    <a href="<?php echo $urls['backgroundsBrowser'];?>"><h3>3D file manager</h3></a>
+    
+    
+    
     <h3 class="contentSectionTitle3">News</h3>
     Some of these can be further categorized through the menu that will load up at the top-right side of the site.<br/>
     
@@ -221,9 +231,7 @@
     
     <a href="<?php echo $urls['tarot'];?>"><h3>Tarot game</h3></a>
     
-    <a href="<?php echo $urls['music'];?>"><h3>Music</h3></a>
     
     <h2 class="contentSectionTitle2" >Demos</h2>
     <a href="<?php echo $urls['3Dcube'];?>"><h3>3D demo : cube</h3></a>
     <a href="<?php echo $urls['3Dmodels'];?>"><h3>3D demo : loading of models (slow to start up)</h3></a>
-    <a href="<?php echo $urls['backgroundsBrowser'];?>"><h3>3D file manager</h3></a>
