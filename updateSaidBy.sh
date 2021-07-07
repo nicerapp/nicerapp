@@ -1,21 +1,21 @@
 #!/bin/sh
-cp -Rf /home/rene/data1/htdocs/nicerapp_v2/nicerapp/apps/nicerapp/cms/* /home/rene/data1/htdocs/said.by/nicerapp/apps/nicerapp/cms/
+cp -rf /home/rene/data1/htdocs/nicerapp_v2/nicerapp/apps/nicerapp/cms/* /home/rene/data1/htdocs/said.by/nicerapp/apps/nicerapp/cms/
 chown -R rene:www-data /home/rene/data1/htdocs/said.by/nicerapp/apps/nicerapp/cms/*
 chmod -R 755 /home/rene/data1/htdocs/said.by/nicerapp/apps/nicerapp/cms/*
 
-cp -Rf /home/rene/data1/htdocs/nicerapp_v2/nicerapp/apps/nicerapp/cmsText/* /home/rene/data1/htdocs/said.by/nicerapp/apps/nicerapp/cmsText/
+cp -rf /home/rene/data1/htdocs/nicerapp_v2/nicerapp/apps/nicerapp/cmsText/* /home/rene/data1/htdocs/said.by/nicerapp/apps/nicerapp/cmsText/
 chown -R rene:www-data /home/rene/data1/htdocs/said.by/nicerapp/apps/nicerapp/cmsText/*
 chmod -R 755 /home/rene/data1/htdocs/said.by/nicerapp/apps/nicerapp/cmsText/*
 
-cp -Rf /home/rene/data1/htdocs/nicerapp_v2/nicerapp/apps/nicerapp/cmsViewMedia/* /home/rene/data1/htdocs/said.by/nicerapp/apps/nicerapp/cmsViewMedia/
+cp -rf /home/rene/data1/htdocs/nicerapp_v2/nicerapp/apps/nicerapp/cmsViewMedia/* /home/rene/data1/htdocs/said.by/nicerapp/apps/nicerapp/cmsViewMedia/
 chown -R rene:www-data /home/rene/data1/htdocs/said.by/nicerapp/apps/nicerapp/cmsViewMedia/*
 chmod -R 755 /home/rene/data1/htdocs/said.by/nicerapp/apps/nicerapp/cmsViewMedia/*
 
-cp -Rf /home/rene/data1/htdocs/nicerapp_v2/nicerapp/apps/nicerapp/diskText/* /home/rene/data1/htdocs/said.by/nicerapp/apps/nicerapp/diskText/
+cp -rf /home/rene/data1/htdocs/nicerapp_v2/nicerapp/apps/nicerapp/diskText/* /home/rene/data1/htdocs/said.by/nicerapp/apps/nicerapp/diskText/
 chown -R rene:www-data /home/rene/data1/htdocs/said.by/nicerapp/apps/nicerapp/diskText/*
 chmod -R 755 /home/rene/data1/htdocs/said.by/nicerapp/apps/nicerapp/diskText/*
 
-cp -Rf /home/rene/data1/htdocs/nicerapp_v2/nicerapp/apps/nicerapp/analytics/* /home/rene/data1/htdocs/said.by/nicerapp/apps/nicerapp/analytics/
+cp -rf /home/rene/data1/htdocs/nicerapp_v2/nicerapp/apps/nicerapp/analytics/* /home/rene/data1/htdocs/said.by/nicerapp/apps/nicerapp/analytics/
 chown -R rene:www-data /home/rene/data1/htdocs/said.by/nicerapp/apps/nicerapp/analytics/*
 chmod -R 755 /home/rene/data1/htdocs/said.by/nicerapp/apps/nicerapp/analytics/*
 
