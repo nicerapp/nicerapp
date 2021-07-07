@@ -4,8 +4,9 @@ this is a revolutionary and constantly evolving, well-maintained repository of H
 # Installation
 Nicerapp can be run on windows, linux and macOS systems, possibly even on smartphones,
 and all it requires is a webserver that can serve up PHP scripts,
-and the **couchdb database server** which works with **JSON data**, 
+and the **couchdb database server[0]** which works with **JSON data**, 
 which can be augmented with a **SQL server** like mysql[1] **which puts data in tables, rows and columns**.
+[0] see https://docs.couchdb.org/en/stable/install/index.html
 [1] see https://adodb.org
 
 The default database for nicerapp is couchdb. I find it more flexible and a lot easier to use than SQL data.
@@ -34,10 +35,13 @@ and it can also be done on **linux systems[2]** from the **terminal** OS-level a
 > 
 > a2enmod headers rewrite
 
-> curl -L https://couchdb.apache.org/repo/bintray-pubkey.asc | sudo apt-key add -
+> sudo apt update && sudo apt install -y curl apt-transport-https gnupg
 > 
-> echo "deb https://apache.bintray.com/couchdb-deb bionic main" | sudo tee -a /etc/apt/sources.list
-
+> curl https://couchdb.apache.org/repo/keys.asc | gpg --dearmor | sudo tee /usr/share/keyrings/couchdb-archive-keyring.gpg >/dev/null 2>&1
+source /etc/os-release
+>
+> echo "deb [signed-by=/usr/share/keyrings/couchdb-archive-keyring.gpg] https://apache.jfrog.io/artifactory/couchdb-deb/ ${VERSION_CODENAME} main" | sudo tee /etc/apt/sources.list.d/couchdb.list >/dev/null
+>    
 > apt update 
 > 
 > apt install couchdb
