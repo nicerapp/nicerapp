@@ -194,7 +194,7 @@
     <h2 class="contentSectionTitle2">What is nicerapp?</h2>
     <p>
     Nicerapp embraces the latest web technologies to provide beautiful new views to your data and files.<br/>
-    End-users can select any tiled, photo or even <a href="https://youtube.com" target="yt">youtube</a> video background to the content or apps.<br/>
+    Page owners and end-users can select any tiled, photo or even <a href="https://youtube.com" target="yt">youtube</a> video backgrounds to the content or apps.<br/>
     </p>
     <p>
     It is also licensed to be completely free, under the <a href="https://opensource.org/licenses/MIT" target="MIT_LICENSE">MIT License</a>.<br/>
@@ -239,6 +239,14 @@
     <h2 class="contentSectionTitle2" >Under development (but currently stalled)</h2>
     
     <a href="<?php echo $urls['backgroundsBrowser'];?>"><h3>3D file manager</h3></a>
+    
+    <h2 class="contentSectionTitle2" >Development direction</h2>
+    <p>
+        <ol>
+            <li>(2021) Social media features : instant messaging, e-mail functionality, features similar to what facebook offers, and forum features.</li>
+            <li>(2022) Webshop functionality.</li>
+        </ol>
+    </p>
     
     
     
