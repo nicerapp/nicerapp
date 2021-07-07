@@ -204,7 +204,7 @@
     
     <p>You can <a href="javascript:na.site.newAccount();">register</a> or <a href="javascript:na.site.displayLogin();">login</a> to access the <a href="<?php echo $urls['cms'];?>">blogging features</a>.</p>
     
-    <p>You can get short URLs (website addresses) for URLs of yours on https://said.by, via <a href="https://zoned.at" target="zonedAt">https://zoned.at</a>.</p>
+    <p>You can get short URLs (website addresses) for URLs of yours via <a href="https://zoned.at" target="zonedAt">https://zoned.at</a>.</p>
     
     <p><a href="<?php echo $urls['text_privacyPolicy'];?>">Privacy policy</a>.</p>
     <p><a href="<?php echo $urls['text_termsOfUse'];?>">Terms of use</a>.</p>
