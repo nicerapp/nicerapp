@@ -2,10 +2,22 @@
 this is a revolutionary and constantly evolving, well-maintained repository of HTML, CSS, JS and PHP code with which you can build websites that use a tiled image, photo or youtube video as site background for information and apps that are put over that background in a semi-transparent way.
 
 # Installation
-nicerapp can be run on both windows and linux and macOS systems, all it requires is a webserver that can serve up PHP scripts. 
-on windows, the https://wampserver.com/en WAMP stack (windows, apache, mysql, php) is well-suited, 
+Nicerapp can be run on windows, linux and macOS systems, possibly even on smartphones,
+and all it requires is a webserver that can serve up PHP scripts,
+and the couchdb database server (works with JSON data), 
+which can be augmented with a SQL server like mysql[1] (works with tables and rows and columns of data).
+[1] see https://adodb.org
+
+One guiding principle of developing web-apps with nicerapp is that we shield our database servers from the outside world as much as possible.
+This means all requests for data by the browsers go via the **browser's jQuery.com** (.../nicerapp_v2/nicerapp/3rd-party/jQuery) **AJAX** (asynchronous javascript and XML) code to PHP scripts that are all specific to the requested functionality, and then on to the actual database server (from **PHP**, which does all of the error checking and **reports back only FAILED or SUCCESS** in non-debug-mode **to the browser**).
+
+The couchdb server software and it's instructions can be found on https://couchdb.apache.org
+
+On windows, the https://wampserver.com/en WAMP stack (windows, apache, mysql, php) is well-suited, 
 and it can also be done on linux systems from the **terminal** window, as such :
 ( if you have no linux system yet, know that a core-i5 with a modest amount of RAM and SSD space runs the latest version just fine, and i recommend to install https://ubuntu.com or kubuntu in case you want semi-transparent windows in your OS )
+
+
 
 > sudo su -
 > 
