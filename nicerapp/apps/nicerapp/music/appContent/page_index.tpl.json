@@ -1,0 +1,118 @@
+{  
+   "saObjectType":"saPageSettings",
+   "divs":{  
+      ".vividialog":{  
+         "vividTheme":"dialog_black_navyBorder_square"
+      },
+      "#siteMenu":{  
+         "vividTheme":"polarbear_001"
+      },
+      "#siteStatusLogin":{  
+         "vividTheme":"dialog_red_purpleBorder_square_500"
+      },
+      "#sitePopup_confirm":{  
+         "vividTheme":"dialog_red_purpleBorder_square_500"
+      },
+      "#sitePopup_error":{  
+         "vividTheme":"dialog_red_purpleBorder_square_500"
+      },
+      "#sitePopup_login":{  
+         "vividTheme":"dialog_red_purpleBorder_square_500"
+      },
+      "#sitePopup_registration":{  
+         "vividTheme":"dialog_red_purpleBorder_square_500"
+      },
+      "#sitePopup_pageOptions":{  
+         "vividTheme":"dialog_red_purpleBorder_square_500"
+      },
+      "#sitePopup_dialogOptions":{  
+         "vividTheme":"dialog_red_purpleBorder_square_500"
+      },
+      "#siteTools":{  
+         "vividTheme":"dialog_black_navyBorder_square"
+      },
+      "#siteContent":{  
+         "vividTheme":"dialog_black_navyBorder_square"
+      },
+      "#siteStatus":{  
+         "vividTheme":"dialog_statusbar_blue_black"
+      },
+      "#siteVideo":{  
+         "vividTheme":"dialog_red_purpleBorder_square_500"
+      },
+      "#siteVideoSearch":{  
+         "vividTheme":"dialog_red_purpleBorder_ver"
+      },
+      "#siteComments":{  
+         "vividTheme":"dialog_navyBorder_stones_ver"
+      },
+     "#siteAds":{  
+		  "vividTheme":"dialog_navyBorder_stones_ver",
+		  "content":"{$SA_SITE_HD}apps/cardgame_tarot/appContent/tarotSite/content/ads/default.html"
+	   },
+      "#siteTreeview":{  
+         "vividTheme":"dialog_black_navyBorder_square"
+      },
+      "#productDetails":{  
+         "vividTheme":"dialog_black_navyBorder_square"
+      },
+      "#siteBackground":{  
+         "backgroundImage":"http:\/\/nicerapp.byethost14.com\/milkywayon155c.jpg",
+         "background":"javascript:var cd=eval('({\"r\":[{\"bg\":\"http:\/\/nicerapp.byethost14.com\/milkywayon155c.jpg\",\"css\":\"http:\/\/t10.imgup.net\/2008030817f906.jpg\"}],\"el_id\":\"siteBackground\",\"toUse\":{\"order\":[{\"layers\":[{\"selectionEngine\":\"random\",\"chances\":{\"landscape -sexy -christmas\":100},\"extraSearchterms\":\"scenery\",\"chancesExtraSearchterms\":{\"landscape -sexy -christmas scenery\":100}}],\"extraSearchterms\":\"scenery\"},{\"goto\":0}],\"callback\":[{\"layers\":[{\"selectionEngine\":\"random\",\"chances\":{\"landscape -sexy -christmas\":100},\"extraSearchterms\":\"scenery\",\"chancesExtraSearchterms\":{\"landscape -sexy -christmas scenery\":100}}],\"extraSearchterms\":\"scenery\"},{\"goto\":0}],\"orderCurrentIdx\":0,\"fadeTime\":1000},\"elJqueryID\":\"#siteBackground\"})'); na.bg.next_do_populate (cd.r, document.getElementById(cd.el_id), cd.toUse, cd.elJqueryID);"
+      }
+   },
+   "settingsPerURLmatched" : {
+		"---default---" : {
+			"about" : "TODO : IMPLEMENT"
+		},
+		"Firesnake" : {
+			"perBrowserDimensions" : {
+				"---default---" : {
+					"about" : {
+						"dontWorry" : "paramsfor_ AND the parameters it gets to pass along, are hardcoded-whitelist-filtered before execution.."
+					},
+					"paramsfor_na.s.c.setVisible" : {
+						"els" : [
+							{"element":"#siteContents","visible":true},
+							{"element":"#siteAds","visible":false},
+							{"element":"#siteComments","visible":false},
+							{"element":"#siteVideoSearch","visible":false},
+							{"element":"#siteVideo","visible":false},
+							{"element":"#productDetails","visible":false}
+						],
+						"resize" : true
+					}			
+				},
+				"upto_800x400" : {
+					"about" : "TODO : IMPLEMENT"
+				},
+				"from_800x400_to_1280x720" : {
+					"about" : "TODO : IMPLEMENT"
+				},
+				"largerthan_1280x720" : {
+					"about" : "TODO : IMPLEMENT"
+				}
+			}
+		},
+		"/shop/" : {
+			"about" : [
+				"/shop/ gets treated as text aka .indexOf(), not as reg-exp."
+			],
+			"perBrowserDimensions" : {
+				"---default---" : {
+					"paramsfor_na.sc.setVisible" : {
+						"els" : [
+							{"element":"#siteAds","visible":false},
+							{"element":"#siteComments","visible":false},
+							{"element":"#siteVideoSearch","visible":false},
+							{"element":"#siteVideo","visible":false},
+							{"element":"#siteStatus","visible":false},
+							{"element":"#productDetails","visible":true}
+						],
+						"resize" : true
+					}
+				}
+			}
+		}
+   }
+}
