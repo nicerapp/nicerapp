@@ -192,12 +192,21 @@
     });
     </script>
     <h2 class="contentSectionTitle2">What is nicerapp?</h2>
-    <div>
+    <p>
     Nicerapp embraces the latest web technologies to provide beautiful new views to your data and files.<br/>
+    End-users can select any tiled, photo or even <a href="https://youtube.com" target="yt">youtube</a> video background to the content or apps.<br/>
+    </p>
+    <p>
+    2021/7/7 :<br/>
+    Nicer.app and Said.by are currently in an "admin party" state, whereby Guest visitors get to change all the default cosmetic settings.<br/>
+    In just a little while, I will modify it so that one can change only the defaults for their own pages on a nicerapp site, 
+    and end-users will still be able to override these settings, if the owner of the page allows that.
+    </p>
+    <p>
     It is also licensed to be completely free, under the <a href="https://opensource.org/licenses/MIT" target="MIT_LICENSE">MIT License</a>.<br/>
     Full sources are available at <a href="https://github.com/nicerapp/nicerapp_v2" target="naGithub">https://github.com/nicerapp/nicerapp_v2</a>.<br/>
     Documentation is available at <a href="https://github.com/nicerapp/nicerapp_v2#readme" target="naDocs">https://github.com/nicerapp/nicerapp_v2#readme</a>.
-    </div>
+    </p>
     
 
     <h2 class="contentSectionTitle2">Available Apps</h2>
