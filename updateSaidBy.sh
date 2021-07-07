@@ -19,7 +19,7 @@ cp -rf /home/rene/data1/htdocs/nicerapp_v2/nicerapp/apps/nicerapp/analytics/* /h
 chown -R rene:www-data /home/rene/data1/htdocs/said.by/nicerapp/apps/nicerapp/analytics/*
 chmod -R 755 /home/rene/data1/htdocs/said.by/nicerapp/apps/nicerapp/analytics/*
 
-cp /home/rene/data1/htdocs/nicerapp_v2/nicerapp/domainConfigs/* /home/rene/data1/htdocs/said.by/nicerapp/domainConfigs/
+cp -Rf /home/rene/data1/htdocs/nicerapp_v2/nicerapp/domainConfigs/* /home/rene/data1/htdocs/said.by/nicerapp/domainConfigs/
 chown -R rene:www-data /home/rene/data1/htdocs/said.by/nicerapp/domainConfigs/*
 chmod -R 755 /home/rene/data1/htdocs/said.by/nicerapp/domainConfigs/*
 touch /home/rene/data1/htdocs/said.by/nicerapp/domainConfigs/said.by/index.combined.js
@@ -28,9 +28,21 @@ touch /home/rene/data1/htdocs/said.by/nicerapp/domainConfigs/said.by/index.combi
 touch /home/rene/data1/htdocs/said.by/nicerapp/domainConfigs/said.by/index.combined.css
 chmod 777 /home/rene/data1/htdocs/said.by/nicerapp/domainConfigs/said.by/index.combined.*
 
-cp /home/rene/data1/htdocs/nicerapp_v2/nicerapp/userInterface/* /home/rene/data1/htdocs/said.by/nicerapp/userInterface/
+cp -Rf /home/rene/data1/htdocs/nicerapp_v2/nicerapp/userInterface/* /home/rene/data1/htdocs/said.by/nicerapp/userInterface/
 chown -R rene:www-data /home/rene/data1/htdocs/said.by/nicerapp/userInterface/*
 chmod -R 755 /home/rene/data1/htdocs/said.by/nicerapp/userInterface/*
+
+cp -Rf /home/rene/data1/htdocs/nicerapp_v2/nicerapp/siteMedia/*.png /home/rene/data1/htdocs/said.by/nicerapp/siteMedia
+chown -R rene:www-data /home/rene/data1/htdocs/said.by/nicerapp/siteMedia/*.png
+chmod -R 755 /home/rene/data1/htdocs/said.by/nicerapp/siteMedia/*.png
+
+cp /home/rene/data1/htdocs/nicerapp_v2/nicerapp/siteMedia/*.jpg /home/rene/data1/htdocs/said.by/nicerapp/siteMedia
+chown rene:www-data /home/rene/data1/htdocs/said.by/nicerapp/siteMedia/*.jpg
+chmod 755 /home/rene/data1/htdocs/said.by/nicerapp/siteMedia/*.jpg
+
+cp /home/rene/data1/htdocs/nicerapp_v2/nicerapp/siteMedia/*.gif /home/rene/data1/htdocs/said.by/nicerapp/siteMedia
+chown rene:www-data /home/rene/data1/htdocs/said.by/nicerapp/siteMedia/*.gif
+chmod 755 /home/rene/data1/htdocs/said.by/nicerapp/siteMedia/*.gif
 
 cp /home/rene/data1/htdocs/nicerapp_v2/nicerapp/jsEngineeringMath/* /home/rene/data1/htdocs/said.by/nicerapp/jsEngineeringMath/
 chown -R rene:www-data /home/rene/data1/htdocs/said.by/nicerapp/jsEngineeringMath/*
