@@ -9,6 +9,7 @@ and the **couchdb database server[0]** which works with **JSON data**.
 However, it can be augmented with a **SQL server** like mysql[1] **which puts data in tables, rows and columns**.
 
 [0] see https://docs.couchdb.org/en/stable/install/index.html
+
 [1] see https://adodb.org
 
 The default database for nicerapp is couchdb. I find it more flexible and a lot easier to use than SQL data.
