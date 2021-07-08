@@ -329,6 +329,8 @@ na.ds = na.dialogSettings = {
         bs = $(event.currentTarget).css('boxShadow'),
         b = $(event.currentTarget).css('border');
         
+        if (!b) b = $(event.currentTarget).css('borderTopWidth')+' '+$(event.currentTarget).css('borderTopStyle')+' '+$(event.currentTarget).css('borderTopColor');
+        
         if (bs == 'none') {
             var
             sliders = [ 2, 2, 2, 2 ];
@@ -370,10 +372,15 @@ na.ds = na.dialogSettings = {
         
         var
         b = $(event.currentTarget).css('border'),
-        bw = b.match(/^\d+/)[0];
+        br = $(event.currentTarget).css('borderRadius');
         
-        $('#borderWidth').val(parseInt(bw));
-        $('#borderRadius').val(parseInt($(event.currentTarget).css('borderRadius')));
+        if (b!=='') {
+            var bw = b.match(/^\d+/)[0];
+            $('#borderWidth').val(parseInt(bw));
+        }
+        if (br!=='') {
+            $('#borderRadius').val(parseInt(br));
+        }
     },
     
     boxSettingsChanged : function (color) {

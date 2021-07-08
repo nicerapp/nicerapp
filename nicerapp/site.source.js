@@ -817,6 +817,8 @@ var nas = na.site = {
             }
             
             themeData.dialogs = JSON.stringify(themeData.dialogs);
+            if (themeData.dialogs.indexOf('+')!==-1) themeData.dialogs = themeData.dialogs.replace(/\+/g, ' ');
+            if (themeData.dialogs.indexOf('\\')!==-1) themeData.dialogs = themeData.dialogs.replace(/\\/g, '');
             
             var
             ac2 = {
@@ -846,17 +848,54 @@ var nas = na.site = {
             fontFamily : $(selector).css('fontFamily'),
             textShadow : $(selector+' .vividDialogContent').css('textShadow')
         };
+        ret[selector].border = 
+            $(selector).css('borderTopWidth')+' '
+            //+$(selector).css('borderRightWidth')+' '
+            //+$(selector).css('borderBottomWidth')+' '
+            //+$(selector).css('borderLeftWidth')+' '
+            +$(selector).css('borderTopStyle')+' '
+            //+$(selector).css('borderRightStyle')+' '
+            //+$(selector).css('borderBottomStyle')+' '
+            //+$(selector).css('borderLeftStyle')+' '
+            +$(selector).css('borderTopColor')+' '
+            //+$(selector).css('borderRightColor')+' '
+            //+$(selector).css('borderBottomColor')+' '
+            //+$(selector).css('borderLeftColor')+' ';
+        ret[selector].borderRadius = 
+            $(selector).css("borderTopLeftRadius")+' '
+            +$(selector).css("borderTopRightRadius")+' '
+            +$(selector).css("borderBottomRightRadius")+' '
+            +$(selector).css("borderBottomLeftRadius")+' ';
+
         ret[selector+' .vdBackground'] = {
             opacity : $(selector+' .vdBackground').css('opacity'),
             background : $(selector+' .vdBackground').css('background'),
             borderRadius : $(selector).css('borderRadius')
         };
+        ret[selector+' .vdBackground'].borderRadius = ret[selector].borderRadius;
+        if (selector == '#infoWindow_mp3desc') debugger;
+
+        // bugfix for firefox :
+        if (
+            ret[selector+' .vdBackground'].background===''
+            && $(selector+' .vdBackground').css('backgroundImage') !== ''
+        ) ret[selector+' .vdBackground'].background = 
+            $(selector+' .vdBackground').css('backgroundImage')+' ' 
+            +$(selector+' .vdBackground').css('backgroundRepeat');
+            
+        if (
+            ret[selector+' .vdBackground'].background===''
+            && $(selector+' .vdBackground').css('background-color') !== ''
+        ) ret[selector+' .vdBackground'].background = $(selector+' .vdBackground').css('background-color'); 
+        
         ret[selector+' td'] = {
             fontSize : $(selector+' td').css('fontSize'),
             fontWeight : $(selector+' td').css('fontWeight'),
             fontFamily : $(selector+' td').css('fontFamily'),
             textShadow : $(selector+' td').css('textShadow')
         };
+        if (ret[selector].fontFamily) ret[selector].fontFamily = ret[selector].fontFamily.replace(/"/g, '');
+        if (ret[selector+' td'].fontFamily) ret[selector+' td'].fontFamily = ret[selector+' td'].fontFamily.replace(/"/g, '');
         return ret;
     }
 }
