@@ -1412,7 +1412,8 @@
 		 * @return {boolean} busy
 		 */
 		History.busy = function(value){
-		
+
+            /*
 			return false; // 20150523 was causing problems, so disabled this function. (RV)
 		
 			// Apply
@@ -1445,6 +1446,7 @@
 
 			// Return
 			return History.busy.flag;
+            */
 		};
 
 		/**
