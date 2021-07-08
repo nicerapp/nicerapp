@@ -301,6 +301,7 @@ na.ds = na.dialogSettings = {
     
     borderSettingsSelected : function (color) {
         if (color) na.ds.settings.current.borderColor = color; else color = na.ds.settings.current.borderColor;
+        if (typeof color=='object') color = 'rgba('+color._r+', '+color._g+', '+color._b+', '+color._a+')'; // firefox bugfix
         var 
         bg = $('#'+na.ds.settings.current.forDialogID),
         newBorder = $('#borderWidth').val() + 'px ' + $('#borderType').val() + ' ' + color,
@@ -374,6 +375,7 @@ na.ds = na.dialogSettings = {
             if (color.match('rgba')) color = color.match(/rgba\(.*\)/)[0];
             else if (color.match('rgb')) color = color.match(/rgb\(.*\)/)[0];
         };
+        if (typeof color=='object') color = 'rgba('+color._r+', '+color._g+', '+color._b+', '+color._a+')'; // firefox bugfix
         
         var
         newBoxSetting = 
@@ -580,13 +582,11 @@ na.ds = na.dialogSettings = {
     
     textSettingsSelected_textColor : function (color) {
         if (color) na.ds.settings.current.textColor = color; else color = na.ds.settings.current.textColor;
-        debugger;
-        if (typeof color=='object') color = 'rgba('+color._r+', '+color._g+', '+color._b+', '+color._a+')';
+        if (typeof color=='object') color = 'rgba('+color._r+', '+color._g+', '+color._b+', '+color._a+')'; // firefox bugfix
         var
         el = $('#'+na.ds.settings.current.forDialogID),
         el2 = $('#'+na.ds.settings.current.forDialogID+' .vividDialogContent'),
         el3 = $('#'+na.ds.settings.current.forDialogID+' td');
-        debugger;
         $(el).add(el2).add(el3).css ({ color : color });
         /*if (na.ds.settings.current.fireSaveTheme) */na.site.saveTheme();
     },
