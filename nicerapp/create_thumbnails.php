@@ -11,7 +11,7 @@ $files = getFilePathList ($root, true, '/.*\.gif|.*\.jpg|.*\.png/', array('file'
 ob_start();
 
 foreach ($files as $idx => $original) {
-    echo '<p style="color:green;">'.$original.'</p>';
+    echo '<p style="color:green;">'.$idx.' of '.count($files).' : '.$original.'</p>';
     /*if (strpos(basename($original),'_')!==false) {
         $o2 = dirname($original).str_replace ('_', ' ', basename($original));
         $xec = 'mv "'.$original.'" "'.$o2.'"';

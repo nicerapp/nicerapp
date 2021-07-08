@@ -12,6 +12,10 @@
 {$cssFiles}
 {$cssThemeFiles}
 {$javascriptFiles}
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/tooltipster/4.2.8/js/tooltipster.bundle.min.js" integrity="sha512-ZKNW/Nk1v5trnyKMNuZ6kjL5aCM0kUATbpnWJLPSHFk/5FxnvF9XmpmjGbag6BEgmXiz7rL6o6uJF6InthyTSg==" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tooltipster/4.2.8/css/tooltipster.bundle.css" integrity="sha512-3zyscitq6+9V1nGiptsXHLVaJaAMCUQeDW34fygk9LdcM+yjYIG19gViDKuDGCbRGXmI/wiY9XjdIHdU55G97g==" crossorigin="anonymous" />-->
+<script src="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"/>
     <!--<script type="module" src="/nicerapp/userInterface/na3D.source.js"></script>-->
 
 <?php 
@@ -92,11 +96,11 @@ na.site.globals = $.extend(na.site.globals, {
     <div class="vividDialogContent vividScrollpane">
         <div class="navbar">
             <!--<img src="/nicerapp/siteMedia/btnSettingsBorder.png"/>-->
-            <div id="btnViewResult" class="vividButton_icon tooltip" title="View result" alt="View result" style="position:absolute;width:50px;height:50px;" onclick="if (!$(this).is('.disabled')) { if (!na.desktop.settings.visibleDivs.includes('#siteContent')) na.desktop.settings.visibleDivs.push('#siteContent'); na.site.settings.activeDivs=['#siteContent']; na.desktop.resize();}">
+            <div id="btnViewResult" class="vividButton_icon tooltip" title="View result" alt="View result" style="position:absolute;width:50px;height:50px;" onclick="if (!$(this).is('.disabled')) { if (!na.desktop.settings.visibleDivs.includes('#siteContent'))  na.desktop.settings.visibleDivs.push('#siteContent'); na.desktop.settings.visibleDivs.remove('#siteToolbarDialogSettings'); na.site.settings.activeDivs=['#siteContent']; na.desktop.resize();}">
                 <div class="cvbBorderCSS"></div>
-                <img class="cvbImgBorder" src="/nicerapp/siteMedia/btnCssVividButton_outerBorder.png"/>
-                <img class="cvbImgTile" src="/nicerapp/siteMedia/btnCssVividButton.png"/>
-                <img class="cvbImgButton" src="/nicerapp/siteMedia/btnZoomIncrease.png"/>
+                <!--<img class="cvbImgBorder" src="/nicerapp/siteMedia/btnCssVividButton_outerBorder.png"/>
+                <img class="cvbImgTile" src="/nicerapp/siteMedia/btnCssVividButton.png"/>-->
+                <img class="cvbImgButton" src="/nicerapp/siteMedia/btnBack.png"/>
             </div>
             <div id="btnSelectBorderSettings" class="vividButton_icon tooltip" title="Select border settings" alt="Select border settings" style="position:absolute;left:65px;width:50px;height:50px;" onclick="if (!$(this).is('.disabled')) na.dialogSettings.selectBorderSettings()">
                 <div class="cvbBorderCSS"></div>
@@ -156,7 +160,7 @@ na.site.globals = $.extend(na.site.globals, {
             <div class="flexBreak"></div>
 
             <label id="labelBorderWidth" for="borderWidth" class="boxSettingsLabel">Width :</label>
-            <input id="borderWidth" type="range" min="1" max="20" value="3" class="sliderOpacityRangeBorderSettings" onchange="na.ds.borderSettingsSelected();"/>
+            <input id="borderWidth" type="range" min="0" max="20" value="3" class="sliderOpacityRangeBorderSettings" onchange="na.ds.borderSettingsSelected();"/>
             <div class="flexBreak"></div>
             
             <label id="labelBorderRadius" for="borderRadius" class="boxSettingsLabel">Radius :</label>
@@ -292,6 +296,14 @@ na.site.globals = $.extend(na.site.globals, {
             </select>
             <div class="flexBreak"></div>
 
+            <label id="labelTextSize" class="textSettingsLabel" for="textSize">Text size :</label>
+            <input id="textSize" type="range" min="5" max="40" value="12" class="sliderOpacityRangeBorderSettings" onchange="na.ds.textSettingsSelected();"/>
+            <div class="flexBreak" style="height:8px;"></div>
+
+            <label id="labelTextWeight" class="textSettingsLabel" for="textWeight">Text boldness :</label>
+            <input id="textWeight" type="range" min="3" max="10" value="4" class="sliderOpacityRangeBorderSettings" onchange="na.ds.textSettingsSelected();"/>
+            <div class="flexBreak" style="height:8px;"></div>
+
             <label id="labelFontFamily" class="textSettingsLabel" for="fontFamily">Font color :</label>
             <input id="textColorpicker" class="dialogSettingsComponent" style="position:absolute;top:95px;"></input>
             <div class="flexBreak"></div>
@@ -401,7 +413,7 @@ na.site.globals = $.extend(na.site.globals, {
     <div id="siteLoginFailed" class="vividDialogPopup vividScrollpane">Login failed..</div>
     
     <!-- see fonts.google.com -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans|ABeeZee|Aclonica|Acme|Actor|Advent+Pro|Akronim|Alex+Brush|Architects+Daughter|Archivo+Black|Baloo|Bebas+Neue|Caveat|Chewy|Cookie|Cormorant|Courgette|Covered+By+Your+Grace|Dancing+Script|El+Messiri|Exo|Exo+2|Galada|Gloria+Hallelujah|Great+Vibes|Handlee|Indie+Flower|Kalam|Kaushan+Script|Khula|Knewave|Krona+One|Lacquer|Lemonada|Lusitana|M+PLUS+1p|Marck+Script|Merienda+One|Modak|Montserrat|Montserrat+Alternates|Mr+Dafoe|Nanum+Pen+Script|Noto+Serif+JP|Odibee+Sans|Oleo+Script|Orbitron|PT+Sans|Parisienne|Pathway+Gothic+One|Permanent+Marker|Playball|Pridi|Quattrocento+Sans|Rock+Salt|Sacramento|Saira+Condensed|Saira+Extra+Condensed|Saira+Semi+Condensed|Satisfy|Shadows+Into+Light|Shadows+Into+Light+Two|Sigmar+One|Signika+Negative|Slabo+27px|Source+Code+Pro|Special+Elite|Spectral|Spinnaker|Sriracha|Unica+One|Acme|Lato:300,300i,400,400i|Montserrat|Mukta+Malar|Ubuntu|Indie+Flower|Raleway|Pacifico|Fjalla+One|Work+Sans|Gloria+Hallelujah&display=swap" rel="stylesheet" onload="$(document).ready(function(){na.site.startTooltips(event);});">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|ABeeZee|Aclonica|Acme|Actor|Advent+Pro|Akronim|Alex+Brush|Architects+Daughter|Archivo+Black|Baloo|Bebas+Neue|Caveat|Chewy|Cookie|Cormorant|Courgette|Covered+By+Your+Grace|Dancing+Script|El+Messiri|Exo|Exo+2|Galada|Gloria+Hallelujah|Great+Vibes|Handlee|Indie+Flower|Kalam|Kaushan+Script|Khula|Knewave|Krona+One|Lacquer|Lemonada|Lusitana|M+PLUS+1p|Marck+Script|Merienda+One|Modak|Montserrat|Montserrat+Alternates|Mr+Dafoe|Nanum+Pen+Script|Noto+Serif+JP|Odibee+Sans|Oleo+Script|Orbitron|PT+Sans|Parisienne|Pathway+Gothic+One|Permanent+Marker|Playball|Pridi|Quattrocento+Sans|Rock+Salt|Sacramento|Saira+Condensed|Saira+Extra+Condensed|Saira+Semi+Condensed|Satisfy|Shadows+Into+Light|Shadows+Into+Light+Two|Sigmar+One|Signika+Negative|Slabo+27px|Source+Code+Pro|Special+Elite|Spectral|Spinnaker|Sriracha|Unica+One|Acme|Lato:300,300i,400,400i|Montserrat|Mukta+Malar|Ubuntu|Indie+Flower|Raleway|Pacifico|Fjalla+One|Work+Sans|Gloria+Hallelujah&display=swap" rel="stylesheet" onload="$(document).ready(function(){setTimeout(function(){na.site.startTooltips(event);},4000);});">
     <!--<link href="https://fonts.googleapis.com/css?family=Krona+One|Open+Sans|Architects+Daughter&display=swap" rel="stylesheet" onload="$(document).ready(function(){nas.startTooltips(event);});">-->
 
 </body>
