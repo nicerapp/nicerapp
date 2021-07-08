@@ -150,12 +150,21 @@ na.ds = na.dialogSettings = {
             var textShadowColor = test2[1];
         } else {
             var textShadowColor = 'black';
-        }
-        debugger;
-        
-
-        na.ds.settings.current.textColor = $(div).css('color');
+        };
         na.ds.settings.current.textShadowColor = textShadowColor;
+        
+        var
+        p1 = $(div).find('td').css('color'),
+        p2 = $(div).css('color');
+        if (p1) {
+            var textColor = p1
+        } else if (p2) {
+            var textColor = p2;
+        } else {
+            var textColor = 'white';
+        };
+        na.ds.settings.current.textColor = textColor;
+        
         na.ds.settings.current.selectedTextShadow = $('#textShadow_0')[0];
         na.ds.settings.current.boxSettings = $('#boxShadow_0')[0];
         setTimeout (function() {
