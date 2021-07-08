@@ -309,7 +309,7 @@ class nicerAppCMS {
     public function getPageCSS_specific($selector) {
         $debug = true;
         if ($debug) echo '<pre>';
-        var_dump ($_COOKIE); die();
+        var_dump ($_COOKIE); var_dump($cdbConfig); die();
         
         $cdbDomain = str_replace('.','_',$this->domain);
         $couchdbConfigFilepath = realpath(dirname(__FILE__)).'/domainConfigs/'.$this->domain.'/couchdb.json';
