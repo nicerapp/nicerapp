@@ -307,16 +307,14 @@ class nicerAppCMS {
     }
     
     public function getPageCSS_specific($selector) {
-        $debug = true;
+        //$debug = true;
         if ($debug) echo '<pre>';
-        var_dump ($_COOKIE); 
+        //var_dump ($_COOKIE); 
         
         $cdbDomain = str_replace('.','_',$this->domain);
         $couchdbConfigFilepath = realpath(dirname(__FILE__)).'/domainConfigs/'.$this->domain.'/couchdb.json';
         $cdbConfig = json_decode(file_get_contents($couchdbConfigFilepath), true);
-        var_dump ($couchdbConfigFilepath);
-        var_dump($cdbConfig); 
-        die();
+        //var_dump ($couchdbConfigFilepath); var_dump($cdbConfig); die();
 
         $cdb = new Sag($cdbConfig['domain'], $cdbConfig['port']);
         $cdb->setHTTPAdapter($cdbConfig['httpAdapter']);
@@ -330,6 +328,7 @@ class nicerAppCMS {
         
         try {
             //$cdb->login($cdbConfig['username'], $cdbConfig['password']);
+            var_dump ($username); var_dump ($pw);
             $cdb->login($username, $pw);
         } catch (Exception $e) {
             if ($debug) { echo 'status : Failed : Login failed (username : '.$username.', password : '.$pw.').<br/>'.PHP_EOL; die(); }
