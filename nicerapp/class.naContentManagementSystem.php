@@ -327,8 +327,7 @@ class nicerAppCMS {
         $pw = array_key_exists('pw', $_COOKIE) ? $_COOKIE['pw'] : $cdbConfig['password'];
         
         try {
-            //$cdb->login($cdbConfig['username'], $cdbConfig['password']);
-            var_dump ($username); var_dump ($pw);
+            //var_dump ($username); var_dump ($pw);
             $cdb->login($username, $pw);
         } catch (Exception $e) {
             if ($debug) { echo 'status : Failed : Login failed (username : '.$username.', password : '.$pw.').<br/>'.PHP_EOL; die(); }
@@ -347,7 +346,13 @@ class nicerAppCMS {
             'selector' => $selector,
             'fields' => array( '_id', 'user', 'role', 'url', 'dialogs' )
         );
-        $call = $cdb->find ($findCommand);
+        try {
+            $call = $cdb->find ($findCommand);
+        } catch (Exception $e) {
+            $msg = 'while trying to find in \''.$dbName.'\' : '.$e->getMsg();
+            echo $msg;
+            die();
+        }
         if ($debug) {
             echo 'info : $findCommand='; var_dump ($findCommand); echo '.<br/>'.PHP_EOL;
             echo 'info : $call='; var_dump ($call); echo '.<br/>'.PHP_EOL;
