@@ -349,7 +349,7 @@ class nicerAppCMS {
         try {
             $call = $cdb->find ($findCommand);
         } catch (Exception $e) {
-            $msg = 'while trying to find in \''.$dbName.'\' : '.$e->getMsg();
+            $msg = 'while trying to find in \''.$dbName.'\' : '.$e->getMessage();
             echo $msg;
             die();
         }
