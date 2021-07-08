@@ -138,8 +138,24 @@ na.ds = na.dialogSettings = {
         };
         $.ajax(ac);
 
-        na.ds.settings.current.textColor = 'white';
-        na.ds.settings.current.textShadowColor = 'black';
+        var 
+        div = $('#'+na.ds.settings.current.forDialogID),
+        rgbaRegEx = /(rgba\(\d{1,3}\,\s*\d{1,3}\,\s*\d{1,3}\,\s*([\d.]+))\).*/,
+        rgbRegEx = /(rgb\(\d{1,3}\,\s*\d{1,3}\,\s*\d{1,3})\).*/,
+        test1 = $(div).css('boxShadow').match (rgbaRegEx),
+        test2 = $(div).css('boxShadow').match (rgbRegEx);
+        if (test1) {
+            var textShadowColor = test1[1];
+        } else if (test2) {
+            var textShadowColor = test2[1];
+        } else {
+            var textShadowColor = 'black';
+        }
+        debugger;
+        
+
+        na.ds.settings.current.textColor = $(div).css('color');
+        na.ds.settings.current.textShadowColor = textShadowColor;
         na.ds.settings.current.selectedTextShadow = $('#textShadow_0')[0];
         na.ds.settings.current.boxSettings = $('#boxShadow_0')[0];
         setTimeout (function() {
@@ -486,7 +502,6 @@ na.ds = na.dialogSettings = {
             el2_fw = $(el2).css('fontWeight'),
             el3_fw = $(el3).css('fontWeight');
             
-            debugger;
             if (typeof el3_ts=='string' && el3_ts!=='') $('#textSize').val(parseInt(el3_ts));
             if (typeof el2_ts=='string' && el2_ts!=='') $('#textSize').val(parseInt(el2_ts));
             if (typeof el_ts=='string' && el_ts!=='') $('#textSize').val(parseInt(el_ts));
@@ -565,10 +580,13 @@ na.ds = na.dialogSettings = {
     
     textSettingsSelected_textColor : function (color) {
         if (color) na.ds.settings.current.textColor = color; else color = na.ds.settings.current.textColor;
+        debugger;
+        if (typeof color=='object') color = 'rgba('+color._r+', '+color._g+', '+color._b+', '+color._a+')';
         var
         el = $('#'+na.ds.settings.current.forDialogID),
         el2 = $('#'+na.ds.settings.current.forDialogID+' .vividDialogContent'),
-        el3 = $('#'+na.ds.settings.current.forDialogID+ 'td');
+        el3 = $('#'+na.ds.settings.current.forDialogID+' td');
+        debugger;
         $(el).add(el2).add(el3).css ({ color : color });
         /*if (na.ds.settings.current.fireSaveTheme) */na.site.saveTheme();
     },

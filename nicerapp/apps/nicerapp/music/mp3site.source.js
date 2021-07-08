@@ -356,7 +356,6 @@ var mp3site = {
                     //dragged = div.clone(true,true)[0],
                     dragged = ui.helper[0].children[0];//.clone()
                     pc = mp3site.playlistCount;
-                    debugger;
                     
                     if (!ui.helper[0].children[0]) return false;
                 
@@ -369,7 +368,7 @@ var mp3site = {
                     $(dragged).attr('id', newID);
                     dragged.evt = evt;
                     var x = evt.originalEvent.originalEvent.path;
-                    x.splice(0,1);
+                    //x.splice(0,1);
                     //x[0].id = x[0].id.replace(new RegExp(oldID), newID);
                     //x[0] = $('#'+x[0].id.replace(new RegExp(oldID), newID))[0];
                     //debugger;
@@ -399,7 +398,6 @@ var mp3site = {
                     //$(div).draggable (mp3site.mp3drag);
                     
                     //mp3site.reorderPlaylist();
-                    
                     if (mp3site.settings.stopped) mp3site.selectMP3 (newID, $(dragged).attr('file'), false);
                     mp3site.onWindowResize();
                     mp3site.playlistCount++;
