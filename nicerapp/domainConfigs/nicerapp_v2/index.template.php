@@ -135,13 +135,21 @@ na.site.globals = $.extend(na.site.globals, {
         </div>
         <div class="flexBreak"></div>
         <div id="specificitySettings" class="dialogSettingsComponent_alwaysVisible">
-            <label id="labelSpecificity" for="specificity" class="specificityLabel">Specificity</label>
-            <select id="specificity" onchange="na.ds.specificitySelected(event)">
-            </select>
+            <label id="labelSpecificity" for="specificity" class="specificityLabel" style="vertical-align:middle;">Specificity</label>
+            <select id="specificity" onchange="na.ds.specificitySelected(event)" style="vertical-align:middle;"></select>
+            
+            <div id="btnDeleteSpecificity" class="vividButton_icon tooltip" title="Delete all cosmetic settings for this specificity" alt="Delete all cosmetic settings for this specificity" onclick="if (!$(this).is('.disabled')) na.ds.deleteSpecificity(event)" style="margin-left:20px;vertical-align:middle;width:35px;height:35px;position:relative;display:inline-block">
+                <div class="cvbBorderCSS" style="width:35px;height:35px;"></div>
+                <img class="cvbImgBorder" src="/nicerapp/siteMedia/btnCssVividButton_outerBorder.png" style="width:35px;height:35px;"/>
+                <img class="cvbImgTile" src="/nicerapp/siteMedia/btnCssVividButton.png" style="width:35px;height:35px;"/>
+                <img class="cvbImgButton" src="/nicerapp/siteMedia/iconDelete.png" style="width:35px;height:35px;"/>
+            </div>
+            
+            
         </div>
         <div class="flexBreak"></div>
-        <div id="borderSettings" class="dialogSettingsComponent" style="top:128px;">
-            <input id="borderColorpicker" class="dialogSettingsComponent" style="position:absolute;top:110px;"></input>
+        <div id="borderSettings" class="dialogSettingsComponent" style="top:130px;">
+            <input id="borderColorpicker" class="dialogSettingsComponent" style="position:absolute;"></input>
             <div class="flexBreak" style="height:5px;"></div>
             
             <label id="labelBorderType" for="borderType" class="boxSettingsLabel">Type :</label>
@@ -201,18 +209,19 @@ na.site.globals = $.extend(na.site.globals, {
             <div class="flexBreak"></div>
             
         </div>
-        <input id="colorpicker" class="dialogSettingsComponent dialogSettings_colorPicker" style="position:absolute;top:110px;"></input>
-        <div id="dialogSettings_jsTree" class="dialogSettingsComponent" style="position:absolute;top:110px;display:none;"></div>
-        <div id="dialogSettings_photoAlbum_specs" class="dialogSettingsComponent" style="position:absolute;top:110px;display:none;">
+        <input id="colorpicker" class="dialogSettingsComponent dialogSettings_colorPicker" style="position:absolute;top:130px;"></input>
+        <div id="dialogSettings_jsTree" class="dialogSettingsComponent" style="position:absolute;top:130px;display:none;"></div>
+        <div id="dialogSettings_photoAlbum_specs" class="dialogSettingsComponent" style="position:absolute;top:130px;display:none;">
             <label id="label_dialogSettings_photoOpacity" class="labelDialogSettings" for="dialogSettings_photoOpacity">Opacity :</label>
             <input id="dialogSettings_photoOpacity" type="range" min="1" max="100" value="50" class="sliderOpacityRangeDialogSettings" oninput="if (na.ds.settings.current.selectedImage) na.ds.imageSelected(na.ds.settings.current.selectedImage);"/>
-            <div class="flexBreak"></div>
+            <div class="flexBreak"></div><br/>
+            
             <label id="label_dialogSettings_photoScale" class="labelDialogSettings" for="dialogSettings_photoScale">Scale :</label>
             <input id="dialogSettings_photoScale" type="range" min="25" max="200" value="100" class="sliderOpacityRangeDialogSettings" style="top:30px;" oninput="if (na.ds.settings.current.selectedImage) na.ds.imageSelected(na.ds.settings.current.selectedImage);"/>
             <div class="flexBreak"></div>
         </div>
-        <iframe id="dialogSettings_photoAlbum" class="dialogSettingsComponent" style="position:absolute;top:175px;display:none;border:0px"></iframe>
-        <div id="textSettings" class="dialogSettingsComponent" style="position:absolute;top:110px;display:none;">
+        <iframe id="dialogSettings_photoAlbum" class="dialogSettingsComponent" style="position:absolute;top:195px;display:none;border:0px"></iframe>
+        <div id="textSettings" class="dialogSettingsComponent" style="position:absolute;top:130px;display:none;">
             <label id="labelTextFontFamily" class="textSettingsLabel" for="textFontFamily">Font :</label>
             <select id="textFontFamily" onchange="na.ds.textSettingsSelected_updateDialog()">
                 <option value="ABeeZee">ABeeZee</option>
