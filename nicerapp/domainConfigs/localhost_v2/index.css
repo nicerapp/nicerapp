@@ -254,6 +254,7 @@ img.bg_last {
 }
 
 .sliderOpacityRangeDialogSettings {
+    vertical-align : middle;
     position : absolute;
     left : 5px;
     display : none;
@@ -376,8 +377,7 @@ img.bg_last {
     height : 1.5rem;
 }
 label {
-    display : inline-block;
-    width : 150px;
+    width : 170px;
     font-weight : bold;
     font-size : 1.1rem;
 }

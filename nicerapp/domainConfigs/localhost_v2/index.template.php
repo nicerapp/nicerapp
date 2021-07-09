@@ -206,12 +206,13 @@ na.site.globals = $.extend(na.site.globals, {
         <div id="dialogSettings_photoAlbum_specs" class="dialogSettingsComponent" style="position:absolute;top:130px;display:none;">
             <label id="label_dialogSettings_photoOpacity" class="labelDialogSettings" for="dialogSettings_photoOpacity">Opacity :</label>
             <input id="dialogSettings_photoOpacity" type="range" min="1" max="100" value="50" class="sliderOpacityRangeDialogSettings" oninput="if (na.ds.settings.current.selectedImage) na.ds.imageSelected(na.ds.settings.current.selectedImage);"/>
-            <div class="flexBreak"></div>
+            <div class="flexBreak"></div><br/>
+            
             <label id="label_dialogSettings_photoScale" class="labelDialogSettings" for="dialogSettings_photoScale">Scale :</label>
             <input id="dialogSettings_photoScale" type="range" min="25" max="200" value="100" class="sliderOpacityRangeDialogSettings" style="top:30px;" oninput="if (na.ds.settings.current.selectedImage) na.ds.imageSelected(na.ds.settings.current.selectedImage);"/>
             <div class="flexBreak"></div>
         </div>
-        <iframe id="dialogSettings_photoAlbum" class="dialogSettingsComponent" style="position:absolute;top:175px;display:none;border:0px"></iframe>
+        <iframe id="dialogSettings_photoAlbum" class="dialogSettingsComponent" style="position:absolute;top:195px;display:none;border:0px"></iframe>
         <div id="textSettings" class="dialogSettingsComponent" style="position:absolute;top:130px;display:none;">
             <label id="labelTextFontFamily" class="textSettingsLabel" for="textFontFamily">Font :</label>
             <select id="textFontFamily" onchange="na.ds.textSettingsSelected_updateDialog()">

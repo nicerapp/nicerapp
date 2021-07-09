@@ -524,16 +524,33 @@ na.ds = na.dialogSettings = {
     selectBackground_image : function () {
         na.ds.onclick($('#btnSelectBackgroundImage')[0]);
         $('.dialogSettingsComponent').not('#dialogSettings_photoAlbum, #dialogSettings_photoAlbum_specs').fadeOut('fast');
-        $('.dialogSettings_colorPicker').next().fadeOut('fast');
-        $('#dialogSettings_photoAlbum, #dialogSettings_photoOpacity, #dialogSettings_photoAlbum_specs').fadeIn('fast');
-        $('#dialogSettings_photoOpacity').css({
-            width:$('#siteToolbarDialogSettings').width() - $('#label_dialogSettings_photoOpacity').width() - 40,
-            left : $('#label_dialogSettings_photoOpacity').width() + 10
-        });
-        $('#dialogSettings_photoScale').css({
-            width:$('#siteToolbarDialogSettings').width() - $('#label_dialogSettings_photoScale').width() - 40,
-            left : $('#label_dialogSettings_photoScale').width() + 10
-        }).val(na.ds.settings.current.scale).fadeIn('fast');
+        setTimeout (function () {
+            $('.dialogSettings_colorPicker').next().fadeOut('fast');
+            $('#dialogSettings_photoAlbum, #dialogSettings_photoOpacity, #dialogSettings_photoAlbum_specs').fadeIn('fast');
+            setTimeout(function() {
+                $('#dialogSettings_photoAlbum_specs').css({
+                    display : 'flex',
+                    flexWrap : 'wrap',
+                    boxSizing: 'border-box',
+                    width : '97%'
+                });
+                $('.labelDialogSettings').css ({ width : 170, flexShrink : 0, flexGrow : 0 });
+                
+                $('#label_dialogSettings_photoOpacity').css ({ top : 4, position : 'absolute' });
+                $('#dialogSettings_photoOpacity').css({
+                    display : 'block',
+                    width : $('#siteToolbarDialogSettings').width() - 180,
+                    left : 150
+                });
+
+                $('#label_dialogSettings_photoScale').css ({ top : 37, position : 'absolute' });
+                $('#dialogSettings_photoScale').css({
+                    display : 'block',
+                    width:$('#siteToolbarDialogSettings').width() - 180,
+                    left : 150
+                }).val(na.ds.settings.current.scale).fadeIn('fast');
+            }, 250);
+        }, 250);
             
     },
     
