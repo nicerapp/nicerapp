@@ -817,8 +817,8 @@ var nas = na.site = {
             }
             
             themeData.dialogs = JSON.stringify(themeData.dialogs);
-            if (themeData.dialogs.indexOf('+')!==-1) themeData.dialogs = themeData.dialogs.replace(/\+/g, ' ');
-            if (themeData.dialogs.indexOf('\\')!==-1) themeData.dialogs = themeData.dialogs.replace(/\\/g, '');
+            //if (themeData.dialogs.indexOf('+')!==-1) themeData.dialogs = themeData.dialogs.replace(/\+/g, ' ');
+            //if (themeData.dialogs.indexOf('\\')!==-1) themeData.dialogs = themeData.dialogs.replace(/\\/g, '');
             
             var
             ac2 = {
@@ -848,7 +848,7 @@ var nas = na.site = {
             fontFamily : $(selector).css('fontFamily'),
             textShadow : $(selector+' .vividDialogContent').css('textShadow')
         };
-        ret[selector].border = 
+        ret[selector].border = // firefox work-around
             $(selector).css('borderTopWidth')+' '
             //+$(selector).css('borderRightWidth')+' '
             //+$(selector).css('borderBottomWidth')+' '
@@ -861,7 +861,7 @@ var nas = na.site = {
             //+$(selector).css('borderRightColor')+' '
             //+$(selector).css('borderBottomColor')+' '
             //+$(selector).css('borderLeftColor')+' ';
-        ret[selector].borderRadius = 
+        ret[selector].borderRadius = // firefox work-around
             $(selector).css("borderTopLeftRadius")+' '
             +$(selector).css("borderTopRightRadius")+' '
             +$(selector).css("borderBottomRightRadius")+' '
@@ -873,7 +873,7 @@ var nas = na.site = {
             borderRadius : $(selector).css('borderRadius')
         };
         ret[selector+' .vdBackground'].borderRadius = ret[selector].borderRadius;
-        if (selector == '#siteDateTime') debugger;
+        //if (selector == '#siteDateTime') debugger;
 
         // bugfix for firefox :
         if (

@@ -274,10 +274,71 @@ na.ds = na.dialogSettings = {
     specificitySelected : function (event) {
         var s = JSON.parse( $(event.currentTarget).find('option:selected')[0].value );
         na.ds.settings.current.specificity = s;
+        /* 
+         * NOT HANDY! :
         na.site.loadTheme (function () {
             var btn = $('#'+na.ds.settings.current.selectedButtonID)[0];
             na.ds.onclick(btn, false);
-        });
+        });*/
+    },
+    deleteSpecificity : function (event, callback) {
+        var
+        s = na.ds.settings.current.specificity,
+        themeData = {
+            username : na.account.settings.username,
+            pw : na.account.settings.password
+        };
+        
+        if (s.url) themeData.url = s.url;
+        if (s.role) themeData.role = s.role;
+        if (s.user) themeData.user = s.user;
+        
+        var
+        ac2 = {
+            type : 'POST',
+            url : '/nicerapp/ajax_delete_vividDialog_settings.php',
+            data : themeData,
+            success : function (data, ts, xhr) {
+                var 
+                state = History.getState(),
+                url = state.url.replace(document.location.origin,'').replace('/apps/', ''),
+                url2 = url.replace(document.location.origin,'').replace(document.location.host,'').replace('/apps/', '');
+                
+                var ac2 = {
+                    type : 'GET',
+                    url : '/nicerapp/ajax_get_pageSpecificSettings.php',
+                    data : {
+                        apps : url2
+                    },
+                    success : function (data, ts, xhr) {
+                        $('#cssPageSpecific, #jsPageSpecific').remove();
+                        $('head').append(data);
+                        setTimeout(function () {
+                            na.site.loadTheme (function () {
+                                var 
+                                btn = $('#'+na.ds.settings.current.selectedButtonID)[0],
+                                evt = { currentTarget : $('#specificity')[0] };
+                                
+                                na.ds.specificitySelected(evt);
+                                na.ds.onclick(btn, false);
+                                
+                                if (typeof callback=='function') callback (themeData, data);
+                            }); 
+                        }, 250);
+                    },
+                    failure : function (xhr, ajaxOptions, thrownError) {
+                    }
+                };
+                //setTimeout (function() { 
+                    $.ajax(ac2);
+                //}, 250);
+                
+            },
+            failure : function (xhr, ajaxOptions, thrownError) {
+                debugger;
+            }
+        };
+        $.ajax(ac2);
     },
     
     selectBorderSettings : function () {

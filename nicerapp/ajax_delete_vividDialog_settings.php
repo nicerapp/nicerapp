@@ -67,66 +67,30 @@ $findCommand = array (
 if (array_key_exists('role',$_POST) && !is_null($_POST['role'])) $findCommand['selector']['role'] = $_POST['role'];
 if (array_key_exists('user',$_POST) && !is_null($_POST['user'])) $findCommand['selector']['user'] = $_POST['user'];
 
-$call = $cdb->find ($findCommand);
-//var_dump ($call); die();
-
-if (!$call->headers->_HTTP->status===200) { 
-    $id = cdb_getRandomString(20); 
-} else {
-    $id = $call->body->docs[0]->_id;
-}
-
-$call = $cdb->get($id);
-//echo json_encode($call, JSON_PRETTY_PRINT).'<br/>'.PHP_EOL; die();
-$rec = (array)$call->body;
-$rec2 = array (
-    'dialogs' => json_decode($_POST['dialogs'], true)                
-);
-switch (json_last_error()) {
-    case JSON_ERROR_NONE:
-        //echo ' - No errors';
-    break;
-    case JSON_ERROR_DEPTH:
-        echo ' - Maximum stack depth exceeded';
-    break;
-    case JSON_ERROR_STATE_MISMATCH:
-        echo ' - Underflow or the modes mismatch';
-    break;
-    case JSON_ERROR_CTRL_CHAR:
-        echo ' - Unexpected control character found';
-    break;
-    case JSON_ERROR_SYNTAX:
-        echo ' - Syntax error, malformed JSON';
-    break;
-    case JSON_ERROR_UTF8:
-        echo ' - Malformed UTF-8 characters, possibly incorrectly encoded';
-    break;
-    default:
-        echo ' - Unknown error';
-    break;
-}
-
-
-if (array_key_exists('url',$_POST) && !is_null($_POST['url'])) $rec2['url'] = $_POST['url'];
-if (array_key_exists('role',$_POST) && !is_null($_POST['role'])) $rec2['role'] = $_POST['role'];
-if (array_key_exists('user',$_POST) && !is_null($_POST['user'])) $rec2['user'] = $_POST['user'];
-
-$rec = array_merge ($rec, $rec2);
-//echo '<pre>'; var_dump ($rec); var_dump($_POST); var_dump(json_last_error()); die();
 try {
-    $call3 = $cdb->post($rec);
+    $call = $cdb->find ($findCommand);
+    //echo '<pre>'; var_dump ($call); die();
+
 } catch (Exception $e) {
+    echo 'Status : Failed';
     if ($debug) {
-        echo 'status : Failed : could not update record in database ('.$dbName.').<br/>'.PHP_EOL;
-        echo '$rec = <pre style="color:blue">'.PHP_EOL; var_dump ($rec); echo PHP_EOL.'</pre>'.PHP_EOL;
-        echo '$call3 = <pre style="color:red">'.PHP_EOL; var_dump ($call3); echo PHP_EOL.'</pre>'.PHP_EOL;
-        echo '$e = <pre style="color:red">'.PHP_EOL; var_dump ($e); echo PHP_EOL.'</pre>'.PHP_EOL; 
-        die(); 
-    
-    } else {
-        echo 'status : Failed.'; die();
+        echo 'When : While trying to find in db "'.$dbName.'" the record with the following fields :'.PHP_EOL;
+        var_dump ($findCommand['selector']); echo PHP_EOL;
+        echo 'Reason : '.$e->getMessage();
     }
 }
-        
-echo 'status : Success';
+
+$d = $call->body->docs[0];
+try {
+
+    $cdb->delete ($d->_id,$d->_rev);
+    echo 'Status : Success';
+    
+} catch (Exception $e) {
+    echo 'Status : Failed.'.PHP_EOL;
+    if ($debug) {
+        echo 'When : While trying to delete from "'.$dbName.'", record with _id='.$d->_id.' and _rev='.$d->_rev.PHP_EOL;
+        echo 'Reason : '.$e->getMessage().PHP_EOL;
+    }
+}
 ?>

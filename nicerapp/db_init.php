@@ -23,7 +23,7 @@ if (
 
 
 $security_admin = '{ "admins": { "names": ["Administrator"], "roles": [] }, "members": { "names": [], "roles": [] } }';
-$security_guest = '{ "admins": { "names": [], "roles": ["Guests"] }, "members": { "names": [], "roles": ["Guests"] } }';
+$security_guest = '{ "admins": { "names": [], "roles": ["guests"] }, "members": { "names": [], "roles": ["guests"] } }';
 
 global $cms;
 $cms = new nicerAppCMS();
