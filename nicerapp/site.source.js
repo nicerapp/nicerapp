@@ -873,7 +873,7 @@ var nas = na.site = {
             borderRadius : $(selector).css('borderRadius')
         };
         ret[selector+' .vdBackground'].borderRadius = ret[selector].borderRadius;
-        if (selector == '#infoWindow_mp3desc') debugger;
+        if (selector == '#siteDateTime') debugger;
 
         // bugfix for firefox :
         if (
@@ -884,7 +884,11 @@ var nas = na.site = {
             +$(selector+' .vdBackground').css('backgroundRepeat');
             
         if (
-            ret[selector+' .vdBackground'].background===''
+            ret[selector+' .vdBackground'].background
+            && (
+                ret[selector+' .vdBackground'].background===''
+                || ret[selector+' .vdBackground'].background.match('none')
+            )
             && $(selector+' .vdBackground').css('background-color') !== ''
         ) ret[selector+' .vdBackground'].background = $(selector+' .vdBackground').css('background-color'); 
         

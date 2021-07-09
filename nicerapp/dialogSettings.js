@@ -282,9 +282,9 @@ na.ds = na.dialogSettings = {
     
     selectBorderSettings : function () {
         na.ds.onclick($('#btnSelectBorderSettings')[0]);
-        $('.dialogSettingsComponent').not('#borderSettings').fadeOut('normal');
-        $('.dialogSettings_colorPicker').next().fadeOut('normal');
-        $('#borderSettings').fadeIn('normal', 'swing', function () {
+        $('.dialogSettingsComponent').not('#borderSettings').fadeOut('fast');
+        $('.dialogSettings_colorPicker').next().fadeOut('fast');
+        $('#borderSettings').fadeIn('fast', 'swing', function () {
             $('#borderSettings').css({display:'flex'});
             $('.boxSettingsLabel').css({width:$('.boxSettingsLabel').width()+10});
             $('#boxShadow').css({width:$('#borderSettings').width() - $('#labelBoxShadow').width() - 20 });
@@ -326,11 +326,11 @@ na.ds = na.dialogSettings = {
         if (event.currentTarget.id!==na.ds.settings.current.forDialogID) na.ds.settings.current.boxSettings = event.currentTarget;
         
         var 
-        bs = $(event.currentTarget).css('boxShadow'),
+        bs = $(event.currentTarget).css('box-shadow'),
         b = $(event.currentTarget).css('border');
         
         if (!b) b = $(event.currentTarget).css('borderTopWidth')+' '+$(event.currentTarget).css('borderTopStyle')+' '+$(event.currentTarget).css('borderTopColor');
-        
+        debugger;
         if (bs == 'none') {
             var
             sliders = [ 2, 2, 2, 2 ];
@@ -351,7 +351,7 @@ na.ds = na.dialogSettings = {
             sliders[3] = parseInt(sliders[3].replace('px',''));
             
             $('#boxShadowColorpicker').spectrum('set', rex[1]);
-            na.ds.settings.current.borderColor = rex2[1];
+            na.ds.settings.current.borderColor = rex2[1] || 'lime';
             na.ds.boxSettingsChanged (rex[1]);
         };
         
@@ -433,8 +433,15 @@ na.ds = na.dialogSettings = {
     },
     
     deleteBoxShadow : function(evt) {
-        $(na.ds.settings.current.boxSettings).remove();
-        na.ds.settings.current.boxSettings = $('#boxShadow_0')[0];
+        if ( na.ds.settings.current.boxSettings !== $('#boxShadow_0')[0] ) {
+            $(na.ds.settings.current.boxSettings).remove();
+            na.ds.settings.current.boxSettings = $('#boxShadow_0')[0];
+        } else {
+            $('#boxShadowXoffset').val(0);
+            $('#boxShadowYoffset').val(0);
+            $('#boxShadowSpreadRadius').val(0);
+            $('#boxShadowBlurRadius').val(0);
+        };
         na.ds.boxSettingsChanged();
     },
     
@@ -442,22 +449,22 @@ na.ds = na.dialogSettings = {
     
     selectBackground_color : function () {
         na.ds.onclick($('#btnSelectBackgroundColor')[0]);
-        $('.dialogSettingsComponent').not('.sp-container').fadeOut('normal');
-        $('.sp-container').fadeIn('normal').css({top:8,opacity:1});
+        $('.dialogSettingsComponent').not('.sp-container').fadeOut('fast');
+        $('.sp-container').fadeIn('fast').css({top:8,opacity:1});
     },
 
     selectBackground_folder : function () {
         na.ds.onclick($('#btnSelectBackgroundFolder')[0]);
-        $('.dialogSettingsComponent').not('#dialogSettings_jsTree').fadeOut('normal');
-        $('.dialogSettings_colorPicker').next().fadeOut('normal');
-        $('#dialogSettings_jsTree').fadeIn('normal');
+        $('.dialogSettingsComponent').not('#dialogSettings_jsTree').fadeOut('fast');
+        $('.dialogSettings_colorPicker').next().fadeOut('fast');
+        $('#dialogSettings_jsTree').fadeIn('fast');
     },
     
     selectBackground_image : function () {
         na.ds.onclick($('#btnSelectBackgroundImage')[0]);
-        $('.dialogSettingsComponent').not('#dialogSettings_photoAlbum, #dialogSettings_photoAlbum_specs').fadeOut('normal');
-        $('.dialogSettings_colorPicker').next().fadeOut('normal');
-        $('#dialogSettings_photoAlbum, #dialogSettings_photoOpacity, #dialogSettings_photoAlbum_specs').fadeIn('normal');
+        $('.dialogSettingsComponent').not('#dialogSettings_photoAlbum, #dialogSettings_photoAlbum_specs').fadeOut('fast');
+        $('.dialogSettings_colorPicker').next().fadeOut('fast');
+        $('#dialogSettings_photoAlbum, #dialogSettings_photoOpacity, #dialogSettings_photoAlbum_specs').fadeIn('fast');
         $('#dialogSettings_photoOpacity').css({
             width:$('#siteToolbarDialogSettings').width() - $('#label_dialogSettings_photoOpacity').width() - 40,
             left : $('#label_dialogSettings_photoOpacity').width() + 10
@@ -465,7 +472,7 @@ na.ds = na.dialogSettings = {
         $('#dialogSettings_photoScale').css({
             width:$('#siteToolbarDialogSettings').width() - $('#label_dialogSettings_photoScale').width() - 40,
             left : $('#label_dialogSettings_photoScale').width() + 10
-        }).val(na.ds.settings.current.scale).fadeIn('normal');
+        }).val(na.ds.settings.current.scale).fadeIn('fast');
             
     },
     
@@ -504,9 +511,9 @@ na.ds = na.dialogSettings = {
     
     selectTextSettings : function () {
         na.ds.onclick($('#btnSelectTextSettings')[0]);
-        $('.dialogSettingsComponent').not('#textSettings').fadeOut('normal');
-        $('.dialogSettings_colorPicker').next().fadeOut('normal');
-        $('#textSettings').fadeIn('normal', 'swing', function () {
+        $('.dialogSettingsComponent').not('#textSettings').fadeOut('fast');
+        $('.dialogSettings_colorPicker').next().fadeOut('fast');
+        $('#textSettings').fadeIn('fast', 'swing', function () {
             $('.textSettingsLabel').css({width:$('.textSettingsLabel').width()+10});
             $('#textFontFamily').css({width:$('#textSettings').width() - $('#labelTextFontFamily').width() - 20 });
             var

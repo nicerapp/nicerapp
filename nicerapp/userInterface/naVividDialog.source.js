@@ -47,9 +47,9 @@ class naVividDialog {
         
         
         $('.vdSettings', t.el).hover (function() {
-            $(this).stop(true,true).animate({opacity:1},'slow');
+            $(this).stop(true,true).animate({opacity:1},'fast');
         }, function() {
-            $(this).stop(true,true).animate({opacity:0.0001},'slow');
+            $(this).stop(true,true).animate({opacity:0.0001},'fast');
         });
     };
     
