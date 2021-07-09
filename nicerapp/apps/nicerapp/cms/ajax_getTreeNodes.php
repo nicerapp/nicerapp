@@ -49,7 +49,7 @@ $data = array();
 $ret = array();
 foreach ($databases as $idx=>$dbName) {
     try { $cdb->setDatabase ($dbName, false); } catch (Exception $e) { echo $e->getMessage(); };
-    $docs = $cdb->getAllDocs();
+    try { $docs = $cdb->getAllDocs(); } catch (Exception $e) { echo $e->getMessage(); };
     $data = $docs->body->rows;
     foreach ($data as $idx2=>$recordSummary) {
         $record = $cdb->get($recordSummary->id);
