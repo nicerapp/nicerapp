@@ -344,24 +344,38 @@ var nas = na.site = {
                         });
                     };
                     na.desktop.resize();
+                    //function() {
+                        var ac2 = {
+                            type : 'GET',
+                            url : '/nicerapp/ajax_get_pageSpecificSettings.php',
+                            data : {
+                                apps : url2
+                            },
+                            success : function (data, ts, xhr) {
+                                $('#cssPageSpecific, #jsPageSpecific').remove();
+                                $('head').append(data);
+                                setTimeout(function() {
+                                    na.site.loadTheme(function() {
+                                        var 
+                                        btn = $('#'+na.ds.settings.current.selectedButtonID)[0],
+                                        evt = { currentTarget : $('#specificity')[0] };
+                                        
+                                        na.ds.specificitySelected(evt);
+                                        na.ds.onclick(btn, false);
+                                        
+                                        if (typeof callback=='function') callback (themeData, data);
+                                    });
+                                }, 250);
+                            },
+                            failure : function (xhr, ajaxOptions, thrownError) {
+                            }
+                        };
+                        setTimeout (function() { 
+                            $.ajax(ac2);
+                        }, 250);
+                        
+                    //});
 
-                    var ac2 = {
-                        type : 'GET',
-                        url : '/nicerapp/ajax_get_pageSpecificSettings.php',
-                        data : {
-                            apps : url2
-                        },
-                        success : function (data, ts, xhr) {
-                            $('#cssPageSpecific, #jsPageSpecific').remove();
-                            $('head').append(data);
-                            setTimeout(na.site.loadTheme, 250);
-                        },
-                        failure : function (xhr, ajaxOptions, thrownError) {
-                        }
-                    };
-                    setTimeout (function() { 
-                        $.ajax(ac2);
-                    }, 250);
 
                     
                 }, 
