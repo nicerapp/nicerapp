@@ -137,7 +137,15 @@ na.site.globals = $.extend(na.site.globals, {
         <div id="specificitySettings" class="dialogSettingsComponent_alwaysVisible">
             <label id="labelSpecificity" for="specificity" class="specificityLabel" style="vertical-align:middle;">Specificity</label>
             <select id="specificity" onchange="na.ds.specificitySelected(event)" style="vertical-align:middle;"></select>
-            <img id="btnDeleteSpecificity" src="/nicerapp/siteMedia/iconDelete.png" class="vividButton_icon" onclick="na.ds.deleteSpecificity(event)" style="vertical-align:middle;width:40px;height:40px;"/>
+            
+            <div id="btnDeleteSpecificity" class="vividButton_icon tooltip" title="Delete all cosmetic settings for this specificity" alt="Delete all cosmetic settings for this specificity" onclick="if (!$(this).is('.disabled')) na.ds.deleteSpecificity(event)" style="margin-left:20px;vertical-align:middle;width:35px;height:35px;position:relative;display:inline-block">
+                <div class="cvbBorderCSS" style="width:35px;height:35px;"></div>
+                <img class="cvbImgBorder" src="/nicerapp/siteMedia/btnCssVividButton_outerBorder.png" style="width:35px;height:35px;"/>
+                <img class="cvbImgTile" src="/nicerapp/siteMedia/btnCssVividButton.png" style="width:35px;height:35px;"/>
+                <img class="cvbImgButton" src="/nicerapp/siteMedia/iconDelete.png" style="width:35px;height:35px;"/>
+            </div>
+            
+            
         </div>
         <div class="flexBreak"></div>
         <div id="borderSettings" class="dialogSettingsComponent" style="top:130px;">

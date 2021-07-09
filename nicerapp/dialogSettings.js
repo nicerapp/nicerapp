@@ -181,6 +181,11 @@ na.ds = na.dialogSettings = {
 
         var s = JSON.parse( $('#specificity').find('option:selected')[0].value );
         na.ds.settings.current.specificity = s;
+        if (!s.role && !s.user) {
+            na.site.settings.buttons['#btnDeleteSpecificity'].disable();
+        } else {
+            na.site.settings.buttons['#btnDeleteSpecificity'].enable();
+        }
         
         $('#btnViewResult .cvbBorderCSS').css({ boxShadow : '0px 0px 0px 0px rgba(0,0,0,0)' });
         $('#btnViewResult .cvbImgButton').css({ top : 2 });
@@ -274,6 +279,11 @@ na.ds = na.dialogSettings = {
     specificitySelected : function (event) {
         var s = JSON.parse( $(event.currentTarget).find('option:selected')[0].value );
         na.ds.settings.current.specificity = s;
+        if (!s.role && !s.user) {
+            na.site.settings.buttons['#btnDeleteSpecificity'].disable();
+        } else {
+            na.site.settings.buttons['#btnDeleteSpecificity'].enable();
+        }
         /* 
          * NOT HANDY! :
         na.site.loadTheme (function () {
@@ -292,7 +302,7 @@ na.ds = na.dialogSettings = {
         if (s.url) themeData.url = s.url;
         if (s.role) themeData.role = s.role;
         if (s.user) themeData.user = s.user;
-        
+
         var
         ac2 = {
             type : 'POST',
