@@ -382,6 +382,17 @@ label {
     font-size : 1.1rem;
     display : inline-block;
 }
+.radioInput {
+    display : inline-block;
+}
+.flexColumns {
+    display : flex;
+    position : absolute;
+    top : 75px;
+}
+.labelDialogSettings2 {
+    display : inline-flex;
+}
 
 #siteRegistrationError {
     display : none;

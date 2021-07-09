@@ -631,8 +631,6 @@ na.ds = na.dialogSettings = {
         $('.dialogSettingsComponent').not('#textSettings').fadeOut('fast');
         $('.dialogSettings_colorPicker').next().fadeOut('fast');
         $('#textSettings').fadeIn('fast', 'swing', function () {
-            $('.textSettingsLabel').css({width:$('.textSettingsLabel').width()+10});
-            $('#textFontFamily').css({width:$('#textSettings').width() - $('#labelTextFontFamily').width() - 20 });
             var
             el = $('#'+na.ds.settings.current.forDialogID),
             el2 = $('#'+na.ds.settings.current.forDialogID+' .vividDialogContent'),
@@ -648,6 +646,10 @@ na.ds = na.dialogSettings = {
             test1a = $(el).css('textShadow').match(re1a),
             test1b = $(el).css('textShadow').match(re1b);
               
+            $('.textSettingsLabel').css({width:$('.textSettingsLabel').width()+10});
+            $('#textFontFamily')
+                .css({width:$('#textSettings').width() - $('#labelTextFontFamily').width() - 20 })
+                .val(el3[0] ? $(el3).css('fontFamily') : el[0] ? $(el).css('fontFamily') : 'ABeeZee');
             $('#textSize')
                 .css({width:$('#textSettings').width() - $('#labelTextSize').width() - 40 })
                 .val(el3_ts!=='' 
