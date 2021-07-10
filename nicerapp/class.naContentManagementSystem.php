@@ -243,17 +243,49 @@ class nicerAppCMS {
         }
         $selectors = array (
             0 => array (
+                'permissions' => array (
+                    'read' => array(
+                        'role' => 'guests'
+                    ),
+                    'write' => array(
+                        'user' => 'Administrator'
+                    )
+                ),
                 'url' => '[default]'
             ),
             1 => array (
+                'permissions' => array (
+                    'read' => array(
+                        'role' => 'guests'
+                    ),
+                    'write' => array(
+                        'user' => 'Administrator'
+                    )
+                ),
                 'url' => $url
             ),
         
             2 => array (
+                'permissions' => array (
+                    'read' => array(
+                        'role' => 'guests'
+                    ),
+                    'write' => array(
+                        'role' => 'guests'
+                    )
+                ),
                 'url' => '[default]',
                 'role' => 'Guests'
             ),
             3 => array (
+                'permissions' => array (
+                    'read' => array(
+                        'role' => 'guests'
+                    ),
+                    'write' => array(
+                        'role' => 'guests'
+                    )
+                ),
                 'url' => $url,
                 'role' => 'Guests'
             )
@@ -261,8 +293,8 @@ class nicerAppCMS {
         $selectorNames = array ( 
             0 => 'site',
             1 => 'page',
-            2 => 'site role Guests',
-            3 => 'page role Guests'
+            2 => 'site group Guests',
+            3 => 'page group Guests'
         );
         
         //var_dump ($this->app); die();
@@ -275,11 +307,27 @@ class nicerAppCMS {
             && $this->app['cmsText']['user'] == $_COOKIE['loginName']
         ) {
             $selectors[] = array (
+                'permissions' => array (
+                    'read' => array(
+                        'user' => $_COOKIE['loginName']
+                    ),
+                    'write' => array(
+                        'user' => $_COOKIE['loginName']
+                    )
+                ),
                 'url' => '[default]',
                 'user' => $_COOKIE['loginName']
             );
             $selectorNames[] = 'site user '.$_COOKIE['loginName'];
             $selectors[] = array (
+                'permissions' => array (
+                    'read' => array(
+                        'user' => $_COOKIE['loginName']
+                    ),
+                    'write' => array(
+                        'user' => $_COOKIE['loginName']
+                    )
+                ),
                 'url' => $url,
                 'user' => $_COOKIE['loginName']
             );
@@ -321,6 +369,10 @@ class nicerAppCMS {
         if ($debug) echo '<pre>';
         //var_dump ($_COOKIE);  
         
+        $permissions = $selector['permissions'];
+        if ($debug) { echo '$permissions='; var_dump ($permissions); echo '<br/><br/>'.PHP_EOL.PHP_EOL; };
+        unset ($selector['permissions']);
+        
         $cdbDomain = str_replace('.','_',$this->domain);
         $exampleConfigFilepath = realpath(dirname(__FILE__)).'/domainConfigs/'.$this->domain.'/couchdb.EXAMPLE.json';
         $couchdbConfigFilepath = realpath(dirname(__FILE__)).'/domainConfigs/'.$this->domain.'/couchdb.json';
@@ -341,12 +393,78 @@ class nicerAppCMS {
         $cdb->setHTTPAdapter($cdbConfig['httpAdapter']);
         $cdb->useSSL($cdbConfig['useSSL']);
         
+        // fetch the roles (aka user-groups) that $username is a member of :
+        $username = $cdbConfig['adminUsername'];
+        $pw = $cdbConfig['adminPassword'];
+        try {
+            //var_dump ($username); var_dump ($pw);
+            $cdb->login($username, $pw);
+        } catch (Exception $e) {
+            if ($debug) { echo 'status : Failed : Login failed (username : '.$username.', password : '.$pw.').<br/>'.PHP_EOL; die(); }
+        }
+        if ($debug) { echo 'info : Login succesful (username : '.$username.', password : '.$pw.').<br/>'.PHP_EOL;  }
+
+        $dbName = '_users';
+        $cdb->setDatabase($dbName, false);
+        
+        
         $username = array_key_exists('loginName',$_COOKIE) ? $_COOKIE['loginName'] : $cdbConfig['username'];
         $username = str_replace(' ', '__', $username);
         $username = str_replace('.', '_', $username);
-        
         $pw = array_key_exists('pw', $_COOKIE) ? $_COOKIE['pw'] : $cdbConfig['password'];
+
         
+        
+        $findCommand = array (
+            'selector' => array (
+                '_id' => 'org.couchdb.user:'.$username
+            ),
+            'fields' => array ('_id', 'roles' )
+        );
+        try {
+            $call = $cdb->find ($findCommand);
+        } catch (Exception $e) {
+            $msg = 'while trying to find in \''.$dbName.'\' : '.$e->getMessage();
+            echo $msg;
+            die();
+        }
+        if ($debug) {
+            echo 'info : $findCommand='; var_dump ($findCommand); echo '.<br/>'.PHP_EOL;
+            echo 'info : $call='; var_dump ($call); echo '.<br/>'.PHP_EOL;
+            //die();
+        }
+
+        
+        // check permissions
+        $hasPermission = false;
+        $roles = $call->body->docs[0]->roles;
+        foreach ($permissions as $permissionType => $accounts) {
+            if ($permissionType=='read') {
+                foreach ($accounts as $accountType => $userOrGroupID) {
+                    if ($accountType == 'role') {
+                        foreach ($roles as $roleIdx => $groupID) {
+                            if ($userOrGroupID==$groupID) {
+                                $hasPermission = true;
+                            }
+                        }
+                    }
+                    if ($accountType == 'user' && $username == $userOrGroupID) {
+                        $hasPermission = true;
+                    }
+                }
+            }
+        }
+                        
+        if (!$hasPermission) {
+            $msg = 'class.naContentManagementSystem.php::getPageCSS_specific() : !$hasPermission for username='.$username;
+            trigger_error ($msg, E_USER_NOTICE);
+            if ($debug) echo $msg.'<br/>'.PHP_EOL;
+            
+            if ($debug) echo '</pre>';
+            return false;
+        }
+        
+        // try to fetch the requested cosmetics data
         try {
             //var_dump ($username); var_dump ($pw);
             $cdb->login($username, $pw);
@@ -389,9 +507,13 @@ class nicerAppCMS {
                     'background' => ( isset($d->background) ? $d->background : ''),
                     'backgroundSearchKey' => ( isset($d->backgroundSearchKey) ? $d->backgroundSearchKey : '')
                 );
+                if ($debug) echo '</pre>';
+
                 return json_decode(json_encode($ret),true);
             }
         }
+        if ($debug) echo '</pre>';
+        
         return false;        
     }
   
