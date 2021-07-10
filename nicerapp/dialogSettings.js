@@ -652,11 +652,11 @@ na.ds = na.dialogSettings = {
                 .val(el3[0] ? $(el3).css('fontFamily') : el[0] ? $(el).css('fontFamily') : 'ABeeZee');
             $('#textSize')
                 .css({width:$('#textSettings').width() - $('#labelTextSize').width() - 40 })
-                .val(el3_ts!=='' 
+                .val(typeof el3_ts == 'string' && el3_ts!=='' 
                         ? parseInt(el3_ts.replace('px','')) 
-                        : el2_ts!==''
+                        : typeof el2_ts == 'string' && el2_ts!==''
                             ? parseInt(el2_ts.replace('px',''))
-                            : el_ts!==''
+                            : typeof el_ts == 'string' && el_ts!==''
                                 ? parseInt(el_ts.replace('px'))
                                 : 12
                  );
