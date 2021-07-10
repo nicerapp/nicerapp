@@ -31,8 +31,7 @@ na.site.globals = $.extend(na.site.globals, {
     couchdb : <?php echo $couchdbSettingsStr?>,
     referer : '<?php echo (array_key_exists('HTTP_REFERER',$_SERVER)?$_SERVER['HTTP_REFERER']:'');?>',
     myip : '<?php echo str_replace('.','_',(array_key_exists('X-Forwarded-For',apache_request_headers())?apache_request_headers()['X-Forwarded-For'] : $_SERVER['REMOTE_ADDR']))?>',
-    domain : '{$domain}',
-    app : {$app}
+    domain : '{$domain}'
 });
 </script>
 {$pageSpecificCSS}
@@ -188,19 +187,19 @@ na.site.globals = $.extend(na.site.globals, {
             <span id="boxShadowInsetClear">&nbsp;</span>
             <div class="flexBreak"></div>
             
-            <label id="labelBoxShadowXoffset" class="boxSettingsLabel" for="boxShadowXoffset">Box shadow horizontal offset :</label>
+            <label id="labelBoxShadowXoffset" class="boxSettingsLabel" for="boxShadowXoffset">Box shadow<br/>horizontal offset :</label>
             <input id="boxShadowXoffset" type="range" min="-10" max="10" value="2" class="sliderOpacityRangeBorderSettings" onchange="na.ds.boxSettingsChanged();"/>
             <div class="flexBreak"></div>
 
-            <label id="labelBoxShadowYoffset" class="boxSettingsLabel" for="boxShadowYoffset">Box shadow vertical offset :</label>
+            <label id="labelBoxShadowYoffset" class="boxSettingsLabel" for="boxShadowYoffset">Box shadow<br/>vertical offset :</label>
             <input id="boxShadowYoffset" type="range" min="-10" max="10" value="2" class="sliderOpacityRangeBorderSettings" onchange="na.ds.boxSettingsChanged();"/>
             <div class="flexBreak"></div>
 
-            <label id="labelBoxShadowSpreadRadius" class="boxSettingsLabel" for="boxShadowSpreadRadius">Box shadow spread radius :</label>
+            <label id="labelBoxShadowSpreadRadius" class="boxSettingsLabel" for="boxShadowSpreadRadius">Box shadow<br/>spread radius :</label>
             <input id="boxShadowSpreadRadius" type="range" min="0" max="10" value="2" class="sliderOpacityRangeBorderSettings" onchange="na.ds.boxSettingsChanged();"/>
             <div class="flexBreak"></div>
 
-            <label id="labelBoxShadowBlurRadius" class="boxSettingsLabel" for="boxShadowBlurRadius">Box shadow blur radius :</label>
+            <label id="labelBoxShadowBlurRadius" class="boxSettingsLabel" for="boxShadowBlurRadius">Box shadow<br/>blur radius :</label>
             <input id="boxShadowBlurRadius" type="range" min="0" max="10" value="2" class="sliderOpacityRangeBorderSettings" onchange="na.ds.boxSettingsChanged();"/>
             <div class="flexBreak"></div>
 
@@ -211,7 +210,7 @@ na.site.globals = $.extend(na.site.globals, {
         </div>
         <input id="colorpicker" class="dialogSettingsComponent dialogSettings_colorPicker" style="position:absolute;top:130px;"></input>
         <div id="dialogSettings_jsTree" class="dialogSettingsComponent" style="position:absolute;top:130px;display:none;"></div>
-        <div id="dialogSettings_photoAlbum_specs" class="dialogSettingsComponent" style="position:absolute;top:130px;display:none;">
+        <div id="dialogSettings_photoAlbum_specs" class="dialogSettingsComponent" style="flex-flow: wrap row;position:absolute;top:130px;display:none;">
             <label id="label_dialogSettings_photoOpacity" class="labelDialogSettings" for="dialogSettings_photoOpacity">Opacity :</label>
             <input id="dialogSettings_photoOpacity" type="range" min="1" max="100" value="50" class="sliderOpacityRangeDialogSettings" oninput="if (na.ds.settings.current.selectedImage) na.ds.imageSelected(na.ds.settings.current.selectedImage);"/>
             <div class="flexBreak"></div><br/>
@@ -219,9 +218,19 @@ na.site.globals = $.extend(na.site.globals, {
             <label id="label_dialogSettings_photoScale" class="labelDialogSettings" for="dialogSettings_photoScale">Scale :</label>
             <input id="dialogSettings_photoScale" type="range" min="25" max="200" value="100" class="sliderOpacityRangeDialogSettings" style="top:30px;" oninput="if (na.ds.settings.current.selectedImage) na.ds.imageSelected(na.ds.settings.current.selectedImage);"/>
             <div class="flexBreak"></div>
+            
+            <div class="flexColumns">
+                <label for="dialogSettings_photoSpecificity_dialog" class="labelDialogSettings2">Dialog
+                <input type="radio" id="dialogSettings_photoSpecificity_dialog" class="radioInput" value="dialog" checked="checked"/>
+                </label>
+                
+                <label for="dialogSettings_photoSpecificity_dialog" class="labelDialogSettings2">Page
+                <input type="radio" id="dialogSettings_photoSpecificity_page" class="radioInput" value="dialog"/>
+                </label>
+            </div>
         </div>
-        <iframe id="dialogSettings_photoAlbum" class="dialogSettingsComponent" style="position:absolute;top:195px;display:none;border:0px"></iframe>
-        <div id="textSettings" class="dialogSettingsComponent" style="position:absolute;top:130px;display:none;">
+        <iframe id="dialogSettings_photoAlbum" class="dialogSettingsComponent" style="position:absolute;top:230px;display:none;border:0px"></iframe>
+        <div id="textSettings" class="dialogSettingsComponent" style="position:absolute;top:140px;display:none;">
             <label id="labelTextFontFamily" class="textSettingsLabel" for="textFontFamily">Font :</label>
             <select id="textFontFamily" onchange="na.ds.textSettingsSelected_updateDialog()">
                 <option value="ABeeZee">ABeeZee</option>
@@ -326,15 +335,15 @@ na.site.globals = $.extend(na.site.globals, {
             </div>
             <div class="flexBreak"></div>
             
-            <label id="labelTextShadowXoffset" class="textSettingsLabel" for="textShadowXoffset">Text shadow horizontal offset :</label>
+            <label id="labelTextShadowXoffset" class="textSettingsLabel" for="textShadowXoffset">Text shadow<br/>horizontal offset :</label>
             <input id="textShadowXoffset" type="range" min="-10" max="10" value="2" class="sliderOpacityRangeBorderSettings" onchange="na.ds.textSettingsSelected();"/>
             <div class="flexBreak"></div>
 
-            <label id="labelTextShadowYoffset" class="textSettingsLabel" for="textShadowYoffset">Text shadow vertical offset :</label>
+            <label id="labelTextShadowYoffset" class="textSettingsLabel" for="textShadowYoffset">Text shadow<br/>vertical offset :</label>
             <input id="textShadowYoffset" type="range" min="-10" max="10" value="2" class="sliderOpacityRangeBorderSettings" onchange="na.ds.textSettingsSelected();"/>
             <div class="flexBreak"></div>
 
-            <label id="labelTextShadowBlurRadius" class="textSettingsLabel" for="textShadowBlurRadius">Text shadow blur radius :</label>
+            <label id="labelTextShadowBlurRadius" class="textSettingsLabel" for="textShadowBlurRadius">Text shadow<br/>blur radius :</label>
             <input id="textShadowBlurRadius" type="range" min="0" max="10" value="2" class="sliderOpacityRangeBorderSettings" onchange="na.ds.textSettingsSelected();"/>
             <div class="flexBreak"></div>
 
