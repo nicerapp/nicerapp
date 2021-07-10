@@ -34,19 +34,18 @@ if ($debug) { echo 'info : '.__FILE__.' : $debug = true.<br/>'.PHP_EOL;  }
 $cdb = new Sag($cdbConfig['domain'], $cdbConfig['port']);
 $cdb->setHTTPAdapter($cdbConfig['httpAdapter']);
 $cdb->useSSL($cdbConfig['useSSL']);
-try {
-    $cdb->login($_POST['username'], $_POST['pw']);
-} catch (Exception $e) {
-    if ($debug) { echo 'status : Failed : Login failed (username : '.$_POST['username'].', password : '.$_POST['pw'].').<br/>'.PHP_EOL; die(); }
-}
-if ($debug) { echo 'info : Login succesful (username : '.$_POST['username'].', password : '.$_POST['pw'].').<br/>'.PHP_EOL;  }
-
-
 
 // create users
 $username = $_POST['username'];
 $username = str_replace(' ', '__', $username);
 $username = str_replace('.', '_', $username);
+
+try {
+    $cdb->login($username, $_POST['pw']);
+} catch (Exception $e) {
+    if ($debug) { echo 'status : Failed : Login failed (username : '.$username.', password : '.$_POST['pw'].').<br/>'.PHP_EOL; die(); }
+}
+if ($debug) { echo 'info : Login succesful (username : '.$username.', password : '.$_POST['pw'].').<br/>'.PHP_EOL;  }
 
 $security_user = '{ "admins": { "names": ["'.$username.'"], "roles": [] }, "members": { "names": ["'.$username.'"], "roles": [] } }';
 if ($debug && false) {
