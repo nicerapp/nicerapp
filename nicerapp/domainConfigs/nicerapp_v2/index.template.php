@@ -219,7 +219,7 @@ na.site.globals = $.extend(na.site.globals, {
             <input id="dialogSettings_photoScale" type="range" min="25" max="200" value="100" class="sliderOpacityRangeDialogSettings" style="top:30px;" oninput="if (na.ds.settings.current.selectedImage) na.ds.imageSelected(na.ds.settings.current.selectedImage);"/>
             <div class="flexBreak"></div>
             
-            <div class="flexColumns" style="top:65px">
+            <div class="flexColumns" style="display:inline-flex;top:65px">
                 <label for="dialogSettings_photoSpecificity_dialog" class="labelDialogSettings2">Dialog
                 <input type="radio" id="dialogSettings_photoSpecificity_dialog" name="psdp" class="radioInput" value="dialog" checked="checked"/>
                 </label>
