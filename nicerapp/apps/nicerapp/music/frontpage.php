@@ -27,7 +27,7 @@
         }
     </style>
     <center>
-    <h1 id="pageTitle" style="font-family:Krona One;font-size:200%;">nicer.app music collections</h1><br/>
+    <h1 id="pageTitle" style="font-size:200%;">nicer.app music collections</h1><br/>
     <br/>
     <p>
     <a href="/apps/eyJtdXNpYyI6eyJzZXQiOiJCZWF1dGlmdWxfQ2hpbGxfTWl4ZXMifX0">Beautiful Chill Mixes</a><br/>
