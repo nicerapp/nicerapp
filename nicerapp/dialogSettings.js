@@ -294,6 +294,7 @@ na.ds = na.dialogSettings = {
         } else {
             na.site.settings.buttons['#btnDeleteSpecificity'].enable();
         }
+        
         na.site.loadTheme (function () { // **POSSIBLY** NOT NEEDED
             var btn = $('#'+na.ds.settings.current.selectedButtonID)[0];
             na.ds.onclick(btn, false);
@@ -452,7 +453,8 @@ na.ds = na.dialogSettings = {
         $('#boxShadowYoffset').val(sliders[1]);
         $('#boxShadowSpreadRadius').val(sliders[2]);
         $('#boxShadowBlurRadius').val(sliders[3]);
-        
+
+        /*
         $('.boxShadow').remove();
         if (bs !== 'none' && bs.match(',')) {
             var bss = bs.split(', rgb');
@@ -462,6 +464,7 @@ na.ds = na.dialogSettings = {
                 $('#boxShadow').append (html);
             }
         };
+        */
         
         var
         b = $(event.currentTarget).css('border'),

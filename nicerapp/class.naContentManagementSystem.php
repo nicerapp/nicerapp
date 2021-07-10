@@ -165,6 +165,7 @@ class nicerAppCMS {
         $contentFetcher = realpath(dirname(__FILE__).'/../').'/ajax_get_content.php';
         $r = execPHP ($contentFetcher);
         $r = json_decode ($r, true);
+        //echo '<pre>'; var_dump ($r);echo '<br/><br/>'; var_dump(json_last_error()); die();
         return $r;
     }
     

@@ -2,13 +2,14 @@
 require_once (dirname(__FILE__).'/nicerapp/boot.php');
     if (array_key_exists('apps', $_GET) && $_GET['apps']!=='') {
         $app = json_decode (base64_decode_url($_GET['apps']), true);
-        //var_dump ($app); die();
+        //var_dump ($app); echo PHP_EOL; //die();
         $folders = getFilePathList (realpath(dirname(__FILE__)).'/nicerapp/apps', true, '/.*/', array('dir'), 1);
+        //var_dump ($folders); echo PHP_EOL; //die();
         foreach ($folders as $idx => $folder) {
             foreach ($app as $appName => $appSettings) {
                 if ($appName=='meta') continue;
                 $files = getFilePathList($folder.'/'.$appName, false, '/app.dialog.*\.php/', array('file'), 1);
-                //var_dump ($files); die();
+                //var_dump ($folder.'/'.$appName); var_dump ($files); echo PHP_EOL; //die();
                 
                 $ret = array ();
                 

@@ -20,7 +20,6 @@ function execPHP ($file) {
     ob_flush();
     ob_end_clean();
     ob_start();
-    //echo $file; die();
     $p = strpos($file,'?');
     $qs = substr($file, $p+1, strlen($file)-$p-1);
     $f = (
