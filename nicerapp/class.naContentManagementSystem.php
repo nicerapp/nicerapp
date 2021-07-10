@@ -345,6 +345,7 @@ class nicerAppCMS {
                 $r = '<script id="jsPageSpecific" type="text/javascript">'.PHP_EOL;
                 $r .= 'na.site.globals = $.extend(na.site.globals, {'.PHP_EOL;
                 $r .= "\tbackground : '".$css['background']."',".PHP_EOL;
+                $r .= "\tbackgroundSearchKey : '".$css['backgroundSearchKey']."',".PHP_EOL;
                 $r .= "\tcosmeticsSpecificityName : '".$selectorNames[$idx]."',".PHP_EOL;
                 $r .= "\tcosmeticsSpecificityNames : ".json_encode($selectorNames).",".PHP_EOL;
                 $r .= "\tcosmeticsDBkeys : ".json_encode($selectors).",".PHP_EOL;

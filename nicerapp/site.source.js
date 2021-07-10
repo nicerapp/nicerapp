@@ -856,6 +856,9 @@ var nas = na.site = {
             //if (themeData.dialogs.indexOf('+')!==-1) themeData.dialogs = themeData.dialogs.replace(/\+/g, ' ');
             //if (themeData.dialogs.indexOf('\\')!==-1) themeData.dialogs = themeData.dialogs.replace(/\\/g, '');
             
+            themeData.backgroundSearchKey = na.site.globals.backgroundSearchKey;
+            themeData.background = na.site.globals.background;
+            
             var
             ac2 = {
                 type : 'POST',

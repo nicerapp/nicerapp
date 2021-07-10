@@ -621,8 +621,15 @@ na.ds = na.dialogSettings = {
     
     imageSelected : function (el) {
         na.ds.settings.current.selectedImage = el;
-        var bg = $('.vdBackground', $('#'+na.ds.settings.current.forDialogID)[0]);
-        $(bg).css({ background : 'url("'+el.src+'") repeat', opacity : parseInt($('#dialogSettings_photoOpacity').val())/100, backgroundSize : na.ds.settings.current.scale+'% '+na.ds.settings.current.scale+'%' });
+        var 
+        bg = $('.vdBackground', $('#'+na.ds.settings.current.forDialogID)[0]),
+        src = el.src.replace('thumbs/','');
+        
+        if ($('#dialogSettings_photoSpecificity_dialog')[0].checked) {
+            $(bg).css({ background : 'url("'+src+'") repeat', opacity : parseInt($('#dialogSettings_photoOpacity').val())/100, backgroundSize : na.ds.settings.current.scale+'% '+na.ds.settings.current.scale+'%' });
+        } else {
+            na.backgrounds.next ('#siteBackground', na.site.globals.backgroundSearchKey, src);
+        }
         /*if (na.ds.settings.current.fireSaveTheme) */na.site.saveTheme();
     },
     
