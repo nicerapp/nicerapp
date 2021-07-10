@@ -245,7 +245,11 @@ var nas = na.site = {
                         na.site.globals.background = defaultBG;
                     }
                 };
-                if (na.site.globals.backgroundSearchKey==='') na.site.globals.backgroundSearchKey = 'landscape';
+                if (
+                    !na.site.globals.backgroundSearchKey
+                    || na.site.globals.backgroundSearchKey===''
+                ) na.site.globals.backgroundSearchKey = 'landscape';
+                
                 na.backgrounds.next ('#siteBackground', na.site.globals.backgroundSearchKey, na.site.globals.background);
             },
             failure : function (xhr, ajaxOptions, thrownError) {
