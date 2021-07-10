@@ -694,7 +694,6 @@ na.ds = na.dialogSettings = {
                     ? $(el).css('fontFamily')
                     : 'ABeeZee',
         newFontFamily = newFontFamily.split(', ')[0].replace(/"/g,'');
-        debugger;
 
         na.ds.settings.current.textColor = newTextColor;
         na.ds.settings.current.textShadowColor = newTextShadowColor;
