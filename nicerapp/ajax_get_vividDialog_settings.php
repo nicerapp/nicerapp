@@ -119,7 +119,13 @@ if ($callOK) {
     if (array_key_exists('user',$_POST) && !is_null($_POST['user'])) $findCommand['selector']['user'] = $_POST['user'];
     
     
-    $call = $cdb->find ($findCommand);
+    try { 
+        $call = $cdb->find ($findCommand);
+    } catch (Exception $e) {
+        echo 'Error while accessing $dbName='.$dbName.'<br/><pre>'.PHP_EOL;
+        echo $e->getMessage();
+        die();
+    };
     if ($debug) {
         echo 'info : $findCommand='; var_dump ($findCommand); echo '.<br/>'.PHP_EOL;
         echo 'info : $call='; var_dump ($call); echo '.<br/>'.PHP_EOL;
