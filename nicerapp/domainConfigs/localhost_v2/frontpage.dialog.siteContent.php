@@ -213,9 +213,7 @@
     <br/>
     Within the next few hours or days it'll be possible to set the cosmetic settings *and* the page background to something you selected <br/>
     from the menu or from a file-tree via the <a href="https://said.by" target="saidBy">blogging features (on https://said.by)</a>,<br/>
-    as the background to use for any of a number of different viewing behavior by the end-user :<br/>
-    <br/>
-    At the moment i'm still stuck on how to arrange the enforcement of these permissions, and how to present them to the end-user in a way that is not too intrusive or too time-consuming or difficult to maintain.<br/>
+    as the background to use for any of a number of different viewing behavior by the end-user.<br/>
     </p>
     
 
