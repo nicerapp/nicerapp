@@ -1,0 +1,8 @@
+#-- REQUIREMENTS
+
+https://bitbucket.org/nicerapp/php-couchdb-rv/src/master/
+
+
+#-- INSTALLATION
+
+Assuming you unpacked this library into your webserver at http(s)://mydomain.com/couchdbMail, with the files in /var/www/html/couchdbMail, you would browse to http(s)://mydomain.com/couchdbMail/install.php to do a first-time install or subsequent editing of the couchdbMail main configurations.

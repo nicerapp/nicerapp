@@ -1,0 +1,17 @@
+input {
+    border : 1px solid black;
+}
+
+textarea {
+    border : 1px solid black;
+}
+
+input:focus {
+    outline : none !important;
+    border : 2px solid lightgreen;
+}
+
+textarea:focus {
+    outline : none !important;
+    border : 2px solid lightgreen;
+}

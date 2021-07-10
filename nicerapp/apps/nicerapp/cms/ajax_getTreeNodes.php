@@ -15,7 +15,7 @@ $ip = (array_key_exists('X-Forwarded-For',apache_request_headers())?apache_reque
     echo '403 - Access forbidden.';
     die();
 }*/
-session_start();
+if (session_status() === PHP_SESSION_NONE) session_start(); 
 
 global $cms;
 $cms = new nicerAppCMS();

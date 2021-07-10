@@ -1,0 +1,208 @@
+html, body {
+    width : 100%;
+    height : 100%;
+    overflow : hidden;
+    padding : 0px;
+    margin : 0px;
+    z-index : -1;
+}
+
+#wmOuter {
+    width : 100%;
+    height : 100%;
+}
+
+#td_left {
+    width : 10%;
+    vertical-align : top;
+}
+
+#wmLeft {
+    width:auto;
+    height:100%;
+    vertical-align : top;
+    width : 100%;
+    padding : 5px;
+    background : rgba(0,0,0,0.5);
+    border-radius : 7px;
+    /*word-break: break-word;*/
+}
+
+#td_right_top {
+    width : 90%;
+    height : 50%;
+    vertical-align:top;
+}
+
+#td_right_bottom {
+    width : 90%;
+    height : 50%;
+}
+
+
+.mailboxName {
+    color : lightgreen;
+}
+
+.mailboxName.selected {
+    color : white;
+    font-weight : bold;
+}
+    
+.bgMailboxName {
+    background : rgba(0,0,0,0.5);
+    border-radius : 5px;
+}
+
+#wmMails_header_table {
+    opacity : 0.0001;
+    width : 100%;
+}
+th {
+    text-align : left;
+    color : lightgreen;
+}
+
+#wmMails_table {
+    width : 100%;
+}
+
+#wmMails {
+    width : 96%;
+    height : 96%;
+    overflow : hidden;
+    overflow-y : auto;
+    background : rgba(0,0,0,0.35);
+    padding : 5px;
+    padding-right:15px;  
+}
+
+.pictogramButton {
+    /*position : absolute; doesnt work well in #siteQuickbar*/
+    width : 30px;
+    height : 30px;
+}
+
+.pictogramButton__onoff {
+}
+
+.pictogramButton__td {
+    width : 46px;
+    height : 46px;
+    vertical-align : middle;
+    text-align : center;
+}
+
+.pictogramButton__onoff {
+    /*margin:5px; /* keep synced with .pictogramButton__onoffIndicator.siteManager_smallDisplay */
+}
+
+.pictogramButton__hoverIndicator {
+    /* keep synced with .pictogramButton__onoffIndicator.siteManager_smallDisplay */
+    width : 37px;
+    height : 37px;
+    
+    background-image: url('/nicerapp/siteMedia/backgrounds/tiled/active/orange/467781133_4f4354223e.jpg'); 
+    background-size : 37px 37px;
+    background-repeat:repeat;
+    opacity:0.58;
+    border-radius:8px;
+    border:1px solid white;
+}
+
+.pictogramButton__onoffIndicator {
+    width : 37px;
+    height : 37px;
+
+
+    background-image: url('/nicerapp/siteMedia/backgrounds/tiled/active/green/dgren051.jpg'); 
+    background-size: 37px 37px; 
+    background-repeat:repeat;
+    opacity:0.7;
+    border-radius:8px;
+    border:1px solid white;
+}
+
+.totalMsgsInThread {
+    text-align:center;
+}
+
+.mailInfo {
+    color : white;
+    z-index : 50;
+}
+
+.mailInfo.selected {
+    color : lime;
+}
+.bgMailInfo {
+    background : rgba(0,0,0,0.5);
+    border-radius : 5px;
+}
+
+.bgMailThreadInfo {
+    background : rgba(0,255,0,0.7);
+    border-radius : 10px;
+    z-index : 99;
+}
+#wmThreadInfo tr.selected {
+    color : white; 
+}
+
+
+#wmThreadInfo {
+    display : none;
+    position : absolute;
+    background : rgba(0,0,0,0.8);
+    border-radius : 10px;
+    padding : 10px;
+    z-index : 100;
+}
+#wmThreadInfo table {
+    color : white;
+}
+
+#wmWriteMail {
+    display:none;
+    position:absolute;
+}
+
+#tinymce {
+    width:100%; 
+    height:*;
+}
+
+#wmEmail {
+    overflow : hidden;
+    overflow-y : auto;
+    background : rgba(255,255,255,0.55);
+    padding : 5px;
+}
+
+#wmMails_table_header, #wmWriteMail_header_table {
+    color : lime;
+}
+
+.btn {
+    width : 40px;
+    height : 40px;
+}
+
+.mailserverName {
+    font-weight:bold;
+    color : #BBF;
+}
+
+.mailboxName {
+    color : lightgreen;
+}
+
+.mailDetails {
+    position : absolute;
+    padding : 5px;
+    border-radius : 5px;
+    border : 1px solid black;
+    background : rgba(0,0,0,0.7);
+    color : white;
+}
+

@@ -1,0 +1,36 @@
+#cmLeft {
+}
+
+#cmRight {
+    overflow : auto;
+}
+
+#cmEmail {
+    overflow : auto;
+}
+
+#cmMails_header {
+    display : none;
+}
+
+.btn {
+    width : 40px;
+}
+
+.mailserverName {
+    font-weight:bold;
+    color : navy;
+}
+
+.mailboxName {
+    color : green;
+}
+
+.mailDetails {
+    position : absolute;
+    padding : 5px;
+    border-radius : 5px;
+    border : 1px solid black;
+    background : rgba(0,0,0,0.7);
+    color : white;
+}

@@ -86,7 +86,7 @@ na.desktop = {
         for (var divIdx in na.d.g.divs) {
             if (typeof na.d.g.divs[divIdx]!=='string') continue;
             var divID = na.d.g.divs[divIdx];
-            $(divID).css(na.d.g.defaultPos[divID]);
+            if (na.d.g.defaultPos[divID]) $(divID).css(na.d.g.defaultPos[divID]);
             var cookie = $.cookie('visible_'+divID.substr(1));            
             if (cookie=='true') {
                 cookies = true;
@@ -520,8 +520,8 @@ na.desktop = {
                         divs[divID].left += na.d.g.margin;
                         divs[divID].width -= (3 * na.d.g.margin);
                         //if (visibleDivs.includes('#siteDateTime')) {
-                            divs[divID].top += (2 * na.d.g.margin );
-                            divs[divID].height -= (2 * na.d.g.margin );
+                            divs[divID].top += na.d.g.margin;
+                            divs[divID].height -= na.d.g.margin;
                         //}
                         if (
                             visibleDivs.includes('#siteComments')
@@ -535,7 +535,8 @@ na.desktop = {
                         divs[divID].top += (2 * na.d.g.margin );
                         break;
                     case '#siteToolbarLeft':
-                        divs[divID].height -= (2 * na.d.g.margin);
+                        divs[divID].top += na.d.g.margin;
+                        divs[divID].height -= na.d.g.margin;
                         break;
                     case '#siteVideoSearch':
                     case '#siteToolbarRight':

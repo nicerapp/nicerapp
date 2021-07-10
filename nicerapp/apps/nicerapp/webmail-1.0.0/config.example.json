@@ -1,0 +1,24 @@
+{
+    "couchdbServer" : "http://localhost:5984",
+    "mailServers" : [
+        { 
+            "Display Name" : "User Display Name",
+            "userID" : "userID",
+            "userPassword" : "passwordABC",
+            "IMAP" : {
+                "domain" : "imap.gmail.com",
+                "port" : 993,
+                "requiresSSL" : true,
+                "sslCertificateCheck" : true
+            },
+            "SMTP" : {
+                "domain" : "smtp.gmail.com",
+                "requires SSL" : true,
+                "requires TLS" : true,
+                "requires authentication" : true,
+                "port for SSL" : 465,
+                "port for TLS" : 587
+            }
+        }
+    ]
+}
