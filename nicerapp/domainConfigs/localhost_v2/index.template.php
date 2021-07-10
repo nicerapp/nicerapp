@@ -14,8 +14,8 @@
 {$javascriptFiles}
 <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/tooltipster/4.2.8/js/tooltipster.bundle.min.js" integrity="sha512-ZKNW/Nk1v5trnyKMNuZ6kjL5aCM0kUATbpnWJLPSHFk/5FxnvF9XmpmjGbag6BEgmXiz7rL6o6uJF6InthyTSg==" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tooltipster/4.2.8/css/tooltipster.bundle.css" integrity="sha512-3zyscitq6+9V1nGiptsXHLVaJaAMCUQeDW34fygk9LdcM+yjYIG19gViDKuDGCbRGXmI/wiY9XjdIHdU55G97g==" crossorigin="anonymous" />-->
-<script src="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css"/>
+<script src="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.css"/>
     <!--<script type="module" src="/nicerapp/userInterface/na3D.source.js"></script>-->
 
 <?php 
@@ -221,11 +221,11 @@ na.site.globals = $.extend(na.site.globals, {
             
             <div class="flexColumns">
                 <label for="dialogSettings_photoSpecificity_dialog" class="labelDialogSettings2">Dialog
-                <input type="radio" id="dialogSettings_photoSpecificity_dialog" class="radioInput" value="dialog" checked="checked"/>
+                <input type="radio" id="dialogSettings_photoSpecificity_dialog" name="psdp" class="radioInput" value="dialog" checked="checked"/>
                 </label>
                 
                 <label for="dialogSettings_photoSpecificity_dialog" class="labelDialogSettings2">Page
-                <input type="radio" id="dialogSettings_photoSpecificity_page" class="radioInput" value="dialog"/>
+                <input type="radio" id="dialogSettings_photoSpecificity_page" name="psdp" class="radioInput" value="dialog"/>
                 </label>
             </div>
         </div>
@@ -328,10 +328,10 @@ na.site.globals = $.extend(na.site.globals, {
             
             <label id="labelTextShadow" class="textSettingsLabel">Text shadow :</label>
             <div id="textShadow">
-                <img src="/nicerapp/siteMedia/iconCreate.png" onclick="na.ds.addTextShadow()"/>
-                <img src="/nicerapp/siteMedia/iconDelete.png" onclick="na.ds.deleteTextShadow()"/>
+                <img src="/nicerapp/siteMedia/iconCreate.png" onclick="na.ds.addTextShadow(event)"/>
+                <img src="/nicerapp/siteMedia/iconDelete.png" onclick="na.ds.deleteTextShadow(event)"/>
                 <div class="flexBreak"></div>
-                <div id="textShadow_0" class="textShadow" style="background:navy;border:1px solid white; border-radius:10px; margin : 5px; padding : 5px;">ABC XYZ</div>
+                <div id="textShadow_0" class="textShadow" style="background:navy;border:1px solid white; border-radius:10px; margin : 5px; padding : 5px;" onclick="na.ds.selectTextShadow(event)">ABC XYZ</div>
             </div>
             <div class="flexBreak"></div>
             
