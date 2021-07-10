@@ -684,8 +684,18 @@ na.ds = na.dialogSettings = {
             : test1b
                 ? 'rgb('+test1b[1]+', '+test1b[2]+', '+test1b[3]+')'
                 : 'black',
-        newTextColor = test2a ? test2a[0] : test2b ? test2b[0] : 'white';
-debugger;
+        newTextColor = test2a ? test2a[0] : test2b ? test2b[0] : 'white',
+        newFontFamily = 
+            el3[0]
+            ? $(el3).css('fontFamily')
+            : el2[0]
+                ? $(el2).css('fontFamily')
+                : el[0]
+                    ? $(el).css('fontFamily')
+                    : 'ABeeZee',
+        newFontFamily = newFontFamily.split(', ')[0].replace(/"/g,'');
+        debugger;
+
         na.ds.settings.current.textColor = newTextColor;
         na.ds.settings.current.textShadowColor = newTextShadowColor;
         
@@ -703,7 +713,7 @@ debugger;
         });
         $('#textFontFamily')
             .css({width:$('#textSettings').width() - $('#labelTextFontFamily').width() - 20 })
-            .val(el3[0] ? $(el3).css('fontFamily') : el[0] ? $(el).css('fontFamily') : 'ABeeZee');
+            .val(newFontFamily);
         $('#textSize')
             .css({width:$('#textSettings').width() - $('#labelTextSize').width() - 20 })
             .val(typeof el3_ts == 'string' && el3_ts!=='' 
@@ -784,7 +794,7 @@ debugger;
             );
 
         //debugger;
-        $(na.ds.settings.current.selectedTextShadow).add(el).css ({ textShadow : newTextShadow, fontWeight : newFontWeight, fontSize : newFontSize+'px', fontFamily : newFontFamily });
+        $(na.ds.settings.current.selectedTextShadow).add(el).add('#'+el.id+' td').css ({ textShadow : newTextShadow, fontWeight : newFontWeight, fontSize : newFontSize+'px', fontFamily : newFontFamily });
         
         na.ds.textSettingsSelected_updateDialog();
     },
