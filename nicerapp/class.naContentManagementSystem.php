@@ -52,7 +52,13 @@ class nicerAppCMS {
                 }
             }
         } else {    
+            $app = null;
             $titleFile = realpath(dirname(__FILE__).'/domainConfigs/'.$this->domain.'/index.title.php');
+        }
+        if (!isset($app) && !file_exists($titleFile)) {
+            trigger_error ('app.title.site.php missing for app=frontpage_of_site, $titleFile="'.$titleFile.'"', E_USER_ERROR);
+        } elseif (!isset($titleFile)) {
+            trigger_error ('app.title.site.php missing for app='.json_encode($app), E_USER_ERROR);
         }
         
         $getAsIndividualLinks = $this->domain==='localhost_v2';
@@ -69,7 +75,7 @@ class nicerAppCMS {
         //$div_siteContent = $this->getDivSiteContent();
         $div_siteMenu = $this->getSiteMenu();
         $replacements = array (
-            '{$app}' => json_encode($app, JSON_PRETTY_PRINT),
+            //'{$app}' => ( is_array($app) ? json_encode($app, JSON_PRETTY_PRINT) : '{}' ),
             '{$title}' => execPHP($titleFile),
             '{$domain}' => $this->domain,
             '{$cssFiles}' => $cssFiles,
@@ -263,6 +269,7 @@ class nicerAppCMS {
         
         if (
             is_array($_COOKIE) && array_key_exists('loginName', $_COOKIE) && is_string($_COOKIE['loginName'])
+            && isset($this->app)
             && array_key_exists('cmsText', $this->app) 
             && array_key_exists('user', $this->app['cmsText'])
             && $this->app['cmsText']['user'] == $_COOKIE['loginName']
@@ -286,33 +293,47 @@ class nicerAppCMS {
         foreach ($selectors2 as $idx => $selector) {
             $css = $this->getPageCSS_specific($selector);
             if ($css!==false) {
-                $r = '<style id="cssPageSpecific">'.PHP_EOL;
-                $r .= css_array_to_css($css).PHP_EOL;
-                $r .= '</style>'.PHP_EOL;
-                $r .= '<script id="jsPageSpecific" type="text/javascript">'.PHP_EOL;
+                $r = '<script id="jsPageSpecific" type="text/javascript">'.PHP_EOL;
                 $r .= 'na.site.globals = $.extend(na.site.globals, {'.PHP_EOL;
-                $r .= "\tselectorName : '".$selectorNames[$idx]."',".PHP_EOL;
-                $r .= "\tselectorNames : ".json_encode($selectorNames).",".PHP_EOL;
-                $r .= "\tselectors : ".json_encode($selectors).",".PHP_EOL;
+                $r .= "\tbackground : '".$css['background']."',".PHP_EOL;
+                $r .= "\tcosmeticsSpecificityName : '".$selectorNames[$idx]."',".PHP_EOL;
+                $r .= "\tcosmeticsSpecificityNames : ".json_encode($selectorNames).",".PHP_EOL;
+                $r .= "\tcosmeticsDBkeys : ".json_encode($selectors).",".PHP_EOL;
                 $r .= "\tapp : ".json_encode($this->app).PHP_EOL;
                 $r .= '});'.PHP_EOL;
-                $r .= 'setTimeout(function() {'.PHP_EOL;
-                $r .= "\tna.site.setSpecificity();".PHP_EOL;
-                $r .= "\tna.ds.onload(na.ds.settings.current.forDialogID);".PHP_EOL;
-                $r .= '}, 250);'.PHP_EOL;
+                $r .= '$(document).ready(function() {'.PHP_EOL;
+                $r .= "\tsetTimeout(function() {".PHP_EOL;
+                $r .= "\t\tna.site.setSpecificity();".PHP_EOL;
+                $r .= "\t\tna.ds.onload(na.ds.settings.current.forDialogID);".PHP_EOL;
+                $r .= "\t}, 250);".PHP_EOL;
+                $r .= '});'.PHP_EOL;
                 $r .= '</script>'.PHP_EOL;
+                $r .= '<style id="cssPageSpecific">'.PHP_EOL;
+                $r .= css_array_to_css($css['dialogs']).PHP_EOL;
+                $r .= '</style>'.PHP_EOL;
                 return $r;
             }
         };
     }
     
     public function getPageCSS_specific($selector) {
-        //$debug = true;
+        $debug = false;
         if ($debug) echo '<pre>';
-        //var_dump ($_COOKIE); 
+        //var_dump ($_COOKIE);  
         
         $cdbDomain = str_replace('.','_',$this->domain);
+        $exampleConfigFilepath = realpath(dirname(__FILE__)).'/domainConfigs/'.$this->domain.'/couchdb.EXAMPLE.json';
         $couchdbConfigFilepath = realpath(dirname(__FILE__)).'/domainConfigs/'.$this->domain.'/couchdb.json';
+        if (!file_exists($couchdbConfigFilepath)) {
+            $msg = 'Fatal error : file "'.$couchdbConfigFilepath.'" missing - please use file "'.$exampleConfigFilepath.'" as a template to create it in a text editor, and then run .../setPermissions.sh from the linux commandline in the root folder of your nicerapp file tree to set the correct filesystem permissions.<br/>'.PHP_EOL;
+            global $naDebugAll;
+            if ($naDebugAll) {
+                trigger_error ($msg, E_USER_ERROR);
+            } else {
+                echo $msg;
+                die();
+            }
+        }
         $cdbConfig = json_decode(file_get_contents($couchdbConfigFilepath), true);
         //var_dump ($couchdbConfigFilepath); var_dump($cdbConfig); die();
 
@@ -344,7 +365,7 @@ class nicerAppCMS {
         
         $findCommand = array (
             'selector' => $selector,
-            'fields' => array( '_id', 'user', 'role', 'url', 'dialogs' )
+            'fields' => array( '_id', 'user', 'role', 'url', 'dialogs', 'background', 'backgroundSearchKey' )
         );
         try {
             $call = $cdb->find ($findCommand);
@@ -363,7 +384,12 @@ class nicerAppCMS {
         if ($call->headers->_HTTP->status==='200') {
             foreach ($call->body->docs as $idx => $d) {
                 $hasRecord = true;
-                return json_decode(json_encode($d->dialogs),true);
+                $ret = array (
+                    'dialogs' => $d->dialogs,
+                    'background' => ( isset($d->background) ? $d->background : ''),
+                    'backgroundSearchKey' => ( isset($d->backgroundSearchKey) ? $d->backgroundSearchKey : '')
+                );
+                return json_decode(json_encode($ret),true);
             }
         }
         return false;        

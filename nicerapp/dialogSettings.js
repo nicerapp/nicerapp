@@ -294,14 +294,8 @@ na.ds = na.dialogSettings = {
         } else {
             na.site.settings.buttons['#btnDeleteSpecificity'].enable();
         }
-        /* 
-         * NOT HANDY! :
-         */
-        
-        debugger;
-        na.site.loadTheme (function () {
+        na.site.loadTheme (function () { // **POSSIBLY** NOT NEEDED
             var btn = $('#'+na.ds.settings.current.selectedButtonID)[0];
-            debugger;
             na.ds.onclick(btn, false);
         });
     },

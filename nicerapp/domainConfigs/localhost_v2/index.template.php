@@ -31,8 +31,7 @@ na.site.globals = $.extend(na.site.globals, {
     couchdb : <?php echo $couchdbSettingsStr?>,
     referer : '<?php echo (array_key_exists('HTTP_REFERER',$_SERVER)?$_SERVER['HTTP_REFERER']:'');?>',
     myip : '<?php echo str_replace('.','_',(array_key_exists('X-Forwarded-For',apache_request_headers())?apache_request_headers()['X-Forwarded-For'] : $_SERVER['REMOTE_ADDR']))?>',
-    domain : '{$domain}',
-    app : {$app}
+    domain : '{$domain}'
 });
 </script>
 {$pageSpecificCSS}

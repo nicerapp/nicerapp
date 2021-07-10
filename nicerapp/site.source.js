@@ -81,13 +81,25 @@ var nas = na.site = {
             na.d.s.visibleDivs.push('#siteDateTime');
         }
         
-        if (!$.cookie('siteBackground_url') || $.cookie('siteBackground_url')==='') {
-        //if (true) {
-            $.cookie('siteBackground_search', 'landscape', na.m.cookieOptions());
-            $.cookie('siteBackground_url', '/nicerapp/siteMedia/backgrounds/tiled/active/grey/cracked-surface-seamless-gray-background.jpg', na.m.cookieOptions());
-        }; 
-        //if (typeof $.cookie('siteBackground_search')==='string' && $.cookie('siteBackground_search')!=='')
-        na.backgrounds.next ('#siteBackground', $.cookie('siteBackground_search'), $.cookie('siteBackground_url'));
+        if (na.site.globals.background==='') {
+            var defaultBG = '/nicerapp/siteMedia/backgrounds/tiled/active/grey/cracked-surface-seamless-gray-background.jpg';
+            if (
+                typeof $.cookie('loginName')=='string'
+                && $.cookie('loginName')=='Guest'
+            ) {
+                if (!$.cookie('siteBackground_url') || $.cookie('siteBackground_url')==='') {
+                    na.site.globals.backgroundSearchKey = 'landscape';
+                    na.site.globals.background = defaultBG;
+                } else {
+                    na.site.globals.backgroundSearchKey = $.cookie('siteBackground_search');
+                    na.site.globals.background = $.cookie('siteBackground_url');
+                }
+            } else {
+                na.site.globals.backgroundSearchKey = 'landscape';
+                na.site.globals.background = defaultBG;
+            }
+        };
+        na.backgrounds.next ('#siteBackground', na.site.globals.backgroundSearchKey, na.site.globals.background);
         
         //$('#siteContent .vividDialogContent').animate({opacity:1},'slow').focus();
         $('.vividDialogContent').css({opacity:1,display:'block'});
@@ -269,11 +281,13 @@ var nas = na.site = {
     
     setSpecificity : function() {
         $('#specificity')[0].innerHTML = '';
-        for (var i=0; i<na.site.globals.selectors.length; i++) {
+        for (var i=0; i<na.site.globals.cosmeticsDBkeys.length; i++) {
             var optEl = document.createElement('option');
-            optEl.value = JSON.stringify(na.site.globals.selectors[i]);
-            optEl.innerHTML = na.site.globals.selectorNames[i];
-            if (na.site.globals.selectorName === na.site.globals.selectorNames[i]) $(optEl).attr('selected','selected');
+            optEl.value = JSON.stringify(na.site.globals.cosmeticsDBkeys[i]);
+            optEl.innerHTML = na.site.globals.cosmeticsSpecificityNames[i];
+            if (na.site.globals.cosmeticsSpecificityName === na.site.globals.cosmeticsSpecificityNames[i]) {
+                $(optEl).attr('selected','selected');
+            };
             $('#specificity')[0].appendChild(optEl);
         };
         var s = JSON.parse( $('#specificity').find('option:selected')[0].value );
@@ -818,7 +832,9 @@ var nas = na.site = {
             username : na.account.settings.username,
             pw : na.account.settings.password,
             url : s.url,
-            dialogs : {}
+            dialogs : {},
+            background : na.site.globals.background,
+            backgroundSearchKey : na.site.globals.backgroundSearchKey
         };
         if (s.role) themeData.role = s.role;
         if (s.user) themeData.user = s.user;

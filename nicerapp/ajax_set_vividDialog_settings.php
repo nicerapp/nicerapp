@@ -80,7 +80,9 @@ $call = $cdb->get($id);
 //echo json_encode($call, JSON_PRETTY_PRINT).'<br/>'.PHP_EOL; die();
 $rec = (array)$call->body;
 $rec2 = array (
-    'dialogs' => json_decode($_POST['dialogs'], true)                
+    'dialogs' => json_decode($_POST['dialogs'], true),
+    'backgroundSearchKey' => $_POST['backgroundSearchKey'],
+    'background' => $_POST['background']
 );
 switch (json_last_error()) {
     case JSON_ERROR_NONE:

@@ -154,6 +154,11 @@
             'cms' => array (
                 'page' => 'index'
             )
+        ),
+        'webmail' => array (
+            'webmail-2.0.0' => array (
+                'page' => 'index'
+            )
         )
     );
     $json = array();
@@ -211,7 +216,10 @@
 
     <h2 class="contentSectionTitle2">Available Apps</h2>
 
-    <a href="<?php echo $urls['cms'];?>"><h3>Blogging features</h3></a>.<br/>
+    <a href="<?php echo $urls['webmail'];?>"><h3>Webmail</h3></a>
+    
+    <a href="<?php echo $urls['cms'];?>"><h3>Blogging features</h3></a>
+    
     <a href="https://said.by" target="saidBy"><h3>Blogging features (on https://said.by)</h3></a>
     
     <a href="https://zoned.at" target="zonedAt"><h3>URL redirection (on https://zoned.at)</h3></a>

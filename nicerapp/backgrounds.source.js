@@ -139,10 +139,18 @@ na.backgrounds = {
             };
             $(bgl).css({position:'absolute'}).hide();
             bgl.src = url;
+        };
+        
+        na.site.globals.backgroundSearchKey = search;
+        na.site.globals.background = url;
+        if (!$.cookie('loginName') || $.cookie('loginName')=='Guest') {
+            $.cookie('siteBackground_search', search, na.m.cookieOptions());
+            $.cookie('siteBackground_url', url, na.m.cookieOptions());
+        } else {
+            na.site.saveTheme();
         }
+
         console.log ('background set to '+url);
-        $.cookie('siteBackground_search', search, na.m.cookieOptions());
-        $.cookie('siteBackground_url', url, na.m.cookieOptions());
         na.analytics.logMetaEvent ('selectionEngines.random.next : url='+url);
     }
 };
