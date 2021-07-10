@@ -38,6 +38,7 @@ $username = $_POST['loginName'];
 $username = str_replace(' ', '__', $username);
 $username = str_replace('.', '_', $username);
 
+$security_role = '{ "admins": { "names": [], "roles": ["Guests"] }, "members": { "names": [], "roles": [] } }';
 $security_user = '{ "admins": { "names": ["'.$username.'"], "roles": [] }, "members": { "names": ["'.$username.'"], "roles": [] } }';
 
 $uid = 'org.couchdb.user:'.$username;
@@ -106,12 +107,11 @@ echo 'Created database '.$dbName.'<br/>'.PHP_EOL;
 $dbName = $cdbDomain.'___cms_vdsettings';
 //try { $cdb->deleteDatabase ($dbName); } catch (Exception $e) { };
 $cdb->setDatabase($dbName, true);
-/*
 try { 
-    $call = $cdb->setSecurity ($security_user);
+    $call = $cdb->setSecurity ($security_role);
 } catch (Exception $e) {
     if ($debug) { echo '<pre style="color:red">'; var_dump ($e); echo '</pre>'; die(); }
-}*/
+}
 
 $rec = array(
     'url' => '[default]',
