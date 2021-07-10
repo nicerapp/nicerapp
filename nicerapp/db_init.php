@@ -86,7 +86,7 @@ if (!$got) {
     echo 'Already have a Guest user record.<br/>';
 }
 
-
+/*
 $dbs = $cdb->getAllDatabases();
 foreach ($dbs->body as $idx => $dbName) {
     if (
@@ -132,7 +132,11 @@ try {
 } catch (Exception $e) {
     echo '<pre style="color:red">'; var_dump ($e); echo '</pre>'; die();
 }
-/*
+*/
+
+
+
+/* DONT USE!
 $do = false; try { $doc = $cdb->get('aaa'); } catch (Exception $e) { $do = true; };
 $data = '{ "database" : "cms_tree", "_id" : "aaa", "id" : "aaa", "parent" : "#", "text" : "System", "state" : { "opened" : false }, "type" : "naSystemFolder" }';
 if ($do) try { $cdb->post($data); } catch (Exception $e) { echo '<pre>'.json_encode(json_decode($data),JSON_PRETTY_PRINT).'</pre>'; echo $e->getMessage(); echo '<br/>'; };
@@ -171,6 +175,11 @@ $data = '{ "database" : "cms_tree", "_id" : "aad", "id" : "aad", "parent" : "aaa
 if ($do) try { $cdb->post($data); } catch (Exception $e) { echo '<pre>'.json_encode(json_decode($data),JSON_PRETTY_PRINT).'</pre>'; echo $e->getMessage(); echo '<br/>'; };
 */
 
+
+
+
+
+/* DO USE!
 $do = false; try { $doc = $cdb->get('caa'); } catch (Exception $e) { $do = true; };
 $data = '{ "database" : "cms_tree", "_id" : "caa", "id" : "caa", "parent" : "#", "text" : "Groups", "state" : { "opened" : true }, "type" : "naSystemFolder" }';
 if ($do) try { $cdb->post($data); } catch (Exception $e) { echo '<pre>'.json_encode(json_decode($data),JSON_PRETTY_PRINT).'</pre>'; echo $e->getMessage(); echo '<br/>'; };
@@ -230,7 +239,7 @@ $data = '{ "database" : "'.$dbName.'", "_id" : "bbb", "id" : "bbb", "parent" : "
 if ($do) try { $cdb->post($data); } catch (Exception $e) { echo '<pre>'.json_encode(json_decode($data),JSON_PRETTY_PRINT).'</pre>'; echo $e->getMessage(); echo '<br/>'; };
 
 echo 'Created database '.$dbName.'<br/>';
-
+*/
 $dbName = str_replace('.','_',$cms->domain).'___cms_tree__user___guest';
 try { $cdb->deleteDatabase ($dbName); } catch (Exception $e) { };
 $dbName2 = str_replace('.','_',$cms->domain).'___cms_tree__user__guest';
@@ -257,6 +266,7 @@ if ($do) try { $cdb->post($data); } catch (Exception $e) { echo '<pre>'.json_enc
 
 echo 'Created database '.$dbName.'<br/>';
 
+/*
 $dbName = str_replace('.','_',$cms->domain).'___cms_documents__user___administrator';
 try { $cdb->deleteDatabase ($dbName); } catch (Exception $e) { };
 $dbName2 = str_replace('.','_',$cms->domain).'___cms_documents__user__administrator';
@@ -301,7 +311,7 @@ $dbg = array (
     'result' => $result
 );
 if ($debug) echo '<pre>'.json_encode($dbg,JSON_PRETTY_PRINT).'</pre><br/>';
-
+*/
 
 /*$dbName = str_replace('.','_',$cms->domain).'___cms_vdsettings__role___guests';
 try { $cdb->deleteDatabase ($dbName); } catch (Exception $e) { };
@@ -314,7 +324,7 @@ try {
 if ($debug) echo 'Created database '.$dbName.'<br/>';
 */
 
-
+/*
 //$dbName = str_replace('.','_',$cms->domain).'___cms_vdsettings__user___guest';
 $dbName = str_replace('.','_',$cms->domain).'___cms_vdsettings';
 try { $cdb->deleteDatabase ($dbName); } catch (Exception $e) { };
@@ -386,5 +396,5 @@ try {
 }
 
 echo 'Created and populated database '.$dbName.'<br/>'.PHP_EOL;
-
+*/
 ?>
