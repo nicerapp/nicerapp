@@ -631,70 +631,101 @@ na.ds = na.dialogSettings = {
         $('.dialogSettingsComponent').not('#textSettings').fadeOut('fast');
         $('.dialogSettings_colorPicker').next().fadeOut('fast');
         $('#textSettings').fadeIn('fast', 'swing', na.ds.updateTextSettingsControls);
-        $('#textColorpicker').spectrum ({color:na.ds.settings.current.textColor, type: "flat", clickoutFiresChange : false, change : na.ds.textSettingsSelected_textColor});
-        $('#textShadowColorpicker').spectrum ({color:na.ds.settings.current.textShadowColor, type: "flat", clickoutFiresChange : false, change : na.ds.textSettingsSelected_textShadowColor});
+        
+        var
+        el = $('#'+na.ds.settings.current.forDialogID),
+        ts = $(el).css('textShadow').split(', rgb');
+        for (var i=0; i<ts.length; i++) {
+            var html = '<div id="textShadow_'+(i+1)+'" class="textShadow" onclick="na.ds.selectTextShadow(event)" style="margin:5px;padding:5px;text-shadow:'+ts[i]+'">ABC XYZ</div>';
+            $('#textShadow').append(html);
+        }  
+        
+        $('#textColorpicker').spectrum ({
+            color:na.ds.settings.current.textColor, 
+            type: "flat", 
+            clickoutFiresChange : false, 
+            change : na.ds.textSettingsSelected_textColor
+        });
+        $('#textShadowColorpicker').spectrum ({
+            color:na.ds.settings.current.textShadowColor, 
+            type: "flat", 
+            clickoutFiresChange : false, 
+            change : na.ds.textSettingsSelected_textShadowColor
+        });
     },
     updateTextSettingsControls : function (evt) {
-            var
-            el = $('#'+na.ds.settings.current.forDialogID),
-            el2 = $('#'+na.ds.settings.current.forDialogID+' .vividDialogContent'),
-            el3 = $('#'+na.ds.settings.current.forDialogID+' td'),
-            ts = $(el).css('textShadow').split(', rgb'),
-            selID = parseInt($(na.ds.settings.current.selectedTextShadow)[0].id.match(/\d+$/)[0]),
-            el_ts = $(el).css('fontSize'),
-            el2_ts = $(el2).css('fontSize'),
-            el3_ts = $(el3).css('fontSize'),
-            el_fw = $(el).css('fontWeight'),
-            el2_fw = $(el2).css('fontWeight'),
-            el3_fw = $(el3).css('fontWeight'),
-            re1a = /^rgba\((\d+),\s*(\d+),\s*(\d+),\s*([\d\.]+)\)\s+(\d+px)\s+(\d+px)\s+(\d+px)$/,
-            re1b = /^rgb\((\d+),\s*(\d+),\s*(\d+)\)\s+(\d+px)\s+(\d+px)\s+(\d+px)$/,
-            re2a = /^rgba\((\d+),\s*(\d+),\s*(\d+),\s*([\d\.]+)\)$/,
-            re2b = /^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/;
-            var
-            test1a = ts[selID] ? ts[selID].match(re1a) : null,
-            test1b = ts[selID] ? ts[selID].match(re1b) : null,
-            test2a = $(el).css('color').match(re2a),
-            test2b = $(el).css('color').match(re2b),
-            newTextShadowColor = 
-                test1a 
-                ? 'rgba('+test1a[1]+', '+test1a[2]+', '+test1a[3]+', '+test1a[4]+')'
-                : test2a
-                    ? 'rgb('+test2a[1]+', '+test2a[2]+', '+test2a[3]+')'
-                    : 'black',
-            newTextColor = test2a ? test2a[0] : test2b ? test2b[0] : 'white';
-
-            na.ds.settings.current.textColor = newTextColor;
-            na.ds.settings.current.textShadowColor = newTextShadowColor;
-            
-            $('#textColorpicker').spectrum ({color:na.ds.settings.current.textColor, type: "flat", clickoutFiresChange : false, change : na.ds.textSettingsSelected_textColor});
-            $('#textShadowColorpicker').spectrum ({color:na.ds.settings.current.textShadowColor, type: "flat", clickoutFiresChange : false, change : na.ds.textSettingsSelected_textShadowColor});
-            //$('.textSettingsLabel').css({width:$('.textSettingsLabel').width()+10});
-            $('#textFontFamily')
-                .css({width:$('#textSettings').width() - $('#labelTextFontFamily').width() - 20 })
-                .val(el3[0] ? $(el3).css('fontFamily') : el[0] ? $(el).css('fontFamily') : 'ABeeZee');
-            $('#textSize')
-                .css({width:$('#textSettings').width() - $('#labelTextSize').width() - 40 })
-                .val(typeof el3_ts == 'string' && el3_ts!=='' 
-                        ? parseInt(el3_ts.replace('px','')) 
-                        : typeof el2_ts == 'string' && el2_ts!==''
-                            ? parseInt(el2_ts.replace('px',''))
-                            : typeof el_ts == 'string' && el_ts!==''
-                                ? parseInt(el_ts.replace('px'))
-                                : 12
-                    );
-            $('#textWeight')
-                .css({width:$('#textSettings').width() - $('#labelTextWeight').width() - 40 })
-                .val(el3_fw!=='' ? el3_fw : el2_fw!=='' ? el2_fw : el_fw!=='' ? el_fw : 500);
-            $('#textShadowXoffset')
-                .css({width:$('#textSettings').width() - $('#labelTextShadowXoffset').width() - 40 })
-                .val(test1a ? parseInt(test1a[5].replace('px','')) : test1b ? parseInt(test1b[4].replace('px','')) : 2);
-            $('#textShadowYoffset')
-                .css({width:$('#textSettings').width() - $('#labelTextShadowYoffset').width() - 40 })
-                .val(test1a ? parseInt(test1a[6].replace('px','')) : test1b ? parseInt(test1b[5].replace('px','')) : 2);
-            $('#textShadowBlurRadius')
-                .css({width:$('#textSettings').width() - $('#labelTextShadowBlurRadius').width() - 40 })
-                .val(test1a ? parseInt(test1a[7].replace('px','')) : test1b ? parseInt(test1b[6].replace('px','')) : 2);
+        var
+        el = $('#'+na.ds.settings.current.forDialogID),
+        el2 = $('#'+na.ds.settings.current.forDialogID+' .vividDialogContent'),
+        el3 = $('#'+na.ds.settings.current.forDialogID+' td'),
+        ts = $(el).css('textShadow').split(', rgb');
+        for (var i=1; i<ts.length; i++) {
+            ts[i] = 'rgb'+ts[i];
+        };
+        var        
+        selID = parseInt($(na.ds.settings.current.selectedTextShadow)[0].id.match(/\d+$/)[0]),
+        el_ts = $(el).css('fontSize'),
+        el2_ts = $(el2).css('fontSize'),
+        el3_ts = $(el3).css('fontSize'),
+        el_fw = $(el).css('fontWeight'),
+        el2_fw = $(el2).css('fontWeight'),
+        el3_fw = $(el3).css('fontWeight'),
+        re1a = /^rgba\((\d+),\s*(\d+),\s*(\d+),\s*([\d\.]+)\)\s+(\-?\d+px)\s+(\-?\d+px)\s+(\-?\d+px)$/,
+        re1b = /^rgb\((\d+),\s*(\d+),\s*(\d+)\)\s+(\-?\d+px)\s+(\-?\d+px)\s+(\-?\d+px)$/,
+        re2a = /^rgba\((\d+),\s*(\d+),\s*(\d+),\s*([\d\.]+)\)$/,
+        re2b = /^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/,
+        test1a = ts[selID] ? ts[selID].match(re1a) : null,
+        test1b = ts[selID] ? ts[selID].match(re1b) : null,
+        test2a = $(el).css('color').match(re2a),
+        test2b = $(el).css('color').match(re2b),
+        newTextShadowColor = 
+            test1a 
+            ? 'rgba('+test1a[1]+', '+test1a[2]+', '+test1a[3]+', '+test1a[4]+')'
+            : test1b
+                ? 'rgb('+test1b[1]+', '+test1b[2]+', '+test1b[3]+')'
+                : 'black',
+        newTextColor = test2a ? test2a[0] : test2b ? test2b[0] : 'white';
+debugger;
+        na.ds.settings.current.textColor = newTextColor;
+        na.ds.settings.current.textShadowColor = newTextShadowColor;
+        
+        $('#textColorpicker').spectrum ({
+            color:na.ds.settings.current.textColor, 
+            type: "flat", 
+            clickoutFiresChange : false, 
+            change : na.ds.textSettingsSelected_textColor
+        });
+        $('#textShadowColorpicker').spectrum ({
+            color:na.ds.settings.current.textShadowColor, 
+            type: "flat", 
+            clickoutFiresChange : false, 
+            change : na.ds.textSettingsSelected_textShadowColor
+        });
+        $('#textFontFamily')
+            .css({width:$('#textSettings').width() - $('#labelTextFontFamily').width() - 20 })
+            .val(el3[0] ? $(el3).css('fontFamily') : el[0] ? $(el).css('fontFamily') : 'ABeeZee');
+        $('#textSize')
+            .css({width:$('#textSettings').width() - $('#labelTextSize').width() - 20 })
+            .val(typeof el3_ts == 'string' && el3_ts!=='' 
+                    ? parseInt(el3_ts.replace('px','')) 
+                    : typeof el2_ts == 'string' && el2_ts!==''
+                        ? parseInt(el2_ts.replace('px',''))
+                        : typeof el_ts == 'string' && el_ts!==''
+                            ? parseInt(el_ts.replace('px'))
+                            : 12
+                );
+        $('#textWeight')
+            .css({width:$('#textSettings').width() - $('#labelTextWeight').width() - 20 })
+            .val(el3_fw!=='' ? el3_fw : el2_fw!=='' ? el2_fw : el_fw!=='' ? el_fw : 500);
+        $('#textShadowXoffset')
+            .css({width:$('#textSettings').width() - $('#labelTextShadowXoffset').width() - 40 })
+            .val(test1a ? parseInt(test1a[5].replace('px','')) : test1b ? parseInt(test1b[4].replace('px','')) : 2);
+        $('#textShadowYoffset')
+            .css({width:$('#textSettings').width() - $('#labelTextShadowYoffset').width() - 40 })
+            .val(test1a ? parseInt(test1a[6].replace('px','')) : test1b ? parseInt(test1b[5].replace('px','')) : 2);
+        $('#textShadowBlurRadius')
+            .css({width:$('#textSettings').width() - $('#labelTextShadowBlurRadius').width() - 40 })
+            .val(test1a ? parseInt(test1a[7].replace('px','')) : test1b ? parseInt(test1b[6].replace('px','')) : 2);
     },
     addTextShadow : function (evt) {
         var last = 0;
@@ -713,7 +744,7 @@ na.ds = na.dialogSettings = {
         var 
         toDel = na.ds.settings.current.selectedTextShadow,
         nextSelected = $(na.ds.settings.current.selectedTextShadow).next('.textShadow');
-        if (!nextSelected[0]) nextSelected = $(na.ds.settings.current.selectedTextShadow).previous('.textShadow');
+        if (!nextSelected[0]) nextSelected = $(na.ds.settings.current.selectedTextShadow).prev('.textShadow');
         
         $(toDel).remove();
         na.ds.settings.current.selectedTextShadow = nextSelected;        
@@ -721,11 +752,18 @@ na.ds = na.dialogSettings = {
         na.ds.updateTextSettingsControls(evt);
     },
     selectTextShadow : function (evt) {
-        var el = evt.currentTarget;
+        var 
+        el = evt.currentTarget,
+        updateControls = na.ds.settings.current.selectedTextShadow !== el;
+        
         na.ds.settings.current.selectedTextShadow = el;
         $('.textShadow').css({ background : 'rgba(0,0,0,0.2)', border : 'none', borderRadius : '10px' });
-        $(el).css({background : 'navy', border : '1px solid white', borderRadius : '10px'  });
-        na.ds.updateTextSettingsControls(evt);
+        $(el).css({
+            background : 'navy', 
+            border : '1px solid white', 
+            borderRadius : '10px'  
+        });
+        if (updateControls) na.ds.updateTextSettingsControls(evt);
     },
     textSettingsSelected : function () {
         var
@@ -745,7 +783,7 @@ na.ds = na.dialogSettings = {
                 : tsc
             );
 
-        debugger;
+        //debugger;
         $(na.ds.settings.current.selectedTextShadow).add(el).css ({ textShadow : newTextShadow, fontWeight : newFontWeight, fontSize : newFontSize+'px', fontFamily : newFontFamily });
         
         na.ds.textSettingsSelected_updateDialog();
