@@ -207,10 +207,15 @@
     Documentation is available at <a href="https://github.com/nicerapp/nicerapp_v2#readme" target="naDocs">https://github.com/nicerapp/nicerapp_v2#readme</a>.
     </p>
     <p>
-    2021/7/7 :<br/>
-    Nicer.app and Said.by are currently in an "admin party" state, whereby Guest visitors get to change all the default cosmetic settings.<br/>
-    In just a little while, I will modify it so that one can change only the defaults for their own pages on a nicerapp site, <br/>
-    but end-users will still be able to override these settings if the owner of the page allows that.
+    2021/7jul/10sat 19:55 CET :<br/>
+    I've made a permissions structure today for the editing and loading of cosmetics settings,<br/>
+    (hover over the horizontal edge at the left-top of the window/dialog).<br/>
+    <br/>
+    Within the next few hours or days it'll be possible to set the cosmetic settings *and* the page background to something you selected <br/>
+    from the menu or from a file-tree via the <a href="https://said.by" target="saidBy">blogging features (on https://said.by)</a>,<br/>
+    as the background to use for any of a number of different viewing behavior by the end-user :<br/>
+    <br/>
+    At the moment i'm still stuck on how to arrange the enforcement of these permissions, and how to present them to the end-user in a way that is not too intrusive or too time-consuming or difficult to maintain.<br/>
     </p>
     
 
