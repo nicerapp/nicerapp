@@ -367,7 +367,7 @@ var nas = na.site = {
                                 $('#cssPageSpecific, #jsPageSpecific').remove();
                                 $('head').append(data);
                                 setTimeout(function() {
-                                    //na.site.loadTheme(function() {
+                                    na.site.loadTheme(function() {
                                         var 
                                         btn = $('#'+na.ds.settings.current.selectedButtonID)[0],
                                         evt = { currentTarget : $('#specificity')[0] };
@@ -395,7 +395,7 @@ var nas = na.site = {
                                         
                                         
                                         if (typeof callback=='function') callback (themeData, data);
-                                    //});
+                                    });
                                 }, 250);
                             },
                             failure : function (xhr, ajaxOptions, thrownError) {
