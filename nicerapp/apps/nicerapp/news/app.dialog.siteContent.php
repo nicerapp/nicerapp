@@ -32,18 +32,18 @@ $app = json_decode (base64_decode_url($_GET['apps']), true);
                 <table id="newsApp_title_table" style="width:100%;">
                     <tr>
                         <td id="td_newsApp_title" style="width:1%;white-space:nowrap;margin:5px;vertical-align:middle;">
-                        <h1 id="newsApp_title" class="newsApp_header" style="font-family:'Architects Daughter';display:none;padding:0px;margin:0px;vertical-align:middle;"><?php echo $pageTitle;?></h1> 
+                        <h1 id="newsApp_title" class="newsApp_header" style="display:none;padding:0px;margin:0px;vertical-align:middle;"><?php echo $pageTitle;?></h1> 
                         </td>
                         <td id="td_newsApp_searchbar_spacer" style="width:20px;display:none;">&nbsp;</td>
                         <td id="td_newsApp_searchbar" style="vertical-align:middle;display:none;">
                             <label for="newsApp_searchbar" id="label_newsApp_searchbar" class="label_newsApp" style="width:80px;">Search :</label>
-                            <input id="newsApp_searchbar" style="display:none; font-family:'Architects Daughter';background:rgba(255,255,255,1); border-radius:7px; border : 1px solid black;vertical-align:middle" onchange="na.apps.loaded.newsApp.onSearch(event)"/>
+                            <input id="newsApp_searchbar" style="display:none; background:rgba(255,255,255,1); border-radius:7px; border : 1px solid black;vertical-align:middle" onchange="na.apps.loaded.newsApp.onSearch(event)"/>
                             <img id="newsApp_searchbar__enterQuery" title="search the entire news database (up to 14 days into the past)" src="/nicerapp/siteMedia/na.question-mark.svg.png" style="height:30px;vertical-align:middle" onclick="na.apps.loaded.newsApp.onSearch(event)"/>
                             <img id="newsApp_searchbar__abandonQuery" title="abandon the current search query and display the very latest news again" src="/nicerapp/siteMedia/na.reset.png" style="height:30px;vertical-align:middle" onclick="na.apps.loaded.newsApp.clearSearch(event)"/>
                         </td>
                         <td style="width:20px;">&nbsp;</td>
                         <td id="td_newsApp_info" style="text-align:left">
-                            <span id="newsApp_info" style="font-family:'Architects Daughter';font-size:120%;font-weight:bold;text-align:left;display:none;">This app will load up older news-items whenever needed</span>
+                            <span id="newsApp_info" style="text-align:left;display:none;">This app will load up older news-items whenever needed</span>
                         </td>
                         <td><span id="newsApp_debug" class="newsApp_header" style="font-weight:bold;"></span></td>
                         <td style="text-align:right"><span id="newsApp_timer" class="newsApp_header" style="display:none;font-weight:bold;"></span></td>
@@ -56,14 +56,13 @@ $app = json_decode (base64_decode_url($_GET['apps']), true);
                 </table>
                 
                 <script type="text/javascript">
-                /*
                 var vividTextCmd = {
                         el : jQuery('#newsApp_info')[0],
                         theme : na.cg.themes.saColorgradientSchemeOrangeYellow_netherlands, 
                         animationType : na.vividText.globals.animationTypes[0],
                         animationSpeed : 4 * 1000
                 };
-                na.vividText.initElement (vividTextCmd);	*/
+                na.vividText.initElement (vividTextCmd);
                 </script>                
                 <div id="app_mainmenu" class="vividMenu" theme="dark" style="position:absolute;width:200px;height:35px;opacity:0.0001;display:none;">
                     <?php echo file_get_contents(dirname(__FILE__).'/mainmenu.php');

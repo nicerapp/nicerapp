@@ -346,8 +346,9 @@ na.apps.loaded.newsApp = {
     intervalMailLogCountdown : function () {
         var
         na1 = na.apps.loaded.newsApp, g = na1.globals, s = na1.settings, c = s.current, db = c.db,
-        ms = c.dtCurrent.getTime(),//na.m.elapsedMilliseconds(),
+        ms = /*c.dtCurrent.getTime(),*/na.m.elapsedMilliseconds(),
         msgTime = na.m.secondsToTimeString(ms/1000);
+        //return false;
         
         c.mailLogMsg = msgTime + ' has passed, mailing log of what happened at around 15 to 20 seconds.';
         if (parseFloat($('#newsApp_debug').css('z-index'))!==10 * 1000 * 1000) {
