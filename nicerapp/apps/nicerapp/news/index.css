@@ -13,14 +13,6 @@
     color : lime;
 }
 
-.newsApp_header {
-    text-shadow: -1px -1px 1px rgba(255, 255, 255, 0.5);
-}
-
-.newsApp__item__outer {
-    text-shadow: -1px -1px 1px rgba(255, 255, 255, 0.5);
-}
-
 .newsApp__item__title { font-weight : bold; }
 .newsApp__item__desc { }
 .newsApp__item__url { }
