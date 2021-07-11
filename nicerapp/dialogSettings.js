@@ -606,14 +606,12 @@ na.ds = na.dialogSettings = {
         
         if (typeof bg1=='string' && bg1!=='' && !bg1.match('url')) {
             var bg2 = '', bg2a = bg1.match(rgbaRegEx), bg2b = bg1.match(rgbRegEx);
-            debugger;
             if (bg2a) {
                 $(bg).css({ background : 'rgba('+bg2a[1]+', '+bg2a[2]+', '+bg2a[3]+', '+opacity+')'+bg2a[5] });
             } else {
                 $(bg).css({ background : 'rgba('+bg2b[1]+', '+bg2b[2]+', '+bg2b[3]+', '+opacity+')'+bg2b[4] });
             }
         } else { 
-            debugger;
             $(bg).css({ opacity : opacity });
         }
         /*if (na.ds.settings.current.fireSaveTheme) */na.site.saveTheme();

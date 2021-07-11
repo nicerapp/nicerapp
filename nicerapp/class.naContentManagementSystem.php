@@ -299,6 +299,17 @@ class nicerAppCMS {
         );
         
         //var_dump ($this->app); die();
+        if (
+            !isset($_COOKIE) 
+            || !is_array($_COOKIE) 
+            || !array_key_exists('loginName',$_COOKIE)
+            || $_COOKIE['loginName'] !== 'Rene Veerman'
+        ) {
+            $selectors[0]['display'] = false;
+            $selectors[1]['display'] = false;
+            $selectors[2]['display'] = false;
+            $selectors[3]['display'] = false;
+        };
         
         if (
             is_array($_COOKIE) && array_key_exists('loginName', $_COOKIE) && is_string($_COOKIE['loginName'])
@@ -335,13 +346,21 @@ class nicerAppCMS {
             $selectorNames[] = 'page user '.$_COOKIE['loginName'];
         };
         
+        if (session_status() === PHP_SESSION_NONE) session_start();
+        $_SESSION['selectors'] = json_encode($selectors);
+        $_SESSION['selectorNames'] = json_encode($selectorNames);
         
         $selectors2 = array_reverse($selectors, true);
         $selectorNames2 = array_reverse($selectorNames, true);
         
+        $ret = '';
+        $hasJS = false;
         foreach ($selectors2 as $idx => $selector) {
             $css = $this->getPageCSS_specific($selector);
-            if ($css!==false) {
+            //echo '$css = '; var_dump ($css); echo PHP_EOL.PHP_EOL;
+            if ($css!==false && !array_key_exists('display',$selector) && $selector['display']!==false) {
+                $hasJS = true;
+                $_SESSION['selectorName'] = $selectorNames[$idx];
                 $r = '<script id="jsPageSpecific" type="text/javascript">'.PHP_EOL;
                 $r .= 'na.site.globals = $.extend(na.site.globals, {'.PHP_EOL;
                 $r .= "\tbackground : '".$css['background']."',".PHP_EOL;
@@ -358,12 +377,29 @@ class nicerAppCMS {
                 $r .= "\t}, 250);".PHP_EOL;
                 $r .= '});'.PHP_EOL;
                 $r .= '</script>'.PHP_EOL;
-                $r .= '<style id="cssPageSpecific">'.PHP_EOL;
+                $ret = $r.$ret;
+            }
+            if ($css!==false) {                
+                $r = '<style id="cssPageSpecific">'.PHP_EOL;
                 $r .= css_array_to_css($css['dialogs']).PHP_EOL;
                 $r .= '</style>'.PHP_EOL;
-                return $r;
+                $ret .= $r;
             }
         };
+        
+        if (!$hasJS) {
+            $r = '<script id="jsPageSpecific" type="text/javascript">'.PHP_EOL;
+            $r .= 'na.site.globals = $.extend(na.site.globals, {'.PHP_EOL;
+            $r .= "\tbackground : '/nicerapp/siteMedia/backgrounds/tiled/active/grey/abstract_ice.jpg',".PHP_EOL;
+            $r .= "\tbackgroundSearchKey : '".$css['backgroundSearchKey']."',".PHP_EOL;
+            $r .= "\tapp : ".json_encode($this->app).PHP_EOL;
+            $r .= '});'.PHP_EOL;
+            $r .= '</script>'.PHP_EOL;
+            $ret = $r.$ret;
+        
+        }
+        
+        return $ret;
     }
     
     public function getPageCSS_specific($selector) {
@@ -374,6 +410,7 @@ class nicerAppCMS {
         $permissions = $selector['permissions'];
         if ($debug) { echo '$permissions='; var_dump ($permissions); echo '<br/><br/>'.PHP_EOL.PHP_EOL; };
         unset ($selector['permissions']);
+        unset ($selector['display']);
         
         $cdbDomain = str_replace('.','_',$this->domain);
         $exampleConfigFilepath = realpath(dirname(__FILE__)).'/domainConfigs/'.$this->domain.'/couchdb.EXAMPLE.json';

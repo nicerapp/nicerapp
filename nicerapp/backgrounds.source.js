@@ -48,7 +48,7 @@ na.backgrounds = {
         bgl = $(div+' img.bg_last')[0],
         bgDiv = $(div+'_bg')[0],
         bgDiv2 = $(div+'_bg2')[0];
-        
+
         if (url.match('tiled')) {
             $(bgf).add(bgl).fadeOut('fast');
             $(bgDiv2).css ({

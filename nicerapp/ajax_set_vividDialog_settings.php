@@ -113,6 +113,94 @@ if (array_key_exists('url',$_POST) && !is_null($_POST['url'])) $rec2['url'] = $_
 if (array_key_exists('role',$_POST) && !is_null($_POST['role'])) $rec2['role'] = $_POST['role'];
 if (array_key_exists('user',$_POST) && !is_null($_POST['user'])) $rec2['user'] = $_POST['user'];
 
+if (session_status() === PHP_SESSION_NONE) session_start();
+if (!isset($_SESSION) || !is_array($_SESSION) || !array_key_exists('selectors',$_SESSION)) {
+    echo 'Session does not contain required "selectors" data.'; die();
+} else {
+    $selectors = json_decode ($_SESSION['selectors'],true);
+    $selectorNames = json_decode ($_SESSION['selectorNames'],true);
+    $selectorName = $_SESSION['selectorName'];
+    foreach ($selectorNames as $idx => $sn) if ($sn == $selectorName) break;
+    $sel = $selectors[$idx];
+    if (!array_key_exists('permissions'],$sel)) {
+        echo 'SESSION selector does not contain a "permissions" entry.'; die();
+    } else {
+        if (!array_key_exists('write', $sel['permissions'])) {
+            echo 'SESSION selector does not contain a "write" entry under "permissions".'; die();
+        }
+    }
+    foreach ($sel['permissions']['write'] as $pur => $urName) { // pur = permissionsUserRole, urName = userOrRoleName
+    
+        $permissions = $sel['permissions'];
+        
+        $username = $cdbConfig['adminUsername'];
+        $pw = $cdbConfig['adminPassword'];
+        try {
+            //var_dump ($username); var_dump ($pw);
+            $cdb->login($username, $pw);
+        } catch (Exception $e) {
+            if ($debug) { echo 'status : Failed : Login failed (username : '.$username.', password : '.$pw.').<br/>'.PHP_EOL; die(); }
+        }
+        if ($debug) { echo 'info : Login succesful (username : '.$username.', password : '.$pw.').<br/>'.PHP_EOL;  }
+
+        $dbName = '_users';
+        $cdb->setDatabase($dbName, false);
+        
+        $username = $_POST['username'];
+        $username = str_replace(' ', '__', $username);
+        $username = str_replace('.', '_', $username);
+        $pw = $_POST['pw'];
+        
+        $findCommand = array (
+            'selector' => array (
+                '_id' => 'org.couchdb.user:'.$username
+            ),
+            'fields' => array ('_id', 'roles' )
+        );
+        try {
+            $call = $cdb->find ($findCommand);
+        } catch (Exception $e) {
+            $msg = 'while trying to find in \''.$dbName.'\' : '.$e->getMessage();
+            echo $msg;
+            die();
+        }
+        if ($debug) {
+            echo 'info : $findCommand='; var_dump ($findCommand); echo '.<br/>'.PHP_EOL;
+            echo 'info : $call='; var_dump ($call); echo '.<br/>'.PHP_EOL;
+            //die();
+        }
+
+        
+        // check permissions
+        $hasPermission = false;
+        $roles = $call->body->docs[0]->roles;
+        foreach ($permissions as $permissionType => $accounts) {
+            if ($permissionType=='write') {
+                foreach ($accounts as $accountType => $userOrGroupID) {
+                    if ($accountType == 'role') {
+                        foreach ($roles as $roleIdx => $groupID) {
+                            if ($userOrGroupID==$groupID) {
+                                $hasPermission = true;
+                            }
+                        }
+                    }
+                    if ($accountType == 'user' && $username == $userOrGroupID) {
+                        $hasPermission = true;
+                    }
+                }
+            }
+        }
+        if (!$hasPermission) {
+            if ($debug) echo 'User '.$username.' has no permission to write this data into the database.'.PHP_EOL;
+            echo 'status : Failed.';
+            die();
+        }        
+    }    
+}
+
+$dbName = $cdbDomain.'___cms_vdsettings';
+$cdb->setDatabase($dbName, false);
+
 $rec = array_merge ($rec, $rec2);
 //echo '<pre>'; var_dump ($rec); var_dump($_POST); var_dump(json_last_error()); die();
 try {

@@ -67,7 +67,7 @@ var nas = na.site = {
             document.body.style.zoom = 0.99;
         });        
         
-        na.site.setSpecificity();
+        //na.site.setSpecificity(); // DONE BY js IN <HEAD>! (if available)
         
         na.desktop.init();
         
@@ -741,7 +741,7 @@ var nas = na.site = {
                     na.account.settings.password = 'Guest';
                     if (typeof callback=='function') callback(false);
                     $('#siteLogin').fadeOut('normal', 'swing', function () {
-                        $('#siteLoginFailed').fadeIn('normal', 'swing', function () {
+                        $('#siteLoginFailed').html('Login failed..').fadeIn('normal', 'swing', function () {
                             setTimeout (function() {
                                 $('#siteLoginFailed').fadeOut('normal', 'swing', function () {
                                     $('#siteLogin').fadeIn('normal');
@@ -865,7 +865,16 @@ var nas = na.site = {
                 url : '/nicerapp/ajax_set_vividDialog_settings.php',
                 data : themeData,
                 success : function (data, ts, xhr) {
-                    if (typeof callback=='function') callback (themeData, data);
+                    if (data.match('status : Failed')) {
+                        $('#siteLoginFailed').html('Could not save settings. Sorry.').fadeIn('normal', 'swing', function () {
+                            setTimeout (function() {
+                                $('#siteLoginFailed').fadeOut('normal', 'swing', function () {
+                                    $('#siteLogin').fadeIn('normal');
+                                });
+                            }, 2 * 1000);
+                        });
+                        
+                    } else if (typeof callback=='function') callback (themeData, data);
                 },
                 failure : function (xhr, ajaxOptions, thrownError) {
                     debugger;
