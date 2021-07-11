@@ -122,7 +122,7 @@ if (!isset($_SESSION) || !is_array($_SESSION) || !array_key_exists('selectors',$
     $selectorName = $_SESSION['selectorName'];
     foreach ($selectorNames as $idx => $sn) if ($sn == $selectorName) break;
     $sel = $selectors[$idx];
-    if (!array_key_exists('permissions'],$sel)) {
+    if (!array_key_exists('permissions',$sel)) {
         echo 'SESSION selector does not contain a "permissions" entry.'; die();
     } else {
         if (!array_key_exists('write', $sel['permissions'])) {
