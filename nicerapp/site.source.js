@@ -385,11 +385,19 @@ var nas = na.site = {
                                         });
                                         //na.ds.onclick(btn, false);
                                         
-                                        na.backgrounds.next (
-                                            '#siteBackground', 
-                                            na.site.globals.backgroundSearchKey,
-                                            na.site.globals.background
-                                        );
+                                        if (
+                                            typeof $.cookie('loginName')=='string'
+                                            && $.cookie('loginName')=='Guest'
+                                        ) {
+                                                na.site.globals.backgroundSearchKey = $.cookie('siteBackground_search');
+                                                na.site.globals.background = $.cookie('siteBackground_url');
+                                        } else {
+                                            na.backgrounds.next (
+                                                '#siteBackground', 
+                                                na.site.globals.backgroundSearchKey,
+                                                na.site.globals.background
+                                            );
+                                        };
                                         
                                         if (typeof callback=='function') callback (themeData, data);
                                     //});
