@@ -363,7 +363,7 @@ na.ds = na.dialogSettings = {
         $.ajax(ac2);
     },
     
-    selectBorderSettings : function () {
+    selectBorderSettings : function (event) {
         na.ds.onclick($('#btnSelectBorderSettings')[0]);
         $('.dialogSettingsComponent').not('#borderSettings').fadeOut('fast');
         $('.dialogSettings_colorPicker').next().fadeOut('fast');
@@ -387,8 +387,8 @@ na.ds = na.dialogSettings = {
         });
         $('#boxShadowColorpicker').spectrum ({color:'rgba(0,0,0,0.5)', type: "flat", clickoutFiresChange : false, change : na.ds.boxSettingsChanged_shadowColor});
         $('#borderColorpicker').spectrum ({color:na.ds.settings.current.borderColor, type: "flat", clickoutFiresChange : false, change : na.ds.borderSettingsSelected});
-        var evt = { currentTarget : $('#'+na.ds.settings.current.forDialogID)[0] };
-        na.ds.boxSettingsSelected (evt);
+        var evt2 = { currentTarget : $('#'+na.ds.settings.current.forDialogID)[0] };
+        na.ds.boxSettingsSelected (evt2, false);
     },
     
     borderSettingsSelected : function (color) {
@@ -405,8 +405,9 @@ na.ds = na.dialogSettings = {
         /*if (na.ds.settings.current.fireSaveTheme) */na.site.saveTheme();
     },
     
-    boxSettingsSelected : function (event) {
+    boxSettingsSelected : function (event, saveTheme) {
         if (event.currentTarget.id!==na.ds.settings.current.forDialogID) na.ds.settings.current.boxSettings = event.currentTarget;
+        if (saveTheme!==false) saveTheme = true;
         
         var 
         bs = $(event.currentTarget).css('box-shadow'),
@@ -449,7 +450,7 @@ na.ds = na.dialogSettings = {
                 
             $('#boxShadowColorpicker').spectrum('set', boxShadowColor);
             na.ds.settings.current.borderColor = borderColor;
-            na.ds.boxSettingsChanged (boxShadowColor);
+            if (saveTheme) na.ds.boxSettingsChanged (boxShadowColor);
         };
         
         $('#boxShadowXoffset').val(sliders[0]);
