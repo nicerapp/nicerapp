@@ -89,9 +89,11 @@ var nas = na.site = {
         });
         
         //setTimeout(function() {
+        /*
             $('.vividDialog').each(function(idx,el){
                 na.site.settings.dialogs['#'+el.id] = new naVividDialog(el);
             });
+        */
         // 1500);
         
         if (na.m.userDevice.isPhone) {
