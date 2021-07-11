@@ -1,8 +1,9 @@
 <script type="text/javascript">
     $(document).ready(function() {
         setTimeout (function () {
-            na.d.s.visibleDivs.push('#siteToolbarLeft'); na.site.onresize();
-        }, 100);
+            na.d.s.visibleDivs.push('#siteToolbarLeft'); 
+            na.site.onresize({callback:webmail.onresize});
+        }, 1100);
     });    
 </script>
 

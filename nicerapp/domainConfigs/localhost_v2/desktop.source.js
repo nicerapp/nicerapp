@@ -614,6 +614,7 @@ na.desktop = {
                                 el.camera.updateProjectionMatrix();
                                 el.renderer.setSize  ($(el.p).width(), $(el.p).height());
                             };
+                            debugger;
                             if (typeof callback=='function') callback($(divID2)[0]);
                         });
                     }

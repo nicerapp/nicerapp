@@ -547,17 +547,19 @@ var nas = na.site = {
         
         na.site.onresize_doContent(settings);
         
+        if (!settings.callback) settings.callback = function() {
+            if (na.m.userDevice.isPhone) $('#btnOptions, #btnLoginLogout, #btnChangeBackground').css({opacity:1})
+            else $('#btnOptions, #btnLoginLogout, #btnChangeBackground').animate({opacity:1},'normal');
+            
+            na.site.settings.desktopReady = true;
+        };
+        debugger;
         if (
             !settings
             || (typeof settings=='object' && settings.reloadMenu===true)
         ) na.site.reloadMenu(function () {
-            na.desktop.resize(function() {
-                if (na.m.userDevice.isPhone) $('#btnOptions, #btnLoginLogout, #btnChangeBackground').css({opacity:1})
-                else $('#btnOptions, #btnLoginLogout, #btnChangeBackground').animate({opacity:1},'normal');
-                
-                na.site.settings.desktopReady = true;
-            });
-        });
+            na.desktop.resize(settings.callback);
+        }); else na.desktop.resize(settings.callback);
     },
     onresize_doContent : function (settings) {
         if ($(window).width() < na.site.globals.reallySmallDeviceWidth) {

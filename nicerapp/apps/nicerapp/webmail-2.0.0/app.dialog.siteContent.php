@@ -3,10 +3,7 @@
 
 <div class="lds-facebook"><!-- thanks for allowing CC0 license usage : https://loading.io/css/ --><div></div><div></div><div></div></div>
 
-<h1>Hello World.</h1>
-
-
-
-<script type="text/javascript">
-    nawm.onload();
-</script>
+<?php
+    $c = execPHP(dirname(__FILE__).'/../webmail-1.0.0/index.php');
+    echo $c;
+?>

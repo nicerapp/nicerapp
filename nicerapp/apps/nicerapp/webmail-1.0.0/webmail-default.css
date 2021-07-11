@@ -13,7 +13,6 @@ html, body {
 }
 
 #td_left {
-    width : 10%;
     vertical-align : top;
 }
 
@@ -23,7 +22,6 @@ html, body {
     vertical-align : top;
     width : 100%;
     padding : 5px;
-    background : rgba(0,0,0,0.5);
     border-radius : 7px;
     /*word-break: break-word;*/
 }
@@ -32,11 +30,13 @@ html, body {
     width : 90%;
     height : 50%;
     vertical-align:top;
+    padding : 5;
 }
 
 #td_right_bottom {
     width : 90%;
     height : 50%;
+    padding : 5;
 }
 
 
@@ -190,11 +190,12 @@ th {
 
 .mailserverName {
     font-weight:bold;
-    color : #BBF;
+    color : white;
 }
 
 .mailboxName {
-    color : lightgreen;
+    color : green;
+    text-shadow : 2px 2px 2px rgba(0,0,0,0.5);
 }
 
 .mailDetails {

@@ -38,6 +38,7 @@ function webmail_get_mailboxes ($config) {
         .($c['IMAP']['requiresSSL']?'/imap/ssl':'')
         .($c['IMAP']['sslCertificateCheck']?'':'/novalidate-cert')
         .'}';
+    //echo $connectString; var_dump ($c);
     $mbox = imap_open($connectString, $c['userID'], $c['userPassword']);
     if ($mbox===false) return array($connectString=>'FAIL:'.json_encode(imap_errors(),JSON_PRETTY_PRINT));
     return imap_list($mbox, $connectString, '*');

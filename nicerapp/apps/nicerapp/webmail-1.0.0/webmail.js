@@ -8,9 +8,13 @@ webmail.settings = {
 };
 
 webmail.init = function () {
-    webmail.onresize();
+    setTimeout(webmail.onresize,500);
     //window.top.na.s.c.grayscale ('pictogramButton__off', 50, true, document);
     //window.top.na.s.c.bindPictogramEvents (document.body);
+    
+    $(window).resize(function() {
+        setTimeout(webmail.onresize, 750);
+    });
     
     webmail.readConfig();
 };
@@ -18,6 +22,7 @@ webmail.init = function () {
 webmail.onresize = function (evt) {
     //clearTimeout (webmail.settings.onresizeTimeout);
     //webmail.settings.onresizeTimeout = setTimeout (function() {
+    
         jQuery('#wmMails_header_table .pictogramButton__td').css({
             width : 46, height : 46
         });
@@ -31,8 +36,13 @@ webmail.onresize = function (evt) {
             marginLeft : 2, marginTop : 2
         });
         jQuery('.pictogramButton').css ({
-            width : 30, height : 30
+            width : 40, height : 40
         });
+        
+        $('#td_right_top, #wmMails, #bgMailInfo, #wmMails_header_table, #wmMails_header_table, #wmMails_header_table2').css ({ 
+            width : $('#siteContent .vividDialogContent').width() - 40
+        });
+        /*
         if (false) window.top.na.m.log (1, {msg : 'heights 1',
             tr_top : jQuery('#tr_top').height(),
             wmMails : jQuery('#wmMails').height(),
@@ -42,14 +52,15 @@ webmail.onresize = function (evt) {
             wmOuter : jQuery('#wmOuter').position().top,
             td_right_bottom : jQuery('#td_right_bottom').height()
         });
+        */
         var xyz = jQuery('#tr_top').height();
         //debugger;
         jQuery('#wmMails').css({
-            width : jQuery('#td_right_top').width() - 23,
             height : jQuery('#tr_top').height() - (jQuery('#wmMails_header_table').outerHeight()*2) - (jQuery('#wmMails_header_table').position().top*2)- (jQuery('#td_right_top').position().top*2) - (jQuery('#wmOuter').position().top *2)
         });
         var xyz = jQuery('#tr_top').height();
         //debugger;
+        /*
         if (false)  window.top.na.m.log (1, {msg : 'heights 2',
             tr_top : jQuery('#tr_top').height(),
             wmMails : jQuery('#wmMails').height(),
@@ -58,7 +69,7 @@ webmail.onresize = function (evt) {
             td_right_top : jQuery('#td_right_top').position().top,
             wmOuter : jQuery('#wmOuter').position().top,
             td_right_bottom : jQuery('#td_right_bottom').height()
-        });
+        });*/
         jQuery('#wmEmail, #td_right_bottom').css({
             marginTop : 10,
             marginBottom : 10
@@ -82,7 +93,7 @@ webmail.onresize = function (evt) {
             width : mailDate
         });
         jQuery('.totalMsgsInThread').css({
-            width : 50
+            width : 88
         });
     //}, 100);
 };
@@ -90,7 +101,7 @@ webmail.onresize = function (evt) {
 webmail.readConfig = function () {
     jQuery.ajax({
         type : 'GET',
-        url : 'config.php',
+        url : '/nicerapp/apps/nicerapp/webmail-1.0.0/config.php',
         success : function (data, ts, xhr) {
             webmail.settings.config = JSON.parse(data);
             if (webmail.settings.config.ERROR) {
@@ -100,7 +111,7 @@ webmail.readConfig = function () {
                 jQuery('#wmLeft').html('');
                 
                 for (var i=0; i<config.mailServers.length; i++) {
-                    html += '<div id="mailserver__'+i+'"><div class="mailserverName">'+config.mailServers[i].IMAP.domain+' '+config.mailServers[i].userID+'</div></div>';
+                    html += '<div id="mailserver__'+i+'"><div class="mailserverName">'/*+config.mailServers[i].IMAP.domain+' '*/+config.mailServers[i].userID+'</div></div>';
                 }
                 jQuery('#wmLeft').html(html);
                 
@@ -123,7 +134,7 @@ webmail.readConfig = function () {
 webmail.getMailboxes = function (serverConfig, serverIdx) {
     jQuery.ajax({
         type : 'POST',
-        url : 'ajax_get_mailboxes.php',
+        url : '/nicerapp/apps/nicerapp/webmail-1.0.0/ajax_get_mailboxes.php',
         data : {
             config : serverConfig
         },
@@ -156,7 +167,7 @@ webmail.getMailboxContent = function (serverIdx, mailboxIdx, pageIdx, perPage) {
     };
     jQuery.ajax ({
         type : 'POST',
-        url : 'ajax_get_mailbox_content.php',
+        url : '/nicerapp/apps/nicerapp/webmail-1.0.0/ajax_get_mailbox_content.php',
         data : {
             serverConfig : config.mailServers[serverIdx],
             serverIdx : serverIdx,
@@ -208,7 +219,7 @@ webmail.getMailboxContent = function (serverIdx, mailboxIdx, pageIdx, perPage) {
             jQuery('#wmThreadInfo').fadeOut('normal');
             
             jQuery('#btnReplyMail, #btnForwardMail').addClass('pictogramButton__changing');
-            window.top.na.s.c.grayscale ('pictogramButton__changing', 50, true, document);
+            //window.top.na.s.c.grayscale ('pictogramButton__changing', 50, true, document);
             setTimeout (function() {
                 jQuery('#btnReplyMail, #btnForwardMail').addClass ('pictogramButton__off').removeClass('pictogramButton__changing');
             }, 2500);           
@@ -229,20 +240,20 @@ webmail.getMailboxContent = function (serverIdx, mailboxIdx, pageIdx, perPage) {
             //jQuery('#wmMails_table_header').fadeIn('slow');
             if (pageIdx===0) { 
                 jQuery('.btnUp').addClass('pictogramButton__off').addClass('pictogramButton__changing2'); 
-                window.top.na.s.c.grayscale('pictogramButton__changing2',50,true,document);
+                //window.top.na.s.c.grayscale('pictogramButton__changing2',50,true,document);
             } else { 
                 jQuery('.btnUp').removeClass('pictogramButton__off').addClass('pictogramButton__changing2'); 
-                window.top.na.s.c.grayscale('pictogramButton__changing2',50,false,document); 
+                //window.top.na.s.c.grayscale('pictogramButton__changing2',50,false,document); 
                 setTimeout (function() {
                     jQuery('.btnUp').removeClass('pictogramButton__changing2'); 
                 }, 1000);
             };
             if (d[0] && pageIdx===d[0].totalMsgs/perPage) {
                 jQuery('.btnDown').addClass('pictogramButton__off').addClass('pictogramButton__changing3'); 
-                window.top.na.s.c.grayscale('pictogramButton__changing3',50,true,document);
+                //window.top.na.s.c.grayscale('pictogramButton__changing3',50,true,document);
             } else { 
                 jQuery('.btnDown').removeClass('pictogramButton__off').addClass('pictogramButton__changing3'); 
-                window.top.na.s.c.grayscale('pictogramButton__changing3',50,false,document); 
+                //window.top.na.s.c.grayscale('pictogramButton__changing3',50,false,document); 
                 setTimeout (function() {
                     jQuery('.btnDown').removeClass('pictogramButton__changing3'); 
                 }, 1000);
@@ -322,7 +333,7 @@ webmail.showEmail = function (evt, serverIdx, mailboxIdx, mailIdx, updateThreadI
     webmail.settings.currentMailData = webmail.settings.mails[serverIdx][mailboxIdx][j];
     jQuery.ajax ({
         type : 'POST',
-        url : 'ajax_get_mail_content.php',
+        url : '/nicerapp/apps/nicerapp/webmail-1.0.0/ajax_get_mail_content.php',
         data : {
             serverConfig : config.mailServers[serverIdx],
             serverIdx : serverIdx,
@@ -338,7 +349,7 @@ webmail.showEmail = function (evt, serverIdx, mailboxIdx, mailIdx, updateThreadI
             jQuery('#wmEmail')[0].contentDocument.open();
             jQuery('#wmEmail')[0].contentDocument.write(data);
             jQuery('#wmEmail')[0].contentDocument.close();
-            jQuery('#wmEmail').contents().find('body,table,td,div,span,center').css({color:'black',background:'rgba(255,255,255,0)',textShadow:'2px 2px 2px rgba(0,0,0,0.7)'});
+            jQuery('#wmEmail').contents().find('body,table,td,div,span,center').css({color:'black',background:'rgba(255,255,255,0)',textShadow:'1px 1px 1px rgba(0,0,0,0.4)'});
             jQuery('#wmEmail').contents().find('a').css({color:'rgb(0,50,0)'});
             jQuery('#wmEmail').css({display:'block'});
         },
@@ -348,7 +359,7 @@ webmail.showEmail = function (evt, serverIdx, mailboxIdx, mailIdx, updateThreadI
     });
 
     jQuery('#btnReplyMail, #btnForwardMail').addClass('pictogramButton__changing');
-    window.top.na.s.c.grayscale ('pictogramButton__changing', 50, false, document);
+    //window.top.na.s.c.grayscale ('pictogramButton__changing', 50, false, document);
     setTimeout (function() {
         jQuery('#btnReplyMail, #btnForwardMail').removeClass ('pictogramButton__off').removeClass('pictogramButton__changing');
     }, 2500);
@@ -362,7 +373,7 @@ webmail.highlightNoMailboxes = function () {
 
 webmail.highlightMailbox = function (evt) {
     if (!jQuery('.bgMailboxName')[0]) {
-        var bgHTML = '<div class="bgMailboxName" style="position:absolute;width:10%;height:'+jQuery(evt.currentTarget).height()+'px;z-index:-1">&nbsp;</div>';
+        var bgHTML = '<div class="bgMailboxName" style="position:absolute;width:97%;height:'+jQuery(evt.currentTarget).height()+'px;z-index:-1">&nbsp;</div>';
         jQuery('#wmLeft').append (bgHTML);
     }
         
@@ -381,14 +392,14 @@ webmail.highlightNoMails = function () {
 
 webmail.highlightMail = function (evt) {
     if (!jQuery('.bgMailInfo')[0]) {
-        var bgHTML = '<div class="bgMailInfo" style="position:absolute;width:100%;height:'+jQuery(evt.currentTarget).height()+'px;z-index:-1">&nbsp;</div>';
+        var bgHTML = '<div class="bgMailInfo" style="position:absolute;width:'+($('#siteContent .vividDialogContent').width() -20)+'px;height:'+jQuery(evt.currentTarget).height()+'px;z-index:-1">&nbsp;</div>';
         jQuery('#wmMails').append (bgHTML);
     }
         
     var t = evt.currentTarget;
     jQuery(t).addClass ('selected');
     jQuery('.bgMailInfo').css ({
-        top : jQuery(t).position().top + jQuery('#wmMails_table').position().top,
+        top : jQuery(t).position().top + jQuery('#wmMails_table').position().top + 14,
         left : jQuery(t).position().left + jQuery('#td_right').position.left
     });
 }
@@ -437,7 +448,7 @@ webmail.replyMail = function () {
         +'| '+mail.replace('\r\n','\r\n| ');
     
     jQuery('#btnForwardMail').addClass('pictogramButton__changing7');
-    window.top.na.s.c.grayscale ('pictogramButton__changing7', 50, true, document);
+    //window.top.na.s.c.grayscale ('pictogramButton__changing7', 50, true, document);
     setTimeout (function() {
         jQuery('#btnForwardMail').addClass ('pictogramButton__off').removeClass('pictogramButton__changing7');
     }, 1000);
@@ -454,7 +465,7 @@ webmail.forwardMail = function () {
         +'| '+mail.replace('\r\n','\r\n| ');
         
     jQuery('#btnReplyMail').addClass('pictogramButton__changing7');
-    window.top.na.s.c.grayscale ('pictogramButton__changing7', 50, true, document);
+    //window.top.na.s.c.grayscale ('pictogramButton__changing7', 50, true, document);
     setTimeout (function() {
         jQuery('#btnReplyMail').addClass ('pictogramButton__off').removeClass('pictogramButton__changing7');
     }, 1000);
@@ -480,13 +491,13 @@ webmail.writeMail = function (evt, editorData) {
     });
 
     jQuery('#btnWriteMail, .btnUp, .btnDown').addClass('pictogramButton__changing4');
-    window.top.na.s.c.grayscale ('pictogramButton__changing4', 50, true, document);
+    //window.top.na.s.c.grayscale ('pictogramButton__changing4', 50, true, document);
     setTimeout (function() {
         jQuery('#btnWriteMail, .btnUp, .btnDown').addClass ('pictogramButton__off').removeClass('pictogramButton__changing4');
     }, 1000);
     
     jQuery('#btnSendMail').addClass('pictogramButton__changing5');
-    window.top.na.s.c.grayscale ('pictogramButton__changing5', 50, false, document);
+    //window.top.na.s.c.grayscale ('pictogramButton__changing5', 50, false, document);
     setTimeout (function() {
         jQuery('#btnSendMail').removeClass ('pictogramButton__off').removeClass('pictogramButton__changing5');
     }, 1000);
@@ -549,7 +560,7 @@ webmail.sendMail = function (editorData) {
     if (i!==config.mailServers.length) {
         jQuery.ajax ({
             type : 'POST',
-            url : 'ajax_send_mail.php',
+            url : '/nicerapp/apps/nicerapp/webmail-1.0.0/ajax_send_mail.php',
             data : {
                 serverConfig : ms,
                 mailFrom : mailFrom.val(),
