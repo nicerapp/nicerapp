@@ -553,7 +553,7 @@ var nas = na.site = {
             
             na.site.settings.desktopReady = true;
         };
-        debugger;
+        //debugger;
         if (
             !settings
             || (typeof settings=='object' && settings.reloadMenu===true)

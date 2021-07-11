@@ -196,26 +196,39 @@
         
     });
     </script>
+    
     <h2 class="contentSectionTitle2">What is nicerapp?</h2>
+    
     <p>
     Nicerapp embraces the latest web technologies to provide beautiful new views to your data and files.<br/>
     Page owners and end-users can select any tiled, photo or even <a href="https://youtube.com" target="yt">youtube</a> video backgrounds to the content or apps.<br/>
     </p>
+    
     <p>
     It is also licensed to be completely free, under the <a href="https://opensource.org/licenses/MIT" target="MIT_LICENSE">MIT License</a>.<br/>
     Full sources are available at <a href="https://github.com/nicerapp/nicerapp_v2" target="naGithub">https://github.com/nicerapp/nicerapp_v2</a>.<br/>
     Documentation is available at <a href="https://github.com/nicerapp/nicerapp_v2#readme" target="naDocs">https://github.com/nicerapp/nicerapp_v2#readme</a>.
     </p>
-    <p>
-    2021/7jul/10sat 19:55 CET :<br/>
-    I've made a permissions structure today for the editing and loading of cosmetics settings,<br/>
-    (hover over the horizontal edge at the left-top of the window/dialog).<br/>
-    <br/>
-    Within the next few hours or days it'll be possible to set the cosmetic settings *and* the page background to something you selected <br/>
-    from the menu or from a file-tree via the <a href="https://said.by" target="saidBy">blogging features (on https://said.by)</a>,<br/>
-    as the background to use for any of a number of different viewing behavior by the end-user.<br/>
-    </p>
     
+    <p>2021/7jul/11sun 21:04 CET :</p>
+    <p>
+    If you now create an account on <a href="https://said.by" target="saidBy">https://said.by</a>,<br/>
+    <em>you can now edit the look of a window/dialog on sites made with my nicerapp software package</em> per page and per site for yourself.<br/>
+    You can also use the blogging features on that site to create articles which you can then, after publishing the article, get a very short and nice-looking URL for at my <a href="https://zoned.at" target="zonedAt">https://zoned.at</a>.<br/>
+    </p>
+    <p>
+    Site backgrounds are now saved in a cookie in all of the browsers used by Guest accounts (password is also 'Guest')<br/>
+    and in the database for anyone having his/her own account,<br/>
+    and can be selected in the 'Site Window Settings' window, by hovering over the top-left part of any window (called a 'vividDialog' internally) on any nicerapp site, and clicking on the painters palette icon that then appears.<br/>
+    </p>
+    <p>
+    Development will not stop here.<br/>
+    I intend to improve a little more upon what i have so far for this complete rewrite called nicerapp_v2.
+    </p>
+    <p>
+    I will focus as well in the coming days on completing the webmail features of nicerapp.<br/>
+    I may however, have to rewrite the business logic code on the server for that, which could take a week, maybe even 2 weeks, to complete.
+    </p>
 
     <h2 class="contentSectionTitle2">Available Apps</h2>
 

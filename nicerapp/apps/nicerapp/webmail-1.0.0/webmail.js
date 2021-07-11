@@ -424,11 +424,11 @@ webmail.highlightMailThread = function (evt) {
 }
 
 webmail.bgMailInfoScroll = function (evt) {
-    var t = jQuery('.mailInfo.selected')[0];
-    if (t) jQuery('.bgMailInfo').css ({
-        top : jQuery(t).position().top + jQuery('#wmMails_table').position().top + 10,
-        left : jQuery(t).position().left + jQuery('#td_right').position.left
-    });
+    var 
+    t = jQuery('.mailInfo.selected')[0], 
+    top = jQuery(t).position().top + jQuery('#wmMails_table').position().top + 10;
+    
+    if (t) jQuery('.bgMailInfo').animate({opacity : top > $(t).height() && top < $('#wmMails').height() - $(t).height() ? 1 : 0.001});
 };
 
 webmail.bgMailboxNameScroll = function (evt) {
