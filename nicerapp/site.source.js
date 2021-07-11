@@ -735,6 +735,7 @@ var nas = na.site = {
                                 }
                             }, 2 * 1000);
                         });
+                        na.site.stateChange();
                     });
                 } else {
                     na.account.settings.username = 'Guest';
