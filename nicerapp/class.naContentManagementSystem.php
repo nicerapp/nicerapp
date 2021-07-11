@@ -399,9 +399,9 @@ class nicerAppCMS {
             $r .= 'na.site.globals = $.extend(na.site.globals, {'.PHP_EOL;
             $r .= "\tbackground : '/nicerapp/siteMedia/backgrounds/tiled/active/grey/abstract_ice.jpg',".PHP_EOL;
             $r .= "\tbackgroundSearchKey : '".$css['backgroundSearchKey']."',".PHP_EOL;
-            $r .= "\ttcosmeticsSpecificityName : null,".PHP_EOL;
-            $r .= "\ttcosmeticsSpecificityNames : null,".PHP_EOL;
-            $r .= "\ttcosmeticsDBkeys : null,".PHP_EOL;
+            $r .= "\tcosmeticsSpecificityName : null,".PHP_EOL;
+            $r .= "\tcosmeticsSpecificityNames : null,".PHP_EOL;
+            $r .= "\tcosmeticsDBkeys : null,".PHP_EOL;
             $r .= "\tapp : ".json_encode($this->app).PHP_EOL;
             $r .= '});'.PHP_EOL;
             $r .= '</script>'.PHP_EOL;
