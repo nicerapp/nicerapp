@@ -780,25 +780,6 @@ var nas = na.site = {
             role : s.role,
             user : s.user            
         };
-        /*
-        if (!acData.dialogs) acData['dialogs'] = {};
-        for (var i=0; i<na.desktop.globals.divs.length; i++) {
-            var 
-            dID = na.desktop.globals.divs[i],
-            dIDbg = dID+' .vdBackground',
-            d = na.site.settings.dialogs[dID],            
-            dData = {};
-            
-            dData[dID] = d.fetchTheme(d, dID);
-            dData[dIDbg] = d.fetchTheme(d, dIDbg);
-            
-            acData['dialogs'] = na.m.negotiateOptions (
-                acData['dialogs'],
-                dData
-            );
-        }
-        acData['dialogs'] = JSON.stringify (acData['dialogs']);
-        */
         var
         ac = {
             type : 'POST',
@@ -823,14 +804,18 @@ var nas = na.site = {
                         ditbgOpacity = test ? dit.background.match(rgbaRegEx)[1] : dit.opacity;
                         $('.sliderOpacityRange', del).attr('value', ditbgOpacity*100);
                         if (test && na.ds.settings.current.selectedButtonID == 'btnSelectBackgroundColor') {
-                            $('#colorpicker').css({display:'block'}).spectrum ({color:dit.background, type:'flat', change : function (color) {
-                                var bg = $('.vdBackground', $('#'+na.ds.settings.current.forDialogID)[0]);
-                                $(bg).css({ background : color, opacity : 1 });
-                                na.ds.settings.current.fireSaveTheme = true;
-                                na.site.saveTheme();                        
-                            }}).css({display:'none'});
+                            $('#colorpicker').css({display:'block'}).spectrum ({
+                                color:dit.background, 
+                                type:'flat', 
+                                clickoutFiresChange : false, 
+                                change : function (color) {
+                                    var bg = $('.vdBackground', $('#'+na.ds.settings.current.forDialogID)[0]);
+                                    $(bg).css({ background : color, opacity : 1 });
+                                    na.ds.settings.current.fireSaveTheme = true;
+                                    na.site.saveTheme();                        
+                                }
+                            }).css({display:'none'});
                         }
-
                     }
                 };
                 if (typeof callback=='function') callback(true);
@@ -894,7 +879,7 @@ var nas = na.site = {
                 }
             };
             $.ajax(ac2);
-        }, 750);
+        }, 500);
     },
     
     fetchTheme (selector) {

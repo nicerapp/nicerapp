@@ -356,11 +356,13 @@ class nicerAppCMS {
         
         $ret = '';
         $hasJS = false;
+        $hasCSS = false;
         foreach ($selectors2 as $idx => $selector) {
             $css = $this->getPageCSS_specific($selector);
             //echo '$css = '; var_dump ($css); echo PHP_EOL.PHP_EOL;
             if (
-                $css!==false 
+                !$hasJS
+                && $css!==false 
                 && (
                     !array_key_exists('display',$selector) 
                     || $selector['display']!==false
@@ -385,8 +387,23 @@ class nicerAppCMS {
                 $r .= '});'.PHP_EOL;
                 $r .= '</script>'.PHP_EOL;
                 $ret = $r.$ret;
-            }
-            if ($css!==false) {                
+            } else if (!$hasJS && $css!==false) {
+                $hasJS = true;
+                $r = '<script id="jsPageSpecific" type="text/javascript">'.PHP_EOL;
+                $r .= 'na.site.globals = $.extend(na.site.globals, {'.PHP_EOL;
+                $r .= "\tbackground : '".$css['background']."',".PHP_EOL;
+                $r .= "\tbackgroundSearchKey : '".$css['backgroundSearchKey']."',".PHP_EOL;
+                $r .= "\tcosmeticsSpecificityName : null,".PHP_EOL;
+                $r .= "\tcosmeticsSpecificityNames : null,".PHP_EOL;
+                $r .= "\tcosmeticsDBkeys : null,".PHP_EOL;
+                $r .= "\tapp : ".json_encode($this->app).PHP_EOL;
+                $r .= '});'.PHP_EOL;
+                $r .= '</script>'.PHP_EOL;
+                $ret = $r.$ret;
+            };
+
+            if ($css!==false && !$hasCSS) {                
+                $hasCSS = true;
                 $r = '<style id="cssPageSpecific">'.PHP_EOL;
                 $r .= css_array_to_css($css['dialogs']).PHP_EOL;
                 $r .= '</style>'.PHP_EOL;
@@ -394,33 +411,22 @@ class nicerAppCMS {
             }
         };
         
-        if (!$hasJS && $css!==false) {
-            $r = '<script id="jsPageSpecific" type="text/javascript">'.PHP_EOL;
-            $r .= 'na.site.globals = $.extend(na.site.globals, {'.PHP_EOL;
-            $r .= "\tbackground : '".$css['background']."',".PHP_EOL;
-            $r .= "\tbackgroundSearchKey : '".$css['backgroundSearchKey']."',".PHP_EOL;
-            $r .= "\tcosmeticsSpecificityName : null,".PHP_EOL;
-            $r .= "\tcosmeticsSpecificityNames : null,".PHP_EOL;
-            $r .= "\tcosmeticsDBkeys : null,".PHP_EOL;
-            $r .= "\tapp : ".json_encode($this->app).PHP_EOL;
-            $r .= '});'.PHP_EOL;
-            $r .= '</script>'.PHP_EOL;
-            $ret = $r.$ret;
-        } else if (!$hasJS) {
-            $r = '<script id="jsPageSpecific" type="text/javascript">'.PHP_EOL;
-            $r .= 'na.site.globals = $.extend(na.site.globals, {'.PHP_EOL;
-            $r .= "\tbackground : '/nicerapp/siteMedia/backgrounds/tiled/active/grey/abstract_ice.jpg',".PHP_EOL;
-            $r .= "\tbackgroundSearchKey : 'landscape',".PHP_EOL;
-            $r .= "\tcosmeticsSpecificityName : null,".PHP_EOL;
-            $r .= "\tcosmeticsSpecificityNames : null,".PHP_EOL;
-            $r .= "\tcosmeticsDBkeys : null,".PHP_EOL;
-            $r .= "\tapp : ".json_encode($this->app).PHP_EOL;
-            $r .= '});'.PHP_EOL;
-            $r .= '</script>'.PHP_EOL;
-            $ret = $r.$ret;
-        }
-        
+        if (!$hasJS) {
+                $hasJS = true;
+                $r = '<script id="jsPageSpecific" type="text/javascript">'.PHP_EOL;
+                $r .= 'na.site.globals = $.extend(na.site.globals, {'.PHP_EOL;
+                $r .= "\tbackground : '/nicerapp/siteMedia/backgrounds/tiled/active/grey/abstract_ice.jpg',".PHP_EOL;
+                $r .= "\tbackgroundSearchKey : 'landscape',".PHP_EOL;
+                $r .= "\tcosmeticsSpecificityName : null,".PHP_EOL;
+                $r .= "\tcosmeticsSpecificityNames : null,".PHP_EOL;
+                $r .= "\tcosmeticsDBkeys : null,".PHP_EOL;
+                $r .= "\tapp : ".json_encode($this->app).PHP_EOL;
+                $r .= '});'.PHP_EOL;
+                $r .= '</script>'.PHP_EOL;
+                $ret = $r.$ret;
+        };
         return $ret;
+        
     }
     
     public function getPageCSS_specific($selector) {

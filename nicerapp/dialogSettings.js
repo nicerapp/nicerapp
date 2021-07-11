@@ -133,12 +133,17 @@ na.ds = na.dialogSettings = {
         );
         na.ds.settings.current.borderColor = c2;
         
-        var x = $('#colorpicker').css('display');
-        $('#colorpicker').css({display:'block'}).spectrum ({color:c, type:'flat', clickoutFiresChange : false, change : function (color) {
-            var bg = $('.vdBackground', $('#'+na.ds.settings.current.forDialogID)[0]);
-            $(bg).css({ background : color, opacity : 1 });
-            na.site.saveTheme();                        
-        }});
+        var x = $('#colorpicker').css('display'), y = 'abc';
+        debugger;
+        $('#colorpicker').css({display:'block'}).spectrum ({
+            color:c, 
+            type:'flat', clickoutFiresChange : false, 
+            change : function (color) {
+                debugger;
+                var bg = $('.vdBackground', $('#'+na.ds.settings.current.forDialogID)[0]);
+                $(bg).css({ background : color, opacity : 1 });
+                na.site.saveTheme();                        
+            }});
         if (na.ds.settings.current.selectedButtonID!=='btnSelectBackgroundColor') $('#colorpicker').next().css({display:x});
         var x = $('#borderColorpicker').css('display');
         $('#borderColorpicker').css({display:'block'}).spectrum ({color:c2, type: "flat", clickoutFiresChange : false, change : na.ds.borderSettingsSelected});
