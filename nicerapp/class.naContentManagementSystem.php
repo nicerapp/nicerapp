@@ -310,7 +310,7 @@ class nicerAppCMS {
             $selectors[2]['display'] = false;
             $selectors[3]['display'] = false;
         };
-        var_dump ($selectors); die();
+        echo '<pre>'; var_dump ($selectors); die();
         
         if (
             is_array($_COOKIE) && array_key_exists('loginName', $_COOKIE) && is_string($_COOKIE['loginName'])
