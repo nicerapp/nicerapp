@@ -2,7 +2,7 @@
 require_once (dirname(__FILE__).'/boot.php');
 require_once (dirname(__FILE__).'/3rd-party/sag/src/Sag.php');
 require_once (dirname(__FILE__).'/Sag-support-functions.php');
-$debug = true;
+$debug = false;
 if ($debug) {
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
@@ -174,9 +174,9 @@ if (!isset($_SESSION) || !is_array($_SESSION) || !array_key_exists('selectors',$
         // check permissions
         $hasPermission = false;
         $roles = $call->body->docs[0]->roles;
-        echo '<pre>$permissions='; var_dump ($permissions); echo '</pre>'.PHP_EOL.PHP_EOL;
-        echo '<pre>$accounts='; var_dump ($accounts); echo '</pre>'.PHP_EOL.PHP_EOL;
+        if ($debug) { echo '<pre>$permissions='; var_dump ($permissions); echo '</pre>'.PHP_EOL.PHP_EOL; };
         foreach ($permissions as $permissionType => $accounts) {
+            if ($debug) { echo '<pre>$accounts='; var_dump ($accounts); echo '</pre>'.PHP_EOL.PHP_EOL; };
             if ($permissionType=='write') {
                 foreach ($accounts as $accountType => $userOrGroupID) {
                     if ($accountType == 'role') {
