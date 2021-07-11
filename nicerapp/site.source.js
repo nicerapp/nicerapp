@@ -234,10 +234,7 @@ var nas = na.site = {
                     typeof $.cookie('loginName')=='string'
                     && $.cookie('loginName')=='Guest'
                 ) {
-                    if (!$.cookie('siteBackground_url') || $.cookie('siteBackground_url')==='') {
-                        na.site.globals.backgroundSearchKey = 'landscape';
-                        na.site.globals.background = defaultBG;
-                    } else {
+                    if ($.cookie('siteBackground_url') && $.cookie('siteBackground_url')!=='') {
                         na.site.globals.backgroundSearchKey = $.cookie('siteBackground_search');
                         na.site.globals.background = $.cookie('siteBackground_url');
                     }
@@ -245,6 +242,7 @@ var nas = na.site = {
                     na.site.globals.backgroundSearchKey = 'landscape';
                 };
                 
+                debugger;
                 na.backgrounds.next (
                     '#siteBackground', 
                     na.site.globals.backgroundSearchKey, 

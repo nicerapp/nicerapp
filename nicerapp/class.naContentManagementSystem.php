@@ -1,4 +1,5 @@
 <?php 
+require_once(dirname(__FILE__).'/boot.php');
 require_once(dirname(__FILE__).'/functions.php');
 require_once(dirname(__FILE__).'/selfHealer/class.selfHealer.php');
 require_once(dirname(__FILE__).'/3rd-party/sag/src/Sag.php');
@@ -347,10 +348,11 @@ class nicerAppCMS {
             $selectorNames[] = 'page user '.$_COOKIE['loginName'];
         };
         
+        /*
         if (session_status() === PHP_SESSION_NONE) {
             ini_set('session.gc_maxlifetime', 3600);
             session_start();
-        };
+        };*/
         $_SESSION['selectors'] = json_encode($selectors);
         $_SESSION['selectorNames'] = json_encode($selectorNames);
         
