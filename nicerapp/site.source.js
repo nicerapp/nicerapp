@@ -228,7 +228,7 @@ var nas = na.site = {
                 var dataDecoded = JSON.parse(data);
                 na.site.settings.backgrounds = dataDecoded;
                 
-        debugger;
+                //debugger;
                 var defaultBG = '/nicerapp/siteMedia/backgrounds/tiled/active/grey/cracked-surface-seamless-gray-background.jpg';
                 if (
                     typeof $.cookie('loginName')=='string'
@@ -869,7 +869,7 @@ var nas = na.site = {
             
             themeData.backgroundSearchKey = na.site.globals.backgroundSearchKey;
             themeData.background = na.site.globals.background;
-            
+   debugger;         
             var
             ac2 = {
                 type : 'POST',
