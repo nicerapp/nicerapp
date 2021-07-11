@@ -174,6 +174,8 @@ if (!isset($_SESSION) || !is_array($_SESSION) || !array_key_exists('selectors',$
         // check permissions
         $hasPermission = false;
         $roles = $call->body->docs[0]->roles;
+        echo '<pre>$permissions='; var_dump ($permissions); echo '</pre>'.PHP_EOL.PHP_EOL;
+        echo '<pre>$accounts='; var_dump ($accounts); echo '</pre>'.PHP_EOL.PHP_EOL;
         foreach ($permissions as $permissionType => $accounts) {
             if ($permissionType=='write') {
                 foreach ($accounts as $accountType => $userOrGroupID) {
