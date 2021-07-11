@@ -877,9 +877,7 @@ var nas = na.site = {
                     if (data.match('status : Failed')) {
                         $('#siteLoginFailed').html('Could not save settings. Sorry.').fadeIn('normal', 'swing', function () {
                             setTimeout (function() {
-                                $('#siteLoginFailed').fadeOut('normal', 'swing', function () {
-                                    $('#siteLogin').fadeIn('normal');
-                                });
+                                $('#siteLoginFailed').fadeOut('normal', 'swing');
                             }, 2 * 1000);
                         });
                         
