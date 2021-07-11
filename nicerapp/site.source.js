@@ -356,7 +356,7 @@ var nas = na.site = {
                             var vdc = $('#'+divID+' .vividDialogContent');
                             vdc.html(dat[divID]).fadeIn('normal');
                             
-                            $('.vividDialog', vdc[0]).each(function(idx,el){
+                            $('.vividDialog'/*, vdc[0]*/).each(function(idx,el){
                                 na.site.settings.dialogs['#'+el.id] = new naVividDialog(el);
                             });
                             //$('#'+divID+' .vividDialogContent')[0].innerHTML = dat[divID];
