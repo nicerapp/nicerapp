@@ -394,10 +394,10 @@ class nicerAppCMS {
             }
         };
         
-        if (!$hasJS) {
+        if (!$hasJS && $css!==false) {
             $r = '<script id="jsPageSpecific" type="text/javascript">'.PHP_EOL;
             $r .= 'na.site.globals = $.extend(na.site.globals, {'.PHP_EOL;
-            $r .= "\tbackground : '/nicerapp/siteMedia/backgrounds/tiled/active/grey/abstract_ice.jpg',".PHP_EOL;
+            $r .= "\tbackground : '".$css['background']."',".PHP_EOL;
             $r .= "\tbackgroundSearchKey : '".$css['backgroundSearchKey']."',".PHP_EOL;
             $r .= "\tcosmeticsSpecificityName : null,".PHP_EOL;
             $r .= "\tcosmeticsSpecificityNames : null,".PHP_EOL;
@@ -406,7 +406,18 @@ class nicerAppCMS {
             $r .= '});'.PHP_EOL;
             $r .= '</script>'.PHP_EOL;
             $ret = $r.$ret;
-        
+        } else if (!$hasJS) {
+            $r = '<script id="jsPageSpecific" type="text/javascript">'.PHP_EOL;
+            $r .= 'na.site.globals = $.extend(na.site.globals, {'.PHP_EOL;
+            $r .= "\tbackground : '/nicerapp/siteMedia/backgrounds/tiled/active/grey/abstract_ice.jpg',".PHP_EOL;
+            $r .= "\tbackgroundSearchKey : 'landscape',".PHP_EOL;
+            $r .= "\tcosmeticsSpecificityName : null,".PHP_EOL;
+            $r .= "\tcosmeticsSpecificityNames : null,".PHP_EOL;
+            $r .= "\tcosmeticsDBkeys : null,".PHP_EOL;
+            $r .= "\tapp : ".json_encode($this->app).PHP_EOL;
+            $r .= '});'.PHP_EOL;
+            $r .= '</script>'.PHP_EOL;
+            $ret = $r.$ret;
         }
         
         return $ret;
