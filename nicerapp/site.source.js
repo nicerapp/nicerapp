@@ -378,7 +378,7 @@ var nas = na.site = {
                                         });
                                         //na.ds.onclick(btn, false);
                                         
-                                        debugger;
+                                        //debugger;
                                         if (
                                             typeof $.cookie('loginName')=='string'
                                             && $.cookie('loginName')=='Guest'
@@ -845,7 +845,10 @@ var nas = na.site = {
     
     saveTheme : function (callback) {
         var 
-        s = na.ds.settings.current.specificity,
+        s = na.ds.settings.current.specificity;
+        if (!s) return false;
+        
+        var
         themeData = {
             username : na.account.settings.username,
             pw : na.account.settings.password,

@@ -101,31 +101,31 @@ na.site.globals = $.extend(na.site.globals, {
                 <img class="cvbImgTile" src="/nicerapp/siteMedia/btnCssVividButton.png"/>-->
                 <img class="cvbImgButton" src="/nicerapp/siteMedia/btnBack.png"/>
             </div>
-            <div id="btnSelectBorderSettings" class="vividButton_icon tooltip" title="Select border settings" alt="Select border settings" style="position:absolute;left:65px;width:50px;height:50px;" onclick="if (!$(this).is('.disabled')) na.dialogSettings.selectBorderSettings()">
+            <div id="btnSelectBorderSettings" class="vividButton_icon tooltip" title="Select border settings" alt="Select border settings" style="position:absolute;left:65px;width:50px;height:50px;" onclick="if (!$(this).is('.disabled')) na.dialogSettings.selectBorderSettings(event)">
                 <div class="cvbBorderCSS"></div>
                 <img class="cvbImgBorder" src="/nicerapp/siteMedia/btnCssVividButton_outerBorder.png"/>
                 <img class="cvbImgTile" src="/nicerapp/siteMedia/btnCssVividButton.png"/>
                 <img class="cvbImgButton" src="/nicerapp/siteMedia/btnSettingsBorder.png"/>
             </div>
-            <div id="btnSelectBackgroundColor" class="vividButton_icon tooltip" title="Select background color" alt="Select background color" style="position:absolute;left:120px;width:50px;height:50px;" onclick="if (!$(this).is('.disabled')) na.dialogSettings.selectBackground_color()">
+            <div id="btnSelectBackgroundColor" class="vividButton_icon tooltip" title="Select background color" alt="Select background color" style="position:absolute;left:120px;width:50px;height:50px;" onclick="if (!$(this).is('.disabled')) na.dialogSettings.selectBackground_color(event)">
                 <div class="cvbBorderCSS"></div>
                 <img class="cvbImgBorder" src="/nicerapp/siteMedia/btnCssVividButton_outerBorder.png"/>
                 <img class="cvbImgTile" src="/nicerapp/siteMedia/btnCssVividButton.png"/>
                 <img class="cvbImgButton" src="/nicerapp/siteMedia/btnColorPicker.png"/>
             </div>
-            <div id="btnSelectBackgroundFolder" class="vividButton_icon tooltip" title="Select background image folder" alt="Select background image folder" style="position:absolute;left:175px;width:50px;height:50px;" onclick="if (!$(this).is('.disabled')) na.dialogSettings.selectBackground_folder()">
+            <div id="btnSelectBackgroundFolder" class="vividButton_icon tooltip" title="Select background image folder" alt="Select background image folder" style="position:absolute;left:175px;width:50px;height:50px;" onclick="if (!$(this).is('.disabled')) na.dialogSettings.selectBackground_folder(event)">
                 <div class="cvbBorderCSS"></div>
                 <img class="cvbImgBorder" src="/nicerapp/siteMedia/btnCssVividButton_outerBorder.png"/>
                 <img class="cvbImgTile" src="/nicerapp/siteMedia/btnCssVividButton.png"/>
                 <img class="cvbImgButton" src="/nicerapp/siteMedia/tree.png"/>
             </div>
-            <div id="btnSelectBackgroundImage" class="vividButton_icon tooltip" title="Select background image" alt="Select background image" style="position:absolute;left:235px;width:50px;height:50px;" onclick="if (!$(this).is('.disabled')) na.dialogSettings.selectBackground_image()">
+            <div id="btnSelectBackgroundImage" class="vividButton_icon tooltip" title="Select background image" alt="Select background image" style="position:absolute;left:235px;width:50px;height:50px;" onclick="if (!$(this).is('.disabled')) na.dialogSettings.selectBackground_image(event)">
                 <div class="cvbBorderCSS"></div>
                 <img class="cvbImgBorder" src="/nicerapp/siteMedia/btnCssVividButton_outerBorder.png"/>
                 <img class="cvbImgTile" src="/nicerapp/siteMedia/btnCssVividButton.png"/>
                 <img class="cvbImgButton" src="/nicerapp/siteMedia/btnBackground.png"/>
             </div>
-            <div id="btnSelectTextSettings" class="vividButton_icon tooltip" title="Select text settings" alt="Select text settings" style="position:absolute;left:290px;width:50px;height:50px;" onclick="if (!$(this).is('.disabled')) na.dialogSettings.selectTextSettings()">
+            <div id="btnSelectTextSettings" class="vividButton_icon tooltip" title="Select text settings" alt="Select text settings" style="position:absolute;left:290px;width:50px;height:50px;" onclick="if (!$(this).is('.disabled')) na.dialogSettings.selectTextSettings(event)">
                 <div class="cvbBorderCSS"></div>
                 <img class="cvbImgBorder" src="/nicerapp/siteMedia/btnCssVividButton_outerBorder.png"/>
                 <!--<img class="cvbImgTile" src="/nicerapp/siteMedia/btnCssVividButton.png"/>-->

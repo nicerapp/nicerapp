@@ -364,7 +364,8 @@ na.ds = na.dialogSettings = {
     },
     
     selectBorderSettings : function (event) {
-        na.ds.onclick($('#btnSelectBorderSettings')[0]);
+        var ct = $('#btnSelectBorderSettings')[0];
+        na.ds.onclick(ct);
         $('.dialogSettingsComponent').not('#borderSettings').fadeOut('fast');
         $('.dialogSettings_colorPicker').next().fadeOut('fast');
         $('#borderSettings').fadeIn('fast', 'swing', function () {
@@ -388,7 +389,7 @@ na.ds = na.dialogSettings = {
         $('#boxShadowColorpicker').spectrum ({color:'rgba(0,0,0,0.5)', type: "flat", clickoutFiresChange : false, change : na.ds.boxSettingsChanged_shadowColor});
         $('#borderColorpicker').spectrum ({color:na.ds.settings.current.borderColor, type: "flat", clickoutFiresChange : false, change : na.ds.borderSettingsSelected});
         var evt2 = { currentTarget : $('#'+na.ds.settings.current.forDialogID)[0] };
-        na.ds.boxSettingsSelected (evt2, false);
+        na.ds.boxSettingsSelected (evt2, false); //event.currentTarget === ct
     },
     
     borderSettingsSelected : function (color) {
@@ -548,20 +549,20 @@ na.ds = na.dialogSettings = {
     
     
     
-    selectBackground_color : function () {
+    selectBackground_color : function (event) {
         na.ds.onclick($('#btnSelectBackgroundColor')[0]);
         $('.dialogSettingsComponent').not('.sp-container').fadeOut('fast');
         $('.sp-container').fadeIn('fast').css({top:8,opacity:1});
     },
 
-    selectBackground_folder : function () {
+    selectBackground_folder : function (event) {
         na.ds.onclick($('#btnSelectBackgroundFolder')[0]);
         $('.dialogSettingsComponent').not('#dialogSettings_jsTree').fadeOut('fast');
         $('.dialogSettings_colorPicker').next().fadeOut('fast');
         $('#dialogSettings_jsTree').fadeIn('fast');
     },
     
-    selectBackground_image : function () {
+    selectBackground_image : function (event) {
         na.ds.onclick($('#btnSelectBackgroundImage')[0]);
         $('.dialogSettingsComponent').not('#dialogSettings_photoAlbum, #dialogSettings_photoAlbum_specs').fadeOut('fast');
         setTimeout (function () {
@@ -589,8 +590,8 @@ na.ds = na.dialogSettings = {
                     width:$('#siteToolbarDialogSettings').width() - 180,
                     left : 150
                 }).val(na.ds.settings.current.scale).fadeIn('fast');
-            }, 250);
-        }, 250);
+            }, 100);
+        }, 100);
             
     },
     
