@@ -13,7 +13,7 @@ class naVividDialog {
         t.settings = { current : {} };
         
         var html = '';
-        debugger;
+        if (t.el.id=='siteContent') debugger;
         if (na.site.globals.cosmeticsDBkeys) {
             html += 
                 '<div class="vdSettings">'
@@ -24,7 +24,6 @@ class naVividDialog {
         if (!$(t.el).find('.vdBackground')[0]) html += '<div class="vdBackground"></div>';
         if (html!=='' && t.el.id!=='#siteToolbarDialogSettings' && !$('.vdSettings',t.el)[0]) $(t.el).prepend(html);
 
-        
         var
         bg = t.el,
         rgbaRegEx = /rgba\((\d{1,3})\,\s*(\d{1,3})\,\s*(\d{1,3})\,\s*([\d.]+)\)(.*)/,
