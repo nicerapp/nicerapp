@@ -229,28 +229,21 @@ var nas = na.site = {
                 na.site.settings.backgrounds = dataDecoded;
                 
         debugger;
-                if (na.site.globals.background==='') {
-                    var defaultBG = '/nicerapp/siteMedia/backgrounds/tiled/active/grey/cracked-surface-seamless-gray-background.jpg';
-                    if (
-                        typeof $.cookie('loginName')=='string'
-                        && $.cookie('loginName')=='Guest'
-                    ) {
-                        if (!$.cookie('siteBackground_url') || $.cookie('siteBackground_url')==='') {
-                            na.site.globals.backgroundSearchKey = 'landscape';
-                            na.site.globals.background = defaultBG;
-                        } else {
-                            na.site.globals.backgroundSearchKey = $.cookie('siteBackground_search');
-                            na.site.globals.background = $.cookie('siteBackground_url');
-                        }
-                    } else {
+                var defaultBG = '/nicerapp/siteMedia/backgrounds/tiled/active/grey/cracked-surface-seamless-gray-background.jpg';
+                if (
+                    typeof $.cookie('loginName')=='string'
+                    && $.cookie('loginName')=='Guest'
+                ) {
+                    if (!$.cookie('siteBackground_url') || $.cookie('siteBackground_url')==='') {
                         na.site.globals.backgroundSearchKey = 'landscape';
                         na.site.globals.background = defaultBG;
+                    } else {
+                        na.site.globals.backgroundSearchKey = $.cookie('siteBackground_search');
+                        na.site.globals.background = $.cookie('siteBackground_url');
                     }
+                } else {
+                    na.site.globals.backgroundSearchKey = 'landscape';
                 };
-                if (
-                    !na.site.globals.backgroundSearchKey
-                    || na.site.globals.backgroundSearchKey===''
-                ) na.site.globals.backgroundSearchKey = 'landscape';
                 
                 na.backgrounds.next ('#siteBackground', na.site.globals.backgroundSearchKey, na.site.globals.background);
             },
