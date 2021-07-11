@@ -776,7 +776,10 @@ var nas = na.site = {
     
     loadTheme : function (callback) {
         var 
-        s = na.ds.settings.current.specificity,
+        s = na.ds.settings.current.specificity;
+        if (!s) return false;
+        
+        var
         acData = {
             username : na.account.settings.username,
             pw : na.account.settings.password,
