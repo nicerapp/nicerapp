@@ -356,9 +356,6 @@ var nas = na.site = {
                             var vdc = $('#'+divID+' .vividDialogContent');
                             vdc.html(dat[divID]).fadeIn('normal');
                             
-                            $('.vividDialog'/*, vdc[0]*/).each(function(idx,el){
-                                na.site.settings.dialogs['#'+el.id] = new naVividDialog(el);
-                            });
                             //$('#'+divID+' .vividDialogContent')[0].innerHTML = dat[divID];
                             na.site.transformLinks($('#'+divID)[0]);
                         });
@@ -381,6 +378,9 @@ var nas = na.site = {
                                         evt = { currentTarget : $('#specificity')[0] };
                                         
                                         na.ds.specificitySelected(evt);
+                                        $('.vividDialog'/*, vdc[0]*/).each(function(idx,el){
+                                            na.site.settings.dialogs['#'+el.id] = new naVividDialog(el);
+                                        });
                                         //na.ds.onclick(btn, false);
                                         
                                         if (typeof callback=='function') callback (themeData, data);
