@@ -13,7 +13,7 @@ class naVividDialog {
         t.settings = { current : {} };
         
         var html = '';
-        //if (t.el.id=='siteContent') debugger;
+        if (t.el.id=='siteContent') debugger;
         if (na.site.globals.cosmeticsDBkeys) {
             html += 
                 '<div class="vdSettings">'

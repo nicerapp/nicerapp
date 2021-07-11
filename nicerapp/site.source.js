@@ -385,6 +385,12 @@ var nas = na.site = {
                                         });
                                         //na.ds.onclick(btn, false);
                                         
+                                        na.backgrounds.next (
+                                            '#siteBackground', 
+                                            na.site.globals.backgroundSearchKey,
+                                            na.site.globals.background
+                                        );
+                                        
                                         if (typeof callback=='function') callback (themeData, data);
                                     //});
                                 }, 250);
