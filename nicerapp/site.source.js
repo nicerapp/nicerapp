@@ -242,7 +242,6 @@ var nas = na.site = {
                     na.site.globals.backgroundSearchKey = 'landscape';
                 };
                 
-                debugger;
                 na.backgrounds.next (
                     '#siteBackground', 
                     na.site.globals.backgroundSearchKey, 
@@ -750,6 +749,7 @@ var nas = na.site = {
                                 }
                             }, 2 * 1000);
                         });
+                        debugger;
                         if (reloadContent) na.site.stateChange();
                     });
                 } else {

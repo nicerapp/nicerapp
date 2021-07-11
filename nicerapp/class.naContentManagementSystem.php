@@ -238,6 +238,8 @@ class nicerAppCMS {
     }
     
     public function getPageCSS() {
+        $debug = false;
+        
         if (is_array($_GET) && array_key_exists('apps',$_GET) && is_string($_GET['apps'])) {
             $url = '/apps/'.$_GET['apps'];
         } else {
@@ -301,10 +303,10 @@ class nicerAppCMS {
         
         //var_dump ($this->app); die();
         if (
-            !isset($_COOKIE) 
-            || !is_array($_COOKIE) 
-            || !array_key_exists('loginName',$_COOKIE)
-            || $_COOKIE['loginName'] !== 'Rene.AJM.Veerman'
+            !isset($_SESSION) 
+            || !is_array($_SESSION) 
+            || !array_key_exists('cdb_loginName',$_SESSION)
+            || $_SESSION['cdb_loginName'] !== 'Rene.AJM.Veerman'
         ) {
             $selectors[0]['display'] = false;
             $selectors[1]['display'] = false;
@@ -314,38 +316,38 @@ class nicerAppCMS {
         //echo '<pre>'; var_dump ($selectors); die();
         
         if (
-            is_array($_COOKIE) && array_key_exists('loginName', $_COOKIE) && is_string($_COOKIE['loginName'])
+            is_array($_SESSION) && array_key_exists('cdb_loginName', $_SESSION) && is_string($_SESSION['cdb_loginName'])
             && isset($this->app)
             && array_key_exists('cmsText', $this->app) 
             && array_key_exists('user', $this->app['cmsText'])
-            && $this->app['cmsText']['user'] == $_COOKIE['loginName']
+            && $this->app['cmsText']['user'] == $_SESSION['cdb_loginName']
         ) {
             $selectors[] = array (
                 'permissions' => array (
                     'read' => array(
-                        'user' => $_COOKIE['loginName']
+                        'user' => $_SESSION['cdb_loginName']
                     ),
                     'write' => array(
-                        'user' => $_COOKIE['loginName']
+                        'user' => $_SESSION['cdb_loginName']
                     )
                 ),
                 'url' => '[default]',
-                'user' => $_COOKIE['loginName']
+                'user' => $_SESSION['cdb_loginName']
             );
-            $selectorNames[] = 'site user '.$_COOKIE['loginName'];
+            $selectorNames[] = 'site user '.$_SESSION['cdb_loginName'];
             $selectors[] = array (
                 'permissions' => array (
                     'read' => array(
-                        'user' => $_COOKIE['loginName']
+                        'user' => $_SESSION['cdb_loginName']
                     ),
                     'write' => array(
-                        'user' => $_COOKIE['loginName']
+                        'user' => $_SESSION['cdb_loginName']
                     )
                 ),
                 'url' => $url,
-                'user' => $_COOKIE['loginName']
+                'user' => $_SESSION['cdb_loginName']
             );
-            $selectorNames[] = 'page user '.$_COOKIE['loginName'];
+            $selectorNames[] = 'page user '.$_SESSION['cdb_loginName'];
         };
         
         /*
@@ -358,13 +360,19 @@ class nicerAppCMS {
         
         $selectors2 = array_reverse($selectors, true);
         $selectorNames2 = array_reverse($selectorNames, true);
-        
+
         $ret = '';
         $hasJS = false;
         $hasCSS = false;
+        if ($debug) echo '<pre>';
         foreach ($selectors2 as $idx => $selector) {
             $css = $this->getPageCSS_specific($selector);
-            //echo '$css = '; var_dump ($css); echo PHP_EOL.PHP_EOL;
+            if ($debug) {
+                echo '$css = '; var_dump ($css); echo PHP_EOL.PHP_EOL;
+                echo '$hasJS = '; var_dump ($hasJS); echo PHP_EOL.PHP_EOL;
+                echo '$hasCSS = '; var_dump ($hasCSS); echo PHP_EOL.PHP_EOL;
+                echo '$selector = '; var_dump ($selector); echo PHP_EOL.PHP_EOL;
+            };
             if (
                 !$hasJS
                 && $css!==false 
@@ -389,6 +397,25 @@ class nicerAppCMS {
                 $r .= "\t\tna.site.setSpecificity();".PHP_EOL;
                 $r .= "\t\tna.ds.onload(na.ds.settings.current.forDialogID);".PHP_EOL;
                 $r .= "\t}, 250);".PHP_EOL;
+                $r .= '});'.PHP_EOL;
+                $r .= '</script>'.PHP_EOL;
+                $ret = $r.$ret;
+            } else if (
+                !$hasJS 
+                && $css!==false 
+                && is_array($_SESSION)
+                && array_key_exists('cdb_loginName',$_SESSION)
+                && $_SESSION['cdb_loginName']=='Rene.AJM.Veerman'
+            ) {
+                $hasJS = true;
+                $r = '<script id="jsPageSpecific" type="text/javascript">'.PHP_EOL;
+                $r .= 'na.site.globals = $.extend(na.site.globals, {'.PHP_EOL;
+                $r .= "\tbackground : '".$css['background']."',".PHP_EOL;
+                $r .= "\tbackgroundSearchKey : '".$css['backgroundSearchKey']."',".PHP_EOL;
+                $r .= "\tcosmeticsSpecificityName : '".$selectorNames[$idx]."',".PHP_EOL;
+                $r .= "\tcosmeticsSpecificityNames : ".json_encode($selectorNames).",".PHP_EOL;
+                $r .= "\tcosmeticsDBkeys : ".json_encode($selectors).",".PHP_EOL;
+                $r .= "\tapp : ".json_encode($this->app).PHP_EOL;
                 $r .= '});'.PHP_EOL;
                 $r .= '</script>'.PHP_EOL;
                 $ret = $r.$ret;
@@ -430,6 +457,7 @@ class nicerAppCMS {
                 $r .= '</script>'.PHP_EOL;
                 $ret = $r.$ret;
         };
+        if ($debug) { echo '$ret='; var_dump($ret); echo '</pre>'.PHP_EOL.PHP_EOL; die(); };
         return $ret;
         
     }
