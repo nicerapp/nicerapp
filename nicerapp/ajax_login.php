@@ -27,7 +27,7 @@ $cdbDomain = str_replace('.','_',$cms->domain);
 
 $couchdbConfigFilepath = realpath(dirname(__FILE__)).'/domainConfigs/'.$cms->domain.'/couchdb.json';
 $cdbConfig = json_decode(file_get_contents($couchdbConfigFilepath), true);
-var_dump ($cdbConfig); echo PHP_EOL;
+//var_dump ($cdbConfig); echo PHP_EOL;
 
 $cdb = new Sag($cdbConfig['domain'], $cdbConfig['port']);
 $cdb->setHTTPAdapter($cdbConfig['httpAdapter']);
@@ -42,7 +42,7 @@ $username = str_replace('.', '_', $username);
 try {
     $cdb->login($username, $_POST['pw']);
 } catch (Exception $e) {
-    echo 'Failed'.PHP_EOL;
+    echo 'status : Failed'.PHP_EOL;
     die();
 }
 
@@ -54,11 +54,11 @@ try {
     $rows = $cdb->getAllDocs()->body->rows;
     $callOK = is_array($rows) && count($rows) >= 1;
 } catch (Exception $e) {
-    echo 'Database '.$dbName.PHP_EOL;
-    echo 'Username '.$username.PHP_EOL;
-    echo 'Password '.$_POST['pw'].PHP_EOL;
-    echo 'Failed'.PHP_EOL;
-    var_dump ($e);
+    //echo 'Database '.$dbName.PHP_EOL;
+    //echo 'Username '.$username.PHP_EOL;
+    //echo 'Password '.$_POST['pw'].PHP_EOL;
+    echo 'status : Failed'.PHP_EOL;
+    //var_dump ($e);
     die();
 }
 //var_dump ($cdb->getAllDocs());
