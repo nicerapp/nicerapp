@@ -228,7 +228,7 @@ var nas = na.site = {
                 var dataDecoded = JSON.parse(data);
                 na.site.settings.backgrounds = dataDecoded;
                 
-        
+        debugger;
                 if (na.site.globals.background==='') {
                     var defaultBG = '/nicerapp/siteMedia/backgrounds/tiled/active/grey/cracked-surface-seamless-gray-background.jpg';
                     if (
@@ -385,19 +385,20 @@ var nas = na.site = {
                                         });
                                         //na.ds.onclick(btn, false);
                                         
+                                        debugger;
                                         if (
                                             typeof $.cookie('loginName')=='string'
                                             && $.cookie('loginName')=='Guest'
                                         ) {
                                                 na.site.globals.backgroundSearchKey = $.cookie('siteBackground_search');
                                                 na.site.globals.background = $.cookie('siteBackground_url');
-                                        } else {
-                                            na.backgrounds.next (
-                                                '#siteBackground', 
-                                                na.site.globals.backgroundSearchKey,
-                                                na.site.globals.background
-                                            );
-                                        };
+                                        } ;
+                                        na.backgrounds.next (
+                                            '#siteBackground', 
+                                            na.site.globals.backgroundSearchKey,
+                                            na.site.globals.background
+                                        );
+                                        
                                         
                                         if (typeof callback=='function') callback (themeData, data);
                                     //});
