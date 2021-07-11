@@ -17,13 +17,12 @@ html, body {
 }
 
 #wmLeft {
-    width:auto;
-    height:100%;
+    width:95%;
+    height:95%;
     vertical-align : top;
     width : 100%;
     padding : 5px;
     border-radius : 7px;
-    /*word-break: break-word;*/
 }
 
 #td_right_top {
@@ -37,6 +36,11 @@ html, body {
     width : 90%;
     height : 50%;
     padding : 5;
+}
+
+#siteToolbarLeft .vividDialogContent {
+    margin : 0;
+    padding : 10px;
 }
 
 

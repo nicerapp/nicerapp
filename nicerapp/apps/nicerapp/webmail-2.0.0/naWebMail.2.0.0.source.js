@@ -13,12 +13,19 @@ var naWebMail = nawm = {
         current : {}
     },
     
-    onload : function (event) {
-        $('.lds-facebook').fadeOut('normal', 'swing');
-        $('#siteToolbarLeft').html('');
-        $('#wmLeft').detach().appendTo('#siteToolbarLeft');
-        $('#td_left').hide();
-        webmail.init();
+    onload : function (el) {
+        if (el.id=='siteDateTime') {
+            var header = 
+                '<div class="header" style="margin:10px;background:rgba(0,0,0,0.4);border-radius:8px;">'
+                    +'<h1 style="padding-left:10px;text-shadow:2px 2px 2px rgba(0,0,0,0.7)">'+$('#siteToolbarLeft h1').html()+'</h1>'
+                +'</div>';
+        
+            $('#siteToolbarLeft .vividDialogContent').html('');
+            $('#siteToolbarLeft').prepend (header);
+            $('#wmLeft').detach().appendTo('#siteToolbarLeft .vividDialogContent');
+            $('#td_left').hide();
+            webmail.init();
+        }
     }    
 };
 nawm.s = nawm.settings;

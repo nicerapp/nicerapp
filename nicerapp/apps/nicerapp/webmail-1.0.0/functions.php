@@ -93,15 +93,22 @@ function webmail_get_mail_content ($serverConfig, $serverIdx, $mailboxes, $mailb
     $structure = imap_fetchstructure($mbox, $mailIdx);
     $flattenedParts = flattenParts($structure->parts);
     if (false) {
-        echo 'structure='.str_replace("\r\n","<br/>\r\n",json_encode($structure, JSON_PRETTY_PRINT));
-        echo 'flattenedParts='.str_replace("\r\n","<br/>\r\n",json_encode($flattenedParts, JSON_PRETTY_PRINT));
+        echo '<pre>';
+        echo 'structure='.str_replace("\r\n","<br/>\r\n",json_encode($structure, JSON_PRETTY_PRINT)).PHP_EOL.PHP_EOL;
+        echo 'flattenedParts='.str_replace("\r\n","<br/>\r\n",json_encode($flattenedParts, JSON_PRETTY_PRINT)).PHP_EOL.PHP_EOL;
+        echo '</pre>';
     };
     foreach($flattenedParts as $partNumber => $part) { // handle both text-only messages and html messages
-
+        if (false) {
+            echo '$part->subtype='; var_dump ($part->subtype); echo PHP_EOL.PHP_EOL;
+            echo '$part->type='; var_dump ($part->type); echo PHP_EOL.PHP_EOL;
+        };
+        if ($part->subtype!=='HTML') continue;
         switch($part->type) {
             case 0:
                 // the HTML or plain text part of the email
                 $data = getPart($mbox, $mailIdx, $partNumber, $part->encoding);
+                //echo '$data='; var_dump($data); echo PHP_EOL.PHP_EOL;
                 $isHTML = (
                     strpos($data,'/>')!==false
                     || stripos($data,'<body')!==false
@@ -149,6 +156,66 @@ function webmail_get_mail_content ($serverConfig, $serverIdx, $mailboxes, $mailb
         }
         //if ($msg!=='') break; // DON'T! ignores HTML when there's PLAIN 
     };
+    //echo 'html $msg='; var_dump ($msg); echo PHP_EOL.PHP_EOL;
+    
+    if ($msg==='') {
+        foreach($flattenedParts as $partNumber => $part) { // handle both text-only messages and html messages
+            if ($part->subtype!=='PLAIN') continue;
+            switch($part->type) {
+                case 0:
+                    // the HTML or plain text part of the email
+                    $data = getPart($mbox, $mailIdx, $partNumber, $part->encoding);
+                    $isHTML = (
+                        strpos($data,'/>')!==false
+                        || stripos($data,'<body')!==false
+                        || stripos($data,'<table')!==false
+                        || stripos($data,'<link')!==false
+                    );
+                    if ($data!=='') {
+                        if ($partNumber==1) {
+                            $msg = $data;
+                            if (!$isHTML) {
+                                $msg = str_replace("\r\n",'<br/>',$msg);
+                                $msg = str_replace("\r",'<br/>',$msg);
+                                $msg = str_replace("\n",'<br/>',$msg);
+                            }
+                        } else {
+                            $msg = $data;
+                        }
+                    };
+                    // now do something with the message, e.g. render it
+                break;
+            
+                case 1:
+                    // multi-part headers, can ignore
+            
+                break;
+                case 2:
+                    // attached message headers, can ignore
+                break;
+            
+                case 3: // application
+                case 4: // audio
+                case 5: // image
+                case 6: // video
+                case 7: // other
+                    $filename = getFilenameFromPart($part);
+                    if($filename) {
+                        // it's an attachment
+                        $attachment = getPart($mbox, $mailIdx, $partNumber, $part->encoding);
+                        // now do something with the attachment, e.g. save it somewhere
+                    }
+                    else {
+                        // don't know what it is
+                    }
+                break;
+            }
+            //if ($msg!=='') break; // DON'T! ignores HTML when there's PLAIN 
+        };
+    
+    }
+    
+    
     if ($msg!=='') return $msg;
     
     switch ($structure->type) {
@@ -224,7 +291,9 @@ function getPart($connection, $messageNumber, $partNumber, $encoding, $useIConv 
             foreach ($matches[1] as $idx=>$m) {
                 if ($r) $r = (filter_var($m, FILTER_VALIDATE_URL)!==false);
             }
+            //echo '$data 1='; var_dump ($data); echo PHP_EOL.PHP_EOL;
             $data = quoted_printable_decode($data);
+            //echo '$data 2='; var_dump ($data); echo PHP_EOL.PHP_EOL;
             if (
                 stripos($data, '<body')!==false
                 || stripos($data, '<table')!==false
@@ -250,13 +319,20 @@ function getPart($connection, $messageNumber, $partNumber, $encoding, $useIConv 
                     fwrite ($f, $d);
                     fclose ($f);
                     $xec = 'chardet "'.dirname(__FILE__).'/temp/data.bin"';
+                    //echo PHP_EOL.PHP_EOL.$xec; die();
                     exec ($xec, $output, $result);
                     preg_match_all('/: (.*) with/',$output[0],$chardet);
                     //return json_encode($output);
                     $chardetResult = $chardet[1][0];
                     if ($chardetResult=='utf-8') return $d;
                     $xec = 'iconv -f '.$chardetResult.' -t UTF-8 "'.dirname(__FILE__).'/temp/data.bin" > "'.dirname(__FILE__).'/temp/data.out"';
+                    //echo PHP_EOL.PHP_EOL.$xec; die();
+                    
                     exec ($xec, $output, $result);
+                    if (false) {
+                        $dbg = array ('xec'=>$xec/*,'output'=>$output*/,'result'=>$result);
+                        echo '$dbg='; var_dump ($dbg); echo PHP_EOL.PHP_EOL;
+                    };
                     return file_get_contents(dirname(__FILE__).'/temp/data.out');
                 } else {
                     echo 'Could not open temp/data.bin for detection and conversion of character set encoding :(<br/>Please check directory permissions on "'.dirname(__FILE__).'/temp"';

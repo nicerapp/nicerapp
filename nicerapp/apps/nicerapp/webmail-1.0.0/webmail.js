@@ -4,30 +4,42 @@ webmail.settings = {
     config : false,
     mailboxes : [],
     mails : [],
-    perPage : 200
+    perPage : 50
 };
 
 webmail.init = function () {
-    setTimeout(webmail.onresize,500);
+    webmail.onresize();
     //window.top.na.s.c.grayscale ('pictogramButton__off', 50, true, document);
     //window.top.na.s.c.bindPictogramEvents (document.body);
     
     $(window).resize(function() {
-        setTimeout(webmail.onresize, 750);
+        setTimeout(webmail.onresize, 3000);
     });
+    $('#siteToolbarLeft').css({
+        background : $('#siteToolbarLeft .vdBackground').css('background')
+    });
+    $('#siteToolbarLeft .vdBackground').css({ background : 'none' });
     
     webmail.readConfig();
 };
 
 webmail.onresize = function (evt) {
     //clearTimeout (webmail.settings.onresizeTimeout);
-    //webmail.settings.onresizeTimeout = setTimeout (function() {
+     //webmail.settings.onresizeTimeout = setTimeout (function() {
+        $('#siteContent .vividDialogContent').css({
+            margin : 0,
+            padding : 0,
+            paddingLeft : 10,
+            width : $('#siteContent').width() - 24
+        });
+        
+        $('#siteToolbarLeft .vividDialogContent, #siteToolbarLeft .vdBackground').css({
+            top : ($('#siteToolbarLeft .header').position().top*3) + $('#siteToolbarLeft .header').outerHeight(),
+            height : $('#siteToolbarLeft').height() - $('#siteToolbarLeft .header').outerHeight() - ($('#siteToolbarLeft .header').position().top*6)
+        });
     
         jQuery('#wmMails_header_table .pictogramButton__td').css({
             width : 46, height : 46
-        });
-        jQuery('#wmMails_header_table').css({
-            width : jQuery('#td_right_top').width() - 30
         });
         jQuery('.pictogramButton__td').css({
             width : 46
@@ -39,8 +51,13 @@ webmail.onresize = function (evt) {
             width : 40, height : 40
         });
         
-        $('#td_right_top, #wmMails, #bgMailInfo, #wmMails_header_table, #wmMails_header_table, #wmMails_header_table2').css ({ 
-            width : $('#siteContent .vividDialogContent').width() - 40
+        $('#wmOuter, #td_right_top, #td_right_bottom, #wmMails, #wmEmail, #bgMailInfo, #wmMails_header').css ({ 
+            padding : 0,
+            margin : 0,
+            width : $('#siteContent').width() - 40
+        });
+        $('#wmMails, #td_right_bottom').css({
+            boxShadow : '2px 2px 2px 2px rgba(0,0,0,0.5), inset 2px 2px 2px 2px rgba(0,0,0,0.5)'
         });
         /*
         if (false) window.top.na.m.log (1, {msg : 'heights 1',
@@ -75,7 +92,7 @@ webmail.onresize = function (evt) {
             marginBottom : 10
         });
         jQuery('#td_right_bottom').css({
-            paddingRight : 20
+            //paddingRight : 20
         });
         var
         mailFrom = jQuery('td.mailFrom').width(),
@@ -113,16 +130,18 @@ webmail.readConfig = function () {
                 for (var i=0; i<config.mailServers.length; i++) {
                     html += '<div id="mailserver__'+i+'"><div class="mailserverName">'/*+config.mailServers[i].IMAP.domain+' '*/+config.mailServers[i].userID+'</div></div>';
                 }
-                jQuery('#wmLeft').html(html);
                 
-                for (var i=0; i<config.mailServers.length; i++) {
-                    s.mailboxes[i] = webmail.getMailboxes(config.mailServers[i], i);
-                    var
-                    domain = config.mailServers[i].SMTP.domain.replace(/smtp./,''),
-                    userID = config.mailServers[i].userID.replace(/@.*/,'');
-                    html = '<option domain="'+domain+'" value="'+userID+'@'+domain+'">'+userID+'@'+domain+'</option>';
-                    jQuery('#select_mailFrom').append (html);
-                }
+                jQuery('#wmLeft').html(html);
+                setTimeout(function(){
+                    for (var i=0; i<config.mailServers.length; i++) {
+                        s.mailboxes[i] = webmail.getMailboxes(config, i);
+                        var
+                        domain = config.mailServers[i].SMTP.domain.replace(/smtp./,''),
+                        userID = config.mailServers[i].userID.replace(/@.*/,'');
+                        html = '<option domain="'+domain+'" value="'+userID+'@'+domain+'">'+userID+'@'+domain+'</option>';
+                        jQuery('#select_mailFrom').append (html);
+                    }
+                }, 100);
             }
         },
         error : function (xhr, ajaxOptions, thrownError) {
@@ -131,7 +150,8 @@ webmail.readConfig = function () {
     });
 };
 
-webmail.getMailboxes = function (serverConfig, serverIdx) {
+webmail.getMailboxes = function (config, serverIdx) {
+    var serverConfig = config.mailServers[serverIdx];
     jQuery.ajax({
         type : 'POST',
         url : '/nicerapp/apps/nicerapp/webmail-1.0.0/ajax_get_mailboxes.php',
@@ -148,9 +168,14 @@ webmail.getMailboxes = function (serverConfig, serverIdx) {
                 d[i] = d[i].replace(/{.*}/,'');
                 html += '<div id="mailbox__'+serverIdx+'__'+i+'" class="mailboxName" onclick="webmail.highlightNoMailboxes(); webmail.highlightMailbox(event); webmail.getMailboxContent('+serverIdx+', '+i+', 0, '+webmail.settings.perPage+');">'+d[i]+'</div>';
             };
-            
             jQuery('#mailserver__'+serverIdx)[0].innerHTML += html;
             webmail.settings.mailboxes[serverIdx] = d;
+            
+            if (serverIdx === config.mailServers.length-1) {
+                $('.lds-facebook').fadeOut('normal', 'swing');
+                webmail.onresize();
+            };
+            
         },
         error : function (xhr, ajaxOptions, thrownError) {
             debugger;

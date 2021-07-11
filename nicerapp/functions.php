@@ -16,10 +16,19 @@ function isLocalhost () {
     }
 }
 
-function execPHP ($file) {
-    ob_flush();
+function execPHP ($file, $flush=true) {
+    
+    //$c = '';
+    if ($flush) {
+        ob_flush(); // NOT WISE AT ALL (nested calls to execPHP() will crash JSON decoding in the browser due to HTML inserted in AJAX response before the JSON data.
+        $c = '';
+    } else {
+        $c = ob_get_contents(); 
+        if ($c===false) $c = '';
+    }
     ob_end_clean();
     ob_start();
+    //echo 'ob_get_level='; var_dump (ob_get_level()); echo PHP_EOL.PHP_EOL;
     $p = strpos($file,'?');
     $qs = substr($file, $p+1, strlen($file)-$p-1);
     $f = (
@@ -29,8 +38,12 @@ function execPHP ($file) {
     );
     //echo $qs; die();
     if ($p!==false) parse_str ($qs, $_GET); // may seem like a dirty hack, but isn't.    
+    /*
+    echo '$flush='; var_dump ($flush); echo PHP_EOL.PHP_EOL;
+    echo '$f='; var_dump ($f); echo PHP_EOL.PHP_EOL;
+    */
     require_once ($f);
-    $c = ob_get_contents();
+    $c .= ob_get_contents();
     ob_end_clean();
     ob_start();
     return $c;

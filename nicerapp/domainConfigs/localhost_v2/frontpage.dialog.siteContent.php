@@ -213,7 +213,7 @@
     <p>2021/7jul/11sun 21:04 CET :</p>
     <p>
     If you now create an account on <a href="https://said.by" target="saidBy">https://said.by</a>,<br/>
-    <em>you can now edit the look of a window/dialog on sites made with my nicerapp software package</em> per page and per site for yourself.<br/>
+    <em>you can now edit the look of a window/dialog on sites made with my nicerapp software package</em> per page and per site for yourself (per app comes a little later).<br/>
     You can also use the blogging features on that site to create articles which you can then, after publishing the article, get a very short and nice-looking URL for at my <a href="https://zoned.at" target="zonedAt">https://zoned.at</a>.<br/>
     </p>
     <p>
@@ -227,7 +227,7 @@
     </p>
     <p>
     I will focus as well in the coming days on completing the webmail features of nicerapp.<br/>
-    I may however, have to rewrite the business logic code on the server for that, which could take a week, maybe even 2 weeks, to complete.
+    I may however, have to rewrite the business logic code on the server for that, which could take a week, maybe even 2 weeks to complete.
     </p>
 
     <h2 class="contentSectionTitle2">Available Apps</h2>

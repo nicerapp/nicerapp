@@ -18,9 +18,6 @@
     <script src="/nicerapp/apps/nicerapp/webmail-1.0.0/pouchdb/pouchdb-7.2.1.js"></script>
     <script type="text/javascript"  src="/nicerapp/apps/nicerapp/webmail-1.0.0/webmail.js?changed=<?php echo webmail_get_current_datetime_stamp();?>"></script>
     <script src="https://smtpjs.com/v3/smtp.js"></script>
-    <script type="text/javascript">
-        $(document).ready(nawm.onload);
-    </script>
 <!--</head>
 <body onload="$(document).ready(function() { debugger; nawm.onload()});" onresize="webmail.onresize(event);">-->
     <table id="wmOuter" cellpadding="10">
@@ -87,7 +84,7 @@
     </tr>
     <tr style="min-height:50%;">
         <td id="td_right_bottom" cellpadding="5">
-        <iframe id="wmEmail" style="width:100%;height:100%;"></iframe>
+        <iframe id="wmEmail" style="width:97%;height:100%;"></iframe>
         </td>
     </tr>
     </table>

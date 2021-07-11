@@ -14,17 +14,19 @@ require_once (dirname(__FILE__).'/nicerapp/boot.php');
                 $ret = array ();
                 
                 foreach ($files as $idx2 => $filepath) {
+                    if (substr(basename($filepath),0,1)=='.') continue;
                     $fileRoot = $folder.$appName.'/';
                     $filename = str_replace ($fileRoot, '', $filepath);
                     $dialogID = str_replace ('app.dialog.', '', $filename);
                     $dialogID = str_replace ('.php', '', $dialogID);
                     $arr = array ( $dialogID => execPHP($filepath) );
+                    //echo $filepath.'='; var_dump ($arr); echo PHP_EOL.PHP_EOL;
                     //$arr = array ( $dialogID => $filepath );
                     $ret = array_merge ($ret, $arr);
                 }
                 //var_dump ($ret); die();
                 //echo '<pre style="color:green;">'; echo json_encode($ret, JSON_PRETTY_PRINT); echo '</pre>'."\r\n";
-                //echo '<pre>'; echo json_encode($files, JSON_PRETTY_PRINT); echo '</pre>'."\r\n";
+                //echo '<pre>'; echo json_encode($files, JSON_PRETTY_PRINT); echo '</pre>'."\r\n";die();
                 echo json_encode($ret);
             }
         }
