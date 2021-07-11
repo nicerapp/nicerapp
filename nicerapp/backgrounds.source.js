@@ -12,7 +12,7 @@ na.backgrounds = {
         sk = search.split(/\s+/),
         hits = [];
         
-        if (saveTheme!===false) saveTheme = true;
+        if (saveTheme!==false) saveTheme = true;
         
         $('#siteBackground, #siteBackground img, #siteBackground div, #siteBackground iframe').css({
             position:'absolute',
