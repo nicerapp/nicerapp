@@ -62,6 +62,11 @@ source /etc/os-release
 > npm install -g add-cors-to-couchdb
 > 
 > add-cors-to-couchdb -u admin -p YOURADMINPASSWORDFORCOUCHDB
+> 
+> apt install python-chardet
+
+
+
 
 # installing the nicerapp source files
 Make a folder equivalent to /home/rene/data1/htdocs/nicerapp_v2 
