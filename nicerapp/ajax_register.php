@@ -38,7 +38,7 @@ $username = $_POST['loginName'];
 $username = str_replace(' ', '__', $username);
 $username = str_replace('.', '_', $username);
 
-$security_role = '{ "admins": { "names": [], "roles": ["Guests"] }, "members": { "names": [], "roles": [] } }';
+$security_role = '{ "admins": { "names": [], "roles": ["guests"] }, "members": { "names": [], "roles": [] } }';
 $security_user = '{ "admins": { "names": ["'.$username.'"], "roles": [] }, "members": { "names": ["'.$username.'"], "roles": [] } }';
 
 $uid = 'org.couchdb.user:'.$username;
