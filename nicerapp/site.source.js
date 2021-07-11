@@ -380,6 +380,7 @@ var nas = na.site = {
                                         evt = { currentTarget : $('#specificity')[0] };
                                         
                                         na.ds.specificitySelected(evt);
+                                        debugger;
                                         $('.vividDialog'/*, vdc[0]*/).each(function(idx,el){
                                             na.site.settings.dialogs['#'+el.id] = new naVividDialog(el);
                                         });
