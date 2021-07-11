@@ -54,6 +54,8 @@ try {
     $callOK = is_array($rows) && count($rows) >= 1;
 } catch (Exception $e) {
     echo 'Database '.$dbName.PHP_EOL;
+    echo 'Username '.$username.PHP_EOL;
+    echo 'Password '.$_POST['pw'].PHP_EOL;
     echo 'Failed'.PHP_EOL;
     var_dump ($e);
     die();
