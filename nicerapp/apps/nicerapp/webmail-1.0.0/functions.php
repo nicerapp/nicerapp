@@ -1,7 +1,7 @@
 <?php 
 /* LICENSE __FOR THIS FILE ONLY(!)__ : LGPL Lesser GNU Public License - free for all use including commercial use.
 */
-require_once (dirname(__FILE__).'/../../lib/vendor/autoload.php');
+require_once (dirname(__FILE__).'/../../../3rd-party/vendor/autoload.php');
 require_once ('/usr/share/php/Mail.php');
 require_once ('/usr/share/php/Mail/mime.php');
 
@@ -39,7 +39,7 @@ function webmail_get_mailboxes ($config) {
         .($c['IMAP']['sslCertificateCheck']?'':'/novalidate-cert')
         .'}';
     $mbox = imap_open($connectString, $c['userID'], $c['userPassword']);
-    if ($mbox===false) return array($connectString=>'FAIL');
+    if ($mbox===false) return array($connectString=>'FAIL:'.json_encode(imap_errors(),JSON_PRETTY_PRINT));
     return imap_list($mbox, $connectString, '*');
 }
 

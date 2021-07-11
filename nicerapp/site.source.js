@@ -749,7 +749,7 @@ var nas = na.site = {
                                 }
                             }, 2 * 1000);
                         });
-                        debugger;
+                        //debugger;
                         if (reloadContent) na.site.stateChange();
                     });
                 } else {

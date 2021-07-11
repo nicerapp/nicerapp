@@ -14,7 +14,7 @@ var naWebMail = nawm = {
     },
     
     onload : function (event) {
-        
+        $('.lds-facebook').fadeOut('normal', 'swing');
     }    
 };
 nawm.s = nawm.settings;

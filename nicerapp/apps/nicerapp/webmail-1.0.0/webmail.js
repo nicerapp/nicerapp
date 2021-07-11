@@ -9,8 +9,8 @@ webmail.settings = {
 
 webmail.init = function () {
     webmail.onresize();
-    window.top.na.s.c.grayscale ('pictogramButton__off', 50, true, document);
-    window.top.na.s.c.bindPictogramEvents (document.body);
+    //window.top.na.s.c.grayscale ('pictogramButton__off', 50, true, document);
+    //window.top.na.s.c.bindPictogramEvents (document.body);
     
     webmail.readConfig();
 };
@@ -33,7 +33,7 @@ webmail.onresize = function (evt) {
         jQuery('.pictogramButton').css ({
             width : 30, height : 30
         });
-        if (true) window.top.na.m.log (1, {msg : 'heights 1',
+        if (false) window.top.na.m.log (1, {msg : 'heights 1',
             tr_top : jQuery('#tr_top').height(),
             wmMails : jQuery('#wmMails').height(),
             td_right_top : jQuery('#td_right_top').height(),
@@ -50,7 +50,7 @@ webmail.onresize = function (evt) {
         });
         var xyz = jQuery('#tr_top').height();
         //debugger;
-        if (true)  window.top.na.m.log (1, {msg : 'heights 2',
+        if (false)  window.top.na.m.log (1, {msg : 'heights 2',
             tr_top : jQuery('#tr_top').height(),
             wmMails : jQuery('#wmMails').height(),
             td_right_top : jQuery('#td_right_top').height(),
