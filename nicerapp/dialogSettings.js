@@ -134,12 +134,14 @@ na.ds = na.dialogSettings = {
         na.ds.settings.current.borderColor = c2;
         
         var x = $('#colorpicker').css('display'), y = 'abc';
-        debugger;
+        //debugger;
         $('#colorpicker').css({display:'block'}).spectrum ({
             color:c, 
-            type:'flat', clickoutFiresChange : false, 
+            type:'flat', 
+            clickoutFiresChange : false, 
             change : function (color) {
                 debugger;
+                if (typeof color=='object') color = 'rgba('+color._r+', '+color._g+', '+color._b+', '+color._a+')';
                 var bg = $('.vdBackground', $('#'+na.ds.settings.current.forDialogID)[0]);
                 $(bg).css({ background : color, opacity : 1 });
                 na.site.saveTheme();                        

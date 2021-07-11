@@ -117,7 +117,7 @@ var nas = na.site = {
                 //na.site.loadTheme(function() {
                     na.site.onresize({reloadMenu:true})
                 //});
-            });
+            }, false);
         } else {
             $('#slf_loginName').val(na.account.settings.username);
             $('#slf_pw').val(na.account.settings.password);
@@ -125,7 +125,7 @@ var nas = na.site = {
                 //na.site.loadTheme(function() {
                     na.site.onresize({reloadMenu:true})
                 //});
-            });
+            }, false);
         }
 
         
@@ -245,7 +245,12 @@ var nas = na.site = {
                     na.site.globals.backgroundSearchKey = 'landscape';
                 };
                 
-                na.backgrounds.next ('#siteBackground', na.site.globals.backgroundSearchKey, na.site.globals.background);
+                na.backgrounds.next (
+                    '#siteBackground', 
+                    na.site.globals.backgroundSearchKey, 
+                    na.site.globals.background,
+                    false
+                );
             },
             failure : function (xhr, ajaxOptions, thrownError) {
                 debugger;
@@ -720,7 +725,8 @@ var nas = na.site = {
         }
     },
     
-    login : function (callback) {
+    login : function (callback, reloadContent) {
+        if (reloadContent!==false) reloadContent = true;
         var ac = {
             type : 'POST',
             url : '/nicerapp/ajax_login.php',
@@ -746,14 +752,14 @@ var nas = na.site = {
                                 }
                             }, 2 * 1000);
                         });
-                        na.site.stateChange();
+                        if (reloadContent) na.site.stateChange();
                     });
                 } else {
                     na.account.settings.username = 'Guest';
                     na.account.settings.password = 'Guest';
                     if (typeof callback=='function') callback(false);
                     $('#siteLogin').fadeOut('normal', 'swing', function () {
-                        $('#siteLoginFailed').html('Login failed..').fadeIn('normal', 'swing', function () {
+                        $('#siteLoginFailed').html('Login failed.. Please try again.').fadeIn('normal', 'swing', function () {
                             setTimeout (function() {
                                 $('#siteLoginFailed').fadeOut('normal', 'swing', function () {
                                     $('#siteLogin').fadeIn('normal');
@@ -858,7 +864,7 @@ var nas = na.site = {
             
             themeData.backgroundSearchKey = na.site.globals.backgroundSearchKey;
             themeData.background = na.site.globals.background;
-   debugger;         
+   //debugger;         
             var
             ac2 = {
                 type : 'POST',

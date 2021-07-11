@@ -347,7 +347,10 @@ class nicerAppCMS {
             $selectorNames[] = 'page user '.$_COOKIE['loginName'];
         };
         
-        if (session_status() === PHP_SESSION_NONE) session_start();
+        if (session_status() === PHP_SESSION_NONE) {
+            ini_set('session.gc_maxlifetime', 3600);
+            session_start();
+        };
         $_SESSION['selectors'] = json_encode($selectors);
         $_SESSION['selectorNames'] = json_encode($selectorNames);
         

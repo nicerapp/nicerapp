@@ -5,7 +5,10 @@
     require_once(dirname(__FILE__).'/class.naContentManagementSystem.php');
     require_once(dirname(__FILE__).'/3rd-party/sag/src/Sag.php');
     
-    if (session_status() === PHP_SESSION_NONE) session_start();
+    if (session_status() === PHP_SESSION_NONE) {
+        ini_set('session.gc_maxlifetime', 3600);
+        session_start();
+    };
     
     $naDebugAll = false;
     global $naDebugAll;

@@ -11,8 +11,12 @@
 <?php
     $root = realpath(dirname(__FILE__).'/../../../');
     require_once ($root.'/boot.php');
-    set_time_limit(5);
-    session_start();
+    set_time_limit(10);
+    if (session_status() === PHP_SESSION_NONE) {
+        ini_set('session.gc_maxlifetime', 3600);
+        session_start(); 
+    };
+
     
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
