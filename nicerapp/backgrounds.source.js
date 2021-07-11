@@ -6,11 +6,13 @@ na.backgrounds = {
             : 'portrait'
         )
     },
-    next : function (div, search, url) {
+    next : function (div, search, url, saveTheme) {
         var
         bgs = nas.s.backgrounds,
         sk = search.split(/\s+/),
         hits = [];
+        
+        if (saveTheme!===false) saveTheme = true;
         
         $('#siteBackground, #siteBackground img, #siteBackground div, #siteBackground iframe').css({
             position:'absolute',
@@ -146,7 +148,7 @@ na.backgrounds = {
         if (!$.cookie('loginName') || $.cookie('loginName')=='Guest') {
             $.cookie('siteBackground_search', search, na.m.cookieOptions());
             $.cookie('siteBackground_url', url, na.m.cookieOptions());
-        } else {
+        } else if (saveTheme) {
             na.site.saveTheme();
         }
 

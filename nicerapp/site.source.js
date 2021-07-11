@@ -389,7 +389,8 @@ var nas = na.site = {
                                         na.backgrounds.next (
                                             '#siteBackground', 
                                             na.site.globals.backgroundSearchKey,
-                                            na.site.globals.background
+                                            na.site.globals.background,
+                                            false
                                         );
                                         
                                         
