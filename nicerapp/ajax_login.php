@@ -27,6 +27,7 @@ $cdbDomain = str_replace('.','_',$cms->domain);
 
 $couchdbConfigFilepath = realpath(dirname(__FILE__)).'/domainConfigs/'.$cms->domain.'/couchdb.json';
 $cdbConfig = json_decode(file_get_contents($couchdbConfigFilepath), true);
+var_dump ($cdbConfig); echo PHP_EOL;
 
 $cdb = new Sag($cdbConfig['domain'], $cdbConfig['port']);
 $cdb->setHTTPAdapter($cdbConfig['httpAdapter']);
