@@ -359,7 +359,13 @@ class nicerAppCMS {
         foreach ($selectors2 as $idx => $selector) {
             $css = $this->getPageCSS_specific($selector);
             //echo '$css = '; var_dump ($css); echo PHP_EOL.PHP_EOL;
-            if ($css!==false && !array_key_exists('display',$selector) && $selector['display']!==false) {
+            if (
+                $css!==false 
+                && (
+                    !array_key_exists('display',$selector) 
+                    || $selector['display']!==false
+                )
+            ) {
                 $hasJS = true;
                 $_SESSION['selectorName'] = $selectorNames[$idx];
                 $r = '<script id="jsPageSpecific" type="text/javascript">'.PHP_EOL;
