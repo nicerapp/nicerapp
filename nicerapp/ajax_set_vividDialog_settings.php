@@ -186,7 +186,7 @@ if (!isset($_SESSION) || !is_array($_SESSION) || !array_key_exists('selectors',$
                             }
                         }
                     }
-                    if ($accountType == 'user' && $username == $userOrGroupID) {
+                    if ($accountType == 'user' && $_POST['username'] == $userOrGroupID) {
                         $hasPermission = true;
                     }
                 }

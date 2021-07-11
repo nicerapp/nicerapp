@@ -249,7 +249,7 @@ class nicerAppCMS {
                         'role' => 'guests'
                     ),
                     'write' => array(
-                        'user' => 'Administrator'
+                        'user' => 'Rene.AJM.Veerman'
                     )
                 ),
                 'url' => '[default]'
@@ -260,7 +260,7 @@ class nicerAppCMS {
                         'role' => 'guests'
                     ),
                     'write' => array(
-                        'user' => 'Administrator'
+                        'user' => 'Rene.AJM.Veerman'
                     )
                 ),
                 'url' => $url
@@ -272,7 +272,7 @@ class nicerAppCMS {
                         'role' => 'guests'
                     ),
                     'write' => array(
-                        'role' => 'guests'
+                        'user' => 'Rene.AJM.Veerman'
                     )
                 ),
                 'url' => '[default]',
@@ -284,7 +284,7 @@ class nicerAppCMS {
                         'role' => 'guests'
                     ),
                     'write' => array(
-                        'role' => 'guests'
+                        'user' => 'Rene.AJM.Veerman'
                     )
                 ),
                 'url' => $url,
