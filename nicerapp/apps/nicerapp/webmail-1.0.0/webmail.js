@@ -8,14 +8,9 @@ webmail.settings = {
 };
 
 webmail.init = function () {
-    //webmail.onresize();
     //window.top.na.s.c.grayscale ('pictogramButton__off', 50, true, document);
     //window.top.na.s.c.bindPictogramEvents (document.body);
     na.desktop.registerCallback ('webmail.onresize', webmail.onresize);
-    /*
-    $(window).resize(function() {
-        setTimeout(webmail.onresize, 3000);
-    });*/
     
     $('#siteToolbarLeft').css({
         background : $('#siteToolbarLeft .vdBackground').css('background')
@@ -26,95 +21,66 @@ webmail.init = function () {
 };
 
 webmail.onresize = function (evt) {
-    //clearTimeout (webmail.settings.onresizeTimeout);
-     //webmail.settings.onresizeTimeout = setTimeout (function() {
-        $('#siteContent .vividDialogContent').css({
-            margin : 0,
-            padding : 0,
-            paddingLeft : 10,
-            width : $('#siteContent').width() - 14
-        });
-        
-        $('#siteToolbarLeft .vividDialogContent, #siteToolbarLeft .vdBackground').css({
-            top : ($('#siteToolbarLeft .header').position().top*3) + $('#siteToolbarLeft .header').outerHeight(),
-            height : $('#siteToolbarLeft').height() - $('#siteToolbarLeft .header').outerHeight() - ($('#siteToolbarLeft .header').position().top*6)
-        });
+    $('#siteContent .vividDialogContent').css({
+        margin : 0,
+        padding : 0,
+        paddingLeft : 10,
+        width : $('#siteContent').width() - 14
+    });
     
-        jQuery('#wmMails_header_table .pictogramButton__td').css({
-            width : 46, height : 46
-        });
-        jQuery('.pictogramButton__td').css({
-            width : 46
-        });
-        jQuery('.pictogramButton__td img').css({
-            marginLeft : 2, marginTop : 2
-        });
-        jQuery('.pictogramButton').css ({
-            width : 40, height : 40
-        });
-        
-        $('#wmOuter, #td_right_top, #td_right_bottom, #wmMails, #wmEmail, #bgMailInfo, #wmMails_header').css ({ 
-            padding : 0,
-            margin : 0,
-            width : $('#siteContent').width() - 40
-        });
-        $('#wmMails, #td_right_bottom').css({
-            boxShadow : '2px 2px 2px 2px rgba(0,0,0,0.5), inset 2px 2px 2px 2px rgba(0,0,0,0.5)'
-        });
-        /*
-        if (false) window.top.na.m.log (1, {msg : 'heights 1',
-            tr_top : jQuery('#tr_top').height(),
-            wmMails : jQuery('#wmMails').height(),
-            td_right_top : jQuery('#td_right_top').height(),
-            wmMails_header_table : jQuery('#wmMails_header_table').height(),
-            td_right_top : jQuery('#td_right_top').position().top,
-            wmOuter : jQuery('#wmOuter').position().top,
-            td_right_bottom : jQuery('#td_right_bottom').height()
-        });
-        */
-        var xyz = jQuery('#tr_top').height();
-        //debugger;
-        jQuery('#wmMails').css({
-            height : jQuery('#tr_top').height() - (jQuery('#wmMails_header_table').outerHeight()*2) - (jQuery('#wmMails_header_table').position().top*2)- (jQuery('#td_right_top').position().top*2) - (jQuery('#wmOuter').position().top *2)
-        });
-        var xyz = jQuery('#tr_top').height();
-        //debugger;
-        /*
-        if (false)  window.top.na.m.log (1, {msg : 'heights 2',
-            tr_top : jQuery('#tr_top').height(),
-            wmMails : jQuery('#wmMails').height(),
-            td_right_top : jQuery('#td_right_top').height(),
-            wmMails_header_table : jQuery('#wmMails_header_table').height(),
-            td_right_top : jQuery('#td_right_top').position().top,
-            wmOuter : jQuery('#wmOuter').position().top,
-            td_right_bottom : jQuery('#td_right_bottom').height()
-        });*/
-        jQuery('#wmEmail, #td_right_bottom').css({
-            marginTop : 10,
-            marginBottom : 10
-        });
-        jQuery('#td_right_bottom').css({
-            //paddingRight : 20
-        });
-        var
-        mailFrom = jQuery('td.mailFrom').width(),
-        mailSubject = jQuery('td.mailSubject').width(),
-        mailDate = jQuery('td.mailDate').width(),
-        mailTotalMsgsInThread = 50;
-        
-        jQuery('.mailFrom').css ({
-            width : mailFrom
-        });
-        jQuery('.mailSubject').css ({
-            width : mailSubject
-        });
-        jQuery('.mailDate').css ({
-            width : mailDate
-        });
-        jQuery('.totalMsgsInThread').css({
-            width : 88
-        });
-    //}, 100);
+    $('#siteToolbarLeft .vividDialogContent, #siteToolbarLeft .vdBackground').css({
+        top : ($('#siteToolbarLeft .header').position().top*3) + $('#siteToolbarLeft .header').outerHeight(),
+        height : $('#siteToolbarLeft').height() - $('#siteToolbarLeft .header').outerHeight() - ($('#siteToolbarLeft .header').position().top*6)
+    });
+
+    jQuery('#wmMails_header_table .pictogramButton__td').css({
+        width : 46, height : 46
+    });
+    jQuery('.pictogramButton__td').css({
+        width : 46
+    });
+    jQuery('.pictogramButton__td img').css({
+        marginLeft : 2, marginTop : 2
+    });
+    jQuery('.pictogramButton').css ({
+        width : 40, height : 40
+    });
+    
+    $('#wmOuter, #td_right_top, #td_right_bottom, #wmMails, #wmEmail, #bgMailInfo, #wmMails_header').css ({ 
+        padding : 0,
+        margin : 0,
+        width : $('#siteContent').width() - 40
+    });
+    $('#wmMails, #td_right_bottom').css({
+        boxShadow : '2px 2px 2px 2px rgba(0,0,0,0.5), inset 2px 2px 2px 2px rgba(0,0,0,0.5)'
+    });
+    var xyz = jQuery('#tr_top').height();
+    jQuery('#wmMails').css({
+        height : jQuery('#tr_top').height() - (jQuery('#wmMails_header_table').outerHeight()*2) - (jQuery('#wmMails_header_table').position().top*2)- (jQuery('#td_right_top').position().top*2) - (jQuery('#wmOuter').position().top *2)
+    });
+    var xyz = jQuery('#tr_top').height();
+    jQuery('#wmEmail, #td_right_bottom').css({
+        marginTop : 10,
+        marginBottom : 10
+    });
+    var
+    mailFrom = jQuery('td.mailFrom').width(),
+    mailSubject = jQuery('td.mailSubject').width(),
+    mailDate = jQuery('td.mailDate').width(),
+    mailTotalMsgsInThread = 50;
+    
+    jQuery('.mailFrom').css ({
+        width : mailFrom
+    });
+    jQuery('.mailSubject').css ({
+        width : mailSubject
+    });
+    jQuery('.mailDate').css ({
+        width : mailDate
+    });
+    jQuery('.totalMsgsInThread').css({
+        width : 88
+    });
 };
 
 webmail.readConfig = function () {
