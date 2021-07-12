@@ -55,7 +55,8 @@ webmail.onresize = function (evt) {
         width : $('#siteContent').width() - 65
     });
     $('#wmMails, #td_right_bottom').css({
-        boxShadow : '2px 2px 2px 2px rgba(0,0,0,0.5), inset 2px 2px 2px 2px rgba(0,0,0,0.5)'
+        border : '1px solid rgba(255,255,255,0.5)',
+        boxShadow : '1px 1px 2px 2px rgba(0,0,0,0.5), inset 2px 2px 2px 2px rgba(0,0,0,0.5)'
     });
     var xyz = jQuery('#tr_top').height();
     jQuery('#wmMails').css({
