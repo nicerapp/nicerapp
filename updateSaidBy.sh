@@ -1,4 +1,7 @@
 #!/bin/sh
+chown -R rene:www-data /home/rene/data1/htdocs/said.by/nicerapp/siteData
+chmod -R 770 /home/rene/data1/htdocs/said.by/nicerapp/siteData
+
 cp -rf /home/rene/data1/htdocs/nicerapp_v2/nicerapp/apps/nicerapp/cms/* /home/rene/data1/htdocs/said.by/nicerapp/apps/nicerapp/cms/
 chown -R rene:www-data /home/rene/data1/htdocs/said.by/nicerapp/apps/nicerapp/cms/*
 chmod -R 755 /home/rene/data1/htdocs/said.by/nicerapp/apps/nicerapp/cms/*
