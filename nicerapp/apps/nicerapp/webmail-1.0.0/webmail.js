@@ -366,20 +366,20 @@ webmail.showEmail = function (evt, serverIdx, mailboxIdx, mailIdx, updateThreadI
             //jQuery('#wmEmail').html(JSON.stringify(webmail.settings.mails[serverIdx][mailboxIdx][mailIdx], null, 4));
             //var d = JSON.parse(data);
             data = '<style>body { overflow : auto; }</style>'
-                    +'<div id="div_wmEmail" class="vividScrollpane" style="height:100%;">'
+                    +'<div id="div_wmEmail" class="vividScrollpane" style="height:100%;width:100%;">'
                     + data
                     +'</div>';            
             webmail.settings.currentMail = data;
             jQuery('#wmEmail').css({display:'none'});
             jQuery('#wmEmail')[0].contentDocument.open();
             jQuery('#wmEmail')[0].contentDocument.write(data);
+            jQuery('#wmEmail')[0].contentDocument.close();
             
             $('body', jQuery('#wmEmail')[0].contentDocument).prepend(
                 '<link type="text/css" rel="StyleSheet" href="/nicerapp/domainConfigs/localhost_v2/index.css?c=20210711_231212">'
                 +'<link type="text/css" rel="StyleSheet" href="/nicerapp/domainConfigs/localhost_v2/index.dark.css?c=20210711_231212">'
             );
-            jQuery('#wmEmail')[0].contentDocument.close();
-            jQuery('#wmEmail').contents().find('body,table,td,div,span,center').css({color:'black',background:'rgba(255,255,255,0)',textShadow:'1px 1px 1px rgba(0,0,0,0.4)'});
+            jQuery('#wmEmail').contents().find('body,table,td,div,span,center').css({maxWidth:'100%',color:'black',background:'rgba(255,255,255,0)',textShadow:'1px 1px 1px rgba(0,0,0,0.4)'});
             jQuery('#wmEmail').contents().find('a').css({color:'rgb(0,50,0)'});
             jQuery('#wmEmail').css({display:'block'});
         },
