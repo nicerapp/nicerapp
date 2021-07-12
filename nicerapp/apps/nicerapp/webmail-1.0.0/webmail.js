@@ -59,6 +59,10 @@ webmail.onresize = function (evt) {
         border : '1px solid rgba(255,255,255,0.5)',
         boxShadow : '1px 1px 2px 2px rgba(0,0,0,0.5), inset 2px 2px 2px 2px rgba(0,0,0,0.5)'
     });
+    $('iframe', $('#siteContent')[0]).css({
+        borderRadius : 10,
+        border : '0px solid rgba(255,255,255,0)'
+    });
     var xyz = jQuery('#tr_top').height();
     jQuery('#wmMails').css({
         height : jQuery('#tr_top').height() - (jQuery('#wmMails_header_table').outerHeight()*2) - (jQuery('#wmMails_header_table').position().top*2)- (jQuery('#td_right_top').position().top*2) - (jQuery('#wmOuter').position().top *2)
