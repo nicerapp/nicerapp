@@ -959,6 +959,7 @@ var nas = na.site = {
     }
 }
 nas.s = nas.settings;
+nas.g = nas.globals;
 
     
 na.apps = {

@@ -63,7 +63,7 @@
                     </tr>
                 </thead>
                 </table>
-                <table id="wmMails_header_table2" cellpadding="4">
+                <table id="wmMails_header_table2" cellpadding="4" style="width:100%:">
                 <thead>
                     <tr>
                         <th class="mailFrom">From</th>

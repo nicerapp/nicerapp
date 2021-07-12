@@ -10,12 +10,22 @@ webmail.settings = {
 webmail.init = function () {
     //window.top.na.s.c.grayscale ('pictogramButton__off', 50, true, document);
     //window.top.na.s.c.bindPictogramEvents (document.body);
-    na.desktop.registerCallback ('webmail.onresize', webmail.onresize);
-    
-    $('#siteToolbarLeft').css({
-        background : $('#siteToolbarLeft .vdBackground').css('background')
+    na.desktop.registerCallback ('webmail.onresize', function(el) {
+        if (el.id=='siteDateTime') {
+            var 
+            origBG = $('#siteToolbarLeft .vdBackground'),
+            origBGval = origBG.css('background');
+            //debugger;
+            if (origBGval.indexOf('rgba(0, 0, 0, 0)')===-1) {
+                $('#siteToolbarLeft').css({
+                    background : origBGval
+                });
+                origBG.css({ background : 'none' });
+            }
+            webmail.onresize();
+        }
     });
-    $('#siteToolbarLeft .vdBackground').css({ background : 'none' });
+    
     
     webmail.readConfig();
 };
@@ -29,8 +39,8 @@ webmail.onresize = function (evt) {
     });
     
     $('#siteToolbarLeft .vividDialogContent, #siteToolbarLeft .vdBackground').css({
-        top : ($('#siteToolbarLeft .header').position().top*3) + $('#siteToolbarLeft .header').outerHeight(),
-        height : $('#siteToolbarLeft').height() - $('#siteToolbarLeft .header').outerHeight() - 48
+        top : ($('#siteToolbarLeft .header').position().top*4) + $('#siteToolbarLeft .header').outerHeight(),
+        height : $('#siteToolbarLeft').height() - $('#siteToolbarLeft .header').outerHeight() - 46
     });
 
     jQuery('#wmMails_header_table .pictogramButton__td').css({

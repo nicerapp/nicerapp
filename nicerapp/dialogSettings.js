@@ -140,7 +140,7 @@ na.ds = na.dialogSettings = {
             type:'flat', 
             clickoutFiresChange : false, 
             change : function (color) {
-                debugger;
+                //debugger;
                 if (typeof color=='object') color = 'rgba('+color._r+', '+color._g+', '+color._b+', '+color._a+')';
                 var bg = $('.vdBackground', $('#'+na.ds.settings.current.forDialogID)[0]);
                 $(bg).css({ background : color, opacity : 1 });
