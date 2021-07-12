@@ -122,9 +122,10 @@ $fncn = "createDirectoryStructure";
     $dbg = array (
         'ptt' => $pathToTest,
         'i' => $i,
-        'dirs' => $directories
+        'dirs' => $directories,
+        'backtrace' => debug_backtrace()
     );
-    //var_dump ($dbg);
+    var_dump ($dbg); die();
 
     if ( (($i-2) < count($directories)) ) {
         for ($j = $i-2; $j < (count($directories)-1); $j++) {

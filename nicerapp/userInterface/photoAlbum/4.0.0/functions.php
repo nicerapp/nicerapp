@@ -15,7 +15,7 @@ function naPhotoAlbum ($basePath=null) {
     
     $baseURL = '/nicerapp/siteData/'.$cms->domain;
     $baseDir = $root.'/nicerapp/siteData/'.$cms->domain;
-    $targetDir = $baseDir.'/'.$basePath;
+    $targetDir = realpath($baseDir.'/'.$basePath);
     $thumbDir = $targetDir.'/thumbs';
     
 	define ("FILE_FORMATS", "/(.*\.png)|(.*\.gif)|(.*\.jpg)/");
