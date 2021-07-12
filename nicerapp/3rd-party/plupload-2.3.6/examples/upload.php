@@ -48,8 +48,10 @@ $relPath = $_POST['relativePath'];
 //echo $relDir; die();
 //$relPath = preg_replace($relDir, '/\/.*/', '');
 $targetDir = 
-    realpath(dirname(__FILE__).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'..')
-    .'/siteData/'.$cms->domain.DIRECTORY_SEPARATOR.$_GET['basePath'];
+    realpath(
+        dirname(__FILE__).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'..'
+        .'/siteData/'.$cms->domain.DIRECTORY_SEPARATOR.$_GET['basePath']
+    );
     
 //echo $targetDir; die();
 createDirectoryStructure (realpath($targetDir.DIRECTORY_SEPARATOR.$relPath), 'rene', 'www-data', 0770);
