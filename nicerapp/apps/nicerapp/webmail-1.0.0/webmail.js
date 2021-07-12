@@ -55,6 +55,7 @@ webmail.onresize = function (evt) {
         width : $('#siteContent').width() - 65
     });
     $('#wmMails, #td_right_bottom').css({
+        borderRadius : 10,
         border : '1px solid rgba(255,255,255,0.5)',
         boxShadow : '1px 1px 2px 2px rgba(0,0,0,0.5), inset 2px 2px 2px 2px rgba(0,0,0,0.5)'
     });
@@ -379,7 +380,7 @@ webmail.highlightNoMailboxes = function () {
 
 webmail.highlightMailbox = function (evt) {
     if (!jQuery('.bgMailboxName')[0]) {
-        var bgHTML = '<div class="bgMailboxName" style="position:absolute;width:97%;height:'+jQuery(evt.currentTarget).height()+'px;z-index:-1">&nbsp;</div>';
+        var bgHTML = '<div class="bgMailboxName" style="position:absolute;width:'+($('#siteToolbarLeft').width()-32)+'px;height:'+jQuery(evt.currentTarget).height()+'px;z-index:-1">&nbsp;</div>';
         jQuery('#wmLeft').append (bgHTML);
     }
         

@@ -16,7 +16,7 @@ var naWebMail = nawm = {
     onload : function (el) {
         if (el.id=='siteDateTime') {
             var header = 
-                '<div class="header" style="padding:5px;height:2.8em;margin:10px;background:rgba(0,0,0,0.4);border-radius:8px;">'
+                '<div class="header" style="padding:5px;margin:10px;margin-right:5px;height:2.8em;background:rgba(0,0,0,0.4);border-radius:8px;">'
                     +'<span class="appTitle" style="float:left; padding-left:10px;font-size:2em; text-shadow:2px 2px 2px rgba(0,0,0,0.7)">'+$('#siteToolbarLeft h1').html()+'</span>'
                     +'<img src="/nicerapp/siteMedia/btnBack.png" style="float:right;width:35px;"/>'
                 +'</div>';
