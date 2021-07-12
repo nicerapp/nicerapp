@@ -1,6 +1,9 @@
 #!/bin/sh
 mkdir nicerapp/apps/nicerapp/news/newsItems
 mkdir nicerapp/apps/nicerapp/webmail-1.0.0/temp
+mkdir nicerapp/siteData/said.by
+chown rene:www-data nicerapp/siteData/said.by
+chmod 750 nicerapp/siteData/said.by
 
 chown -R rene:www-data *
 chmod -R 750 *
