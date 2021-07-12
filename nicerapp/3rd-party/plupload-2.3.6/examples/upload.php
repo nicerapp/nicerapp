@@ -54,8 +54,12 @@ $targetDir =
     );
     
 //echo $targetDir; die();
-createDirectoryStructure (realpath($targetDir.DIRECTORY_SEPARATOR.$relPath), 'rene', 'www-data', 0770);
-createDirectoryStructure (realpath($targetDir.DIRECTORY_SEPARATOR.$relPath).DIRECTORY_SEPARATOR.'thumbs', 'rene', 'www-data', 0770);
+try {
+    createDirectoryStructure (realpath($targetDir.DIRECTORY_SEPARATOR.$relPath), 'rene', 'www-data', 0770);
+    createDirectoryStructure (realpath($targetDir.DIRECTORY_SEPARATOR.$relPath).DIRECTORY_SEPARATOR.'thumbs', 'rene', 'www-data', 0770);
+} catch (Exception $e) {
+    // createDirectoryStructure will fail for existing paths, so ignore it..
+}
 //$targetDir = 'uploads';
 $cleanupTargetDir = true; // Remove old files
 $maxFileAge = 5 * 3600; // Temp file age in seconds
