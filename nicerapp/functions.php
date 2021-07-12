@@ -111,6 +111,7 @@ $fncn = "createDirectoryStructure";
     if (($filepath[1]!=':') && ($filepath[0]!='/')) trigger_error ("$fncn: $filepath is not from the root. results would be unstable. gimme a filepath with / as first character.", E_USER_ERROR);
 
     $directories = explode ("/", $filepath);
+    if ($directories[count($directories)-1] === '') unset ($directories[count($directories)-1])
     //var_dump ($directories);
     $result = true;
 
