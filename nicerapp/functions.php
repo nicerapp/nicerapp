@@ -142,13 +142,6 @@ $fncn = "createDirectoryStructure";
                 $result=mkdir($pathToCreate,!is_null($filePerms)?$filePerms:0777);
                 if (is_string($ownerUser)) $x = chown ($pathToCreate, $ownerUser);
                 if (is_string($ownerGroup)) $y = chgrp ($pathToCreate, $ownerGroup);
-                //$dbg = array ('ptc'=>$pathToCreate,'x'=>$x,'y'=>$y);
-                //echo json_encode($dbg,JSON_PRETTY_PRINT);
-//				chown ($pathToCreate, 'Webserver');
-            }
-            if (!$result) {
-                trigger_error ("$fncn : couldn't create directory $pathToCreate.", E_USER_ERROR);
-                return false;
             }
         }
     }
