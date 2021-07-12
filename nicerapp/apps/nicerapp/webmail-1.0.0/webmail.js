@@ -8,13 +8,15 @@ webmail.settings = {
 };
 
 webmail.init = function () {
-    webmail.onresize();
+    //webmail.onresize();
     //window.top.na.s.c.grayscale ('pictogramButton__off', 50, true, document);
     //window.top.na.s.c.bindPictogramEvents (document.body);
-    
+    na.desktop.registerCallback ('webmail.onresize', webmail.onresize);
+    /*
     $(window).resize(function() {
         setTimeout(webmail.onresize, 3000);
-    });
+    });*/
+    
     $('#siteToolbarLeft').css({
         background : $('#siteToolbarLeft .vdBackground').css('background')
     });
@@ -30,7 +32,7 @@ webmail.onresize = function (evt) {
             margin : 0,
             padding : 0,
             paddingLeft : 10,
-            width : $('#siteContent').width() - 24
+            width : $('#siteContent').width() - 14
         });
         
         $('#siteToolbarLeft .vividDialogContent, #siteToolbarLeft .vdBackground').css({
