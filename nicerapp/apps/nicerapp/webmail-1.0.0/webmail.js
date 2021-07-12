@@ -21,7 +21,15 @@ webmail.init = function () {
                     background : origBGval
                 });
                 origBG.css({ background : 'none' });
+            };
+            
+            var
+            onScroll = $('#wmLeft').attr('onscroll');
+            if (onScroll!=='') {
+                $('#siteToolbarLeft .vividDialogContent').attr('onscroll', onScroll);
+                $('#wmLeft').attr('onscroll','');
             }
+            
             setTimeout(webmail.onresize, 250);
         }
     });
@@ -449,17 +457,26 @@ webmail.highlightMailThread = function (evt) {
 webmail.bgMailInfoScroll = function (evt) {
     var 
     t = jQuery('.mailInfo.selected')[0], 
-    top = jQuery(t).position().top + jQuery('#wmMails_table').position().top + 10;
-    
-    if (t) jQuery('.bgMailInfo').animate({opacity : top > $(t).height() && top < $('#wmMails').height() - $(t).height() ? 1 : 0.001});
+    top = jQuery(t).position().top + jQuery('#wmMails_table').position().top + 10,
+    opacity = top > $(t).height() - top && top < $('#wmMails').height() + top - $(t).height() ? 1 : 0.001;
+    if (t) jQuery('.bgMailInfo')
+        .stop(true,true)
+        .animate({opacity : opacity}, 'fast')
+        .css({ top : top });
 };
 
 webmail.bgMailboxNameScroll = function (evt) {
-    var t = jQuery('.mailboxName.selected')[0];
-    if (t) jQuery('.bgMailboxName').css ({
-        top : jQuery(t).position().top + jQuery('#td_left').position().top,
-        left : jQuery(t).position().left + jQuery('#td_left').position.left
-    });
+    var 
+    t = jQuery('.mailboxName.selected')[0],
+    top = jQuery(t).position().top,
+    opacity = top > $(t).height() - top && top < $('#wmLeft').height() + top - $(t).height() ? 1 : 0.001;
+    if (t) jQuery('.bgMailboxName')
+        .stop(true,true)
+        .animate({opacity : opacity}, 'fast')
+        .css ({
+            top : top,
+            left : jQuery(t).position().left + jQuery('#td_left').position.left
+        });
 };
 
 webmail.replyMail = function () {
