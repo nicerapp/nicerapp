@@ -49,8 +49,8 @@ $relPath = $_POST['relativePath'];
 //$relPath = preg_replace($relDir, '/\/.*/', '');
 $targetDir = realpath(dirname(__FILE__).'/../../..').'/siteData/'.$cms->domain.'/'.$_GET['basePath'];
 //echo $targetDir; die();
-createDirectoryStructure ($targetDir.DIRECTORY_SEPARATOR.$relPath, 'rene', 'www-data', 0777);
-createDirectoryStructure ($targetDir.DIRECTORY_SEPARATOR.$relPath.DIRECTORY_SEPARATOR.'thumbs', 'rene', 'www-data', 0777);
+createDirectoryStructure (realpath($targetDir.DIRECTORY_SEPARATOR.$relPath), 'rene', 'www-data', 0770);
+createDirectoryStructure (realpath($targetDir.DIRECTORY_SEPARATOR.$relPath).DIRECTORY_SEPARATOR.'thumbs', 'rene', 'www-data', 0770);
 //$targetDir = 'uploads';
 $cleanupTargetDir = true; // Remove old files
 $maxFileAge = 5 * 3600; // Temp file age in seconds
