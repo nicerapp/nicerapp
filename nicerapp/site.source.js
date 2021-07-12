@@ -547,6 +547,7 @@ var nas = na.site = {
         
         na.site.onresize_doContent(settings);
         
+        if (!settings) settings = {};
         if (!settings.callback) settings.callback = function() {
             if (na.m.userDevice.isPhone) $('#btnOptions, #btnLoginLogout, #btnChangeBackground').css({opacity:1})
             else $('#btnOptions, #btnLoginLogout, #btnChangeBackground').animate({opacity:1},'normal');

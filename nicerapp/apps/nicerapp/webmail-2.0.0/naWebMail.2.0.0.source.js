@@ -20,11 +20,23 @@ var naWebMail = nawm = {
                     +'<span class="appTitle" style="float:left; padding-left:10px;font-size:2em; text-shadow:2px 2px 2px rgba(0,0,0,0.7)">'+$('#siteToolbarLeft h1').html()+'</span>'
                     +'<img src="/nicerapp/siteMedia/btnBack.png" style="float:right;width:35px;"/>'
                 +'</div>';
-        
             $('#siteToolbarLeft .vividDialogContent').html('');
             $('#siteToolbarLeft').prepend (header);
+
             $('#wmLeft').detach().appendTo('#siteToolbarLeft .vividDialogContent');
             $('#td_left').hide();
+            
+            var 
+            origBG = $('#siteToolbarLeft .vdBackground'),
+            origBGval = origBG.css('background');
+            /*
+            if (origBGval.indexOf('rgba(0, 0, 0, 0)')===-1) {*/
+                $('#siteToolbarLeft').css({
+                    background : origBGval
+                });
+                origBG.css({ background : 'none' });
+            //};
+            
             webmail.init();
         }
     }    

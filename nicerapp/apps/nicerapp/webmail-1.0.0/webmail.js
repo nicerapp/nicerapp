@@ -375,7 +375,7 @@ webmail.showEmail = function (evt, serverIdx, mailboxIdx, mailIdx, updateThreadI
             jQuery('#wmEmail')[0].contentDocument.write(data);
             jQuery('#wmEmail')[0].contentDocument.close();
             
-            $('body', jQuery('#wmEmail')[0].contentDocument).prepend(
+            $('#wmEmail').contents().find('body').prepend(
                 '<link type="text/css" rel="StyleSheet" href="/nicerapp/domainConfigs/localhost_v2/index.css?c=20210711_231212">'
                 +'<link type="text/css" rel="StyleSheet" href="/nicerapp/domainConfigs/localhost_v2/index.dark.css?c=20210711_231212">'
             );
