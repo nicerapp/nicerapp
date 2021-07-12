@@ -39,7 +39,6 @@
             <div id="wmThreadInfo" style="position:absolute;"></div>
             <div id="wmMails_header">
                 <table id="wmMails_header_table" style="width:100%;">
-                <thead>
                     <tr>
                         <td class="pictogramButton__td">
                             <img id="btnWriteMail" src="/nicerapp/apps/nicerapp/webmail-1.0.0/images/writeMail6.png" title="Write mail" onclick="webmail.writeMail()" class="btn pictogramButton pictogramButton__onoff"/>
@@ -61,17 +60,14 @@
                         </td>
                         <td>&nbsp;</td>
                     </tr>
-                </thead>
                 </table>
-                <table id="wmMails_header_table2" cellpadding="4" style="width:100%:">
-                <thead>
+                <table id="wmMails_header_table2" cellpadding="4" style="width:100%">
                     <tr>
                         <th class="mailFrom">From</th>
                         <th class="mailSubject">Subject</th>
                         <th class="mailDate">Date</th>
                         <th class="totalMsgsInThread">Total Msgs</th>
                     </tr>
-                </thead>
                 </table>                    
             </div>
             <div id="wmMails" class="vividScrollpane" onscroll="webmail.bgMailInfoScroll(event);">

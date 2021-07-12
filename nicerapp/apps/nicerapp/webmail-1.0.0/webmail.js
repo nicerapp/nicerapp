@@ -22,7 +22,7 @@ webmail.init = function () {
                 });
                 origBG.css({ background : 'none' });
             }
-            webmail.onresize();
+            setTimeout(webmail.onresize, 250);
         }
     });
     
@@ -82,6 +82,7 @@ webmail.onresize = function (evt) {
         marginTop : 10,
         marginBottom : 10
     });
+    
     var
     mailFrom = jQuery('td.mailFrom').width(),
     mailSubject = jQuery('td.mailSubject').width(),
