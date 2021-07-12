@@ -30,7 +30,7 @@ webmail.onresize = function (evt) {
     
     $('#siteToolbarLeft .vividDialogContent, #siteToolbarLeft .vdBackground').css({
         top : ($('#siteToolbarLeft .header').position().top*3) + $('#siteToolbarLeft .header').outerHeight(),
-        height : $('#siteToolbarLeft').height() - $('#siteToolbarLeft .header').outerHeight() - ($('#siteToolbarLeft .header').position().top*6)
+        height : $('#siteToolbarLeft').height() - $('#siteToolbarLeft .header').outerHeight() - 48
     });
 
     jQuery('#wmMails_header_table .pictogramButton__td').css({
@@ -50,6 +50,9 @@ webmail.onresize = function (evt) {
         padding : 0,
         margin : 0,
         width : $('#siteContent').width() - 40
+    });
+    $('#bgMailInfo').css({
+        width : $('#siteContent').width() - 65
     });
     $('#wmMails, #td_right_bottom').css({
         boxShadow : '2px 2px 2px 2px rgba(0,0,0,0.5), inset 2px 2px 2px 2px rgba(0,0,0,0.5)'
@@ -337,10 +340,19 @@ webmail.showEmail = function (evt, serverIdx, mailboxIdx, mailIdx, updateThreadI
         success : function (data, ts, xhr) {
             //jQuery('#wmEmail').html(JSON.stringify(webmail.settings.mails[serverIdx][mailboxIdx][mailIdx], null, 4));
             //var d = JSON.parse(data);
+            data = '<style>body { overflow : auto; }</style>'
+                    +'<div id="div_wmEmail" class="vividScrollpane" style="height:100%;">'
+                    + data
+                    +'</div>';            
             webmail.settings.currentMail = data;
             jQuery('#wmEmail').css({display:'none'});
             jQuery('#wmEmail')[0].contentDocument.open();
             jQuery('#wmEmail')[0].contentDocument.write(data);
+            
+            $('body', jQuery('#wmEmail')[0].contentDocument).prepend(
+                '<link type="text/css" rel="StyleSheet" href="/nicerapp/domainConfigs/localhost_v2/index.css?c=20210711_231212">'
+                +'<link type="text/css" rel="StyleSheet" href="/nicerapp/domainConfigs/localhost_v2/index.dark.css?c=20210711_231212">'
+            );
             jQuery('#wmEmail')[0].contentDocument.close();
             jQuery('#wmEmail').contents().find('body,table,td,div,span,center').css({color:'black',background:'rgba(255,255,255,0)',textShadow:'1px 1px 1px rgba(0,0,0,0.4)'});
             jQuery('#wmEmail').contents().find('a').css({color:'rgb(0,50,0)'});
@@ -392,8 +404,9 @@ webmail.highlightMail = function (evt) {
     var t = evt.currentTarget;
     jQuery(t).addClass ('selected');
     jQuery('.bgMailInfo').css ({
-        top : jQuery(t).position().top + jQuery('#wmMails_table').position().top + 14,
-        left : jQuery(t).position().left + jQuery('#td_right').position.left
+        top : jQuery(t).position().top + jQuery('#wmMails_table').position().top,
+        left : jQuery(t).position().left + jQuery('#td_right').position.left,
+        width : $('#siteContent').width() - 65
     });
 }
 

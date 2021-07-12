@@ -74,7 +74,7 @@
                 </thead>
                 </table>                    
             </div>
-            <div id="wmMails" onscroll="webmail.bgMailInfoScroll(event);">
+            <div id="wmMails" class="vividScrollpane" onscroll="webmail.bgMailInfoScroll(event);">
                 <table id="wmMails_table" style="width:100%">
                 <tbody>
                 </tbody>
