@@ -298,13 +298,13 @@ class newsApp2_class {
         );*/
         
         if (!file_exists($fn)) {
-            $x = file_put_contents ($fn, json_encode($d));
-            echo '$x='; var_dump ($x); echo PHP_EOL.PHP_EOL;
-            
-            if (is_string($filePerms_ownerUser)) $x = chown ($fn, $filePerms_ownerUser);
-            if (is_string($filePerms_ownerGroup)) $y = chgrp ($fn, $filePerms_ownerGroup);
-            if (is_numeric($filePerms_perms)) $z = chmod ($fn, $filePerms_perms);
+            if (file_put_contents ($fn, json_encode($d))) {
+                if (is_string($filePerms_ownerUser)) $x = chown ($fn, $filePerms_ownerUser);
+                if (is_string($filePerms_ownerGroup)) $y = chgrp ($fn, $filePerms_ownerGroup);
+                if (is_numeric($filePerms_perms)) $z = chmod ($fn, $filePerms_perms);
+            }
             //echo '$fn1='.$fn.', filesize='.filesizeHumanReadable(filesize($fn)).PHP_EOL; die();
+            
         }
     }
     

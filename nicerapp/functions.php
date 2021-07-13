@@ -98,7 +98,7 @@ function css_array_to_css($rules, $indent = 0) {
 
 function createDirectoryStructure ($filepath, $ownerUser=null, $ownerGroup=null, $filePerms=null) {
 $fncn = "createDirectoryStructure";
-$debug = true;
+$debug = false;
 /*	Creates a directory structure. 
     Returns a boolean success value. False usually indicates illegal characters in the directories.
 
