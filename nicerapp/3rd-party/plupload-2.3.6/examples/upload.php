@@ -60,7 +60,7 @@ $thumbPath = $targetDir.DIRECTORY_SEPARATOR.$relPath.DIRECTORY_SEPARATOR.'thumbs
 
 try {
     createDirectoryStructure (realpath($filePath), $filePerms_ownerUser, $filePerms_ownerGroup, 0770);
-} catch (ErrorException ($e)) }
+} catch (ErrorException $e) }
     echo 'Could not create filepath "'.realpath($filePath).'".';
     echo $e->getMessage();
     echo json_encode ($e, JSON_PRETTY PRINT);
@@ -75,7 +75,7 @@ try {
 } 
 try {
     createDirectoryStructure (realpath($thumbPath), $filePerms_ownerUser, $filePerms_ownerGroup, 0770);
-} catch (ErrorException ($e)) }
+} catch (ErrorException $e) }
     echo 'Could not create filepath "'.realpath($filePath).'".';
     echo $e->getMessage();
     echo json_encode ($e, JSON_PRETTY PRINT);
