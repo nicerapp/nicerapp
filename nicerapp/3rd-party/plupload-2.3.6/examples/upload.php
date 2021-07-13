@@ -62,9 +62,9 @@ $targetDir =
 $fileName = $_POST['name'];
 $filePath = $targetDir.DIRECTORY_SEPARATOR.$fileName;
 $thumbPath = $targetDir.DIRECTORY_SEPARATOR.'thumbs'.DIRECTORY_SEPARATOR . $fileName;
-var_dump ($thumbPath);
+if ($debug) var_dump ($thumbPath);
 //try {
-    createDirectoryStructure ($filePath, $filePerms_ownerUser, $filePerms_ownerGroup, 0770);
+    createDirectoryStructure ($filePath, $filePerms_ownerUser, $filePerms_ownerGroup, $filePerms_perms);
     //chgrp ($filePath, $filePerms_ownerGroup);
     //chown ($filePath, $filePerms_ownerUser);
 /*} catch (ErrorException $e) }
@@ -81,7 +81,7 @@ var_dump ($thumbPath);
     die();
 } */
 //try {
-    createDirectoryStructure ($thumbPath, $filePerms_ownerUser, $filePerms_ownerGroup, 0770);
+    createDirectoryStructure ($thumbPath, $filePerms_ownerUser, $filePerms_ownerGroup, $filePerms_perms);
     //chgrp ($thumbPath, $filePerms_ownerGroup);
     //chown ($thumbPath, $filePerms_ownerUser);
 /*} catch (ErrorException $e) }

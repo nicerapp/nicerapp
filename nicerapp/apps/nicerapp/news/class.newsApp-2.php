@@ -287,7 +287,11 @@ class newsApp2_class {
     public function writeToDisk_leaf_category (&$v, $path, $k) {
         $dataRoot = dirname(__FILE__).'/newsItems';
         $fn = $dataRoot.'/'.$path.'/items.json';
-        if (!file_exists(dirname($fn))) createDirectoryStructure (dirname($fn));
+        
+        global $filePerms_ownerUser; 
+        global $filePerms_ownerGroup;
+        global $filePerms_perms;
+        if (!file_exists(dirname($fn))) createDirectoryStructure (dirname($fn), $filePerms_ownerUser, $filePerms_ownerGroup, $filePerms_perms);
         
         $d = &$v;/*array (
             $k => &$v
@@ -295,6 +299,9 @@ class newsApp2_class {
         
         if (!file_exists($fn)) {
             file_put_contents ($fn, json_encode($d));
+            if (is_string($filePerms_ownerUser)) $x = chown ($fn, $filePerms_ownerUser);
+            if (is_string($filePerms_ownerGroup)) $y = chgrp ($fn, $filePerms_ownerGroup);
+            if (is_numeric($filePerms_perms)) $z = chmod ($fn, $filePerms_perms);
             //echo '$fn1='.$fn.', filesize='.filesizeHumanReadable(filesize($fn)).PHP_EOL; die();
         }
     }
