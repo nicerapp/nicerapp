@@ -10,7 +10,7 @@
         session_start();
     };
     
-    $naDebugAll = true;
+    $naDebugAll = false;
     global $naDebugAll;
     if ($naDebugAll) {
         ini_set('display_errors', 1);
