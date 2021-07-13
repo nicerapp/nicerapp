@@ -332,9 +332,9 @@ $rec = array(
     'dialogs' => array (
         '.vividDialog' => array (
             'color' => 'white',
-            'boxShadow' => '7px 7px 5px rgba(0,0,0,0.7), inset -2px -2px 2px rgba(0,0,0,0.8), inset 2px 2px 2px rgba(0,0,0,0.8)',
+            'boxShadow' => '4px 4px 2px rgba(0,0,0,0.7), inset -2px -2px 2px rgba(255,255,255,0.7)',
             'borderRadius' => '15px',
-            'border' => '3px ridge lime'
+            'border' => '2px ridge white'
         ),
         '.vividDialog .vdBackground' => array (
             'background' => 'rgba(0,0,0,0.5)',

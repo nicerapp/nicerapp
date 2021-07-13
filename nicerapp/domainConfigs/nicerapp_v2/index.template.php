@@ -19,16 +19,16 @@
     <!--<script type="module" src="/nicerapp/userInterface/na3D.source.js"></script>-->
 
 <?php 
-    $couchdbSettings = json_decode(file_get_contents(dirname(__FILE__).'/couchdb.json'), true);
+    /*$couchdbSettings = json_decode(file_get_contents(dirname(__FILE__).'/couchdb.json'), true);
     unset ($couchdbSettings['adminUsername']);
     unset ($couchdbSettings['adminPassword']);
     $couchdbSettingsStr = json_encode($couchdbSettings, JSON_PRETTY_PRINT);
     $couchdbSettingsStr = str_replace("\n    ", "\n\t\t", $couchdbSettingsStr);
     $couchdbSettingsStr = str_replace("}", "\t}", $couchdbSettingsStr);    
+    couchdb : <?php echo $couchdbSettingsStr?>,*/
 ?>
 <script type="text/javascript">
 na.site.globals = $.extend(na.site.globals, {
-    couchdb : <?php echo $couchdbSettingsStr?>,
     referer : '<?php echo (array_key_exists('HTTP_REFERER',$_SERVER)?$_SERVER['HTTP_REFERER']:'');?>',
     myip : '<?php echo str_replace('.','_',(array_key_exists('X-Forwarded-For',apache_request_headers())?apache_request_headers()['X-Forwarded-For'] : $_SERVER['REMOTE_ADDR']))?>',
     domain : '{$domain}'
@@ -101,31 +101,31 @@ na.site.globals = $.extend(na.site.globals, {
                 <img class="cvbImgTile" src="/nicerapp/siteMedia/btnCssVividButton.png"/>-->
                 <img class="cvbImgButton" src="/nicerapp/siteMedia/btnBack.png"/>
             </div>
-            <div id="btnSelectBorderSettings" class="vividButton_icon tooltip" title="Select border settings" alt="Select border settings" style="position:absolute;left:65px;width:50px;height:50px;" onclick="if (!$(this).is('.disabled')) na.dialogSettings.selectBorderSettings()">
+            <div id="btnSelectBorderSettings" class="vividButton_icon tooltip" title="Select border settings" alt="Select border settings" style="position:absolute;left:65px;width:50px;height:50px;" onclick="if (!$(this).is('.disabled')) na.dialogSettings.selectBorderSettings(event)">
                 <div class="cvbBorderCSS"></div>
                 <img class="cvbImgBorder" src="/nicerapp/siteMedia/btnCssVividButton_outerBorder.png"/>
                 <img class="cvbImgTile" src="/nicerapp/siteMedia/btnCssVividButton.png"/>
                 <img class="cvbImgButton" src="/nicerapp/siteMedia/btnSettingsBorder.png"/>
             </div>
-            <div id="btnSelectBackgroundColor" class="vividButton_icon tooltip" title="Select background color" alt="Select background color" style="position:absolute;left:120px;width:50px;height:50px;" onclick="if (!$(this).is('.disabled')) na.dialogSettings.selectBackground_color()">
+            <div id="btnSelectBackgroundColor" class="vividButton_icon tooltip" title="Select background color" alt="Select background color" style="position:absolute;left:120px;width:50px;height:50px;" onclick="if (!$(this).is('.disabled')) na.dialogSettings.selectBackground_color(event)">
                 <div class="cvbBorderCSS"></div>
                 <img class="cvbImgBorder" src="/nicerapp/siteMedia/btnCssVividButton_outerBorder.png"/>
                 <img class="cvbImgTile" src="/nicerapp/siteMedia/btnCssVividButton.png"/>
                 <img class="cvbImgButton" src="/nicerapp/siteMedia/btnColorPicker.png"/>
             </div>
-            <div id="btnSelectBackgroundFolder" class="vividButton_icon tooltip" title="Select background image folder" alt="Select background image folder" style="position:absolute;left:175px;width:50px;height:50px;" onclick="if (!$(this).is('.disabled')) na.dialogSettings.selectBackground_folder()">
+            <div id="btnSelectBackgroundFolder" class="vividButton_icon tooltip" title="Select background image folder" alt="Select background image folder" style="position:absolute;left:175px;width:50px;height:50px;" onclick="if (!$(this).is('.disabled')) na.dialogSettings.selectBackground_folder(event)">
                 <div class="cvbBorderCSS"></div>
                 <img class="cvbImgBorder" src="/nicerapp/siteMedia/btnCssVividButton_outerBorder.png"/>
                 <img class="cvbImgTile" src="/nicerapp/siteMedia/btnCssVividButton.png"/>
                 <img class="cvbImgButton" src="/nicerapp/siteMedia/tree.png"/>
             </div>
-            <div id="btnSelectBackgroundImage" class="vividButton_icon tooltip" title="Select background image" alt="Select background image" style="position:absolute;left:235px;width:50px;height:50px;" onclick="if (!$(this).is('.disabled')) na.dialogSettings.selectBackground_image()">
+            <div id="btnSelectBackgroundImage" class="vividButton_icon tooltip" title="Select background image" alt="Select background image" style="position:absolute;left:235px;width:50px;height:50px;" onclick="if (!$(this).is('.disabled')) na.dialogSettings.selectBackground_image(event)">
                 <div class="cvbBorderCSS"></div>
                 <img class="cvbImgBorder" src="/nicerapp/siteMedia/btnCssVividButton_outerBorder.png"/>
                 <img class="cvbImgTile" src="/nicerapp/siteMedia/btnCssVividButton.png"/>
                 <img class="cvbImgButton" src="/nicerapp/siteMedia/btnBackground.png"/>
             </div>
-            <div id="btnSelectTextSettings" class="vividButton_icon tooltip" title="Select text settings" alt="Select text settings" style="position:absolute;left:290px;width:50px;height:50px;" onclick="if (!$(this).is('.disabled')) na.dialogSettings.selectTextSettings()">
+            <div id="btnSelectTextSettings" class="vividButton_icon tooltip" title="Select text settings" alt="Select text settings" style="position:absolute;left:290px;width:50px;height:50px;" onclick="if (!$(this).is('.disabled')) na.dialogSettings.selectTextSettings(event)">
                 <div class="cvbBorderCSS"></div>
                 <img class="cvbImgBorder" src="/nicerapp/siteMedia/btnCssVividButton_outerBorder.png"/>
                 <!--<img class="cvbImgTile" src="/nicerapp/siteMedia/btnCssVividButton.png"/>-->
@@ -133,21 +133,39 @@ na.site.globals = $.extend(na.site.globals, {
             </div>
         </div>
         <div class="flexBreak"></div>
-        <div id="specificitySettings" class="dialogSettingsComponent_alwaysVisible">
-            <label id="labelSpecificity" for="specificity" class="specificityLabel" style="vertical-align:middle;">Specificity</label>
-            <select id="specificity" onchange="na.ds.specificitySelected(event)" style="vertical-align:middle;"></select>
-            
-            <div id="btnDeleteSpecificity" class="vividButton_icon tooltip" title="Delete all cosmetic settings for this specificity" alt="Delete all cosmetic settings for this specificity" onclick="if (!$(this).is('.disabled')) na.ds.deleteSpecificity(event)" style="margin-left:20px;vertical-align:middle;width:35px;height:35px;position:relative;display:inline-block">
-                <div class="cvbBorderCSS" style="width:35px;height:35px;"></div>
-                <img class="cvbImgBorder" src="/nicerapp/siteMedia/btnCssVividButton_outerBorder.png" style="width:35px;height:35px;"/>
-                <img class="cvbImgTile" src="/nicerapp/siteMedia/btnCssVividButton.png" style="width:35px;height:35px;"/>
-                <img class="cvbImgButton" src="/nicerapp/siteMedia/iconDelete.png" style="width:35px;height:35px;"/>
+        <div id="specificitySettings" class="dialogSettingsComponent_alwaysVisible" style="display:flex;padding:0;margin:0;margin-bottom:25px;font-size:22px;">
+            <label id="labelSpecificity" for="specificity" class="specificityLabel" style="order:1;vertical-align:middle;">Specificity</label>
+            <select id="specificity" onchange="na.ds.specificitySelected(event)" style="order:1;vertical-align:middle;font-size:20px;height:24px;"></select>
+            <div id="btnDeleteSpecificity" class="vividButton_icon tooltip" title="Delete all cosmetic settings for this specificity" alt="Delete all cosmetic settings for this specificity" onclick="if (!$(this).is('.disabled')) na.ds.deleteSpecificity(event)" style="order:1;margin-left:auto;vertical-align:middle;width:70px;height:70px;position:relative;display:inline-block">
+                <div class="cvbBorderCSS" style="width:70px;height:70px;"></div>
+                <img class="cvbImgBorder" src="/nicerapp/siteMedia/btnCssVividButton_outerBorder.png" style="width:70px;height:70px;"/>
+                <img class="cvbImgTile" src="/nicerapp/siteMedia/btnCssVividButton.png" style="width:70px;height:70px;"/>
+                <img class="cvbImgButton" src="/nicerapp/siteMedia/iconDelete.png" style="position:absolute;top:7px;left:7px;width:56px;height:56px;"/>
             </div>
+            <div class="flexBreak"></div>
             
+            <label id="labelTheme" for="theme" class="specificityLabel" style="order:2;vertical-align:middle;">Theme</label>
+            <select id="theme" onchange="na.ds.themeSelected(event)" style="order:2;vertical-align:middle;font-size:20px;height:24px;"></select>
+            <div id="btnSetPermissionsForTheme" class="vividButton_icon tooltip" title="Set permissions for this theme" alt="Set permissions for this theme" onclick="if (!$(this).is('.disabled')) na.ds.setPermissionsForTheme(event)" style="order:2;margin-left:auto;vertical-align:middle;width:70px;height:70px;position:relative;display:inline-block">
+                <div class="cvbBorderCSS" style="width:70px;height:70px;"></div>
+                <img class="cvbImgBorder" src="/nicerapp/siteMedia/btnCssVividButton_outerBorder.png" style="width:70px;height:70px;"/>
+                <img class="cvbImgTile" src="/nicerapp/siteMedia/btnCssVividButton.red1a.png" style="width:70px;height:70px;"/>
+                <img class="cvbImgButton" src="/nicerapp/siteMedia/1660_blk_19329_zoom.upperBodyOnly.256x256.png" style="position:absolute;top:7px;left:7px;width:56px;height:56px;"/>
+            </div>
+            <div class="flexBreak" style="width:100%;"></div>
             
+            <div class="flexColumns" style="display:inline-flex;top:220px">
+                <label for="dialogSettings_specificity_dialog" class="labelDialogSettings2">Dialog
+                <input type="radio" id="dialogSettings_photoSpecificity_dialog" name="sdad" class="radioInput" value="dialog" checked="checked"/>
+                </label>
+                
+                <label for="dialogSettings_specificity_allDialogs" class="labelDialogSettings2" style="white-space:nowrap;">All dialogs
+                <input type="radio" id="dialogSettings_photoSpecificity_allDialogs" name="sdad" class="radioInput" value="dialog"/>
+                </label>
+            </div>
         </div>
         <div class="flexBreak"></div>
-        <div id="borderSettings" class="dialogSettingsComponent" style="top:130px;">
+        <div id="borderSettings" class="dialogSettingsComponent" style="top:auto;">
             <input id="borderColorpicker" class="dialogSettingsComponent" style="position:absolute;"></input>
             <div class="flexBreak" style="height:5px;"></div>
             
@@ -208,9 +226,9 @@ na.site.globals = $.extend(na.site.globals, {
             <div class="flexBreak"></div>
             
         </div>
-        <input id="colorpicker" class="dialogSettingsComponent dialogSettings_colorPicker" style="position:absolute;top:130px;"></input>
-        <div id="dialogSettings_jsTree" class="dialogSettingsComponent" style="position:absolute;top:130px;display:none;"></div>
-        <div id="dialogSettings_photoAlbum_specs" class="dialogSettingsComponent" style="flex-flow: wrap row;position:absolute;top:130px;display:none;">
+        <input id="colorpicker" class="dialogSettingsComponent dialogSettings_colorPicker" style="position:absolute;top:auto;"></input>
+        <div id="dialogSettings_jsTree" class="dialogSettingsComponent" style="position:absolute;top:auto;display:none;"></div>
+        <div id="dialogSettings_photoAlbum_specs" class="dialogSettingsComponent" style="flex-flow: wrap row;position:absolute;top:auto;display:none;">
             <label id="label_dialogSettings_photoOpacity" class="labelDialogSettings" for="dialogSettings_photoOpacity">Opacity :</label>
             <input id="dialogSettings_photoOpacity" type="range" min="1" max="100" value="50" class="sliderOpacityRangeDialogSettings" oninput="if (na.ds.settings.current.selectedImage) na.ds.imageSelected(na.ds.settings.current.selectedImage);"/>
             <div class="flexBreak"></div><br/>
@@ -224,7 +242,7 @@ na.site.globals = $.extend(na.site.globals, {
                 <input type="radio" id="dialogSettings_photoSpecificity_dialog" name="psdp" class="radioInput" value="dialog" checked="checked"/>
                 </label>
                 
-                <label for="dialogSettings_photoSpecificity_dialog" class="labelDialogSettings2">Page
+                <label for="dialogSettings_photoSpecificity_page" class="labelDialogSettings2">Page
                 <input type="radio" id="dialogSettings_photoSpecificity_page" name="psdp" class="radioInput" value="dialog"/>
                 </label>
             </div>

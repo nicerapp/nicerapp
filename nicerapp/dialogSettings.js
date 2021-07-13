@@ -208,7 +208,6 @@ na.ds = na.dialogSettings = {
         }
         
         $('#btnViewResult .cvbBorderCSS').css({ boxShadow : '0px 0px 0px 0px rgba(0,0,0,0)' });
-        $('#btnViewResult .cvbImgButton').css({ top : 2 });
         
         $('.vividButton, .vividButton_icon', $('#siteToolbarDialogSettings')[0]).each(function(idx,el){
             na.site.settings.buttons['#'+el.id] = new naVividButton(el);

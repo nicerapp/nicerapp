@@ -182,35 +182,6 @@ img.bg_last {
     position : absolute;
     opacity : 0.0001;
 }
-.vividButton_icon {
-    z-index : 1100;
-    width : 50px;
-    height : 50px;
-    border-radius : 8px;
-    
-}
-.vividButton_icon img {
-    position : absolute;
-    top : 0px;
-    left : 0px;
-    width : 50px;
-    height : 50px;
-}
-.cvbBorderCSS {
-    position : absolute;
-    top : 0px;
-    left : 0px;
-    width : 50px;
-    height : 50px;
-    z-index : 2002;
-    border-radius : 8px;
-    /*background-image : radial-gradient(circle 45px at center, rgba(0,255,0,1), rgba(0,0,0,0));*/
-    box-shadow : 2px 2px 2px 2px rgba(0,0,0,0.7);
-}
-.cvbImgBorder { z-index : 2001; }
-.cvbImgTile { z-index : 2010; }
-.cvbImgButton { z-index : 2015; }
-    
 .vdSettings {
     position : absolute;
     top : -15px;
@@ -305,9 +276,6 @@ img.bg_last {
   cursor: pointer; /* Cursor on hover */
 }
 
-#siteToolbarDialogSettings .navbar img, #textShadow img, #boxShadow img {
-    width : 50px;
-}
 #borderSettings {
     position : absolute;
     display : none;
@@ -376,27 +344,6 @@ img.bg_last {
 .button img {
     height : 1.5rem;
 }
-label {
-    width : 170px;
-    font-weight : bold;
-    font-size : 1.1rem;
-    display : inline-block;
-}
-.radioInput {
-    display : inline-block;
-    border : 0px;
-    width : 100%;
-    height : 2em; 
-}
-.flexColumns {
-    display : flex;
-    position : absolute;
-    top : 75px;
-}
-.labelDialogSettings2 {
-    display : inline-flex;
-}
-
 #siteRegistrationError {
     display : none;
     border-radius : 8px;
@@ -625,8 +572,108 @@ label {
 }
 
 select, optgroup {
-    font-size : 1.25rem;
 }
+#specificitySettings {
+  display: flex;
+  flex-flow: row wrap;
+  align-content: center;
+  justify-content: space-between;
+  align-items : center;
+}
+#specificitySettings::before, #specificitySettings::after {
+  content: '';
+  width: 100%;
+  order: 1;
+}
+.navbar .vividButton_icon_sdsnav {
+    display : inline-block;
+    position : relative;
+    margin-left : 10px;
+    margin-right:10px;
+    z-index : 1100;
+    width : 84px;
+    height : 84px;
+}
+.vividButton_icon_sdsnav img {
+    position : absolute;
+    top : 0px;
+    left : 0px;
+    width : 84px;
+    height : 84px;
+}    
+#specificitySettings .vividButton_icon {
+    display : inline-block;
+    position : relative;
+    z-index : 1100;
+    margin-right : 5px;
+    width : 70px;
+    height : 70px;
+}
+.vividButton_icon img {
+    position : absolute;
+    top : 0px;
+    left : 0px;
+    width : 70px;
+    height : 70px;
+}
+.vividButton_icon_siteTop {
+    display : inline-block;
+    position : absolute;
+}
+.vividButton_icon_siteTop img {
+    position : absolute;
+    top : 0px;
+    left : 0px;
+    width : 50px;
+    height : 50px;
+}    
+
+.cvbBorderCSS {
+    position : absolute;
+    top : 0px;
+    left : 0px;
+    width : 70px;
+    height : 70px;
+    z-index : 2002;
+    border-radius : 8px;
+}
+.cvbImgBorder { z-index : 2001; }
+.cvbImgTile { z-index : 2010; }
+.cvbImgButton { z-index : 2015; }
+.navbar {
+    display : flex;
+    padding : 0;
+    align-content : center;
+    align-items : center;
+    height : 78px;
+    width : calc(100% - 20px);
+}
+.navBar_button {
+    width : 50px;
+}
+.dialogSettingsComponent {
+    display : none;
+}
+label {
+    width : 170px;
+    font-weight : bold;
+    display : inline-block;
+}
+.radioInput {
+    display : inline-block;
+    border : 0px;
+    width : 100%;
+    height : 2em; 
+}
+.flexColumns {
+    display : flex;
+    position : absolute;
+    top : 75px;
+}
+.labelDialogSettings2 {
+    display : inline-flex;
+}
+
 
 .contentSectionTitle {
     text-shadow : 2px 2px 1px rgba(0,0,0,0.4);
@@ -877,22 +924,6 @@ select, optgroup {
     0% { filter : grayscale(80%); opacity : 0.5; }
     100% { filter : grayscale(0%); border : 2px solid rgba(0,0,0,0); opacity : 1 }
 }
-
-.navbar {
-    display : block;
-    padding : 0;
-    margin : 5px;
-    align-items : center;
-    width : 97%;
-    height : 60px;
-}
-.navBar_button {
-    width : 50px;
-}
-.dialogSettingsComponent {
-    display : none;
-}
-
 
 #documentTitle {
     margin : 4px;
