@@ -138,12 +138,10 @@ $debug = true;
     if ($debug) { var_dump ($dbg); echo PHP_EOL.PHP_EOL; }//die(); 
 
     if ( ($i < count($directories)) ) {
-        for ($j = $i; $j < (count($directories)-1); $j++) {
+        for ($j = $i; $j < (count($directories)); $j++) {
             $pathToCreate = '/'.implode ("/", array_slice($directories,0,$j+1));
             //var_dump ($pathToCreate);
-            if (file_exists($pathToCreate)) {
-                $result = true;
-            } else {
+            if (!file_exists($pathToCreate)) {
                 $filePerms = 0770; // dirty hack for said.by and the now more secure .../setPermissions.sh
                 if ($debug) { echo 'p2='; var_dump ($pathToCreate); }
                 $result=mkdir($pathToCreate,!is_null($filePerms)?$filePerms:0777);
