@@ -63,7 +63,7 @@ try {
 } catch (ErrorException $e) }
     echo 'Could not create filepath "'.realpath($filePath).'".';
     echo $e->getMessage();
-    echo json_encode ($e, JSON_PRETTY PRINT);
+    echo json_encode ($e, JSON_PRETTY_PRINT);
     debug_print_backtrace();
     die();
 } catch (Exception $e) {
@@ -78,7 +78,7 @@ try {
 } catch (ErrorException $e) }
     echo 'Could not create filepath "'.realpath($filePath).'".';
     echo $e->getMessage();
-    echo json_encode ($e, JSON_PRETTY PRINT);
+    echo json_encode ($e, JSON_PRETTY_PRINT);
     debug_print_backtrace();
     die();
 } catch (Exception $e) {
