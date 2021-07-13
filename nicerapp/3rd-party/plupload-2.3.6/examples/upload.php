@@ -42,6 +42,7 @@ global $cms;
 $cms = new nicerAppCMS();
 $cms->init();
 
+global $filePerms_ownerUser; global $filePerms_ownerGroup;
 
 // Settings
 $relPath = $_POST['relativePath'];
@@ -58,20 +59,32 @@ $filePath = $targetDir . DIRECTORY_SEPARATOR . $relPath.DIRECTORY_SEPARATOR.$fil
 $thumbPath = $targetDir.DIRECTORY_SEPARATOR.$relPath.DIRECTORY_SEPARATOR.'thumbs'. DIRECTORY_SEPARATOR . $fileName;
 
 try {
-    createDirectoryStructure (realpath($filePath), 'rene', 'www-data', 0770);
+    createDirectoryStructure (realpath($filePath), $filePerms_ownerUser, $filePerms_ownerGroup, 0770);
 } catch (Exception $e) {
     // createDirectoryStructure will fail for existing paths, so ignore it..
     echo 'Could not create filepath "'.realpath($filePath).'".';
     echo $e->getMessage();
     debug_print_backtrace();
     die();
+} catch (ErrorException ($e)) }
+    echo 'Could not create filepath "'.realpath($filePath).'".';
+    echo $e->getMessage();
+    echo json_encode ($e, JSON_PRETTY PRINT);
+    debug_print_backtrace();
+    die();
 }
 try {
-    createDirectoryStructure (realpath($thumbPath), 'rene', 'www-data', 0770);
+    createDirectoryStructure (realpath($thumbPath), $filePerms_ownerUser, $filePerms_ownerGroup, 0770);
 } catch (Exception $e) {
     // createDirectoryStructure will fail for existing paths, so ignore it..
     echo 'Could not create filepath "'.realpath($thumbPath).'".';
     echo $e->getMessage();
+    debug_print_backtrace();
+    die();
+} catch (ErrorException ($e)) }
+    echo 'Could not create filepath "'.realpath($filePath).'".';
+    echo $e->getMessage();
+    echo json_encode ($e, JSON_PRETTY PRINT);
     debug_print_backtrace();
     die();
 }
@@ -183,7 +196,6 @@ if (!$chunks || $chunk == $chunks - 1) {
 	*/
 }
 
-global $filePerms_ownerUser; global $filePerms_ownerGroup;
 if (is_string($filePerms_ownerUser)) $x = chown ($filePath, $filePerms_ownerUser);
 if (is_string($filePerms_ownerGroup)) $y = chgrp ($filePath, $filePerms_ownerGroup);
 if (is_string($filePerms_ownerUser)) $x = chown ($thumbPath, $filePerms_ownerUser);

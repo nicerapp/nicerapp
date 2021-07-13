@@ -22,3 +22,4 @@ echo "DONE updating /home/rene/data1/htdocs/said.by"
 
 # start the apps (selfHealer only for now)
 ./restart.sh
+./nicerapp/apps/upgradeAllSiteOperatorSites.sh
