@@ -175,7 +175,8 @@ while ($buff = fread($in, 4096)) {
 
 @fclose($out);
 @fclose($in);
-
+echo '$chunk='; var_dump ($chunk); echo PHP_EOL;
+echo '$chunks='; var_dump ($chunks); echo PHP_EOL;
 // Check if file has been uploaded
 if (!$chunks || $chunk == $chunks - 1) {
 	// Strip the temp .part suffix off 
