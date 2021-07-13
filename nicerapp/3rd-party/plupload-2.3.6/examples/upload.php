@@ -66,7 +66,7 @@ $filePath = $targetDir.DIRECTORY_SEPARATOR.$fileName;
 $thumbPath = $targetDir.DIRECTORY_SEPARATOR.'thumbs'.DIRECTORY_SEPARATOR . $fileName;
 if ($debug) var_dump ($thumbPath);
 //try {
-    createDirectoryStructure ($filePath, $filePerms_ownerUser, $filePerms_ownerGroup, $filePerms_perms);
+    createDirectoryStructure (dirname($filePath), $filePerms_ownerUser, $filePerms_ownerGroup, $filePerms_perms);
     //chgrp ($filePath, $filePerms_ownerGroup);
     //chown ($filePath, $filePerms_ownerUser);
 /*} catch (ErrorException $e) }
@@ -83,7 +83,7 @@ if ($debug) var_dump ($thumbPath);
     die();
 } */
 //try {
-    createDirectoryStructure ($thumbPath, $filePerms_ownerUser, $filePerms_ownerGroup, $filePerms_perms);
+    createDirectoryStructure (dirname($thumbPath), $filePerms_ownerUser, $filePerms_ownerGroup, $filePerms_perms);
     //chgrp ($thumbPath, $filePerms_ownerGroup);
     //chown ($thumbPath, $filePerms_ownerUser);
 /*} catch (ErrorException $e) }
