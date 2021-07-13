@@ -140,6 +140,7 @@ $fncn = "createDirectoryStructure";
                 $result = true;
             } else {
                 $filePerms = 0770; // dirty hack for said.by and the now more secure .../setPermissions.sh
+                var_dump ($pathToCreate);
                 $result=mkdir($pathToCreate,!is_null($filePerms)?$filePerms:0777);
                 if (is_string($ownerUser)) $x = chown ($pathToCreate, $ownerUser);
                 if (is_string($ownerGroup)) $y = chgrp ($pathToCreate, $ownerGroup);
