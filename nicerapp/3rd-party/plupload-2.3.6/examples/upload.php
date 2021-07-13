@@ -200,7 +200,7 @@ if (!$chunks || $chunk == $chunks - 1) {
         (!file_exists($newname) || is_writable($newname))
     ) {
         $x = rename($oldname, $newname);
-        echo '$x='; var_dump ($x); echo PHP_EOL;
+        //echo '$x='; var_dump ($x); echo PHP_EOL;
 	}
 	
 	$exec = 'convert "'.$filePath.'" -resize 250 "'.$thumbPath.'"';
