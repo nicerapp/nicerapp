@@ -180,8 +180,15 @@ echo '$chunks='; var_dump ($chunks); echo PHP_EOL;
 // Check if file has been uploaded
 if (!$chunks || $chunk == $chunks - 1) {
 	// Strip the temp .part suffix off 
-	$x = rename("{$filePath}.part", $filePath);
-	echo '$x='; var_dump ($x); echo PHP_EOL;
+	$oldname = $filePath.'.part';
+	$newname = $filePath;
+	if (
+        file_exists($old_name) && 
+        (!file_exists($new_name) || is_writable($new_name))
+    ) {
+        $x = rename("{$filePath}.part", $filePath);
+        echo '$x='; var_dump ($x); echo PHP_EOL;
+	}
 	
 	$exec = 'convert "'.$filePath.'" -resize 200x100 "'.$thumbPath.'"';
 	$output = array(); $result = -1;
