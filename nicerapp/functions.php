@@ -137,8 +137,8 @@ $debug = true;
     );
     if ($debug) { var_dump ($dbg); echo PHP_EOL.PHP_EOL; }//die(); 
 
-    if ( (($i-1) < count($directories)) ) {
-        for ($j = $i-1; $j < (count($directories)-1); $j++) {
+    if ( ($i < count($directories)) ) {
+        for ($j = $i; $j < (count($directories)-1); $j++) {
             $pathToCreate = '/'.implode ("/", array_slice($directories,0,$j+1));
             //var_dump ($pathToCreate);
             if (file_exists($pathToCreate)) {
