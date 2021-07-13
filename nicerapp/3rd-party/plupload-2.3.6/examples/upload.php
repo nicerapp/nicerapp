@@ -58,9 +58,9 @@ $targetDir =
 $fileName = $_POST['name'];
 $filePath = $targetDir.DIRECTORY_SEPARATOR.$fileName;
 $thumbPath = $targetDir.DIRECTORY_SEPARATOR.'thumbs'.DIRECTORY_SEPARATOR . $fileName;
-var_dump (realpath($filePath));
+var_dump (realpath(dirname($filePath)));
 //try {
-    createDirectoryStructure (realpath($filePath), $filePerms_ownerUser, $filePerms_ownerGroup, 0770);
+    createDirectoryStructure (realpath(dirname($filePath)), $filePerms_ownerUser, $filePerms_ownerGroup, 0770);
 /*} catch (ErrorException $e) }
     echo 'Could not create filepath "'.realpath($filePath).'".';
     echo $e->getMessage();
@@ -75,7 +75,7 @@ var_dump (realpath($filePath));
     die();
 } */
 //try {
-    createDirectoryStructure (realpath($thumbPath), $filePerms_ownerUser, $filePerms_ownerGroup, 0770);
+    createDirectoryStructure (realpath(dirname($thumbPath)), $filePerms_ownerUser, $filePerms_ownerGroup, 0770);
 /*} catch (ErrorException $e) }
     echo 'Could not create filepath "'.realpath($filePath).'".';
     echo $e->getMessage();
