@@ -175,22 +175,26 @@ while ($buff = fread($in, 4096)) {
 
 @fclose($out);
 @fclose($in);
-echo '$chunk='; var_dump ($chunk); echo PHP_EOL;
-echo '$chunks='; var_dump ($chunks); echo PHP_EOL;
+if ($debug) {
+    echo '$chunk='; var_dump ($chunk); echo PHP_EOL;
+    echo '$chunks='; var_dump ($chunks); echo PHP_EOL;
+}
 // Check if file has been uploaded
 if (!$chunks || $chunk == $chunks - 1) {
 	// Strip the temp .part suffix off 
 	$oldname = $filePath.'.part';
 	$newname = $filePath;
-	$dbg = array (
-        'f1' => file_exists($oldname),
-        'f2' => !file_exists($newname),
-        'f3' => is_writable($newname)
-    );
-    echo '$dbg='; var_dump ($dbg); echo PHP_EOL;
+	if ($debug) {
+        $dbg = array (
+            'f1' => file_exists($oldname),
+            'f2' => !file_exists($newname),
+            'f3' => is_writable($newname)
+        );
+        echo '$dbg='; var_dump ($dbg); echo PHP_EOL;
         ini_set('display_errors', 1);
         ini_set('display_startup_errors', 1);
-    error_reporting (E_ALL);
+        error_reporting (E_ALL);
+    }
 	if (
         file_exists($oldname) && 
         (!file_exists($newname) || is_writable($newname))
@@ -199,7 +203,7 @@ if (!$chunks || $chunk == $chunks - 1) {
         echo '$x='; var_dump ($x); echo PHP_EOL;
 	}
 	
-	$exec = 'convert "'.$filePath.'" -resize 200x100 "'.$thumbPath.'"';
+	$exec = 'convert "'.$filePath.'" -resize 200 "'.$thumbPath.'"';
 	$output = array(); $result = -1;
 	exec ($exec, $output, $result);
 
