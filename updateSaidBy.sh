@@ -27,7 +27,8 @@ touch /home/rene/data1/htdocs/said.by/nicerapp/domainConfigs/said.by/index.combi
 touch /home/rene/data1/htdocs/said.by/nicerapp/domainConfigs/said.by/index.combined.cssTheme.dark.css
 touch /home/rene/data1/htdocs/said.by/nicerapp/domainConfigs/said.by/index.combined.cssTheme.light.css
 touch /home/rene/data1/htdocs/said.by/nicerapp/domainConfigs/said.by/index.combined.css
-chmod -v 770 /home/rene/data1/htdocs/said.by/nicerapp/domainConfigs/said.by/index.combined.*
+chown rene:www-data /home/rene/data1/htdocs/said.by/nicerapp/domainConfigs/said.by/index.combined.*
+chmod 770 /home/rene/data1/htdocs/said.by/nicerapp/domainConfigs/said.by/index.combined.*
 
 cp -Rf /home/rene/data1/htdocs/nicerapp_v2/nicerapp/userInterface/* /home/rene/data1/htdocs/said.by/nicerapp/userInterface/
 chown -R rene:www-data /home/rene/data1/htdocs/said.by/nicerapp/userInterface/*
