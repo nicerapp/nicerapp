@@ -10,7 +10,7 @@
         session_start();
     };
     
-    $naDebugAll = false;
+    $naDebugAll = true;
     global $naDebugAll;
     if ($naDebugAll) {
         ini_set('display_errors', 1);
@@ -28,6 +28,7 @@
     if (file_exists($fn)) require_once ($fn);
     
     // error handling (catches warnings)
+    /*
     set_error_handler(function($errno, $errstr, $errfile, $errline) {
         // error was suppressed with the @-operator
         if (0 === error_reporting()) {
@@ -35,5 +36,5 @@
         }
         
         throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
-    });    
+    });    */
 ?>
