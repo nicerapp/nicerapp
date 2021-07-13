@@ -114,7 +114,8 @@ $fncn = "createDirectoryStructure";
     $i = count($directories)-1;
     $j = $i;
     while ($j > -1) {
-        if ($directories[$j]==='') unset ($directories[$j]); else $j--;
+        if ($directories[$j]==='') unset ($directories[$j]); 
+        $j--;
     };
     $result = true;
 

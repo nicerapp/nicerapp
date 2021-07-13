@@ -60,34 +60,34 @@ $thumbPath = $targetDir.DIRECTORY_SEPARATOR.$relPath.DIRECTORY_SEPARATOR.'thumbs
 
 try {
     createDirectoryStructure (realpath($filePath), $filePerms_ownerUser, $filePerms_ownerGroup, 0770);
-} catch (Exception $e) {
-    // createDirectoryStructure will fail for existing paths, so ignore it..
-    echo 'Could not create filepath "'.realpath($filePath).'".';
-    echo $e->getMessage();
-    debug_print_backtrace();
-    die();
 } catch (ErrorException ($e)) }
     echo 'Could not create filepath "'.realpath($filePath).'".';
     echo $e->getMessage();
     echo json_encode ($e, JSON_PRETTY PRINT);
     debug_print_backtrace();
     die();
-}
+} catch (Exception $e) {
+    // createDirectoryStructure will fail for existing paths, so ignore it..
+    echo 'Could not create filepath "'.realpath($filePath).'".';
+    echo $e->getMessage();
+    debug_print_backtrace();
+    die();
+} 
 try {
     createDirectoryStructure (realpath($thumbPath), $filePerms_ownerUser, $filePerms_ownerGroup, 0770);
+} catch (ErrorException ($e)) }
+    echo 'Could not create filepath "'.realpath($filePath).'".';
+    echo $e->getMessage();
+    echo json_encode ($e, JSON_PRETTY PRINT);
+    debug_print_backtrace();
+    die();
 } catch (Exception $e) {
     // createDirectoryStructure will fail for existing paths, so ignore it..
     echo 'Could not create filepath "'.realpath($thumbPath).'".';
     echo $e->getMessage();
     debug_print_backtrace();
     die();
-} catch (ErrorException ($e)) }
-    echo 'Could not create filepath "'.realpath($filePath).'".';
-    echo $e->getMessage();
-    echo json_encode ($e, JSON_PRETTY PRINT);
-    debug_print_backtrace();
-    die();
-}
+} 
 
 //$targetDir = 'uploads';
 $cleanupTargetDir = true; // Remove old files
