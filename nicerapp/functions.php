@@ -106,7 +106,7 @@ $fncn = "createDirectoryStructure";
 */
     //slash-direction doesn't matter for PHP4 file functions :-), so we even things out first;
     $filepath = strtr (trim($filepath), "\\", "/");
-    if (!is_dir($filepath)) $filepath = dirname($filepath);
+    //if (!is_dir($filepath)) $filepath = dirname($filepath);
     if ($filepath[strlen($filepath)-1]!="/") $filepath.="/";
     if ($filepath[0]!="/") $filepath="/".$filepath;	
     echo '$filepath='; var_dump ($filepath); echo PHP_EOL.PHP_EOL;
