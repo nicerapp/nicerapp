@@ -45,7 +45,7 @@ $cms->init();
 global $filePerms_ownerUser; global $filePerms_ownerGroup;
 
 // Settings
-$relPath = $_POST['relativePath'];
+//$relPath = $_POST['relativePath'];
 //echo $relDir; die();
 //$relPath = preg_replace($relDir, '/\/.*/', '');
 $targetDir = 
@@ -55,8 +55,8 @@ $targetDir =
     );
     
 //echo $targetDir; die();
-$filePath = $targetDir . DIRECTORY_SEPARATOR . $relPath.DIRECTORY_SEPARATOR.$fileName;
-$thumbPath = $targetDir.DIRECTORY_SEPARATOR.$relPath.DIRECTORY_SEPARATOR.'thumbs'. DIRECTORY_SEPARATOR . $fileName;
+$filePath = $targetDir.DIRECTORY_SEPARATOR.$fileName;
+$thumbPath = $targetDir.DIRECTORY_SEPARATOR.'thumbs'.DIRECTORY_SEPARATOR . $fileName;
 
 try {
     createDirectoryStructure (realpath($filePath), $filePerms_ownerUser, $filePerms_ownerGroup, 0770);
