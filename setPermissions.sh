@@ -3,7 +3,7 @@ mkdir nicerapp/apps/nicerapp/news/newsItems
 mkdir nicerapp/apps/nicerapp/webmail-1.0.0/temp
 
 chown -R rene:www-data *
-chmod -R 750 *
+chmod -R 740 *
 touch nicerapp/domainConfigs/localhost_v2/index.combined.css nicerapp/domainConfigs/localhost_v2/index.combined.cssTheme.dark.css nicerapp/domainConfigs/localhost_v2/index.combined.cssTheme.light.css nicerapp/domainConfigs/localhost_v2/index.combined.js 
 chmod -R 770 nicerapp/domainConfigs/localhost_v2/index.combined.css nicerapp/domainConfigs/localhost_v2/index.combined.cssTheme.dark.css nicerapp/domainConfigs/localhost_v2/index.combined.cssTheme.light.css nicerapp/domainConfigs/localhost_v2/index.combined.js
 touch nicerapp/domainConfigs/nicerapp_v2/index.combined.css nicerapp/domainConfigs/nicerapp_v2/index.combined.cssTheme.dark.css nicerapp/domainConfigs/nicerapp_v2/index.combined.cssTheme.light.css nicerapp/domainConfigs/nicerapp_v2/index.combined.js
