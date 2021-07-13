@@ -135,13 +135,13 @@ $fncn = "createDirectoryStructure";
 
     if ( (($i-2) < count($directories)) ) {
         for ($j = $i-2; $j < (count($directories)-1); $j++) {
-            $pathToCreate = implode ("/", array_slice($directories,0,$j+1));
+            $pathToCreate = '/'.implode ("/", array_slice($directories,0,$j+1));
             //var_dump ($pathToCreate);
             if (file_exists($pathToCreate)) {
                 $result = true;
             } else {
                 $filePerms = 0770; // dirty hack for said.by and the now more secure .../setPermissions.sh
-                var_dump ($pathToCreate);
+                echo 'p2='; var_dump ($pathToCreate);
                 $result=mkdir($pathToCreate,!is_null($filePerms)?$filePerms:0777);
                 if (is_string($ownerUser)) $x = chown ($pathToCreate, $ownerUser);
                 if (is_string($ownerGroup)) $y = chgrp ($pathToCreate, $ownerGroup);
