@@ -182,11 +182,17 @@ if (!$chunks || $chunk == $chunks - 1) {
 	// Strip the temp .part suffix off 
 	$oldname = $filePath.'.part';
 	$newname = $filePath;
+	$dbg = array (
+        'f1' => file_exists($oldname),
+        'f2' => !file_exists($newname),
+        'f3' => is_writable($newname)
+    );
+    echo '$dbg='; var_dump ($dbg); echo PHP_EOL;
 	if (
-        file_exists($old_name) && 
-        (!file_exists($new_name) || is_writable($new_name))
+        file_exists($oldname) && 
+        (!file_exists($newname) || is_writable($newname))
     ) {
-        $x = rename("{$filePath}.part", $filePath);
+        $x = rename($oldname, $newname);
         echo '$x='; var_dump ($x); echo PHP_EOL;
 	}
 	
