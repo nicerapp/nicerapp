@@ -121,7 +121,7 @@ $debug = true;
         $j--;
     };
     $result = true;
-    if ($debug) { echo '1::$directories='; var_dump ($directories); echo PHP_EOL.PHP_EOL; }
+    if ($debug && false) { echo '1::$directories='; var_dump ($directories); echo PHP_EOL.PHP_EOL; }
 
     for ($i = count($directories); $i>0; $i--) {
         $pathToTest = '/'.implode ("/", array_slice($directories,0,$i+1));
@@ -132,10 +132,10 @@ $debug = true;
     $dbg = array (
         'ptt' => $pathToTest,
         'i' => $i,
-        'dirs' => $directories,
-        'backtrace' => debug_backtrace()
+        'dirs' => $directories//,
+         //'backtrace' => debug_backtrace()
     );
-    if ($debug && false) { var_dump ($dbg); echo PHP_EOL.PHP_EOL; }//die(); 
+    if ($debug) { var_dump ($dbg); echo PHP_EOL.PHP_EOL; }//die(); 
 
     if ( (($i-1) < count($directories)) ) {
         for ($j = $i-1; $j < (count($directories)-1); $j++) {
