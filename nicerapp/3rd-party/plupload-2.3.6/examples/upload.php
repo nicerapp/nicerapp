@@ -58,7 +58,7 @@ $targetDir =
         .'/siteData/'.$cms->domain.DIRECTORY_SEPARATOR.$_GET['basePath']
     );
     
-echo '1::$targetDir='; var_dump ($targetDir); echo PHP_EOL.PHP_EOL;
+//echo '1::$targetDir='; var_dump ($targetDir); echo PHP_EOL.PHP_EOL;
     
 //echo $targetDir; die();
 $fileName = $_POST['name'];
@@ -126,7 +126,7 @@ $chunks = isset($_REQUEST["chunks"]) ? intval($_REQUEST["chunks"]) : 0;
 
 // Remove old temp files	
 if ($cleanupTargetDir) {
-    echo '$targetDir='; var_dump ($targetDir); echo PHP_EOL.PHP_EOL;
+    //echo '$targetDir='; var_dump ($targetDir); echo PHP_EOL.PHP_EOL;
 	if (!is_dir($targetDir) || !$dir = opendir($targetDir)) {
 		die('{"jsonrpc" : "2.0", "error" : {"code": 100, "message": "Failed to open temp directory."}, "id" : "id"}');
 	}
