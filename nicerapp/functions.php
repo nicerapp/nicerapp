@@ -106,7 +106,8 @@ $fncn = "createDirectoryStructure";
 */
     //slash-direction doesn't matter for PHP4 file functions :-), so we even things out first;
     $filepath = strtr (trim($filepath), "\\", "/");
-    if ($filepath[strlen($filepath)-1]!="/") $filepath.="/";	
+    if ($filepath[strlen($filepath)-1]!="/") $filepath.="/";
+    if ($filepath[0]!="/") $filepath="/".$filepath;	
 
     if (($filepath[1]!=':') && ($filepath[0]!='/')) trigger_error ("$fncn: $filepath is not from the root. results would be unstable. gimme a filepath with / as first character.", E_USER_ERROR);
 
