@@ -108,6 +108,7 @@ $fncn = "createDirectoryStructure";
     $filepath = strtr (trim($filepath), "\\", "/");
     if ($filepath[strlen($filepath)-1]!="/") $filepath.="/";
     if ($filepath[0]!="/") $filepath="/".$filepath;	
+    echo '$filepath='; var_dump ($filepath); echo PHP_EOL.PHP_EOL;
 
     if (($filepath[1]!=':') && ($filepath[0]!='/')) trigger_error ("$fncn: $filepath is not from the root. results would be unstable. gimme a filepath with / as first character.", E_USER_ERROR);
 
