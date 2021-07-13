@@ -133,8 +133,8 @@ $fncn = "createDirectoryStructure";
     );
     var_dump ($dbg); echo PHP_EOL.PHP_EOL; //die();
 
-    if ( (($i-2) < count($directories)) ) {
-        for ($j = $i-2; $j < (count($directories)-1); $j++) {
+    if ( (($i-1) < count($directories)) ) {
+        for ($j = $i-1; $j < (count($directories)-1); $j++) {
             $pathToCreate = '/'.implode ("/", array_slice($directories,0,$j+1));
             //var_dump ($pathToCreate);
             if (file_exists($pathToCreate)) {
