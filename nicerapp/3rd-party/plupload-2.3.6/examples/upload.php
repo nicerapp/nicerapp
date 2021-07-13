@@ -61,6 +61,8 @@ $thumbPath = $targetDir.DIRECTORY_SEPARATOR.'thumbs'.DIRECTORY_SEPARATOR . $file
 var_dump ($thumbPath);
 //try {
     createDirectoryStructure ($filePath, $filePerms_ownerUser, $filePerms_ownerGroup, 0770);
+    chgrp ($filePath, $filePerms_ownerGroup);
+    chown ($filePath, $filePerms_ownerUser);
 /*} catch (ErrorException $e) }
     echo 'Could not create filepath "'.realpath($filePath).'".';
     echo $e->getMessage();
@@ -76,6 +78,8 @@ var_dump ($thumbPath);
 } */
 //try {
     createDirectoryStructure ($thumbPath, $filePerms_ownerUser, $filePerms_ownerGroup, 0770);
+    chgrp ($thumbPath, $filePerms_ownerGroup);
+    chown ($thumbPath, $filePerms_ownerUser);
 /*} catch (ErrorException $e) }
     echo 'Could not create filepath "'.realpath($filePath).'".';
     echo $e->getMessage();
