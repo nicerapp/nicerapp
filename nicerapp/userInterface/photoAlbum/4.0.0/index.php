@@ -19,9 +19,6 @@
     $targetDir = $baseDir.$_GET['basePath'];
     $thumbDir = $targetDir.'/thumbs';
     
-    $smID = $_GET['smID'];
-    $iid = $_GET['iid'];
-    $dialogID = $_GET['dialogID'];
     $imgStyle = ''; // boxShadow perhaps
 
 	define ("FILE_FORMATS", "/(.*\.png)|(.*\.gif)|(.*\.jpg)/");
