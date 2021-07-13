@@ -42,7 +42,11 @@ global $cms;
 $cms = new nicerAppCMS();
 $cms->init();
 
-global $filePerms_ownerUser; global $filePerms_ownerGroup;
+global $filePerms_ownerUser; 
+global $filePerms_ownerGroup;
+global $filePerms_perms;
+
+$debug = false;
 
 // Settings
 //$relPath = $_POST['relativePath'];
@@ -61,8 +65,8 @@ $thumbPath = $targetDir.DIRECTORY_SEPARATOR.'thumbs'.DIRECTORY_SEPARATOR . $file
 var_dump ($thumbPath);
 //try {
     createDirectoryStructure ($filePath, $filePerms_ownerUser, $filePerms_ownerGroup, 0770);
-    chgrp ($filePath, $filePerms_ownerGroup);
-    chown ($filePath, $filePerms_ownerUser);
+    //chgrp ($filePath, $filePerms_ownerGroup);
+    //chown ($filePath, $filePerms_ownerUser);
 /*} catch (ErrorException $e) }
     echo 'Could not create filepath "'.realpath($filePath).'".';
     echo $e->getMessage();
@@ -78,8 +82,8 @@ var_dump ($thumbPath);
 } */
 //try {
     createDirectoryStructure ($thumbPath, $filePerms_ownerUser, $filePerms_ownerGroup, 0770);
-    chgrp ($thumbPath, $filePerms_ownerGroup);
-    chown ($thumbPath, $filePerms_ownerUser);
+    //chgrp ($thumbPath, $filePerms_ownerGroup);
+    //chown ($thumbPath, $filePerms_ownerUser);
 /*} catch (ErrorException $e) }
     echo 'Could not create filepath "'.realpath($filePath).'".';
     echo $e->getMessage();
@@ -142,7 +146,7 @@ if ($cleanupTargetDir) {
 
 
 // Open temp file
-var_dump ("{$filePath}.part"); echo PHP_EOL.PHP_EOL;//die();
+if ($debug) { var_dump ("{$filePath}.part"); echo PHP_EOL.PHP_EOL; }
 if (!$out = @fopen("{$filePath}.part", $chunks ? "ab" : "wb")) {
 	die('{"jsonrpc" : "2.0", "error" : {"code": 102, "message": "Failed to open output stream."}, "id" : "id"}');
 }
@@ -169,9 +173,6 @@ while ($buff = fread($in, 4096)) {
 @fclose($out);
 @fclose($in);
 
-//if (is_string($filePerms_ownerUser)) $x = chown ($filePath.'.part', $filePerms_ownerUser);
-//if (is_string($filePerms_ownerGroup)) $y = chgrp ($filePath.'.part', $filePerms_ownerGroup);
-
 // Check if file has been uploaded
 if (!$chunks || $chunk == $chunks - 1) {
 	// Strip the temp .part suffix off 
@@ -181,29 +182,9 @@ if (!$chunks || $chunk == $chunks - 1) {
 	$output = array(); $result = -1;
 	exec ($exec, $output, $result);
 
-	/*
-	$exec = 'sudo chown rene:www-data "'.$filePath.'"';
-	$output = array(); $result = -1;
-	exec ($exec, $output, $result);
-	//$dbg = array ('e'=>$exec,'o'=>$output,'r'=>$result); var_dump ($dbg); echo '<br/>'.PHP_EOL;
-	
-	$exec = 'sudo chown rene:www-data "'.$thumbPath.'"';
-	$output = array(); $result = -1;
-	exec ($exec, $output, $result);
-	//$dbg = array ('e'=>$exec,'o'=>$output,'r'=>$result); var_dump ($dbg); echo '<br/>'.PHP_EOL;
-	
-	$exec = 'sudo chmod 777 "'.$filePath.'"';
-	$output = array(); $result = -1;
-	exec ($exec, $output, $result);
-	//$dbg = array ('e'=>$exec,'o'=>$output,'r'=>$result); var_dump ($dbg); echo '<br/>'.PHP_EOL;
-	
-	$exec = 'sudo chmod 777 "'.$thumbPath.'"';
-	$output = array(); $result = -1;
-	exec ($exec, $output, $result);
-	//$dbg = array ('e'=>$exec,'o'=>$output,'r'=>$result); var_dump ($dbg); echo '<br/>'.PHP_EOL;
-	*/
     if (is_string($filePerms_ownerUser)) $x = chown ($thumbPath, $filePerms_ownerUser);
     if (is_string($filePerms_ownerGroup)) $y = chgrp ($thumbPath, $filePerms_ownerGroup);
+    if (is_numeric($filePerms_perms)) $z = chmod ($thumbPath, $filePerms_perms);
 }
 
 

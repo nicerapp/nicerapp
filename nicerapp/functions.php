@@ -98,6 +98,7 @@ function css_array_to_css($rules, $indent = 0) {
 
 function createDirectoryStructure ($filepath, $ownerUser=null, $ownerGroup=null, $filePerms=null) {
 $fncn = "createDirectoryStructure";
+$debug = false;
 /*	Creates a directory structure. 
     Returns a boolean success value. False usually indicates illegal characters in the directories.
 
@@ -106,10 +107,9 @@ $fncn = "createDirectoryStructure";
 */
     //slash-direction doesn't matter for PHP4 file functions :-), so we even things out first;
     $filepath = strtr (trim($filepath), "\\", "/");
-    //if (!is_dir($filepath)) $filepath = dirname($filepath);
     if ($filepath[strlen($filepath)-1]!="/") $filepath.="/";
     if ($filepath[0]!="/") $filepath="/".$filepath;	
-    echo '$filepath='; var_dump ($filepath); echo PHP_EOL.PHP_EOL;
+    if ($debug) { echo $fncn.'()'.PHP_EOL; echo '$filepath='; var_dump ($filepath); echo PHP_EOL.PHP_EOL; }
 
     if (($filepath[1]!=':') && ($filepath[0]!='/')) trigger_error ("$fncn: $filepath is not from the root. results would be unstable. gimme a filepath with / as first character.", E_USER_ERROR);
 
@@ -121,11 +121,11 @@ $fncn = "createDirectoryStructure";
         $j--;
     };
     $result = true;
-    echo '1::$directories='; var_dump ($directories); echo PHP_EOL.PHP_EOL;
+    if ($debug) { echo '1::$directories='; var_dump ($directories); echo PHP_EOL.PHP_EOL; }
 
     for ($i = count($directories); $i>0; $i--) {
         $pathToTest = '/'.implode ("/", array_slice($directories,0,$i+1));
-        echo '$pathToTest='; var_dump ($pathToTest); echo PHP_EOL.PHP_EOL;
+        //echo '$pathToTest='; var_dump ($pathToTest); echo PHP_EOL.PHP_EOL;
         if (file_exists($pathToTest)) break;
     }
     
@@ -135,7 +135,7 @@ $fncn = "createDirectoryStructure";
         'dirs' => $directories,
         'backtrace' => debug_backtrace()
     );
-    var_dump ($dbg); echo PHP_EOL.PHP_EOL; //die();
+    if ($debug) { var_dump ($dbg); echo PHP_EOL.PHP_EOL; }//die(); 
 
     if ( (($i-1) < count($directories)) ) {
         for ($j = $i-1; $j < (count($directories)-1); $j++) {
@@ -145,7 +145,7 @@ $fncn = "createDirectoryStructure";
                 $result = true;
             } else {
                 $filePerms = 0770; // dirty hack for said.by and the now more secure .../setPermissions.sh
-                echo 'p2='; var_dump ($pathToCreate);
+                if ($debug) { echo 'p2='; var_dump ($pathToCreate); }
                 $result=mkdir($pathToCreate,!is_null($filePerms)?$filePerms:0777);
                 if (is_string($ownerUser)) $x = chown ($pathToCreate, $ownerUser);
                 if (is_string($ownerGroup)) $y = chgrp ($pathToCreate, $ownerGroup);
