@@ -119,9 +119,11 @@ $fncn = "createDirectoryStructure";
         $j--;
     };
     $result = true;
+    echo '1::$directories='; var_dump ($directories); echo PHP_EOL.PHP_EOL;
 
     for ($i = count($directories); $i>0; $i--) {
         $pathToTest = '/'.implode ("/", array_slice($directories,0,$i+1));
+        echo '$pathToTest='; var_dump ($pathToTest); echo PHP_EOL.PHP_EOL;
         if (file_exists($pathToTest)) break;
     }
     
