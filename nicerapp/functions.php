@@ -135,7 +135,7 @@ $debug = true;
         'dirs' => $directories,
         'backtrace' => debug_backtrace()
     );
-    if ($debug) { var_dump ($dbg); echo PHP_EOL.PHP_EOL; }//die(); 
+    if ($debug && false) { var_dump ($dbg); echo PHP_EOL.PHP_EOL; }//die(); 
 
     if ( (($i-1) < count($directories)) ) {
         for ($j = $i-1; $j < (count($directories)-1); $j++) {
