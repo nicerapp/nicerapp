@@ -138,7 +138,7 @@ if ($cleanupTargetDir) {
 
 
 // Open temp file
-//var_dump ("{$filePath}.part"); die();
+var_dump ("{$filePath}.part"); echo PHP_EOL.PHP_EOL;//die();
 if (!$out = @fopen("{$filePath}.part", $chunks ? "ab" : "wb")) {
 	die('{"jsonrpc" : "2.0", "error" : {"code": 102, "message": "Failed to open output stream."}, "id" : "id"}');
 }
