@@ -52,7 +52,7 @@ $databases = array (
 $data = array();
 $ret = array();
 foreach ($databases as $idx=>$dbName) {
-    trigger_error ('ajax_getTreeNodes.php : $dbName='.$dbName, E_USER_NOTICE);
+    //trigger_error ('ajax_getTreeNodes.php : $dbName='.$dbName, E_USER_NOTICE);
     try { $cdb->setDatabase ($dbName, false); } catch (Exception $e) { echo $e->getMessage(); };
     try { $docs = $cdb->getAllDocs(); } catch (Exception $e) { echo $e->getMessage(); };
     $data = $docs->body->rows;
