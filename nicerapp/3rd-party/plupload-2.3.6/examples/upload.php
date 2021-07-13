@@ -58,9 +58,9 @@ $targetDir =
 $filePath = $targetDir.DIRECTORY_SEPARATOR.$fileName;
 $thumbPath = $targetDir.DIRECTORY_SEPARATOR.'thumbs'.DIRECTORY_SEPARATOR . $fileName;
 
-try {
+//try {
     createDirectoryStructure (realpath($filePath), $filePerms_ownerUser, $filePerms_ownerGroup, 0770);
-} catch (ErrorException $e) }
+/*} catch (ErrorException $e) }
     echo 'Could not create filepath "'.realpath($filePath).'".';
     echo $e->getMessage();
     echo json_encode ($e, JSON_PRETTY_PRINT);
@@ -72,10 +72,10 @@ try {
     echo $e->getMessage();
     debug_print_backtrace();
     die();
-} 
-try {
+} */
+//try {
     createDirectoryStructure (realpath($thumbPath), $filePerms_ownerUser, $filePerms_ownerGroup, 0770);
-} catch (ErrorException $e) }
+/*} catch (ErrorException $e) }
     echo 'Could not create filepath "'.realpath($filePath).'".';
     echo $e->getMessage();
     echo json_encode ($e, JSON_PRETTY_PRINT);
@@ -87,7 +87,7 @@ try {
     echo $e->getMessage();
     debug_print_backtrace();
     die();
-} 
+} */
 
 //$targetDir = 'uploads';
 $cleanupTargetDir = true; // Remove old files
