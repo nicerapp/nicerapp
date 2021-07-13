@@ -53,10 +53,10 @@ $debug = false;
 //echo $relDir; die();
 //$relPath = preg_replace($relDir, '/\/.*/', '');
 $targetDir = 
-    realpath(
+    //realpath( //MESSES THINGS UP
         dirname(__FILE__).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'..'
         .'/siteData/'.$cms->domain.DIRECTORY_SEPARATOR.$_GET['basePath']
-    );
+    //);
     
 //echo $targetDir; die();
 $fileName = $_POST['name'];
