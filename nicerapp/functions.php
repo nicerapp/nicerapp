@@ -121,7 +121,7 @@ $fncn = "createDirectoryStructure";
     $result = true;
 
     for ($i = count($directories); $i>0; $i--) {
-        $pathToTest = implode ("/", array_slice($directories,0,$i+1));
+        $pathToTest = '/'.implode ("/", array_slice($directories,0,$i+1));
         if (file_exists($pathToTest)) break;
     }
     
