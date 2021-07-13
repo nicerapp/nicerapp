@@ -203,7 +203,7 @@ if (!$chunks || $chunk == $chunks - 1) {
         echo '$x='; var_dump ($x); echo PHP_EOL;
 	}
 	
-	$exec = 'convert "'.$filePath.'" -resize 200 "'.$thumbPath.'"';
+	$exec = 'convert "'.$filePath.'" -resize 250 "'.$thumbPath.'"';
 	$output = array(); $result = -1;
 	exec ($exec, $output, $result);
 
