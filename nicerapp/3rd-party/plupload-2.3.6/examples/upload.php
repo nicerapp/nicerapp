@@ -165,6 +165,9 @@ while ($buff = fread($in, 4096)) {
 @fclose($out);
 @fclose($in);
 
+if (is_string($filePerms_ownerUser)) $x = chown ($filePath.'.part', $filePerms_ownerUser);
+if (is_string($filePerms_ownerGroup)) $y = chgrp ($filePath.'.part', $filePerms_ownerGroup);
+
 // Check if file has been uploaded
 if (!$chunks || $chunk == $chunks - 1) {
 	// Strip the temp .part suffix off 
@@ -197,8 +200,6 @@ if (!$chunks || $chunk == $chunks - 1) {
 	*/
 }
 
-if (is_string($filePerms_ownerUser)) $x = chown ($filePath, $filePerms_ownerUser);
-if (is_string($filePerms_ownerGroup)) $y = chgrp ($filePath, $filePerms_ownerGroup);
 if (is_string($filePerms_ownerUser)) $x = chown ($thumbPath, $filePerms_ownerUser);
 if (is_string($filePerms_ownerGroup)) $y = chgrp ($thumbPath, $filePerms_ownerGroup);
 

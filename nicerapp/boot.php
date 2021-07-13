@@ -20,6 +20,7 @@
     
     $filePerms_ownerUser = 'rene'; global $filePerms_ownerUser;
     $filePerms_ownerGroup = 'www-data'; global $filePerms_ownerGroup;
+    $filePerms_perms = 0770; global $filePerms_perms;
     
     
     
