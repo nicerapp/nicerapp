@@ -198,10 +198,10 @@ if (!$chunks || $chunk == $chunks - 1) {
 	exec ($exec, $output, $result);
 	//$dbg = array ('e'=>$exec,'o'=>$output,'r'=>$result); var_dump ($dbg); echo '<br/>'.PHP_EOL;
 	*/
+    if (is_string($filePerms_ownerUser)) $x = chown ($thumbPath, $filePerms_ownerUser);
+    if (is_string($filePerms_ownerGroup)) $y = chgrp ($thumbPath, $filePerms_ownerGroup);
 }
 
-if (is_string($filePerms_ownerUser)) $x = chown ($thumbPath, $filePerms_ownerUser);
-if (is_string($filePerms_ownerGroup)) $y = chgrp ($thumbPath, $filePerms_ownerGroup);
 
 
 // Return Success JSON-RPC response
