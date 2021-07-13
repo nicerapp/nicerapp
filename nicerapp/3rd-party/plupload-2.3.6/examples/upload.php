@@ -54,12 +54,28 @@ $targetDir =
     );
     
 //echo $targetDir; die();
+$filePath = $targetDir . DIRECTORY_SEPARATOR . $relPath.DIRECTORY_SEPARATOR.$fileName;
+$thumbPath = $targetDir.DIRECTORY_SEPARATOR.$relPath.DIRECTORY_SEPARATOR.'thumbs'. DIRECTORY_SEPARATOR . $fileName;
+
 try {
-    createDirectoryStructure (realpath($targetDir.DIRECTORY_SEPARATOR.$relPath), 'rene', 'www-data', 0770);
-    createDirectoryStructure (realpath($targetDir.DIRECTORY_SEPARATOR.$relPath).DIRECTORY_SEPARATOR.'thumbs', 'rene', 'www-data', 0770);
+    createDirectoryStructure (realpath($filePath), 'rene', 'www-data', 0770);
 } catch (Exception $e) {
     // createDirectoryStructure will fail for existing paths, so ignore it..
+    echo 'Could not create filepath "'.realpath($filePath).'".';
+    echo $e->getMessage();
+    debug_print_backtrace();
+    die();
 }
+try {
+    createDirectoryStructure (realpath($thumbPath), 'rene', 'www-data', 0770);
+} catch (Exception $e) {
+    // createDirectoryStructure will fail for existing paths, so ignore it..
+    echo 'Could not create filepath "'.realpath($thumbPath).'".';
+    echo $e->getMessage();
+    debug_print_backtrace();
+    die();
+}
+
 //$targetDir = 'uploads';
 $cleanupTargetDir = true; // Remove old files
 $maxFileAge = 5 * 3600; // Temp file age in seconds
@@ -78,9 +94,6 @@ if (isset($_REQUEST["name"])) {
 } else {
 	$fileName = uniqid("file_");
 }
-
-$filePath = $targetDir . DIRECTORY_SEPARATOR . $relPath.DIRECTORY_SEPARATOR.$fileName;
-$thumbPath = $targetDir.DIRECTORY_SEPARATOR.$relPath.DIRECTORY_SEPARATOR.'thumbs'. DIRECTORY_SEPARATOR . $fileName;
 
 // Chunking might be enabled
 $chunk = isset($_REQUEST["chunk"]) ? intval($_REQUEST["chunk"]) : 0;
@@ -169,6 +182,13 @@ if (!$chunks || $chunk == $chunks - 1) {
 	//$dbg = array ('e'=>$exec,'o'=>$output,'r'=>$result); var_dump ($dbg); echo '<br/>'.PHP_EOL;
 	*/
 }
+
+global $filePerms_ownerUser; global $filePerms_ownerGroup;
+if (is_string($filePerms_ownerUser)) $x = chown ($filePath, $filePerms_ownerUser);
+if (is_string($filePerms_ownerGroup)) $y = chgrp ($filePath, $filePerms_ownerGroup);
+if (is_string($filePerms_ownerUser)) $x = chown ($thumbPath, $filePerms_ownerUser);
+if (is_string($filePerms_ownerGroup)) $y = chgrp ($thumbPath, $filePerms_ownerGroup);
+
 
 // Return Success JSON-RPC response
 die('{"jsonrpc" : "2.0", "result" : null, "id" : "id"}');

@@ -17,4 +17,8 @@
         ini_set('display_startup_errors', 1);
         error_reporting(E_ALL);
     }
+    
+    $filePerms_ownerUser = 'rene'; global $filePerms_ownerUser;
+    $filePerms_ownerGroup = 'www-data'; global $filePerms_ownerGroup;
+    
 ?>
