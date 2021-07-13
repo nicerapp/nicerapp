@@ -188,6 +188,9 @@ if (!$chunks || $chunk == $chunks - 1) {
         'f3' => is_writable($newname)
     );
     echo '$dbg='; var_dump ($dbg); echo PHP_EOL;
+        ini_set('display_errors', 1);
+        ini_set('display_startup_errors', 1);
+    error_reporting (E_ALL);
 	if (
         file_exists($oldname) && 
         (!file_exists($newname) || is_writable($newname))
