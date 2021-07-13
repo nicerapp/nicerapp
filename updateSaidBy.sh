@@ -75,7 +75,7 @@ chmod 750 /home/rene/data1/htdocs/said.by/*.php
 cd /home/rene/data1/htdocs/said.by/nicerapp/3rd-party/sag
 git pull
 
-cp -R /home/rene/data1/htdocs/nicerapp_v2/nicerapp/3rd-party/plupload*.* /home/rene/data1/htdocs/said.by/nicerapp/3rd-party
+cp -Rv /home/rene/data1/htdocs/nicerapp_v2/nicerapp/3rd-party/plupload*.* /home/rene/data1/htdocs/said.by/nicerapp/3rd-party
 chown -R rene:www-data /home/rene/data1/said.by/nicerapp/3rd-party/plupload*.*
 chmod -R 750 /home/rene/data1/said.by/nicerapp/3rd-party/plupload*.*
 
