@@ -112,7 +112,7 @@ na.site.globals = $.extend(na.site.globals, {
             </div>
             <div id="btnSelectBackgroundFolder" class="vividButton_icon_sdsnav tooltip" title="Select background image folder" alt="Select background image folder" onclick="if (!$(this).is('.disabled')) na.dialogSettings.selectBackground_folder(event)">
                 <div class="cvbBorderCSS"></div>
-                <img class="cvbImgTile" src="/nicerapp/siteMedia/btnCssVividButton.yellow1a.png"/>
+                <img class="cvbImgTile" src="/nicerapp/siteMedia/btnCssVividButton.yellow1b.png"/>
                 <img class="cvbImgButton" src="/nicerapp/siteMedia/fileTree_1b.png" style="position:absolute;top:5px;left:5px;width:74px;height:74px;"/>
             </div>
             <div id="btnSelectBackgroundImage" class="vividButton_icon_sdsnav tooltip" title="Select background image" alt="Select background image"  onclick="if (!$(this).is('.disabled')) na.dialogSettings.selectBackground_image(event)">
