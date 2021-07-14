@@ -126,7 +126,7 @@ na.ds = na.dialogSettings = {
             : test2b
                 ? $(div).css('borderTopColor')
                 : test2c
-                    ? $(div).css('border')
+                    ? $(div).css('border')  
                     : test2d
                         ? $(div).css('borderTopColor')
                         : 'black'
@@ -181,7 +181,6 @@ na.ds = na.dialogSettings = {
             var textColor = 'white';
         };
         na.ds.settings.current.textColor = textColor;
-        
         if (!na.ds.settings.current.selectedTextShadow) {
             na.ds.settings.current.selectedTextShadow = $('#textShadow_0')[0];
             $('#textShadow_0').css({ textShadow : $(div).css('textShadow') });
@@ -223,6 +222,8 @@ na.ds = na.dialogSettings = {
             var btnID = na.ds.settings.current.selectedButtonID;
             $('#'+btnID).trigger('click');
         }
+        
+        na.ds.onresize();
     },
     
     onresize : function () { 
@@ -230,7 +231,6 @@ na.ds = na.dialogSettings = {
         t = this,
         display = $('#dialogSettings_photoAlbum').css('display'),
         doc = $('#dialogSettings_photoAlbum')[0].contentWindow.document;
-        
         $('.vividScrollpane div', doc).css({width:110,height:130});
         $('.vividScrollpane div img', doc).css({width:100,height:100}).each(function(idx,el){
             el.onclick = function () { na.ds.imageSelected(el); };
@@ -252,19 +252,32 @@ na.ds = na.dialogSettings = {
                 - $('#specificitySettings').height()
                 - 70
         }).css({display:display});
+
+        var 
+        w = $('#siteToolbarDialogSettings').innerWidth(),
+        h = $('#siteToolbarDialogSettings').innerHeight(),
+        h1 = $('#specificitySettings').position().top,
+        h2 = $('#specificitySettings').outerHeight();
+        //debugger;
+        $('#siteToolbarDialogSettings .vividScrollpane').css({
+            width : w - 15,
+            height : h - h1 - h2 - 10
+        });
     },
     
     onclick : function (el, fireSaveTheme) {
         na.ds.settings.current.fireSaveTheme = fireSaveTheme === null ? true : false;
         if (na.ds.settings.current.selectedButtonID) {
             var b = na.site.settings.buttons['#'+na.ds.settings.current.selectedButtonID];
-            b.deselect();
+            if (b) b.deselect();
         }
         
         var b = na.site.settings.buttons['#'+el.id];
-        na.ds.settings.current.selectedButtonID = el.id;
-        b.select();
-        $('#'+el.id).click(event);
+        if (b) {
+            na.ds.settings.current.selectedButtonID = el.id;
+            b.select();
+            $('#'+el.id).click(event);
+        }
     },
     
     currentPath : function (node) {
@@ -306,7 +319,7 @@ na.ds = na.dialogSettings = {
         
         na.site.loadTheme (function () { // **POSSIBLY** NOT NEEDED
             var btn = $('#'+na.ds.settings.current.selectedButtonID)[0];
-            na.ds.onclick(btn, false);
+            if (btn) na.ds.onclick(btn, false);
         });
     },
     deleteSpecificity : function (event, callback) {
@@ -417,7 +430,7 @@ na.ds = na.dialogSettings = {
         if (saveTheme!==false) saveTheme = true;
         
         var 
-        bs = $(event.currentTarget).css('box-shadow'),
+        bs = $(event.currentTarget).css('boxShadow'),
         b = $(event.currentTarget).css('border');
         
         if (!b) b = $(event.currentTarget).css('borderTopWidth')+' '+$(event.currentTarget).css('borderTopStyle')+' '+$(event.currentTarget).css('borderTopColor');
@@ -435,9 +448,11 @@ na.ds = na.dialogSettings = {
             var 
             re1a = /^rgba\((\d+),\s*(\d+),\s*(\d+),\s*([\d\.]+)\)\s+(\d+px)\s+(\d+px)\s+(\d+px)\s+(\d+px)\s*(\w+)*,?.*$/,
             re1b = /^rgb\((\d+),\s*(\d+),\s*(\d+)\)\s+(\d+px)\s+(\d+px)\s+(\d+px)\s*(\w+)?,?.*$/,
-            re2 = /^(\d+px)\s+(\w+)\s+rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)$/,
+            re2a = /^(\d+)px\s*(\w+)\s*rgb\((\d+),\s*(\d+),\s+(\d+),\s+(\d+)\)$/,
+            re2b = /^(\d+)px\s*(\w+)\s*rgb\((\d+),\s*(\d+),\s+(\d+)\)$/,
             m1 = bs.match(re1a) ? bs.match(re1a) : bs.match(re1b),
-            m2 = b.match(re2),
+            m2a = b.match(re2a),
+            m2b = b.match(re2b),
             sliders = [ 
                 parseInt(m1[5].replace('px','')),
                 parseInt(m1[6].replace('px','')),
@@ -449,10 +464,10 @@ na.ds = na.dialogSettings = {
                 ? 'rgba('+m1[1]+', '+m1[2]+', '+m1[3]+', '+m1[4]+')'
                 : 'rgb('+m1[1]+', '+m1[2]+', '+m1[3]+')',
             borderColor =
-                b.match(re1a)
-                ? 'rgba('+m2[3]+', '+m2[4]+', '+m2[5]+', '+m2[6]+')'
-                : b.match(re1b)
-                    ? 'rgb('+m2[4]+', '+m2[4]+', '+m2[5]+')'
+                b.match(re2a)
+                ? 'rgba('+m2a[3]+', '+m2a[4]+', '+m2a[5]+', '+m2a[6]+')'
+                : b.match(re2b)
+                    ? 'rgb('+m2b[4]+', '+m2b[4]+', '+m2b[5]+')'
                     : 'lime';
                 
             $('#boxShadowColorpicker').spectrum('set', boxShadowColor);

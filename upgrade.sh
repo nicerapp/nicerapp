@@ -11,15 +11,12 @@ date +%Y-%m\(%B\)-%d\(%A\)\ %H:%M:%S\ Amsterdam.NL\ timezone > lastModified.when
 git fetch --all
 git reset --hard origin/main
 
-#cd nicerapp/3rd-party/php-couchdb
-#git fetch --all
-#git reset --hard origin/main
-#cd ../../..
-
-echo "now updating /home/rene/data1/htdocs/said.by"
-./updateSaidBy.sh
-echo "DONE updating /home/rene/data1/htdocs/said.by"
+for f in $(ls /home/rene/data1/htdocs/localhost_v2/updateSite_*.sh)
+do
+    echo "NOW UPDATING $f"
+    $f
+    echo "DONE UPDATING $f"
+done
 
 # start the apps (selfHealer only for now)
 ./restart.sh
-./nicerapp/apps/upgradeAllSiteOperatorSites.sh

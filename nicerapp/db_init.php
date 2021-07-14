@@ -332,7 +332,7 @@ $rec = array(
     'dialogs' => array (
         '.vividDialog' => array (
             'color' => 'white',
-            'boxShadow' => '4px 4px 2px rgba(0,0,0,0.7), inset -2px -2px 2px rgba(255,255,255,0.7)',
+            'boxShadow' => '4px 4px 3px 2px rgba(0,0,0,0.7), inset -2px -2px 3px 2px rgba(255,255,255,0.55)',
             'borderRadius' => '15px',
             'border' => '2px ridge white'
         ),

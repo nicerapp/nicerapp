@@ -127,7 +127,7 @@ na.site.globals = $.extend(na.site.globals, {
             </div>
         </div>
         <div class="flexBreak"></div>
-        <div id="specificitySettings" class="dialogSettingsComponent_alwaysVisible" style="display:flex;padding:0;margin:0;margin-bottom:35px;font-size:22px;">
+        <div id="specificitySettings" class="dialogSettingsComponent_alwaysVisible" style="padding:0;margin:0;font-size:22px;flex-wrap:wrap;">
             <label id="labelSpecificity" for="specificity" class="specificityLabel" style="order:1;vertical-align:middle;">Specificity</label>
             <select id="specificity" onchange="na.ds.specificitySelected(event)" style="order:1;vertical-align:middle;font-size:20px;height:24px;"></select>
             <div id="btnDeleteSpecificity" class="vividButton_icon tooltip" title="Delete all cosmetic settings for this specificity" alt="Delete all cosmetic settings for this specificity" onclick="if (!$(this).is('.disabled')) na.ds.deleteSpecificity(event)" style="order:1;margin-left:auto;vertical-align:middle;width:70px;height:70px;position:relative;display:inline-block">
@@ -136,10 +136,12 @@ na.site.globals = $.extend(na.site.globals, {
                 <img class="cvbImgTile" src="/nicerapp/siteMedia/btnCssVividButton.png" style="width:70px;height:70px;"/>
                 <img class="cvbImgButton" src="/nicerapp/siteMedia/iconDelete.png" style="position:absolute;top:7px;left:7px;width:56px;height:56px;"/>
             </div>
-            <div class="flexBreak"></div>
+            <div class="flexBreak" style="width:100%"></div>
             
             <label id="labelTheme" for="theme" class="specificityLabel" style="order:2;vertical-align:middle;">Theme</label>
-            <select id="theme" onchange="na.ds.themeSelected(event)" style="order:2;vertical-align:middle;font-size:20px;height:24px;"></select>
+            <select id="theme" onchange="na.ds.themeSelected(event)" style="order:2;vertical-align:middle;font-size:20px;height:24px;">
+                <option id="theme_default" name="theme_default" value="default">Default</option>
+            </select>
             <div id="btnSetPermissionsForTheme" class="vividButton_icon tooltip" title="Create or delete theme, and set permissions for current theme" alt="Create or delete theme, and set permissions for this theme" onclick="if (!$(this).is('.disabled')) na.ds.setPermissionsForTheme(event)" style="order:2;margin-left:auto;vertical-align:middle;width:70px;height:70px;position:relative;display:inline-block">
                 <div class="cvbBorderCSS" style="width:70px;height:70px;"></div>
                 <!--<img class="cvbImgBorder" src="/nicerapp/siteMedia/btnCssVividButton_outerBorder.png" style="width:70px;height:70px;"/>-->
@@ -149,20 +151,18 @@ na.site.globals = $.extend(na.site.globals, {
                 <img class="cvbImgButton_sup2" src="/nicerapp/siteMedia/documentAdd_lowres.png" style="position:absolute;left:50px;width:20px;height:20px;z-index:2021;"/>
                 
             </div>
-            <div class="flexBreak" style="width:100%;"></div>
+            <div class="flexBreak" style="width:100%"></div>
             
-            <div class="flexColumns" style="display:inline-flex;top:230px">
-                <label for="dialogSettings_specificity_dialog" class="labelDialogSettings2">Dialog
-                <input type="radio" id="dialogSettings_photoSpecificity_dialog" name="sdad" class="radioInput" value="dialog" checked="checked"/>
+                <label for="dialogSettings_specificity_dialog" class="labelDialogSettings2" style="order:3">Dialog
+                <input type="radio" id="dialogSettings_photoSpecificity_dialog" name="sdad" class="radioInput" value="dialog" checked="checked" style="order:3"/>
                 </label>
                 
-                <label for="dialogSettings_specificity_allDialogs" class="labelDialogSettings2" style="white-space:nowrap;">All dialogs
-                <input type="radio" id="dialogSettings_photoSpecificity_allDialogs" name="sdad" class="radioInput" value="dialog"/>
+                <label for="dialogSettings_specificity_allDialogs" class="labelDialogSettings2" style="order:3;white-space:nowrap;">All dialogs
+                <input type="radio" id="dialogSettings_photoSpecificity_allDialogs" name="sdad" class="radioInput" value="dialog" style="order:3"/>
                 </label>
-            </div>
         </div>
         <div class="flexBreak"></div>
-        <div id="borderSettings" class="dialogSettingsComponent" style="top:auto;">
+        <div id="borderSettings" class="dialogSettingsComponent vividScrollpane" style="top:auto;">
             <input id="borderColorpicker" class="dialogSettingsComponent" style="position:absolute;"></input>
             <div class="flexBreak" style="height:5px;"></div>
             
@@ -224,8 +224,8 @@ na.site.globals = $.extend(na.site.globals, {
             
         </div>
         <input id="colorpicker" class="dialogSettingsComponent dialogSettings_colorPicker" style="position:absolute;top:auto;"></input>
-        <div id="dialogSettings_jsTree" class="dialogSettingsComponent" style="position:absolute;top:auto;display:none;"></div>
-        <div id="dialogSettings_photoAlbum_specs" class="dialogSettingsComponent" style="flex-flow: wrap row;position:absolute;top:auto;display:none;">
+        <div id="dialogSettings_jsTree" class="dialogSettingsComponent vividScrollpane" style="position:absolute;top:auto;display:none;"></div>
+        <div id="dialogSettings_photoAlbum_specs" class="dialogSettingsComponent vividScrollpane" style="flex-flow: wrap row;position:absolute;top:auto;display:none;">
             <label id="label_dialogSettings_photoOpacity" class="labelDialogSettings" for="dialogSettings_photoOpacity">Opacity :</label>
             <input id="dialogSettings_photoOpacity" type="range" min="1" max="100" value="50" class="sliderOpacityRangeDialogSettings" oninput="if (na.ds.settings.current.selectedImage) na.ds.imageSelected(na.ds.settings.current.selectedImage);"/>
             <div class="flexBreak"></div><br/>
@@ -245,7 +245,7 @@ na.site.globals = $.extend(na.site.globals, {
             </div>
         </div>
         <iframe id="dialogSettings_photoAlbum" class="dialogSettingsComponent" style="position:absolute;top:230px;display:none;border:0px"></iframe>
-        <div id="textSettings" class="dialogSettingsComponent" style="position:absolute;top:140px;display:none;">
+        <div id="textSettings" class="dialogSettingsComponent vividScrollpane" style="position:absolute;top:auto;display:none;">
             <label id="labelTextFontFamily" class="textSettingsLabel" for="textFontFamily">Font :</label>
             <select id="textFontFamily" onchange="na.ds.textSettingsSelected_updateDialog()">
                 <option value="ABeeZee">ABeeZee</option>
