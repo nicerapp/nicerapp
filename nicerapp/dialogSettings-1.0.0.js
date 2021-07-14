@@ -133,8 +133,6 @@ na.ds = na.dialogSettings = {
         );
         na.ds.settings.current.borderColor = c2;
         
-        $('#siteToolbarDialogSettings').css({ display : 'flex' });
-        
         var x = $('#colorpicker').css('display'), y = 'abc';
         //debugger;
         $('#colorpicker').css({display:'block'}).spectrum ({
@@ -148,10 +146,10 @@ na.ds = na.dialogSettings = {
                 $(bg).css({ background : color, opacity : 1 });
                 na.site.saveTheme();                        
             }});
-        //if (na.ds.settings.current.selectedButtonID!=='btnSelectBackgroundColor') $('#colorpicker').next().css({display:x});
+        if (na.ds.settings.current.selectedButtonID!=='btnSelectBackgroundColor') $('#colorpicker').next().css({display:x});
         var x = $('#borderColorpicker').css('display');
         $('#borderColorpicker').css({display:'block'}).spectrum ({color:c2, type: "flat", clickoutFiresChange : false, change : na.ds.borderSettingsSelected});
-        //if (na.ds.settings.current.selectedButtonID!=='btnSelectBorderSettings') $('#borderColorpicker').next().css({display:x});
+        if (na.ds.settings.current.selectedButtonID!=='btnSelectBorderSettings') $('#borderColorpicker').next().css({display:x});
         
         if ($(window).width() < na.site.globals.reallySmallDeviceWidth) $('.sp-container').css({width:$(window).width()-35});
         //$('.sp-container').addClass('dialogSettingsComponent').css({position:'absolute'});
@@ -256,10 +254,11 @@ na.ds = na.dialogSettings = {
         }).css({display:display});
 
         var 
-        w = $('#siteToolbarDialogSettings').width(),
-        h = $('#siteToolbarDialogSettings').height(),
+        w = $('#siteToolbarDialogSettings').innerWidth(),
+        h = $('#siteToolbarDialogSettings').innerHeight(),
         h1 = $('#specificitySettings').position().top,
-        h2 = $('#specificitySettings').height();
+        h2 = $('#specificitySettings').outerHeight();
+        //debugger;
         $('#siteToolbarDialogSettings .vividScrollpane').css({
             width : w - 15,
             height : h - h1 - h2 - 10
@@ -267,7 +266,6 @@ na.ds = na.dialogSettings = {
     },
     
     onclick : function (el, fireSaveTheme) {
-        if (!el) return false;
         na.ds.settings.current.fireSaveTheme = fireSaveTheme === null ? true : false;
         if (na.ds.settings.current.selectedButtonID) {
             var b = na.site.settings.buttons['#'+na.ds.settings.current.selectedButtonID];
@@ -279,18 +277,6 @@ na.ds = na.dialogSettings = {
             na.ds.settings.current.selectedButtonID = el.id;
             b.select();
             $('#'+el.id).click(event);
-        }
-    },
-    
-    whichSettingSelected : function (event) {
-        var whichSetting = $(event.currentTarget).val();
-        switch (whichSetting) {
-            case 'border' : na.dialogSettings.selectBorderSettings(event); break;
-            case 'backgroundColor' : na.dialogSettings.selectBackground_color(event); break;
-            case 'backgroundFolder' : na.dialogSettings.selectBackground_folder(event); break;
-            case 'backgroundImage' : na.dialogSettings.selectBackground_image(event); break;
-            case 'textSettings' : na.dialogSettings.selectTextSettings(event); break;
-            //case 'scrollbars' : break;
         }
     },
     
