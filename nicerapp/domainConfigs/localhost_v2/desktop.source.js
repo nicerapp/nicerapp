@@ -36,7 +36,7 @@ na.desktop = {
                 left : $(window).width()+100,
                 width : !na.m.userDevice.isPhone ? 300 : $(window).width - 50,
                 opacity : 0.0001
-            },
+            },  
             '#siteComments' : {
                 top : $('#siteDateTime').height()+20,
                 left : $(window).width()+100,

@@ -36,7 +36,7 @@ na.desktop = {
                 left : $(window).width()+100,
                 width : !na.m.userDevice.isPhone ? 300 : $(window).width - 50,
                 opacity : 0.0001
-            },
+            },  
             '#siteComments' : {
                 top : $('#siteDateTime').height()+20,
                 left : $(window).width()+100,
@@ -45,9 +45,9 @@ na.desktop = {
             },
             '#siteToolbarDialogSettings' : {
                 top : $('#siteDateTime').height()+20,
-                left : -480,
+                left : -520,
                 height : $(window).height()-120,
-                width : !na.m.userDevice.isPhone ? 470 : $(window).width - 50,
+                width : !na.m.userDevice.isPhone ? 500 : $(window).width - 50,
                 opacity : 0.0001
             },
             '#siteToolbarLeft' : {
@@ -78,7 +78,8 @@ na.desktop = {
         margin : na.m.userDevice.isPhone ? 5 : 10
     },
     settings : {
-        visibleDivs : [ '#siteContent' ]
+        visibleDivs : [ '#siteContent' ],
+        callbacks : []
     },
     
     init : function () {
@@ -98,13 +99,18 @@ na.desktop = {
         //na.d.goto (divs);
     },
     
+    registerCallback : function (name, func) {
+        var entry = { name : name, callback : func };
+        na.d.s.callbacks.push (entry); // na.d.s = na.desktop.settings
+    },
+    
     isVisible : function (id) {
         return na.desktop.settings.visibleDivs.includes(id);
     },
     
     setConfig : function (configName) {
         var divs = [];
-        for (var i=0; i<na.d.g.divs.length; i++) {
+        for (var i=0; i<na.d.g.divs.length; i++) { // na.d.g = na.desktop.globals
             var divID = na.d.g.divs[i];
             $.cookie ('visible_'+divID.substr(1), 'false', na.m.cookieOptions());
         }
@@ -573,7 +579,8 @@ na.desktop = {
                     };
                 } else var params = undefined;
                 
-            
+                // for mobile phones, use plain $(...).css() calls, for desktops, use $(...).animate() calls, 
+                // and don't forget to call the callback functions of course
                 if (divID=='#siteContent') {
                     if (na.m.userDevice.isPhone) {
                         $(divID).css ({
@@ -594,9 +601,10 @@ na.desktop = {
                             el.camera.updateProjectionMatrix();
                             el.renderer.setSize  ($(el.p).width(), $(el.p).height());
                         };
-                        if (typeof callback=='function') callback($(divID)[0]);             
+                        //if (typeof callback=='function') callback($(divID)[0]);             
+                        if (typeof callback=='function') na.d.masterCallback(callback,$(divID2)[0]);
                     } else {
-                        var divID2 = divID;
+                        let divID2 = divID;
                         $(divID).stop(true,true,false).animate ({
                             top : divs[divID].top,
                             left : divs[divID].left,
@@ -614,7 +622,8 @@ na.desktop = {
                                 el.camera.updateProjectionMatrix();
                                 el.renderer.setSize  ($(el.p).width(), $(el.p).height());
                             };
-                            if (typeof callback=='function') callback($(divID2)[0]);
+                            //debugger;
+                            if (typeof callback=='function') na.d.masterCallback(callback,$(divID2)[0]);
                         });
                     }
                 } else if (na.m.userDevice.isPhone) {
@@ -627,7 +636,7 @@ na.desktop = {
                         };
                         if (divID.substr(0,4)!=='#btn' || !na.m.userDevice.isPhone) props.opacity = 1;
                         $(divID).css (props); 
-                        if (typeof callback=='function') callback($(divID)[0]);
+                        if (typeof callback=='function') na.d.masterCallback(callback,$(divID)[0]);
                     } 
                     else {
                         var props = {
@@ -637,7 +646,10 @@ na.desktop = {
                             height : divs[divID].height
                         };
                         if (divID.substr(0,4)!=='#btn' || !na.m.userDevice.isPhone) props.opacity = 1;
-                        $(divID).stop(true,true,false).animate (props, 'normal', 'swing', callback);
+                        let divID3 = divID;
+                        $(divID).stop(true,true,false).animate (props, 'normal', 'swing', function(){
+                            na.d.masterCallback(callback,$(divID3)[0])
+                        });
                     }
                 }
         }
@@ -648,7 +660,15 @@ na.desktop = {
             for (var divID2 in divs) if (divID2==divID) shown = true;
             if (!shown) $(divID).stop(true,true,false).animate(na.d.g.defaultPos[divID],'slow');
         }
-    } // goto()
+    }, // goto()
+    
+    masterCallback : function (callback, div) {
+        for (var i=0; i<na.d.s.callbacks.length; i++) {
+            var cb = na.d.s.callbacks[i];
+            if (typeof cb.callback=='function') cb.callback(div);
+        };
+        if (typeof callback=='function') callback(div);
+    }
 };
 na.d = na.desktop;
 na.d.g = na.d.globals;
