@@ -189,7 +189,7 @@ na.desktop = {
                         '#btnLoginLogout' : {
                             snapTo : [
                                 { element : 'body', edge : 'top' },
-                                { element : '#siteDateTime', edge : 'right' }
+                                { element : '#btnOptions', edge : 'right' }
                             ]
                         },
                         '#btnChangeBackground' : {
