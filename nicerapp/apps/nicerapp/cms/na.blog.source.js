@@ -293,7 +293,7 @@ na.blog = {
         sel = tree.get_node(tree.get_selected()[0]),
         ac = {
             type : 'POST',
-            url : '/nicerapp/apps/nicerapp/cms/ajax_changeNode_name.php',
+            url : '/nicerapp/apps/nicerapp/cms/ajax_changeNode_mediaFolderTitle.php',
             data : {
                 database : sel.original.database,
                 id : sel.original.id,
@@ -314,7 +314,7 @@ na.blog = {
         sel = tree.get_node(tree.get_selected()[0]),
         ac = {
             type : 'POST',
-            url : '/nicerapp/apps/nicerapp/cms/ajax_changeNode_name.php',
+            url : '/nicerapp/apps/nicerapp/cms/ajax_changeNode_documentTitle.php',
             data : {
                 database : sel.original.database,
                 id : sel.original.id,
