@@ -34,7 +34,7 @@ chmod -R $NA_MAIN_PERMISSIONS *
 for f in $(ls $ROOT_PATH/upgradeSite_*.sh)
 do
     echo "NOW UPDATING $f"
-    #$f
+    $f
     echo "DONE UPDATING $f"
 done
 
@@ -42,6 +42,6 @@ done
 for f in "$ROOT_PATH/${NA_SITE_APPS[@]}"
 do
     echo "NOW STARTING $f"
-    #$f
+    $f
     echo "DONE STARTING $f"
 done
