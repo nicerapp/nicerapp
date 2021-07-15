@@ -1,6 +1,10 @@
-#!/bin/sh
-mkdir nicerapp/apps/nicerapp/news/newsItems
-mkdir nicerapp/apps/nicerapp/webmail-1.0.0/temp
+#!/bin/bash
+if [ ! -d nicerapp/apps/nicerapp/news/newsItems ]; then 
+	mkdir nicerapp/apps/nicerapp/news/newsItems 
+fi
+if [ ! -d nicerapp/apps/nicerapp/webmail-1.0.0/temp ]; then 
+	mkdir nicerapp/apps/nicerapp/webmail-1.0.0/temp 
+fi
 
 chown -R rene:www-data *
 chmod -R 750 *
