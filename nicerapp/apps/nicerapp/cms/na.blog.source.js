@@ -227,6 +227,7 @@ na.blog = {
                 $('#jsTree').jstree(true).settings.core.data = dat;
                 $('#jsTree').jstree(true).refresh();
                 $('#siteToolbarLeft .lds-facebook').stop(true,true).fadeOut('slow');
+                $('.jQueryFileUpload')[0].reload(true);
                 setTimeout (function () {
                     if (typeof callback=='function') callback (dat);
                 }, 500);
@@ -286,13 +287,6 @@ na.blog = {
         
     },
     
-    onload_mediaFolderTitle : function (event) {
-        var 
-        tree = $('#jsTree').jstree(true),
-        sel = tree.get_node(tree.get_selected()[0]);
-        debugger;
-        $('#mediaFolderTitle').val(sel.original.text);
-    },
     onchange_mediaFolderTitle : function (event) {
         var 
         tree = $('#jsTree').jstree(true),
