@@ -29,12 +29,9 @@ SQL : https://adodb.org
 
 # Installation 
 
-On windows, the https://wampserver.com/en WAMP stack (windows, apache, mysql, php) is well-suited, 
+On Windows(tm)(r), the https://wampserver.com/en WAMP stack (windows, apache, mysql, php) is well-suited, 
+
 and it can also be done on **linux systems[3]** from the **terminal** OS-level app, as such :
-
-[3] if you have no linux system yet, know that a core-i5 with a modest amount of RAM and SSD space runs the latest version just fine, and i recommend to install https://ubuntu.com or kubuntu in case you want semi-transparent windows in your OS
-
-
 
 > sudo su -
 > 
@@ -44,11 +41,9 @@ and it can also be done on **linux systems[3]** from the **terminal** OS-level a
 > 
 > apt dist-upgrade
 > 
-> apt install apache2 php libapache2-mod-php php7.4-mbstring php-imap curl git imagemagick npm net-tools
+> apt install -y apache2 php libapache2-mod-php php7.4-mbstring php-imap curl git imagemagick npm net-tools python-chardet apt-transport-https gnupg
 > 
 > a2enmod headers rewrite
-
-> sudo apt update && sudo apt install -y curl apt-transport-https gnupg
 > 
 > curl https://couchdb.apache.org/repo/keys.asc | gpg --dearmor | sudo tee /usr/share/keyrings/couchdb-archive-keyring.gpg >/dev/null 2>&1
 source /etc/os-release
@@ -62,29 +57,17 @@ source /etc/os-release
 > npm install -g add-cors-to-couchdb
 > 
 > add-cors-to-couchdb -u admin -p YOURADMINPASSWORDFORCOUCHDB
-> 
-> apt install python-chardet
 
-
-
+[3] if you have no linux system yet, know that a core-i5 with a modest amount of RAM and SSD space runs the latest version just fine, and i recommend to install https://ubuntu.com or kubuntu in case you want semi-transparent windows in your OS
 
 # installing the nicerapp source files
-Make a folder equivalent to /home/rene/data1/htdocs/nicerapp_v2 
+Go to the /var/www folder and install the sources :
 
-Meaning : use your own ubuntu username and possibly the name of your 
-domain (internet site) instead of localhost. 
-
-localhost is usually used for development setups, 
-and should ideally be run on a different machine than 
-your live server that hosts your domain to the outside world.
-
-put the nicerapp source files in that folder :
-
-> cd /home/rene/data1/htdocs
->
-> git clone https://github.com/nicerapp/nicerapp_v2
+> cd /var/www
 > 
-> cd /home/rene/data1/htdocs/nicerapp_v2/nicerapp/3rd-party/jQuery
+> git clone https://github.com/nicerapp/nicerapp
+> 
+> cd /var/www/nicerapp/3rd-party/jQuery
 > 
 > git clone https://github.com/bgrins/spectrum
 > 
@@ -92,12 +75,11 @@ put the nicerapp source files in that folder :
 > 
 > git clone https://github.com/zingchart/zingtouch
 > 
-> cd /home/rene/data1/htdocs/nicerapp_v2
-
+> cd /var/www/nicerapp
 
 copy the following into /etc/apache2/sites-available/001.localhost.conf 
 (everything between the /---- lines)
-(be sure to modify ServerAdmin and DocumentRoot in both places (mid-way through the text and at the bottom))
+(be sure to modify ServerAdmin)
 (this particular server is running on the unencrypted port 80, port 443 is the encrypted SSL port but it requires more configuration effort, see the manuals for **letsencrypt** and **certbot** and the example further down on this page you're reading now)
 
 ````
@@ -113,7 +95,7 @@ copy the following into /etc/apache2/sites-available/001.localhost.conf
 	ServerName localhost
 
 	ServerAdmin rv.nicer.app@gmail.com
-	DocumentRoot /home/rene/data1/htdocs/localhost
+	DocumentRoot /var/www/nicerapp
 
 	# Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
 	# error, crit, alert, emerg.
@@ -130,7 +112,7 @@ copy the following into /etc/apache2/sites-available/001.localhost.conf
 	# following line enables the CGI configuration for this host only
 	# after it has been globally disabled with "a2disconf".
 	#Include conf-available/serve-cgi-bin.conf
-	<Directory /home/rene/data1/htdocs/localhost>
+	<Directory /var/www/nicerapp>
 		AllowOverride All
 		Require all granted
 	</Directory>
@@ -401,7 +383,7 @@ the following is in /etc/apache2/sites-available/001-zoned.at.conf
 </VirtualHost>
 ````
 
-**Finally**, you need to create the actual encryption keys. 
+**Finally**, you need to create the actual encryption keys for apache2.
 This is free and fairly simple.
 You can choose between **certbot** or **letsencrypt**.
 You can find tutorials on how to use them via google searches for either 'certbox example' or 'letsencrypt example'.
@@ -435,7 +417,6 @@ in PHP, that's done with the always available .../nicerapp/functions.php::**base
 in JavaScript, it's done with the always available **na.m.base64_encode_url()** and **na.m.base64_decode_url()**
 
 # Questions, bug-reports, feature-requests?
-
 you can post these to rv.nicer.app@gmail.com, and i will try to respond within 72 hours, even on weekends.
 
 if you need a quick solution towards getting yourself a collection of background images, you can look for 'wallpaper' on https://rarbg.to and use a torrent client (like transmission on ubuntu, or utorrent on windows) to download them.
