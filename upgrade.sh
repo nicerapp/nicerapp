@@ -9,22 +9,25 @@
 # prevent alarms in .../nicerapp/selfHealer/index.php going off
 sudo killall php
 
-./upgrade_globals_manufacturer.sh
+source ./upgrade_globals_manufacturer.sh
 ROOT_PATH="/home/$NA_MAIN_USER/$NA_MAIN_HTDOCS_RELATIVE_PATH/$NA_MAIN_SITE_FOLDER"
-for f in $(ls $ROOT_PATH/upgrade_globals_*.sh)
+echo $ROOT_PATH
+
+for f in $(ls $ROOT_PATH/upgrade_globalsClient_*.sh)
 do
     echo "BEGIN INCLUDING $f"
-    #$f
+    source $f
     echo "DONE INCLUDING $f"
 done
+
+git fetch --all
+git reset --hard origin/main
 
 rm lastModified.*
 date +%Y-%m\(%B\)-%d\(%A\)\ %H:%M:%S\ Amsterdam.NL\ timezone > lastModified.whenHumanReadable.txt
 date +%Y-%m\(%B\)-%d\(%A\)\ %H:%M:%S\ Amsterdam.NL\ timezone > lastModified.whenJS.txt
-
-
-git fetch --all
-git reset --hard origin/main
+chown $NA_MAIN_USER:$NA_MAIN_GROUP lastModified.*
+chmod $NA_MAIN_PERMISSIONS lastModified.*
 
 for f in $(ls $ROOT_PATH/upgradeSite_*.sh)
 do

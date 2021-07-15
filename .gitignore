@@ -10,3 +10,4 @@ nicerapp/siteCache/*
 nicerapp/siteMedia/backgrounds/*
 nicerapp/siteMedia.thumbs/*
 zoned.at/
+upgrade_globalsClient_*.sh
