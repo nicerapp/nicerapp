@@ -294,8 +294,8 @@ na.blog = {
         rec = na.blog.settings.current.selectedTreeNode,
         relFilePath = na.blog.currentPath(rec),
         oldFolderName = rec.original.text,
-        newRelFilePath = relFilePath.replace(oldFolderName, newFolderName),
-        newFolderName = $('#mediaFolderTitle').val();
+        newFolderName = $('#mediaFolderTitle').val(),
+        newRelFilePath = relFilePath.replace(oldFolderName, newFolderName);
         debugger;
         var
         ac = {
