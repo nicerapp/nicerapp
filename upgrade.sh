@@ -1,7 +1,22 @@
 #!/bin/bash
 
+# if you're new to the bash programming language, 
+# just look up things like :
+#   bash variables
+#   bash if statements
+# on google or whatever searchengine you prefer :)
+
 # prevent alarms in .../nicerapp/selfHealer/index.php going off
 sudo killall php
+
+./upgrade_globals_manufacturer.sh
+ROOT_PATH="/home/$NA_MAIN_USER/$NA_MAIN_HTDOCS_RELATIVE_PATH/$NA_MAIN_SITE_FOLDER"
+for f in $(ls $ROOT_PATH/upgrade_globals_*.sh)
+do
+    echo "BEGIN INCLUDING $f"
+    #$f
+    echo "DONE INCLUDING $f"
+done
 
 rm lastModified.*
 date +%Y-%m\(%B\)-%d\(%A\)\ %H:%M:%S\ Amsterdam.NL\ timezone > lastModified.whenHumanReadable.txt
@@ -11,12 +26,17 @@ date +%Y-%m\(%B\)-%d\(%A\)\ %H:%M:%S\ Amsterdam.NL\ timezone > lastModified.when
 git fetch --all
 git reset --hard origin/main
 
-for f in $(ls /home/rene/data1/htdocs/localhost_v2/updateSite_*.sh)
+for f in $(ls $ROOT_PATH/upgradeSite_*.sh)
 do
     echo "NOW UPDATING $f"
-    $f
+    #$f
     echo "DONE UPDATING $f"
 done
 
 # start the apps (selfHealer only for now)
-./restart.sh
+for f in "$ROOT_PATH/${NA_SITE_APPS[@]}"
+do
+    echo "NOW STARTING $f"
+    #$f
+    echo "DONE STARTING $f"
+done
