@@ -4,6 +4,7 @@
 # just look up things like :
 #   bash variables
 #   bash if statements
+#   bash for loop
 # on google or whatever searchengine you prefer :)
 
 # prevent alarms in .../nicerapp/selfHealer/index.php going off
@@ -26,8 +27,8 @@ git reset --hard origin/main
 rm lastModified.*
 date +%Y-%m\(%B\)-%d\(%A\)\ %H:%M:%S\ Amsterdam.NL\ timezone > lastModified.whenHumanReadable.txt
 date +%Y-%m\(%B\)-%d\(%A\)\ %H:%M:%S\ Amsterdam.NL\ timezone > lastModified.whenJS.txt
-chown $NA_MAIN_USER:$NA_MAIN_GROUP *
-chmod $NA_MAIN_PERMISSIONS *
+chgrp -R $NA_MAIN_GROUP *
+chmod -R $NA_MAIN_PERMISSIONS *
 ./setPermissions.sh
 
 for f in $(ls $ROOT_PATH/upgradeSite_*.sh)
