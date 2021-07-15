@@ -18,7 +18,7 @@ class naVividDialog {
         //if (t.el.id=='siteContent') debugger;
         if (na.site.globals.cosmeticsDBkeys) {
             html += 
-                '<div class="vdSettings">'
+                '<div class="vdSettings" style="z-index:10000;">'
                     +'<img class="btnSettings" src="/nicerapp/siteMedia/btnPickColor.png" onclick="na.site.settings.activeDivs = [\'#siteToolbarDialogSettings\']; var d = na.site.settings.dialogs[\'#'+this.el.id+'\']; d.displaySettingsDialog(d, \''+t.el.id+'\')"/>'
                     +'<input type="range" min="1" max="100" value="50" class="sliderOpacityRange" onchange="na.ds.opacityChange(event);"/>'
                 +'</div>';
@@ -55,12 +55,23 @@ class naVividDialog {
         var dialog = $(bg).parents('.vividDialog')[0];
         $(dialog).find('.sliderOpacityRange').val(parseInt(opacity*100));
         
-        
+        var el = t.el;
         $('.vdSettings', t.el).hover (function() {
-            if (!$(this).is(':animated')) $(this).animate({opacity:1},'fast');
+            if (
+                !$(this).is(':animated')
+                && !$(el).is(':animated')
+            ) $(this).animate({opacity:1},'fast');
+            
         }, function() {
-            if (!$(this).is(':animated')) $(this).animate({opacity:0.0001},'fast');
+            if (
+                !$(this).is(':animated')
+                && !$(el).is(':animated')
+            ) $(this).animate({opacity:0.0001},'fast');
         });
+        $('.vdSettings', t.el).click (function() {
+            $(this).stop(true,true).animate({opacity:0.0001},'fast');
+        });
+        
     };
     
     displaySettingsDialog (t, dialogID) {

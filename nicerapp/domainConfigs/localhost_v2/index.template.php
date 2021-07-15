@@ -128,6 +128,7 @@ na.site.globals = $.extend(na.site.globals, {
             <label id="labelWhichSetting" for="whichSetting" class="specificityLabel" style="order:3;vertical-align:middle;">Set</label>
             <select id="whichSetting" class="select" onchange="na.ds.whichSettingSelected(event)" style="order:3;vertical-align:middle;">
                 <option id="set_border" value="border">Border</option>
+                <option id="set_boxShadow" value="boxShadow">Border</option>
                 <option id="set_backgroundColor" value="backgroundColor" selected>Background color</option>
                 <option id="set_backgroundFolder" value="backgroundFolder">Background folder</option>
                 <option id="set_backgroundImage" value="backgroundImage">Background image</option>
@@ -173,9 +174,10 @@ na.site.globals = $.extend(na.site.globals, {
             
             <label id="labelBorderRadius" for="borderRadius" class="boxSettingsLabel">Radius :</label>
             <input id="borderRadius" type="range" min="0" max="50" value="20" class="sliderOpacityRangeBorderSettings" onchange="na.ds.borderSettingsSelected();"/>
-            <div class="flexBreak"></div>
-            
-            <label id="labelBoxShadow" class="boxSettingsLabel">Box shadow :</label>
+        </div>
+        <div class="flexBreak"></div>
+        <div id="boxShadowSettings" class="dialogSettingsComponent vividScrollpane" style="top:auto;">
+            <label id="labelBoxShadow" class="boxSettingsLabel">Box shadows :</label>
             <div id="boxShadow">
                 <img src="/nicerapp/siteMedia/iconCreate.png" onclick="na.ds.addBoxShadow()"/>
                 <img src="/nicerapp/siteMedia/iconDelete.png" onclick="na.ds.deleteBoxShadow()"/>
@@ -183,31 +185,29 @@ na.site.globals = $.extend(na.site.globals, {
             </div>
             <div class="flexBreak"></div>
             
-            <label id="labelBoxShadowInset" class="boxSettingsLabel" for="boxShadowInset">Box shadow inset :</label>
+            <label id="labelBoxShadowInset" class="boxSettingsLabel" for="boxShadowInset">Inset :</label>
             <input id="boxShadowInset" type="checkbox" onchange="na.ds.boxSettingsChanged();"/>
             <span id="boxShadowInsetClear">&nbsp;</span>
             <div class="flexBreak"></div>
             
-            <label id="labelBoxShadowXoffset" class="boxSettingsLabel" for="boxShadowXoffset">Box shadow<br/>horizontal offset :</label>
+            <label id="labelBoxShadowXoffset" class="boxSettingsLabel" for="boxShadowXoffset">Horizontal offset :</label>
             <input id="boxShadowXoffset" type="range" min="-10" max="10" value="2" class="sliderOpacityRangeBorderSettings" onchange="na.ds.boxSettingsChanged();"/>
             <div class="flexBreak"></div>
 
-            <label id="labelBoxShadowYoffset" class="boxSettingsLabel" for="boxShadowYoffset">Box shadow<br/>vertical offset :</label>
+            <label id="labelBoxShadowYoffset" class="boxSettingsLabel" for="boxShadowYoffset">Vertical offset :</label>
             <input id="boxShadowYoffset" type="range" min="-10" max="10" value="2" class="sliderOpacityRangeBorderSettings" onchange="na.ds.boxSettingsChanged();"/>
             <div class="flexBreak"></div>
 
-            <label id="labelBoxShadowSpreadRadius" class="boxSettingsLabel" for="boxShadowSpreadRadius">Box shadow<br/>spread radius :</label>
+            <label id="labelBoxShadowSpreadRadius" class="boxSettingsLabel" for="boxShadowSpreadRadius">Spread radius :</label>
             <input id="boxShadowSpreadRadius" type="range" min="0" max="10" value="2" class="sliderOpacityRangeBorderSettings" onchange="na.ds.boxSettingsChanged();"/>
             <div class="flexBreak"></div>
 
-            <label id="labelBoxShadowBlurRadius" class="boxSettingsLabel" for="boxShadowBlurRadius">Box shadow<br/>blur radius :</label>
+            <label id="labelBoxShadowBlurRadius" class="boxSettingsLabel" for="boxShadowBlurRadius">Blur radius :</label>
             <input id="boxShadowBlurRadius" type="range" min="0" max="10" value="2" class="sliderOpacityRangeBorderSettings" onchange="na.ds.boxSettingsChanged();"/>
             <div class="flexBreak"></div>
 
-            <label id="labelBoxShadowColor" class="boxSettingsLabel" for="boxShadowColor">Box shadow color :</label>
+            <label id="labelBoxShadowColor" class="boxSettingsLabel" for="boxShadowColor">Color :</label>
             <input id="boxShadowColorpicker" class="dialogSettingsComponent" style="position:absolute;top:95px;"></input>
-            <div class="flexBreak"></div>
-            
         </div>
         <input id="colorpicker" class="dialogSettingsComponent dialogSettings_colorPicker" style="position:absolute;top:auto;"></input>
         <div id="dialogSettings_jsTree" class="dialogSettingsComponent vividScrollpane" style="position:absolute;top:auto;display:none;"></div>

@@ -286,6 +286,7 @@ na.ds = na.dialogSettings = {
         var whichSetting = $(event.currentTarget).val();
         switch (whichSetting) {
             case 'border' : na.dialogSettings.selectBorderSettings(event); break;
+            case 'boxShadow' : na.dialogSettings.selectBorderSettings(event); break;
             case 'backgroundColor' : na.dialogSettings.selectBackground_color(event); break;
             case 'backgroundFolder' : na.dialogSettings.selectBackground_folder(event); break;
             case 'backgroundImage' : na.dialogSettings.selectBackground_image(event); break;
