@@ -296,6 +296,7 @@ na.blog = {
         oldFolderName = rec.original.text,
         newRelFilePath = relFilePath.replace(oldFolderName, newFolderName),
         newFolderName = $('#mediaFolderTitle').val();
+        debugger;
         var
         ac = {
             type : 'POST',
