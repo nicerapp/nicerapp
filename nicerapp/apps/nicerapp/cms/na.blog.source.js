@@ -292,7 +292,8 @@ na.blog = {
         tree = $('#jsTree').jstree(true),
         sel = tree.get_node(tree.get_selected()[0]),
         rec = na.blog.settings.current.selectedTreeNode,
-        newFolderName = $('#mediaFolderTitle').val(),
+        newFolderName = $('#mediaFolderTitle').val();
+        debugger;
         relFilePath = na.blog.currentPath(rec),
         oldFolderName = relFilePath.replace(/\/(.*)\/.*$/)[0],
         newRelFilePath = relFilePath.replace(oldFolderName, newFolderName),
