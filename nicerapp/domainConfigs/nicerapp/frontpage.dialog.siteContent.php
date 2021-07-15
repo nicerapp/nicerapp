@@ -206,8 +206,8 @@
     
     <p>
     It is also licensed to be completely free, under the <a href="https://opensource.org/licenses/MIT" target="MIT_LICENSE">MIT License</a>.<br/>
-    Full sources are available at <a href="https://github.com/nicerapp/nicerapp_v2" target="naGithub">https://github.com/nicerapp/nicerapp_v2</a>.<br/>
-    Documentation is available at <a href="https://github.com/nicerapp/nicerapp_v2#readme" target="naDocs">https://github.com/nicerapp/nicerapp_v2#readme</a>.
+    Full sources are available at <a href="https://github.com/nicerapp/nicerapp" target="naGithub">https://github.com/nicerapp/nicerapp</a>.<br/>
+    Documentation is available at <a href="https://github.com/nicerapp/nicerapp#readme" target="naDocs">https://github.com/nicerapp/nicerapp#readme</a>.
     </p>
     
     <p>2021/7jul/11sun 21:04 CET :</p>
@@ -219,7 +219,7 @@
     <p>
     Site backgrounds are now saved in a cookie in all of the browsers used by Guest accounts (password is also 'Guest')<br/>
     and in the database for anyone having his/her own account,<br/>
-    and can be selected in the 'Site Window Settings' window, by hovering over the top-left part of any window (called a 'vividDialog' internally) on any nicerapp site, and clicking on the painters palette icon that then appears.<br/>
+    and can cosmetic settings be selected in the 'Site Window Settings' window, by hovering over the top-left part of any window (called a 'vividDialog' internally) on any nicerapp site, and clicking on the painters palette icon that then appears.<br/>
     </p>
     <p>
     Development will not stop here.<br/>
