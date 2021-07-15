@@ -285,13 +285,34 @@ na.blog = {
         
     },
     
+    onchange_mediaFolderTitle : function (event) {
+        var 
+        tree = $('#jsTree').jstree(true),
+        sel = tree.get_node(tree.get_selected()[0]),
+        ac = {
+            type : 'POST',
+            url : '/nicerapp/apps/nicerapp/cms/ajax_changeNode_name.php',
+            data : {
+                database : sel.original.database,
+                id : sel.original.id,
+                text : $('#mediaFolderTitle').val()
+            },
+            success : function (data, ts, xhr) {
+                na.blog.refresh();
+            },
+            failure : function (xhr, ajaxOptions, thrownError) {
+                debugger;
+            }
+        };
+        $.ajax(ac);
+    },
     onchange_documentTitle : function () {
         var 
         tree = $('#jsTree').jstree(true),
         sel = tree.get_node(tree.get_selected()[0]),
         ac = {
             type : 'POST',
-            url : '/nicerapp/apps/nicerapp/cms/ajax_changeNodeText.php',
+            url : '/nicerapp/apps/nicerapp/cms/ajax_changeNode_name.php',
             data : {
                 database : sel.original.database,
                 id : sel.original.id,
