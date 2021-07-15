@@ -10,7 +10,7 @@
 # prevent alarms in .../nicerapp/selfHealer/index.php going off
 sudo killall php
 
-source ./upgrade_globals_manufacturer.sh
+source ./do_upgrade_globals_manufacturer.sh
 ROOT_PATH="/home/$NA_MAIN_USER/$NA_MAIN_HTDOCS_RELATIVE_PATH/$NA_MAIN_SITE_FOLDER"
 echo $ROOT_PATH
 
