@@ -55,7 +55,7 @@
             'thumbURL' => $thumbURL
         );
         //echo '<pre style="color:black;background:white;border-radius:3px;border:1px solid black;">'; var_dump ($dbg); echo '</pre>';die();
-        echo '<div style="overflow:hidden;float:left;width:220px;height:240px;margin:5px;padding:10px;padding-top:20px;border-radius:10px;border:1px solid black;background:rgba(0,0,0,0.7);box-shadow:2px 2px 2px rgba(0,0,0,0.5), inset 1px 1px 1px rgba(0,0,255,0.5), inset -1px -1px 1px rgba(0,0,255,0.5);">';
+        echo '<div style="overflow:hidden;float:left;width:220px;height:auto;margin:5px;padding:10px;padding-top:20px;border-radius:10px;border:1px solid black;background:rgba(0,0,0,0.7);box-shadow:2px 2px 2px rgba(0,0,0,0.5), inset 1px 1px 1px rgba(0,0,255,0.5), inset -1px -1px 1px rgba(0,0,255,0.5);">';
         
         
         $onclick = 'onclick="window.top.na.blog.onclick_mediaThumbnail(event, \''.$_GET['basePath'].'\', \''.$fileName.'\')"';
