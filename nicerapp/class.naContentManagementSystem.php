@@ -62,7 +62,7 @@ class nicerAppCMS {
             trigger_error ('app.title.site.php missing for app='.json_encode($app), E_USER_ERROR);
         }
         
-        $getAsIndividualLinks = $this->domain==='localhost_v2';
+        $getAsIndividualLinks = $this->domain==='nicerapp2';
         if ($getAsIndividualLinks) {
             $cssFiles = $this->getFiles_asIndividualLinks('css', 'css');
             $cssThemeFiles = $this->getFiles_asIndividualLinks('css', 'cssTheme');
@@ -115,7 +115,8 @@ class nicerAppCMS {
         $c = '';
         $newest = strtotime ('1970-01-01');
         foreach ($files as $idx => $file) {
-            $file = str_replace ('{$domain}', $this->domain, $file);
+            $c .= PHP_EOL.PHP_EOL.'/* --- '.$this->basePath.'/'.$file.' --- */'.PHP_EOL;
+            $file = str_replace ('{$domain}', $this->domain, $file); // desktop.source.js is listed in .../nicerapp/domainConfigs/index.javascripts.json!
             $c .= file_get_contents($this->basePath.$file).PHP_EOL.PHP_EOL;
             $fdt = filectime($this->basePath.'/'.$file);
             if ($fdt > $newest) $newest = $fdt;
