@@ -46,17 +46,16 @@ global $filePerms_ownerUser;
 global $filePerms_ownerGroup;
 global $filePerms_perms;
 
-$debug = false;
+$debug = true;
 
 // Settings
 //$relPath = $_POST['relativePath'];
 //echo $relDir; die();
 //$relPath = preg_replace($relDir, '/\/.*/', '');
 $targetDir = 
-    realpath( //MESSES THINGS UP
-        dirname(__FILE__).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'..'
-        .'/siteData/'.$cms->domain.DIRECTORY_SEPARATOR.$_GET['basePath']
-    );
+        realpath(dirname(__FILE__).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'../siteData/')
+        .DIRECTORY_SEPARATOR.$cms->domain.DIRECTORY_SEPARATOR.$_GET['basePath'];
+if ($debug) var_dump ($targetDir);
     
 //echo '1::$targetDir='; var_dump ($targetDir); echo PHP_EOL.PHP_EOL;
     

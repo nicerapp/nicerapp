@@ -1,4 +1,15 @@
 #!/bin/bash
+if [ ! -d nicerapp/siteData ]; then 
+	mkdir nicerapp/siteData
+fi
+chmod 750 nicerapp/siteData
+chown rene:www-data nicerapp/siteData
+
+if [ ! -d nicerapp/siteData/nicerapp ]; then 
+	mkdir nicerapp/siteData/nicerapp
+fi
+chmod 750 nicerapp/siteData/nicerapp
+chown rene:www-data nicerapp/siteData/nicerapp
 if [ ! -d nicerapp/apps/nicerapp/news/newsItems ]; then 
 	mkdir nicerapp/apps/nicerapp/news/newsItems 
 fi
@@ -15,5 +26,8 @@ chmod -R 770 nicerapp/apps/nicerapp/news/newsItems nicerapp/siteMedia/background
 touch nicerapp/domainConfigs/said.by/index.combined.css nicerapp/domainConfigs/said.by/index.combined.cssTheme.dark.css nicerapp/domainConfigs/said.by/index.combined.cssTheme.light.css nicerapp/domainConfigs/said.by/index.combined.js
 chmod -R 770 nicerapp/domainConfigs/said.by/index.combined.css nicerapp/domainConfigs/said.by/index.combined.cssTheme.dark.css nicerapp/domainConfigs/said.by/index.combined.cssTheme.light.css nicerapp/domainConfigs/said.by/index.combined.js 
 chmod -R 770 nicerapp/apps/nicerapp/news/newsItems nicerapp/apps/nicerapp/webmail-1.0.0/temp
+
+
+
 #chown -R root:root nicerapp/selfHealer
 #chmod -R 640 nicerapp/selfHealer
