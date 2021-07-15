@@ -1,7 +1,7 @@
 <html>
 <head>
-    <link type="text/css" rel="StyleSheet" href="/nicerapp/domainConfigs/localhost_v2/index.css?c=20210327_101723">
-    <link type="text/css" rel="StyleSheet" href="/nicerapp/domainConfigs/localhost_v2/index.dark.css?c=20210327_100418">
+    <link type="text/css" rel="StyleSheet" href="/nicerapp/domainConfigs/nicerapp/index.css?c=<?php echo date('Ymd_His',filemtime(realpath(dirname(__FILE__).'/../../../').'/domainConfigs/nicerapp/index.css'))?>">
+    <link type="text/css" rel="StyleSheet" href="/nicerapp/domainConfigs/nicerapp/index.dark.css?c=<?php echo date('Ymd_His',filemtime(realpath(dirname(__FILE__).'/../../../').'/domainConfigs/nicerapp/index.dark.css'))?>">
     <script type="text/javascript" src="/nicerapp/userInterface/photoAlbum/4.0.0/photoAlbum-4.0.0.source.js?c=<?php echo date('Ymd_His', filemtime(dirname(__FILE__).'/../userInterface/photoAlbum/4.0.0/photoAlbum-4.0.0.source.js'));?>"></script>
 </head>
 <body style="overflow:hidden">
