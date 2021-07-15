@@ -29,7 +29,7 @@ $ip = (array_key_exists('X-Forwarded-For',apache_request_headers())?apache_reque
         <img id="btnUpload" class="navBar_button" src="/nicerapp/siteMedia/btnInsertMedia2.png" onclick="na.blog.onclick_btnUpload(event);"/>
         <img id="btnViewMedia" class="navBar_button" src="/nicerapp/siteMedia/btnViewMedia.png" onclick="na.blog.onclick_btnViewMedia(event);"/>
         <label id="mediaFolderTitle_label" for="mediaFolderTitle">name : </label>
-        <input id="mediaFolderTitle" type="text" onchange="na.blog.onchange_mediaFolderTitle(event);"></input>
+        <input id="mediaFolderTitle" type="text" onload="na.blog.onload_mediaFolderTitle(event);" onchange="na.blog.onchange_mediaFolderTitle(event);"></input>
     </div>
     <iframe id="jQueryFileUpload" class="jQueryFileUpload" src="" style="overflow:hidden;width:100%;height:100%" allowtransparency="true"></iframe>
 </div>

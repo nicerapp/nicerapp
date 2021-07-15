@@ -285,6 +285,12 @@ na.blog = {
         
     },
     
+    onload_mediaFolderTitle : function (event) {
+        var 
+        tree = $('#jsTree').jstree(true),
+        sel = tree.get_node(tree.get_selected()[0]);
+        $('#mediaFolderTitle').val(sel.original.text);
+    },
     onchange_mediaFolderTitle : function (event) {
         var 
         tree = $('#jsTree').jstree(true),
