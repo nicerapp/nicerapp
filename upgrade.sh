@@ -14,7 +14,7 @@ source ./upgrade_globals_manufacturer.sh
 ROOT_PATH="/home/$NA_MAIN_USER/$NA_MAIN_HTDOCS_RELATIVE_PATH/$NA_MAIN_SITE_FOLDER"
 echo $ROOT_PATH
 
-for f in $(ls $ROOT_PATH/upgrade_globalsClient_*.sh)
+for f in $(ls $ROOT_PATH/do_upgrade_globalsClient_*.sh)
 do
     echo "BEGIN INCLUDING $f"
     source $f
@@ -31,7 +31,7 @@ chgrp -R $NA_MAIN_GROUP *
 chmod -R $NA_MAIN_PERMISSIONS *
 ./setPermissions.sh
 
-for f in $(ls $ROOT_PATH/upgradeSite_*.sh)
+for f in $(ls $ROOT_PATH/do_upgradeSite_*.sh)
 do
     echo "NOW UPDATING $f"
     $f
