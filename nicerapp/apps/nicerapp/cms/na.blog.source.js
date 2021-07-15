@@ -82,6 +82,7 @@ na.blog = {
                         var d = data.selected[i], rec = data.instance.get_node(d);
                         na.blog.treeButtonsEnableDisable (rec);
                         $('#documentTitle').val(rec.original.text);
+                        $('#mediaFolderTitle').val(rec.original.text);
                         na.blog.settings.current.selectedTreeNode = rec;
                         if (rec.original.type=='naDocument') {
                             na.blog.loadEditorContent(rec);
