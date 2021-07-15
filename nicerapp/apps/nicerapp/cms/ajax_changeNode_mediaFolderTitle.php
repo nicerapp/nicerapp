@@ -41,8 +41,8 @@ try { $call = $cdb->post($call->body); } catch (Exception $e) {
     cdb_error (500, $e, 'Could not add record'); die();
 }
 
-$oldPath = realpath(dirname(__FILE__).'/../../../').'/siteData/nicerapp/'.$_GET['relFilePath'];
-$newPath = realpath(dirname(__FILE__).'/../../../').'/siteData/nicerapp/'.$_GET['newRelFilePath'];
+$oldPath = realpath(dirname(__FILE__).'/../../../').'/siteData/nicerapp/'.$_POST['relFilePath'];
+$newPath = realpath(dirname(__FILE__).'/../../../').'/siteData/nicerapp/'.$_POST['newRelFilePath'];
 $xec = 'mv "'.$oldPath.'" "'.$newPath.'"';
 exec ($xec, $output, $result);
 $dbg = array (
