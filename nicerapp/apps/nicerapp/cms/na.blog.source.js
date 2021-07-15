@@ -291,13 +291,19 @@ na.blog = {
         var 
         tree = $('#jsTree').jstree(true),
         sel = tree.get_node(tree.get_selected()[0]),
+        newFolderName = $('#mediaFolderTitle').val(),
+        relFilePath = na.blog.currentPath(),
+        oldFolderName = relFilePath.replace(/\/(.*)\/.*$/)[0],
+        newRelFilePath = relFilePath.replace(oldFolderName, newFolderName),
         ac = {
             type : 'POST',
             url : '/nicerapp/apps/nicerapp/cms/ajax_changeNode_mediaFolderTitle.php',
             data : {
                 database : sel.original.database,
                 id : sel.original.id,
-                text : $('#mediaFolderTitle').val()
+                text : newFolderName,
+                relFilePath : relFilePath,
+                newRelFilePath : newRelFilePath
             },
             success : function (data, ts, xhr) {
                 na.blog.refresh();
