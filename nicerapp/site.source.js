@@ -358,59 +358,54 @@ var nas = na.site = {
                         });
                     };
                     na.desktop.resize();
-                    //function() {
-                        var ac2 = {
-                            type : 'GET',
-                            url : '/nicerapp/ajax_get_pageSpecificSettings.php',
-                            data : {
-                                apps : url2
-                            },
-                            success : function (data, ts, xhr) {
-                                $('#cssPageSpecific, #jsPageSpecific').remove();
-                                $('head').append(data);
-                                setTimeout(function() {
-                                    na.site.loadTheme(function() {
-                                        var 
-                                        btn = $('#'+na.ds.settings.current.selectedButtonID)[0],
-                                        evt = { currentTarget : $('#specificity')[0] };
-                                        
-                                        na.ds.specificitySelected(evt);
-                                        $('.vividDialog'/*, vdc[0]*/).each(function(idx,el){
-                                            na.site.settings.dialogs['#'+el.id] = new naVividDialog(el);
-                                        });
-                                        //na.ds.onclick(btn, false);
-                                        
-                                        //debugger;
-                                        if (
-                                            typeof $.cookie('loginName')=='string'
-                                            && $.cookie('loginName')=='Guest'
-                                        ) {
-                                                na.site.globals.backgroundSearchKey = $.cookie('siteBackground_search');
-                                                na.site.globals.background = $.cookie('siteBackground_url');
-                                        } ;
-                                        na.backgrounds.next (
-                                            '#siteBackground', 
-                                            na.site.globals.backgroundSearchKey,
-                                            na.site.globals.background,
-                                            false
-                                        );
-                                        
-                                        
-                                        if (typeof callback=='function') callback (themeData, data);
-                                    });
-                                }, 250);
-                            },
-                            failure : function (xhr, ajaxOptions, thrownError) {
-                            }
-                        };
-                        setTimeout (function() { 
-                            $.ajax(ac2);
-                        }, 250);
-                        
-                    //});
-
-
                     
+                    var ac2 = {
+                        type : 'GET',
+                        url : '/nicerapp/ajax_get_pageSpecificSettings.php',
+                        data : {
+                            apps : url2
+                        },
+                        success : function (data, ts, xhr) {
+                            $('#cssPageSpecific, #jsPageSpecific').remove();
+                            $('head').append(data);
+                            setTimeout(function() {
+                                na.site.loadTheme(function() {
+                                    var 
+                                    btn = $('#'+na.ds.settings.current.selectedButtonID)[0],
+                                    evt = { currentTarget : $('#specificity')[0] };
+                                    
+                                    na.ds.specificitySelected(evt);
+                                    $('.vividDialog'/*, vdc[0]*/).each(function(idx,el){
+                                        na.site.settings.dialogs['#'+el.id] = new naVividDialog(el);
+                                    });
+                                    //na.ds.onclick(btn, false);
+                                    
+                                    //debugger;
+                                    if (
+                                        typeof $.cookie('loginName')=='string'
+                                        && $.cookie('loginName')=='Guest'
+                                    ) {
+                                            na.site.globals.backgroundSearchKey = $.cookie('siteBackground_search');
+                                            na.site.globals.background = $.cookie('siteBackground_url');
+                                    } ;
+                                    na.backgrounds.next (
+                                        '#siteBackground', 
+                                        na.site.globals.backgroundSearchKey,
+                                        na.site.globals.background,
+                                        false
+                                    );
+                                    
+                                    
+                                    if (typeof callback=='function') callback (themeData, data);
+                                });
+                            }, 250);
+                        },
+                        failure : function (xhr, ajaxOptions, thrownError) {
+                        }
+                    };
+                    setTimeout (function() { 
+                        $.ajax(ac2);
+                    }, 250);
                 }, 
                 failure : function (xhr, ajaxOptions, thrownError) {
                     debugger;
@@ -780,16 +775,21 @@ var nas = na.site = {
     loadTheme : function (callback) {
         var 
         s = na.ds.settings.current.specificity;
-        if (!s) return false;
+        
+        // maybe use the immediately following line instead, depends on permissions checking in /nicerapp/ajax_get_vividDialog_settings.php
+        //if (!s) var s = { url : '[default]', role : 'guests', user : 'Guest' }; 
+        
+        if (!s) var s = { url : '[default]' };
         
         var
         acData = {
             username : na.account.settings.username,
             pw : na.account.settings.password,
-            url : s.url,
-            role : s.role,
-            user : s.user            
+            url : s.url
         };
+        if (s.role) acData.role = s.role;
+        if (s.user) acData.user = s.user;
+        
         var
         ac = {
             type : 'POST',
