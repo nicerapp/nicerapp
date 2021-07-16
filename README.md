@@ -67,7 +67,7 @@ Go to the /var/www folder and install the sources :
 > 
 > git clone https://github.com/nicerapp/nicerapp
 > 
-> cd /var/www/nicerapp/3rd-party/jQuery
+> cd /var/www/nicerapp/nicerapp/3rd-party/jQuery
 > 
 > git clone https://github.com/bgrins/spectrum
 > 
