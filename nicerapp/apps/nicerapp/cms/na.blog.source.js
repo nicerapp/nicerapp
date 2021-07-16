@@ -304,9 +304,9 @@ na.blog = {
             type : 'POST',
             url : '/nicerapp/apps/nicerapp/cms/ajax_changeNodeStatus_openOrClosed.php',
             data : {
-                database : data.original.database,
-                id : data.original.id,
-                open : !data.original.state.opened ? 'true' : 'false' // the 'listed' state is the OLD state....
+                database : data.node.database,
+                id : data.node.id,
+                open : !data.node.state.opened ? 'true' : 'false' // the 'listed' state is the OLD state....
             },
             success : function (data, ts, xhr) {
                 na.blog.refresh(); // needs this to update the JS db!
