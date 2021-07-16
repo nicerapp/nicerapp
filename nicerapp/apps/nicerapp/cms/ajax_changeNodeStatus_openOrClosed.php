@@ -41,6 +41,7 @@ if ($debug) { echo '$call='; var_dump ($call); echo PHP_EOL.PHP_EOL; }
 try { $call = $cdb->post($call->body); } catch (Exception $e) {
     cdb_error (500, $e, 'Could not add record'); die();
 }
+if ($debug) { echo '$call='; var_dump ($call); echo PHP_EOL.PHP_EOL; }
 
 echo 'Success'; 
 ?>
