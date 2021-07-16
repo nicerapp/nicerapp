@@ -2,9 +2,12 @@
 require_once (dirname(__FILE__).'/../../../boot.php');
 require_once (dirname(__FILE__).'/../../../3rd-party/sag/src/Sag.php');
 require_once (dirname(__FILE__).'/../../../Sag-support-functions.php');
-/*ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);*/
+$debug = false;
+if ($debug) {
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+}
 
 $ip = (array_key_exists('X-Forwarded-For',apache_request_headers())?apache_request_headers()['X-Forwarded-For'] : $_SERVER['REMOTE_ADDR']);
 /*if (
@@ -37,6 +40,8 @@ $call->body->text = $_POST['text'];
 try { $call = $cdb->post($call->body); } catch (Exception $e) {
     cdb_error (500, $e, 'Could not add record'); die();
 }
+if ($debug) { echo '$call='; var_dump ($call); echo PHP_EOL.PHP_EOL; }
 
-echo 'Success'; // echo json_encode($recordToAdd); <-- not needed, js will refresh the entire tree (accounting for multiple users working on the same tree at the same time)
+
+echo 'Success'; 
 ?>

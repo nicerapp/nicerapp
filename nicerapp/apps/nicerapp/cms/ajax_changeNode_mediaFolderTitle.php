@@ -2,7 +2,7 @@
 require_once (dirname(__FILE__).'/../../../boot.php');
 require_once (dirname(__FILE__).'/../../../3rd-party/sag/src/Sag.php');
 require_once (dirname(__FILE__).'/../../../Sag-support-functions.php');
-$debug = true;
+$debug = false;
 if ($debug) {
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
@@ -40,6 +40,7 @@ $call->body->text = $_POST['text'];
 try { $call = $cdb->post($call->body); } catch (Exception $e) {
     cdb_error (500, $e, 'Could not add record'); die();
 }
+if ($debug) { echo '$call='; var_dump ($call); echo PHP_EOL.PHP_EOL; }
 
 $oldPath = realpath(dirname(__FILE__).'/../../../').'/siteData/nicerapp/'.$_POST['relFilePath'];
 $newPath = realpath(dirname(__FILE__).'/../../../').'/siteData/nicerapp/'.$_POST['newRelFilePath'];
@@ -52,5 +53,5 @@ $dbg = array (
 );
 if ($debug) { echo '<pre style="color:green">'; var_dump ($dbg); echo '</pre>'; }
 
-echo 'Success'; // echo json_encode($recordToAdd); <-- not needed, js will refresh the entire tree (accounting for multiple users working on the same tree at the same time)
+echo 'Success'; 
 ?>

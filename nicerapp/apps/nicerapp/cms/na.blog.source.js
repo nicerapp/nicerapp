@@ -306,14 +306,12 @@ na.blog = {
                 open : !sel.original.state.opened ? 'true' : 'false' // the 'listed' state is the OLD state....
             },
             success : function (data, ts, xhr) {
-                debugger;
                 na.blog.refresh(); // needs this to update the JS db!
             },
             failure : function (xhr, ajaxOptions, thrownError) {
                 debugger;
             }
         };
-        debugger;
         $.ajax(ac);
     },
     onchange_mediaFolderTitle : function (event) {
