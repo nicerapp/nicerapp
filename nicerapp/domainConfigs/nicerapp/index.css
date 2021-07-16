@@ -757,6 +757,10 @@ label {
     height : 78px;
     width : calc(100% - 20px);
 }
+.navBar {
+    display : flex;
+    align-items : center;
+}
 .navBar_button {
     width : 50px;
 }

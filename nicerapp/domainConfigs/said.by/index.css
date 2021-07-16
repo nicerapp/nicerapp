@@ -187,15 +187,15 @@ img.bg_last {
     top : -15px;
     left : 15px;
     width : 200px;
-    height : 50px;
+    height : 40px;
     opacity : 0.0001;
 }
 .vdSettings img {
     position : absolute;
     top : 0px;
     left : 0px;
-    width : 50px;
-    z-index : 5000;
+    width : 40px;
+    z-index : inherit;
 }
 .sliderOpacityRange {
     position : absolute;
@@ -571,8 +571,102 @@ img.bg_last {
     height : 100%;
 }
 
-select, optgroup {
+:root {
+  --select-border: #777;
+  --select-focus: blue;
+  --select-arrow: var(--select-border);
 }
+
+/* BEGIN thanks https://freefrontend.com/css-select-boxes/ and https://codepen.io/5t3ph/pen/MWyyYNz */
+select {
+  background-color: transparent;
+  border: none;
+  padding: 0 1em 0 0;
+  margin: 0;
+  width: calc(100% - 240px);
+  font-family: inherit;
+  font-size: inherit;
+  cursor: inherit;
+  line-height: inherit;
+
+  z-index: 1;
+
+  outline: none;
+}
+
+.select {
+  display: grid;
+  grid-template-areas: "select";
+  align-items: center;
+  position: relative;
+  grid-area: select;
+  box-sizing:border-box;
+  min-width: 15ch;
+  max-width: 30ch;
+
+  border: 1px solid var(--select-border);
+  border-radius: 0.25em;
+  padding: 0.25em 0.5em;
+
+  cursor: pointer;
+  line-height: 1.1;
+
+  background-image: linear-gradient(to top, rgba(255,255,255,0.4), rgba(255,255,255,0.7) 33%);
+}
+.select::after {
+    grid-area: select;
+    box-sizing:border-box;
+    content: "";
+    justify-self: end;
+    width: 0.8em;
+    height: 0.5em;
+    background-color: var(--select-arrow);
+    clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+}
+
+select:focus + .focus {
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+  border: 2px solid var(--select-focus);
+  border-radius: inherit;
+}
+
+select[multiple] {
+  padding-right: 0;
+
+  /*
+   * Safari will not reveal an option
+   * unless the select height has room to 
+   * show all of it
+   * Firefox and Chrome allow showing 
+   * a partial option
+   */
+  height: 6rem;
+
+  option {
+    white-space: normal;
+
+    outline-color: var(--select-focus);
+  }
+}
+
+.select--disabled {
+  cursor: not-allowed;
+  background-image: linear-gradient(to top, rgba(255,255,255,0.7), rgba(255,255,255,0.7) 33%);
+}
+
+label {
+  font-size: 1.125rem;
+  font-weight: 500;
+}
+
+.select + label {
+  margin-top: 2rem;
+}
+/* END thanks https://freefrontend.com/css-select-boxes/ and https://codepen.io/5t3ph/pen/MWyyYNz */
 #specificitySettings {
   display: flex;
   flex-flow: row wrap;
@@ -585,36 +679,47 @@ select, optgroup {
   width: 100%;
   order: 1;
 }
-.navbar .vividButton_icon_sdsnav {
+.sds_dialogTitle {
+    display : flex;
+    align-items : center;
+    background : rgba(0,0,0,0.5);
+    border-radius : 10px;
+    box-shadow : 2px 2px 3px 2px rgba(0,0,0,0.5) inset;
+    padding : 5px;
+}
+.sds_dialogTitle .vividButton_icon_sdsdt {
     display : inline-block;
     position : relative;
     margin-left : 10px;
     margin-right:10px;
     z-index : 1100;
-    width : 84px;
-    height : 84px;
+    width : 35px;
+    height : 35px;
 }
-.vividButton_icon_sdsnav img {
+#sds_dialogTitle {
+    font-weight : bold;
+}
+.vividButton_icon_sdsdt img {
     position : absolute;
     top : 0px;
     left : 0px;
-    width : 84px;
-    height : 84px;
+    width : 35px;
+    height : 35px;
 }    
 #specificitySettings .vividButton_icon {
     display : inline-block;
     position : relative;
     z-index : 1100;
     margin-right : 5px;
-    width : 70px;
-    height : 70px;
+    width : 50px;
+    height : 50px;
 }
 .vividButton_icon img {
     position : absolute;
     top : 0px;
     left : 0px;
-    width : 70px;
-    height : 70px;
+    width : 50px;
+    height : 50px;
 }
 .vividButton_icon_siteTop {
     display : inline-block;
@@ -652,6 +757,10 @@ select, optgroup {
     height : 78px;
     width : calc(100% - 20px);
 }
+.navBar {
+    display : flex;
+    align-items : center;
+}
 .navBar_button {
     width : 50px;
 }
@@ -667,7 +776,7 @@ label {
     display : inline-block;
     border : 0px;
     width : 100%;
-    height : 2em; 
+    height : 1.2em; 
 }
 .flexColumns {
     display : flex;
