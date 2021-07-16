@@ -73,6 +73,7 @@ na.blog = {
                 }).on('ready.jstree', function (e, data) {
                   
                 }).on('changed.jstree', function (e, data) {
+                    debugger;
                     if (
                         na.blog.settings.current.selectedTreeNode
                         && na.blog.settings.current.selectedTreeNode.type=='naDocument'
