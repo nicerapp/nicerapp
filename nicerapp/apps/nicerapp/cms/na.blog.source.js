@@ -305,10 +305,9 @@ na.blog = {
             data : {
                 database : sel.original.database,
                 id : sel.original.id,
-                open : sel.original.state.opened
+                open : sel.original.state.opened ? 'true' : 'false'
             },
             success : function (data, ts, xhr) {
-                debugger;
                 na.blog.refresh(); // needs this to update the JS db!
             },
             failure : function (xhr, ajaxOptions, thrownError) {
