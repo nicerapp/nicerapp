@@ -307,13 +307,11 @@ na.blog = {
         var
         ac = {
             type : 'POST',
-            url : '/nicerapp/apps/nicerapp/cms/ajax_changeNode_mediaFolderTitle.php',
+            url : '/nicerapp/apps/nicerapp/cms/ajax_changeNodeStatus_openOrClosed.php',
             data : {
                 database : sel.original.database,
                 id : sel.original.id,
-                text : newFolderName,
-                relFilePath : relFilePath,
-                newRelFilePath : newRelFilePath
+                open : sel.original.state.opened
             },
             success : function (data, ts, xhr) {
                 na.blog.refresh();
