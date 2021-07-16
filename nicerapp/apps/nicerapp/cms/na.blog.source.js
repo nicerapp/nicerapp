@@ -228,12 +228,15 @@ na.blog = {
             type : 'GET',
             url : '/nicerapp/apps/nicerapp/cms/ajax_getTreeNodes.php',
             success : function (data, ts, xhr) {
-                let dat = JSON.parse(data);
+                let 
+                dat = JSON.parse(data),
+                jfu = $('.jQueryFileUpload')[0];
+                
                 na.blog.settings.current.db = dat;
                 $('#jsTree').jstree(true).settings.core.data = dat;
                 $('#jsTree').jstree(true).refresh();
                 $('#siteToolbarLeft .lds-facebook').stop(true,true).fadeOut('slow');
-                $('.jQueryFileUpload')[0].reload(true);
+                if (jfu) jfu.reload(true);
                 setTimeout (function () {
                     if (typeof callback=='function') callback (dat);
                 }, 500);
