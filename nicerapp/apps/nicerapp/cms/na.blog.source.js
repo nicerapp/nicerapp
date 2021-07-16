@@ -313,6 +313,7 @@ na.blog = {
                 debugger;
             }
         };
+        debugger;
         $.ajax(ac);
     },
     onchange_mediaFolderTitle : function (event) {
