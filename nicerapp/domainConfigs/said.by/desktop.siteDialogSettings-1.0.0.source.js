@@ -45,9 +45,9 @@ na.desktop = {
             },
             '#siteToolbarDialogSettings' : {
                 top : $('#siteDateTime').height()+20,
-                left : -500,
+                left : -520,
                 height : $(window).height()-120,
-                width : !na.m.userDevice.isPhone ? 458 : $(window).width - 50,
+                width : !na.m.userDevice.isPhone ? 500 : $(window).width - 50,
                 opacity : 0.0001
             },
             '#siteToolbarLeft' : {
@@ -179,11 +179,7 @@ na.desktop = {
                         '#btnOptions' : {
                             snapTo : [
                                 { element : 'body', edge : 'top' },
-                                { 
-                                    element : visibleDivs.includes('#siteDateTime') ? '#siteDateTime' : 'body', 
-                                    edge : visibleDivs.includes('#siteDateTime') ? 'right' : 'left'
-                                    
-                                }
+                                { element : '#siteDateTime', edge : 'right' }
                             ]
                         },
                         '#btnLoginLogout' : {
@@ -255,7 +251,7 @@ na.desktop = {
                     ? {
                         '#siteVideo' : {
                             snapTo : [
-                                { element : visibleDivs.includes('#siteDateTime') ? '#siteDateTime' : '#btnOptions', edge : 'bottom' },
+                                { element : '#btnOptions', edge : 'bottom' },
                                 { element : 'body', edge : 'right' }
                             ]
                         },
@@ -281,7 +277,7 @@ na.desktop = {
                     ? {
                         '#siteVideo' : {
                             snapTo : [
-                                { element : visibleDivs.includes('#siteDateTime') ? '#siteDateTime' : '#btnOptions', edge : 'bottom' },
+                                { element : '#btnOptions', edge : 'bottom' },
                                 { element : 'body', edge : 'right' }
                             ]
                         },
@@ -307,7 +303,7 @@ na.desktop = {
                     ? {
                         '#siteComments' : {
                             snapTo : [
-                                { element : visibleDivs.includes('#siteDateTime') ? '#siteDateTime' : '#btnOptions', edge : 'bottom' },
+                                { element : '#btnOptions', edge : 'bottom' },
                                 { element : 'body', edge : 'right' }
                             ],
                             growTo : 'maxY',
@@ -324,7 +320,7 @@ na.desktop = {
                     ? {
                         '#siteToolbarRight' : {
                             snapTo : [
-                                {element : visibleDivs.includes('#siteDateTime') ? '#siteDateTime' : '#btnOptions', edge : 'bottom' },
+                                {element : '#btnOptions', edge : 'bottom' },
                                 {element : 'body', edge:'right'}
                             ],
                             growTo : 'maxY',
@@ -343,7 +339,7 @@ na.desktop = {
                     ? {
                         '#siteToolbarDialogSettings' : {
                             snapTo : [
-                                { element : visibleDivs.includes('#siteDateTime') ? '#siteDateTime' : '#btnOptions', edge : 'bottom' },
+                                { element : '#btnOptions', edge : 'bottom' },
                                 { element : 'body', edge : 'left' }
                             ],
                             growTo : 'maxY',
@@ -362,7 +358,7 @@ na.desktop = {
                     ? {
                         '#siteToolbarLeft' : {
                             snapTo : [
-                                { element : visibleDivs.includes('#siteDateTime') ? '#siteDateTime' : '#btnOptions', edge : 'bottom' },
+                                { element : '#btnOptions', edge : 'bottom' },
                                 { element : 'body', edge : 'left' }
                             ],
                             growTo : 'maxY',
@@ -381,7 +377,7 @@ na.desktop = {
                     ? {
                         '#siteToolbarLeft' : {
                             snapTo : [
-                                { element : visibleDivs.includes('#siteDateTime') ? '#siteDateTime' : '#btnOptions', edge : 'bottom' },
+                                { element : '#btnOptions', edge : 'bottom' },
                                 { element : '#siteToolbarDialogSettings', edge : 'left' }
                             ],
                             growTo : 'maxY',
@@ -401,16 +397,16 @@ na.desktop = {
                             snapTo : 
                                 visibleDivs.includes('#siteToolbarLeft')
                                 ? [
-                                    { element : '#siteDateTime', edge : 'bottom' },
+                                    { element : '#btnOptions', edge : 'bottom' },
                                     { element : '#siteToolbarLeft', edge : 'right' }
                                 ]
                                 : visibleDivs.includes('#siteToolbarDialogSettings')
                                     ? [
-                                        { element : '#siteDateTime', edge : 'bottom' },
+                                        { element : '#btnOptions', edge : 'bottom' },
                                         { element : '#siteToolbarDialogSettings', edge : 'right' }
                                     ]
                                     : [
-                                        { element : '#siteDateTime', edge : 'bottom' },
+                                        { element : '#btnOptions', edge : 'bottom' },
                                         { element : 'body', edge : 'left' }
                                     ],
                             growTo : 'max',
@@ -424,7 +420,7 @@ na.desktop = {
 
         var c = calculate['calculate_visible'];
         c.order = 
-            visibleDivs.includes('#siteDateTime') 
+            visibleDivs.includes('#siteDateTime')
             ? [ '#siteDateTime', '#btnOptions', '#btnLoginLogout', '#btnChangeBackground', '#siteMenu' ]
             : [ '#btnOptions', '#siteMenu', '#btnLoginLogout', '#btnChangeBackground' ];
             
@@ -447,6 +443,7 @@ na.desktop = {
             if (visibleDivs.includes('#siteStatusbar')) gtl.push ({ element : '#siteStatusbar', edge : 'top' });
         }
         
+        //debugger;
         var divs = {};
         for (var sectionID in calculate) {
             var section = calculate[sectionID];
@@ -544,7 +541,6 @@ na.desktop = {
                         divs[divID].top += (2 * na.d.g.margin );
                         break;
                     case '#siteToolbarLeft':
-                    case '#siteToolbarDialogSettings':
                         divs[divID].top += na.d.g.margin;
                         divs[divID].height -= na.d.g.margin;
                         break;
