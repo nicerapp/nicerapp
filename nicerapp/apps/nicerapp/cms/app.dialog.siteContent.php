@@ -34,11 +34,11 @@ $ip = (array_key_exists('X-Forwarded-For',apache_request_headers())?apache_reque
     <iframe id="jQueryFileUpload" class="jQueryFileUpload" src="" style="overflow:hidden;width:100%;height:100%" allowtransparency="true"></iframe>
 </div>
 <div id="document">
-    <div id="document_navBar" class="navBar">
-        <img id="btnInsertLink" class="navBar_button" src="/nicerapp/siteMedia/btnInsertLink.png" onclick="tinymce.activeEditor.execCommand('mceLink');"/>
-        <img id="btnInsertMedia" class="navBar_button" src="/nicerapp/siteMedia/btnInsertMedia.png" onclick="na.blog.onclick_insertMedia()"/>
-        <img id="btnInsertPageBackground" class="navBar_button" src="/nicerapp/siteMedia/btnInsertPageBackground.png"/>
-        <img id="btnPublish" class="navBar_button" src="/nicerapp/siteMedia/iconPublish.png" onclick="na.blog.onclick_publish(event);"/>
+    <div id="document_navBar" class="navbar">
+        <img id="btnInsertLink" class="navbar_button" src="/nicerapp/siteMedia/btnInsertLink.png" onclick="tinymce.activeEditor.execCommand('mceLink');"/>
+        <img id="btnInsertMedia" class="navbar_button" src="/nicerapp/siteMedia/btnInsertMedia.png" onclick="na.blog.onclick_insertMedia()"/>
+        <img id="btnInsertPageBackground" class="navbar_button" src="/nicerapp/siteMedia/btnInsertPageBackground.png"/>
+        <img id="btnPublish" class="navbar_button" src="/nicerapp/siteMedia/iconPublish.png" onclick="na.blog.onclick_publish(event);"/>
         <label id="documentTitle_label" for="documentTitle">Document name : </label>
         <input id="documentTitle" type="text" onchange="na.blog.onchange_documentTitle(event);"></input>
     </div>
