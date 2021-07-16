@@ -299,12 +299,6 @@ na.blog = {
         tree = $('#jsTree').jstree(true),
         sel = tree.get_node(tree.get_selected()[0]),
         rec = na.blog.settings.current.selectedTreeNode,
-        relFilePath = na.blog.currentPath(rec),
-        oldFolderName = rec.original.text,
-        newFolderName = $('#mediaFolderTitle').val(),
-        newRelFilePath = relFilePath.replace('/'+oldFolderName, '/'+newFolderName);
-        debugger;
-        var
         ac = {
             type : 'POST',
             url : '/nicerapp/apps/nicerapp/cms/ajax_changeNodeStatus_openOrClosed.php',
@@ -314,13 +308,14 @@ na.blog = {
                 open : sel.original.state.opened
             },
             success : function (data, ts, xhr) {
-                na.blog.refresh();
+                debugger;
+                na.blog.refresh(); // needs this to update the JS db!
             },
             failure : function (xhr, ajaxOptions, thrownError) {
                 debugger;
             }
         };
-        //$.ajax(ac);
+        $.ajax(ac);
     },
     onchange_mediaFolderTitle : function (event) {
         var 
