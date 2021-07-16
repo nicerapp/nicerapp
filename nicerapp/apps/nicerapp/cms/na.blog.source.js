@@ -297,7 +297,6 @@ na.blog = {
         var 
         tree = $('#jsTree').jstree(true),
         sel = tree.get_node(tree.get_selected()[0]),
-        rec = na.blog.settings.current.selectedTreeNode,
         ac = {
             type : 'POST',
             url : '/nicerapp/apps/nicerapp/cms/ajax_changeNodeStatus_openOrClosed.php',
@@ -307,6 +306,7 @@ na.blog = {
                 open : !sel.original.state.opened ? 'true' : 'false' // the 'listed' state is the OLD state....
             },
             success : function (data, ts, xhr) {
+                debugger;
                 na.blog.refresh(); // needs this to update the JS db!
             },
             failure : function (xhr, ajaxOptions, thrownError) {
