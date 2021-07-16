@@ -72,6 +72,12 @@ na.blog = {
                     ]
                 }).on('ready.jstree', function (e, data) {
                   
+                }).on('open_node.jstree', function (e, data) {
+                    na.blog.onchange_folderStatus_openOrClosed(e);
+                    
+                }).on('close_node.jstree', function (e, data) {
+                    na.blog.onchange_folderStatus_openOrClosed(e);
+                    
                 }).on('changed.jstree', function (e, data) {
                     debugger;
                     if (
@@ -288,6 +294,36 @@ na.blog = {
         
     },
     
+    onchange_folderStatus_openOrClosed : function (event) {
+        var 
+        tree = $('#jsTree').jstree(true),
+        sel = tree.get_node(tree.get_selected()[0]),
+        rec = na.blog.settings.current.selectedTreeNode,
+        relFilePath = na.blog.currentPath(rec),
+        oldFolderName = rec.original.text,
+        newFolderName = $('#mediaFolderTitle').val(),
+        newRelFilePath = relFilePath.replace('/'+oldFolderName, '/'+newFolderName);
+        debugger;
+        var
+        ac = {
+            type : 'POST',
+            url : '/nicerapp/apps/nicerapp/cms/ajax_changeNode_mediaFolderTitle.php',
+            data : {
+                database : sel.original.database,
+                id : sel.original.id,
+                text : newFolderName,
+                relFilePath : relFilePath,
+                newRelFilePath : newRelFilePath
+            },
+            success : function (data, ts, xhr) {
+                na.blog.refresh();
+            },
+            failure : function (xhr, ajaxOptions, thrownError) {
+                debugger;
+            }
+        };
+        //$.ajax(ac);
+    },
     onchange_mediaFolderTitle : function (event) {
         var 
         tree = $('#jsTree').jstree(true),
