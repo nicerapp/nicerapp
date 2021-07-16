@@ -128,11 +128,12 @@ na.site.globals = $.extend(na.site.globals, {
             <label id="labelWhichSetting" for="whichSetting" class="specificityLabel" style="order:3;vertical-align:middle;">Set</label>
             <select id="whichSetting" class="select" onchange="na.ds.whichSettingSelected(event)" style="order:3;vertical-align:middle;">
                 <option id="set_border" value="border">Border</option>
-                <option id="set_boxShadow" value="boxShadow">Border</option>
+                <option id="set_boxShadow" value="boxShadow">Border shadow</option>
                 <option id="set_backgroundColor" value="backgroundColor" selected>Background color</option>
                 <option id="set_backgroundFolder" value="backgroundFolder">Background folder</option>
                 <option id="set_backgroundImage" value="backgroundImage">Background image</option>
-                <option id="set_textSettings" value="textSettings">Text settings</option>
+                <option id="set_textSettings" value="text">Text</option>
+                <option id="set_textShadowSettings" value="text">Text shadow</option>
                 <!--<option id="set_scrollbar" value="scrollbar">Scrollbars</option>-->
             </select>
             <div id="btnSpacer2" class="vividButton_icon tooltip" style="order:4;margin-left:auto;height:17px;vertical-align:middle;position:relative;display:inline-block">
@@ -323,10 +324,11 @@ na.site.globals = $.extend(na.site.globals, {
             <input id="textWeight" type="range" min="3" max="10" value="4" class="sliderOpacityRangeBorderSettings" onchange="na.ds.textSettingsSelected();"/>
             <div class="flexBreak" style="height:8px;"></div>
 
-            <label id="labelFontFamily" class="textSettingsLabel" for="fontFamily">Font color :</label>
+            <label id="labelTextColor" class="textColorpicker" for="fontFamily">Font color :</label>
             <input id="textColorpicker" class="dialogSettingsComponent" style="position:absolute;top:95px;"></input>
             <div class="flexBreak"></div>
-            
+        <div>
+        <div id="textShadowSettings" class="dialogSettingsComponent vividScrollpane" style="position:absolute;top:auto;display:none;">
             <label id="labelTextShadow" class="textSettingsLabel">Text shadow :</label>
             <div id="textShadow">
                 <img src="/nicerapp/siteMedia/iconCreate.png" onclick="na.ds.addTextShadow(event)"/>

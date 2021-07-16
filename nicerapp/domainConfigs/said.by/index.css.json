@@ -1,5 +1,5 @@
 [
     "/nicerapp/3rd-party/jQuery/tooltipster/dist/css/tooltipster.bundle.css",
-    "/nicerapp/3rd-party/jQuery/spectrum/dist/spectrum.min.css",
+    "/nicerapp/3rd-party/jQuery/spectrum/spectrum.css",
     "/nicerapp/domainConfigs/{$domain}/index.css"
 ]

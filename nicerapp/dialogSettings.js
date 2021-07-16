@@ -290,7 +290,8 @@ na.ds = na.dialogSettings = {
             case 'backgroundColor' : na.dialogSettings.selectBackground_color(event); break;
             case 'backgroundFolder' : na.dialogSettings.selectBackground_folder(event); break;
             case 'backgroundImage' : na.dialogSettings.selectBackground_image(event); break;
-            case 'textSettings' : na.dialogSettings.selectTextSettings(event); break;
+            case 'text' : na.dialogSettings.selectTextSettings(event); break;
+            case 'textShadow' : na.dialogSettings.selectTextSettings(event); break;
             //case 'scrollbars' : break;
         }
     },
