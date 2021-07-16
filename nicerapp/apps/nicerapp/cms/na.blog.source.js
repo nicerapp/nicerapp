@@ -73,6 +73,7 @@ na.blog = {
                 }).on('ready.jstree', function (e, data) {
                   
                 }).on('open_node.jstree', function (e, data) {
+                    debugger;
                     na.blog.onchange_folderStatus_openOrClosed(e);
                     
                 }).on('close_node.jstree', function (e, data) {
