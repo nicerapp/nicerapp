@@ -304,7 +304,7 @@ na.blog = {
             data : {
                 database : sel.original.database,
                 id : sel.original.id,
-                open : sel.original.state.opened ? 'true' : 'false'
+                open : !sel.original.state.opened ? 'true' : 'false' // the 'listed' state is the OLD state....
             },
             success : function (data, ts, xhr) {
                 na.blog.refresh(); // needs this to update the JS db!
