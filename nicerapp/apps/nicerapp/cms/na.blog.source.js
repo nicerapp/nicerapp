@@ -73,11 +73,10 @@ na.blog = {
                 }).on('ready.jstree', function (e, data) {
                   
                 }).on('open_node.jstree', function (e, data) {
-                    debugger;
-                    na.blog.onchange_folderStatus_openOrClosed(e);
+                    na.blog.onchange_folderStatus_openOrClosed(e, data);
                     
                 }).on('close_node.jstree', function (e, data) {
-                    na.blog.onchange_folderStatus_openOrClosed(e);
+                    na.blog.onchange_folderStatus_openOrClosed(e, data);
                     
                 }).on('changed.jstree', function (e, data) {
                     if (
@@ -297,17 +296,17 @@ na.blog = {
         
     },
     
-    onchange_folderStatus_openOrClosed : function (event) {
+    onchange_folderStatus_openOrClosed : function (event, data) {
         var 
         tree = $('#jsTree').jstree(true),
-        sel = tree.get_node(tree.get_selected()[0]),
+        //sel = tree.get_node(tree.get_selected()[0]),
         ac = {
             type : 'POST',
             url : '/nicerapp/apps/nicerapp/cms/ajax_changeNodeStatus_openOrClosed.php',
             data : {
-                database : sel.original.database,
-                id : sel.original.id,
-                open : !sel.original.state.opened ? 'true' : 'false' // the 'listed' state is the OLD state....
+                database : data.original.database,
+                id : data.original.id,
+                open : !data.original.state.opened ? 'true' : 'false' // the 'listed' state is the OLD state....
             },
             success : function (data, ts, xhr) {
                 na.blog.refresh(); // needs this to update the JS db!
