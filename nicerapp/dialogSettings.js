@@ -530,9 +530,9 @@ na.ds = na.dialogSettings = {
         if (color) $(na.ds.settings.current.boxSettings)[0].boxShadowColor = color; 
         else {
             color = $(na.ds.settings.current.boxSettings).css('boxShadow');
-            if (color.match('#')) color = color.match(/#.*\s/)[0];
-            if (color.match('rgba')) color = color.match(/rgba\(.*\)/)[0];
-            else if (color.match('rgb')) color = color.match(/rgb\(.*\)/)[0];
+            if (color && color.match('#')) color = color.match(/#.*\s/)[0];
+            if (color && color.match('rgba')) color = color.match(/rgba\(.*\)/)[0];
+            else if (color && color.match('rgb')) color = color.match(/rgb\(.*\)/)[0];
         };
         if (typeof color=='object') color = 'rgba('+color._r+', '+color._g+', '+color._b+', '+color._a+')'; // firefox bugfix
         
