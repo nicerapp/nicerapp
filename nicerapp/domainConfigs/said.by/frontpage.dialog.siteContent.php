@@ -214,7 +214,7 @@
     <p>The software that runs on said.by is open-sourced (MIT-licensed) on <a href="https://nicer.app" target="nicerDotApp">https://nicer.app</a> and <a href="https://github.com/nicerapp/nicerapp" target="githubNicerApp">https://github.com/nicerapp/nicerapp</a> for a copy of the full sources and the documentation (scroll down for that on that page).
     </p>
     
-    <p>I currently plan to keep said.by completely ads free, and charge people a minor monthly fee (no more than 8 Euros per month probably) for new features beyond a fairly wide range of 'basic features'. These new features will be written later in 2021 or even later than that.
+    <p>I currently plan to keep said.by completely ads free, and *maybe*, eventually, start charging people a minor monthly fee (no more than 8 Euros per month probably) for new features beyond a fairly wide range of 'basic features'. These new features will be written later in 2021 or even later than that.
     </p>
     
     <p>How can i do this?<br/>
