@@ -94,7 +94,8 @@ na.ds = na.dialogSettings = {
                             el.onload = na.ds.onresize;
                             el.src = src;
                         } else {
-                            na.site.settings.buttons['#btnSelectBackgroundImage'].disable();
+                            var btn = na.site.settings.buttons['#btnSelectBackgroundImage'];
+                            if (btn) btn.disable();
                         }
 
                     };
