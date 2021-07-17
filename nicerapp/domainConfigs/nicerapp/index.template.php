@@ -327,7 +327,7 @@ na.site.globals = $.extend(na.site.globals, {
             <label id="labelTextColor" class="textColorpicker" for="fontFamily">Font color :</label>
             <input id="textColorpicker" class="dialogSettingsComponent" style="position:absolute;top:95px;"></input>
             <div class="flexBreak"></div>
-        <div>
+        </div>
         <div id="textShadowSettings" class="dialogSettingsComponent vividScrollpane" style="position:absolute;top:auto;display:none;">
             <label id="labelTextShadow" class="textSettingsLabel">Text shadow :</label>
             <div id="textShadow">
