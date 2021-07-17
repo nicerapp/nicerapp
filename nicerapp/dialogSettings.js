@@ -79,13 +79,17 @@ na.ds = na.dialogSettings = {
                     ) na.blog.saveEditorContent(na.blog.settings.current.selectedTreeNode);
                     
                     for (var i=0; i<data.selected.length; i++) {
-                        var d = data.selected[i], rec = data.instance.get_node(d);
+                        var 
+                        d = data.selected[i], 
+                        rec = data.instance.get_node(d),
+                        btn = na.site.settings.buttons['#btnSelectBackgroundImage'];
+                        
                         $('#documentTitle').val(rec.original.text);
                         na.ds.settings.current.selectedTreeNode = rec;
                         if (rec.original.type=='naDocument') {
-                            na.site.settings.buttons['#btnSelectBackgroundImage'].disable();
+                            if (btn) btn.disable();
                         } else if (rec.original.type=='naMediaFolder') {
-                            na.site.settings.buttons['#btnSelectBackgroundImage'].enable();
+                            if (btn) btn.enable();
                             var
                             path = na.ds.currentPath(rec),
                             path = path.replace(/ /g, '%20'),
@@ -94,7 +98,6 @@ na.ds = na.dialogSettings = {
                             el.onload = na.ds.onresize;
                             el.src = src;
                         } else {
-                            var btn = na.site.settings.buttons['#btnSelectBackgroundImage'];
                             if (btn) btn.disable();
                         }
 
