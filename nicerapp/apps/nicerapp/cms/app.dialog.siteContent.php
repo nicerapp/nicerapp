@@ -25,9 +25,9 @@ $ip = (array_key_exists('X-Forwarded-For',apache_request_headers())?apache_reque
 <script type="text/javascript" src="/nicerapp/3rd-party/tinymce-4.9.11/js/tinymce/tinymce.min.js"></script>
 <div id="folder"></div>
 <div id="upload">
-    <div id="mediaFolder_navBar" class="navBar">
-        <img id="btnUpload" class="navBar_button" src="/nicerapp/siteMedia/btnInsertMedia2.png" onclick="na.blog.onclick_btnUpload(event);"/>
-        <img id="btnViewMedia" class="navBar_button" src="/nicerapp/siteMedia/btnViewMedia.png" onclick="na.blog.onclick_btnViewMedia(event);"/>
+    <div id="mediaFolder_navBar" class="navbar">
+        <img id="btnUpload" class="navbar_button" src="/nicerapp/siteMedia/btnInsertMedia2.png" onclick="na.blog.onclick_btnUpload(event);"/>
+        <img id="btnViewMedia" class="navbar_button" src="/nicerapp/siteMedia/btnViewMedia.png" onclick="na.blog.onclick_btnViewMedia(event);"/>
         <label id="mediaFolderTitle_label" for="mediaFolderTitle">name : </label>
         <input id="mediaFolderTitle" type="text" onchange="na.blog.onchange_mediaFolderTitle(event);"></input>
     </div>
