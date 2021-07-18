@@ -229,6 +229,7 @@ var nas = na.site = {
                 na.site.settings.backgrounds = dataDecoded;
                 
                 //debugger;
+                /*
                 var defaultBG = '/nicerapp/siteMedia/backgrounds/tiled/active/grey/cracked-surface-seamless-gray-background.jpg';
                 if (
                     typeof $.cookie('loginName')=='string'
@@ -240,7 +241,7 @@ var nas = na.site = {
                     }
                 } else {
                     na.site.globals.backgroundSearchKey = 'landscape';
-                };
+                };*/
                 
                 na.backgrounds.next (
                     '#siteBackground', 
