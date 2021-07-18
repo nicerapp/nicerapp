@@ -338,19 +338,19 @@ na.site.globals = $.extend(na.site.globals, {
             </div>
             <div class="flexBreak"></div>
             
-            <label id="labelTextShadowXoffset" class="textSettingsLabel" for="textShadowXoffset">Text shadow<br/>horizontal offset :</label>
+            <label id="labelTextShadowXoffset" class="textSettingsLabel" for="textShadowXoffset">Horizontal offset :</label>
             <input id="textShadowXoffset" type="range" min="-10" max="10" value="2" class="sliderOpacityRangeBorderSettings" onchange="na.ds.textSettingsSelected();"/>
             <div class="flexBreak"></div>
 
-            <label id="labelTextShadowYoffset" class="textSettingsLabel" for="textShadowYoffset">Text shadow<br/>vertical offset :</label>
+            <label id="labelTextShadowYoffset" class="textSettingsLabel" for="textShadowYoffset">Vertical offset :</label>
             <input id="textShadowYoffset" type="range" min="-10" max="10" value="2" class="sliderOpacityRangeBorderSettings" onchange="na.ds.textSettingsSelected();"/>
             <div class="flexBreak"></div>
 
-            <label id="labelTextShadowBlurRadius" class="textSettingsLabel" for="textShadowBlurRadius">Text shadow<br/>blur radius :</label>
+            <label id="labelTextShadowBlurRadius" class="textSettingsLabel" for="textShadowBlurRadius">Blur radius :</label>
             <input id="textShadowBlurRadius" type="range" min="0" max="10" value="2" class="sliderOpacityRangeBorderSettings" onchange="na.ds.textSettingsSelected();"/>
             <div class="flexBreak"></div>
 
-            <label id="labelTextShadowColor" class="textSettingsLabel" for="textShadowColor">Text shadow color :</label>
+            <label id="labelTextShadowColor" class="textSettingsLabel" for="textShadowColor">Color :</label>
             <input id="textShadowColorpicker" class="dialogSettingsComponent" style="position:absolute;top:95px;"></input>
             <div class="flexBreak"></div>
         </div>
