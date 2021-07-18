@@ -229,7 +229,7 @@ na.ds = na.dialogSettings = {
             $('#'+btnID).trigger('click');
         }
         
-        na.ds.onresize();
+        setTimeout (na.ds.onresize, 1000);
     },
     
     onresize : function () { 
@@ -266,7 +266,7 @@ na.ds = na.dialogSettings = {
         h2 = $('#specificitySettings').height();
         $('#siteToolbarDialogSettings .vividScrollpane').css({
             width : w - 15,
-            height : h - h1 - h2 - 10
+            height : h - 20
         });
     },
     
@@ -408,6 +408,12 @@ na.ds = na.dialogSettings = {
         $('.dialogSettingsComponent').css({ width : $('#siteToolbarDialogSettings .vividDialogContent').width() - 25 });
         $('.dialogSettingsComponent').not('#borderSettings').fadeOut('fast');
         $('.dialogSettings_colorPicker').next().fadeOut('fast');
+        var 
+        w = $('#siteToolbarDialogSettings').width(),
+        h = $('#siteToolbarDialogSettings').height(),
+        h1 = $('#specificitySettings').position().top,
+        h2 = $('#specificitySettings').height();
+        $('#borderSettings').css({ height : h - h1 - h2 - 20 });
         $('#borderSettings').fadeIn('fast', 'swing', function () {
             $('#borderSettings').css({display:'flex'});
             $('.boxSettingsLabel').css({width:$('.boxSettingsLabel').width()+10});
@@ -438,6 +444,12 @@ na.ds = na.dialogSettings = {
         $('.dialogSettingsComponent').css({ width : $('#siteToolbarDialogSettings .vividDialogContent').width() - 25 });
         $('.dialogSettingsComponent').not('#boxShadowSettings').fadeOut('fast');
         $('.dialogSettings_colorPicker').next().fadeOut('fast');
+        var 
+        w = $('#siteToolbarDialogSettings').width(),
+        h = $('#siteToolbarDialogSettings').height(),
+        h1 = $('#specificitySettings').position().top,
+        h2 = $('#specificitySettings').height();
+        $('#boxShadowSettings').css({ height : h - h1 - h2 - 20 });
         $('#boxShadowSettings').fadeIn('fast', 'swing', function () {
             $('.boxSettingsLabel').css({width:$('.boxSettingsLabel').width()+10});
             $('#boxShadow').css({width:$('#borderSettings').width() - $('#labelBoxShadow').width() - 20 });
