@@ -327,6 +327,7 @@ var nas = na.site = {
 	},
 
     loadContent_getAndDisplayContent : function (url) {
+        debugger;
         let 
         reloadMenu = false,
         url2 = url.replace(document.location.origin,'').replace(document.location.host,'').replace('/apps/', ''),
@@ -343,7 +344,7 @@ var nas = na.site = {
                     
             
                     var dat = JSON.parse(data), reloadMenu = false;
-                    //debugger;
+                    debugger;
                     for (let divID in dat) {
                         if (divID=='siteContent') reloadMenu = true;
                         if (!na.d.s.visibleDivs.includes('#'+divID)) {
