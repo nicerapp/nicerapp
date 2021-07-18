@@ -6,6 +6,7 @@ na.blog = {
             type : 'GET',
             url : '/nicerapp/apps/nicerapp/cms/ajax_getTreeNodes.php',
             success : function (data, ts, xhr) {
+                debugger;
                 let dat = JSON.parse(data);
                 na.blog.settings.current.db = dat;
                 $.jstree.defaults.core.error = function (a,b,c,d) {
