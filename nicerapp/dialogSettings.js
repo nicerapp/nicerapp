@@ -290,7 +290,7 @@ na.ds = na.dialogSettings = {
         var whichSetting = $(event.currentTarget).val();
         switch (whichSetting) {
             case 'border' : na.dialogSettings.selectBorderSettings(event); break;
-            case 'boxShadow' : na.dialogSettings.selectBorderSettings(event); break;
+            case 'boxShadow' : na.dialogSettings.selectBoxShadowSettings(event); break;
             case 'backgroundColor' : na.dialogSettings.selectBackground_color(event); break;
             case 'backgroundFolder' : na.dialogSettings.selectBackground_folder(event); break;
             case 'backgroundImage' : na.dialogSettings.selectBackground_image(event); break;
@@ -403,11 +403,40 @@ na.ds = na.dialogSettings = {
     },
     
     selectBorderSettings : function (event) {
-        var ct = $('#btnSelectBorderSettings')[0];
-        na.ds.onclick(ct);
+        //var ct = $('#btnSelectBorderSettings')[0];
+        //na.ds.onclick(ct);
         $('.dialogSettingsComponent').not('#borderSettings').fadeOut('fast');
         $('.dialogSettings_colorPicker').next().fadeOut('fast');
         $('#borderSettings').fadeIn('fast', 'swing', function () {
+            $('#borderSettings').css({display:'flex'});
+            $('.boxSettingsLabel').css({width:$('.boxSettingsLabel').width()+10});
+            $('#boxShadow').css({width:$('#borderSettings').width() - $('#labelBoxShadow').width() - 20 });
+            $('.boxShadow').css({
+                border:$('#borderWidth').val()+'px '+$('#borderType').val()+' '+$('#borderColorpicker').val(),
+                borderRadius:parseInt($('#borderRadius').val())
+            });
+            $('#borderType').css({width:$('#borderSettings').width() - $('#labelBorderType').width() - 20 });
+            $('#borderWidth').css({width:$('#borderSettings').width() - $('#labelBorderWidth').width() - 20 });
+            $('#borderRadius').css({width:$('#borderSettings').width() - $('#labelBorderRadius').width() - 20 });
+            $('#boxShadowInsetClear').css({width:$('#borderSettings').width() - $('#labelBoxShadowInset').width() - 35 });
+            $('#boxShadowXoffset').css({width:$('#borderSettings').width() - $('#labelBoxShadowXoffset').width() - 20 });
+            $('#boxShadowYoffset').css({width:$('#borderSettings').width() - $('#labelBoxShadowYoffset').width() - 20 });
+            $('#boxShadowSpreadRadius').css({width:$('#borderSettings').width() - $('#labelBoxShadowSpreadRadius').width() - 20 });
+            $('#boxShadowBlurRadius').css({width:$('#borderSettings').width() - $('#labelBoxShadowBlurRadius').width() - 20 });
+            $('#labelBoxShadowColor').css({width:$('#borderSettings').width() - 10});
+        });
+        $('#boxShadowColorpicker').spectrum ({color:'rgba(0,0,0,0.5)', type: "flat", clickoutFiresChange : false, change : na.ds.boxSettingsChanged_shadowColor});
+        $('#borderColorpicker').spectrum ({color:na.ds.settings.current.borderColor, type: "flat", clickoutFiresChange : false, change : na.ds.borderSettingsSelected});
+        var evt2 = { currentTarget : $('#'+na.ds.settings.current.forDialogID)[0] };
+        na.ds.boxSettingsSelected (evt2, false); //event.currentTarget === ct
+    },
+    
+    selectBoxShadowSettings : function (event) {
+        //var ct = $('#btnSelectBorderSettings')[0];
+        //na.ds.onclick(ct);
+        $('.dialogSettingsComponent').not('#boxShadowSettings').fadeOut('fast');
+        $('.dialogSettings_colorPicker').next().fadeOut('fast');
+        $('#boxShadowSettings').fadeIn('fast', 'swing', function () {
             $('#borderSettings').css({display:'flex'});
             $('.boxSettingsLabel').css({width:$('.boxSettingsLabel').width()+10});
             $('#boxShadow').css({width:$('#borderSettings').width() - $('#labelBoxShadow').width() - 20 });
