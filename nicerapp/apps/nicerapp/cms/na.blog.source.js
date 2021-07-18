@@ -79,6 +79,8 @@ na.blog = {
                     na.blog.onchange_folderStatus_openOrClosed(e, data);
                     
                 }).on('changed.jstree', function (e, data) {
+                                                debugger;
+
                     if (
                         na.blog.settings.current.selectedTreeNode
                         && na.blog.settings.current.selectedTreeNode.type=='naDocument'
