@@ -83,6 +83,7 @@ na.blog = {
                         na.blog.settings.current.selectedTreeNode
                         && na.blog.settings.current.selectedTreeNode.type=='naDocument'
                     ) na.blog.saveEditorContent(na.blog.settings.current.selectedTreeNode);
+                    debugger;
                     
                     for (var i=0; i<data.selected.length; i++) {
                         var d = data.selected[i], rec = data.instance.get_node(d);
