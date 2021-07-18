@@ -208,7 +208,7 @@ $dbName = $cdbDomain.'___cms_vdsettings';
 $cdb->setDatabase($dbName, false);
 
 $rec = array_merge ($rec, $rec2);
-//echo '<pre>'; var_dump ($rec); var_dump($_POST); var_dump(json_last_error()); die();
+if ($debug) { echo '<pre>'; var_dump ($rec); var_dump($_POST); var_dump(json_last_error()); echo '</pre>'.PHP_EOL.PHP_EOL; }
 try {
     $call3 = $cdb->post($rec);
 } catch (Exception $e) {
