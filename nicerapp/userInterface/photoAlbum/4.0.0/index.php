@@ -41,7 +41,7 @@
         'targetDir' => $targetDir,
         'files' => $files
     );
-    if ($debug) { echo '<pre style="color:black;background:white;border-radius:3px;border:1px solid black;">'; var_dump ($dbg); echo '</pre>'; }
+    if ($debug && false) { echo '<pre style="color:black;background:white;border-radius:3px;border:1px solid black;">'; var_dump ($dbg); echo '</pre>'; }
     foreach ($files as $idx => $filePath) {
         $fileName = str_replace ($targetDir.'/', '', $filePath);
         $thumbPath = $thumbDir.'/'.$fileName;
