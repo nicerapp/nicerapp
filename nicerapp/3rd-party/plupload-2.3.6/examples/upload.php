@@ -46,7 +46,7 @@ global $filePerms_ownerUser;
 global $filePerms_ownerGroup;
 global $filePerms_perms;
 
-$debug = false;
+$debug = true;
 
 // Settings
 //$relPath = $_POST['relativePath'];

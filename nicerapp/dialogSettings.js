@@ -295,7 +295,7 @@ na.ds = na.dialogSettings = {
             case 'backgroundFolder' : na.dialogSettings.selectBackground_folder(event); break;
             case 'backgroundImage' : na.dialogSettings.selectBackground_image(event); break;
             case 'text' : na.dialogSettings.selectTextSettings(event); break;
-            case 'textShadow' : na.dialogSettings.selectTextSettings(event); break;
+            case 'textShadow' : na.dialogSettings.selectTextShadowSettings(event); break;
             //case 'scrollbars' : break;
         }
     },
@@ -743,6 +743,35 @@ na.ds = na.dialogSettings = {
             change : na.ds.textSettingsSelected_textShadowColor
         });
     },
+    
+    selectTextShadowSettings : function (updateTextSettingsControls) {
+        na.ds.onclick($('#btnSelectTextSettings')[0]);
+        $('.dialogSettingsComponent').not('#textSettings').fadeOut('fast');
+        $('.dialogSettings_colorPicker').next().fadeOut('fast');
+        $('#textShadowSettings').fadeIn('fast', 'swing', na.ds.updateTextSettingsControls);
+        
+        var
+        el = $('#'+na.ds.settings.current.forDialogID),
+        ts = $(el).css('textShadow').split(', rgb');
+        for (var i=0; i<ts.length; i++) {
+            var html = '<div id="textShadow_'+(i+1)+'" class="textShadow" onclick="na.ds.selectTextShadow(event)" style="margin:5px;padding:5px;text-shadow:'+ts[i]+'">ABC XYZ</div>';
+            $('#textShadow').append(html);
+        }  
+        
+        $('#textColorpicker').spectrum ({
+            color:na.ds.settings.current.textColor, 
+            type: "flat", 
+            clickoutFiresChange : false, 
+            change : na.ds.textSettingsSelected_textColor
+        });
+        $('#textShadowColorpicker').spectrum ({
+            color:na.ds.settings.current.textShadowColor, 
+            type: "flat", 
+            clickoutFiresChange : false, 
+            change : na.ds.textSettingsSelected_textShadowColor
+        });
+    },
+    
     updateTextSettingsControls : function (evt) {
         var
         el = $('#'+na.ds.settings.current.forDialogID),
