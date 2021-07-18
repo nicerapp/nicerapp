@@ -133,7 +133,7 @@ na.site.globals = $.extend(na.site.globals, {
                 <option id="set_backgroundFolder" value="backgroundFolder">Background folder</option>
                 <option id="set_backgroundImage" value="backgroundImage">Background image</option>
                 <option id="set_textSettings" value="text">Text</option>
-                <option id="set_textShadowSettings" value="text">Text shadow</option>
+                <option id="set_textShadowSettings" value="textShadow">Text shadow</option>
                 <!--<option id="set_scrollbar" value="scrollbar">Scrollbars</option>-->
             </select>
             <div id="btnSpacer2" class="vividButton_icon tooltip" style="order:4;margin-left:auto;height:17px;vertical-align:middle;position:relative;display:inline-block">

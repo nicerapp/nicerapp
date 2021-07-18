@@ -773,6 +773,7 @@ na.ds = na.dialogSettings = {
     },
     
     updateTextSettingsControls : function (evt) {
+        debugger;
         var
         el = $('#'+na.ds.settings.current.forDialogID),
         el2 = $('#'+na.ds.settings.current.forDialogID+' .vividDialogContent'),
