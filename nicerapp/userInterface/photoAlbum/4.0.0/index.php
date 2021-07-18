@@ -10,6 +10,8 @@
     $root = realpath(dirname(__FILE__).'/../../../../');
     require_once ($root.'/nicerapp/boot.php');
     
+    global $naDebugAll; $debug = $naDebugAll;    
+    
     global $cms;
     $cms = new nicerAppCMS();
     $cms->init();
@@ -39,7 +41,7 @@
         'targetDir' => $targetDir,
         'files' => $files
     );
-    echo '<pre style="color:black;background:white;border-radius:3px;border:1px solid black;">'; var_dump ($dbg); echo '</pre>';
+    if ($debug) { echo '<pre style="color:black;background:white;border-radius:3px;border:1px solid black;">'; var_dump ($dbg); echo '</pre>'; }
     foreach ($files as $idx => $filePath) {
         $fileName = str_replace ($targetDir.'/', '', $filePath);
         $thumbPath = $thumbDir.'/'.$fileName;
