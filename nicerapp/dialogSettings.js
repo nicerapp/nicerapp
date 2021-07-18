@@ -405,6 +405,7 @@ na.ds = na.dialogSettings = {
     selectBorderSettings : function (event) {
         //var ct = $('#btnSelectBorderSettings')[0];
         //na.ds.onclick(ct);
+        $('.dialogSettingsComponent').css({ width : $('#siteToolbarDialogSettings .vividDialogContent').width() - 25 });
         $('.dialogSettingsComponent').not('#borderSettings').fadeOut('fast');
         $('.dialogSettings_colorPicker').next().fadeOut('fast');
         $('#borderSettings').fadeIn('fast', 'swing', function () {
@@ -434,10 +435,10 @@ na.ds = na.dialogSettings = {
     selectBoxShadowSettings : function (event) {
         //var ct = $('#btnSelectBorderSettings')[0];
         //na.ds.onclick(ct);
+        $('.dialogSettingsComponent').css({ width : $('#siteToolbarDialogSettings .vividDialogContent').width() - 25 });
         $('.dialogSettingsComponent').not('#boxShadowSettings').fadeOut('fast');
         $('.dialogSettings_colorPicker').next().fadeOut('fast');
         $('#boxShadowSettings').fadeIn('fast', 'swing', function () {
-            $('#borderSettings').css({display:'flex'});
             $('.boxSettingsLabel').css({width:$('.boxSettingsLabel').width()+10});
             $('#boxShadow').css({width:$('#borderSettings').width() - $('#labelBoxShadow').width() - 20 });
             $('.boxShadow').css({
