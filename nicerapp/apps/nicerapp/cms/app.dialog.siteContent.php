@@ -83,7 +83,7 @@ $ip = (array_key_exists('X-Forwarded-For',apache_request_headers())?apache_reque
                     $(editor.editorContainer).addClass('fade-in'); 
                     $('#siteContent .lds-facebook').fadeOut('slow');
                     tinymce.ready = true;   
-                    na.blog.onresize();
+                    na.blog.onload();
                 }
             });
        // });

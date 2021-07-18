@@ -6,7 +6,6 @@ na.blog = {
             type : 'GET',
             url : '/nicerapp/apps/nicerapp/cms/ajax_getTreeNodes.php',
             success : function (data, ts, xhr) {
-                debugger;
                 let dat = JSON.parse(data);
                 na.blog.settings.current.db = dat;
                 $.jstree.defaults.core.error = function (a,b,c,d) {
@@ -84,7 +83,6 @@ na.blog = {
                         na.blog.settings.current.selectedTreeNode
                         && na.blog.settings.current.selectedTreeNode.type=='naDocument'
                     ) na.blog.saveEditorContent(na.blog.settings.current.selectedTreeNode);
-                    debugger;
                     
                     for (var i=0; i<data.selected.length; i++) {
                         var d = data.selected[i], rec = data.instance.get_node(d);
