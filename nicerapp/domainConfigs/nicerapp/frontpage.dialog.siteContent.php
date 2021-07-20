@@ -210,33 +210,35 @@
     Documentation is available at <a href="https://github.com/nicerapp/nicerapp#readme" target="naDocs">https://github.com/nicerapp/nicerapp#readme</a>.
     </p>
     
-    <p>July 20th, 2021, 07:00am CET :</p>
+    <p>July 20th, 2021, 07:10am CET :</p>
     <p>
     If you now create an account on <a href="https://said.by" target="saidBy">https://said.by</a>,<br/>
     <em>you can edit the look of a window/dialog on sites made with my nicerapp software package</em> per page and per site for yourself (per app comes a little later).<br/>
-    You can also use the blogging features on that site to create articles which you can then, after publishing the article, get a very short and nice-looking URL for at my <a href="https://zoned.at" target="zonedAt">https://zoned.at</a>.<br/>
     </p>
     <p>
-    Cosmetic settings be selected in the 'Site Window Settings' window, by hovering over the top-left part of any window (called a 'vividDialog' internally) on any nicerapp site, and clicking on the painters palette icon that then appears.<br/>
+    Cosmetic settings be selected in the 'Window Cosmetics Settings' window, by hovering over the top-left part of any window (called a 'vividDialog' internally) on any nicerapp site, and clicking on the painters palette icon that then appears.<br/>
     </p>
     <p>
     Development will not stop here.<br/>
-    I intend to improve a little more upon what i have so far for this complete rewrite called nicerapp_v2.
+    I intend to improve a lot more upon what i have so far for the Window Cosmetics Settings.
     </p>
     <p>
-    I will focus as well in the coming days on completing the webmail features of nicerapp.<br/>
+    Next up, after all that is completed, i will focus on completing the webmail features of nicerapp.<br/>
     I may however, have to rewrite the business logic code on the server for that, which could take a week, maybe even 2 weeks to complete.
     </p>
 
     <h2 class="contentSectionTitle2">Available Apps</h2>
 
 
+    <?php global $cms; if ($cms->domain=='nicerapp') { ?>
     <a href="<?php echo $urls['webmail'];?>"><h3>Webmail</h3></a>
     
     <a href="<?php echo $urls['cms'];?>"><h3>Blogging features</h3></a>
+    <?php } ?>
     
     <a href="https://said.by" target="saidBy"><h3>Blogging features (on https://said.by)</h3></a>
-    
+    <p>You can now use the blogging features on that site to create articles which you can then, after publishing the article, get a very short and nice-looking URL for at my <a href="https://zoned.at" target="zonedAt">https://zoned.at</a>.</p>
+        
     <a href="https://zoned.at" target="zonedAt"><h3>URL redirection (on https://zoned.at)</h3></a>
     
     <a href="<?php echo $urls['music'];?>"><h3>Music</h3></a>
