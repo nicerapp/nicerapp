@@ -1,15 +1,25 @@
 <?php 
-require_once (dirname(__FILE__).'/nicerapp/boot.php');
+    require_once (dirname(__FILE__).'/nicerapp/boot.php');
+    
+    global $naDebugAll;
+    $debug = true;
+    if ($debug) {
+        ini_set('display_errors', 1);
+        ini_set('display_startup_errors', 1);
+        error_reporting(E_ALL);
+    }
+    
+    
     if (array_key_exists('apps', $_GET) && $_GET['apps']!=='') {
         $app = json_decode (base64_decode_url($_GET['apps']), true);
-        //var_dump ($app); echo PHP_EOL; //die();
+        if ($debug) { var_dump ($app); echo PHP_EOL.PHP_EOL;  };
         $folders = getFilePathList (realpath(dirname(__FILE__)).'/nicerapp/apps', true, '/.*/', array('dir'), 1);
-        //var_dump ($folders); echo PHP_EOL; //die();
+        if ($debug) { var_dump ($folders); echo PHP_EOL.PHP_EOL;  };
         foreach ($folders as $idx => $folder) {
             foreach ($app as $appName => $appSettings) {
                 if ($appName=='meta') continue;
                 $files = getFilePathList($folder.'/'.$appName, false, '/app.dialog.*\.php/', array('file'), 1);
-                //var_dump ($folder.'/'.$appName); var_dump ($files); echo PHP_EOL; //die();
+                if ($debug) { var_dump ($folder.'/'.$appName); var_dump ($files); echo PHP_EOL.PHP_EOL;  }
                 
                 $ret = array ();
                 
@@ -25,8 +35,10 @@ require_once (dirname(__FILE__).'/nicerapp/boot.php');
                     $ret = array_merge ($ret, $arr);
                 }
                 //var_dump ($ret); die();
-                //echo '<pre style="color:green;">'; echo json_encode($ret, JSON_PRETTY_PRINT); echo '</pre>'."\r\n";
-                //echo '<pre>'; echo json_encode($files, JSON_PRETTY_PRINT); echo '</pre>'."\r\n";die();
+                if ($debug) {
+                    echo '<pre style="color:green;">'; echo json_encode($ret, JSON_PRETTY_PRINT); echo '</pre>'."\r\n";
+                    echo '<pre>'; echo json_encode($files, JSON_PRETTY_PRINT); echo '</pre>'."\r\n";
+                }
                 echo json_encode($ret);
             }
         }
@@ -39,7 +51,7 @@ require_once (dirname(__FILE__).'/nicerapp/boot.php');
         
         $folder = realpath(dirname(__FILE__)).'/nicerapp/domainConfigs/'.$cms->domain.'/';
         $files = getFilePathList($folder, false, '/frontpage.dialog.*\.php/', array('file'), 1);
-        echo json_encode($files); die();
+        if ($debug) { echo json_encode($files); echo PHP_EOL.PHP_EOL; };
         
         $ret = array ();
         foreach ($files as $idx2 => $filepath) {
