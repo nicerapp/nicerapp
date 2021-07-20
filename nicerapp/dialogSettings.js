@@ -386,7 +386,9 @@ na.ds = na.dialogSettings = {
                                 evt = { currentTarget : $('#specificity')[0] };
                                 
                                 na.ds.specificitySelected(evt);
-                                na.ds.onclick(btn, false);
+                                //na.ds.onclick(btn, false);
+                                var tabPage = na.ds.settings.current.selectedSetting;
+                                na.ds.whichSettingSelected(tabPage);
                                 
                                 if (typeof callback=='function') callback (themeData, data);
                             }); 

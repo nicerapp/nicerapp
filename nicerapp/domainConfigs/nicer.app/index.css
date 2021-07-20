@@ -6,6 +6,10 @@ html, body {
 body {
     overflow : hidden;
 }
+* {
+    text-shadow : 2px 2px 3px 2px rgba(0,0,0,0.75);
+}
+
 #siteBackground {
     position:absolute;
 }
