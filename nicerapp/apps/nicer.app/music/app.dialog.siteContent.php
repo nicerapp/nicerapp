@@ -23,8 +23,8 @@ if (getLocationBarInfo()['apps']['music']['set']==='index') {
     require_once(dirname(__FILE__).'/frontpage.php');
 } else {
     $setPath = dirname(__FILE__).'/music/'.getLocationBarInfo()['apps']['music']['set'];
-    //var_dump ($setPath); die();
-    $files = getFilePathList ($setPath.'/', true, FILE_FORMATS, array('file'));
+    var_dump ($setPath); die();
+    $files = getFilePathList ($setPath, true, FILE_FORMATS, array('file'));
     //var_dump ($files); die();
     foreach ($files as $idx => $filepath) {
         $files[$idx] = str_replace(realpath(dirname(__FILE__.'/../..')), '', $files[$idx]);
@@ -43,12 +43,12 @@ $htmlTitleMeta = file_get_contents ($setPath.'/index.title_meta.html');
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta http-equiv="content-language" content="en">
 	<meta http-equiv="content-language" content="english">
-	<link type="text/css" rel="StyleSheet" media="screen" href="/nicerapp/apps/nicerapp/music/index.css"/>
+	<link type="text/css" rel="StyleSheet" media="screen" href="/nicerapp/apps/nicer.app/music/index.css"/>
 	<link type="text/css" rel="StyleSheet" media="screen" href="/nicerapp/3rd-party/jQuery/jPlayer-2.9.1/jplayer.vivid.css"/>
   
     <!--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>-->
     <script src="/nicerapp/3rd-party/jQuery/jquery-ui-1.12.1/jquery-ui.js"></script>
-	<script type="text/javascript" src="/nicerapp/apps/nicerapp/music/mp3site.source.js?changed=<?php echo date('Ymd-His', filectime(dirname(__FILE__).'/mp3site.source.js'));?>"></script>
+	<script type="text/javascript" src="/nicerapp/apps/nicer.app/music/mp3site.source.js?changed=<?php echo date('Ymd-His', filectime(dirname(__FILE__).'/mp3site.source.js'));?>"></script>
 
 	<div id="horizontalMover__containmentBox2" style="display:none;position:absolute;height:20px;border-radius:8px;background:black;opacity:0.2"></div>
 	<div id="horizontalMover__containmentBox1" style="display:none;position:absolute;height:16px;top:2px;border-radius:4px;background:black;opacity:0.0"></div>
