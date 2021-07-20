@@ -103,7 +103,6 @@ var mp3site = {
 			success : function (json, ts) {
 				var mixTitle = file.replace ('- DJ FireSnake.mp3','').replace('.mp3','');
 				var mixLoc = file.replace (' - DJ FireSnake.mp3','').replace('.mp3','').replace(/ /g, '_');
-                json.title = json.title.replace (' - DJ FireSnake.mp3','').replace('.mp3','').replace(/ /g, '_');
 				//window.History.pushState (null, mp3site.language.siteTitle + ' - ' + mixTitle, na.site.globals.urls.app+'/musicPlayer(play\''+mixLoc+'\')');
 			
 				if (typeof json!=='object') json = eval ('('+json+') ');
