@@ -416,6 +416,17 @@ One would ask, rightfully so, how to create these /apps/* URLs.
 in PHP, that's done with the always available .../nicerapp/functions.php::**base64_encode_url()** and .../nicerapp/functions.php::**base64_decode_url()**
 in JavaScript, it's done with the always available **na.m.base64_encode_url()** and **na.m.base64_decode_url()**
 
+# Window Cosmetics Settings
+2021/07/20 : 
+it needs more work. it needs theme capabilities for instance.
+and please note i may run a different ubuntu OS installation on my development machine, with it's own apache2 running on localhost only of course, but that this machine does query the live server.
+
+so if i'm working on my development machine (which is just good practice) and go from debugging general issues to specifically hunt for WCS settings,
+then i'm updating the live server with the new graphics settings.
+
+to try to copy such settings from a development couchdb to a live-server couchdb,
+is to invite tons upon tons of extra work, which will sometimes be nearly impossible to replicate accurately.
+
 # Questions, bug-reports, feature-requests?
 you can post these to rv.nicer.app@gmail.com, and i will try to respond within 72 hours, even on weekends.
 
