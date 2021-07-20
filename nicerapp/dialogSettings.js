@@ -1,5 +1,12 @@
 na.ds = na.dialogSettings = {
-    settings : { current : { firstRun : true, forDialogID : 'siteContent' } }, 
+    settings : { 
+        current : { 
+            firstRun : true, 
+            forDialogID : 'siteContent',
+            selectedButtonID : 'btnSelectBackgroundColor',
+            selectedSetting : 'backgroundColor'
+        } 
+    }, 
     onload : function (forDialogID) {
         na.ds.settings.current.forDialogID = forDialogID;
         var ac = {
@@ -218,18 +225,16 @@ na.ds = na.dialogSettings = {
             na.site.settings.buttons['#'+el.id] = new naVividButton(el);
         });
         
-        if (na.ds.settings.current.firstRun) {
-            na.ds.settings.current.firstRun = false;
-            //setTimeout (function() {
-                na.ds.settings.current.selectedButtonID = 'btnSelectBackgroundColor';
-                na.ds.selectBackground_color();
-            //}, 500);
-        } else {
-            var btnID = na.ds.settings.current.selectedButtonID;
-            $('#'+btnID).trigger('click');
-        }
         
-        setTimeout (na.ds.onresize, 1000);
+        /*var btnID = na.ds.settings.current.selectedButtonID;
+        debugger;
+        $('#'+btnID).trigger('click');
+        */
+        
+        var tabPage = na.ds.settings.current.selectedSetting;
+        na.ds.whichSettingSelected(tabPage);
+        
+        setTimeout (na.ds.onresize, 750);
     },
     
     onresize : function () { 
@@ -287,7 +292,7 @@ na.ds = na.dialogSettings = {
     },
     
     whichSettingSelected : function (event) {
-        var whichSetting = $(event.currentTarget).val();
+        if (typeof event=='object') whichSetting = $(event.currentTarget).val(); else whichSetting = event;
         switch (whichSetting) {
             case 'border' : na.dialogSettings.selectBorderSettings(event); break;
             case 'boxShadow' : na.dialogSettings.selectBoxShadowSettings(event); break;

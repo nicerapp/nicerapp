@@ -66,7 +66,12 @@ class naVividDialog {
         $('.vdSettings', t.el).click (function() {
             $(this).stop(true,true).animate({opacity:0.0001},'fast');
         });
-        
+        /* see displaySettingsDialog_displayDialog in this file instead
+        $('.btnSettings', t.el).click (function() {
+            var btnID = this.id;
+            $('#'+btnID).trigger('click');
+            setTimeout (na.ds.onresize, 500);
+        });*/
     };
     
     displaySettingsDialog (t, dialogID) {
@@ -97,7 +102,10 @@ class naVividDialog {
     displaySettingsDialog_displayDialog (t) {
         if (!na.desktop.settings.visibleDivs.includes('#siteToolbarDialogSettings')) na.desktop.settings.visibleDivs.push('#siteToolbarDialogSettings');
         na.desktop.resize(function(el) {
-            if (el && el.id=='siteToolbarDialogSettings') na.dialogSettings.onload(t.settings.current.dialogID);
+            if (el && el.id=='siteToolbarDialogSettings') {
+                na.dialogSettings.onload(t.settings.current.dialogID);
+                // setTimeout (na.ds.onresize, 500); see na.dialogsettings.onload() (near the end of that function) instead
+            }
         });
     }
 }
