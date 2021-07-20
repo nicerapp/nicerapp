@@ -1,33 +1,33 @@
 #!/bin/bash
-if [ ! -d nicerapp/siteData ]; then 
-	mkdir nicerapp/siteData
+if [ ! -d nicer.app/siteData ]; then 
+	mkdir nicer.app/siteData
 fi
-chmod 750 nicerapp/siteData
-chown rene:www-data nicerapp/siteData
+chmod 750 nicer.app/siteData
+chown rene:www-data nicer.app/siteData
 
-if [ ! -d nicerapp/siteData/nicerapp ]; then 
-	mkdir nicerapp/siteData/nicerapp
+if [ ! -d nicer.app/siteData/nicerapp ]; then 
+	mkdir nicer.app/siteData/nicerapp
 fi
-chmod 750 nicerapp/siteData/nicerapp
-chown rene:www-data nicerapp/siteData/nicerapp
-if [ ! -d nicerapp/apps/nicerapp/news/newsItems ]; then 
-	mkdir nicerapp/apps/nicerapp/news/newsItems 
+chmod 750 nicer.app/siteData/nicerapp
+chown rene:www-data nicer.app/siteData/nicerapp
+if [ ! -d nicer.app/apps/nicer.app/news/newsItems ]; then 
+	mkdir nicer.app/apps/nicer.app/news/newsItems 
 fi
-if [ ! -d nicerapp/apps/nicerapp/webmail-1.0.0/temp ]; then 
-	mkdir nicerapp/apps/nicerapp/webmail-1.0.0/temp 
+if [ ! -d nicer.app/apps/nicer.app/webmail-1.0.0/temp ]; then 
+	mkdir nicer.app/apps/nicer.app/webmail-1.0.0/temp 
 fi
 
-touch nicerapp/domainConfigs/nicerapp/index.combined.css nicerapp/domainConfigs/nicerapp/index.combined.cssTheme.dark.css nicerapp/domainConfigs/nicerapp/index.combined.cssTheme.light.css nicerapp/domainConfigs/nicerapp/index.combined.js 
-chmod -R 770 nicerapp/domainConfigs/nicerapp/index.combined.css nicerapp/domainConfigs/nicerapp/index.combined.cssTheme.dark.css nicerapp/domainConfigs/nicerapp/index.combined.cssTheme.light.css nicerapp/domainConfigs/nicerapp/index.combined.js
-touch nicerapp/domainConfigs/nicerapp/index.combined.css nicerapp/domainConfigs/nicerapp/index.combined.cssTheme.dark.css nicerapp/domainConfigs/nicerapp/index.combined.cssTheme.light.css nicerapp/domainConfigs/nicerapp/index.combined.js
-chmod -R 770 nicerapp/domainConfigs/nicerapp/index.combined.css nicerapp/domainConfigs/nicerapp/index.combined.cssTheme.dark.css nicerapp/domainConfigs/nicerapp/index.combined.cssTheme.light.css nicerapp/domainConfigs/nicerapp/index.combined.js 
-chmod -R 770 nicerapp/apps/nicerapp/news/newsItems nicerapp/siteMedia/backgrounds/iframe/youtube nicerapp/siteMedia/backgrounds.offline nicerapp/siteMedia.thumbs nicerapp/siteCache nicerapp/siteData
+touch nicer.app/domainConfigs/nicer.app/index.combined.css nicer.app/domainConfigs/nicer.app/index.combined.cssTheme.dark.css nicer.app/domainConfigs/nicer.app/index.combined.cssTheme.light.css nicer.app/domainConfigs/nicer.app/index.combined.js 
+chmod -R 770 nicer.app/domainConfigs/nicer.app/index.combined.css nicer.app/domainConfigs/nicer.app/index.combined.cssTheme.dark.css nicer.app/domainConfigs/nicer.app/index.combined.cssTheme.light.css nicer.app/domainConfigs/nicer.app/index.combined.js
+touch nicer.app/domainConfigs/nicer.app/index.combined.css nicer.app/domainConfigs/nicer.app/index.combined.cssTheme.dark.css nicer.app/domainConfigs/nicer.app/index.combined.cssTheme.light.css nicer.app/domainConfigs/nicer.app/index.combined.js
+chmod -R 770 nicer.app/domainConfigs/nicer.app/index.combined.css nicer.app/domainConfigs/nicer.app/index.combined.cssTheme.dark.css nicer.app/domainConfigs/nicer.app/index.combined.cssTheme.light.css nicer.app/domainConfigs/nicer.app/index.combined.js 
+chmod -R 770 nicer.app/apps/nicer.app/news/newsItems nicer.app/siteMedia/backgrounds/iframe/youtube nicer.app/siteMedia/backgrounds.offline nicer.app/siteMedia.thumbs nicer.app/siteCache nicer.app/siteData
 
-touch nicerapp/domainConfigs/said.by/index.combined.css nicerapp/domainConfigs/said.by/index.combined.cssTheme.dark.css nicerapp/domainConfigs/said.by/index.combined.cssTheme.light.css nicerapp/domainConfigs/said.by/index.combined.js
-chmod -R 770 nicerapp/domainConfigs/said.by/index.combined.css nicerapp/domainConfigs/said.by/index.combined.cssTheme.dark.css nicerapp/domainConfigs/said.by/index.combined.cssTheme.light.css nicerapp/domainConfigs/said.by/index.combined.js 
-chmod -R 770 nicerapp/apps/nicerapp/news/newsItems nicerapp/apps/nicerapp/webmail-1.0.0/temp
+touch nicer.app/domainConfigs/said.by/index.combined.css nicer.app/domainConfigs/said.by/index.combined.cssTheme.dark.css nicer.app/domainConfigs/said.by/index.combined.cssTheme.light.css nicer.app/domainConfigs/said.by/index.combined.js
+chmod -R 770 nicer.app/domainConfigs/said.by/index.combined.css nicer.app/domainConfigs/said.by/index.combined.cssTheme.dark.css nicer.app/domainConfigs/said.by/index.combined.cssTheme.light.css nicer.app/domainConfigs/said.by/index.combined.js 
+chmod -R 770 nicer.app/apps/nicer.app/news/newsItems nicer.app/apps/nicer.app/webmail-1.0.0/temp
 
 
 
-#chown -R root:root nicerapp/selfHealer
-#chmod -R 640 nicerapp/selfHealer
+#chown -R root:root nicer.app/selfHealer
+#chmod -R 640 nicer.app/selfHealer
