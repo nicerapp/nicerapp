@@ -54,7 +54,7 @@ class nicerAppCMS {
             }
         } else {    
             $app = null;
-            $titleFile = realpath(dirname(__FILE__).'/domainConfigs/'.$this->domain.'/index.title.php');
+            $titleFile = realpath(dirname(__FILE__)).'/domainConfigs/'.$this->domain.'/index.title.php';
         }
         if (!isset($app) && !file_exists($titleFile)) {
             trigger_error ('app.title.site.php missing for app=frontpage_of_site, $titleFile="'.$titleFile.'"', E_USER_ERROR);
