@@ -1,23 +1,23 @@
 #!/bin/sh
-cp -rf /home/rene/data1/htdocs/nicer.app/nicerapp/apps/nicerapp/cms/* /home/rene/data1/htdocs/said.by/nicerapp/apps/nicerapp/cms/
-chown -R rene:www-data /home/rene/data1/htdocs/said.by/nicerapp/apps/nicerapp/cms/*
-chmod -R 750 /home/rene/data1/htdocs/said.by/nicerapp/apps/nicerapp/cms/*
+cp -rf /home/rene/data1/htdocs/nicer.app/nicerapp/apps/nicer.app/cms/* /home/rene/data1/htdocs/said.by/nicerapp/apps/nicer.app/cms/
+chown -R rene:www-data /home/rene/data1/htdocs/said.by/nicerapp/apps/nicer.app/cms/*
+chmod -R 750 /home/rene/data1/htdocs/said.by/nicerapp/apps/nicer.app/cms/*
 
-cp -rf /home/rene/data1/htdocs/nicer.app/nicerapp/apps/nicerapp/cmsText/* /home/rene/data1/htdocs/said.by/nicerapp/apps/nicerapp/cmsText/
-chown -R rene:www-data /home/rene/data1/htdocs/said.by/nicerapp/apps/nicerapp/cmsText/*
-chmod -R 750 /home/rene/data1/htdocs/said.by/nicerapp/apps/nicerapp/cmsText/*
+cp -rf /home/rene/data1/htdocs/nicer.app/nicerapp/apps/nicer.app/cmsText/* /home/rene/data1/htdocs/said.by/nicerapp/apps/nicer.app/cmsText/
+chown -R rene:www-data /home/rene/data1/htdocs/said.by/nicerapp/apps/nicer.app/cmsText/*
+chmod -R 750 /home/rene/data1/htdocs/said.by/nicerapp/apps/nicer.app/cmsText/*
 
-cp -rf /home/rene/data1/htdocs/nicer.app/nicerapp/apps/nicerapp/cmsViewMedia/* /home/rene/data1/htdocs/said.by/nicerapp/apps/nicerapp/cmsViewMedia/
-chown -R rene:www-data /home/rene/data1/htdocs/said.by/nicerapp/apps/nicerapp/cmsViewMedia/*
-chmod -R 750 /home/rene/data1/htdocs/said.by/nicerapp/apps/nicerapp/cmsViewMedia/*
+cp -rf /home/rene/data1/htdocs/nicer.app/nicerapp/apps/nicer.app/cmsViewMedia/* /home/rene/data1/htdocs/said.by/nicerapp/apps/nicer.app/cmsViewMedia/
+chown -R rene:www-data /home/rene/data1/htdocs/said.by/nicerapp/apps/nicer.app/cmsViewMedia/*
+chmod -R 750 /home/rene/data1/htdocs/said.by/nicerapp/apps/nicer.app/cmsViewMedia/*
 
-cp -rf /home/rene/data1/htdocs/nicer.app/nicerapp/apps/nicerapp/diskText/* /home/rene/data1/htdocs/said.by/nicerapp/apps/nicerapp/diskText/
-chown -R rene:www-data /home/rene/data1/htdocs/said.by/nicerapp/apps/nicerapp/diskText/*
-chmod -R 750 /home/rene/data1/htdocs/said.by/nicerapp/apps/nicerapp/diskText/*
+cp -rf /home/rene/data1/htdocs/nicer.app/nicerapp/apps/nicer.app/diskText/* /home/rene/data1/htdocs/said.by/nicerapp/apps/nicer.app/diskText/
+chown -R rene:www-data /home/rene/data1/htdocs/said.by/nicerapp/apps/nicer.app/diskText/*
+chmod -R 750 /home/rene/data1/htdocs/said.by/nicerapp/apps/nicer.app/diskText/*
 
-cp -rf /home/rene/data1/htdocs/nicer.app/nicerapp/apps/nicerapp/analytics/* /home/rene/data1/htdocs/said.by/nicerapp/apps/nicerapp/analytics/
-chown -R rene:www-data /home/rene/data1/htdocs/said.by/nicerapp/apps/nicerapp/analytics/*
-chmod -R 750 /home/rene/data1/htdocs/said.by/nicerapp/apps/nicerapp/analytics/*
+cp -rf /home/rene/data1/htdocs/nicer.app/nicerapp/apps/nicer.app/analytics/* /home/rene/data1/htdocs/said.by/nicerapp/apps/nicer.app/analytics/
+chown -R rene:www-data /home/rene/data1/htdocs/said.by/nicerapp/apps/nicer.app/analytics/*
+chmod -R 750 /home/rene/data1/htdocs/said.by/nicerapp/apps/nicer.app/analytics/*
 
 cp -Rf /home/rene/data1/htdocs/nicer.app/nicerapp/domainConfigs/* /home/rene/data1/htdocs/said.by/nicerapp/domainConfigs/
 chown -R rene:www-data /home/rene/data1/htdocs/said.by/nicerapp/domainConfigs/*
