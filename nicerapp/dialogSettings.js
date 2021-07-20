@@ -3,8 +3,9 @@ na.ds = na.dialogSettings = {
         current : { 
             firstRun : true, 
             forDialogID : 'siteContent',
-            selectedButtonID : 'btnSelectBackgroundColor',
-            selectedSetting : 'backgroundColor'
+            //selectedButtonID : 'btnSelectBackgroundColor', // OBSOLETED
+            //selectedSetting : 'backgroundColor'
+            selectedSetting : 'boxShadow'
         } 
     }, 
     onload : function (forDialogID) {
@@ -225,7 +226,7 @@ na.ds = na.dialogSettings = {
         $('.vividButton, .vividButton_icon', $('#siteToolbarDialogSettings')[0]).each(function(idx,el){
             na.site.settings.buttons['#'+el.id] = new naVividButton(el);
         });
-        
+
         var tabPage = na.ds.settings.current.selectedSetting;
         na.ds.whichSettingSelected(tabPage);
         
@@ -409,6 +410,7 @@ na.ds = na.dialogSettings = {
     selectBorderSettings : function (event) {
         //var ct = $('#btnSelectBorderSettings')[0];
         //na.ds.onclick(ct);
+        na.ds.settings.current.selectedSetting = 'border';
         $('.dialogSettings_colorPicker').next().css ({ width : 230 });
         var w1 = $('#siteToolbarDialogSettings .vividDialogContent').width() - 25;
         $('.dialogSettingsComponent').css({ width : w1 });
@@ -439,10 +441,24 @@ na.ds = na.dialogSettings = {
         var evt2 = { currentTarget : $('#'+na.ds.settings.current.forDialogID)[0] };
         na.ds.boxSettingsSelected (evt2, false); //event.currentTarget === ct
     },
+    borderSettingsSelected : function (color) {
+        if (color) na.ds.settings.current.borderColor = color; else color = na.ds.settings.current.borderColor;
+        if (typeof color=='object') color = 'rgba('+color._r+', '+color._g+', '+color._b+', '+color._a+')'; // firefox bugfix
+        var 
+        bg = $('#'+na.ds.settings.current.forDialogID),
+        newBorder = $('#borderWidth').val() + 'px ' + $('#borderType').val() + ' ' + color,
+        newBorderRadius = parseInt($('#borderRadius').val());
+        
+        $(bg).css({ border : newBorder, borderRadius : newBorderRadius });
+        $('#'+na.ds.settings.current.forDialogID+' .vdBackground').css({borderRadius : newBorderRadius});
+        $('.boxShadow').css({ border : newBorder, borderRadius : newBorderRadius });
+        /*if (na.ds.settings.current.fireSaveTheme) */na.site.saveTheme();
+    },
     
     selectBoxShadowSettings : function (event) {
         //var ct = $('#btnSelectBorderSettings')[0];
         //na.ds.onclick(ct);
+        na.ds.settings.current.selectedSetting = 'boxShadow';
         $('.dialogSettings_colorPicker').next().css ({ width : 230 });
         var w1 = $('#siteToolbarDialogSettings .vividDialogContent').width() - 25;
         $('.dialogSettingsComponent').css({ width : w1 });
@@ -457,6 +473,23 @@ na.ds = na.dialogSettings = {
         h2 = $('#specificitySettings').height();
         //$('#boxShadowSettings').css({ height : h - h1 - h2 - 20 });
         $('#boxShadowSettings').fadeIn('fast', 'swing', function () {
+            var
+            div = $('#'+na.ds.settings.current.forDialogID),
+            //rgbaRegEx1a = /(rgba\(\d{1,3}\,\s*\d{1,3}\,\s*\d{1,3}\,\s*[\d.]+\){1}\s+[\d\.]+px\s+[\d\.]+px\s+\d\.]+px\s+[\w+]?)\,?/,
+            //rgbaRegEx1b = /(rgba\(\d{1,3}\,\s*\d{1,3}\,\s*\d{1,3}\,\s*[\d.]+\){1}\s+[\d\.]+px\s+[\d\.]+px\s+[\d\.]+px\s+[\d\.]+px\s+[\w+]?)\,?/,
+            //rgbRegEx = /(rgb\(\d{1,3}\,\s*\d{1,3}\,\s*\d{1,3})\).*/,
+            //test1a = $(div).css('boxShadow').match (rgbaRegEx1a),
+            //test1b = $(div).css('boxShadow').match (rgbaRegEx1b),
+            bs = $(div).css('boxShadow').split(', rgb');
+            html = '';
+            for (var i=1; i<bs.length; i++) { bs[i] = 'rgb'+bs[i]; };
+            for (var i=0; i<bs.length; i++) {
+                html += '<div id="boxShadow_'+i+'" class="boxShadow" onclick="na.ds.boxSettingsSelected(event)" style="border:'+$('#borderWidth').val()+'px solid '+na.ds.settings.current.borderColor+';background:'+$(div).css('background')+';box-shadow:'+bs[i]+';border-radius:'+parseInt($('#borderRadius').val())+'px;margin:5px;padding:5px;">ABC XYZ</div>';
+            };
+            debugger;
+            $('.boxShadow').remove();
+            $('#boxShadowControls').append(html);
+            
             $('#boxShadowSettings, .boxSettingsLabel, #boxShadowSettings > *').not('#boxShadowControls, #boxShadowColorpicker, .sp-container').css({display:'block'});
             $('#boxShadow').css({width:$('#borderSettings').width() - $('#labelBoxShadow').width() - 20 });
             $('.boxShadow').css({
@@ -477,21 +510,6 @@ na.ds = na.dialogSettings = {
         var evt2 = { currentTarget : $('#'+na.ds.settings.current.forDialogID)[0] };
         na.ds.boxSettingsSelected (evt2, false); //event.currentTarget === ct
     },
-    
-    borderSettingsSelected : function (color) {
-        if (color) na.ds.settings.current.borderColor = color; else color = na.ds.settings.current.borderColor;
-        if (typeof color=='object') color = 'rgba('+color._r+', '+color._g+', '+color._b+', '+color._a+')'; // firefox bugfix
-        var 
-        bg = $('#'+na.ds.settings.current.forDialogID),
-        newBorder = $('#borderWidth').val() + 'px ' + $('#borderType').val() + ' ' + color,
-        newBorderRadius = parseInt($('#borderRadius').val());
-        
-        $(bg).css({ border : newBorder, borderRadius : newBorderRadius });
-        $('#'+na.ds.settings.current.forDialogID+' .vdBackground').css({borderRadius : newBorderRadius});
-        $('.boxShadow').css({ border : newBorder, borderRadius : newBorderRadius });
-        /*if (na.ds.settings.current.fireSaveTheme) */na.site.saveTheme();
-    },
-    
     boxSettingsSelected : function (event, saveTheme) {
         if (event.currentTarget.id!==na.ds.settings.current.forDialogID) na.ds.settings.current.boxSettings = event.currentTarget;
         if (saveTheme!==false) saveTheme = true;
@@ -576,7 +594,6 @@ na.ds = na.dialogSettings = {
             $('#borderRadius').val(parseInt(br));
         }
     },
-    
     boxSettingsChanged : function (color) {
         if (color) $(na.ds.settings.current.boxSettings)[0].boxShadowColor = color; 
         else {
@@ -605,11 +622,9 @@ na.ds = na.dialogSettings = {
         $('#'+na.ds.settings.current.forDialogID).css ({ boxShadow : newBoxSetting });
         /*if (na.ds.settings.current.fireSaveTheme) */na.site.saveTheme();
     },
-    
     boxSettingsChanged_shadowColor : function (color) {
         na.ds.boxSettingsChanged(color);
     },
-    
     addBoxShadow : function () {
         var last = 0;
         $('.boxShadow').each(function(idx,el) {
@@ -625,7 +640,6 @@ na.ds = na.dialogSettings = {
         $('#boxShadowSpreadRadius').val(2);
         $('#boxShadowBlurRadius').val(2);
     },
-    
     deleteBoxShadow : function(evt) {
         if ( na.ds.settings.current.boxSettings !== $('#boxShadow_0')[0] ) {
             $(na.ds.settings.current.boxSettings).remove();
@@ -639,10 +653,9 @@ na.ds = na.dialogSettings = {
         na.ds.boxSettingsChanged();
     },
     
-    
-    
     selectBackground_color : function (event) {
         na.ds.onclick($('#btnSelectBackgroundColor')[0]);
+        na.ds.settings.current.selectedSetting = 'backgroundColor';
         $('.dialogSettingsComponent').not('.sp-container').fadeOut('fast');
         $('.dialogSettings_colorPicker').next().css ({ width : 230 });
         $('.sp-container').fadeIn('fast').css({top:8,opacity:1});
@@ -650,6 +663,7 @@ na.ds = na.dialogSettings = {
 
     selectBackground_folder : function (event) {
         na.ds.onclick($('#btnSelectBackgroundFolder')[0]);
+        na.ds.settings.current.selectedSetting = 'backgroundFolder';
         $('.dialogSettingsComponent').not('#dialogSettings_jsTree').fadeOut('fast');
         $('.dialogSettings_colorPicker').next().fadeOut('fast');
         $('#dialogSettings_jsTree').fadeIn('fast');
@@ -657,6 +671,8 @@ na.ds = na.dialogSettings = {
     
     selectBackground_image : function (event) {
         na.ds.onclick($('#btnSelectBackgroundImage')[0]);
+        na.ds.settings.current.selectedSetting = 'backgroundImage';
+
         $('.dialogSettingsComponent').not('#dialogSettings_photoAlbum, #dialogSettings_photoAlbum_specs').fadeOut('fast');
         setTimeout (function () {
             $('.dialogSettings_colorPicker').next().fadeOut('fast');
@@ -728,6 +744,7 @@ na.ds = na.dialogSettings = {
     
     selectTextSettings : function (updateTextSettingsControls) {
         na.ds.onclick($('#btnSelectTextSettings')[0]);
+        na.ds.settings.current.selectedSetting = 'text';
         $('.dialogSettingsComponent').not('#textSettings').fadeOut('fast');
         $('.dialogSettings_colorPicker').next().css ({ width : 230 }).fadeOut('fast');;
         $('#textSettings').fadeIn('fast', 'swing', na.ds.updateTextSettingsControls);
@@ -756,6 +773,7 @@ na.ds = na.dialogSettings = {
     
     selectTextShadowSettings : function (updateTextSettingsControls) {
         na.ds.onclick($('#btnSelectTextSettings')[0]);
+        na.ds.settings.current.selectedSetting = 'textShadow';
         $('.dialogSettingsComponent').not('#textSettings').fadeOut('fast');
         $('.dialogSettings_colorPicker').next().fadeOut('fast');
         $('#textShadowSettings').fadeIn('fast', 'swing', na.ds.updateTextSettingsControls);
