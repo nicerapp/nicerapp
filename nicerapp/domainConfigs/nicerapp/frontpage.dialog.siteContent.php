@@ -210,16 +210,14 @@
     Documentation is available at <a href="https://github.com/nicerapp/nicerapp#readme" target="naDocs">https://github.com/nicerapp/nicerapp#readme</a>.
     </p>
     
-    <p>2021/7jul/11sun 21:04 CET :</p>
+    <p>July 20th, 2021, 07:00am CET :</p>
     <p>
     If you now create an account on <a href="https://said.by" target="saidBy">https://said.by</a>,<br/>
-    <em>you can now edit the look of a window/dialog on sites made with my nicerapp software package</em> per page and per site for yourself (per app comes a little later).<br/>
+    <em>you can edit the look of a window/dialog on sites made with my nicerapp software package</em> per page and per site for yourself (per app comes a little later).<br/>
     You can also use the blogging features on that site to create articles which you can then, after publishing the article, get a very short and nice-looking URL for at my <a href="https://zoned.at" target="zonedAt">https://zoned.at</a>.<br/>
     </p>
     <p>
-    Site backgrounds are now saved in a cookie in all of the browsers used by Guest accounts (password is also 'Guest')<br/>
-    and in the database for anyone having his/her own account,<br/>
-    and can cosmetic settings be selected in the 'Site Window Settings' window, by hovering over the top-left part of any window (called a 'vividDialog' internally) on any nicerapp site, and clicking on the painters palette icon that then appears.<br/>
+    Cosmetic settings be selected in the 'Site Window Settings' window, by hovering over the top-left part of any window (called a 'vividDialog' internally) on any nicerapp site, and clicking on the painters palette icon that then appears.<br/>
     </p>
     <p>
     Development will not stop here.<br/>
