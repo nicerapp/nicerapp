@@ -2,6 +2,7 @@
 require_once (dirname(__FILE__).'/boot.php');
 require_once (dirname(__FILE__).'/3rd-party/sag/src/Sag.php');
 require_once (dirname(__FILE__).'/Sag-support-functions.php');
+global $naDebugAll;
 $debug = false;
 if ($debug) {
     ini_set('display_errors', 1);
