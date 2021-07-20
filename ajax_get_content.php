@@ -29,9 +29,9 @@
                     $filename = str_replace ($fileRoot, '', $filepath);
                     $dialogID = str_replace ('app.dialog.', '', $filename);
                     $dialogID = str_replace ('.php', '', $dialogID);
-                    if ($debug) { echo $filepath.'='; $filepath; echo PHP_EOL.PHP_EOL; die();}
+                    if ($debug) { echo '$filepath='.$filepath; echo PHP_EOL.PHP_EOL;  }
                     $arr = array ( $dialogID => execPHP($filepath) );
-                    if ($debug) { echo $filepath.'='; var_dump ($arr); echo PHP_EOL.PHP_EOL; }
+                    if ($debug) { echo $arr.'='; var_dump ($arr); echo PHP_EOL.PHP_EOL; die(); }
                     //$arr = array ( $dialogID => $filepath );
                     $ret = array_merge ($ret, $arr);
                 }
