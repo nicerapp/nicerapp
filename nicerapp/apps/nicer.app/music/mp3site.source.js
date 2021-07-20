@@ -90,7 +90,7 @@ var mp3site = {
 
 		var ajaxCommand = {
 			type : 'GET',
-			url : '/nicerapp/apps/nicerapp/music/music/'+naLocationBarInfo['apps']['music']['set']+'/' + file + '.json',
+			url : '/nicerapp/apps/nicer.app/music/music/'+naLocationBarInfo['apps']['music']['set']+'/' + file + '.json',
             error: function(l0_jqXHR, l0_textStatus, l0_errorThrown) {
 				var html = '';
                 html += '<div style="height:15px;">&nbsp;</div>';
@@ -103,6 +103,7 @@ var mp3site = {
 			success : function (json, ts) {
 				var mixTitle = file.replace ('- DJ FireSnake.mp3','').replace('.mp3','');
 				var mixLoc = file.replace (' - DJ FireSnake.mp3','').replace('.mp3','').replace(/ /g, '_');
+                json.title = json.title.replace (' - DJ FireSnake.mp3','').replace('.mp3','').replace(/ /g, '_');
 				//window.History.pushState (null, mp3site.language.siteTitle + ' - ' + mixTitle, na.site.globals.urls.app+'/musicPlayer(play\''+mixLoc+'\')');
 			
 				if (typeof json!=='object') json = eval ('('+json+') ');
