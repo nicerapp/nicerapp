@@ -144,7 +144,7 @@ var mp3site = {
             //setTimeout (function () {
                 if (!firstRun) {
                     var 
-                    mp3 = '/nicerapp/apps/nicerapp/music/music/'+naLocationBarInfo['apps']['music']['set']+'/' + file;
+                    mp3 = '/nicerapp/apps/nicer.app/music/music/'+naLocationBarInfo['apps']['music']['set']+'/' + file;
                     $('#audioTag')[0].src = mp3;
                     $('#audioTag')[0].play();
                     mp3site.settings.stopped = false;
