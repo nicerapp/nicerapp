@@ -13,5 +13,5 @@ sudo chmod -R 777 ../RAM_disk
 ./setPermissions.sh
 #sudo nice -n -19 php nicerapp/selfHealer/run.php &
 
-sudo rm nicerapp/apps/nicerapp/news/crontabEntry_manageDatabase.lock.txt
-nice -n 19 php nicerapp/apps/nicerapp/news/crontabEntry_manageDatabase.php & 
+sudo rm nicerapp/apps/nicer.app/news/crontabEntry_manageDatabase.lock.txt
+nice -n 19 php nicerapp/apps/nicer.app/news/crontabEntry_manageDatabase.php & 
