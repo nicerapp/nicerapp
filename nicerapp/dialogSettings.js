@@ -417,12 +417,6 @@ na.ds = na.dialogSettings = {
         //$('#borderSettings').children().css({ width : w1 });
         $('.dialogSettingsComponent').not('#borderSettings').fadeOut('fast');
         $('.dialogSettings_colorPicker').next().fadeOut('fast');
-        var 
-        w = $('#siteToolbarDialogSettings').width(),
-        h = $('#siteToolbarDialogSettings').height(),
-        h1 = $('#specificitySettings').position().top,
-        h2 = $('#specificitySettings').height();
-        //$('#borderSettings').css({ height : h - h1 - h2 - 20 });
         $('#borderSettings').fadeIn('fast', 'swing', function () {
             $('#borderSettings, .boxSettingsLabel, #borderSettings > *').not('#boxShadowControls, #borderColorpicker, .sp-container').css({display:'block'});
             $('#boxShadow').css({width:$('#borderSettings').width() - $('#labelBoxShadow').width() - 20 });
@@ -466,27 +460,15 @@ na.ds = na.dialogSettings = {
         $('.dialogSettingsComponent').css({ width : w1 });
         $('.dialogSettingsComponent').not('#boxShadowSettings').fadeOut('fast');
         $('.dialogSettings_colorPicker').next().fadeOut('fast');
-        var 
-        w = $('#siteToolbarDialogSettings').width(),
-        h = $('#siteToolbarDialogSettings').height(),
-        h1 = $('#specificitySettings').position().top,
-        h2 = $('#specificitySettings').height();
-        //$('#boxShadowSettings').css({ height : h - h1 - h2 - 20 });
         $('#boxShadowSettings').fadeIn('fast', 'swing', function () {
             var
             div = $('#'+na.ds.settings.current.forDialogID),
-            //rgbaRegEx1a = /(rgba\(\d{1,3}\,\s*\d{1,3}\,\s*\d{1,3}\,\s*[\d.]+\){1}\s+[\d\.]+px\s+[\d\.]+px\s+\d\.]+px\s+[\w+]?)\,?/,
-            //rgbaRegEx1b = /(rgba\(\d{1,3}\,\s*\d{1,3}\,\s*\d{1,3}\,\s*[\d.]+\){1}\s+[\d\.]+px\s+[\d\.]+px\s+[\d\.]+px\s+[\d\.]+px\s+[\w+]?)\,?/,
-            //rgbRegEx = /(rgb\(\d{1,3}\,\s*\d{1,3}\,\s*\d{1,3})\).*/,
-            //test1a = $(div).css('boxShadow').match (rgbaRegEx1a),
-            //test1b = $(div).css('boxShadow').match (rgbaRegEx1b),
             bs = $(div).css('boxShadow').split(', rgb');
             html = '';
             for (var i=1; i<bs.length; i++) { bs[i] = 'rgb'+bs[i]; };
             for (var i=0; i<bs.length; i++) {
                 html += '<div id="boxShadow_'+i+'" class="boxShadow" onclick="na.ds.boxSettingsSelected(event)" style="border:'+$('#borderWidth').val()+'px solid '+na.ds.settings.current.borderColor+';background:'+$(div).css('background')+';box-shadow:'+bs[i]+';border-radius:'+parseInt($('#borderRadius').val())+'px;margin:5px;padding:5px;">ABC XYZ</div>';
             };
-            debugger;
             $('.boxShadow').remove();
             $('#boxShadowControls').append(html);
             
