@@ -23,7 +23,7 @@ if (getLocationBarInfo()['apps']['music']['set']==='index') {
     require_once(dirname(__FILE__).'/frontpage.php');
 } else {
     $setPath = dirname(__FILE__).'/music/'.getLocationBarInfo()['apps']['music']['set'];
-    var_dump ($setPath); die();
+    //var_dump ($setPath); die();
     $files = getFilePathList ($setPath, true, FILE_FORMATS, array('file'));
     //var_dump ($files); die();
     foreach ($files as $idx => $filepath) {
