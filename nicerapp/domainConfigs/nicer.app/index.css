@@ -658,11 +658,6 @@ select[multiple] {
   background-image: linear-gradient(to top, rgba(255,255,255,0.7), rgba(255,255,255,0.7) 33%);
 }
 
-label {
-  font-size: 1.125rem;
-  font-weight: 500;
-}
-
 .select + label {
   margin-top: 2rem;
 }
@@ -673,6 +668,12 @@ label {
   align-content: center;
   justify-content: space-between;
   align-items : center;
+  margin : 5px;
+  padding : 10px;
+  background : rgba(0,0,0,0.55);
+  border-radius : 10px;
+  box-shadow : inset 1px 1px 2px 1px rgba(0,0,0,0.8);
+  
 }
 #specificitySettings::before, #specificitySettings::after {
   content: '';
@@ -732,7 +733,7 @@ label {
     width : 50px;
     height : 50px;
 }    
-#boxShadow img, #textShadow img {
+#boxShadowControls img, #textShadowControls img {
     width : 50px;
     height : 50px;
 }
@@ -764,8 +765,7 @@ label {
     display : none;
 }
 label {
-    width : 170px;
-    font-weight : bold;
+    width : 100px;
     display : inline-block;
 }
 .radioInput {

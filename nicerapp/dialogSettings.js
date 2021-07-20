@@ -11,7 +11,7 @@ na.ds = na.dialogSettings = {
         na.ds.settings.current.forDialogID = forDialogID;
         var ac = {
             type : 'GET',
-            url : '/nicerapp/apps/nicerapp/cms/ajax_getTreeNodes.php',
+            url : '/nicerapp/apps/nicer.app/cms/ajax_getTreeNodes.php',
             success : function (data, ts, xhr) {
                 let dat = JSON.parse(data);
                 na.ds.settings.current.db = dat;
@@ -144,13 +144,14 @@ na.ds = na.dialogSettings = {
         );
         na.ds.settings.current.borderColor = c2;
         
-        $('#siteToolbarDialogSettings').css({ display : 'flex' });
+        $('#siteToolbarDialogSettings').css({ display : 'flex', flexDirection : 'row', flexWrap : 'wrap' });
         
         var x = $('#colorpicker').css('display'), y = 'abc';
         //debugger;
         $('#colorpicker').css({display:'block'}).spectrum ({
             color:c, 
-            type:'flat', 
+            type:'flat',
+            showPalette : false,
             clickoutFiresChange : false, 
             change : function (color) {
                 //debugger;
@@ -161,10 +162,10 @@ na.ds = na.dialogSettings = {
             }});
         //if (na.ds.settings.current.selectedButtonID!=='btnSelectBackgroundColor') $('#colorpicker').next().css({display:x});
         var x = $('#borderColorpicker').css('display');
-        $('#borderColorpicker').css({display:'block'}).spectrum ({color:c2, type: "flat", clickoutFiresChange : false, change : na.ds.borderSettingsSelected});
+        $('#borderColorpicker').css({display:'block'}).spectrum ({color:c2, type: "flat", showPalette : false, clickoutFiresChange : false, change : na.ds.borderSettingsSelected});
         //if (na.ds.settings.current.selectedButtonID!=='btnSelectBorderSettings') $('#borderColorpicker').next().css({display:x});
         
-        if ($(window).width() < na.site.globals.reallySmallDeviceWidth) $('.sp-container').css({width:$(window).width()-35});
+        //if ($(window).width() < na.site.globals.reallySmallDeviceWidth) $('.sp-container').css({width:$(window).width()-35});
         //$('.sp-container').addClass('dialogSettingsComponent').css({position:'absolute'});
 
         
@@ -258,6 +259,7 @@ na.ds = na.dialogSettings = {
                 - 70
         }).css({display:display});
 
+        /*
         var 
         w = $('#siteToolbarDialogSettings').width(),
         h = $('#siteToolbarDialogSettings').height(),
@@ -266,7 +268,10 @@ na.ds = na.dialogSettings = {
         $('#siteToolbarDialogSettings .vividScrollpane').css({
             width : w - 15,
             height : h - 20
-        });
+        });*/
+        
+        $('.dialogSettings_colorPicker').next().css ({ width : 230 });
+        $('#siteToolbarDialogSettings label', t.el).css ({ float : 'left' });
     },
     
     onclick : function (el, fireSaveTheme) {
@@ -404,7 +409,10 @@ na.ds = na.dialogSettings = {
     selectBorderSettings : function (event) {
         //var ct = $('#btnSelectBorderSettings')[0];
         //na.ds.onclick(ct);
-        $('.dialogSettingsComponent').css({ width : $('#siteToolbarDialogSettings .vividDialogContent').width() - 25 });
+        $('.dialogSettings_colorPicker').next().css ({ width : 230 });
+        var w1 = $('#siteToolbarDialogSettings .vividDialogContent').width() - 25;
+        $('.dialogSettingsComponent').css({ width : w1 });
+        //$('#borderSettings').children().css({ width : w1 });
         $('.dialogSettingsComponent').not('#borderSettings').fadeOut('fast');
         $('.dialogSettings_colorPicker').next().fadeOut('fast');
         var 
@@ -412,27 +420,22 @@ na.ds = na.dialogSettings = {
         h = $('#siteToolbarDialogSettings').height(),
         h1 = $('#specificitySettings').position().top,
         h2 = $('#specificitySettings').height();
-        $('#borderSettings').css({ height : h - h1 - h2 - 20 });
+        //$('#borderSettings').css({ height : h - h1 - h2 - 20 });
         $('#borderSettings').fadeIn('fast', 'swing', function () {
-            $('#borderSettings').css({display:'flex'});
-            $('.boxSettingsLabel').css({width:$('.boxSettingsLabel').width()+10});
+            $('#borderSettings, .boxSettingsLabel, #borderSettings > *').not('#boxShadowControls, #borderColorpicker, .sp-container').css({display:'block'});
             $('#boxShadow').css({width:$('#borderSettings').width() - $('#labelBoxShadow').width() - 20 });
             $('.boxShadow').css({
+                background : $('#'+na.ds.s.c.forDialogID+' .vdBackground').css('background'),
                 border:$('#borderWidth').val()+'px '+$('#borderType').val()+' '+$('#borderColorpicker').val(),
                 borderRadius:parseInt($('#borderRadius').val())
             });
-            $('#borderType').css({width:$('#borderSettings').width() - $('#labelBorderType').width() - 20 });
-            $('#borderWidth').css({width:$('#borderSettings').width() - $('#labelBorderWidth').width() - 20 });
-            $('#borderRadius').css({width:$('#borderSettings').width() - $('#labelBorderRadius').width() - 20 });
-            $('#boxShadowInsetClear').css({width:$('#borderSettings').width() - $('#labelBoxShadowInset').width() - 35 });
-            $('#boxShadowXoffset').css({width:$('#borderSettings').width() - $('#labelBoxShadowXoffset').width() - 20 });
-            $('#boxShadowYoffset').css({width:$('#borderSettings').width() - $('#labelBoxShadowYoffset').width() - 20 });
-            $('#boxShadowSpreadRadius').css({width:$('#borderSettings').width() - $('#labelBoxShadowSpreadRadius').width() - 20 });
-            $('#boxShadowBlurRadius').css({width:$('#borderSettings').width() - $('#labelBoxShadowBlurRadius').width() - 20 });
-            $('#labelBoxShadowColor').css({width:$('#borderSettings').width() - 10});
+            var w3 = 'calc(100% - 108px)';
+            $('#borderType').css({ width : w3 });
+            $('#borderWidth').css({ width : w3 });
+            $('#borderRadius').css({ width : w3 });
         });
-        $('#boxShadowColorpicker').spectrum ({color:'rgba(0,0,0,0.5)', type: "flat", clickoutFiresChange : false, change : na.ds.boxSettingsChanged_shadowColor});
-        $('#borderColorpicker').spectrum ({color:na.ds.settings.current.borderColor, type: "flat", clickoutFiresChange : false, change : na.ds.borderSettingsSelected});
+        $('#boxShadowColorpicker').spectrum ({color:'rgba(0,0,0,0.5)', type: "flat", showPalette : false, clickoutFiresChange : false, change : na.ds.boxSettingsChanged_shadowColor});
+        $('#borderColorpicker').spectrum ({color:na.ds.settings.current.borderColor, type: "flat", showPalette : false, clickoutFiresChange : false, change : na.ds.borderSettingsSelected});
         var evt2 = { currentTarget : $('#'+na.ds.settings.current.forDialogID)[0] };
         na.ds.boxSettingsSelected (evt2, false); //event.currentTarget === ct
     },
@@ -440,7 +443,11 @@ na.ds = na.dialogSettings = {
     selectBoxShadowSettings : function (event) {
         //var ct = $('#btnSelectBorderSettings')[0];
         //na.ds.onclick(ct);
-        $('.dialogSettingsComponent').css({ width : $('#siteToolbarDialogSettings .vividDialogContent').width() - 25 });
+        $('.dialogSettings_colorPicker').next().css ({ width : 230 });
+        var w1 = $('#siteToolbarDialogSettings .vividDialogContent').width() - 25;
+        $('.dialogSettingsComponent').css({ width : w1 });
+        //$('#boxShadowSettings').children().css({ width : w1 });
+        $('.dialogSettingsComponent').css({ width : w1 });
         $('.dialogSettingsComponent').not('#boxShadowSettings').fadeOut('fast');
         $('.dialogSettings_colorPicker').next().fadeOut('fast');
         var 
@@ -448,26 +455,25 @@ na.ds = na.dialogSettings = {
         h = $('#siteToolbarDialogSettings').height(),
         h1 = $('#specificitySettings').position().top,
         h2 = $('#specificitySettings').height();
-        $('#boxShadowSettings').css({ height : h - h1 - h2 - 20 });
+        //$('#boxShadowSettings').css({ height : h - h1 - h2 - 20 });
         $('#boxShadowSettings').fadeIn('fast', 'swing', function () {
-            $('.boxSettingsLabel').css({width:$('.boxSettingsLabel').width()+10});
+            $('#boxShadowSettings, .boxSettingsLabel, #boxShadowSettings > *').not('#boxShadowControls, #boxShadowColorpicker, .sp-container').css({display:'block'});
             $('#boxShadow').css({width:$('#borderSettings').width() - $('#labelBoxShadow').width() - 20 });
             $('.boxShadow').css({
+                background : $('#'+na.ds.s.c.forDialogID+' .vdBackground').css('background'),
                 border:$('#borderWidth').val()+'px '+$('#borderType').val()+' '+$('#borderColorpicker').val(),
                 borderRadius:parseInt($('#borderRadius').val())
             });
-            $('#borderType').css({width:$('#borderSettings').width() - $('#labelBorderType').width() - 20 });
-            $('#borderWidth').css({width:$('#borderSettings').width() - $('#labelBorderWidth').width() - 20 });
-            $('#borderRadius').css({width:$('#borderSettings').width() - $('#labelBorderRadius').width() - 20 });
-            $('#boxShadowInsetClear').css({width:$('#borderSettings').width() - $('#labelBoxShadowInset').width() - 35 });
-            $('#boxShadowXoffset').css({width:$('#borderSettings').width() - $('#labelBoxShadowXoffset').width() - 20 });
-            $('#boxShadowYoffset').css({width:$('#borderSettings').width() - $('#labelBoxShadowYoffset').width() - 20 });
-            $('#boxShadowSpreadRadius').css({width:$('#borderSettings').width() - $('#labelBoxShadowSpreadRadius').width() - 20 });
-            $('#boxShadowBlurRadius').css({width:$('#borderSettings').width() - $('#labelBoxShadowBlurRadius').width() - 20 });
-            $('#labelBoxShadowColor').css({width:$('#borderSettings').width() - 10});
+            var w3 = 'calc(100% - 108px)';
+            $('#boxShadowInsetClear').css({ width : w3 });
+            $('#boxShadowXoffset').css({ width : w3 });
+            $('#boxShadowYoffset').css({ width : w3 });
+            $('#boxShadowSpreadRadius').css({ width : w3 });
+            $('#boxShadowBlurRadius').css({ width : w3 });
+            //$('#labelBoxShadowColor').css({ width : $('#borderSettings').width() - 10 });
         });
-        $('#boxShadowColorpicker').spectrum ({color:'rgba(0,0,0,0.5)', type: "flat", clickoutFiresChange : false, change : na.ds.boxSettingsChanged_shadowColor});
-        $('#borderColorpicker').spectrum ({color:na.ds.settings.current.borderColor, type: "flat", clickoutFiresChange : false, change : na.ds.borderSettingsSelected});
+        $('#boxShadowColorpicker').spectrum ({color:'rgba(0,0,0,0.5)', type: "flat", showPalette : false, clickoutFiresChange : false, change : na.ds.boxSettingsChanged_shadowColor});
+        $('#borderColorpicker').spectrum ({color:na.ds.settings.current.borderColor, type: "flat", showPalette : false, clickoutFiresChange : false, change : na.ds.borderSettingsSelected});
         var evt2 = { currentTarget : $('#'+na.ds.settings.current.forDialogID)[0] };
         na.ds.boxSettingsSelected (evt2, false); //event.currentTarget === ct
     },
@@ -495,17 +501,21 @@ na.ds = na.dialogSettings = {
         b = $(event.currentTarget).css('border');
         
         if (!b) b = $(event.currentTarget).css('borderTopWidth')+' '+$(event.currentTarget).css('borderTopStyle')+' '+$(event.currentTarget).css('borderTopColor');
+        
+        $('.boxShadow').css({ 
+            background : $('#'+na.ds.s.c.forDialogID+' .vdBackground').css('background')
+        });
 
         if (bs == 'none') {
             var
-            sliders = [ 2, 2, 2, 2 ];
+            sliders = [ 2, 2, 4, 2 ];
             $('#boxShadowColorpicker').spectrum('set', 'rgba(0,0,0,0.7)');
             $('#boxShadowInset')[0].checked = false;
             na.ds.settings.current.borderColor = $('#borderColorpicker').val();
         } else {
             if (bs.match('inset')) $('#boxShadowInset')[0].checked = true; else $('#boxShadowInset')[0].checked = false;
 
-            // NOTE (for beginners) : google for 'regex tester', and use one, if you're going to make your own regular expressions.
+            // NOTE (for beginners) : re1a through re2b are regular expressions. you can test your regexs at https://regex101.com/
             var 
             re1a = /^rgba\((\d+),\s*(\d+),\s*(\d+),\s*([\d\.]+)\)\s+(\d+px)\s+(\d+px)\s+(\d+px)\s+(\d+px)\s*(\w+)*,?.*$/,
             re1b = /^rgb\((\d+),\s*(\d+),\s*(\d+)\)\s+(\d+px)\s+(\d+px)\s+(\d+px)\s*(\w+)?,?.*$/,
@@ -634,6 +644,7 @@ na.ds = na.dialogSettings = {
     selectBackground_color : function (event) {
         na.ds.onclick($('#btnSelectBackgroundColor')[0]);
         $('.dialogSettingsComponent').not('.sp-container').fadeOut('fast');
+        $('.dialogSettings_colorPicker').next().css ({ width : 230 });
         $('.sp-container').fadeIn('fast').css({top:8,opacity:1});
     },
 
@@ -718,7 +729,7 @@ na.ds = na.dialogSettings = {
     selectTextSettings : function (updateTextSettingsControls) {
         na.ds.onclick($('#btnSelectTextSettings')[0]);
         $('.dialogSettingsComponent').not('#textSettings').fadeOut('fast');
-        $('.dialogSettings_colorPicker').next().fadeOut('fast');
+        $('.dialogSettings_colorPicker').next().css ({ width : 230 }).fadeOut('fast');;
         $('#textSettings').fadeIn('fast', 'swing', na.ds.updateTextSettingsControls);
         
         var
@@ -731,13 +742,13 @@ na.ds = na.dialogSettings = {
         
         $('#textColorpicker').spectrum ({
             color:na.ds.settings.current.textColor, 
-            type: "flat", 
+            type: "flat", showPalette : false, 
             clickoutFiresChange : false, 
             change : na.ds.textSettingsSelected_textColor
         });
         $('#textShadowColorpicker').spectrum ({
             color:na.ds.settings.current.textShadowColor, 
-            type: "flat", 
+            type: "flat", showPalette : false, 
             clickoutFiresChange : false, 
             change : na.ds.textSettingsSelected_textShadowColor
         });
@@ -759,13 +770,13 @@ na.ds = na.dialogSettings = {
         
         $('#textColorpicker').spectrum ({
             color:na.ds.settings.current.textColor, 
-            type: "flat", 
+            type: "flat", showPalette : false, 
             clickoutFiresChange : false, 
             change : na.ds.textSettingsSelected_textColor
         });
         $('#textShadowColorpicker').spectrum ({
             color:na.ds.settings.current.textShadowColor, 
-            type: "flat", 
+            type: "flat", showPalette : false, 
             clickoutFiresChange : false, 
             change : na.ds.textSettingsSelected_textShadowColor
         });
@@ -819,13 +830,13 @@ na.ds = na.dialogSettings = {
         
         $('#textColorpicker').spectrum ({
             color:na.ds.settings.current.textColor, 
-            type: "flat", 
+            type: "flat", showPalette : false, 
             clickoutFiresChange : false, 
             change : na.ds.textSettingsSelected_textColor
         });
         $('#textShadowColorpicker').spectrum ({
             color:na.ds.settings.current.textShadowColor, 
-            type: "flat", 
+            type: "flat", showPalette : false, 
             clickoutFiresChange : false, 
             change : na.ds.textSettingsSelected_textShadowColor
         });
@@ -955,3 +966,5 @@ na.ds = na.dialogSettings = {
         }
     }
 };
+na.ds.s = na.ds.settings;
+na.ds.s.c = na.ds.s.current;

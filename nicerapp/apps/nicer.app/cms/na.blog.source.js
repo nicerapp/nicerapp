@@ -4,7 +4,7 @@ na.blog = {
     onload : async function() {
         var ac = {
             type : 'GET',
-            url : '/nicerapp/apps/nicerapp/cms/ajax_getTreeNodes.php',
+            url : '/nicerapp/apps/nicer.app/cms/ajax_getTreeNodes.php',
             success : function (data, ts, xhr) {
                 let dat = JSON.parse(data);
                 na.blog.settings.current.db = dat;

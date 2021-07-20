@@ -93,7 +93,7 @@ $htmlTitleMeta = file_get_contents ($setPath.'/index.title_meta.html');
             <?php 
             foreach ($filez as $idx=>$fn) {
                 $id = 'mp3Source_'.$idx;
-                echo '<source id="'.$id.'" src="/nicerapp/apps/nicerapp/music/music/'.getLocationBarInfo()['apps']['music']['set'].'/'.basename($files[$idx]).'" type="audio/mpeg">';
+                echo '<source id="'.$id.'" src="/nicerapp/apps/nicer.app/music/music/'.getLocationBarInfo()['apps']['music']['set'].'/'.basename($files[$idx]).'" type="audio/mpeg">';
             }
             ?>
         </audio>
@@ -106,9 +106,9 @@ $htmlTitleMeta = file_get_contents ($setPath.'/index.title_meta.html');
 							<div id="jp_interface_1" class="jp-gui jp-interface">
 								<table border="0" class="jp-controls" cellspacing="5" style="width:100%">
 									<tr>
-										<td class="jp-button"><img id="btnPlayPause" src="/nicerapp/apps/nicerapp/music/pause_icon.png" onclick="mp3site.playpause();"></td>
-										<td class="jp-button"><img id="btnMuteUnmute" src="/nicerapp/apps/nicerapp/music/mute_icon.png" onclick="mp3site.mute();"/></td>
-										<td class="jp-button"><img id="btnRepeat" src="/nicerapp/apps/nicerapp/music/repeat_icon.png" onclick="mp3site.toggleRepeat();"/></td>
+										<td class="jp-button"><img id="btnPlayPause" src="/nicerapp/apps/nicer.app/music/pause_icon.png" onclick="mp3site.playpause();"></td>
+										<td class="jp-button"><img id="btnMuteUnmute" src="/nicerapp/apps/nicer.app/music/mute_icon.png" onclick="mp3site.mute();"/></td>
+										<td class="jp-button"><img id="btnRepeat" src="/nicerapp/apps/nicer.app/music/repeat_icon.png" onclick="mp3site.toggleRepeat();"/></td>
 									</tr>
 									<tr>
 										<td style="vertical-align:top;">
