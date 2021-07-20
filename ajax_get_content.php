@@ -2,7 +2,7 @@
     require_once (dirname(__FILE__).'/nicerapp/boot.php');
     
     global $naDebugAll;
-    $debug = true;
+    $debug = false;
     if ($debug) {
         ini_set('display_errors', 1);
         ini_set('display_startup_errors', 1);
@@ -31,7 +31,7 @@
                     $dialogID = str_replace ('.php', '', $dialogID);
                     if ($debug) { echo '$filepath='.$filepath; echo PHP_EOL.PHP_EOL;  }
                     $arr = array ( $dialogID => execPHP($filepath) );
-                    if ($debug) { echo $arr.'='; var_dump ($arr); echo PHP_EOL.PHP_EOL; die(); }
+                    if ($debug) { echo '$arr='; var_dump ($arr); echo PHP_EOL.PHP_EOL; die(); }
                     //$arr = array ( $dialogID => $filepath );
                     $ret = array_merge ($ret, $arr);
                 }
