@@ -15,7 +15,7 @@
     "/nicerapp/jsEngineeringMath/math_3D.source.js",
     "/nicerapp/site.source.js",
     "/nicerapp/dialogSettings.js",
-    "/nicerapp/domainConfigs/nicerapp/desktop.source.js",
+    "/nicerapp/domainConfigs/nicer.app/desktop.source.js",
     "/nicerapp/backgrounds.source.js",
     "/nicerapp/userInterface/naVividComponents.source.js",
     "/nicerapp/userInterface/naVividButton.source.js",
@@ -24,6 +24,6 @@
     "/nicerapp/userInterface/naColorGradients-1.0.0.source.js",
     "/nicerapp/userInterface/naVividText-1.1.0.source.js",
     "/nicerapp/canvasLogo-2.1.0.source.js",
-    "/nicerapp/apps/nicerapp/analytics/app.source.js",
-    "/nicerapp/apps/nicerapp/cms/na.blog.source.js"
+    "/nicerapp/apps/nicer.app/analytics/app.source.js",
+    "/nicerapp/apps/nicer.app/cms/na.blog.source.js"
 ]

@@ -47,7 +47,7 @@ na.desktop = {
                 top : $('#siteDateTime').height()+20,
                 left : -520,
                 height : $(window).height()-120,
-                width : !na.m.userDevice.isPhone ? 500 : $(window).width - 50,
+                width : !na.m.userDevice.isPhone ? 340 : $(window).width - 50,
                 opacity : 0.0001
             },
             '#siteToolbarLeft' : {

@@ -101,25 +101,25 @@ na.site.globals = $.extend(na.site.globals, {
             <span id="sds_dialogTitle">Window Cosmetic Settings</span>
         </div>
         <div class="flexBreak"></div>
-        <div id="specificitySettings" class="dialogSettingsComponent_alwaysVisible" style="padding:0;margin:0;font-size:15px;flex-wrap:wrap;">
+        <div id="specificitySettings" class="dialogSettingsComponent_alwaysVisible" style="font-size:15px;flex-wrap:wrap;">
             <label id="labelSpecificity" for="specificity" class="specificityLabel" style="order:1;vertical-align:middle;">Specificity</label>
             <select id="specificity" class="select" onchange="na.ds.specificitySelected(event)" style="order:1;vertical-align:middle;"></select>
-            <div id="btnDeleteSpecificity" class="vividButton_icon tooltip" title="Delete all cosmetic settings for this specificity" alt="Delete all cosmetic settings for this specificity" onclick="if (!$(this).is('.disabled')) na.ds.deleteSpecificity(event)" style="order:1;margin-left:auto;vertical-align:middle;width:50px;height:50px;position:relative;display:inline-block">
-                <div class="cvbBorderCSS" style="width:50px;height:50px;"></div>
-                <img class="cvbImgBorder" src="/nicerapp/siteMedia/btnCssVividButton_outerBorder.png" style="width:50px;height:50px;"/>
-                <img class="cvbImgTile" src="/nicerapp/siteMedia/btnCssVividButton.png" style="width:50px;height:50px;"/>
-                <img class="cvbImgButton" src="/nicerapp/siteMedia/iconDelete.png" style="position:absolute;top:7px;left:7px;width:36px;height:36px;"/>
+            <div id="btnDeleteSpecificity" class="vividButton_icon tooltip" title="Delete all cosmetic settings for this specificity" alt="Delete all cosmetic settings for this specificity" onclick="if (!$(this).is('.disabled')) na.ds.deleteSpecificity(event)" style="order:1;margin-left:auto;vertical-align:middle;width:40px;height:40px;position:relative;display:inline-block">
+                <div class="cvbBorderCSS" style="width:40px;height:40px;"></div>
+                <img class="cvbImgBorder" src="/nicerapp/siteMedia/btnCssVividButton_outerBorder.png" style="width:40px;height:40px;"/>
+                <img class="cvbImgTile" src="/nicerapp/siteMedia/btnCssVividButton.png" style="width:40px;height:40px;"/>
+                <img class="cvbImgButton" src="/nicerapp/siteMedia/iconDelete.png" style="position:absolute;top:2px;left:2px;width:36px;height:36px;"/>
             </div>
             
             <label id="labelTheme" for="theme" class="specificityLabel" style="order:2;vertical-align:middle;">Theme</label>
             <select id="theme" class="select" onchange="na.ds.themeSelected(event)" style="order:2;vertical-align:middle;">
                 <option id="theme_default" name="theme_default" value="default">Default</option>
             </select>
-            <div id="btnSetPermissionsForTheme" class="vividButton_icon tooltip" title="Create or delete theme, and set permissions for current theme" alt="Create or delete theme, and set permissions for this theme" onclick="if (!$(this).is('.disabled')) na.ds.setPermissionsForTheme(event)" style="order:2;margin-left:auto;vertical-align:middle;width:50px;height:50px;position:relative;display:inline-block">
-                <div class="cvbBorderCSS" style="width:50px;height:50px;"></div>
+            <div id="btnSetPermissionsForTheme" class="vividButton_icon tooltip" title="Create or delete theme, and set permissions for current theme" alt="Create or delete theme, and set permissions for this theme" onclick="if (!$(this).is('.disabled')) na.ds.setPermissionsForTheme(event)" style="order:2;margin-left:auto;vertical-align:middle;width:40px;height:40px;position:relative;display:inline-block">
+                <div class="cvbBorderCSS" style="width:40px;height:40px;"></div>
                 <!--<img class="cvbImgBorder" src="/nicerapp/siteMedia/btnCssVividButton_outerBorder.png" style="width:70px;height:70px;"/>-->
-                <img class="cvbImgTile" src="/nicerapp/siteMedia/btnCssVividButton.red1b.png" style="width:50px;height:50px;"/>
-                <img class="cvbImgButton" src="/nicerapp/siteMedia/1660_blk_19329_zoom.upperBodyOnly.256x256.png" style="position:absolute;top:7px;left:7px;width:36px;height:36px;z-index:2020;"/>
+                <img class="cvbImgTile" src="/nicerapp/siteMedia/btnCssVividButton.red1b.png" style="width:40px;height:40px;"/>
+                <img class="cvbImgButton" src="/nicerapp/siteMedia/1660_blk_19329_zoom.upperBodyOnly.256x256.png" style="position:absolute;top:2px;left:2px;width:36px;height:36px;z-index:2020;"/>
                 <img class="cvbImgButton_sup1" src="/nicerapp/siteMedia/btnTrashcan2_white_lowres.png" style="position:absolute;width:15px;height:19px;z-index:2021;"/>
                 <img class="cvbImgButton_sup2" src="/nicerapp/siteMedia/documentAdd_lowres.png" style="position:absolute;left:30px;width:20px;height:20px;z-index:2021;"/>
                 
@@ -136,7 +136,7 @@ na.site.globals = $.extend(na.site.globals, {
                 <option id="set_textShadowSettings" value="textShadow">Text shadow</option>
                 <!--<option id="set_scrollbar" value="scrollbar">Scrollbars</option>-->
             </select>
-            <div id="btnSpacer2" class="vividButton_icon tooltip" style="order:4;margin-left:auto;height:17px;vertical-align:middle;position:relative;display:inline-block">
+            <div id="btnSpacer2" class="vividButton_icon tooltip" style="width:40px;order:4;margin-left:auto;height:17px;vertical-align:middle;position:relative;display:inline-block">
             </div>
             
             <label for="dialogSettings_specificity_dialog" class="labelDialogSettings2" style="order:4">Dialog
@@ -151,10 +151,10 @@ na.site.globals = $.extend(na.site.globals, {
         </div>
         <div class="flexBreak"></div>
         <div id="borderSettings" class="dialogSettingsComponent vividScrollpane" style="top:auto;">
-            <input id="borderColorpicker" class="dialogSettingsComponent" style="position:absolute;"></input>
+            <input id="borderColorpicker" class="dialogSettingsComponent dialogSettings_colorPicker" style="position:absolute;"></input>
             <div class="flexBreak" style="height:5px;"></div>
             
-            <label id="labelBorderType" for="borderType" class="boxSettingsLabel">Type :</label>
+            <label id="labelBorderType" for="borderType" class="boxSettingsLabel">Type</label>
             <select class="select" id="borderType" onchange="na.ds.borderSettingsSelected()">
                 <option value="dotted">Dotted</option>
                 <option value="dashed">Dashed</option>
@@ -169,55 +169,55 @@ na.site.globals = $.extend(na.site.globals, {
             </select>
             <div class="flexBreak"></div>
 
-            <label id="labelBorderWidth" for="borderWidth" class="boxSettingsLabel">Width :</label>
+            <label id="labelBorderWidth" for="borderWidth" class="boxSettingsLabel">Width</label>
             <input id="borderWidth" type="range" min="0" max="20" value="3" class="sliderOpacityRangeBorderSettings" onchange="na.ds.borderSettingsSelected();"/>
             <div class="flexBreak"></div>
             
-            <label id="labelBorderRadius" for="borderRadius" class="boxSettingsLabel">Radius :</label>
+            <label id="labelBorderRadius" for="borderRadius" class="boxSettingsLabel">Radius</label>
             <input id="borderRadius" type="range" min="0" max="50" value="20" class="sliderOpacityRangeBorderSettings" onchange="na.ds.borderSettingsSelected();"/>
         </div>
         <div class="flexBreak"></div>
         <div id="boxShadowSettings" class="dialogSettingsComponent vividScrollpane" style="top:auto;">
-            <label id="labelBoxShadow" class="boxSettingsLabel">Box shadows :</label>
-            <div id="boxShadow">
+            <label id="labelBoxShadow" class="boxSettingsLabel">Box shadows</label>
+            <div id="boxShadowControls" style="display:table-cell;">
                 <img src="/nicerapp/siteMedia/iconCreate.png" onclick="na.ds.addBoxShadow()"/>
                 <img src="/nicerapp/siteMedia/iconDelete.png" onclick="na.ds.deleteBoxShadow()"/>
                 <div id="boxShadow_0" class="boxShadow" style="background:rgba(200,200,200,1);border:1px solid lime; box-shadow:2px 2px 2px 2px rgba(0,0,0,0.5); border-radius:10px; margin : 5px; padding : 5px;" onclick="na.ds.boxSettingsSelected(event);">ABC XYZ</div>
             </div>
             <div class="flexBreak"></div>
             
-            <label id="labelBoxShadowInset" class="boxSettingsLabel" for="boxShadowInset">Inset :</label>
+            <label id="labelBoxShadowInset" class="boxSettingsLabel" for="boxShadowInset">Inset</label>
             <input id="boxShadowInset" type="checkbox" onchange="na.ds.boxSettingsChanged();"/>
             <span id="boxShadowInsetClear">&nbsp;</span>
             <div class="flexBreak"></div>
             
-            <label id="labelBoxShadowXoffset" class="boxSettingsLabel" for="boxShadowXoffset">Horizontal offset :</label>
+            <label id="labelBoxShadowXoffset" class="boxSettingsLabel" for="boxShadowXoffset">Hor-offset</label>
             <input id="boxShadowXoffset" type="range" min="-10" max="10" value="2" class="sliderOpacityRangeBorderSettings" onchange="na.ds.boxSettingsChanged();"/>
             <div class="flexBreak"></div>
 
-            <label id="labelBoxShadowYoffset" class="boxSettingsLabel" for="boxShadowYoffset">Vertical offset :</label>
+            <label id="labelBoxShadowYoffset" class="boxSettingsLabel" for="boxShadowYoffset">Ver-offset</label>
             <input id="boxShadowYoffset" type="range" min="-10" max="10" value="2" class="sliderOpacityRangeBorderSettings" onchange="na.ds.boxSettingsChanged();"/>
             <div class="flexBreak"></div>
 
-            <label id="labelBoxShadowSpreadRadius" class="boxSettingsLabel" for="boxShadowSpreadRadius">Spread radius :</label>
+            <label id="labelBoxShadowSpreadRadius" class="boxSettingsLabel" for="boxShadowSpreadRadius">Spread</label>
             <input id="boxShadowSpreadRadius" type="range" min="0" max="10" value="2" class="sliderOpacityRangeBorderSettings" onchange="na.ds.boxSettingsChanged();"/>
             <div class="flexBreak"></div>
 
-            <label id="labelBoxShadowBlurRadius" class="boxSettingsLabel" for="boxShadowBlurRadius">Blur radius :</label>
+            <label id="labelBoxShadowBlurRadius" class="boxSettingsLabel" for="boxShadowBlurRadius">Blur</label>
             <input id="boxShadowBlurRadius" type="range" min="0" max="10" value="2" class="sliderOpacityRangeBorderSettings" onchange="na.ds.boxSettingsChanged();"/>
             <div class="flexBreak"></div>
 
-            <label id="labelBoxShadowColor" class="boxSettingsLabel" for="boxShadowColor">Color :</label>
+            <label id="labelBoxShadowColor" class="boxSettingsLabel" for="boxShadowColor">Color</label>
             <input id="boxShadowColorpicker" class="dialogSettingsComponent" style="position:absolute;top:95px;"></input>
         </div>
         <input id="colorpicker" class="dialogSettingsComponent dialogSettings_colorPicker" style="position:absolute;top:auto;"></input>
         <div id="dialogSettings_jsTree" class="dialogSettingsComponent vividScrollpane" style="position:absolute;top:auto;display:none;"></div>
         <div id="dialogSettings_photoAlbum_specs" class="dialogSettingsComponent vividScrollpane" style="flex-flow: wrap row;position:absolute;top:auto;display:none;">
-            <label id="label_dialogSettings_photoOpacity" class="labelDialogSettings" for="dialogSettings_photoOpacity">Opacity :</label>
+            <label id="label_dialogSettings_photoOpacity" class="labelDialogSettings" for="dialogSettings_photoOpacity">Opacity</label>
             <input id="dialogSettings_photoOpacity" type="range" min="1" max="100" value="50" class="sliderOpacityRangeDialogSettings" oninput="if (na.ds.settings.current.selectedImage) na.ds.imageSelected(na.ds.settings.current.selectedImage);"/>
             <div class="flexBreak"></div><br/>
             
-            <label id="label_dialogSettings_photoScale" class="labelDialogSettings" for="dialogSettings_photoScale">Scale :</label>
+            <label id="label_dialogSettings_photoScale" class="labelDialogSettings" for="dialogSettings_photoScale">Scale</label>
             <input id="dialogSettings_photoScale" type="range" min="25" max="200" value="100" class="sliderOpacityRangeDialogSettings" style="top:30px;" oninput="if (na.ds.settings.current.selectedImage) na.ds.imageSelected(na.ds.settings.current.selectedImage);"/>
             <div class="flexBreak"></div>
             
@@ -233,7 +233,7 @@ na.site.globals = $.extend(na.site.globals, {
         </div>
         <iframe id="dialogSettings_photoAlbum" class="dialogSettingsComponent" style="position:absolute;top:230px;display:none;border:0px"></iframe>
         <div id="textSettings" class="dialogSettingsComponent vividScrollpane" style="position:absolute;top:auto;display:none;">
-            <label id="labelTextFontFamily" class="textSettingsLabel" for="textFontFamily">Font :</label>
+            <label id="labelTextFontFamily" class="textSettingsLabel" for="textFontFamily">Font</label>
             <select class="select" id="textFontFamily" onchange="na.ds.textSettingsSelected_updateDialog()">
                 <option value="ABeeZee">ABeeZee</option>
                 <option value="Aclonica">Aclonica</option>
@@ -316,21 +316,21 @@ na.site.globals = $.extend(na.site.globals, {
             </select>
             <div class="flexBreak"></div>
 
-            <label id="labelTextSize" class="textSettingsLabel" for="textSize">Text size :</label>
+            <label id="labelTextSize" class="textSettingsLabel" for="textSize">Text size</label>
             <input id="textSize" type="range" min="5" max="40" value="12" class="sliderOpacityRangeBorderSettings" onchange="na.ds.textSettingsSelected();"/>
             <div class="flexBreak" style="height:8px;"></div>
 
-            <label id="labelTextWeight" class="textSettingsLabel" for="textWeight">Text boldness :</label>
+            <label id="labelTextWeight" class="textSettingsLabel" for="textWeight">Text boldness</label>
             <input id="textWeight" type="range" min="3" max="10" value="4" class="sliderOpacityRangeBorderSettings" onchange="na.ds.textSettingsSelected();"/>
             <div class="flexBreak" style="height:8px;"></div>
 
-            <label id="labelTextColor" class="textColorpicker" for="fontFamily">Font color :</label>
-            <input id="textColorpicker" class="dialogSettingsComponent" style="position:absolute;top:95px;"></input>
+            <label id="labelTextColor" class="textColorpicker" for="fontFamily">Font color</label>
+            <input id="textColorpicker" class="dialogSettingsComponent dialogSettings_colorPicker" style="position:absolute;top:95px;"></input>
             <div class="flexBreak"></div>
         </div>
         <div id="textShadowSettings" class="dialogSettingsComponent vividScrollpane" style="position:absolute;top:auto;display:none;">
-            <label id="labelTextShadow" class="textSettingsLabel">Text shadow :</label>
-            <div id="textShadow">
+            <label id="labelTextShadow" class="textSettingsLabel">Text shadow</label>
+            <div id="textShadowControls">
                 <img src="/nicerapp/siteMedia/iconCreate.png" onclick="na.ds.addTextShadow(event)"/>
                 <img src="/nicerapp/siteMedia/iconDelete.png" onclick="na.ds.deleteTextShadow(event)"/>
                 <div class="flexBreak"></div>
@@ -338,20 +338,20 @@ na.site.globals = $.extend(na.site.globals, {
             </div>
             <div class="flexBreak"></div>
             
-            <label id="labelTextShadowXoffset" class="textSettingsLabel" for="textShadowXoffset">Horizontal offset :</label>
+            <label id="labelTextShadowXoffset" class="textSettingsLabel" for="textShadowXoffset">Hor-offset</label>
             <input id="textShadowXoffset" type="range" min="-10" max="10" value="2" class="sliderOpacityRangeBorderSettings" onchange="na.ds.textSettingsSelected();"/>
             <div class="flexBreak"></div>
 
-            <label id="labelTextShadowYoffset" class="textSettingsLabel" for="textShadowYoffset">Vertical offset :</label>
+            <label id="labelTextShadowYoffset" class="textSettingsLabel" for="textShadowYoffset">Ver-offset</label>
             <input id="textShadowYoffset" type="range" min="-10" max="10" value="2" class="sliderOpacityRangeBorderSettings" onchange="na.ds.textSettingsSelected();"/>
             <div class="flexBreak"></div>
 
-            <label id="labelTextShadowBlurRadius" class="textSettingsLabel" for="textShadowBlurRadius">Blur radius :</label>
+            <label id="labelTextShadowBlurRadius" class="textSettingsLabel" for="textShadowBlurRadius">Blur</label>
             <input id="textShadowBlurRadius" type="range" min="0" max="10" value="2" class="sliderOpacityRangeBorderSettings" onchange="na.ds.textSettingsSelected();"/>
             <div class="flexBreak"></div>
 
-            <label id="labelTextShadowColor" class="textSettingsLabel" for="textShadowColor">Color :</label>
-            <input id="textShadowColorpicker" class="dialogSettingsComponent" style="position:absolute;top:95px;"></input>
+            <label id="labelTextShadowColor" class="textSettingsLabel" for="textShadowColor">Color</label>
+            <input id="textShadowColorpicker" class="dialogSettingsComponent dialogSettings_colorPicker" style="position:absolute;top:95px;"></input>
             <div class="flexBreak"></div>
         </div>
     </div>
