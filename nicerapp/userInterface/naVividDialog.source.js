@@ -57,17 +57,20 @@ class naVividDialog {
         
         var el = t.el;
         $('.vdSettings', t.el).hover (function() {
-            if (
+            /*if (
                 !$(this).is(':animated')
                 && !$(el).is(':animated')
-            ) $(this).animate({opacity:1},'fast');
+            ) $(this).animate({opacity:1},'fast');*/            
+            if ( !$(el).is(':animated') ) $(this).stop(true,true).animate({ opacity : 1 }, 'fast');
             
         }, function() {
-            if (
+            /*if (
                 !$(this).is(':animated')
                 && !$(el).is(':animated')
-            ) $(this).animate({opacity:0.0001},'fast');
+            ) $(this).animate({opacity:0.0001},'fast');*/
+            if ( !$(el).is(':animated') ) $(this).stop(true,true).animate({ opacity : 0.0001 }, 'fast');
         });
+        
         $('.vdSettings', t.el).click (function() {
             $(this).stop(true,true).animate({opacity:0.0001},'fast');
         });
