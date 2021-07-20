@@ -225,16 +225,10 @@ na.ds = na.dialogSettings = {
             na.site.settings.buttons['#'+el.id] = new naVividButton(el);
         });
         
-        
-        /*var btnID = na.ds.settings.current.selectedButtonID;
-        debugger;
-        $('#'+btnID).trigger('click');
-        */
-        
         var tabPage = na.ds.settings.current.selectedSetting;
         na.ds.whichSettingSelected(tabPage);
         
-        setTimeout (na.ds.onresize, 750);
+        setTimeout (na.ds.onresize, 100);
     },
     
     onresize : function () { 
@@ -302,7 +296,7 @@ na.ds = na.dialogSettings = {
             case 'text' : na.dialogSettings.selectTextSettings(event); break;
             case 'textShadow' : na.dialogSettings.selectTextShadowSettings(event); break;
             //case 'scrollbars' : break;
-        }
+        };
     },
     
     currentPath : function (node) {

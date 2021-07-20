@@ -396,6 +396,7 @@ class nicerAppCMS {
                 $r .= '$(document).ready(function() {'.PHP_EOL;
                 $r .= "\tsetTimeout(function() {".PHP_EOL;
                 $r .= "\t\tna.site.setSpecificity();".PHP_EOL;
+                $r .= "\t\t$('.dialogSettingsComponent').css({ display : 'none' });".PHP_EOL;
                 //$r .= "\t\tna.ds.onload(na.ds.settings.current.forDialogID);".PHP_EOL; // done via .btnSettings::onclick() and naVividDialog::displaySettingsDialog_displayDialog()
                 $r .= "\t}, 250);".PHP_EOL;
                 $r .= '});'.PHP_EOL;
