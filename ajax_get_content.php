@@ -39,7 +39,7 @@ require_once (dirname(__FILE__).'/nicerapp/boot.php');
         
         $folder = realpath(dirname(__FILE__)).'/nicerapp/domainConfigs/'.$cms->domain.'/';
         $files = getFilePathList($folder, false, '/frontpage.dialog.*\.php/', array('file'), 1);
-        //echo json_encode($files); die();
+        echo json_encode($files); die();
         
         $ret = array ();
         foreach ($files as $idx2 => $filepath) {
