@@ -464,50 +464,28 @@ var mp3site = {
 			opacity : 0.001,
 			display : 'block'
 		}).animate ({opacity:0.3},1300);
-		if (!mp3site.settings.afterInitializing) {
-            mp3site.settings.afterInitializing = true;
-            setTimeout (function() {
-                $(document.body).animate({opacity:1}, 'fast');
-                $('#horizontalMover').css({
-                    width : 610,
-                    opacity : 0.001,
-                    display : 'block'
-                }).animate ({opacity:0.5}, 700);
-            }, 100);
-        
-            //setTimeout (function() {
-            
-			$('.vividDialog, .vividScrollpane, .vividDialog_dialog, .vsp_container, #heading_wrapper, #siteIntroText, #mp3s, #player, #player_table, #playlist_wrapper, #infoWindow_help, #comments')
-				.not ('#siteLoginSuccessful, #siteLoginFailed, #siteLogin, #siteRegistration, #siteDateTime, #infoWindow_info, #infoWindow_tools, #infoWindow_tools, #infoWindow_info')
-				.animate ({opacity:1}, 'normal');
-            //}, 1000);
-        }
 		
         $('#infoWindow_mp3desc, #infoWindow_mp3desc__CSS3, #infoWindow_mp3desc__item__0, #infoWindow_mp3desc__item__0__img1, infoWindow_mp3desc__item__0__img2, #infoWindow_mp3desc, #infoWindow_mp3desc').css({
             position : 'absolute',
             width : 300,
-            height : (myHeight - 40 - 120) /2,
-            opacity : 1                                                                                                                                                                                                                                                
+            height : (myHeight - 40 - 120) /2                                                                                                                                                                                                                          
         });
         $('#infoWindow_mp3desc').css({
             left : leftOffset + 250 + 20,
             top : 30 + $('#player')[0].offsetHeight + 20,
             width : 300,
-            height : ((myHeight - 40 - 120) /2),
-            opacity : 1
+            height : ((myHeight - 40 - 120) /2)
         });
         $('#infoWindow_mp3desc__CSS3').css({
             width : 300,
-            height : (myHeight - 40 - 120) /2,
-            opacity : 0.5
+            height : (myHeight - 40 - 120) /2
         });
         $('#mp3descText').css({ marginLeft : 40 });
         
         
         $('#infoWindow_mp3desc > table').css({
             width : '',
-            height : ((myHeight - 40 - 120) /2),
-            opacity : 1
+            height : ((myHeight - 40 - 120) /2)
         });
 	 
 		var dialogMP3sList = '#mp3s';
@@ -552,8 +530,7 @@ var mp3site = {
             left : dialogsLeft,
             width : 245,
             height : myHeight ,
-            top : dialogsTop,
-            opacity : 1
+            top : dialogsTop
         });
         
         // hardcoded for now with use of vividTheme__lava_002.png
@@ -569,9 +546,27 @@ var mp3site = {
             left : leftOffset + 250 + 20,
             width : 300,
             height : (myHeight - 40 - 120) /2,
-            top : ($dialogMP3desc[0].offsetTop + $dialogMP3desc.height() + 20) + 'px',
-            opacity : 1
+            top : ($dialogMP3desc[0].offsetTop + $dialogMP3desc.height() + 20) + 'px'
         });
+        
+		if (!mp3site.settings.afterInitializing) {
+            mp3site.settings.afterInitializing = true;
+            setTimeout (function() {
+                $(document.body).animate({opacity:1}, 'fast');
+                $('#horizontalMover').css({
+                    width : 610,
+                    opacity : 0.001,
+                    display : 'block'
+                }).animate ({opacity:0.5}, 700);
+            }, 100);
+        
+            //setTimeout (function() {
+            
+			$('.vividDialog, .vividScrollpane, .vividDialog_dialog, .vsp_container, #heading_wrapper, #siteIntroText, #mp3s, #player, #player_table, #playlist_wrapper, #infoWindow_help, #comments')
+				.not ('#siteLoginSuccessful, #siteLoginFailed, #siteLogin, #siteRegistration, #siteDateTime, #infoWindow_info, #infoWindow_tools, #infoWindow_tools, #infoWindow_info')
+				.animate ({opacity:1}, 'normal');
+            //}, 1000);
+        }
 	}
 	
 };
