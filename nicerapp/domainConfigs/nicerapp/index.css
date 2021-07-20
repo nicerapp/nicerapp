@@ -281,7 +281,7 @@ img.bg_last {
     display : none;
     flex-wrap : wrap;
     justify-content : center;
-    align-items : center;
+    /*align-items : center;*/
     top : 70px;
     width : calc(100% - 10px);
 }

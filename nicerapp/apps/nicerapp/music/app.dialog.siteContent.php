@@ -71,7 +71,7 @@ $htmlTitleMeta = file_get_contents ($setPath.'/index.title_meta.html');
         }, 250);
 	</script>
 
-	<div id="mp3s" class="vividDialog_mp3s vividScrollpane" theme="transparent" style="visibility:hidden;position:absolute;text-align:center;width:230px; color:yellow;font-weight:bold">
+	<div id="mp3s" class="vividDialog_mp3s vividScrollpane" theme="transparent" style="opacity:0.001;position:absolute;text-align:center;width:230px; color:yellow;font-weight:bold">
 <?php
 			$filez = array();
 			foreach ($files as $idx=>$file) {
@@ -87,7 +87,7 @@ $htmlTitleMeta = file_get_contents ($setPath.'/index.title_meta.html');
 ?> 
 	</div>
 		
-	<div id="player" class="vividDialog" theme="dark" style="overflow:visible; visibility:hidden;position:absolute; width:320px; height:120px; ">
+	<div id="player" class="vividDialog" theme="dark" style="overflow:visible;opacity:0.001;position:absolute; width:320px; height:120px; ">
         <audio id="audioTag">
         
             <?php 
@@ -97,7 +97,7 @@ $htmlTitleMeta = file_get_contents ($setPath.'/index.title_meta.html');
             }
             ?>
         </audio>
-		<table id="player_table" style="margin-left:40px;visibility:hidden;width:100%;">
+		<table id="player_table" style="padding-left:20px;width:100%;">
 			<tr>
 				<td style="width:220px">
 					<div id="jplayer" class="jp-jplayer"></div>
@@ -137,13 +137,13 @@ $htmlTitleMeta = file_get_contents ($setPath.'/index.title_meta.html');
 		</table>
 	</div>
 
-	<div id="playlist_wrapper" class="vividDialog" theme="dark" style="overflow:visible; visibility:hidden; position:absolute; width:300px;height:300px;">
+	<div id="playlist_wrapper" class="vividDialog" theme="dark" style="opacity:0.001;overflow:visible;position:absolute; width:300px;height:300px;">
 		<ul id="playlist" style="padding:10px;padding-left:35px;width:100%;height:100%;"></ul>
 	</div>
 	
-	<div id="infoWindow_mp3desc" class="vividDialog" theme="dark" style="overflow:visible;visibility:hidden; position:absolute;width:320px;height:300px;">
+	<div id="infoWindow_mp3desc" class="vividDialog" theme="dark" style="opacity:0.001;overflow:visible;position:absolute;width:320px;height:300px;">
 		<div id="mp3descText"></div>
-		<div id="siteIntroText" style="visibility:hidden;">
+		<div id="siteIntroText">
 			<?php echo $htmlIntro?>
 		</div>
 	</div>
