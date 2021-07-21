@@ -230,11 +230,15 @@
     <h2 class="contentSectionTitle2">Available Apps</h2>
 
 
-    <?php global $cms; if ($cms->domain=='nicer.app') { ?>
+    <?php 
+        global $naLAN; 
+        if ($naLAN) { 
+    ?>
     <a href="<?php echo $urls['webmail'];?>"><h3>Webmail</h3></a>
     
     <a href="<?php echo $urls['cms'];?>"><h3>Blogging features</h3></a>
     <?php } ?>
+    
     
     <a href="https://said.by" target="saidBy"><h3>Blogging features (on https://said.by)</h3></a>
     <p>You can now use the blogging features on that site to create articles which you can then, after publishing the article, get a very short and nice-looking URL for at my <a href="https://zoned.at" target="zonedAt">https://zoned.at</a>.</p>

@@ -2,8 +2,11 @@
 source ./do_upgrade_globals_manufacturer.sh
 ROOT_PATH="/home/$NA_MAIN_USER/$NA_MAIN_HTDOCS_RELATIVE_PATH/$NA_MAIN_SITE_FOLDER"
 if [ ! -d $ROOT_PATH ]; then
-	ROOT_PATH="/var/www/nicerapp"
+	ROOT_PATH="/var/www/nicer.app"
 fi
+
+chgrp -R $NA_MAIN_GROUP *
+chmod -R $NA_MAIN_PERMISSIONS *
 
 if [ ! -d $ROOT_PATH/nicerapp/siteData ]; then 
 	mkdir $ROOT_PATH/nicerapp/siteData

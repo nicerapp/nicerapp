@@ -1,7 +1,7 @@
 <html>
 <head>
-    <link type="text/css" rel="StyleSheet" href="/nicerapp/domainConfigs/nicerapp/index.css?c=<?php echo date('Ymd_His',filemtime(realpath(dirname(__FILE__).'/../../../').'/domainConfigs/nicerapp/index.css'))?>">
-    <link type="text/css" rel="StyleSheet" href="/nicerapp/domainConfigs/nicerapp/index.dark.css?c=<?php echo date('Ymd_His',filemtime(realpath(dirname(__FILE__).'/../../../').'/domainConfigs/nicerapp/index.dark.css'))?>">
+    <link type="text/css" rel="StyleSheet" href="/nicerapp/domainConfigs/nicer.app/index.css?c=<?php echo date('Ymd_His',filemtime(realpath(dirname(__FILE__).'/../../../').'/domainConfigs/nicerapp/index.css'))?>">
+    <link type="text/css" rel="StyleSheet" href="/nicerapp/domainConfigs/nicer.app/index.dark.css?c=<?php echo date('Ymd_His',filemtime(realpath(dirname(__FILE__).'/../../../').'/domainConfigs/nicerapp/index.dark.css'))?>">
     <script type="text/javascript" src="/nicerapp/userInterface/photoAlbum/4.0.0/photoAlbum-4.0.0.source.js?c=<?php echo date('Ymd_His', filemtime(dirname(__FILE__).'/../userInterface/photoAlbum/4.0.0/photoAlbum-4.0.0.source.js'));?>"></script>
 </head>
 <body style="overflow:hidden">
@@ -10,11 +10,10 @@
     $root = realpath(dirname(__FILE__).'/../../../../');
     require_once ($root.'/nicerapp/boot.php');
     
-    global $naDebugAll; $debug = $naDebugAll;    
+    global $naDebugAll; 
+    $debug = false;    
     
     global $cms;
-    $cms = new nicerAppCMS();
-    $cms->init();
     
     $baseURL = '/nicerapp/siteData/'.$cms->domain.'/';
     $baseDir = $root.'/nicerapp/siteData/'.$cms->domain.'/';
@@ -25,7 +24,7 @@
 
 	define ("FILE_FORMATS", "/(.*\.png)|(.*\.gif)|(.*\.jpg)/");
     $files = getFilePathList ($targetDir, false, FILE_FORMATS, array('file'));
-    //echo $targetDir."<br/>\r\n"; echo json_encode($files, JSON_PRETTY_PRINT); die();
+    if ($debug) { echo $targetDir."<br/>\r\n"; echo json_encode($files, JSON_PRETTY_PRINT); };
     
     ?>
     <style>

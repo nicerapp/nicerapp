@@ -27,8 +27,7 @@ git reset --hard origin/main
 rm lastModified.*
 date +%Y-%m\(%B\)-%d\(%A\)\ %H:%M:%S\ Amsterdam.NL\ timezone > lastModified.whenHumanReadable.txt
 date +%Y-%m\(%B\)-%d\(%A\)\ %H:%M:%S\ Amsterdam.NL\ timezone > lastModified.whenJS.txt
-chgrp -R $NA_MAIN_GROUP *
-chmod -R $NA_MAIN_PERMISSIONS *
+
 ./setPermissions.sh
 
 for f in $(ls $ROOT_PATH/do_upgradeSite_*.sh)

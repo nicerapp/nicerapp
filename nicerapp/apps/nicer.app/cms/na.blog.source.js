@@ -79,8 +79,6 @@ na.blog = {
                     na.blog.onchange_folderStatus_openOrClosed(e, data);
                     
                 }).on('changed.jstree', function (e, data) {
-                                                debugger;
-
                     if (
                         na.blog.settings.current.selectedTreeNode
                         && na.blog.settings.current.selectedTreeNode.type=='naDocument'
@@ -228,7 +226,7 @@ na.blog = {
         $('#siteToolbarLeft .lds-facebook').fadeIn('slow');
         var ac = {
             type : 'GET',
-            url : '/nicerapp/apps/nicerapp/cms/ajax_getTreeNodes.php',
+            url : '/nicerapp/apps/nicer.app/cms/ajax_getTreeNodes.php',
             success : function (data, ts, xhr) {
                 let 
                 dat = JSON.parse(data),
@@ -253,7 +251,7 @@ na.blog = {
     loadEditorContent : function (rec, callback) {
         ac = {
             type : 'POST',
-            url : '/nicerapp/apps/nicerapp/cms/ajax_loadDocument.php',
+            url : '/nicerapp/apps/nicer.app/cms/ajax_loadDocument.php',
             data : {
                 database : rec.original.database.replace('tree','documents'),
                 id : rec.original.id
@@ -281,7 +279,7 @@ na.blog = {
         var 
         ac = {
             type : 'POST',
-            url : '/nicerapp/apps/nicerapp/cms/ajax_editDocument.php',
+            url : '/nicerapp/apps/nicer.app/cms/ajax_editDocument.php',
             data : {
                 database : rec.original.database.replace('tree','documents'),
                 id : rec.original.id,
@@ -304,7 +302,7 @@ na.blog = {
         //sel = tree.get_node(tree.get_selected()[0]),
         ac = {
             type : 'POST',
-            url : '/nicerapp/apps/nicerapp/cms/ajax_changeNodeStatus_openOrClosed.php',
+            url : '/nicerapp/apps/nicer.app/cms/ajax_changeNodeStatus_openOrClosed.php',
             data : {
                 database : data.node.database,
                 id : data.node.id,
@@ -331,7 +329,7 @@ na.blog = {
         var
         ac = {
             type : 'POST',
-            url : '/nicerapp/apps/nicerapp/cms/ajax_changeNode_mediaFolderTitle.php',
+            url : '/nicerapp/apps/nicer.app/cms/ajax_changeNode_mediaFolderTitle.php',
             data : {
                 database : sel.original.database,
                 id : sel.original.id,
@@ -354,7 +352,7 @@ na.blog = {
         sel = tree.get_node(tree.get_selected()[0]),
         ac = {
             type : 'POST',
-            url : '/nicerapp/apps/nicerapp/cms/ajax_changeNode_documentTitle.php',
+            url : '/nicerapp/apps/nicer.app/cms/ajax_changeNode_documentTitle.php',
             data : {
                 database : sel.original.database,
                 id : sel.original.id,
@@ -376,7 +374,7 @@ na.blog = {
         sel = tree.get_node(tree.get_selected()[0]),
         ac = {
             type : 'POST',
-            url : '/nicerapp/apps/nicerapp/cms/ajax_addNode.php',
+            url : '/nicerapp/apps/nicer.app/cms/ajax_addNode.php',
             data : {
                 database : sel.original.database,
                 parent : sel.original.id,
@@ -398,7 +396,7 @@ na.blog = {
         sel = tree.get_node(tree.get_selected()[0]),
         ac = {
             type : 'POST',
-            url : '/nicerapp/apps/nicerapp/cms/ajax_addNode.php',
+            url : '/nicerapp/apps/nicer.app/cms/ajax_addNode.php',
             data : {
                 database : sel.original.database,
                 parent : sel.original.id,
@@ -420,7 +418,7 @@ na.blog = {
         sel = tree.get_node(tree.get_selected()[0]),
         ac = {
             type : 'POST',
-            url : '/nicerapp/apps/nicerapp/cms/ajax_addNode.php',
+            url : '/nicerapp/apps/nicer.app/cms/ajax_addNode.php',
             data : {
                 database : sel.original.database,
                 parent : sel.original.id,
@@ -455,7 +453,7 @@ na.blog = {
         path = na.blog.currentPath(rec),
         ac = {
             type : 'POST',
-            url : '/nicerapp/apps/nicerapp/cms/ajax_deleteNode.php',
+            url : '/nicerapp/apps/nicer.app/cms/ajax_deleteNode.php',
             data : {
                 database : sel.original.database,
                 id : sel.original.id,
@@ -686,7 +684,7 @@ na.blog = {
                 r = tree.create_node (cur.id, n),
                 ac = {
                     type : 'POST',
-                    url : '/nicerapp/apps/nicerapp/cms/ajax_addNode.php',
+                    url : '/nicerapp/apps/nicer.app/cms/ajax_addNode.php',
                     data : {
                         database : n2.original.database,
                         id : r,

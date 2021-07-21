@@ -212,7 +212,7 @@ na.site.globals = $.extend(na.site.globals, {
         </div>
         <input id="colorpicker" class="dialogSettingsComponent dialogSettings_colorPicker" style="position:absolute;top:auto;"></input>
         <div id="dialogSettings_jsTree" class="dialogSettingsComponent vividScrollpane" style="position:absolute;top:auto;display:none;"></div>
-        <div id="dialogSettings_photoAlbum_specs" class="dialogSettingsComponent vividScrollpane" style="flex-flow: wrap row;position:absolute;top:auto;display:none;">
+        <div id="dialogSettings_photoAlbum_specs" class="dialogSettingsComponent vividScrollpane" style="height:4em;flex-flow: wrap row;position:absolute;top:auto;display:none;">
             <label id="label_dialogSettings_photoOpacity" class="labelDialogSettings" for="dialogSettings_photoOpacity">Opacity</label>
             <input id="dialogSettings_photoOpacity" type="range" min="1" max="100" value="50" class="sliderOpacityRangeDialogSettings" oninput="if (na.ds.settings.current.selectedImage) na.ds.imageSelected(na.ds.settings.current.selectedImage);"/>
             <div class="flexBreak"></div><br/>
@@ -221,6 +221,7 @@ na.site.globals = $.extend(na.site.globals, {
             <input id="dialogSettings_photoScale" type="range" min="25" max="200" value="100" class="sliderOpacityRangeDialogSettings" style="top:30px;" oninput="if (na.ds.settings.current.selectedImage) na.ds.imageSelected(na.ds.settings.current.selectedImage);"/>
             <div class="flexBreak"></div>
             
+            <!--
             <div class="flexColumns" style="display:inline-flex;top:65px">
                 <label for="dialogSettings_photoSpecificity_dialog" class="labelDialogSettings2">Dialog
                 <input type="radio" id="dialogSettings_photoSpecificity_dialog" name="psdp" class="radioInput" value="dialog" checked="checked"/>
@@ -230,8 +231,9 @@ na.site.globals = $.extend(na.site.globals, {
                 <input type="radio" id="dialogSettings_photoSpecificity_page" name="psdp" class="radioInput" value="dialog"/>
                 </label>
             </div>
+            -->
         </div>
-        <iframe id="dialogSettings_photoAlbum" class="dialogSettingsComponent" style="position:absolute;top:230px;display:none;border:0px"></iframe>
+        <iframe id="dialogSettings_photoAlbum" class="dialogSettingsComponent" style="position:absolute;top:calc(230px + 4em);display:none;border:0px"></iframe>
         <div id="textSettings" class="dialogSettingsComponent vividScrollpane" style="position:absolute;top:auto;display:none;">
             <label id="labelTextFontFamily" class="textSettingsLabel" for="textFontFamily">Font</label>
             <select class="select" id="textFontFamily" onchange="na.ds.textSettingsSelected_updateDialog()">

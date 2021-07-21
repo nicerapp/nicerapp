@@ -39,22 +39,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 // usleep(5000);
 
 global $cms;
-$cms = new nicerAppCMS();
-$cms->init();
-
 global $filePerms_ownerUser; 
 global $filePerms_ownerGroup;
 global $filePerms_perms;
 
-$debug = true;
+$debug = false;
 
 // Settings
-//$relPath = $_POST['relativePath'];
+$relPath = array_key_exists('relativePath',$_POST) ? DIRECTORY_SEPARATOR.$_POST['relativePath'] : '';
 //echo $relDir; die();
 //$relPath = preg_replace($relDir, '/\/.*/', '');
 $targetDir = 
         realpath(dirname(__FILE__).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'../siteData/')
-        .DIRECTORY_SEPARATOR.$cms->domain.DIRECTORY_SEPARATOR.$_GET['basePath'];
+        .DIRECTORY_SEPARATOR.$cms->domain.DIRECTORY_SEPARATOR.$_GET['basePath']
+        .$relPath;
 if ($debug) var_dump ($targetDir);
     
 //echo '1::$targetDir='; var_dump ($targetDir); echo PHP_EOL.PHP_EOL;
@@ -185,6 +183,8 @@ if (!$chunks || $chunk == $chunks - 1) {
 	$newname = $filePath;
 	if ($debug) {
         $dbg = array (
+            'oldname' => $oldname,
+            'newname' => $newname,
             'f1' => file_exists($oldname),
             'f2' => !file_exists($newname),
             'f3' => is_writable($newname)
@@ -206,9 +206,31 @@ if (!$chunks || $chunk == $chunks - 1) {
 	$output = array(); $result = -1;
 	exec ($exec, $output, $result);
 
+    if (is_string($filePerms_ownerUser)) $x = chown ($newname, $filePerms_ownerUser);
+    if (is_string($filePerms_ownerGroup)) $y = chgrp ($newname, $filePerms_ownerGroup);
+    if (is_numeric($filePerms_perms)) $z = chmod ($newname, $filePerms_perms);
+    if ($debug) {
+        $dbg = array (
+            'file' => $newname,
+            'chown' => $x,
+            'chgrp' => $y,
+            'chmod' => $z
+        );
+        echo '1::$dbg='; var_dump($dbg); echo PHP_EOL.PHP_EOL;
+    };
+
     if (is_string($filePerms_ownerUser)) $x = chown ($thumbPath, $filePerms_ownerUser);
     if (is_string($filePerms_ownerGroup)) $y = chgrp ($thumbPath, $filePerms_ownerGroup);
     if (is_numeric($filePerms_perms)) $z = chmod ($thumbPath, $filePerms_perms);
+    if ($debug) {
+        $dbg = array (
+            'file' => $thumbPath,
+            'chown' => $x,
+            'chgrp' => $y,
+            'chmod' => $z
+        );
+        echo '1::$dbg='; var_dump($dbg); echo PHP_EOL.PHP_EOL;
+    };
 }
 
 

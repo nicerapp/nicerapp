@@ -854,7 +854,7 @@ var nas = na.site = {
         };
         if (s.role) themeData.role = s.role;
         if (s.user) themeData.user = s.user;
-        debugger;
+        //debugger;
         
         clearTimeout (na.site.settings.current.saveThemeTimeout);
         na.site.settings.current.saveThemeTimeout = setTimeout(function() {

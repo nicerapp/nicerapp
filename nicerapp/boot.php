@@ -22,19 +22,21 @@
     $filePerms_ownerUser = 'rene'; global $filePerms_ownerUser;
     $filePerms_ownerGroup = 'www-data'; global $filePerms_ownerGroup;
     $filePerms_perms = 0770; global $filePerms_perms;
+
+    global $cms;
+    $cms = new nicerAppCMS();
+    $cms->init();
     
     $naIP = (array_key_exists('X-Forwarded-For',apache_request_headers())?apache_request_headers()['X-Forwarded-For'] : $_SERVER['REMOTE_ADDR']);
     global $naIP;
     
-    
-    $couchdbConfigFilepath = realpath(dirname(__FILE__).'/../../../').'/domainConfigs/'.$cms->domain.'/naLAN.json';
-    $cdbConfig = json_decode(file_get_contents($couchdbConfigFilepath), true);
-
+    $lanConfigFilepath = realpath(dirname(__FILE__)).'/domainConfigs/'.$cms->domain.'/naLAN.json';
+    $lanConfig = json_decode(file_get_contents($lanConfigFilepath), true);
     
     if (
         $naIP !== '::1'
         && $naIP !== '127.0.0.1'
-        && $naIP !== '80.101.238.137'
+        && !in_array($naIP, $lanConfig)
     ) $naLAN = false; else $naLAN = true;
     global $naLAN;
     
