@@ -102,6 +102,9 @@ na.site.globals = $.extend(na.site.globals, {
         </div>
         <div class="flexBreak"></div>
         <div id="specificitySettings" class="dialogSettingsComponent_alwaysVisible" style="font-size:15px;flex-wrap:wrap;">
+            <span id="specificityForDiv"></span>
+            <div class="flexBreak"></div>
+            
             <label id="labelSpecificity" for="specificity" class="specificityLabel" style="order:1;vertical-align:middle;">Specificity</label>
             <select id="specificity" class="select" onchange="na.ds.specificitySelected(event)" style="order:1;vertical-align:middle;"></select>
             <div id="btnDeleteSpecificity" class="vividButton_icon tooltip" title="Delete all cosmetic settings for this specificity" alt="Delete all cosmetic settings for this specificity" onclick="if (!$(this).is('.disabled')) na.ds.deleteSpecificity(event)" style="order:1;margin-left:auto;vertical-align:middle;width:40px;height:40px;position:relative;display:inline-block">

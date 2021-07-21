@@ -15,6 +15,8 @@ na.ds = na.dialogSettings = {
         na.m.settings.startTime = timeInMilliseconds;
         
         na.ds.s.c.forDialogID = forDialogID;
+        $('#specificityForDiv').html (forDialogID);
+        
         var ac = {
             type : 'GET',
             url : '/nicerapp/apps/nicer.app/cms/ajax_getTreeNodes.php',
