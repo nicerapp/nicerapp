@@ -427,7 +427,8 @@ var mp3site = {
 		var 
 		myWidth = $(window.top.document.getElementById('siteContent'))[0].offsetWidth,
 		myHeight = $(window.top.document.getElementById('siteContent'))[0].offsetHeight - $('#horizontalMover__containmentBox2').height() - $('#horizontalMover__containmentBox2')[0].offsetTop - 50,
-		contentWidth = 20 + 240 + 40 + 300 + 20;
+		contentWidth = 20 + 240 + 40 + 300 + 20,
+        contentInnerWidth = 240 + 40 + 300;
         //debugger;
 		var
 		sc_scrollpane = $('#siteContent', window.top.document.body),
@@ -445,11 +446,30 @@ var mp3site = {
 			mp3site.settings.masterLeftOffset = masterLeftOffset;
 		}
 		
+		var dialogMP3sList = '#mp3s';
+		if ($('#infoWindow_mp3desc').length>0) var dialogMP3desc = '#infoWindow_mp3desc'; 
+			else var dialogMP3desc = '#infoWindow_mp3desc';
+		if ($('#playlist_wrapper').length>0) var dialogPlaylist = '#playlist_wrapper, #playlist_wrapper'; 
+			else var dialogPlaylist = '#playlist_wrapper';
+		if ($('#player').length>0) var dialogPlayer = '#player, #player, #player__CSS3'; 
+			else var dialogPlayer = '#player, #player__CSS3';
+            
 		var 
 		timeDelay = 10,
 		timeIncrease = 50,
-        leftOffset = masterLeftOffset + 20;
-			
+        leftOffset = masterLeftOffset + 20,
+		$dialogHeading = $('#heading_wrapper'),
+		$dialogMP3sList = $(dialogMP3sList),
+		$dialogMP3desc = $(dialogMP3desc),
+		$dialogPlaylist = $(dialogPlaylist),
+		$dialogPlayer = $(dialogPlayer),
+		$dialogComments = $(dialogComments),
+		centerDialogsWidth = $(dialogMP3sList).width() + $dialogPlaylist.width() + $dialogComments.width(),
+		dialogsLeft = Math.round (leftOffset),
+		dialogsTop = 30,//$dialogHeading[0].offsetTop + $dialogHeading.height() + 10,
+		dialogsHeight = (myHeight - dialogsTop - 40);
+
+        
 		$('#horizontalMover__containmentBox2').css({
 			left : 0,
             top : 0,
@@ -465,56 +485,13 @@ var mp3site = {
 			display : 'block'
 		}).animate ({opacity:0.3},1300);
 		
-        $('#infoWindow_mp3desc, #infoWindow_mp3desc__CSS3, #infoWindow_mp3desc__item__0, #infoWindow_mp3desc__item__0__img1, infoWindow_mp3desc__item__0__img2, #infoWindow_mp3desc, #infoWindow_mp3desc').css({
-            position : 'absolute',
-            width : 300,
-            height : (myHeight - 40 - 120) /2                                                                                                                                                                                                                          
+        $('#titlebar').css ({
+            width : contentInnerWidth,
+            left : dialogsLeft,
+            top : dialogsTop
         });
-        $('#infoWindow_mp3desc').css({
-            left : leftOffset + 250 + 20,
-            top : 30 + $('#player')[0].offsetHeight + 20,
-            width : 300,
-            height : ((myHeight - 40 - 120) /2)
-        });
-        $('#infoWindow_mp3desc__CSS3').css({
-            width : 300,
-            height : (myHeight - 40 - 120) /2
-        });
-        $('#mp3descText').css({ marginLeft : 40 });
         
-        
-        $('#infoWindow_mp3desc > table').css({
-            width : '',
-            height : ((myHeight - 40 - 120) /2)
-        });
-	 
-		var dialogMP3sList = '#mp3s';
-		if ($('#infoWindow_mp3desc').length>0) var dialogMP3desc = '#infoWindow_mp3desc'; 
-			else var dialogMP3desc = '#infoWindow_mp3desc';
-		if ($('#playlist_wrapper').length>0) var dialogPlaylist = '#playlist_wrapper, #playlist_wrapper'; 
-			else var dialogPlaylist = '#playlist_wrapper';
-		if ($('#player').length>0) var dialogPlayer = '#player, #player, #player__CSS3'; 
-			else var dialogPlayer = '#player, #player__CSS3';
-		
-		if ($('#infoWindow_comments').length>0) var dialogComments = '#infoWindow_comments'; else var dialogComments = '#infoWindow_comments';
-
-        var 
-		$dialogHeading = $('#heading_wrapper'),
-		$dialogMP3sList = $(dialogMP3sList),
-		$dialogMP3desc = $(dialogMP3desc),
-		$dialogPlaylist = $(dialogPlaylist),
-		$dialogPlayer = $(dialogPlayer),
-		$dialogComments = $(dialogComments),
-		centerDialogsWidth = $(dialogMP3sList).width() + $dialogPlaylist.width() + $dialogComments.width(),
-		dialogsLeft = Math.round (leftOffset),
-		dialogsTop = 30,//$dialogHeading[0].offsetTop + $dialogHeading.height() + 10,
-		dialogsHeight = (myHeight - dialogsTop - 40);
-
-        $('#horizontalMover').css({
-			left : masterLeftOffset
-		});
-
-
+        dialogsTop += $('#titlebar').height() + 10;
         var playerLeft = (leftOffset + 250 + 20);
         $('#player, #player__CSS3').css ({
             left : playerLeft,
@@ -524,6 +501,36 @@ var mp3site = {
         });
         $('#player__CSS3').css ({ left : '', top : '', opacity : 0.5 });
         
+        $('#infoWindow_mp3desc, #infoWindow_mp3desc__CSS3, #infoWindow_mp3desc__item__0, #infoWindow_mp3desc__item__0__img1, infoWindow_mp3desc__item__0__img2, #infoWindow_mp3desc, #infoWindow_mp3desc').css({
+            position : 'absolute',
+            width : 300,
+            height : (myHeight - 40 - 120 - $('#titlebar').height()) /2                                                                                                                                                                                                                          
+        });
+        $('#infoWindow_mp3desc').css({
+            left : leftOffset + 250 + 20,
+            top : dialogsTop + $('#player')[0].offsetHeight + 20,
+            width : 300,
+            height : ((myHeight - 40 - 120 - $('#titlebar').height()) /2)
+        });
+        $('#infoWindow_mp3desc__CSS3').css({
+            width : 300,
+            height : (myHeight - 40 - 120 - $('#titlebar').height()) /2
+        });
+        $('#mp3descText').css({ marginLeft : 40 });
+        
+        
+        $('#infoWindow_mp3desc > table').css({
+            width : '',
+            height : ((myHeight - 40 - 120 - $('#titlebar').height()) /2)
+        });
+	 
+		if ($('#infoWindow_comments').length>0) var dialogComments = '#infoWindow_comments'; else var dialogComments = '#infoWindow_comments';
+
+        $('#horizontalMover').css({
+			left : masterLeftOffset
+		});
+
+
         $('#mp3s').css ({
             visibility : 'visible',
             position : 'absolute',
@@ -545,7 +552,7 @@ var mp3site = {
         $dialogPlaylist.css ({
             left : leftOffset + 250 + 20,
             width : 300,
-            height : (myHeight - 40 - 120) /2,
+            height : (myHeight - 40 - 120 - $('#titlebar').height()) /2,
             top : ($dialogMP3desc[0].offsetTop + $dialogMP3desc.height() + 20) + 'px'
         });
         

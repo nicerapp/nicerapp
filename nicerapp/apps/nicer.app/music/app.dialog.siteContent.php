@@ -70,6 +70,10 @@ $htmlTitleMeta = file_get_contents ($setPath.'/index.title_meta.html');
             na.desktop.globals.divs.push ('#infoWindow_mp3desc');
         }, 250);
 	</script>
+	
+	<div id="titlebar" class="vividDialog" style="opacity:0.0001;position:absolute;display:flex;background:rgba(0,0,0,0.4);border:1px solid white;border-radius:15px;height:2em;font-weight:bold;justify-content:center;vertical-align:middle;align-content: center;align-items : center;font-size:2em">
+        <?php echo str_replace('_', ' ', getLocationBarInfo()['apps']['music']['set']) ?>
+    </div>
 
 	<div id="mp3s" class="vividDialog_mp3s vividScrollpane" theme="transparent" style="opacity:0.001;position:absolute;text-align:center;width:230px; color:yellow;font-weight:bold">
 <?php
