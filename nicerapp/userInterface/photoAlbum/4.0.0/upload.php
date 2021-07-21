@@ -47,6 +47,7 @@ $debug = true;
 
 // Settings
 $relPath = array_key_exists('relativePath',$_POST) ? DIRECTORY_SEPARATOR.$_POST['relativePath'] : '';
+$relPath = rtrim($relPath, '/');
 //echo $relDir; die();
 //$relPath = preg_replace($relDir, '/\/.*/', '');
 $targetDir = 
