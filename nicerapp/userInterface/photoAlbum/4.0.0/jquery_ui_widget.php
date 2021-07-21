@@ -12,14 +12,14 @@
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
 
 <!-- production -->
-<script type="text/javascript" src="/nicerapp/3rd-party/plupload-2.3.6/js/plupload.dev.js"></script>
+<script type="text/javascript" src="/nicerapp/3rd-party/plupload-2.3.6/js/plupload.full.min.js"></script>
 <script type="text/javascript" src="/nicerapp/3rd-party/plupload-2.3.6/js/jquery.ui.plupload/jquery.ui.plupload.js"></script>
 
-<!-- debug 
-<script type="text/javascript" src="../../js/moxie.js"></script>
-<script type="text/javascript" src="../../js/plupload.dev.js"></script>
-<script type="text/javascript" src="../../js/jquery.ui.plupload/jquery.ui.plupload.js"></script>
--->
+<!-- debug -->
+<script type="text/javascript" src="/nicerapp/3rd-party/plupload-2.3.6/js/moxie.js"></script>
+<script type="text/javascript" src="/nicerapp/3rd-party/plupload-2.3.6/js/plupload.dev.js"></script>
+<script type="text/javascript" src="/nicerapp/3rd-party/plupload-2.3.6/js/jquery.ui.plupload/jquery.ui.plupload.js"></script>
+<!--  -->
 
 </head>
 <body style="font: 13px Verdana;width:100%;height:100%;overflow:hidden;margin:0px;padding:0px;">
