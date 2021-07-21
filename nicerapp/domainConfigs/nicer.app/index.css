@@ -290,6 +290,42 @@ img.bg_last {
     flex-basis : 100%;
     height : 5px; width:5px;
 }
+.navbar .vividButton_icon_sdsnav {
+    display : inline-block;
+    position : relative;
+    margin-left : 10px;
+    margin-right:10px;
+    z-index : 1100;
+    width : 44px;
+    height : 44px;
+}
+.vividButton_icon_sdsnav img {
+    position : absolute;
+    top : 0px;
+    left : 0px;
+    width : 40px;
+    height : 40px;
+}    
+.cvbImgButton {
+    width : 34px;
+    top : 3px;
+    left : 3px;
+    position : absolute;
+}
+#btnSelectBoxShadowSettings .cvbImgTile {
+    position : absolute;
+    top : 0px;
+    left : 0px;
+    width : 40px;
+    height : 40px;
+    box-shadow : 3px 3px 4px 3px rgba(0, 0, 0, 0.75);
+}   
+#btnSelectBackgroundImage .cvbImgButton {
+    width : 30px;
+    height : 30px;
+    top : 5px;
+    left : 5px;
+}
 
 
 #siteMenu {
@@ -737,6 +773,9 @@ select[multiple] {
 #boxShadowControls img, #textShadowControls img {
     width : 50px;
     height : 50px;
+}
+#specificityForDiv {
+    font-weight : bold;
 }
 
 .cvbBorderCSS {

@@ -15,7 +15,7 @@ na.ds = na.dialogSettings = {
         na.m.settings.startTime = timeInMilliseconds;
         
         na.ds.s.c.forDialogID = forDialogID;
-        $('#specificityForDiv').html ('For : #'+forDialogID);
+        $('#specificityForDiv').html ('#'+forDialogID);
         
         var ac = {
             type : 'GET',
