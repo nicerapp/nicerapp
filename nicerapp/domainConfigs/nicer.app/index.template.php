@@ -121,7 +121,7 @@ na.site.globals = $.extend(na.site.globals, {
             <div id="btnSetPermissionsForTheme" class="vividButton_icon tooltip" title="Create or delete theme, and set permissions for current theme" alt="Create or delete theme, and set permissions for this theme" onclick="if (!$(this).is('.disabled')) na.ds.setPermissionsForTheme(event)" style="order:2;margin-left:auto;vertical-align:middle;width:40px;height:40px;position:relative;display:inline-block">
                 <div class="cvbBorderCSS" style="width:40px;height:40px;"></div>
                 <!--<img class="cvbImgBorder" src="/nicerapp/siteMedia/btnCssVividButton_outerBorder.png" style="width:70px;height:70px;"/>-->
-                <img class="cvbImgTile" src="/nicerapp/siteMedia/btnCssVividButton.red1b.png" style="width:40px;height:40px;opacity:0.4567"/>
+                <img class="cvbImgTile" src="/nicerapp/siteMedia/btnCssVividButton.red1b.png" style="width:40px;height:40px;opacity:0.67"/>
                 <img class="cvbImgButton" src="/nicerapp/siteMedia/1660_blk_19329_zoom.upperBodyOnly.256x256.png" style="position:absolute;top:2px;left:2px;width:36px;height:36px;z-index:2020;"/>
                 <img class="cvbImgButton_sup1" src="/nicerapp/siteMedia/btnTrashcan2_white_lowres.png" style="position:absolute;width:15px;height:19px;z-index:2021;"/>
                 <img class="cvbImgButton_sup2" src="/nicerapp/siteMedia/documentAdd_lowres.png" style="position:absolute;left:30px;width:20px;height:20px;z-index:2021;"/>
