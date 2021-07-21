@@ -62,6 +62,15 @@ $fileName = $_POST['name'];
 $filePath = $targetDir.DIRECTORY_SEPARATOR.$fileName;
 $thumbPath = $targetDir.DIRECTORY_SEPARATOR.'thumbs'.DIRECTORY_SEPARATOR . $fileName;
 if ($debug) var_dump ($thumbPath);
+
+if (
+    file_exists($filePath)
+    && file_exists($thumbPath)
+) {
+    // send success JSON-PRC flag back to browser
+    die('{"jsonrpc" : "2.0", "result" : null, "id" : "id"}');
+}
+
 //try {
     createDirectoryStructure (dirname($filePath), $filePerms_ownerUser, $filePerms_ownerGroup, $filePerms_perms);
     //chgrp ($filePath, $filePerms_ownerGroup);
