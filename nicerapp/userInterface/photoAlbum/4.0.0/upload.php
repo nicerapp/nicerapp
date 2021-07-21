@@ -43,7 +43,7 @@ global $filePerms_ownerUser;
 global $filePerms_ownerGroup;
 global $filePerms_perms;
 
-$debug = false;
+$debug = true;
 
 // Settings
 $relPath = array_key_exists('relativePath',$_POST) ? DIRECTORY_SEPARATOR.$_POST['relativePath'] : '';
@@ -53,7 +53,7 @@ $targetDir =
         realpath(dirname(__FILE__).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'../siteData/')
         .DIRECTORY_SEPARATOR.$cms->domain.DIRECTORY_SEPARATOR.$_GET['basePath']
         .$relPath;
-if ($debug) var_dump ($targetDir);
+if ($debug) { echo '$targetDir='; var_dump ($targetDir); echo PHP_EOL.PHP_EOL; }
     
 //echo '1::$targetDir='; var_dump ($targetDir); echo PHP_EOL.PHP_EOL;
     
