@@ -43,11 +43,13 @@ global $filePerms_ownerUser;
 global $filePerms_ownerGroup;
 global $filePerms_perms;
 
-$debug = false;
+$debug = true;
 
 // Settings
 $relPath = array_key_exists('relativePath',$_POST) ? DIRECTORY_SEPARATOR.$_POST['relativePath'] : '';
+if ($debug) { echo '$relPath='; var_dump ($relPath); echo PHP_EOL.PHP_EOL; }
 $relPath = rtrim($relPath, '/');
+if ($debug) { echo '$relPath='; var_dump ($relPath); echo PHP_EOL.PHP_EOL; }
 //echo $relDir; die();
 //$relPath = preg_replace($relDir, '/\/.*/', '');
 $targetDir = 
