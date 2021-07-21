@@ -1,4 +1,4 @@
-na.a = na.analytics = {
+na.an = na.analytics = {
     about : {
         whatsThis : 'a complete set of analytics routines, using couchdb as storage facility',
         firstCreated : '2020-09',
@@ -18,10 +18,12 @@ na.a = na.analytics = {
             type : 'GET',
             url : '/nicerapp/apps/nicer.app/analytics/ajax_load_index.php',
             data : {
-                
+                username : na.account.settings.username,
+                pw : na.account.settings.password,
+                date : '2021-07-19'
             },
             success : function (data, ts, xhr) {
-                debugger;
+                $('#siteContent .vividDialogContent').html(data);
             },
             failure : function (xhr, ajaxOptions, errorThrown) {
                 debugger;
@@ -253,5 +255,5 @@ na.a = na.analytics = {
         jQuery.ajax (ajaxCmd);
     }
 };
-na.a.s = na.a.settings;
-na.a.s.c = na.a.s.current;
+na.an.s = na.an.settings;
+na.an.s.c = na.an.s.current;

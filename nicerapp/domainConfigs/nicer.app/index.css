@@ -29,6 +29,26 @@ img.bg_last {
     z-index : 8;
 }
 
+.naCouchDB_findCommand {
+    color : rgb(0, 50, 0);
+    background : rgba(255,255,255,0.75);
+    text-shadow : none;
+    padding : 10px;
+}
+.naCouchDB_getCommand {
+    color : rgb(0, 100, 0);
+    background : rgba(255,255,255,0.75);
+    text-shadow : none;
+    padding : 10px;
+}
+.naCouchDB_dataReturnedToBrowser {
+    color : green;
+    background : rgba(255,255,255,0.75);
+    text-shadow : none;
+    padding : 10px;
+}
+
+
 .vividInfoDialog {
     position : absolute;
     z-index : 1000;
