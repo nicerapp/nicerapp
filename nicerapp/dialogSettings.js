@@ -209,6 +209,7 @@ na.ds = na.dialogSettings = {
         if (!na.ds.s.c.boxSettings) na.ds.s.c.boxSettings = $('#boxShadow_0')[0];
         setTimeout (function() {
             var x = $('#'+forDialogID+' .vdBackground').css('background');
+            debugger;
             na.m.log (300, 'x='+x);
             $('.mediaThumb', $('#dialogSettings_photoAlbum')[0].contentWindow.document).each(function(idx,el) {
                 na.m.log (300, 'el.src='+el.src);
