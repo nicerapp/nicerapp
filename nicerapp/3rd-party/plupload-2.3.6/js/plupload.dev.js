@@ -1473,22 +1473,24 @@ plupload.Uploader = function(options) {
 				file.loaded = offset; // reset all progress
 
 				/*
+                if (xhr.status === 100) {
 					up.trigger('FileUploaded', file, {
 						response : xhr.responseText,
 						status : xhr.status,
 						responseHeaders: xhr.getAllResponseHeaders()
 					});
+                } else {
 				*/
-                debugger;
-				
-				up.trigger('Error', {
-					code : plupload.HTTP_ERROR,
-					message : plupload.translate('HTTP Error.'),
-					file : file,
-					response : xhr.responseText,
-					status : xhr.status,
-					responseHeaders: xhr.getAllResponseHeaders()
-				});
+                    debugger;
+                    up.trigger('Error', {
+                        code : plupload.HTTP_ERROR,
+                        message : plupload.translate('HTTP Error.'),
+                        file : file,
+                        response : xhr.responseText,
+                        status : xhr.status,
+                        responseHeaders: xhr.getAllResponseHeaders()
+                    });
+                //}
 			}
 		}
 
