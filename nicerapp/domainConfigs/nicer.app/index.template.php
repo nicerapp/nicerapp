@@ -165,6 +165,11 @@ na.site.globals = $.extend(na.site.globals, {
                     <img class="cvbImgTile" src="/nicerapp/siteMedia/btnCssVividButton.yellow1a.png"/>
                     <img class="cvbImgButton" src="/nicerapp/siteMedia/btnSettingsText.png"/>
                 </div>
+                <div id="btnSelectTextShadowSettings" class="vividButton_icon_sdsnav tooltip" title="Set text shadow" alt="Set text shadow"  onclick="if (!$(this).is('.disabled')) na.dialogSettings.selectTextShadowSettings(event)">
+                    <div class="cvbBorderCSS"></div>
+                    <img class="cvbImgTile" src="/nicerapp/siteMedia/btnCssVividButton.yellow1a.png"/>
+                    <img class="cvbImgButton" src="/nicerapp/siteMedia/btnSettingsTextShadow.png"/>
+                </div>
             </div>
             
             <!--
