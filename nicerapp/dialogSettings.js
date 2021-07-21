@@ -637,7 +637,7 @@ na.ds = na.dialogSettings = {
         div = $('#'+na.ds.s.c.forDialogID),
         bg =  $('#'+na.ds.s.c.forDialogID+' .vdBackground'),
         bg1 = bg.css('background').replace(/\'/g, '\\\'').replace(/"/g, '\''),
-        opacity = bg1.match('url(') ? bg.css('opacity') : 1,
+        opacity = bg1.indexOf('url(')!==-1 ? bg.css('opacity') : 1,
         border = div.css('border'),
         borderRadius = bg.css('borderRadius'),
         i = last + 1,
