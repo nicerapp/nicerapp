@@ -4,8 +4,7 @@ na.ds = na.dialogSettings = {
             firstRun : true, 
             forDialogID : 'siteContent',
             //selectedButtonID : 'btnSelectBackgroundColor', // OBSOLETED
-            //selectedSetting : 'backgroundColor'
-            selectedSetting : 'textShadow'
+            selectedSetting : 'backgroundColor'
         } 
     }, 
     onload : function (forDialogID) {
@@ -558,18 +557,6 @@ na.ds = na.dialogSettings = {
         $('#boxShadowYoffset').val(sliders[1]);
         $('#boxShadowSpreadRadius').val(sliders[2]);
         $('#boxShadowBlurRadius').val(sliders[3]);
-
-        /*
-        $('.boxShadow').remove();
-        if (bs !== 'none' && bs.match(',')) {
-            var bss = bs.split(', rgb');
-            for (var i=0; i<bss.length; i++) {
-                if (i>0) bss[i] = 'rgb'+bss[i];
-                var html = '<div id="boxShadow_'+i+'" class="boxShadow" style="background:rgb(200,200,200);box-shadow:'+bss[i]+';border:'+$('#borderWidth').val()+'px solid '+na.ds.settings.current.borderColor+';border-radius:'+parseInt($(event.currentTarget).css('borderRadius'))+'px;margin:5px;padding:5px;" onclick="na.ds.boxSettingsSelected(event);">ABC XYZ</div>';
-                $('#boxShadow').append (html);
-            }
-        };
-        */
         
         var
         b = $(event.currentTarget).css('border'),
@@ -602,7 +589,7 @@ na.ds = na.dialogSettings = {
             + $('#boxShadowSpreadRadius').val() + 'px '
             + $('#boxShadowBlurRadius').val() + 'px '
             + color;
-        $(na.ds.settings.current.boxSettings).css ({ boxShadow : newBoxSetting });
+        $('#'+na.ds.settings.current.boxSettings[0].id+' div').css ({ boxShadow : newBoxSetting });
         
         newBoxSetting = '';
         $('.boxShadow').each(function(idx,el) {
@@ -792,9 +779,9 @@ na.ds = na.dialogSettings = {
         };
         for (let i=0; i<ts.length; i++) {
             var
-            j = i + 1,
+            j = i,
             fw = div.css('fontWeight'),
-            font = div.css('fontFamily'),
+            font = div.css('fontFamily').replace(/"/g, '\''),
             html = '<div id="textShadow_'+j+'" class="textShadow" onclick="na.ds.boxSettingsSelected(event)" style="height:1.5em;margin:5px;padding:5px;position:relative;"><div id="textShadow_'+j+'_bg" class="textShadow_bg" style="border:'+border+';background:'+bg1+';opacity:'+opacity+';border-radius:'+br+';position:absolute;"></div><span style="font-weight:'+fw+';font-family:'+font+';position:absolute;height:1em;top:0.5em;vertical-align:middle;text-align:center;display:table-cell;text-shadow:'+ts[i]+'">abc XYZ</span></div>';
             
             $('#textShadowControls').append(html);
@@ -921,7 +908,8 @@ na.ds = na.dialogSettings = {
         br = bg.css('borderRadius'),
         fw = div.css('fontWeight'),
         font = div.css('fontFamily'),
-        j = last + 1,
+        j = last === 0 ? 0 : last + 1;
+        var
         html = '<div id="textShadow_'+j+'" class="textShadow" onclick="na.ds.boxSettingsSelected(event)" style="height:1.5em;margin:5px;padding:5px;position:relative;"><div id="textShadow_'+j+'_bg" class="textShadow_bg" style="border:'+border+';background:'+bg1+';opacity:'+opacity+';border-radius:'+br+';position:absolute;"></div><span style="font-weight:'+fw+';font-family:'+font+';position:absolute;height:1em;top:0.5em;vertical-align:middle;text-align:center;display:table-cell;text-shadow:'+ts[i]+'">abc XYZ</span></div>';
 
         $('#textShadowControls').append(html);
@@ -976,12 +964,21 @@ na.ds = na.dialogSettings = {
             + (typeof tsc == 'object'
                 ? 'rgba('+tsc._r+', '+tsc._g+', '+tsc._b+', '+tsc._a+')'
                 : tsc
-            );
+            ),
+        els = $('#'+na.ds.settings.current.selectedTextShadow.id+' span')
+                .add(na.ds.s.c.selectedTextShadow)
+                .add(el[0])
+                .add('#'+el[0].id+' td');
 
-        //debugger;
-        $(na.ds.settings.current.selectedTextShadow).add(el).add('#'+el.id+' td').css ({ textShadow : newTextShadow, fontWeight : newFontWeight, fontSize : newFontSize+'px', fontFamily : newFontFamily });
+        debugger;
+        els.css ({ 
+            textShadow : newTextShadow, 
+            fontWeight : newFontWeight, 
+            fontSize : newFontSize+'px', 
+            fontFamily : newFontFamily 
+        });
         
-        na.ds.textSettingsSelected_updateDialog();
+        setTimeout (na.ds.textSettingsSelected_updateDialog, 250);
     },
     
     textSettingsSelected_updateDialog : function () {
@@ -997,8 +994,9 @@ na.ds = na.dialogSettings = {
             //.css({ fontWeight : newFontWeight, fontSize : newFontSize+'px', fontFamily : newFontFamily })
             .each(function(idx,el) {
                 if (newTextShadow!=='') newTextShadow+=', ';
-                newTextShadow += $(el).css('textShadow');
+                newTextShadow += $('#'+el.id+' span').css('textShadow');
             });
+            
         $(el).add(el2).css({ fontWeight : newFontWeight, fontSize : newFontSize+'px', fontFamily : newFontFamily });
         $(el).add(el2).css({ textShadow : newTextShadow });
         /*if (na.ds.settings.current.fireSaveTheme) */na.site.saveTheme();
