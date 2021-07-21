@@ -492,20 +492,12 @@ na.ds = na.dialogSettings = {
             
             $('#boxShadowSettings, .boxSettingsLabel, #boxShadowSettings > *').not('#boxShadowControls, #boxShadowColorpicker, .sp-container').css({display:'block'});
             $('#boxShadow').css({width:$('#borderSettings').width() - $('#labelBoxShadow').width() - 20 });
-            /*
-            $('.boxShadow').css({
-                background : $('#'+na.ds.s.c.forDialogID+' .vdBackground').css('background'),
-                border:$('#borderWidth').val()+'px '+$('#borderType').val()+' '+$('#borderColorpicker').val(),
-                borderRadius:parseInt($('#borderRadius').val())
-            });
-            */
             var w3 = 'calc(100% - 108px)';
             $('#boxShadowInsetClear').css({ width : w3 });
             $('#boxShadowXoffset').css({ width : w3 });
             $('#boxShadowYoffset').css({ width : w3 });
             $('#boxShadowSpreadRadius').css({ width : w3 });
             $('#boxShadowBlurRadius').css({ width : w3 });
-            //$('#labelBoxShadowColor').css({ width : $('#borderSettings').width() - 10 });
         });
         $('#boxShadowColorpicker').spectrum ({color:'rgba(0,0,0,0.5)', type: "flat", showPalette : false, clickoutFiresChange : false, change : na.ds.boxSettingsChanged_shadowColor});
         $('#borderColorpicker').spectrum ({color:na.ds.settings.current.borderColor, type: "flat", showPalette : false, clickoutFiresChange : false, change : na.ds.borderSettingsSelected});
