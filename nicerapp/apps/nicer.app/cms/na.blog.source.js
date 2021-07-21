@@ -236,7 +236,7 @@ na.blog = {
                 $('#jsTree').jstree(true).settings.core.data = dat;
                 $('#jsTree').jstree(true).refresh();
                 $('#siteToolbarLeft .lds-facebook').stop(true,true).fadeOut('slow');
-                if (jfu) jfu.reload(true);
+                if (jfu) jfu.contentWindow.location.reload(true);
                 setTimeout (function () {
                     if (typeof callback=='function') callback (dat);
                 }, 500);
