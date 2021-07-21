@@ -645,7 +645,8 @@ na.ds = na.dialogSettings = {
         
         $('#boxShadowControls').append(html);
         setTimeout (function () { 
-            $('#boxShadow_'+i+'_bg').css({ 
+            debugger;
+            $('#boxShadow_'+i+'_bg, #boxShadow_'+i+' span').css({ 
                 width : $('#boxShadow_'+i).width(),
                 height : $('#boxShadow_'+i).height()
             });
