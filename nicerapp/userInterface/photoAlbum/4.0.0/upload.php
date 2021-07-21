@@ -43,24 +43,20 @@ global $filePerms_ownerUser;
 global $filePerms_ownerGroup;
 global $filePerms_perms;
 
-$debug = true;
+$debug = false;
 
 // Settings
 $relPath = array_key_exists('relativePath',$_POST) ? DIRECTORY_SEPARATOR.$_POST['relativePath'] : '';
-if ($debug) { echo '$relPath='; var_dump ($relPath); echo PHP_EOL.PHP_EOL; }
 $relPath = rtrim($relPath, '/');
+//$relPath = preg_replace($relDir, '/\/.*/', ''); // NOT NEEDED, here for future bughunts only!
 if ($debug) { echo '$relPath='; var_dump ($relPath); echo PHP_EOL.PHP_EOL; }
-//echo $relDir; die();
-//$relPath = preg_replace($relDir, '/\/.*/', '');
+
 $targetDir = 
         realpath(dirname(__FILE__).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'../siteData/')
         .DIRECTORY_SEPARATOR.$cms->domain.DIRECTORY_SEPARATOR.$_GET['basePath']
         .$relPath;
 if ($debug) { echo '$targetDir='; var_dump ($targetDir); echo PHP_EOL.PHP_EOL; }
     
-//echo '1::$targetDir='; var_dump ($targetDir); echo PHP_EOL.PHP_EOL;
-    
-//echo $targetDir; die();
 $fileName = $_POST['name'];
 $filePath = $targetDir.DIRECTORY_SEPARATOR.$fileName;
 $thumbPath = $targetDir.DIRECTORY_SEPARATOR.'thumbs'.DIRECTORY_SEPARATOR . $fileName;
@@ -74,42 +70,9 @@ if (
     die('{"jsonrpc" : "2.0", "error" : {"code": 100, "message": "File already exists."}, "id" : "id"}');
 }
 
-//try {
-    createDirectoryStructure (dirname($filePath), $filePerms_ownerUser, $filePerms_ownerGroup, $filePerms_perms);
-    //chgrp ($filePath, $filePerms_ownerGroup);
-    //chown ($filePath, $filePerms_ownerUser);
-/*} catch (ErrorException $e) }
-    echo 'Could not create filepath "'.realpath($filePath).'".';
-    echo $e->getMessage();
-    echo json_encode ($e, JSON_PRETTY_PRINT);
-    debug_print_backtrace();
-    die();
-} catch (Exception $e) {
-    // createDirectoryStructure will fail for existing paths, so ignore it..
-    echo 'Could not create filepath "'.realpath($filePath).'".';
-    echo $e->getMessage();
-    debug_print_backtrace();
-    die();
-} */
-//try {
-    createDirectoryStructure (dirname($thumbPath), $filePerms_ownerUser, $filePerms_ownerGroup, $filePerms_perms);
-    //chgrp ($thumbPath, $filePerms_ownerGroup);
-    //chown ($thumbPath, $filePerms_ownerUser);
-/*} catch (ErrorException $e) }
-    echo 'Could not create filepath "'.realpath($filePath).'".';
-    echo $e->getMessage();
-    echo json_encode ($e, JSON_PRETTY_PRINT);
-    debug_print_backtrace();
-    die();
-} catch (Exception $e) {
-    // createDirectoryStructure will fail for existing paths, so ignore it..
-    echo 'Could not create filepath "'.realpath($thumbPath).'".';
-    echo $e->getMessage();
-    debug_print_backtrace();
-    die();
-} */
+createDirectoryStructure (dirname($filePath), $filePerms_ownerUser, $filePerms_ownerGroup, $filePerms_perms);
+createDirectoryStructure (dirname($thumbPath), $filePerms_ownerUser, $filePerms_ownerGroup, $filePerms_perms);
 
-//$targetDir = 'uploads';
 $cleanupTargetDir = true; // Remove old files
 $maxFileAge = 5 * 3600; // Temp file age in seconds
 
