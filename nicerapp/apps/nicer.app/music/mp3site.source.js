@@ -202,12 +202,12 @@ var mp3site = {
 			$('#audioTag')[0].play();
 			mp3site.settings.paused = false;
 			mp3site.settings.stopped = false;
-            $('#btnPlayPause')[0].src = '/nicerapp/apps/nicerapp/music/pause_icon.png';
+            $('#btnPlayPause')[0].src = '/nicerapp/apps/nicer.app/music/pause_icon.png';
 		} else {
 			$('#audioTag')[0].pause();
 			mp3site.settings.paused = true;
 			mp3site.settings.stopped = false;
-            $('#btnPlayPause')[0].src = '/nicerapp/apps/nicerapp/music/play_icon.png';
+            $('#btnPlayPause')[0].src = '/nicerapp/apps/nicer.app/music/play_icon.png';
 		}
 	},
 	

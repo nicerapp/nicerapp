@@ -1,4 +1,7 @@
 #!/bin/sh
+chown -R rene:www-data /home/rene/data1/htdocs/said.by
+chmod -R 755 /home/rene/data1/htdocs/said.by
+
 cp -rf /home/rene/data1/htdocs/nicer.app/nicerapp/apps/nicer.app/cms/* /home/rene/data1/htdocs/said.by/nicerapp/apps/nicer.app/cms/
 chown -R rene:www-data /home/rene/data1/htdocs/said.by/nicerapp/apps/nicer.app/cms/*
 chmod -R 740 /home/rene/data1/htdocs/said.by/nicerapp/apps/nicer.app/cms/*
@@ -33,6 +36,10 @@ chmod 770 /home/rene/data1/htdocs/said.by/nicerapp/domainConfigs/said.by/index.c
 cp -Rf /home/rene/data1/htdocs/nicer.app/nicerapp/3rd-party/plupload-2.3.6/examples/upload.php /home/rene/data1/htdocs/said.by/nicerapp/3rd-party/plupload-2.3.6/examples
 chown -R rene:www-data /home/rene/data1/htdocs/said.by/nicerapp/3rd-party/plupload-2.3.6/examples/upload.php
 chmod -R 740 /home/rene/data1/htdocs/said.by/nicerapp/3rd-party/plupload-2.3.6/examples/upload.php
+
+cp -Rf /home/rene/data1/htdocs/nicer.app/nicerapp/3rd-party/plupload-2.3.6/examples/jquery/jquery_ui_widget.php /home/rene/data1/htdocs/said.by/nicerapp/3rd-party/plupload-2.3.6/examples/jquery
+chown -R rene:www-data /home/rene/data1/htdocs/said.by/nicerapp/3rd-party/plupload-2.3.6/examples/jquery/jquery_ui_widget.php
+chmod -R 740 /home/rene/data1/htdocs/said.by/nicerapp/3rd-party/plupload-2.3.6/examples/jquery/jquery_ui_widget.php
 
 
 cp -Rf /home/rene/data1/htdocs/nicer.app/nicerapp/userInterface/* /home/rene/data1/htdocs/said.by/nicerapp/userInterface/
