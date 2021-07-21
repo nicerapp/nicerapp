@@ -711,6 +711,26 @@ class newsApp2_class {
                         $date2 = $date->sub(new DateInterval('P2D'));
                         $add = !$cd['params']['this']->doesItemExistOnDate ($date2, $item, $cd, $path, $k);
                     }
+                    if ($add) {
+                        $date2 = $date->sub(new DateInterval('P3D'));
+                        $add = !$cd['params']['this']->doesItemExistOnDate ($date2, $item, $cd, $path, $k);
+                    }
+                    if ($add) {
+                        $date2 = $date->sub(new DateInterval('P4D'));
+                        $add = !$cd['params']['this']->doesItemExistOnDate ($date2, $item, $cd, $path, $k);
+                    }
+                    if ($add) {
+                        $date2 = $date->sub(new DateInterval('P5D'));
+                        $add = !$cd['params']['this']->doesItemExistOnDate ($date2, $item, $cd, $path, $k);
+                    }
+                    if ($add) {
+                        $date2 = $date->sub(new DateInterval('P6D'));
+                        $add = !$cd['params']['this']->doesItemExistOnDate ($date2, $item, $cd, $path, $k);
+                    }
+                    if ($add) {
+                        $date2 = $date->sub(new DateInterval('P7D'));
+                        $add = !$cd['params']['this']->doesItemExistOnDate ($date2, $item, $cd, $path, $k);
+                    }
                     
                     // if the item is not found in the database, put it in the database.
                     if ($add) {
