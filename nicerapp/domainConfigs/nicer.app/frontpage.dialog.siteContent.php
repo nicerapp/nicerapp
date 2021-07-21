@@ -234,6 +234,8 @@
         global $naLAN; 
         if ($naLAN) { 
     ?>
+    <a href="<?php echo $urls['analytics'];?>"><h3>Analytics</h3></a>
+    
     <a href="<?php echo $urls['webmail'];?>"><h3>Webmail</h3></a>
     
     <a href="<?php echo $urls['cms'];?>"><h3>Blogging features</h3></a>
