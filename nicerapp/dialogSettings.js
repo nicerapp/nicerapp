@@ -210,8 +210,7 @@ na.ds = na.dialogSettings = {
         setTimeout (function() {
             $('.mediaThumb', $('#dialogSettings_photoAlbum')[0].contentWindow.document).each(function(idx,el) {
                 var x = $('#'+forDialogID+' .vdBackground').css('background');
-                debugger;
-                if (x && x.match(el.src)) {
+                if (x && x.match(el.src.replace(/%20/g, ' '))) {
                     debugger;
                     var scale = $('#'+forDialogID+' .vdBackground').css('backgroundSize').match(/\d+/);
                     if (scale) na.ds.s.c.scale = scale[0];
