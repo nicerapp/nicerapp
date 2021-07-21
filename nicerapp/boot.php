@@ -27,7 +27,14 @@
     $cms = new nicerAppCMS();
     $cms->init();
     
-    $naIP = (function_exists('apache_request_headers') && array_key_exists('X-Forwarded-For',apache_request_headers())?apache_request_headers()['X-Forwarded-For'] : $_SERVER['REMOTE_ADDR']);
+    $naIP = (
+        function_exists('apache_request_headers') 
+        && array_key_exists('X-Forwarded-For',apache_request_headers())
+        ? apache_request_headers()['X-Forwarded-For'] 
+        : array_key_exists('REMOTE_ADDR', $_SERVER)
+            ? $_SERVER['REMOTE_ADDR']
+            : 'OS commandline probably'
+    );
     global $naIP;
     
     $lanConfigFilepath = realpath(dirname(__FILE__)).'/domainConfigs/'.$cms->domain.'/naLAN.json';
