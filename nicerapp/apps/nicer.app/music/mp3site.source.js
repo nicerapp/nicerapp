@@ -428,7 +428,7 @@ var mp3site = {
 		myWidth = $(window.top.document.getElementById('siteContent'))[0].offsetWidth,
 		myHeight = $(window.top.document.getElementById('siteContent'))[0].offsetHeight - $('#horizontalMover__containmentBox2').height() - $('#horizontalMover__containmentBox2')[0].offsetTop - 50,
 		contentWidth = 20 + 240 + 40 + 300 + 20,
-        contentInnerWidth = 240 + 40 + 300;
+        contentInnerWidth = 240 + 40 + 300 - 10;
         //debugger;
 		var
 		sc_scrollpane = $('#siteContent', window.top.document.body),

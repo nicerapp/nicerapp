@@ -104,7 +104,8 @@ na.blog = {
                             path = path.replace(/ /g, '%20'),
                             src = (
                                 na.blog.settings.current.mediaFolderView == 'upload'
-                                ? '/nicerapp/3rd-party/plupload-2.3.6/examples/jquery/jquery_ui_widget.php?c='+na.m.changedDateTime_current()+/*'&smID='+siteManager.id+'&iid='+iid+'&dialogID='+did+*/'&basePath='+path
+                                //? '/nicerapp/3rd-party/plupload-2.3.6/examples/jquery/jquery_ui_widget.php?c='+na.m.changedDateTime_current()+/*'&smID='+siteManager.id+'&iid='+iid+'&dialogID='+did+*/'&basePath='+path
+                                ? '/nicerapp/userInterface/photoAlbum/4.0.0/jquery_ui_widget.php?basePath='+path
                                 : '/nicerapp/userInterface/photoAlbum/4.0.0/index.php?basePath='+path
                             ),
                             el = $('#jQueryFileUpload')[0];
