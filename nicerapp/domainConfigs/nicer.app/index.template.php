@@ -116,7 +116,7 @@ na.site.globals = $.extend(na.site.globals, {
             
             <label id="labelTheme" for="theme" class="specificityLabel" style="order:2;vertical-align:middle;">Theme</label>
             <select id="theme" class="select" onchange="na.ds.themeSelected(event)" style="order:2;vertical-align:middle;">
-                <option id="theme_default" name="theme_default" value="default">Default</option>
+                <option id="theme_default" name="theme_default" value="default">default</option>
             </select>
             <div id="btnSetPermissionsForTheme" class="vividButton_icon tooltip" title="Create or delete theme, and set permissions for current theme" alt="Create or delete theme, and set permissions for this theme" onclick="if (!$(this).is('.disabled')) na.ds.setPermissionsForTheme(event)" style="order:2;margin-left:auto;vertical-align:middle;width:40px;height:40px;position:relative;display:inline-block">
                 <div class="cvbBorderCSS" style="width:40px;height:40px;"></div>
@@ -130,11 +130,12 @@ na.site.globals = $.extend(na.site.globals, {
             
             <div class="navbar" style="order:5">
                 <!--<img src="/nicerapp/siteMedia/btnSettingsBorder.png"/>-->
-                <div id="btnViewResult" class="vividButton_icon_sdsnav tooltip" title="View result" alt="View result" onclick="if (!$(this).is('.disabled')) { if (!na.desktop.settings.visibleDivs.includes('#siteContent'))  na.desktop.settings.visibleDivs.push('#siteContent'); na.desktop.settings.visibleDivs.remove('#siteToolbarDialogSettings'); na.site.settings.activeDivs=['#siteContent']; na.desktop.resize();}">
+                <!--<div id="btnViewResult" class="vividButton_icon_sdsnav tooltip" title="View result" alt="View result" onclick="if (!$(this).is('.disabled')) { if (!na.desktop.settings.visibleDivs.includes('#siteContent'))  na.desktop.settings.visibleDivs.push('#siteContent'); na.desktop.settings.visibleDivs.remove('#siteToolbarDialogSettings'); na.site.settings.activeDivs=['#siteContent']; na.desktop.resize();}">
                     <div class="cvbBorderCSS"></div>
-                    <!--<img class="cvbImgTile" src="/nicerapp/siteMedia/btnCssVividButton.green2a.png"/>-->
+                    <! --<img class="cvbImgTile" src="/nicerapp/siteMedia/btnCssVividButton.green2a.png"/>-- >
                     <img class="cvbImgButton" src="/nicerapp/siteMedia/btnBack.png"/>
                 </div>
+                -->
                 <div id="btnSelectBorderSettings" class="vividButton_icon_sdsnav tooltip" title="Set border settings" alt="Set border settings"  onclick="if (!$(this).is('.disabled')) na.dialogSettings.selectBorderSettings(event)">
                     <div class="cvbBorderCSS"></div>
                     <!--<img class="cvbImgTile" src="/nicerapp/siteMedia/btnCssVividButton.grey2a.png"/>-->
