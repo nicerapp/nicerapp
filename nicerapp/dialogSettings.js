@@ -5,7 +5,7 @@ na.ds = na.dialogSettings = {
             forDialogID : 'siteContent',
             //selectedButtonID : 'btnSelectBackgroundColor', // OBSOLETED
             //selectedSetting : 'backgroundColor'
-            selectedSetting : 'boxShadow'
+            selectedSetting : 'textShadow'
         } 
     }, 
     onload : function (forDialogID) {
@@ -465,22 +465,40 @@ na.ds = na.dialogSettings = {
         $('#boxShadowSettings').fadeIn('fast', 'swing', function () {
             var
             div = $('#'+na.ds.settings.current.forDialogID),
+            bg = $('#'+na.ds.settings.current.forDialogID+' .vdBackground'),
+            bg1 = $(bg).css('background').replace(/"/g, '\''),
             bs = $(div).css('boxShadow').split(', rgb');
-            html = '';
-            for (var i=1; i<bs.length; i++) { bs[i] = 'rgb'+bs[i]; };
-            for (var i=0; i<bs.length; i++) {
-                html += '<div id="boxShadow_'+i+'" class="boxShadow" onclick="na.ds.boxSettingsSelected(event)" style="border:'+$('#borderWidth').val()+'px solid '+na.ds.settings.current.borderColor+';background:'+$(div).css('background')+';box-shadow:'+bs[i]+';border-radius:'+parseInt($('#borderRadius').val())+'px;margin:5px;padding:5px;">ABC XYZ</div>';
+            opacity = bg1.indexOf('url(')!==-1 ? bg.css('opacity') : 1,
+            border = $('#borderWidth').val()+'px solid '+na.ds.settings.current.borderColor,
+            br = parseInt($('#borderRadius').val());
+            
+            for (var i=1; i<bs.length; i++) { 
+                bs[i] = 'rgb'+bs[i]; 
             };
             $('.boxShadow').remove();
-            $('#boxShadowControls').append(html);
+            for (let i=0; i<bs.length; i++) {
+                var html = '<div id="boxShadow_'+i+'" class="boxShadow" onclick="na.ds.boxSettingsSelected(event)" style="height:1.5em;margin:5px;padding:5px;position:relative;"><div id="boxShadow_'+i+'_bg" style="border:'+border+';background:'+bg1+';opacity:'+opacity+';border-radius:'+br+'px;position:absolute;"></div><span class="boxShadow_bg" style="position:absolute;height:1em;top:0.5em;vertical-align:middle;text-align:center;display:table-cell;">ABC XYZ</span></div>';
+                
+                $('#boxShadowControls').append(html);
+                
+                setTimeout (function () { 
+                    $('#boxShadow_'+i+'_bg, #boxShadow_'+i+' span').css({ 
+                        width : $('#boxShadow_'+i).width(),
+                        height : $('#boxShadow_'+i).height()
+                    });
+                }, 200);
+            };
+            
             
             $('#boxShadowSettings, .boxSettingsLabel, #boxShadowSettings > *').not('#boxShadowControls, #boxShadowColorpicker, .sp-container').css({display:'block'});
             $('#boxShadow').css({width:$('#borderSettings').width() - $('#labelBoxShadow').width() - 20 });
+            /*
             $('.boxShadow').css({
                 background : $('#'+na.ds.s.c.forDialogID+' .vdBackground').css('background'),
                 border:$('#borderWidth').val()+'px '+$('#borderType').val()+' '+$('#borderColorpicker').val(),
                 borderRadius:parseInt($('#borderRadius').val())
             });
+            */
             var w3 = 'calc(100% - 108px)';
             $('#boxShadowInsetClear').css({ width : w3 });
             $('#boxShadowXoffset').css({ width : w3 });
@@ -504,10 +522,6 @@ na.ds = na.dialogSettings = {
         
         if (!b) b = $(event.currentTarget).css('borderTopWidth')+' '+$(event.currentTarget).css('borderTopStyle')+' '+$(event.currentTarget).css('borderTopColor');
         
-        $('.boxShadow').css({ 
-            background : $('#'+na.ds.s.c.forDialogID+' .vdBackground').css('background')
-        });
-
         if (bs == 'none') {
             var
             sliders = [ 2, 2, 4, 2 ];
@@ -615,8 +629,24 @@ na.ds = na.dialogSettings = {
             var idx2 = parseInt(el.id.replace('boxShadow_',''));
             if (idx2 > last) last = idx2;
         });
-        var html = '<div id="boxShadow_'+(last+1)+'" class="boxShadow" onclick="na.ds.boxSettingsSelected(event)" style="border:'+$('#borderWidth').val()+'px solid '+na.ds.settings.current.borderColor+';background:rgba(200,200,200,1);box-shadow:2px 2px 2px 2px rgba(0,0,0,0.5);border-radius:'+parseInt($('#borderRadius').val())+'px;margin:5px;padding:5px;">ABC XYZ</div>';
-        $('#boxShadow').append(html);
+        
+        var
+        div = $('#'+na.ds.settings.current.forDialogID),
+        bg =  $('#'+na.ds.settings.current.forDialogID+' .vdBackground'),
+        bg1 = bg.css('background').replace(/\'/g, '\\\'').replace(/"/g, '\''),
+        opacity = bg1.match('url(') ? bg.css('opacity') : 1,
+        border = div.css('border'),
+        borderRadius = bg.css('borderRadius'),
+        i = last + 1,
+        html = '<div id="boxShadow_'+i+'" class="boxShadow" onclick="na.ds.boxSettingsSelected(event)" style="height:1.5em;margin:5px;padding:5px;position:relative;"><div id="boxShadow_'+i+'_bg" style="border:'+border+';background:'+bg1+';opacity:'+opacity+';border-radius:'+br+'px;position:absolute;"></div><span class="boxShadow_bg" style="position:absolute;height:1em;top:0.5em;vertical-align:middle;text-align:center;display:table-cell;">ABC XYZ</span></div>';
+        
+        $('#boxShadowControls').append(html);
+        setTimeout (function () { 
+            $('#boxShadow_'+(i+1)+'_bg').css({ 
+                width : $('#boxShadow_'+i).width(),
+                height : $('#boxShadow_'+i).height()
+            });
+        }, 200);
         
         na.ds.settings.current.boxSettings = $('#boxShadow_'+(last+1))[0];
         $('#boxShadowXoffset').val(2);
@@ -702,12 +732,12 @@ na.ds = na.dialogSettings = {
         if (typeof bg1=='string' && bg1!=='' && !bg1.match('url')) {
             var bg2 = '', bg2a = bg1.match(rgbaRegEx), bg2b = bg1.match(rgbRegEx);
             if (bg2a) {
-                $(bg).css({ background : 'rgba('+bg2a[1]+', '+bg2a[2]+', '+bg2a[3]+', '+opacity+')'+bg2a[5] });
+                $(bg).add('.boxShadow_bg, .textShadow_bg').css({ background : 'rgba('+bg2a[1]+', '+bg2a[2]+', '+bg2a[3]+', '+opacity+')'+bg2a[5] });
             } else {
-                $(bg).css({ background : 'rgba('+bg2b[1]+', '+bg2b[2]+', '+bg2b[3]+', '+opacity+')'+bg2b[4] });
+                $(bg).add('.boxShadow_bg, .textShadow_bg').css({ background : 'rgba('+bg2b[1]+', '+bg2b[2]+', '+bg2b[3]+', '+opacity+')'+bg2b[4] });
             }
         } else { 
-            $(bg).css({ opacity : opacity });
+            $(bg).add('.boxShadow_bg, .textShadow_bg').css({ opacity : opacity });
         }
         /*if (na.ds.settings.current.fireSaveTheme) */na.site.saveTheme();
     },
@@ -733,42 +763,57 @@ na.ds = na.dialogSettings = {
         $('.dialogSettings_colorPicker').next().css ({ width : 230 }).fadeOut('fast');;
         $('#textSettings').fadeIn('fast', 'swing', na.ds.updateTextSettingsControls);
         
-        var
-        el = $('#'+na.ds.settings.current.forDialogID),
-        ts = $(el).css('textShadow').split(', rgb');
-        for (var i=0; i<ts.length; i++) {
-            var html = '<div id="textShadow_'+(i+1)+'" class="textShadow" onclick="na.ds.selectTextShadow(event)" style="margin:5px;padding:5px;text-shadow:'+ts[i]+'">ABC XYZ</div>';
-            $('#textShadow').append(html);
-        }  
-        
         $('#textColorpicker').spectrum ({
             color:na.ds.settings.current.textColor, 
-            type: "flat", showPalette : false, 
+            type: "flat", 
+            showPalette : false, 
             clickoutFiresChange : false, 
             change : na.ds.textSettingsSelected_textColor
         });
         $('#textShadowColorpicker').spectrum ({
             color:na.ds.settings.current.textShadowColor, 
-            type: "flat", showPalette : false, 
+            type: "flat", 
+            showPalette : false, 
             clickoutFiresChange : false, 
             change : na.ds.textSettingsSelected_textShadowColor
         });
     },
     
     selectTextShadowSettings : function (updateTextSettingsControls) {
-        na.ds.onclick($('#btnSelectTextSettings')[0]);
+        //na.ds.onclick($('#btnSelectTextSettings')[0]);
         na.ds.settings.current.selectedSetting = 'textShadow';
         $('.dialogSettingsComponent').not('#textSettings').fadeOut('fast');
         $('.dialogSettings_colorPicker').next().fadeOut('fast');
         $('#textShadowSettings').fadeIn('fast', 'swing', na.ds.updateTextSettingsControls);
         
         var
-        el = $('#'+na.ds.settings.current.forDialogID),
-        ts = $(el).css('textShadow').split(', rgb');
-        for (var i=0; i<ts.length; i++) {
-            var html = '<div id="textShadow_'+(i+1)+'" class="textShadow" onclick="na.ds.selectTextShadow(event)" style="margin:5px;padding:5px;text-shadow:'+ts[i]+'">ABC XYZ</div>';
-            $('#textShadow').append(html);
-        }  
+        div = $('#'+na.ds.settings.current.forDialogID),
+        bg =  $('#'+na.ds.settings.current.forDialogID+' .vdBackground'),
+        bg1 = bg.css('background').replace(/\'/g, '\\\'').replace(/"/g, '\''),
+        opacity = bg1.indexOf('url(') !== -1 ? bg.css('opacity') : 1,
+        border = div.css('border'),
+        br = bg.css('borderRadius'),
+        ts = $(div).css('textShadow').split(', rgb');
+        $('.textShadow').remove();
+        for (var i=1; i<ts.length; i++) { 
+            ts[i] = 'rgb'+ts[i]; 
+        };
+        for (let i=0; i<ts.length; i++) {
+            var
+            j = i + 1,
+            fw = div.css('fontWeight'),
+            font = div.css('fontFamily'),
+            html = '<div id="textShadow_'+j+'" class="textShadow" onclick="na.ds.boxSettingsSelected(event)" style="height:1.5em;margin:5px;padding:5px;position:relative;"><div id="textShadow_'+j+'_bg" class="textShadow_bg" style="border:'+border+';background:'+bg1+';opacity:'+opacity+';border-radius:'+br+';position:absolute;"></div><span style="font-weight:'+fw+';font-family:'+font+';position:absolute;height:1em;top:0.5em;vertical-align:middle;text-align:center;display:table-cell;text-shadow:'+ts[i]+'">abc XYZ</span></div>';
+            
+            $('#textShadowControls').append(html);
+
+            setTimeout (function () { 
+                $('#textShadow_'+j+'_bg, #textShadow_'+j+' span').css({ 
+                    width : $('#textShadow_'+j).width(),
+                    height : $('#textShadow_'+j).height()
+                });
+            }, 200);
+        };
         
         $('#textColorpicker').spectrum ({
             color:na.ds.settings.current.textColor, 
@@ -785,7 +830,6 @@ na.ds = na.dialogSettings = {
     },
     
     updateTextSettingsControls : function (evt) {
-        debugger;
         var
         el = $('#'+na.ds.settings.current.forDialogID),
         el2 = $('#'+na.ds.settings.current.forDialogID+' .vividDialogContent'),
@@ -827,8 +871,9 @@ na.ds = na.dialogSettings = {
                     : 'ABeeZee',
         newFontFamily = newFontFamily.split(', ')[0].replace(/"/g,'');
 
-        na.ds.settings.current.textColor = newTextColor;
-        na.ds.settings.current.textShadowColor = newTextShadowColor;
+        na.ds.s.c.fontFamily = newFontFamily;
+        na.ds.s.c.textColor = newTextColor;
+        na.ds.s.c.textShadowColor = newTextShadowColor;
         
         $('#textColorpicker').spectrum ({
             color:na.ds.settings.current.textColor, 
@@ -866,7 +911,7 @@ na.ds = na.dialogSettings = {
             .val(test1a ? parseInt(test1a[6].replace('px','')) : test1b ? parseInt(test1b[5].replace('px','')) : 2);
         $('#textShadowBlurRadius')
             .css({width:$('#textSettings').width() - $('#labelTextShadowBlurRadius').width() - 40 })
-            .val(test1a ? parseInt(test1a[7].replace('px','')) : test1b ? parseInt(test1b[6].replace('px','')) : 2);
+            .val(test1a ? parseInt(test1a[7].replace('px','')) : test1b ? parseInt(test1b[6].replace('px','')) : 4);
     },
     addTextShadow : function (evt) {
         var last = 0;
@@ -874,8 +919,28 @@ na.ds = na.dialogSettings = {
             var idx2 = parseInt(el.id.replace('textShadow_',''));
             if (idx2 > last) last = idx2;
         });
-        var html = '<div id="textShadow_'+(last+1)+'" class="textShadow" onclick="na.ds.selectTextShadow(event)" style="margin:5px;padding:5px;">ABC XYZ</div>';
-        $('#textShadow').append(html);
+        
+        var
+        div = $('#'+na.ds.settings.current.forDialogID),
+        bg =  $('#'+na.ds.settings.current.forDialogID+' .vdBackground'),
+        bg1 = bg.css('background').replace(/\'/g, '\\\'').replace(/"/g, '\''),
+        opacity = bg1.match('url(') ? bg.css('opacity') : 1,
+        border = div.css('border'),
+        br = bg.css('borderRadius'),
+        fw = div.css('fontWeight'),
+        font = div.css('fontFamily'),
+        j = last + 1,
+        html = '<div id="textShadow_'+j+'" class="textShadow" onclick="na.ds.boxSettingsSelected(event)" style="height:1.5em;margin:5px;padding:5px;position:relative;"><div id="textShadow_'+j+'_bg" class="textShadow_bg" style="border:'+border+';background:'+bg1+';opacity:'+opacity+';border-radius:'+br+';position:absolute;"></div><span style="font-weight:'+fw+';font-family:'+font+';position:absolute;height:1em;top:0.5em;vertical-align:middle;text-align:center;display:table-cell;text-shadow:'+ts[i]+'">abc XYZ</span></div>';
+
+        $('#textShadowControls').append(html);
+
+        setTimeout (function () { 
+            $('#textShadow_'+(i+1)+'_bg').css({ 
+                width : $('#textShadow_'+(i+1)).width(),
+                height : $('#textShadow_'+(i+1)).height()
+            });
+        }, 200);
+        
         var 
         el = $('#textShadow_'+(last+1))[0],
         evt2 = { currentTarget : el };
@@ -898,10 +963,7 @@ na.ds = na.dialogSettings = {
         updateControls = na.ds.settings.current.selectedTextShadow !== el;
         
         na.ds.settings.current.selectedTextShadow = el;
-        $('.textShadow').css({ background : 'rgba(0,0,0,0.2)', border : 'none', borderRadius : '10px' });
         $(el).css({
-            background : 'navy', 
-            border : '1px solid white', 
             borderRadius : '10px'  
         });
         if (updateControls) na.ds.updateTextSettingsControls(evt);

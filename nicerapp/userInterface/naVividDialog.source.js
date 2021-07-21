@@ -43,14 +43,14 @@ class naVividDialog {
             var bg2 = '', bg2a = bg1.match(rgbaRegEx), bg2b = bg1.match(rgbRegEx);
             if (bg2a) {
                 var opacity = bg2a[4];
-                $(bg).css({ background : 'rgba('+bg2a[1]+', '+bg2a[2]+', '+bg2a[3]+', '+bg2a[4]+')'+bg2a[5] });
+                $(bg).add('.boxShadow_bg, .textShadow_bg').css({ background : 'rgba('+bg2a[1]+', '+bg2a[2]+', '+bg2a[3]+', '+bg2a[4]+')'+bg2a[5] });
             } else {
                 var opacity = 0.5;
-                $(bg).css({ background : 'rgba('+bg2b[1]+', '+bg2b[2]+', '+bg2b[3]+', 0.5)'+bg2b[4] });
+                $(bg).add('.boxShadow_bg, .textShadow_bg').css({ background : 'rgba('+bg2b[1]+', '+bg2b[2]+', '+bg2b[3]+', 0.5)'+bg2b[4] });
             }
         } else { 
             var opacity = parseFloat($(bg).css('opacity'));
-            $(bg).css({ opacity : opacity });
+            $(bg).add('.boxShadow_bg, .textShadow_bg').css({ opacity : opacity });
         }
         var dialog = $(bg).parents('.vividDialog')[0];
         $(dialog).find('.sliderOpacityRange').val(parseInt(opacity*100));

@@ -545,7 +545,21 @@ na.ds = na.dialogSettings = {
             var idx2 = parseInt(el.id.replace('boxShadow_',''));
             if (idx2 > last) last = idx2;
         });
-        var html = '<div id="boxShadow_'+(last+1)+'" class="boxShadow" onclick="na.ds.boxSettingsSelected(event)" style="border:'+$('#borderWidth').val()+'px solid '+na.ds.settings.current.borderColor+';background:rgba(200,200,200,1);box-shadow:2px 2px 2px 2px rgba(0,0,0,0.5);border-radius:'+parseInt($('#borderRadius').val())+'px;margin:5px;padding:5px;">ABC XYZ</div>';
+        var 
+        div = $('#'+na.ds.settings.current.forDialogID),
+        bg = $('#'+na.ds.settings.current.forDialogID+' .vdBackground'),
+        border = $('#borderWidth').val()+'px solid '+na.ds.settings.current.borderColor,
+        background = bg.css('background'),
+        opacity = bg.css('opacity'),
+        boxShadow = 
+            $('#boxShadowXoffset').val() + 'px '
+            + $('#boxShadowYoffset').val() + 'px '
+            + $('#boxShadowSpreadRadius').val() + 'px '
+            + $('#boxShadowBlurRadius').val() + 'px '
+            + $('#textShadow').val() + ' '
+            + $('#boxShadowInset')[0].checked ? 'inset' : '',
+        borderRadius = parseInt($('#borderRadius').val())+'px',
+        html = '<div id="boxShadow_'+(last+1)+'" class="boxShadow" onclick="na.ds.boxSettingsSelected(event)" style="border:'+border+';background:'+background+';box-shadow:'+boxShadow+';border-radius:'+borderRadius+';margin:5px;padding:5px;">ABC XYZ</div>';
         $('#boxShadow').append(html);
         
         na.ds.settings.current.boxSettings = $('#boxShadow_'+(last+1))[0];
@@ -660,11 +674,32 @@ na.ds = na.dialogSettings = {
         $('.dialogSettings_colorPicker').next().fadeOut('fast');
         $('#textSettings').fadeIn('fast', 'swing', na.ds.updateTextSettingsControls);
         
+        var 
+        div = $('#'+na.ds.settings.current.forDialogID),
+        bg = $('#'+na.ds.settings.current.forDialogID+' .vdBackground'),
+        border = $('#borderWidth').val()+'px solid '+na.ds.settings.current.borderColor,
+        background = bg.css('background'),
+        opacity = bg.css('opacity'),
+        boxShadow = 
+            $('#boxShadowXoffset').val() + 'px '
+            + $('#boxShadowYoffset').val() + 'px '
+            + $('#boxShadowSpreadRadius').val() + 'px '
+            + $('#boxShadowBlurRadius').val() + 'px '
+            + $('#textShadow').val() + ' '
+            + $('#boxShadowInset')[0].checked ? 'inset' : '',
+        borderRadius = parseInt($('#borderRadius').val())+'px',
+        html = '<div id="boxShadow_'+(last+1)+'" class="boxShadow" onclick="na.ds.boxSettingsSelected(event)" style="border:'+border+';background:'+background+';box-shadow:'+boxShadow+';border-radius:'+borderRadius+';margin:5px;padding:5px;">ABC XYZ</div>';
+        $('#textShadow').append(html);
+
+
         var
         el = $('#'+na.ds.settings.current.forDialogID),
         ts = $(el).css('textShadow').split(', rgb');
+        for (var i=1; i<ts.length; i++) {
+            ts[i] = 'rgb'+ts[i];
+        }
         for (var i=0; i<ts.length; i++) {
-            var html = '<div id="textShadow_'+(i+1)+'" class="textShadow" onclick="na.ds.selectTextShadow(event)" style="margin:5px;padding:5px;text-shadow:'+ts[i]+'">ABC XYZ</div>';
+            var html = '<div id="textShadow_'+(i+1)+'" class="textShadow" onclick="na.ds.selectTextShadow(event)" style="border:'+border+';background:'+background+';box-shadow:'+boxShadow+';border-radius:'+borderRadius+';margin:5px;padding:5px;text-shadow:'+ts[i]+'">ABC XYZ</div>';
             $('#textShadow').append(html);
         }  
         
@@ -794,12 +829,6 @@ na.ds = na.dialogSettings = {
         updateControls = na.ds.settings.current.selectedTextShadow !== el;
         
         na.ds.settings.current.selectedTextShadow = el;
-        $('.textShadow').css({ background : 'rgba(0,0,0,0.2)', border : 'none', borderRadius : '10px' });
-        $(el).css({
-            background : 'navy', 
-            border : '1px solid white', 
-            borderRadius : '10px'  
-        });
         if (updateControls) na.ds.updateTextSettingsControls(evt);
     },
     textSettingsSelected : function () {
