@@ -254,7 +254,9 @@ na.site.globals = $.extend(na.site.globals, {
             <label id="labelBoxShadowColor" class="boxSettingsLabel" for="boxShadowColor">Color</label>
             <input id="boxShadowColorpicker" class="dialogSettingsComponent" style="position:absolute;top:95px;"></input>
         </div>
-        <input id="colorpicker" class="dialogSettingsComponent dialogSettings_colorPicker" style="position:absolute;top:auto;"></input>
+        <div style="text-align:center;">
+            <input id="colorpicker" class="dialogSettingsComponent dialogSettings_colorPicker" style="position:absolute;top:auto;"></input>
+        </div>
         <div id="dialogSettings_jsTree" class="dialogSettingsComponent vividScrollpane" style="position:absolute;top:auto;display:none;"></div>
         <div id="dialogSettings_photoAlbum_specs" class="dialogSettingsComponent vividScrollpane" style="height:4em;flex-flow: wrap row;position:absolute;top:auto;display:none;">
             <label id="label_dialogSettings_photoOpacity" class="labelDialogSettings" for="dialogSettings_photoOpacity">Opacity</label>
@@ -362,15 +364,15 @@ na.site.globals = $.extend(na.site.globals, {
             </select>
             <div class="flexBreak"></div>
 
-            <label id="labelTextSize" class="textSettingsLabel" for="textSize">Text size</label>
+            <label id="labelTextSize" class="textSettingsLabel" for="textSize">Size</label>
             <input id="textSize" type="range" min="5" max="40" value="12" class="sliderOpacityRangeBorderSettings" onchange="na.ds.textSettingsSelected();"/>
             <div class="flexBreak" style="height:8px;"></div>
 
-            <label id="labelTextWeight" class="textSettingsLabel" for="textWeight">Text boldness</label>
+            <label id="labelTextWeight" class="textSettingsLabel" for="textWeight">Boldness</label>
             <input id="textWeight" type="range" min="3" max="10" value="4" class="sliderOpacityRangeBorderSettings" onchange="na.ds.textSettingsSelected();"/>
             <div class="flexBreak" style="height:8px;"></div>
 
-            <label id="labelTextColor" class="textColorpicker" for="fontFamily">Font color</label>
+            <label id="labelTextColor" class="textColorpicker" for="fontFamily">Color</label>
             <input id="textColorpicker" class="dialogSettingsComponent dialogSettings_colorPicker" style="position:absolute;top:95px;"></input>
             <div class="flexBreak"></div>
         </div>

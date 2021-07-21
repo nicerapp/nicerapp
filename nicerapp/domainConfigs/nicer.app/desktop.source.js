@@ -45,7 +45,7 @@ na.desktop = {
             },
             '#siteToolbarDialogSettings' : {
                 top : $('#siteDateTime').height()+20,
-                left : -520,
+                left : -400,
                 height : $(window).height()-120,
                 width : !na.m.userDevice.isPhone ? 340 : $(window).width - 50,
                 opacity : 0.0001

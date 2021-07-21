@@ -794,7 +794,6 @@ select[multiple] {
     padding : 0;
     align-content : center;
     align-items : center;
-    height : 78px;
     width : calc(100% - 20px);
 }
 .navbar_button {

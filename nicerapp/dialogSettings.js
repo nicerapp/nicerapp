@@ -274,7 +274,8 @@ na.ds = na.dialogSettings = {
                 - $('#dialogSettings_photoAlbum').offset().top
                 - $('.navbar').height()
                 - $('#specificitySettings').height()
-                - 70
+                - 90,
+            top : $('#specificitySettings').height() + 170
         }).css({display:display});
 
         /*
@@ -449,7 +450,16 @@ na.ds = na.dialogSettings = {
             $('#borderWidth').css({ width : w3 });
             $('#borderRadius').css({ width : w3 });
         });
-        $('#borderColorpicker').spectrum ({color:na.ds.s.c.borderColor, type: "flat", showPalette : false, clickoutFiresChange : false, change : na.ds.borderSettingsSelected});
+        $('#borderColorpicker').spectrum ({
+            color : na.ds.s.c.borderColor, 
+            type: "flat", 
+            showPalette : false, 
+            clickoutFiresChange : false, 
+            change : na.ds.borderSettingsSelected
+        });
+        $('#borderColorpicker').next().css ({
+            display : 'inline-block'
+        });
         var evt2 = { currentTarget : $('#'+na.ds.s.c.forDialogID)[0] };
         na.ds.boxSettingsSelected (evt2, false); //event.currentTarget === ct
     },
