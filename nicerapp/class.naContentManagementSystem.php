@@ -62,7 +62,7 @@ class nicerAppCMS {
             trigger_error ('app.title.site.php missing for app='.json_encode($app), E_USER_ERROR);
         }
         
-        $getAsIndividualLinks = true;//$this->domain==='nicerapp';
+        $getAsIndividualLinks = $this->domain==='nicer.app';
         if ($getAsIndividualLinks) {
             $cssFiles = $this->getFiles_asIndividualLinks('css', 'css');
             $cssThemeFiles = $this->getFiles_asIndividualLinks('css', 'cssTheme');
