@@ -1472,25 +1472,14 @@ plupload.Uploader = function(options) {
 			} else {
 				file.loaded = offset; // reset all progress
 
-				/*
-                if (xhr.status === 100) {
-					up.trigger('FileUploaded', file, {
-						response : xhr.responseText,
-						status : xhr.status,
-						responseHeaders: xhr.getAllResponseHeaders()
-					});
-                } else {
-				*/
-                    debugger;
-                    up.trigger('Error', {
-                        code : plupload.HTTP_ERROR,
-                        message : plupload.translate('HTTP Error.'),
-                        file : file,
-                        response : xhr.responseText,
-                        status : xhr.status,
-                        responseHeaders: xhr.getAllResponseHeaders()
-                    });
-                //}
+                up.trigger('Error', {
+                    code : plupload.HTTP_ERROR,
+                    message : plupload.translate('HTTP Error.'),
+                    file : file,
+                    response : xhr.responseText,
+                    status : xhr.status,
+                    responseHeaders: xhr.getAllResponseHeaders()
+                });
 			}
 		}
 
@@ -1547,7 +1536,6 @@ plupload.Uploader = function(options) {
 
 			xhr.onload = function() {
 				// check if upload made itself through
-                debugger;
 				if (xhr.status < 200 || xhr.status >= 400) {
 					handleError();
 					return;
@@ -1582,8 +1570,12 @@ plupload.Uploader = function(options) {
 				chunkBlob = formData = null; // Free memory
 
 				// Check if file is uploaded
-				if (!offset || offset >= blob.size) {
-					// If file was modified, destory the copy
+				if (
+                    !offset 
+                    || offset >= blob.size
+                    || xhr.responseText.indexOf('"code": 100')!==-1
+                ) {
+					// If file was modified, destroy the copy
 					if (file.size != file.origSize) {
 						blob.destroy();
 						blob = null;
