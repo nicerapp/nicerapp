@@ -632,7 +632,7 @@ na.ds = na.dialogSettings = {
             var idx2 = parseInt(el.id.replace('boxShadow_',''));
             if (idx2 > last) last = idx2;
         });
-        
+        debugger;
         var
         div = $('#'+na.ds.s.c.forDialogID),
         bg =  $('#'+na.ds.s.c.forDialogID+' .vdBackground'),
@@ -641,10 +641,12 @@ na.ds = na.dialogSettings = {
         border = div.css('border'),
         borderRadius = bg.css('borderRadius'),
         i = last + 1,
-        html = '<div id="boxShadow_'+i+'" class="boxShadow" onclick="na.ds.boxSettingsSelected(event)" style="height:1.5em;margin:5px;padding:5px;position:relative;"><div id="boxShadow_'+i+'_bg" style="border:'+border+';background:'+bg1+';opacity:'+opacity+';border-radius:'+br+'px;position:absolute;"></div><span class="boxShadow_bg" style="position:absolute;height:1em;top:0.5em;vertical-align:middle;text-align:center;display:table-cell;">ABC XYZ</span></div>';
+        html = '<div id="boxShadow_'+i+'" class="boxShadow" onclick="na.ds.boxSettingsSelected(event)" style="height:1.5em;margin:5px;padding:5px;position:relative;"><div id="boxShadow_'+i+'_bg" style="border:'+border+';background:'+bg1+';opacity:'+opacity+';border-radius:'+br+'px;position:absolute;"></div><span class="boxShadow_label" style="position:absolute;height:1em;top:0.5em;vertical-align:middle;text-align:center;display:table-cell;">ABC XYZ</span></div>';
         
         $('#boxShadowControls').append(html);
+        debugger;
         setTimeout (function () { 
+            debugger;
             $('#boxShadow_'+(i+1)+'_bg').css({ 
                 width : $('#boxShadow_'+i).width(),
                 height : $('#boxShadow_'+i).height()
