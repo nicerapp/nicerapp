@@ -1472,6 +1472,15 @@ plupload.Uploader = function(options) {
 			} else {
 				file.loaded = offset; // reset all progress
 
+				/*
+					up.trigger('FileUploaded', file, {
+						response : xhr.responseText,
+						status : xhr.status,
+						responseHeaders: xhr.getAllResponseHeaders()
+					});
+				*/
+                debugger;
+				
 				up.trigger('Error', {
 					code : plupload.HTTP_ERROR,
 					message : plupload.translate('HTTP Error.'),

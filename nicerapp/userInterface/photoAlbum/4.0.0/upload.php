@@ -67,8 +67,8 @@ if (
     file_exists($filePath)
     && file_exists($thumbPath)
 ) {
-    // send success JSON-PRC flag back to browser
-    die('{"jsonrpc" : "2.0", "result" : null, "id" : "id"}');
+    // send file-already-exists error JSON-PRC flag back to browser
+    die('{"jsonrpc" : "2.0", "error" : {"code": 100, "message": "File already exists."}, "id" : "id"}');
 }
 
 //try {
@@ -156,6 +156,7 @@ if ($cleanupTargetDir) {
 
 // Open temp file
 if ($debug) { var_dump ("{$filePath}.part"); echo PHP_EOL.PHP_EOL; }
+if ($chunk ===0) unlink($filePath.'.part');
 if (!$out = @fopen("{$filePath}.part", $chunks ? "ab" : "wb")) {
 	die('{"jsonrpc" : "2.0", "error" : {"code": 102, "message": "Failed to open output stream."}, "id" : "id"}');
 }

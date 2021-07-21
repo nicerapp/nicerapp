@@ -12,7 +12,7 @@
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
 
 <!-- production -->
-<script type="text/javascript" src="/nicerapp/3rd-party/plupload-2.3.6/js/plupload.full.min.js"></script>
+<script type="text/javascript" src="/nicerapp/3rd-party/plupload-2.3.6/js/plupload.dev.js"></script>
 <script type="text/javascript" src="/nicerapp/3rd-party/plupload-2.3.6/js/jquery.ui.plupload/jquery.ui.plupload.js"></script>
 
 <!-- debug 
