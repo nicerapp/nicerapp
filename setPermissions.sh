@@ -5,7 +5,7 @@ if [ ! -d $ROOT_PATH ]; then
 	ROOT_PATH="/var/www/nicer.app"
 fi
 
-chgrp -R $NA_MAIN_GROUP *
+chown -R $NA_MAIN_USER:$NA_MAIN_GROUP *
 chmod -R $NA_MAIN_PERMISSIONS *
 
 if [ ! -d $ROOT_PATH/nicerapp/siteData ]; then 
