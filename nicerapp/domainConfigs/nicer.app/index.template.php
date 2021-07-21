@@ -233,7 +233,7 @@ na.site.globals = $.extend(na.site.globals, {
             </div>
             -->
         </div>
-        <iframe id="dialogSettings_photoAlbum" class="dialogSettingsComponent" style="position:absolute;top:calc(230px + 4em);display:none;border:0px"></iframe>
+        <iframe id="dialogSettings_photoAlbum" class="dialogSettingsComponent" style="position:absolute;top:calc(230px + 4em);height:calc(100% - 230px - 4em); display:none;border:0px"></iframe>
         <div id="textSettings" class="dialogSettingsComponent vividScrollpane" style="position:absolute;top:auto;display:none;">
             <label id="labelTextFontFamily" class="textSettingsLabel" for="textFontFamily">Font</label>
             <select class="select" id="textFontFamily" onchange="na.ds.textSettingsSelected_updateDialog()">
