@@ -208,8 +208,10 @@ na.ds = na.dialogSettings = {
         }
         if (!na.ds.s.c.boxSettings) na.ds.s.c.boxSettings = $('#boxShadow_0')[0];
         setTimeout (function() {
+            na.m.log (300, 'el.src='+el.src);
             $('.mediaThumb', $('#dialogSettings_photoAlbum')[0].contentWindow.document).each(function(idx,el) {
                 var x = $('#'+forDialogID+' .vdBackground').css('background');
+                na.m.log (300, 'x='+x);
                 if (x && x.match(el.src.replace(/%20/g, ' '))) {
                     debugger;
                     var scale = $('#'+forDialogID+' .vdBackground').css('backgroundSize').match(/\d+/);
