@@ -741,9 +741,13 @@ na.ds = na.dialogSettings = {
         var 
         bg = $('.vdBackground', $('#'+na.ds.s.c.forDialogID)[0]),
         src = el.src.replace('thumbs/','');
-        
+debugger;        
         if ($('#dialogSettings_photoSpecificity_dialog')[0].checked) {
-            $(bg).css({ background : 'url("'+src+'") repeat', opacity : parseInt($('#dialogSettings_photoOpacity').val())/100, backgroundSize : na.ds.s.c.scale+'% '+na.ds.s.c.scale+'%' });
+            $(bg).css({ 
+                background : 'url("'+src+'") repeat', 
+                opacity : parseInt($('#dialogSettings_photoOpacity').val())/100, 
+                backgroundSize : na.ds.s.c.scale+'% '+na.ds.s.c.scale+'%' 
+            });
         } else {
             na.backgrounds.next ('#siteBackground', na.site.globals.backgroundSearchKey, src);
         }
