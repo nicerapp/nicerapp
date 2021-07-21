@@ -209,12 +209,10 @@ na.ds = na.dialogSettings = {
         if (!na.ds.s.c.boxSettings) na.ds.s.c.boxSettings = $('#boxShadow_0')[0];
         setTimeout (function() {
             var x = $('#'+forDialogID+' .vdBackground').css('background');
-            debugger;
             na.m.log (300, 'x='+x);
             $('.mediaThumb', $('#dialogSettings_photoAlbum')[0].contentWindow.document).each(function(idx,el) {
                 na.m.log (300, 'el.src='+el.src);
                 if (x && x.match(el.src.replace(/%20/g, ' '))) {
-                    debugger;
                     var scale = $('#'+forDialogID+' .vdBackground').css('backgroundSize').match(/\d+/);
                     if (scale) na.ds.s.c.scale = scale[0];
                     na.ds.s.c.selectedImage = el;
