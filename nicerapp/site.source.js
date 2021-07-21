@@ -1078,6 +1078,7 @@ na.m = {
         date = new Date(),
         timeInMilliseconds = date.getTime(),
         appRuntime = timeInMilliseconds - na.m.settings.startTime;
+        //debugger;
         
         if (na.m.settings.debugLevel == 'show all')
             na.m.settings.debugLevel = 0;
