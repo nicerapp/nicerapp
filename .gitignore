@@ -1,8 +1,9 @@
-nicerapp/domainConfigs/localhost_v2/couchdb.json
-nicerapp/domainConfigs/localhost_v2/index.combined.*
-nicerapp/domainConfigs/nicerapp_v2/couchdb.json
-nicerapp/domainConfigs/nicerapp_v2/index.combined.*
+nicerapp/domainConfigs/nicer.app/naLAN.json
+nicerapp/domainConfigs/nicer.app/couchdb.json
+nicerapp/domainConfigs/nicer.app/index.combined.*
+nicerapp/domainConfigs/said.by/naLAN.json
 nicerapp/domainConfigs/said.by/couchdb.json
+nicerapp/domainConfigs/said.by/index.combined.*
 nicerapp/3rd-party/jQuery/poshytip/
 nicerapp/key.youtube.txt
 nicerapp/siteData/*

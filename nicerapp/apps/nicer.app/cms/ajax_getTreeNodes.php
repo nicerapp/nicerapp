@@ -5,7 +5,8 @@ require_once (dirname(__FILE__).'/../../../3rd-party/sag/src/Sag.php');
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);*/
 
-$ip = (array_key_exists('X-Forwarded-For',apache_request_headers())?apache_request_headers()['X-Forwarded-For'] : $_SERVER['REMOTE_ADDR']);
+global $naIP;
+$ip = $naIP;
 /*if (
     $ip !== '::1'
     && $ip !== '127.0.0.1'

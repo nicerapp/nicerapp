@@ -23,7 +23,20 @@
     $filePerms_ownerGroup = 'www-data'; global $filePerms_ownerGroup;
     $filePerms_perms = 0770; global $filePerms_perms;
     
+    $naIP = (array_key_exists('X-Forwarded-For',apache_request_headers())?apache_request_headers()['X-Forwarded-For'] : $_SERVER['REMOTE_ADDR']);
+    global $naIP;
     
+    
+    $couchdbConfigFilepath = realpath(dirname(__FILE__).'/../../../').'/domainConfigs/'.$cms->domain.'/naLAN.json';
+    $cdbConfig = json_decode(file_get_contents($couchdbConfigFilepath), true);
+
+    
+    if (
+        $naIP !== '::1'
+        && $naIP !== '127.0.0.1'
+        && $naIP !== '80.101.238.137'
+    ) $naLAN = false; else $naLAN = true;
+    global $naLAN;
     
     // overrides by the site operator go here :
     $fn = dirname(__FILE__).'/apps/siteOperator_boot.php';
