@@ -1547,6 +1547,7 @@ plupload.Uploader = function(options) {
 
 			xhr.onload = function() {
 				// check if upload made itself through
+                debugger;
 				if (xhr.status < 200 || xhr.status >= 400) {
 					handleError();
 					return;
