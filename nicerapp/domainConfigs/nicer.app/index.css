@@ -293,37 +293,42 @@ img.bg_last {
 .navbar .vividButton_icon_sdsnav {
     display : inline-block;
     position : relative;
-    margin-left : 10px;
-    margin-right:10px;
+    margin-left : auto;
+    margin-right:auto;
     z-index : 1100;
-    width : 44px;
-    height : 44px;
+    width : 48px;
+    height : 48px;
 }
 .vividButton_icon_sdsnav img {
     position : absolute;
-    top : 0px;
-    left : 0px;
-    width : 40px;
-    height : 40px;
+    top : 2px;
+    left : 2px;
+    width : 44px;
+    height : 44px;
 }    
 .cvbImgButton {
-    width : 34px;
-    top : 3px;
-    left : 3px;
+    width : 38px;
+    top : 5px;
+    left : 5px;
     position : absolute;
 }
 #btnSelectBoxShadowSettings .cvbImgTile {
     position : absolute;
-    top : 0px;
-    left : 0px;
-    width : 40px;
-    height : 40px;
+    top : 2px;
+    left : 2px;
+    width : 44px;
+    height : 44px;
 }   
 #btnSelectBackgroundImage .cvbImgButton {
-    width : 30px;
-    height : 30px;
+    width : 34px;
+    height : 34px;
     top : 5px;
     left : 5px;
+}
+.sp-container {
+    background : linear-gradient(to top, rgba(255,255,200,0.7), rgba(100,255,100,0.75) 50%, rgba(255,255,200,0.7) 100%);
+    padding : 5px;
+    border-radius : 10px;
 }
 
 
@@ -794,6 +799,7 @@ select[multiple] {
     padding : 0;
     align-content : center;
     align-items : center;
+    height : 78px;
     width : calc(100% - 20px);
 }
 .navbar_button {

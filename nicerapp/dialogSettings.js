@@ -277,17 +277,6 @@ na.ds = na.dialogSettings = {
                 - 90,
             top : $('#specificitySettings').height() + 170
         }).css({display:display});
-
-        /*
-        var 
-        w = $('#siteToolbarDialogSettings').width(),
-        h = $('#siteToolbarDialogSettings').height(),
-        h1 = $('#specificitySettings').position().top,
-        h2 = $('#specificitySettings').height();
-        $('#siteToolbarDialogSettings .vividScrollpane').css({
-            width : w - 15,
-            height : h - 20
-        });*/
         
         $('.dialogSettings_colorPicker').next().css ({ width : 230 });
         $('#siteToolbarDialogSettings label', t.el).css ({ float : 'left' });
