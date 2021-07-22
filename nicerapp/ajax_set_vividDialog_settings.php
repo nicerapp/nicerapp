@@ -66,9 +66,11 @@ $findCommand = array (
 );
 if (array_key_exists('role',$_POST) && !is_null($_POST['role'])) $findCommand['selector']['role'] = $_POST['role'];
 if (array_key_exists('user',$_POST) && !is_null($_POST['user'])) $findCommand['selector']['user'] = $_POST['user'];
+if ($debug) { echo '$findCommand='; var_dump ($findCommand); echo PHP_EOL.PHP_EOL; }
+
 
 $call = $cdb->find ($findCommand);
-//var_dump ($call); die();
+if ($debug) { echo '$call='; var_dump ($call); echo PHP_EOL.PHP_EOL; }
 
 if (!$call->headers->_HTTP->status===200) { 
     $id = cdb_getRandomString(20); 
