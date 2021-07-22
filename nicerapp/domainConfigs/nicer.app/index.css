@@ -29,6 +29,19 @@ img.bg_last {
     z-index : 8;
 }
 
+.naan_rec {
+    
+}
+.naan_datetimeStr {
+    color : skyblue;
+}
+.naan_ip {
+    color : lime;
+}
+.naan_msg {
+    
+}
+
 .naCouchDB_findCommand {
     color : rgb(0, 50, 0);
     background : rgba(255,255,255,0.75);

@@ -90,7 +90,11 @@ foreach ($call->body->docs as $idx => $d) {
     }
 }
 
-if ($debug) echo '<pre class="naCouchDB_dataReturnedToBrowser">';
-echo json_encode ($recs, JSON_PRETTY_PRINT);
-if ($debug) echo '</pre>';
+if ($debug) {
+    echo '<pre class="naCouchDB_dataReturnedToBrowser">';
+    echo json_encode ($recs, JSON_PRETTY_PRINT);
+    echo '</pre>';
+} else {
+    echo json_encode ($recs);
+}
 ?>

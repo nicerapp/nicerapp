@@ -11,25 +11,93 @@ na.an = na.analytics = {
         }
     },
     
-    settings : { current : {} },
+    globals : {
+        loadDaysIntoPast : 4
+    },
+    
+    settings : { current : { loadedDaysIntoPast : 0, db : {}, dbByIP : {} } },
     
     onload : function () {
+        $('#siteContent .vividDialogContent').html('<div style="display:flex;align-items:center;font-weight:bold;justify-content:center;vertical-align:middle;align-content: center;align-items : center;font-size:2em"><div class="startupMsg"></div></div>');
+        na.an.load_more();
+    },
+    
+    load_more : function (date, daysIntoPast) {
+        var 
+        date = new Date(), 
+        dip = na.an.s.c.loadedDaysIntoPast;
+        if (dip < na.an.globals.loadDaysIntoPast) {
+            if (dip > 0) date.setDate (date.getDate() - dip);            
+            var dateStr = date.toISOString().slice(0, 10);
+            $('.startupMsg').html('Now loading '+dateStr+' ('+dip+' of '+na.an.globals.loadDaysIntoPast+')');
+            na.an.load_date (dateStr);
+        } else {
+            na.an.visualizeLoadedData();
+        }
+    },
+    
+    load_date : function(date) {
         var ac = {
             type : 'GET',
             url : '/nicerapp/apps/nicer.app/analytics/ajax_load_index.php',
             data : {
                 username : na.account.settings.username,
                 pw : na.account.settings.password,
-                date : '2021-07-19'
+                date : date
             },
             success : function (data, ts, xhr) {
-                $('#siteContent .vividDialogContent').html(data);
+                //$('#siteContent .vividDialogContent').html(data);
+                var dat = {};
+                dat[date] = JSON.parse(data);
+                na.an.s.c.db = $.extend( dat, na.an.s.c.db );                
+                
+                var recs = na.an.s.c.db[date];
+                for (var i=0; i<recs.length; i++) {
+                    var rec = recs[i];
+                    //debugger;
+                    if (rec.msg.indexOf('keep-alive')===-1) {
+                        if (!na.an.s.c.dbByIP[date]) na.an.s.c.dbByIP[date] = [];
+                        if (!na.an.s.c.dbByIP[date][rec.ip]) na.an.s.c.dbByIP[date][rec.ip] = [];
+                        if (
+                            rec.msg.indexOf('Bot')!==-1
+                            || rec.msg.indexOf('bot')!==-1
+                        ) rec.isBot = true;
+                        
+                        var ipr = na.an.s.c.dbByIP[date][rec.ip];
+                        ipr[ipr.length] = rec;
+                    }
+                }
+                
+                na.an.s.c.loadedDaysIntoPast++;
+                na.an.load_more()
             },
             failure : function (xhr, ajaxOptions, errorThrown) {
                 debugger;
             }
         };
         $.ajax(ac);
+    },
+    
+    visualizeLoadedData : function () {
+        var
+        html = '<table class="naan_rec_table">';
+        for (var date in na.an.s.c.dbByIP) {
+            var d = na.an.s.c.dbByIP[date];
+            for (var ip in d) {
+                var d2 = d[ip];
+                for (var i=0; i<d2.length; i++) {
+                    var d3 = d2[i];
+                    html += 
+                        '<tr class="naan_rec">'
+                        +'<td class="naan_datetimeStr">'+d3.datetimeStr+'</td>'
+                        +'<td class="naan_ip">'+d3.ip+'</td>'
+                        +'<td class="naan_msg">'+d3.msg+'</td>'
+                        +'</tr>'
+                }
+            }
+        }
+        html += '</table>';
+        $('#siteContent .vividDialogContent').html(html);
     },
     
     dt2str : function (datetime) {
