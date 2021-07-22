@@ -85,14 +85,26 @@ na.an = na.analytics = {
             var d = na.an.s.c.dbByIP[date];
             for (var ip in d) {
                 var d2 = d[ip];
-                for (var i=0; i<d2.length; i++) {
-                    var d3 = d2[i];
-                    html += 
-                        '<tr class="naan_rec">'
-                        +'<td class="naan_datetimeStr">'+d3.datetimeStr+'</td>'
-                        +'<td class="naan_ip">'+d3.ip+'</td>'
-                        +'<td class="naan_msg">'+d3.msg+'</td>'
-                        +'</tr>'
+                if (d2.isBot) {
+                    for (var i=0; i<d2.length; i++) {
+                        var d3 = d2[i];
+                        html += 
+                            '<tr class="naan_rec naan_bot">'
+                            +'<td class="naan_datetimeStr">'+d3.datetimeStr+'</td>'
+                            +'<td class="naan_ip">'+d3.ip+'</td>'
+                            +'<td class="naan_msg">'+d3.msg+'</td>'
+                            +'</tr>'
+                    }
+                } else {
+                    for (var i=0; i<d2.length; i++) {
+                        var d3 = d2[i];
+                        html += 
+                            '<tr class="naan_rec">'
+                            +'<td class="naan_datetimeStr">'+d3.datetimeStr+'</td>'
+                            +'<td class="naan_ip">'+d3.ip+'</td>'
+                            +'<td class="naan_msg">'+d3.msg+'</td>'
+                            +'</tr>'
+                    }
                 }
             }
         }

@@ -41,6 +41,12 @@ img.bg_last {
 .naan_msg {
     
 }
+.naan_bot .naan_ip {
+    color : grey;
+}
+.naan_bot .naan_msg {
+    color : grey;
+}
 
 .naCouchDB_findCommand {
     color : rgb(0, 50, 0);
