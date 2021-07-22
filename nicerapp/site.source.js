@@ -275,9 +275,11 @@ var nas = na.site = {
         
         setInterval (nas.updateDateTime, 1000);
         
+        /* not such a success.. :
         setInterval (function() {
             na.analytics.logMetaEvent ('keep-alive');
         }, 5000);
+        */
         
         na.site.transformLinks ($('#siteContent')[0]);
 		History.Adapter.bind(window,'statechange', na.site.stateChange); // use HTML5 History API if available:
