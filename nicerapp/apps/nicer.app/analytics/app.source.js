@@ -12,7 +12,7 @@ na.an = na.analytics = {
     },
     
     globals : {
-        loadDaysIntoPast : 4
+        loadDaysIntoPast : 7
     },
     
     settings : { current : { loadedDaysIntoPast : 0, db : {}, dbByIP : {} } },
@@ -61,7 +61,7 @@ na.an = na.analytics = {
                         if (
                             rec.msg.indexOf('Bot')!==-1
                             || rec.msg.indexOf('bot')!==-1
-                        ) rec.isBot = true;
+                        ) na.an.s.c.dbByIP[date][rec.ip].isBot = true;
                         
                         var ipr = na.an.s.c.dbByIP[date][rec.ip];
                         ipr[ipr.length] = rec;
